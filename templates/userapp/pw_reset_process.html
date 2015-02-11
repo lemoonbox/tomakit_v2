@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+비밀 번호를 변경 합니다.
+<form action="{{request.path}}" method="post">
+    {%csrf_token%}
+    {{pwresetform.as_p}}
+    <input type = "submit" value="비밀번호 변경하기">
+
+</form>
+</body>
+</html>

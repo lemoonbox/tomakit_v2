@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+{% autoescape on %}
+<html>
+<head lang="ko">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+  다음의 링크를 클릭하시면 계정이 활성화 하실 수 있습니다. <br/>
+  <br/>
+  http://{{host}}/user/signup_confirm/{{key}}
+  <br/>
+</body>
+</html>
+{% endautoescape %}

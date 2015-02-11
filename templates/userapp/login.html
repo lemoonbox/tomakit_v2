@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+{% block content %}
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+   <form method="post" action="{% url 'login_url' %}">
+       {% csrf_token %}
+       email :{{form.username}}  <br/>
+       password : {{form.password}}  <br/>
+
+       <input type = "submit" value="login"/>
+
+   </form>
+</body>
+</html>
+
+{% endblock %}
