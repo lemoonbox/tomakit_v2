@@ -8,9 +8,11 @@ from django.conf import settings
 class Profile(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
     email = models.EmailField(max_length=100, unique=True, null=False, blank=False)
+    pro_photo = models.ImageField()
     mobile = models.CharField(max_length=30, unique=True)
     address = models.CharField(max_length=255, null=False)
     email_confirm = models.BooleanField(default=False)
+
 
 
     @staticmethod

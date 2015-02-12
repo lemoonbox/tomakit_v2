@@ -51,7 +51,7 @@ class ProfilesForm(forms.ModelForm):
 
     class Meta:
         model = Profile
-        fields = ('email', 'password', 'password_confirm', 'mobile', 'address',)
+        fields = ('email', 'password', 'password_confirm', 'mobile', 'address','pro_photo')
 
 
 

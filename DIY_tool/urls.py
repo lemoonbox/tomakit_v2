@@ -10,5 +10,5 @@ urlpatterns = patterns('',
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^user/', include(user_urls)),
-    url(r'', include('social.apps.django_app.urls', namespace='social')),
+    #url(r'', include('social.apps.django_app.urls', namespace='social')),
 )

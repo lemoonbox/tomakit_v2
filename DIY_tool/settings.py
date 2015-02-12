@@ -47,7 +47,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'userapp',
-    'social.apps.django_app.default',
+    #'social.apps.django_app.default',
     'djcelery',
 )
 
@@ -69,15 +69,17 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.static",
     "django.core.context_processors.tz",
     "django.contrib.messages.context_processors.messages",
-    'social.apps.django_app.context_processors.backends',
-    'social.apps.django_app.context_processors.login_redirect',
+    #'social.apps.django_app.context_processors.backends',
+    #'social.apps.django_app.context_processors.login_redirect',
 )
 
 ####facebook auth####
+"""
 AUTHENTICATION_BACKENDS = (
     'social.backends.facebook.FacebookOAuth2',
     'django.contrib.auth.backends.ModelBackend',
 )
+
 
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/user/profile'
 SOCIAL_AUTH_URL_NAMESPACE = 'social'
@@ -86,7 +88,7 @@ SOCIAL_AUTH_FACEBOOK_KEY = '1035953116420715'
 SOCIAL_AUTH_FACEBOOK_SECRET = '84ef6ed0e0815ffea885ea022cdc6768'
 SESSION_SERIALIZER='django.contrib.sessions.serializers.PickleSerializer'
 ###facebook auth end ###
-
+"""
 ROOT_URLCONF = 'DIY_tool.urls'
 
 WSGI_APPLICATION = 'DIY_tool.wsgi.application'
