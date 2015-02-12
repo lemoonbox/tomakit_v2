@@ -136,3 +136,7 @@ LOGIN_REDIRECT_URL = '/user/profile'
 
 LOGIN_URL = '/user/login/'
 LOGOUT_URL = '/user/logout/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
+MEDIA_URL = '/userphoto/'
+

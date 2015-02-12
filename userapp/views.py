@@ -25,7 +25,7 @@ def signup(request):
 
     elif request.method =="POST" :
 
-        profile_form = ProfilesForm(request.POST)
+        profile_form = ProfilesForm(request.POST, request.FILES)
 
         email = request.POST['email'].strip()
         password = request.POST['password']
@@ -42,7 +42,9 @@ def signup(request):
                 _u = User(username = email)
                 _u.set_password(password)
                 _u.save()
-                _profile = Profile.create(_u, email, mobile, address)
+                _profile = profile_form.save(commit=False)
+                _profile.user =_u
+                _profile.save()
 
                 #send_email confirm
                 import string , random
@@ -70,13 +72,17 @@ def signup(request):
                 cont = tpl_mail.render(ctx_mail)
                 recipient = [_profile.email]
 
-                tasks.sendmail.delay(cont, recipient)
                 """
+
+                tasks.sendmail.delay(cont, recipient)
+
+                #sendmail net celery
                 from django.core.mail import send_mail
                 send_mail(u'안녕하세요! 앞발 사용 설명서입니다. 정식 사용을 승인해주세요.', "", \
                           'makerecipe@gmail.com', recipient, fail_silently=False,
                             html_message=cont)
                 """
+
 
 
                 return HttpResponseRedirect("user/login/")
