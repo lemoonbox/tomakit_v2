@@ -25,13 +25,22 @@ def signup(request):
 
     elif request.method =="POST" :
 
-        profile_form = ProfilesForm(request.POST, request.FILES)
+
+        print request.FILES
+        print type(request.FILES)
+        print request.FILES['pro_photo']
+        print type(request.FILES['pro_photo'])
+
+        profile_form = ProfilesForm(request.POST)
 
         email = request.POST['email'].strip()
         password = request.POST['password']
         password_confirm = request.POST['password_confirm']
         mobile =  request.POST['mobile']
         address = request.POST['address']
+        #이미지 파일 업로드 되지 않는 경우 처리해함.
+        filename = request.FILES['pro_photo']
+
 
         if profile_form.is_valid():
             if password != password_confirm:
@@ -45,6 +54,11 @@ def signup(request):
                 _profile = profile_form.save(commit=False)
                 _profile.user =_u
                 _profile.save()
+
+                #make thumnail
+                from PIL import Image
+                image = Image.
+
 
                 #send_email confirm
                 import string , random
