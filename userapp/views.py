@@ -45,6 +45,7 @@ def signup(request):
         if profile_form.is_valid():
             if password != password_confirm:
                 profile_form.add_error('password','비밀번호가 일치 하지 않음')
+                print "thumnail test"
 
             else :
                 User = get_user_model()
