@@ -1,6 +1,5 @@
 #coding: utf-8
 from django.shortcuts import render, loader
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import get_user_model
 from django.contrib.auth.views import login as django_login, logout as django_logout
 from django.contrib.auth.decorators import login_required
@@ -12,9 +11,9 @@ from django.core.context_processors import csrf
 from userapp.models import Profile, SignupConfirmKey, PasswordResetKeys
 from userapp.form import ProfilesForm, PwReset_RequestForm, PwReset_ProcessForm
 from userapp import tasks
+from userapp.utils import handle_uploaded_image
 
 # Create your views here.
-
 def signup(request):
 
     ctx = Context({
@@ -24,68 +23,75 @@ def signup(request):
         profile_form = ProfilesForm()
 
     elif request.method =="POST" :
-
         profile_form = ProfilesForm(request.POST, request.FILES)
 
-        email = request.POST['email'].strip()
-        password = request.POST['password']
-        password_confirm = request.POST['password_confirm']
-        mobile =  request.POST['mobile']
-        address = request.POST['address']
-
         if profile_form.is_valid():
+            email = request.POST['email'].strip()
+            password = request.POST['password']
+            password_confirm = request.POST['password_confirm']
+
             if password != password_confirm:
                 profile_form.add_error('password','비밀번호가 일치 하지 않음')
 
-            else :
-                User = get_user_model()
-                _u = User(username = email)
-                _u.set_password(password)
-                _u.save()
-                _profile = profile_form.save(commit=False)
-                _profile.user =_u
-                _profile.save()
+                return render(request, 'userapp/signup.html',{
+                    'profileform':profile_form,},
+                  )
 
-                #send_email confirm
-                import string , random
-                key =""
+            User = get_user_model()
+            _u = User(username = email)
+            _u.set_password(password)
+            _u.save()
 
-                while True:
-                    for i in xrange(32):
-                        key = key+random.choice(string.ascii_letters\
-                            +string.digits)
+            try :
+                t = handle_uploaded_image(request.FILES['pro_photo'], 50, 50)
+                _profile = Profile(user = _u, email = email,
+                           pro_photo=t[1])
+            except KeyError:
+                _profile = Profile(user = _u, email = email)
 
-                    if (SignupConfirmKey.find(key)==None):break
+            _profile.save()
 
-                #save the key
-                conkey = SignupConfirmKey(key=key, user=_profile)
-                conkey.save()
+            #send_email confirm
+            import string , random
+            key =""
 
-                host = request.META['HTTP_HOST']
+            while True:
+                for i in xrange(32):
+                    key = key+random.choice(string.ascii_letters\
+                        +string.digits)
 
-                #write email
-                tpl_mail = loader.get_template('mail_form/mail_confirm.html')
-                ctx_mail = Context({
-                    'host':host,
-                    'key':key,
-                })
-                cont = tpl_mail.render(ctx_mail)
-                recipient = [_profile.email]
+                if (SignupConfirmKey.find(key)==None):break
 
-                """
+            #save the key
+            conkey = SignupConfirmKey(key=key, user=_profile)
+            conkey.save()
 
-                tasks.sendmail.delay(cont, recipient)
+            host = request.META['HTTP_HOST']
 
-                #sendmail net celery
-                from django.core.mail import send_mail
-                send_mail(u'안녕하세요! 앞발 사용 설명서입니다. 정식 사용을 승인해주세요.', "", \
-                          'makerecipe@gmail.com', recipient, fail_silently=False,
-                            html_message=cont)
-                """
+            #write email
+            tpl_mail = loader.get_template('mail_form/mail_confirm.html')
+            ctx_mail = Context({
+                'host':host,
+                'key':key,
+            })
+            cont = tpl_mail.render(ctx_mail)
+            recipient = [_profile.email]
 
 
+            """
+            #tasks.sendmail.delay(cont, recipient)
 
-                return HttpResponseRedirect("user/login/")
+            #sendmail not celery
+            from django.core.mail import send_mail
+            send_mail(u'안녕하세요! 앞발 사용 설명서입니다. 정식 사용을 승인해주세요.', "", \
+                      'makerecipe@gmail.com', recipient, fail_silently=False,
+                        html_message=cont)
+            """
+
+
+
+
+            return HttpResponseRedirect("user/login/")
 
     return render(request, 'userapp/signup.html',{
                     'profileform':profile_form,},

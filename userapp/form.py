@@ -48,10 +48,11 @@ class ProfilesForm(forms.ModelForm):
                                        validators=[AlphaNumeric,], required=True)
     password = forms.CharField(max_length=100, widget=forms.PasswordInput,
                                validators=[AlphaNumeric,], required=True)
+    pro_photo = forms.ImageField(required=False)
 
     class Meta:
         model = Profile
-        fields = ('email', 'password', 'password_confirm', 'mobile', 'address','pro_photo')
+        fields = ('email', 'password', 'password_confirm','pro_photo')
 
 
 

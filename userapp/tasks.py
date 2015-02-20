@@ -1,5 +1,5 @@
-__author__ = 'moon'
 #coding: utf-8
+__author__ = 'moon'
 from djcelery import celery
 from django.core.mail import send_mail
 
