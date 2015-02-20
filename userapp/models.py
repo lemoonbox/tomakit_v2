@@ -4,28 +4,17 @@ from django.conf import settings
 # Create your models here.
 
 def upload_to(instance, filename):
-    return '%s/profile/%s' %(instance.email,filename)
+    path_arr = filename.split('/')
+    return '%s/profile/%s' %(instance.email,path_arr[-1])
 
 class Profile(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
     email = models.EmailField(max_length=100, unique=True, null=False, blank=False)
     pro_photo = models.ImageField(upload_to=upload_to)
-    mobile = models.CharField(max_length=30, unique=True)
-    address = models.CharField(max_length=255, null=False)
+    mobile = models.CharField(max_length=30, unique=True, null=True)
+    address = models.CharField(max_length=255, null=True)
     email_confirm = models.BooleanField(default=False)
 
-
-
-    @staticmethod
-    def create(_user, email, mobile, address):
-
-        profile = Profile(user=_user, email=email,
-                          mobile=mobile, address=address)
-
-        profile.save()
-
-
-        return profile
 
 
 class SignupConfirmKey(models.Model):
