@@ -14,6 +14,20 @@ def handle_uploaded_image(i, x, y):
     import uuid
 
 
+    IMAGE_TYPE=i.content_type
+
+    #PIL_TYPE use to save disk, FILE_EXTENSTION use to make the path
+    print
+    if IMAGE_TYPE =='image/jpeg':
+         PIL_TYPE = 'image/jpg'
+         PIL_SAVE = 'JPEG'
+         FILE_EXTENSION = 'jpg'
+    elif IMAGE_TYPE=='image/png':
+        PIL_TYPE = 'image/png'
+        PIL_SAVE = 'PNG'
+        FILE_EXTENSION = 'png'
+
+
     #read image from InMemoryUploadedFile
     image_str = ""
     for c in i.chunks():
@@ -66,16 +80,15 @@ def handle_uploaded_image(i, x, y):
 
     #re-initialize imageFile and set a hash (unique filename)
     imagefile = StringIO.StringIO()
-    filename = str(uuid.uuid1())+'.jpg'
+    filename = str(uuid.uuid1())+"."+FILE_EXTENSION
 
-    #PIL instance(image)
-    #  change to imagefile
-    #Just resize return with FILE
+    #PIL instance(image) change to imagefile
+    #return FILE instance after just resize not save
     thumnail_io= StringIO.StringIO()
-    image.save(thumnail_io, 'jpeg')
+    image.save(thumnail_io, format=PIL_SAVE)
     thumnail_io.seek(0)
 
-    content = InMemoryUploadedFile(thumnail_io, None, filename, 'image/jpeg',
+    content = InMemoryUploadedFile(thumnail_io, None, filename, PIL_TYPE,
                                    thumnail_io.len, None)
 
     """

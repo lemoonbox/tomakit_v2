@@ -10,45 +10,27 @@ from django.utils.translation import ugettext as _
 
 
 AlphaNumeric = RegexValidator(
-    r'^[0-9a-zA-z]+$', message = _(u'영문자, 숫자만 허용됩니다.')
+    r'^[0-9a-zA-z@.]{1,}$', message = _(u'알파벳과, 숫자만 허용됩니다.')
 )
-
-#u = UserForm(data=request.Post)
-
-# class UserForm(forms.ModelForm):
-#     password_confirm = forms.CharField(max_length=100, widget=forms.PasswordInput, validators=[AlphaNumeric,])
-#     password = forms.CharField(widget=forms.PasswordInput,validators=[AlphaNumeric,])
-#     class Meta:
-#         model =get_user_model()
-#         widgets = {
-#             'password':forms.PasswordInput(),
-#             'password_confirm':forms.PasswordInput(),
-#         }
-#         fields = ('password','password_confirm')
-#
-#
-#
-#
-#     def save(self, *args, **kwargs):
-#         self.username = self.email
-#
-#     def clean(self):
-#         cleaned_data = super(UserForm, self).clean()
-#
-#
-#
-#         if cleaned_data['password'] != cleaned_data['password_confirm']:
-#             self.add_error('비밀번호가 일치하지 않음.')
-
-
 
 class ProfilesForm(forms.ModelForm):
 
-    password_confirm = forms.CharField(max_length=100, widget=forms.PasswordInput,
-                                       validators=[AlphaNumeric,], required=True)
+    email_errors={'required':u"이메일이 필요합니다.",
+                    'invalid':u'잘못된 이메일 형식입니다.',
+                    'unique':u'이미 사용중 이메일 주소입니다.'}
+    pw_errors={'required':u"비밀번호가 필요합니다.",
+                'invalid':u"6자리 이상의 비밀번호가 안전합니다."}
+    image_errors={'invalid_image':u"이미지 파일만 올릴 수 있습니다."}
+    email = forms.EmailField(error_messages=email_errors,
+                            validators=[AlphaNumeric,])
     password = forms.CharField(max_length=100, widget=forms.PasswordInput,
-                               validators=[AlphaNumeric,], required=True)
-    pro_photo = forms.ImageField(required=False)
+                           validators=[AlphaNumeric,], required=True,
+                           error_messages=pw_errors, label=u'비밀번호')
+    password_confirm = forms.CharField(max_length=100, widget=forms.PasswordInput,
+                                       validators=[AlphaNumeric,], required=True,
+                                       error_messages=pw_errors, label=u'비밀번호확인')
+    pro_photo = forms.ImageField(required=False, label=u'프로필이미지(선택)',
+                                 error_messages = image_errors)
 
     class Meta:
         model = Profile

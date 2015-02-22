@@ -7,11 +7,14 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.core.mail import send_mail
 from django.template import Context
 from django.core.context_processors import csrf
+import os
+from django.core.files.images import ImageFile
 
 from userapp.models import Profile, SignupConfirmKey, PasswordResetKeys
 from userapp.form import ProfilesForm, PwReset_RequestForm, PwReset_ProcessForm
 from userapp import tasks
 from userapp.utils import handle_uploaded_image
+from DIY_tool import settings
 
 # Create your views here.
 def signup(request):
@@ -26,13 +29,21 @@ def signup(request):
         profile_form = ProfilesForm(request.POST, request.FILES)
 
         if profile_form.is_valid():
+            valid_error = False
             email = request.POST['email'].strip()
             password = request.POST['password']
             password_confirm = request.POST['password_confirm']
+            image_type = request.FILES['pro_photo'].content_type
 
             if password != password_confirm:
                 profile_form.add_error('password','비밀번호가 일치 하지 않음')
+                valid_error =True
 
+            if image_type != 'image/png' and image_type !='image/jpeg':
+                profile_form.add_error('pro_photo','jpg와 png 형식의 이미지만 가능합니다.')
+                valid_error =True
+
+            if valid_error:
                 return render(request, 'userapp/signup.html',{
                     'profileform':profile_form,},
                   )
@@ -47,7 +58,10 @@ def signup(request):
                 _profile = Profile(user = _u, email = email,
                            pro_photo=t[1])
             except KeyError:
-                _profile = Profile(user = _u, email = email)
+                image_file = open(os.path.join(settings.BASE_DIR, 'resource/image'),
+                                  'default_profile.jpg', 'r')
+                content = ImageFile(image_file)
+                _profile = Profile(user = _u, email = email, pro_photo=content)
 
             _profile.save()
 
