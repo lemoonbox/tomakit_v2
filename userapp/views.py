@@ -42,6 +42,7 @@ def signup(request):
             if image_type != 'image/png' and image_type !='image/jpeg':
                 profile_form.add_error('pro_photo','jpg와 png 형식의 이미지만 가능합니다.')
                 valid_error =True
+                print "nono"
 
             if valid_error:
                 return render(request, 'userapp/signup.html',{
