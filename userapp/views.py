@@ -33,16 +33,29 @@ def signup(request):
             email = request.POST['email'].strip()
             password = request.POST['password']
             password_confirm = request.POST['password_confirm']
-            image_type = request.FILES['pro_photo'].content_type
 
             if password != password_confirm:
                 profile_form.add_error('password','비밀번호가 일치 하지 않음')
                 valid_error =True
 
-            if image_type != 'image/png' and image_type !='image/jpeg':
-                profile_form.add_error('pro_photo','jpg와 png 형식의 이미지만 가능합니다.')
-                valid_error =True
-                print "nono"
+            #upload image or user defualt
+            if bool(request.FILES):
+                image_type = request.FILES['pro_photo'].content_type
+                if image_type != 'image/png' and image_type !='image/jpeg':
+                    profile_form.add_error('pro_photo','jpg와 png 형식의 이미지만 가능합니다.')
+                    valid_error =True
+                try :
+                    t = handle_uploaded_image(request.FILES['pro_photo'], 50, 50)
+                    content = t[1]
+                except KeyError:
+                    image_file = open(os.path.join(settings.BASE_DIR,
+                                               'resource/image/default_profile.jpg'),'r')
+                    content = ImageFile(image_file)
+            else :
+                image_file = open(os.path.join(settings.BASE_DIR,
+                                               'resource/image/default_profile.jpg'),'r')
+                content = ImageFile(image_file)
+
 
             if valid_error:
                 return render(request, 'userapp/signup.html',{
@@ -53,17 +66,7 @@ def signup(request):
             _u = User(username = email)
             _u.set_password(password)
             _u.save()
-
-            try :
-                t = handle_uploaded_image(request.FILES['pro_photo'], 50, 50)
-                _profile = Profile(user = _u, email = email,
-                           pro_photo=t[1])
-            except KeyError:
-                image_file = open(os.path.join(settings.BASE_DIR, 'resource/image'),
-                                  'default_profile.jpg', 'r')
-                content = ImageFile(image_file)
-                _profile = Profile(user = _u, email = email, pro_photo=content)
-
+            _profile = Profile(user = _u, email = email,pro_photo=content)
             _profile.save()
 
             #send_email confirm
