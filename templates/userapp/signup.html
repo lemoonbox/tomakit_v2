@@ -71,23 +71,4 @@
         <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
     </form>
 </body>
-</html></html>
-=======
-    <head lang="ko">
-        <meta charset="UTF-8">
-        <title></title>
-    </head>
-    <body>
-        {% if profileform.is_multipart %}
-        <form method="POST" action ="{{request.path}}" enctype="multipart/form-data">
-            {% else %}
-            <form method="POST" action ="{{request.path}}">
-                {% endif %}
-                <h1>회원가입 페이지 입니다.</h1>
-                {% csrf_token%}
-                {{profileform.as_p}}
-                <input type="submit" value="회원가입">
-            </form>
-            </body>
-        </html>
->>>>>>> b514c01a4b4319607805cf3844c3c672a18f4b98
+</html>
