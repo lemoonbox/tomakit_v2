@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% block content %}
+{% load static from staticfiles%}
 <html>
 <head lang="en">
     <meta charset="UTF-8">
@@ -12,7 +13,7 @@
        password : {{form.password}}  <br/>
 
        <input type = "submit" value="login"/>
-
+       <img src="{% static 'default_profile.jpg' %}" class="img-responsive"/></a></p>
    </form>
 </body>
 </html>

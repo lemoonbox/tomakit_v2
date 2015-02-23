@@ -27,7 +27,7 @@ DEBUG = True
 
 TEMPLATE_DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 ###setting for celery####
 import djcelery
@@ -140,3 +140,5 @@ LOGOUT_URL = '/user/logout/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
 MEDIA_URL = '/userphoto/'
 
+#serve static file
+STATICFILES_DIRS=(os.path.join(BASE_DIR, 'static'),)

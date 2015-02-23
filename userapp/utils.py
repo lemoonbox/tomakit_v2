@@ -1,9 +1,6 @@
 __author__ = 'moon'
 from DIY_tool import settings
 
-#http://stackoverflow.com/questions/623698/resize-image-on-save
-#http://stackoverflow.com/questions/3723220/how-do-you-convert-a-pil-image-to-a-django-file
-#https://gist.github.com/valberg/2429288
 
 def handle_uploaded_image(i, x, y):
     import StringIO

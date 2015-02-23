@@ -47,7 +47,7 @@ class PasswordResetKeys(models.Model):
         now = datetime.datetime.utcnow().replace(tzinfo=utc)
         timeoff = now - ret[0].created_at
 
-        if timeoff.total_seconds()>60*20:
+        if timeoff.total_seconds()>60*5:
             ret[0].delete()
 
         return ret[0]

@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load staticfiles%}
 <html>
 <head lang="en">
     <meta charset="UTF-8">
@@ -10,6 +11,6 @@
   이메일 : {{profile.email}} <br/>
   전화번호 : {{profile.mobile}}<br/>
   주소 : {{profile.address}}<br/>
-  프로필 사진 :<img src="{{profile.pro_photo.url}}" class="img-responsive"/></a></p>
+  프로필 사진 :<img src="{% static profile.pro_photo.url%}" class="img-responsive"/></a></p>
 </body>
 </html>
