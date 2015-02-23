@@ -21,6 +21,7 @@ class ProfilesForm(forms.ModelForm):
     pw_errors={'required':u"비밀번호가 필요합니다.",
                 'invalid':u"6자리 이상의 비밀번호가 안전합니다."}
     image_errors={'invalid_image':u"이미지 파일만 올릴 수 있습니다."}
+    
     email = forms.EmailField(error_messages=email_errors,
                             validators=[AlphaNumeric,])
     password = forms.CharField(max_length=100, widget=forms.PasswordInput,
