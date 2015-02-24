@@ -1,9 +1,11 @@
 amqp==1.4.6
 anyjson==0.3.3
 billiard==3.3.0.19
+boto==2.36.0
 celery==3.1.17
 Django==1.7.1
 django-celery==3.1.16
+django-storages==1.1.8
 kombu==3.0.24
 Pillow==2.7.0
 pytz==2014.10
