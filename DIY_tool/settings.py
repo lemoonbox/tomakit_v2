@@ -25,7 +25,7 @@ SECRET_KEY = 'sj)7m^^1u$9=s40&8de&z#$alfgx(k6fztu3gj(w2^pdsnne6n'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-TEMPLATE_DEBUG = True
+TEMPLATE_DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -49,6 +49,7 @@ INSTALLED_APPS = (
     'userapp',
     #'social.apps.django_app.default',
     'djcelery',
+    'storages',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -104,6 +105,19 @@ DATABASES = {
     }
 }
 
+"""
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'testdb',
+        'USER': 'root',
+        'PASSWORD':'ok123456',
+        'HOST':'diy-tec-dev.cfxqbzsbzi3i.ap-northeast-1.rds.amazonaws.com',
+        'PORT':'3306',
+    }
+}
+"""
+
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
 
@@ -119,7 +133,6 @@ USE_TZ = True
 
 # email with TLS
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBacken'
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_POST = 587
@@ -130,15 +143,36 @@ EMAIL_HOST_PASSWORD = 'maketeee15'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
-STATIC_URL = '/static/'
 
+####------------------default login path----------------------####
 LOGIN_REDIRECT_URL = '/user/profile'
-
 LOGIN_URL = '/user/login/'
 LOGOUT_URL = '/user/logout/'
 
+####------------------serve media file----------------------####
 MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
 MEDIA_URL = '/userphoto/'
 
-#serve static file
-STATICFILES_DIRS=(os.path.join(BASE_DIR, 'static'),)
+####------------------serve static file----------------------####
+#S3serve settings
+AWS_HEADERS = {
+    'Expires' : 'Thu, 31 Dec 2099 20:00:00 GMT',
+    'Cashe-Control' : 'max-age=94608000',
+}
+#S3 acess_key
+AWS_STORAGE_BUCKET_NAME = 'diytec.beta'
+AWS_ACCESS_KEY_ID = 'AKIAJG4KYTAON2HRQB7Q'
+AWS_SECRET_ACCESS_KEY = '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'
+
+#static
+#STATIC_ROOT = os.path.join(BASE_DIR, 'static_deploy')
+
+if DEBUG :
+    #local
+    STATIC_URL = '/static/'
+    STATICFILES_DIRS=(os.path.join(BASE_DIR, 'static_local'),)
+    #STATIC_ROOT = os.path.join(BASE_DIR, 'static_deploy')
+else :
+    AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+    STATIC_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
+    STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'

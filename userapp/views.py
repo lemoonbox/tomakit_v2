@@ -52,6 +52,7 @@ def signup(request):
                                                'resource/image/default_profile.jpg'),'r')
                     content = ImageFile(image_file)
             else :
+                print settings.BASE_DIR
                 image_file = open(os.path.join(settings.BASE_DIR,
                                                'resource/image/default_profile.jpg'),'r')
                 content = ImageFile(image_file)
