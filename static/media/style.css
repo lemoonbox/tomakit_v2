@@ -2,13 +2,16 @@ body {
     background-color: #eee;
 }
 
-input {
+.jumbotron {
+    width: 400px;
+    height: 70%;
+}
     
 .container {
-    width: 50%;
+    width: 450px;
     height: 70%;
-    margin: 200px auto;
-/*    background-color: orange;*/
+    margin: 200px;
+
 }
 
 .outer {
@@ -27,6 +30,9 @@ input {
     
     width: 100%;
     padding: 1em;
+/*
     background: #b5ffda;
     color: #3A4741;
+*/
 }
+
