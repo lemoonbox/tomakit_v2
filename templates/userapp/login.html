@@ -6,32 +6,24 @@
         <meta charset="UTF-8">
         <link rel="stylesheet" type="text/css" href="/static/media/style.css" />
         <title> Log In </title>
-
-<<<<<<< HEAD
     </head>
+    
     <body>
-=======
-       <input type = "submit" value="login"/>
-       <img src="{% static 'image/default_profile.jpg' %}" class="img-responsive"/></a></p>
-   </form>
-</body>
-</html>
->>>>>>> f68b2393c139849dc1ed15c0f0baeaea34b51dd7
-
         <form method="post" action="{% url 'login_url' %}" autocomplete="off">
             <div class="container">
                 <div class="outer">
                     <div class="centered">
                     {% csrf_token %}
-                    <input type="text" name="username" placeholder="Username(Email)" value="{{valid_username}}">
-                    
-                    <br/>
-                    <input type="password" name="password" placeholder="Password" value="{{valid_password}}"> <br/>
-                <input type = "submit" value="login"/>
-                <img src="{% static 'default_profile.jpg' %}" class="img-responsive"/></a></p>
+                    <input type="text" name="username" placeholder="Username(Email)"
+                           value="{{valid_username}}" /><br>
+                    <input type="password" name="password" placeholder="Password"
+                           value="{{valid_password}}" /><br>
+                        <input type = "submit" value="login" />
+                        <img src="{% static 'default_profile.jpg' %}" class="img-responsive"/>
                     </div>
                 </div>
             </div>
-    </form>
+        </form>
+    </body>
 </html>
 {% endblock %}

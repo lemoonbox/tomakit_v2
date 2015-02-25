@@ -35,7 +35,7 @@ def signup(request):
             password_confirm = request.POST['password_confirm']
 
             if password != password_confirm:
-                profile_form.add_error('password','비밀번호가 일치 하지 않음')
+                profile_form.add_error('password','비밀번호가 일치 하지 않습니다. 정확히 입력해주세요.')
                 valid_error =True
 
             #upload image or user defualt

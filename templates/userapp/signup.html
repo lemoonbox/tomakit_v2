@@ -20,6 +20,20 @@
         <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
     </head>
     
+    {% if profileform.errors %}
+    <div id="form-error">
+        <div class="alert alert-warning">
+            <a href="#" class="close" data-dismiss="alert">&times;</a>
+            <p>The operation could not be performed because one or more error(s) occurred.<br />Please resubmit the form after making the following changes:</p>
+            <table>
+                {% for field in profileform %}
+                <tr>{{ field.errors|striptags }}<tr>
+                {% endfor %}
+            </table>
+        </div>
+        </div>
+        {% endif %}
+    
     <body>
         <form method="POST" action="" enctype="multipart/form-data">
             <form class="form-signin">
@@ -37,12 +51,36 @@
     
                             <h2 class="form-signin-heading">Please sign in</h2><br>
                             
-                            <div class="ly_pop3 alert_form alert_form_income_amount" style="display:block">
+<!-- error message part
+                            <div class="ly_pop3 alert_form alert_form_income_amount"{% if profileform.errors.income_amount %}style="display:block"{% endif %}>
+                                <div class="form-group has-error has-feedback">
                                 <div class="ly_cont">
-                                    <div class="p_dsc">{{profileform.errors}}</div>
-                                    <span class="sp arr"></span>
+                                    <div class="p_dsc">
+                                        <label class="control-label" for="{profileform.errors}">Error</label>
+                                <input type="text" class="form-control" id="{profileform.errors}" aria-describedby="inputError2Status">
+                                <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                                <span id="inputError2Status">{{profileform.errors}}</span>
+                                <span class="sp arr"></span>
+                                    </div>
                                 </div>
-                            </div><br>
+                                </div>
+                            </div>
+-->
+
+                            
+                            
+<!--
+                            <div class="profileform error_form alert_form_income_amount"{%if profileform.errors.income_amount %} style="display:block"{% endif %}>
+                                    <div class="form-group has-error has-feedback">
+                                        </div> {{profileform.errors}}
+-->
+
+<!--                                    <span id="{{profileform.errors}}"></span>-->
+<!--
+                                </div>
+                            <br>
+-->
+
 
                             <label for="id_email" class="sr-only">Email address</label>
                             <input id="id_email" name="email" type="email"
@@ -55,7 +93,7 @@
                             <input id="id_password_confirm" maxlength="100" name="password_confirm" type="password"
                                    class="form-control" placeholder="Confirm password" required autofocus /><br>
                             
-                            <label for="id_pro_photo">프로필이미지(선택):</label>
+                            <label for="id_pro_photo" style="color: gray; font-family: sans-serif;">프로필 이미지(선택):</label>
                             <input id="id_pro_photo" name="pro_photo" type="file"/><br><br>
 
 <!--
@@ -68,15 +106,14 @@
 
                             <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
                         </form>
-                        </div> <!--jumbotron -->
-                    </div> <!-- /container -->
-
-
-                    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-                    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
-                </div>
+                        </form>
+                    </div> <!--jumbotron -->
+                </div> <!-- /container -->
             </form>
         </form>
+
+        <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+        <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
     </body>
 </html>
 
