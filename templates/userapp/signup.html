@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load static from staticfiles%}
 <html>
 
     <head lang="ko">
@@ -44,6 +45,7 @@
 -->
 
 <body>
+    <img src="{% static 'image/default_profile.jpg' %}" class="img-responsive"/></a></p>
     <form method="POST" action ="" enctype="multipart/form-data">
         <div class="container">
             <div class="jumbotron">
@@ -65,7 +67,6 @@
                         </div> <!-- /submit -->
             </div> <!-- /box -->
         </div> <!-- /container -->
-
 
         <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
         <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>

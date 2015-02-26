@@ -23,7 +23,7 @@ TEMPLATE_DIRS ={
 SECRET_KEY = 'sj)7m^^1u$9=s40&8de&z#$alfgx(k6fztu3gj(w2^pdsnne6n'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 TEMPLATE_DEBUG = False
 
@@ -149,11 +149,7 @@ LOGIN_REDIRECT_URL = '/user/profile'
 LOGIN_URL = '/user/login/'
 LOGOUT_URL = '/user/logout/'
 
-####------------------serve media file----------------------####
-MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
-MEDIA_URL = '/userphoto/'
-
-####------------------serve static file----------------------####
+####------------------serve static/media file----------------------####
 #S3serve settings
 AWS_HEADERS = {
     'Expires' : 'Thu, 31 Dec 2099 20:00:00 GMT',
@@ -164,15 +160,23 @@ AWS_STORAGE_BUCKET_NAME = 'diytec.beta'
 AWS_ACCESS_KEY_ID = 'AKIAJG4KYTAON2HRQB7Q'
 AWS_SECRET_ACCESS_KEY = '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'
 
-#static
+#static serve on server self
 #STATIC_ROOT = os.path.join(BASE_DIR, 'static_deploy')
 
 if DEBUG :
-    #local
+    #local_static
     STATIC_URL = '/static/'
     STATICFILES_DIRS=(os.path.join(BASE_DIR, 'static_local'),)
-    #STATIC_ROOT = os.path.join(BASE_DIR, 'static_deploy')
+    #local_media
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
+    MEDIA_URL = '/userphoto/media/'
 else :
+    STATICFILES_DIRS=(os.path.join(BASE_DIR, 'static_local'),)
     AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
-    STATIC_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
-    STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+    STATICFILES_LOCATION = 'static'
+    STATICFILES_STORAGE = 'DIY_tool.custom_storages.StaticStorage'
+    #STATIC_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
+
+    MEDIAFILES_LOCATION = 'uploads'
+    DEFAULT_FILE_STORAGE = 'DIY_tool.custom_storages.MediaStorage'
+    MEDIA_URL = "https://%s/uploads/" % AWS_S3_CUSTOM_DOMAIN

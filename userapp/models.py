@@ -4,6 +4,7 @@ from django.conf import settings
 # Create your models here.
 
 def upload_to(instance, filename):
+    print instance
     path_arr = filename.split('/')
     return '%s/profile/%s' %(instance.email,path_arr[-1])
 
@@ -47,7 +48,7 @@ class PasswordResetKeys(models.Model):
         now = datetime.datetime.utcnow().replace(tzinfo=utc)
         timeoff = now - ret[0].created_at
 
-        if timeoff.total_seconds()>60*5:
+        if timeoff.total_seconds()>0*56:
             ret[0].delete()
 
         return ret[0]

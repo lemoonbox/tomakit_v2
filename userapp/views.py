@@ -67,6 +67,7 @@ def signup(request):
             _u = User(username = email)
             _u.set_password(password)
             _u.save()
+            #_profile = Profile(user = _u, email = email,pro_photo=content)
             _profile = Profile(user = _u, email = email,pro_photo=content)
             _profile.save()
 
@@ -113,8 +114,7 @@ def signup(request):
             return HttpResponseRedirect("user/login/")
 
     return render(request, 'userapp/signup.html',{
-                    'profileform':profile_form,},
-                  )
+                    'profileform':profile_form,},)
 
 
 def signup_confirm(request, *args, **kwargs):
@@ -245,7 +245,7 @@ def logout(request, *args, **kwargs):
     res = django_logout(request, *args, **kwargs)
     return res
 
-@login_required
+#@login_required
 def profile(request, *args, **kwargs):
 
     print args
@@ -260,6 +260,9 @@ def profile(request, *args, **kwargs):
     print _profile[0].email
 
     ctx['profile']= _profile[0]
+    print _profile[0].pro_photo
 
-    tpl = loader.get_template('userapp/profile.html')
-    return HttpResponse(tpl.render(ctx))
+    #tpl = loader.get_template('userapp/profile.html')
+    #ctx.update(csrf(request))
+    return render(request, 'userapp/profile.html',{
+                    'profile':_profile[0],},)
