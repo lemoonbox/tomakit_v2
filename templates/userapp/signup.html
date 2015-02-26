@@ -18,6 +18,30 @@
         <!-- Custom style -->
         <link href="signin.css" rel="stylesheet">
         <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
+        
+        <style>
+            
+        .container {
+            width: 500px;
+            margin: 100px auto;
+            
+        }
+        
+        #form-error {
+            width: 70%;
+            margin: auto auto;
+        }
+            
+        .centered {
+            position: relative;
+            display: inline-block;
+
+            width: 100%;
+            padding: 1em;
+            
+        }
+            
+        </style>
     </head>
     
     {% if profileform.errors %}
@@ -25,13 +49,14 @@
         <div class="alert alert-warning">
             <a href="#" class="close" data-dismiss="alert">&times;</a>
             <p>The operation could not be performed because one or more error(s) occurred.<br />Please resubmit the form after making the following changes:</p>
+            <br />
             <table>
                 {% for field in profileform %}
-                <tr>{{ field.errors|striptags }}<tr>
+                {{ field.errors|striptags }}
                 {% endfor %}
             </table>
         </div>
-        </div>
+    </div>
         {% endif %}
     
     <body>
@@ -39,7 +64,7 @@
             <form class="form-signin">
                 <div class="container">
                     <div class="jumbotron">                
-
+<div class="centered">
                     {% if profileform.is_multipart %}
                     <form method="POST" action ="{{request.path}}" enctype="multipart/form-data">
                     
@@ -49,38 +74,7 @@
                             {% endif %}
                             {% csrf_token%}
     
-                            <h2 class="form-signin-heading">Please sign in</h2><br>
-                            
-<!-- error message part
-                            <div class="ly_pop3 alert_form alert_form_income_amount"{% if profileform.errors.income_amount %}style="display:block"{% endif %}>
-                                <div class="form-group has-error has-feedback">
-                                <div class="ly_cont">
-                                    <div class="p_dsc">
-                                        <label class="control-label" for="{profileform.errors}">Error</label>
-                                <input type="text" class="form-control" id="{profileform.errors}" aria-describedby="inputError2Status">
-                                <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
-                                <span id="inputError2Status">{{profileform.errors}}</span>
-                                <span class="sp arr"></span>
-                                    </div>
-                                </div>
-                                </div>
-                            </div>
--->
-
-                            
-                            
-<!--
-                            <div class="profileform error_form alert_form_income_amount"{%if profileform.errors.income_amount %} style="display:block"{% endif %}>
-                                    <div class="form-group has-error has-feedback">
-                                        </div> {{profileform.errors}}
--->
-
-<!--                                    <span id="{{profileform.errors}}"></span>-->
-<!--
-                                </div>
-                            <br>
--->
-
+                            <h2 class="form-signin-heading">Please sign in</h2><br />
 
                             <label for="id_email" class="sr-only">Email address</label>
                             <input id="id_email" name="email" type="email"
@@ -91,10 +85,10 @@
                                    class="form-control" placeholder="password" required autofocus />
                             <label for="id_password_confirm" class="sr-only">Confirm Password</label>
                             <input id="id_password_confirm" maxlength="100" name="password_confirm" type="password"
-                                   class="form-control" placeholder="Confirm password" required autofocus /><br>
+                                   class="form-control" placeholder="Confirm password" required autofocus /><br />
                             
                             <label for="id_pro_photo" style="color: gray; font-family: sans-serif;">프로필 이미지(선택):</label>
-                            <input id="id_pro_photo" name="pro_photo" type="file"/><br><br>
+                            <input id="id_pro_photo" name="pro_photo" type="file"/><br /><br />
 
 <!--
                             <div class="checkbox">
@@ -107,6 +101,7 @@
                             <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
                         </form>
                         </form>
+                        </div>
                     </div> <!--jumbotron -->
                 </div> <!-- /container -->
             </form>
