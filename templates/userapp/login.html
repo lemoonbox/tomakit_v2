@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 {% block content %}
 <html>
+<<<<<<< HEAD
 <head lang="en">
     <meta charset="UTF-8">
     <title></title>
@@ -14,6 +15,30 @@
        <input type = "submit" value="login"/>
    </form>
 </body>
+=======
+    <head lang="en">
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href="/static/media/style.css" />
+        <title> Log In </title>
+    </head>
+    
+    <body>
+        <form method="post" action="{% url 'login_url' %}" autocomplete="off">
+            <div class="container">
+                <div class="outer">
+                    <div class="centered">
+                    {% csrf_token %}
+                    <input type="text" name="username" placeholder="Username(Email)"
+                           value="{{valid_username}}" /><br>
+                    <input type="password" name="password" placeholder="Password"
+                           value="{{valid_password}}" /><br>
+                        <input type = "submit" value="login" />
+                        <img src="{% static 'default_profile.jpg' %}" class="img-responsive"/>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </body>
+>>>>>>> 91fe6a825ee9a106f5b64a43d207dcfc55c5af93
 </html>
-
 {% endblock %}
