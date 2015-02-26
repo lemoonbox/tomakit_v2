@@ -1,190 +1,98 @@
 <!DOCTYPE html>
-{% load static from staticfiles%}
 <html>
 
-    <head lang="ko">
-        <meta charset="utf-8">
-        <meta name="viewport" contet="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-        <title>
+  <head lang="ko">
+    <meta charset="utf-8">
+    <meta name="viewport" contet="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <title>
 
-            회원가입 페이지
+      회원가입 페이지
 
-        </title>
-    </head>
-    
-<!--
+    </title>
+    <!-- Bootstrap core CSS -->
+    <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom style -->
+    <link href="signin.css" rel="stylesheet">
+    <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
+
     <style>
-        .box {
-            display: table;
-            width: 100%;
-            height: 100%;
-<<<<<<< HEAD
-=======
-        <!-- Bootstrap core CSS -->
-        <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
 
-        <!-- Custom style -->
-        <link href="signin.css" rel="stylesheet">
-        <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
-        
-        <style>
-            
-        .container {
-            width: 500px;
-            margin: 100px auto;
-            
->>>>>>> roll_back
-        }
-        
-        .inner {
-            display: table-cell;
-            vertical-align: middle;
-<<<<<<< HEAD
-        }
+      .container {
+        width: 500px;
+        margin: 100px auto;
 
-=======
-        #form-error {
-            width: 70%;
-            margin: auto auto;
-        }
+      }
 
-            
->>>>>>> roll_back
-        .centered {
-            position: relative;
-            display: inline-block;
-        
-<<<<<<< HEAD
-=======
+      #form-error {
+        width: 70%;
+        margin: auto auto;
+      }
 
->>>>>>> roll_back
-            width: 100%;
-            padding: 1em;
-            background: orange;
-            color: white;
-            }
-        .submit {
-            margin: 20px auto;
-<<<<<<< HEAD
-        }
-=======
-            
-        }
-<<<<<<< HEAD
->>>>>>> roll_back
-        
+      .centered {
+        position: relative;
+        display: inline-block;
+
+        width: 100%;
+        padding: 1em;
+
+      }
+
     </style>
--->
+  </head>
 
-<body>
-    <img src="{% static 'image/default_profile.jpg' %}" class="img-responsive"/></a></p>
-    <form method="POST" action ="" enctype="multipart/form-data">
-        <div class="container">
-            <div class="jumbotron">
-                    <h1>회원가입 페이지</h1>
-            </div> <!-- jumbotron -->
-            <div class="box">
-                <div class="centered">
-<<<<<<< HEAD
-=======
-=======
-            
-        </style>
-    </head>
-    
-    {% if profileform.errors %}
-    <div id="form-error">
-        <div class="alert alert-warning">
-            <a href="#" class="close" data-dismiss="alert">&times;</a>
-            <p>The operation could not be performed because one or more error(s) occurred.<br />Please resubmit the form after making the following changes:</p>
-            <br />
-            <table>
-                {% for field in profileform %}
-                {{ field.errors|striptags }}
-                {% endfor %}
-            </table>
-        </div>
+  {% if profileform.errors %}
+  <div id="form-error">
+    <div class="alert alert-warning">
+      <a href="#" class="close" data-dismiss="alert">&times;</a>
+      <p>The operation could not be performed because one or more error(s) occurred.<br />Please resubmit the form after making the following changes:</p>
+      <br />
+      <table>
+        {% for field in profileform %}
+        {{ field.errors|striptags }}
+        {% endfor %}
+      </table>
     </div>
-        {% endif %}
-    
-    <body>
-        <form method="POST" action="" enctype="multipart/form-data">
-            <form class="form-signin">
-                <div class="container">
-                    <div class="jumbotron">                
-<div class="centered">
->>>>>>> 91fe6a825ee9a106f5b64a43d207dcfc55c5af93
->>>>>>> roll_back
-                    {% if profileform.is_multipart %}
-                    <form method="POST" action ="{{request.path}}" enctype="multipart/form-data">
-                        {% else %}
-                        <form method="POST" action ="{{request.path}}">
-                            {% endif %}
-                            {% csrf_token%}
-                            {{profileform.as_p}}
-<<<<<<< HEAD
-=======
-    
-                            <h2 class="form-signin-heading">Please sign in</h2><br />
+  </div>
+  {% endif %}
 
-                            <label for="id_email" class="sr-only">Email address</label>
-                            <input id="id_email" name="email" type="email"
-                                   class="form-control" placeholder="Email address" required autofocus />
+  <body>
+    <form method="POST" action="" enctype="multipart/form-data" class="form-signin">
+      <div class="container">
+        <div class="jumbotron">                
+          <div class="centered">
 
-                            <label for="id_password" class="sr-only">Password</label>
-                            <input id="id_password" maxlength="100" name="password" type="password" 
-                                   class="form-control" placeholder="password" required autofocus />
-                            <label for="id_password_confirm" class="sr-only">Confirm Password</label>
-                            <input id="id_password_confirm" maxlength="100" name="password_confirm" type="password"
-                                   class="form-control" placeholder="Confirm password" required autofocus /><br />
->>>>>>> roll_back
-                            
-                </div> <!-- /centered -->
-                        <div class="submit">
-                            <input type="submit" value="회원가입">
-                        </div> <!-- /submit -->
-            </div> <!-- /box -->
-        </div> <!-- /container -->
-<<<<<<< HEAD
+            {% csrf_token%}
 
-=======
-                            <label for="id_pro_photo" style="color: gray; font-family: sans-serif;">프로필 이미지(선택):</label>
-                            <input id="id_pro_photo" name="pro_photo" type="file"/><br /><br />
+            <h2 class="form-signin-heading">Please sign in</h2><br />
 
-<<<<<<< HEAD
-=======
-<!--
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" value="remember-me"> Remember me
-                                </label>
-                            </div>
--->
+            <label for="id_email" class="sr-only">Email address</label>
+            <input id="id_email" name="email" type="email"
+                   class="form-control" placeholder="Email address" required autofocus />
 
-                            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-                        </form>
-                        </form>
-                        </div>
-                    </div> <!--jumbotron -->
-                </div> <!-- /container -->
-            </form>
-        </form>
+            <label for="id_password" class="sr-only">Password</label>
+            <input id="id_password" maxlength="100" name="password" type="password" 
+                   class="form-control" placeholder="password" required autofocus />
+            <label for="id_password_confirm" class="sr-only">Confirm Password</label>
+            <input id="id_password_confirm" maxlength="100" name="password_confirm" type="password"
+                   class="form-control" placeholder="Confirm password" required autofocus /><br />
 
->>>>>>> 91fe6a825ee9a106f5b64a43d207dcfc55c5af93
->>>>>>> roll_back
-        <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-        <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+            <label for="id_pro_photo" style="color: gray; font-family: sans-serif;">프로필 이미지(선택):</label>
+            <input id="id_pro_photo" name="pro_photo" type="file"/><br /><br />
+
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+          </div>
+        </div> <!--jumbotron -->
+      </div> <!-- /container -->
     </form>
-</body>
-<<<<<<< HEAD
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+  </body>
 </html>
-=======
-</html></html></html></html></html>    </body>
-</html>
 
 
 
->>>>>>> roll_back

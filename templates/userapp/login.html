@@ -1,26 +1,7 @@
 <!DOCTYPE html>
 {% block content %}
 {% load static from staticfiles%}
-<<<<<<< HEAD
-=======
 
->>>>>>> roll_back
-<html>
-<<<<<<< HEAD
-<head lang="en">
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
-   <form method="post" action="{% url 'login_url' %}">
-       {% csrf_token %}
-       email :{{form.username}}  <br/>
-       password : {{form.password}}  <br/>
-
-       <input type = "submit" value="login"/>
-   </form>
-</body>
-=======
     <head lang="en">
         <meta charset="UTF-8">
         <link rel="stylesheet" type="text/css" href="/static/media/style.css" />
@@ -44,7 +25,5 @@
             </div>
         </form>
     </body>
->>>>>>> 91fe6a825ee9a106f5b64a43d207dcfc55c5af93
 </html>
-
 {% endblock %}

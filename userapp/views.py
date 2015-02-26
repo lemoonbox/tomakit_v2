@@ -245,7 +245,7 @@ def logout(request, *args, **kwargs):
     res = django_logout(request, *args, **kwargs)
     return res
 
-#@login_required
+@login_required
 def profile(request, *args, **kwargs):
 
     print args
