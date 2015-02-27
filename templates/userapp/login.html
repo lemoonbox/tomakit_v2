@@ -1,29 +1,32 @@
 <!DOCTYPE html>
 {% block content %}
 {% load static from staticfiles%}
+<!DOCTYPE html>
 
-    <head lang="en">
-        <meta charset="UTF-8">
-        <link rel="stylesheet" type="text/css" href="/static/media/style.css" />
-        <title> Log In </title>
-    </head>
-    
-    <body>
-        <form method="post" action="{% url 'login_url' %}" autocomplete="off">
-            <div class="container">
-                <div class="outer">
-                    <div class="centered">
-                    {% csrf_token %}
-                    <input type="text" name="username" placeholder="Username(Email)"
-                           value="{{valid_username}}" /><br>
-                    <input type="password" name="password" placeholder="Password"
-                           value="{{valid_password}}" /><br>
-                        <input type = "submit" value="login" />
-                        <img src="{% static 'image/default_profile.jpg' %}" class="img-responsive"/>
-                    </div>
-                </div>
-            </div>
-        </form>
-    </body>
+<html>
+  <head lang="en">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/static/media/css/style.css" />
+    <title> Log In </title>
+  </head>
+
+  <body>
+    <form method="post" action="{% url 'login_url' %}" autocomplete="off">
+      <div class="container">
+        <div class="outer">
+          <div class="centered">
+            {% csrf_token %}
+            <label for="username" class="sr-only">Username(Email)</label>
+            <input type="text" name="username" 
+                   value="{{valid_username}}" /><br>
+            <input type="password" name="password" placeholder="Password"
+                   value="{{valid_password}}" /><br>
+            <input type = "submit" value="login" />
+            <img src="{% static 'image/default_profile.jpg' %}" class="img-responsive"/>
+          </div>
+        </div>
+      </div>
+    </form>
+  </body>
 </html>
 {% endblock %}
