@@ -3,28 +3,31 @@
 
   <head lang="ko">
     <meta charset="utf-8">
-    <meta name="viewport" contet="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="/static/bootstrap/dist/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="/static/bootstrap/dist/js/bootstrap.min.js"></script>
     <title>
 
       회원가입 페이지
 
     </title>
+
     <!-- Bootstrap core CSS -->
-    <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/bootstrap/dist/css/bootstrap.min.css" type="text/css" rel="stylesheet">
+
+    <!-- Animation style -->
+    <link href="/static_local/media/css/animate-custom.css" rel="stylesheet">
 
     <!-- Custom style -->
-    <link href="signin.css" rel="stylesheet">
-    <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
+    <link href="/static/media/css/signin.css" rel="stylesheet">
+    <script src="/static/bootstrap/docs/assets/js/ie-emulation-modes-warning.js"></script>
 
     <style>
 
       .container {
         width: 500px;
         margin: 100px auto;
-
       }
 
       #form-error {
@@ -38,61 +41,188 @@
 
         width: 100%;
         padding: 1em;
-
       }
 
+
     </style>
+
   </head>
 
-  {% if profileform.errors %}
-  <div id="form-error">
-    <div class="alert alert-warning">
-      <a href="#" class="close" data-dismiss="alert">&times;</a>
-      <p>The operation could not be performed because one or more error(s) occurred.<br />Please resubmit the form after making the following changes:</p>
-      <br />
-      <table>
-        {% for field in profileform %}
-        {{ field.errors|striptags }}
-        {% endfor %}
-      </table>
-    </div>
-  </div>
-  {% endif %}
 
   <body>
-    <form method="POST" action="" enctype="multipart/form-data" class="form-signin">
-      <div class="container">
-        <div class="jumbotron">                
-          <div class="centered">
+
+    <!-- Static navbar -->
+    <nav class="navbar navbar-default navbar-static-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Crafter Penguin</a>
+        </div>
+
+        <div id="navbar" class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home <span class="sr-only">(current)</span></a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">강사 등록</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">원데이 클래스 <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="#">목공예 </a></li>
+                <li><a href="#">패브릭 </a></li>
+                <li><a href="#">푸드 앤 디저트 </a></li>
+                <li><a href="#">테크놀로지</a></li>
+                <li class="divider"></li>
+
+                <!--
+<li class="dropdown-header">Nav header</li>
+<li><a href="#">Separated link</a></li>
+<li><a href="#">One more separated link</a></li>
+
+-->
+              </ul>
+            </li>
+          </ul>
+
+          <ul class="nav navbar-nav navbar-right">
+            <!--
+<form class="navbar-form navbar-left" role="search">
+<div class="form-group">
+<input type="text" class="form-control" placeholder="Search">
+</div>
+<button type="submit" class="btn btn-default">검색</button>
+</form>
+-->
+
+            {% if user.is_authenticated %}
+            <li><a href="#"><p class="hi"><strong>안녕하세요 {{user.username }}님!</strong></p></a></li>
+            <li><a href="http://127.0.0.1:8000/user/logout">로그아웃</a></li>
+            {% else %}
+            <li><a href="#"><p class="hi">hello world!</p></a></li>
+            <li><a href="http://127.0.0.1:8000/user/signup">회원가입</a></li>
+            <li class="active"><a href="http://127.0.0.1:8000/user/login">로그인</a></li>
+            <!--            <span class="sr-only">(current)</span>-->
+
+          </ul>
+          {% endif %}
+
+        </div><!--/.nav-collapse -->
+      </div><!--/.container-fluid -->
+    </nav>
+
+    {% if profileform.errors %}
+    <div id="form-error">
+      <div class="alert alert-warning">
+        <a href="#" class="close" data-dismiss="alert">&times;</a>
+        <p>The operation could not be performed because one or more error(s) occurred.<br />Please resubmit the form after making the following changes:</p>
+        <br />
+        <table>
+          {% for field in profileform %}
+          {{ field.errors|striptags }}
+          {% endfor %}
+        </table>
+      </div>
+    </div>
+    {% endif %}
+
+    <!-- auth test. remove required-->
+    <!--
+{% if user.is_authenticated %}
+<p class="hi"><strong>안녕하세요 {{user.username }}님!</strong></p>
+{% else %}
+<p class="hi">hello world!</p><br />
+{% endif %}
+<br><br>
+-->
+    <!-- end -->    
+
+    <div class="container">
+      <a class="hiddenanchor" id="toregister"></a>
+      <a class="hiddenanchor" id="tologin"></a>
+
+      <div id="wrapper">
+<!--
+        <div id="login" class="animate">
+          <form method="post" action="{% url 'login_url' %}" class="form-signin" autocomplete="off">
+            {% csrf_token %}
+            <h2 class="form-signin-heading">Log in</h2><br />
+-->
+
+            <!-- TODO: email -> email and username -->
+<!--
+            <label for="email" class="email" name="email" > Username(Email) </label><br />
+            <input id="email" name="email" class="form-control" required
+                   type="text" placeholder="username or email" autocomplete="off" value><br />
+            <label for="password" class="password" data-icon="u"> Password </label> 
+            <a href="password.reset" class="fg-pwd">Forgot Password?</a>
+            <br />
+            <input id="password" name="password" class="form-control" required 
+                   type="password" placeholder="Password" autocomplete="off" value>
+
+            <br /><br /><br />
+-->
+            <!--
+<p class="kepplogin">
+<input type="checkbox" name="loginkeeping" id="loginkeeping" value="loginkeeping" />
+<label for="loginkeeping">Keep me logged in</label>
+</p>
+-->
+<!--
+
+            <div class="signin-btn-p">
+              <p class="change_link">
+                Not a member yet?
+                <a href="#toregister" class="to_register">Join us</a>
+              </p>
+              <button class="btn btn-lg btn-primary btn-block" type="submit">Log In</button>
+            </div>
+
+          </form>
+        </div>
+-->
+
+
+        <div id="register" class="animate">
+
+          <!--
+<p><label for="usernamesignup" class="username" data-icon="u">Your username</label>
+<input id="usernamesignup" name="usernamesignup" required="required" type="text" placeholder="username" />
+</p>
+-->
+
+          <form method="POST" action="" enctype="multipart/form-data" class="form-signin">
 
             {% csrf_token%}
 
             <h2 class="form-signin-heading">Please sign in</h2><br />
-
             <label for="id_email" class="sr-only">Email address</label>
             <input id="id_email" name="email" type="email"
                    class="form-control" placeholder="Email address" required autofocus />
-
             <label for="id_password" class="sr-only">Password</label>
             <input id="id_password" maxlength="100" name="password" type="password" 
                    class="form-control" placeholder="password" required autofocus />
             <label for="id_password_confirm" class="sr-only">Confirm Password</label>
             <input id="id_password_confirm" maxlength="100" name="password_confirm" type="password"
                    class="form-control" placeholder="Confirm password" required autofocus /><br />
-
             <label for="id_pro_photo" style="color: gray; font-family: sans-serif;">프로필 이미지(선택):</label>
-            <input id="id_pro_photo" name="pro_photo" type="file"/><br /><br />
+            <input id="id_pro_photo" name="pro_photo" type="file"/><br />
+
+            <p class="change_link">Already a member?
+              <a href="#tologin" class="to_register">Go and log in</a>
+            </p>
 
             <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-          </div>
-        </div> <!--jumbotron -->
-      </div> <!-- /container -->
-    </form>
 
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+          </form>  
+
+        </div> <!--/register-->
+      </div> <!--/wrapper-->
+    </div> <!-- /container -->
+
   </body>
 </html>
-
-
 
