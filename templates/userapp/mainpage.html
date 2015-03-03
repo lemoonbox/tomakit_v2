@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="크래프터 펭귄(Crafter Penguin)은 DIY 라이프 스타일을 즐기는 사람들을 위한 놀이터입니다.">
+    <meta name="author" content="Minaminimi">
+    <meta name="keywords" contetn="DIY, Craft, DIY kit, 만들기, 수공예" />
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+    <script type="text/javascript" src="http://twitter.github.com/bootstrap/assets/js/bootstrap-dropdown.js"></script>
+
+
+    <title>Main Page</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="navbar-fixed-top.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+
+    <style>
+      body {
+        background-color: #eee;
+      }
+
+      #wrapper {
+        width: 90%;
+        max-width: 1100px;
+        min-width: 800px;
+        margin: 50px auto;
+      }
+
+      #columns {
+        -webkit-column-count: 3;
+        -webkit-column-gap: 10px;
+        -webkit-column-fill: auto;
+        -moz-column-count: 3;
+        -moz-column-gap: 10px;
+        -moz-column-fill: auto;
+        column-count: 3;
+        column-gap: 15px;
+        column-fill: auto;
+      }
+
+      .pin {
+        display: inline-block;
+        background: #FEFEFE;
+        border: 2px solid #FAFAFA;
+        box-shadow: 0 1px 2px rgba(34, 25, 25, 0.4);
+        margin: 0 2px 15px;
+        -webkit-column-break-inside: avoid;
+        -moz-column-break-inside: avoid;
+        column-break-inside: avoid;
+        padding: 15px;
+        padding-bottom: 5px;
+        background: -webkit-linear-gradient(45deg, #FFF, #F9F9F9);
+        opacity: 1;
+
+        -webkit-transition: all .2s ease;
+        -moz-transition: all .2s ease;
+        -o-transition: all .2s ease;
+        transition: all .2s ease;
+      }
+
+      .pin img {
+        width: 100%;
+        border-bottom: 1px solid #ccc;
+        padding-bottom: 15px;
+        margin-bottom: 5px;
+      }
+
+      .pin p {
+        font: 12px/18px Arial, sans-serif;
+        color: #333;
+        margin: 0;
+      }
+
+      @media (min-width: 960px) {
+        #columns {
+          -webkit-column-count: 4;
+          -moz-column-count: 4;
+          column-count: 4;
+        }
+      }
+
+      @media (min-width: 1100px) {
+        #columns {
+          -webkit-column-count: 5;
+          -moz-column-count: 5;
+          column-count: 5;
+        }
+      }
+
+      #columns:hover .pin:not(:hover) {
+        opacity: 0.4;
+      }
+    </style>
+
+
+
+
+  </head>
+
+  <body>
+
+    <!-- Static navbar -->
+    <nav class="navbar navbar-default navbar-static-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Crafter Penguin</a>
+        </div>
+
+        <div id="navbar" class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home <span class="sr-only">(current)</span></a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">강사 등록</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">원데이 클래스 <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="#">목공예 </a></li>
+                <li><a href="#">패브릭 </a></li>
+                <li><a href="#">푸드 앤 디저트 </a></li>
+                <li><a href="#">테크놀로지</a></li>
+                <li class="divider"></li>
+
+                <!--
+<li class="dropdown-header">Nav header</li>
+<li><a href="#">Separated link</a></li>
+<li><a href="#">One more separated link</a></li>
+
+-->
+              </ul>
+            </li>
+          </ul>
+
+          <ul class="nav navbar-nav navbar-right">
+            <!--
+<form class="navbar-form navbar-left" role="search">
+<div class="form-group">
+<input type="text" class="form-control" placeholder="Search">
+</div>
+<button type="submit" class="btn btn-default">검색</button>
+</form>
+-->
+
+            {% if user.is_authenticated %}
+            <li><a href="#"><p class="hi"><strong>안녕하세요 {{user.username }}님!</strong></p></a></li>
+            <li><a href="http://127.0.0.1:8000/user/logout">로그아웃</a></li>
+            {% else %}
+            <li><a href="#"><p class="hi">hello world!</p></a></li>
+            <li><a href="http://127.0.0.1:8000/user/signup">회원가입</a></li>
+            <li class="active"><a href="http://127.0.0.1:8000/user/login">로그인</a></li>
+            <!--            <span class="sr-only">(current)</span>-->
+
+          </ul>
+          {% endif %}
+
+        </div><!--/.nav-collapse -->
+      </div><!--/.container-fluid -->
+    </nav>
+
+    <div class="container">
+
+      <!-- Main component for a primary marketing message or call to action -->
+      <div class="jumbotron">
+        <h1>Hello</h1>
+        <p>Navigation sample</p>
+        <p>test</p>
+<!--
+        <p>
+          <a class="btn btn-lg btn-primary" href="../../components/#navbar" role="button">View navbar docs &raquo;</a>
+        </p>
+-->
+      </div>
+
+    </div> 
+    <!-- /container -->
+
+
+
+
+    <div id="wrapper">
+      <div id="columns">
+        <div class="pin">
+          <a href="http://riot-web-static.s3.amazonaws.com/images/news/December_2012/2012_12_06_SS94/imaii.jpg"><img src="http://riot-web-static.s3.amazonaws.com/images/news/December_2012/2012_12_06_SS94/imaii.jpg" />
+            <p>
+              Blitzcrank Paper Craft fan art
+            </p></a>
+        </div>
+
+        <div class="pin">
+          <img src="http://fc04.deviantart.net/fs71/f/2012/316/a/1/league_of_legends___royal_shaco___papercraft_by_kotlesiu-d5krfhp.jpg" />
+          <p>
+            League of Legends - Royal Shaco - papercraft by kotlesiu 
+          </p>
+        </div>
+
+        <div class="pin">
+          <img src="http://cssdeck.com/uploads/media/items/6/6f3nXse.png" />
+          <p>
+            Nullam eget lectus augue. Donec eu sem sit amet ligula 
+            faucibus suscipit. Suspendisse rutrum turpis quis nunc 
+            convallis quis aliquam mauris suscipit.
+          </p>
+        </div>
+
+        <div class="pin">
+          <img src="http://cssdeck.com/uploads/media/items/8/8kEc1hS.png" />
+          <p>
+            Nullam eget lectus augue. Donec eu sem sit amet ligula 
+            faucibus suscipit. Suspendisse rutrum turpis quis nunc 
+            convallis quis aliquam mauris suscipit.
+          </p>
+        </div>
+
+        <div class="pin">
+          <img src="http://cssdeck.com/uploads/media/items/1/1swi3Qy.png" />
+          <p>
+            Donec a fermentum nisi. Integer dolor est, commodo ut 
+            sagittis vitae, egestas at augue. 
+          </p>
+        </div>
+
+        <div class="pin">
+          <img src="http://cssdeck.com/uploads/media/items/6/6f3nXse.png" />
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+            Sed feugiat consectetur pellentesque. Nam ac elit risus, 
+            ac blandit dui. Duis rutrum porta tortor ut convallis.
+            Duis rutrum porta tortor ut convallis.
+          </p>
+        </div>	
+
+        <div class="pin">
+          <img src="http://cssdeck.com/uploads/media/items/2/2v3VhAp.png" />
+          <p>
+            Nullam eget lectus augue. Donec eu sem sit amet ligula 
+            faucibus suscipit. Suspendisse rutrum turpis quis nunc 
+            convallis quis aliquam mauris suscipit.
+            Duis rutrum porta tortor ut convallis.
+          </p>
+        </div>
+
+        <div class="pin">
+          <img src="http://cssdeck.com/uploads/media/items/1/1swi3Qy.png" />
+          <p>
+            Nullam eget lectus augue. 
+          </p>
+        </div>
+
+        <div class="pin">
+          <img src="http://cssdeck.com/uploads/media/items/8/8kEc1hS.png" />
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+            Sed feugiat consectetur pellentesque. 
+          </p>
+        </div>
+
+        <div class="pin">
+          <img src="http://cssdeck.com/uploads/media/items/2/2v3VhAp.png" />
+          <p>
+            Donec a fermentum nisi. Integer dolor est, commodo ut 
+            sagittis vitae, egestas at augue. Suspendisse id nulla 
+            ac urna vestibulum mattis. Duis rutrum porta tortor ut convallis.
+          </p>
+        </div>
+
+        <div class="pin">
+          <img src="http://cssdeck.com/uploads/media/items/1/1swi3Qy.png" />
+          <p>
+            Donec a fermentum nisi. Integer dolor est, commodo ut 
+            sagittis vitae, egestas at augue. Suspendisse id nulla 
+            ac urna vestibulum mattis. 
+          </p>
+        </div>
+
+        <div class="pin">
+          <img src="http://cssdeck.com/uploads/media/items/6/6f3nXse.png" />
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+            Sed feugiat consectetur pellentesque. Nam ac elit risus, 
+            ac blandit dui. Duis rutrum porta tortor ut convallis.
+          </p>
+        </div>	
+
+        <div class="pin">
+          <img src="http://cssdeck.com/uploads/media/items/2/2v3VhAp.png" />
+          <p>
+            Donec a fermentum nisi. Integer dolor est, commodo ut 
+            sagittis vitae, egestas at augue. Suspendisse id nulla 
+            ac urna vestibulum mattis. 
+          </p>
+        </div>
+
+        <div class="pin">
+          <img src="http://cssdeck.com/uploads/media/items/1/1swi3Qy.png" />
+          <p>
+            Donec a fermentum nisi. Integer dolor est, commodo ut 
+            sagittis vitae, egestas at augue. Suspendisse id nulla 
+            ac urna vestibulum mattis. 
+          </p>
+        </div>
+
+        <div class="pin">
+          <img src="http://cssdeck.com/uploads/media/items/6/6f3nXse.png" />
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+            Sed feugiat consectetur pellentesque. Nam ac elit risus, 
+            ac blandit dui. Duis rutrum porta tortor ut convallis.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript
+================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="../../dist/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+
+    <!-- Dropdown signin -->
+    <script>
+      $(document).ready(function()
+                        {
+        //Handles menu drop down
+        $('.dropdown-menu').find('form').click(function (e) {
+          e.stopPropagation();
+        });
+      });
+    </script>
+  </body>
+</html>
