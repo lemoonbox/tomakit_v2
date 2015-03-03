@@ -4,6 +4,7 @@
   <head lang="ko">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="/static/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="/static/bootstrap/dist/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="/static/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -14,6 +15,7 @@
     </title>
     
     <!-- Bootstrap core CSS -->
+    <link href="/static/bootstrap/dist/css/bootstrap.min.css" type="text/css" rel="stylesheet">
     <link href="/static/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 
 
@@ -47,6 +49,7 @@
     
   </head>
   
+  
 
 
   <body>
@@ -64,6 +67,7 @@
           <a class="navbar-brand" href="#">Crafter Penguin</a>
         </div>
         
+        <div id="navbar" class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <div id="navbar" class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">         
           
           <ul class="nav navbar-nav">
@@ -100,28 +104,14 @@
 -->
             
             {% if user.is_authenticated %}
-            <li>
-              <a href="#">
-                <p class="hi"><strong>안녕하세요 {{user.username }}님!</strong></p>
-              </a>
-            </li>
-            <li>
-              <a href="http://127.0.0.1:8000/user/logout">로그아웃</a>
-            </li>
+            <li><a href="#"><p class="hi"><strong>안녕하세요 {{user.username }}님!</strong></p></a></li>
+            <li><a href="http://127.0.0.1:8000/user/logout">로그아웃</a></li>
             {% else %}
-            <li>
-              <a href="#"><p class="hi">hello world!</p></a>
-            </li>
-            <li>
-              <a href="http://127.0.0.1:8000/user/signup">회원가입</a>
-            </li>
-            <li class="active">
-              <a href="http://127.0.0.1:8000/user/login">로그인</a>
-            </li>
+            <li><a href="#"><p class="hi">hello world!</p></a></li>
+            <li><a href="http://127.0.0.1:8000/user/signup">회원가입</a></li>
+            <li class="active"><a href="http://127.0.0.1:8000/user/login">로그인</a></li>
+            <!--            <span class="sr-only">(current)</span>-->
 
-<!--        
-            <span class="sr-only">(current)</span>
--->
 
           </ul>
           {% endif %}
@@ -135,14 +125,14 @@
     {% load static from staticfiles%}
 
     
-    {% if profileform.errors %}
+      {% if login_form.errors %}
     <div id="form-error">
       <div class="alert alert-warning">
         <a href="#" class="close" data-dismiss="alert">&times;</a>
         <p>The operation could not be performed because one or more error(s) occurred.<br />Please resubmit the form after making the following changes:</p>
         <br />
         <table>
-          {% for field in profileform %}
+          {% for field in login_form %}
           {{ field.errors|striptags }}
           {% endfor %}
         </table>
@@ -171,6 +161,7 @@
             {% csrf_token %}
             <h2 class="form-signin-heading">Log in</h2><br />
             
+            <!-- TODO: email -> email and username -->
             <!-- #TODO: email -> email and username -->
             <label for="username" name="username"> Username(Email) </label><br />
             <input type="text" name="username" class="form-control" required
