@@ -1,38 +1,10 @@
 <!DOCTYPE html>
-<<<<<<< HEAD
-{% block content %}
-{% load static from staticfiles%}
-
-    <head lang="en">
-        <meta charset="UTF-8">
-        <link rel="stylesheet" type="text/css" href="/static/media/style.css" />
-        <title> Log In </title>
-    </head>
-    
-    <body>
-    <img src="{% static 'image/default_profile.jpg' %}" class="img-responsive"/>
-        <form method="post" action="{% url 'login_url' %}" autocomplete="off">
-            <div class="container">
-                <div class="outer">
-                    {% for field in login_form %}
-                    {{ field.errors|striptags }}
-                    {% endfor %}
-                    <div class="centered">
-                    {% csrf_token %}
-                    <input type="text" name="username" placeholder="Username(Email)"
-                           value="{{valid_username}}" /><br>
-                    <input type="password" name="password" placeholder="Password"
-                           value="{{valid_password}}" /><br>
-                        <input type = "submit" value="login" />
-                    </div>
-                </div>
-=======
 <html>
 
   <head lang="ko">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="/static/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/bootstrap/dist/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="/static/bootstrap/dist/js/bootstrap.min.js"></script>
     <title>
@@ -42,7 +14,7 @@
     </title>
     
     <!-- Bootstrap core CSS -->
-    <link href="/static/bootstrap/dist/css/bootstrap.min.css" type="text/css" rel="stylesheet">
+    <link href="/static/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 
 
     <!-- Custom style -->
@@ -75,7 +47,7 @@
     
   </head>
   
-  
+
 
   <body>
     
@@ -92,7 +64,8 @@
           <a class="navbar-brand" href="#">Crafter Penguin</a>
         </div>
         
-        <div id="navbar" class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <div id="navbar" class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">         
+          
           <ul class="nav navbar-nav">
             <li class="active"><a href="#">Home <span class="sr-only">(current)</span></a></li>
             <li><a href="#about">About</a></li>
@@ -127,13 +100,28 @@
 -->
             
             {% if user.is_authenticated %}
-            <li><a href="#"><p class="hi"><strong>안녕하세요 {{user.username }}님!</strong></p></a></li>
-            <li><a href="http://127.0.0.1:8000/user/logout">로그아웃</a></li>
+            <li>
+              <a href="#">
+                <p class="hi"><strong>안녕하세요 {{user.username }}님!</strong></p>
+              </a>
+            </li>
+            <li>
+              <a href="http://127.0.0.1:8000/user/logout">로그아웃</a>
+            </li>
             {% else %}
-            <li><a href="#"><p class="hi">hello world!</p></a></li>
-            <li><a href="http://127.0.0.1:8000/user/signup">회원가입</a></li>
-            <li class="active"><a href="http://127.0.0.1:8000/user/login">로그인</a></li>
-            <!--            <span class="sr-only">(current)</span>-->
+            <li>
+              <a href="#"><p class="hi">hello world!</p></a>
+            </li>
+            <li>
+              <a href="http://127.0.0.1:8000/user/signup">회원가입</a>
+            </li>
+            <li class="active">
+              <a href="http://127.0.0.1:8000/user/login">로그인</a>
+            </li>
+
+<!--        
+            <span class="sr-only">(current)</span>
+-->
 
           </ul>
           {% endif %}
@@ -183,7 +171,7 @@
             {% csrf_token %}
             <h2 class="form-signin-heading">Log in</h2><br />
             
-            <!-- TODO: email -> email and username -->
+            <!-- #TODO: email -> email and username -->
             <label for="username" name="username"> Username(Email) </label><br />
             <input type="text" name="username" class="form-control" required
                    placeholder="username or email" autocomplete="off" value="{{valid_username}}"><br />
@@ -210,12 +198,8 @@
               <a href="#toregister" class="to_register">Join us</a>
             </p>
             <button class="btn btn-lg btn-primary btn-block" type="submit">Log In</button>
->>>>>>> e424bfef1ad0e98f56ef2482782b4a335eb4afef
             </div>
-        </form>
-    </body>
-</html>
-{% endblock %}{% endblock %}{% endblock %}          
+          
           </form>
         </div>
 

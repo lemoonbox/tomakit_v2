@@ -3,13 +3,10 @@
 
   <head lang="ko">
     <meta charset="utf-8">
-    <meta name="viewport" contet="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="/static/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}bootstrap/dist/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    <script src="/static/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="{{ STATIC_URL }}bootstrap/dist/js/bootstrap.min.js"></script>
     <title>
 
       회원가입 페이지
@@ -17,24 +14,27 @@
     </title>
 
     <!-- Bootstrap core CSS -->
-    <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/static/bootstrap/dist/css/bootstrap.min.css" type="text/css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Animation style -->
-    <link href="/static_local/media/css/animate-custom.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}media/css/animate-custom.css" rel="stylesheet">
 
     <!-- Custom style -->
-    <link href="signin.css" rel="stylesheet">
-    <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
-    <link href="/static/media/css/signin.css" rel="stylesheet">
-    <script src="/static/bootstrap/docs/assets/js/ie-emulation-modes-warning.js"></script>
+    <link href="{{ STATIC_URL}}media/css/signin.css" rel="stylesheet">
+    <script src="{{ STATIC_URL }}bootstrap/docs/assets/js/ie-emulation-modes-warning.js"></script>
+    
+    <script>
+    ${function(){
+    $("#includedContent").load("layout/header.html");
+    });
+    </script>
 
+    
     <style>
 
       .container {
         width: 500px;
         margin: 100px auto;
-
       }
 
       #form-error {
@@ -48,7 +48,10 @@
 
         width: 100%;
         padding: 1em;
-
+      }
+      
+      object {
+        width:100%;
       }
 
 
@@ -56,26 +59,9 @@
 
   </head>
 
-  {% if profileform.errors %}
-  <div id="form-error">
-    <div class="alert alert-warning">
-      <a href="#" class="close" data-dismiss="alert">&times;</a>
-      <p>The operation could not be performed because one or more error(s) occurred.<br />Please resubmit the form after making the following changes:</p>
-      <br />
-      <table>
-        {% for field in profileform %}
-        {{ field.errors|striptags }}
-        {% endfor %}
-      </table>
-    </div>
-  </div>
-  {% endif %}
 
   <body>
-    <form method="POST" action="" enctype="multipart/form-data" class="form-signin">
-      <div class="container">
-        <div class="jumbotron">                
-          <div class="centered">
+<!--    <object name="navbar" type="text/html" data={% include "layout/header.html" %}></object>-->
 
     <!-- Static navbar -->
     <nav class="navbar navbar-default navbar-static-top">
@@ -178,7 +164,7 @@
             <h2 class="form-signin-heading">Log in</h2><br />
 -->
 
-            <!-- TODO: email -> email and username -->
+            <!-- #TODO: email -> email and username -->
 <!--
             <label for="email" class="email" name="email" > Username(Email) </label><br />
             <input id="email" name="email" class="form-control" required
@@ -225,24 +211,16 @@
             {% csrf_token%}
 
             <h2 class="form-signin-heading">Please sign in</h2><br />
-
             <label for="id_email" class="sr-only">Email address</label>
             <input id="id_email" name="email" type="email"
                    class="form-control" placeholder="Email address" required autofocus />
-
             <label for="id_password" class="sr-only">Password</label>
             <input id="id_password" maxlength="100" name="password" type="password" 
                    class="form-control" placeholder="password" required autofocus />
             <label for="id_password_confirm" class="sr-only">Confirm Password</label>
             <input id="id_password_confirm" maxlength="100" name="password_confirm" type="password"
                    class="form-control" placeholder="Confirm password" required autofocus /><br />
-<<<<<<< HEAD
-
-              <input id="id_nick" name="nick_name" class="form-control" placeholder="이름"/>
-=======
->>>>>>> e424bfef1ad0e98f56ef2482782b4a335eb4afef
             <label for="id_pro_photo" style="color: gray; font-family: sans-serif;">프로필 이미지(선택):</label>
-            <input id="id_pro_photo" name="pro_photo" type="file"/><br /><br />
             <input id="id_pro_photo" name="pro_photo" type="file"/><br />
 
             <p class="change_link">Already a member?
@@ -250,15 +228,7 @@
             </p>
 
             <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-          </div>
-        </div> <!--jumbotron -->
-      </div> <!-- /container -->
-    </form>
 
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
-  </body>
-</html>
           </form>  
 
         </div> <!--/register-->
