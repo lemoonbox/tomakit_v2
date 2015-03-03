@@ -4,27 +4,27 @@
   <head lang="ko">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="/static/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/static/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}bootstrap/dist/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="/static/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="{{ STATIC_URL }}bootstrap/dist/js/bootstrap.min.js"></script>
     <title>
 
       회원가입 페이지
 
     </title>
-    
-    <!-- Bootstrap core CSS -->
-    <link href="/static/bootstrap/dist/css/bootstrap.min.css" type="text/css" rel="stylesheet">
-    <link href="/static/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 
+    <!-- Bootstrap core CSS -->
+    <link href="{{ STATIC_URL }}bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Animation style -->
+    <link href="{{ STATIC_URL }}media/css/animate-custom.css" rel="stylesheet">
 
     <!-- Custom style -->
-    <link href="/static/media/css/signin.css" rel="stylesheet">
-    <link href="/static_local/bootstrap/docs/examples/navbar-fixed-top/navbar-fixed-top.css" rel="stylesheet">
-    <script src="/static/bootstrap/docs/assets/js/ie-emulation-modes-warning.js"></script>
+    <link href="{{ STATIC_URL}}media/css/signin.css" rel="stylesheet">
+    <script src="{{ STATIC_URL }}bootstrap/docs/assets/js/ie-emulation-modes-warning.js"></script>
 
     <style>
+
 
       .container {
         width: 500px;
@@ -104,7 +104,7 @@
 -->
             
             {% if user.is_authenticated %}
-            <li><a href="#"><p class="hi"><strong>안녕하세요 {{user.username }}님!</strong></p></a></li>
+            <li><a href="#"><p class="hi"><strong>안녕하세요 {{ user.nick_name }}님!</strong></p></a></li>
             <li><a href="http://127.0.0.1:8000/user/logout">로그아웃</a></li>
             {% else %}
             <li><a href="#"><p class="hi">hello world!</p></a></li>
@@ -165,7 +165,7 @@
             <!-- #TODO: email -> email and username -->
             <label for="username" name="username"> Username(Email) </label><br />
             <input type="text" name="username" class="form-control" required
-                   placeholder="username or email" autocomplete="off" value="{{valid_username}}"><br />
+                   placeholder="username or email" autocomplete="off" value="{{is_authenticated}}"><br />
             <label for="password" name="password"> Password </label> 
             <a href="password.reset" class="fg-pwd">Forgot Password?</a>
             <br />
