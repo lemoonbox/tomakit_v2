@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+  <form method="POST" action="{{request.path}}" enctype="multipart/form-data">
+      {% csrf_token%}
+      {% if class_createform.title.errors %}
+        {{ class_createform.title.errors|striptags }}<br/>
+      {% endif %}
+      제목:<input id="id_title" name ="title" placeholder ="title: 어떤 클래스인가요?"><br />
+      {% if class_createform.price.errors %}
+        {{ class_createform.price.errors|striptags }}<br/>
+      {% endif %}
+      가격:<input id="id_price" name ="price" placeholder ="수강료는 얼마인가요?"><br />
+      {% if class_createform.describe.errors %}
+        {{ class_createform.describe.errors|striptags }}<br/>
+      {% endif %}
+      강의 소개 :<textarea id="id_describe" name = "describe" rows=5 cols=50 maxlength=500></textarea><br />
+      {% if class_createform.lessonday.errors %}
+        {{ class_createform.lessonday.errors|striptags }}<br/>
+      {% endif %}
+      강의 날짜 :<input id="id_lessonday" name = "lessonday" type="date"><br />
+      {% if class_createform.start_time.errors %}
+        {{ class_createform.start_time.errors|striptags }}<br/>
+      {% endif %}
+      시작 시간 : <input id= "id_start_time" name ="start_time" type="time"><br />
+      {% if class_createform.end_time.errors %}
+        {{ class_createform.end_time.errors|striptags }}<br/>
+      {% endif %}
+      종료 시간 : <input id= "id_end_time" name ="end_time" type="time"><br />
+      {% if class_createform.minimum.errors %}
+        {{ class_createform.minimum.errors|striptags }}<br/>
+      {% endif %}
+      최소 인원 : <input id="id_minimum" name = 'minimum'><br />
+      {% if class_createform.maximum.errors %}
+        {{ class_createform.maximum.errors|striptags }}<br/>
+      {% endif %}
+      최대 인원 : <input id="id_maximum" name = 'maximum'><br />
+
+      {% if class_createform.contact_tel.errors %}
+        {{ class_createform.contact_tel.errors|striptags }}<br/>
+      {% endif %}
+      연락처 : <input id="id_contact_tel" name="contact_tel" placeholder="숫자만입력해주세요"><br />
+      {% if class_createform.address.errors %}
+        {{ class_createform.address.errors|striptags }}<br/>
+      {% endif %}
+      address : <input id="id_address" name = "address" placeholder="정확한 주소를 입력해주세요"><br />
+      {% if classpic_createform.class_photo.errors %}
+        {{ classpic_createform.class_photo.errors|striptags }}<br/>
+      {% endif %}
+      사진1:<input id="id_photo1" name ="class_photo" type="file"><br />
+      사진2:<input id="id_photo2" name ="class_photo" type="file"><br />
+      사진3:<input id="id_photo3" name ="class_photo" type="file"><br />
+      사진4:<input id="id_photo4" name ="class_photo" type="file"><br />
+      사진5:<input id="id_photo5" name ="class_photo" type="file">
+
+      <input type="submit" value="클래스 올리기">
+  </form>
+
+</body>
+</html>

@@ -23,6 +23,8 @@ def handle_uploaded_image(i, x, y):
         PIL_TYPE = 'image/png'
         PIL_SAVE = 'PNG'
         FILE_EXTENSION = 'png'
+    else :
+        raise Exception('Image-type-error', "It's not jpeg of PNG")
 
 
     #read image from InMemoryUploadedFile

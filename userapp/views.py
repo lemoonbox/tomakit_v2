@@ -1,17 +1,39 @@
 #coding: utf-8
-from django.shortcuts import render, loader
-from django.contrib.auth import get_user_model
-from django.contrib.auth.views import login as django_login, logout as django_logout
-from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect, HttpResponse
-from django.core.mail import send_mail
-from django.template import Context
-from django.core.context_processors import csrf
+from django.shortcuts import \
+    render, \
+    loader
+from django.contrib.auth import \
+    get_user_model,\
+    authenticate, \
+    login as authlogin
+from django.contrib.auth.views import \
+    login as django_login,\
+    logout as django_logout
+from django.contrib.auth.decorators import \
+    login_required
+from django.http import \
+    HttpResponseRedirect, \
+    HttpResponse
+from django.core.mail import\
+    send_mail
+from django.template import\
+    Context
+from django.core.context_processors import \
+    csrf
 import os
-from django.core.files.images import ImageFile
+from django.core.files.images import \
+    ImageFile
 
-from userapp.models import Profile, SignupConfirmKey, PasswordResetKeys
-from userapp.form import ProfilesForm, PwReset_RequestForm, PwReset_ProcessForm
+from userapp.models import \
+    Profile, \
+    SignupConfirmKey, \
+    PasswordResetKeys
+from userapp.form import \
+    ProfilesForm, \
+    PwReset_RequestForm, \
+    PwReset_ProcessForm, \
+    LoginForm
+
 from userapp import tasks
 from userapp.utils import handle_uploaded_image
 from DIY_tool import settings
@@ -33,6 +55,7 @@ def signup(request):
             email = request.POST['email'].strip()
             password = request.POST['password']
             password_confirm = request.POST['password_confirm']
+            nick_name = request.POST['nick_name']
 
             if password != password_confirm:
                 profile_form.add_error('password','비밀번호가 일치 하지 않습니다. 정확히 입력해주세요.')
@@ -42,12 +65,13 @@ def signup(request):
             if bool(request.FILES):
                 image_type = request.FILES['pro_photo'].content_type
                 if image_type != 'image/png' and image_type !='image/jpeg':
+                    print "error"
                     profile_form.add_error('pro_photo','jpg와 png 형식의 이미지만 가능합니다.')
                     valid_error =True
                 try :
                     t = handle_uploaded_image(request.FILES['pro_photo'], 50, 50)
                     content = t[1]
-                except KeyError:
+                except :
                     image_file = open(os.path.join(settings.BASE_DIR,
                                                'resource/image/default_profile.jpg'),'r')
                     content = ImageFile(image_file)
@@ -67,8 +91,8 @@ def signup(request):
             _u = User(username = email)
             _u.set_password(password)
             _u.save()
-            #_profile = Profile(user = _u, email = email,pro_photo=content)
-            _profile = Profile(user = _u, email = email,pro_photo=content)
+            #chang form
+            _profile = Profile(user = _u, email = email,pro_photo=content, nick_name=nick_name)
             _profile.save()
 
             #send_email confirm
@@ -236,10 +260,15 @@ def pw_reset_process(request, key):
 
 
 def login(request, *args, **kwargs):
-    print args
-    print kwargs
-    res = django_login(request, *args, **kwargs)
-    return res
+
+    login_form = LoginForm(request.POST or None)
+    print login_form.is_valid()
+    if request.POST and login_form.is_valid():
+        user = login_form.login(request)
+        if user:
+            authlogin(request, user)
+            return HttpResponseRedirect("user/profile/")
+    return render(request, 'userapp/login.html', {'login_form':login_form})
 
 def logout(request, *args, **kwargs):
     res = django_logout(request, *args, **kwargs)
@@ -248,19 +277,12 @@ def logout(request, *args, **kwargs):
 @login_required
 def profile(request, *args, **kwargs):
 
-    print args
-    print kwargs
-
     ctx = Context({
         'error':None
     })
     user = request.user
     _profile = Profile.objects.filter(email = user)
-
-    print _profile[0].email
-
     ctx['profile']= _profile[0]
-    print _profile[0].pro_photo
 
     #tpl = loader.get_template('userapp/profile.html')
     #ctx.update(csrf(request))

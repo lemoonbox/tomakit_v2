@@ -5,7 +5,7 @@
     <title></title>
 </head>
 <body>
-비밀 번호를 변경 합니다.
+비밀 번호를 변경 합니다. 원하시는 비밀 번호를 입력해주세요.
 <form action="{{request.path}}" method="post">
     {%csrf_token%}
     {{pwresetform.as_p}}

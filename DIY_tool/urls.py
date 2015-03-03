@@ -7,6 +7,7 @@ import settings as appset
 
 
 from userapp import urls as user_urls
+from app_class import urls as class_urls
 
 urlpatterns = patterns('',
     # Examples:
@@ -15,6 +16,7 @@ urlpatterns = patterns('',
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^user/', include(user_urls)),
+    url(r'^class/', include(class_urls)),
     #url(r'', include('social.apps.django_app.urls', namespace='social')),
 )
 

@@ -4,7 +4,7 @@ __author__ = 'moon'
 from django import forms
 from userapp.models import Profile
 from django.conf import settings
-from django.contrib.auth import get_user_model
+from django.contrib.auth import get_user_model, authenticate
 from django.core.validators import RegexValidator
 from django.utils.translation import ugettext as _
 
@@ -20,7 +20,7 @@ class ProfilesForm(forms.ModelForm):
                     'unique':u'이미 사용 중인 이메일 주소입니다.'}
     pw_errors={'required':u"비밀번호가 필요합니다.",
                 'invalid':u"6자리 이상의 비밀번호가 안전합니다."}
-    image_errors={'invalid_image':u"이미지 파일만 올릴 수 있습니다."}
+    #image_errors={'invalid_image':u"이미지 파일만 올릴 수 있습니다."}
     
     email = forms.EmailField(error_messages=email_errors,
                             validators=[AlphaNumeric,])
@@ -30,12 +30,11 @@ class ProfilesForm(forms.ModelForm):
     password_confirm = forms.CharField(max_length=100, widget=forms.PasswordInput,
                                        validators=[AlphaNumeric,], required=True,
                                        error_messages=pw_errors, label=u'비밀번호확인')
-    pro_photo = forms.ImageField(required=False, label=u'프로필이미지(선택)',
-                                 error_messages = image_errors)
+    pro_photo = forms.ImageField(required=False, label=u'프로필이미지(선택)')
 
     class Meta:
         model = Profile
-        fields = ('email', 'password', 'password_confirm','pro_photo')
+        fields = ('email', 'password', 'password_confirm','nick_name','pro_photo')
 
 
 
@@ -57,3 +56,22 @@ class PwReset_ProcessForm(forms.Form):
     class Meta:
         model = Profile
         fields = ('password', 'password_confirm',)
+
+
+class LoginForm(forms.Form):
+    username = forms.CharField(max_length=255, required=True)
+    password = forms.CharField(required=True)
+
+    def clean(self):
+        username = self.cleaned_data.get('username')
+        password = self.cleaned_data.get('password')
+        user = authenticate(username = username, password=password)
+        if not user or not user.is_active:
+            self.add_error('username', '아이디 혹은 비밀번호가 잘 못되었습니다.')
+        return self.cleaned_data
+
+    def login(self, request):
+        username = self.cleaned_data.get('username')
+        password = self.cleaned_data.get('password')
+        user = authenticate(username=username, password=password)
+        return user

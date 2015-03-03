@@ -9,9 +9,13 @@
     </head>
     
     <body>
+    <img src="{% static 'image/default_profile.jpg' %}" class="img-responsive"/>
         <form method="post" action="{% url 'login_url' %}" autocomplete="off">
             <div class="container">
                 <div class="outer">
+                    {% for field in login_form %}
+                    {{ field.errors|striptags }}
+                    {% endfor %}
                     <div class="centered">
                     {% csrf_token %}
                     <input type="text" name="username" placeholder="Username(Email)"
@@ -19,7 +23,6 @@
                     <input type="password" name="password" placeholder="Password"
                            value="{{valid_password}}" /><br>
                         <input type = "submit" value="login" />
-                        <img src="{% static 'image/default_profile.jpg' %}" class="img-responsive"/>
                     </div>
                 </div>
             </div>
