@@ -41,6 +41,8 @@ from DIY_tool import settings
 # Create your views here.
 def signup(request):
 
+    print "signup"
+
     ctx = Context({
         'error':None
     })
