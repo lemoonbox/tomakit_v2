@@ -288,3 +288,6 @@ def profile(request, *args, **kwargs):
     #ctx.update(csrf(request))
     return render(request, 'userapp/profile.html',{
                     'profile':_profile[0],},)
+  
+def mainpage(request):
+    return render(request, 'userapp/mainpage.html')
