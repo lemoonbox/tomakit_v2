@@ -13,11 +13,8 @@
 
     </title>
 
-    <!-- Bootstrap core CSS -->
-    <link href="{{ STATIC_URL }}bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-
     <!-- Animation style -->
-    <link href="{{ STATIC_URL }}media/css/animate-custom.css" rel="stylesheet">
+<!--    <link href="{{ STATIC_URL }}media/css/animate-custom.css" rel="stylesheet">-->
 
     <!-- Custom style -->
     <link href="{{ STATIC_URL}}media/css/signin.css" rel="stylesheet">
@@ -105,7 +102,7 @@
 -->
 
             {% if user.is_authenticated %}
-            <li><a href="#"><p class="hi"><strong>안녕하세요 {{ user_profile.nick_name }}님!</strong></p></a></li>
+            <li><a href="#"><p class="hi"><strong>안녕하세요 {{ user.username }}님!</strong></p></a></li>
             <li><a href="http://127.0.0.1:8000/user/logout">로그아웃</a></li>
             {% else %}
             <li><a href="#"><p class="hi">hello world!</p></a></li>
@@ -135,16 +132,6 @@
     </div>
     {% endif %}
 
-    <!-- auth test. remove required-->
-    <!--
-{% if user.is_authenticated %}
-<p class="hi"><strong>안녕하세요 {{user.username }}님!</strong></p>
-{% else %}
-<p class="hi">hello world!</p><br />
-{% endif %}
-<br><br>
--->
-    <!-- end -->    
 
     <div class="container">
       <a class="hiddenanchor" id="toregister"></a>
@@ -158,7 +145,6 @@
             <h2 class="form-signin-heading">Log in</h2><br />
 -->
 
-            <!-- TODO: email -> email and username -->
             <!-- #TODO: email -> email and username -->
 <!--
             <label for="email" class="email" name="email" > Username(Email) </label><br />
@@ -222,6 +208,8 @@
             <input id="id_pro_photo" name="pro_photo" type="file"/>
 
             <p class="change_link">Already a member?
+              
+              {# have to change link #tologin to other link #}
               <a href="#tologin" class="to_register">Go and log in</a>
             </p>
 
