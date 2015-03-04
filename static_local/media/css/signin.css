@@ -1,9 +1,7 @@
 body {
   padding-top: 40px;
   padding-bottom: 40px;
-  background-color: #eee;
-  background-image:url(/static/image/cherry.jpg);
-  background-size: auto;
+  background: #eee url(/static/image/cherry.jpg);
 }
 
 .email {
@@ -46,7 +44,8 @@ body {
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
 }
-  
+
+
 .form-signin input[type="email"] {
   margin-bottom: -1px;
   border-bottom-right-radius: 0;

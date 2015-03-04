@@ -1,0 +1,9 @@
+# Logs and databases #
+*.sqlite
+*.sqlite3
+
+# Directory #
+/uploads/*.*
+
+# Migrations#
+/../migrations/*.*
