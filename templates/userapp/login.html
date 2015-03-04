@@ -1,3 +1,5 @@
+{% load static from staticfiles%}
+
 <!DOCTYPE html>
 <html>
 
@@ -13,11 +15,10 @@
 
     </title>
 
-    <!-- Bootstrap core CSS -->
-    <link href="{{ STATIC_URL }}bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Animation style -->
+<!--
+     Animation style 
     <link href="{{ STATIC_URL }}media/css/animate-custom.css" rel="stylesheet">
+-->
 
     <!-- Custom style -->
     <link href="{{ STATIC_URL}}media/css/signin.css" rel="stylesheet">
@@ -51,7 +52,6 @@
   
   
 
-
   <body>
     
     <!-- Static navbar -->
@@ -68,8 +68,7 @@
         </div>
         
         <div id="navbar" class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <div id="navbar" class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">         
-          
+        
           <ul class="nav navbar-nav">
             <li class="active"><a href="#">Home <span class="sr-only">(current)</span></a></li>
             <li><a href="#about">About</a></li>
@@ -115,14 +114,14 @@
 
           </ul>
           {% endif %}
-          
+
         </div><!--/.nav-collapse -->
       </div><!--/.container-fluid -->
     </nav>
     
     
 
-    {% load static from staticfiles%}
+
 
     
       {% if login_form.errors %}
@@ -192,51 +191,10 @@
             </div>
           
           </form>
-        </div>
+ 
 
-
-<!--        <div id="register" class="animate">-->
-
-          <!--
-<p><label for="usernamesignup" class="username" data-icon="u">Your username</label>
-<input id="usernamesignup" name="usernamesignup" required="required" type="text" placeholder="username" />
-</p>
--->
-
-<!--
-       <form method="POST" action="" enctype="multipart/form-data" class="form-signin">
-
-        {% csrf_token%}
-
-        <h2 class="form-signin-heading">Please sign in</h2><br />
-        <label for="id_email" class="sr-only">Email address</label>
-        <input id="id_email" name="email" type="email"
-               class="form-control" placeholder="Email address" required autofocus />
-        <label for="id_password" class="sr-only">Password</label>
-        <input id="id_password" maxlength="100" name="password" type="password" 
-               class="form-control" placeholder="password" required autofocus />
-        <label for="id_password_confirm" class="sr-only">Confirm Password</label>
-        <input id="id_password_confirm" maxlength="100" name="password_confirm" type="password"
-               class="form-control" placeholder="Confirm password" required autofocus /><br />
-        <label for="id_pro_photo" style="color: gray; font-family: sans-serif;">프로필 이미지(선택):</label>
-        <input id="id_pro_photo" name="pro_photo" type="file"/><br />
-        
-        <p class="change_link">Already a member?
-          <a href="#tologin" class="to_register">Go and log in</a>
-        </p>
-        
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-    
-      </form>  
--->
-
-<!--          </div> /register-->
         </div> <!--/wrapper-->
       </div> <!-- /container -->
-
-<!--    <img src="{% static 'image/default_profile.jpg' %}" class="img-responsive"/>-->
-
-
 
   </body>
 </html>
