@@ -1,5 +1,7 @@
 body {
-    background: url(http://subtlepatterns.com/patterns/scribble_light.png) ;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background: #eee url(/static/image/cherry.jpg);
 }
 
 #wrapper {
@@ -73,3 +75,4 @@ body {
 #columns:hover .pin:not(:hover) {
     opacity: 0.4;
 }
+

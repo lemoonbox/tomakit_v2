@@ -3,7 +3,7 @@
 *.sqlite3
 
 # Directory #
-uploads/
+/uploads/*.*
 
 # Migrations#
-userapp/migrations/
+/../migrations/*.*
