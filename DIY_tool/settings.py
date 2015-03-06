@@ -10,6 +10,7 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 TEMPLATE_DIRS ={
@@ -25,7 +26,7 @@ SECRET_KEY = 'sj)7m^^1u$9=s40&8de&z#$alfgx(k6fztu3gj(w2^pdsnne6n'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-TEMPLATE_DEBUG = False
+TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -51,6 +52,7 @@ INSTALLED_APPS = (
     #'social.apps.django_app.default',
     'djcelery',
     'storages',
+    'django_summernote',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -161,8 +163,6 @@ AWS_STORAGE_BUCKET_NAME = 'diytec.beta'
 AWS_ACCESS_KEY_ID = 'AKIAJG4KYTAON2HRQB7Q'
 AWS_SECRET_ACCESS_KEY = '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'
 
-#static serve on server self
-#STATIC_ROOT = os.path.join(BASE_DIR, 'static_deploy')
 
 if DEBUG :
     #local_static
@@ -171,13 +171,34 @@ if DEBUG :
     #local_media
     MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
     MEDIA_URL = '/userphoto/media/'
+
+    from app_class.models import summer_filepath
+    SUMMERNOTE_CONFIG = {
+    'attachment_upload_to' :summer_filepath,
+    'lang': 'ko-KR',}
+
 else :
+    #STATIC_URL = '/static/'
+    #MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
+
+
     STATICFILES_DIRS=(os.path.join(BASE_DIR, 'static_local'),)
     AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
     STATICFILES_LOCATION = 'static'
     STATICFILES_STORAGE = 'DIY_tool.custom_storages.StaticStorage'
-    #STATIC_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
+    #It's for summernote
+    STATIC_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
 
     MEDIAFILES_LOCATION = 'uploads'
     DEFAULT_FILE_STORAGE = 'DIY_tool.custom_storages.MediaStorage'
     MEDIA_URL = "https://%s/uploads/" % AWS_S3_CUSTOM_DOMAIN
+
+    from storages.backends.s3boto import S3BotoStorage
+    from app_class.models import summer_filepath
+    SUMMERNOTE_CONFIG = {
+        'attachment_upload_to' :summer_filepath,
+        'lang': 'ko-KR',
+        'attachment_storage_class': S3BotoStorage,}
+
+
+

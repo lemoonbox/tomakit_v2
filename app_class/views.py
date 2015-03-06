@@ -4,6 +4,7 @@ from django.shortcuts import \
 from django.http import \
     HttpResponseRedirect,\
     HttpResponse
+
 from django.core.context_processors import \
     csrf
 from django.shortcuts import \
@@ -20,13 +21,14 @@ from django.shortcuts import \
 
 from app_class.form import \
     ClassCreateForm,\
-    ClassPicCreateForm
+    ClassPicCreateForm,\
+    ClassditailForm
 
 from app_class.models import \
     ClassPic, \
-    ClassPost
-from userapp.utils import \
-    handle_uploaded_image
+    ClassPost, \
+    ClassDetail
+
 import datetime
 
 from userapp.utils import handle_uploaded_image
@@ -44,11 +46,15 @@ def classcreate(request):
     if request.method == "GET":
         class_form =ClassCreateForm()
         classpic_form = ClassPicCreateForm()
+        class_detail_form = ClassditailForm()
+
 
     elif request.method =="POST":
 
         class_form = ClassCreateForm(request.POST)
         classpic_form = ClassPicCreateForm(request.FILES)
+        class_detail_form = ClassditailForm(request.POST)
+
 
         host = request.META['HTTP_HOST']
         u_day = request.POST['lessonday']
@@ -58,7 +64,6 @@ def classcreate(request):
         #read photo
         photos =request.FILES.getlist("class_photo")
 
-        print classpic_form.is_valid()
 
         for photo in photos:
             if photo.content_type != 'image/png' and photo.content_type !='image/jpeg':
@@ -74,8 +79,8 @@ def classcreate(request):
                 class_form.add_error('start_time', u'시작 시간은 끝나는 시간보다 빨라야 합니다.')
                 error =True
 
-
-        if class_form.is_valid() and not error:
+        #start make post
+        if class_form.is_valid() and not error and class_detail_form.is_valid():
             _class = class_form.save(commit=False)
             _class.user = request.user
             day= datetime.datetime.strptime(u_day, '%Y-%m-%d')
@@ -94,12 +99,18 @@ def classcreate(request):
                 except Exception:
                     print Exception.message
 
+                _class_detail =class_detail_form.save(commit=False)
+                _class_detail.user = request.user
+                _class_detail.class_post = _class
+                _class_detail.save()
+
             return HttpResponseRedirect('http://{0}/user/profile'.format(host))
 
     return render(request, 'app_class/create_class_post.html',
         {
             'class_createform':class_form,
-            'classpic_createform':classpic_form
+            'classpic_createform':classpic_form,
+            'class_detailform': class_detail_form,
         })
 
 def class_detail(request, class_num):
@@ -113,12 +124,9 @@ def class_detail(request, class_num):
     #class_num이 없거나 있어도 읽어 올 수 없는 경우 처리
 
     if request.method == "GET":
-        _class_detail = get_object_or_404(ClassPost, pk=class_num)
+        _class_post = get_object_or_404(ClassPost, pk=class_num)
 
-
-    tpl = loader.get_template('app_class/class_detail.html')
-    ctx.update(csrf(request))
-    return render(request, 'app_class/class_detail.html',
+    return render(request, 'app_class/class_post.html',
         {
-            'class_detial':_class_detail
+            'class_post':_class_post
         })

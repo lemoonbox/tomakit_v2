@@ -1,9 +1,10 @@
 <!DOCTYPE html>
+{% load static from staticfiles%}
 <html>
 <head lang="en">
     <meta charset="UTF-8">
     <title></title>
-</head>
+</head>py
 <body>
 
   <form method="POST" action="{{request.path}}" enctype="multipart/form-data">
@@ -56,9 +57,12 @@
       사진2:<input id="id_photo2" name ="class_photo" type="file"><br />
       사진3:<input id="id_photo3" name ="class_photo" type="file"><br />
       사진4:<input id="id_photo4" name ="class_photo" type="file"><br />
-      사진5:<input id="id_photo5" name ="class_photo" type="file">
+      사진5:<input id="id_photo5" name ="class_photo" type="file"><br /><br />
 
+줄 바꿈 안하고 이미지 삽입하면 엔터가 삽입이 안됨.
+      {{class_detailform|safe}}
       <input type="submit" value="클래스 올리기">
+
   </form>
 
 </body>

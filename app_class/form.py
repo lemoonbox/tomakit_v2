@@ -1,14 +1,18 @@
 #coding: utf-8
 __author__ = 'moon'
-from django import forms
-
-
-from app_class.models import ClassPost, ClassPic
+from django import \
+    forms
 from django.core.validators import\
     RegexValidator
 from django.utils.translation import \
     ugettext as _
+from django_summernote.widgets import \
+    SummernoteWidget, \
+    SummernoteInplaceWidget
+from django_summernote import \
+    fields as summer_fields
 
+from app_class.models import ClassPost, ClassPic, ClassDetail
 
 # Create your models here.
 Numeric = RegexValidator(
@@ -53,6 +57,7 @@ class ClassCreateForm(forms.ModelForm):
         fields = ('title','price','describe','lessonday','start_time','end_time', 'minimum', 'maximum',
         'contact_tel', 'address')
 
+
 class ClassPicCreateForm(forms.ModelForm):
 
     photo_error ={'required':u"한개 이상의 사진을 입력해 주세요",
@@ -64,3 +69,18 @@ class ClassPicCreateForm(forms.ModelForm):
     class Meta :
         model = ClassPic
         fields = ('class_photo',)
+
+
+
+class ClassditailForm(forms.ModelForm):
+
+    class_detail_error= {'required':_(u"상세한 정보를 입력해주세요"), }
+
+    class_detail = summer_fields.SummernoteTextFormField(error_messages=class_detail_error)
+    class Meta:
+        model = ClassDetail
+        fields = ('class_detail',)
+        widgets = {
+            'foo': SummernoteWidget(),
+            'bar': SummernoteInplaceWidget(),
+        }
