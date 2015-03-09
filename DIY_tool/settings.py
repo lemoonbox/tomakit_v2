@@ -49,10 +49,12 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'userapp',
     'app_class',
+    'app_kit',
     #'social.apps.django_app.default',
     'djcelery',
     'storages',
     'django_summernote',
+
 )
 
 MIDDLEWARE_CLASSES = (
@@ -172,14 +174,12 @@ if DEBUG :
     MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
     MEDIA_URL = '/userphoto/media/'
 
-    from app_class.models import summer_filepath
     SUMMERNOTE_CONFIG = {
-    'attachment_upload_to' :summer_filepath,
     'lang': 'ko-KR',}
 
 else :
-    #STATIC_URL = '/static/'
-    #MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
+    STATIC_URL = '/static/'
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
 
 
     STATICFILES_DIRS=(os.path.join(BASE_DIR, 'static_local'),)
@@ -194,11 +194,10 @@ else :
     MEDIA_URL = "https://%s/uploads/" % AWS_S3_CUSTOM_DOMAIN
 
     from storages.backends.s3boto import S3BotoStorage
-    from app_class.models import summer_filepath
     SUMMERNOTE_CONFIG = {
-        'attachment_upload_to' :summer_filepath,
         'lang': 'ko-KR',
-        'attachment_storage_class': S3BotoStorage,}
+        #'attachment_storage_class': S3BotoStorage,
+         }
 
 
 

@@ -1,9 +1,12 @@
 #coding: utf-8
 from django.shortcuts import \
-    render
+    render, \
+    render_to_response
+
 from django.http import \
     HttpResponseRedirect,\
-    HttpResponse
+    HttpResponse, \
+    Http404
 
 from django.core.context_processors import \
     csrf
@@ -22,7 +25,7 @@ from django.shortcuts import \
 from app_class.form import \
     ClassCreateForm,\
     ClassPicCreateForm,\
-    ClassditailForm
+    ClassdetailForm
 
 from app_class.models import \
     ClassPic, \
@@ -46,17 +49,16 @@ def classcreate(request):
     if request.method == "GET":
         class_form =ClassCreateForm()
         classpic_form = ClassPicCreateForm()
-        class_detail_form = ClassditailForm()
+        class_detail_form = ClassdetailForm()
 
 
     elif request.method =="POST":
 
         class_form = ClassCreateForm(request.POST)
         classpic_form = ClassPicCreateForm(request.FILES)
-        class_detail_form = ClassditailForm(request.POST)
+        class_detail_form = ClassdetailForm(request.POST)
 
 
-        host = request.META['HTTP_HOST']
         u_day = request.POST['lessonday']
         u_start_time = request.POST['start_time']
         u_end_time = request.POST['end_time']
@@ -84,7 +86,6 @@ def classcreate(request):
             _class = class_form.save(commit=False)
             _class.user = request.user
             day= datetime.datetime.strptime(u_day, '%Y-%m-%d')
-
             _class.lessonday = day
             _class.start_time = start_time
             _class.end_time = end_time
@@ -104,7 +105,7 @@ def classcreate(request):
                 _class_detail.class_post = _class
                 _class_detail.save()
 
-            return HttpResponseRedirect('http://{0}/user/profile'.format(host))
+            return HttpResponseRedirect('/user/profile')
 
     return render(request, 'app_class/create_class_post.html',
         {
@@ -119,14 +120,34 @@ def class_detail(request, class_num):
         'error':None
     })
     error = False
-
-    print class_num
     #class_num이 없거나 있어도 읽어 올 수 없는 경우 처리
 
     if request.method == "GET":
-        _class_post = get_object_or_404(ClassPost, pk=class_num)
 
+        try:
+            _class_post = ClassPost.objects.get(pk=class_num)
+        except ClassPost.DoesNotExist:
+            raise Http404("Class does not exist")
     return render(request, 'app_class/class_post.html',
         {
             'class_post':_class_post
         })
+
+def handler404(request):
+
+    template = loader.get_template('error/404.html')
+    context = Context({
+        'message':'All:%s'%request,
+    })
+
+    return HttpResponse(contet = template.render(context),
+                        content_type='text/html; charset=utf-8', status=404)
+
+def handler500(request):
+    template = loader.get_template('error/500.html')
+    context = Context({
+        'message':'All:%s'%request,
+    })
+
+    return HttpResponse(content=template.render(context),
+                        content_type='text/html; charset=utf-8', status=404)

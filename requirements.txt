@@ -5,7 +5,11 @@ boto==2.36.0
 celery==3.1.17
 Django==1.7.1
 django-celery==3.1.16
+django-ckeditor==4.4.7
+django-froala-editor==1.2.5
 django-storages==1.1.8
+django-summernote==0.6.3
+django-wysiwyg-redactor==0.4.5
 kombu==3.0.24
 Pillow==2.7.0
 pytz==2014.10

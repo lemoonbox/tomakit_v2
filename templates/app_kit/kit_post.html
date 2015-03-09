@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+제목 : {{kit_post.title}}<br/>
+가격: {{kit_post.price}}<br/>
+강의 소개 : {{kit_post.describe}}<br>
+연락처 : {{kit_post.contact_tel}}<br>
+주소 : {{kit_post.address}}<br>
+사진
+{%for photo in kit_post.kit_phote_set.all%}
+<img src="{{MEDIA_URL}}{{photo.kit_photo}}">
+{% endfor %}
+
+상세 정보:
+{%for detail in class_post.classdetail_set.all%}
+    {{detail.class_detail | safe}}
+{% endfor %}
+
+{%for detail in kit_post.kit_detailm_set.all%}
+    {{detail.kit_detail|safe}}
+{% endfor %}
+
+</body>
+</html>

@@ -6,7 +6,6 @@ from django.core.validators import\
     RegexValidator
 from django.utils.translation import \
     ugettext as _
-from django.forms.widgets import Select
 
 
 from django_summernote.widgets import \
@@ -15,7 +14,10 @@ from django_summernote.widgets import \
 from django_summernote import \
     fields as summer_fields
 
-from app_class.models import ClassPost, ClassPic, ClassDetail
+from app_kit.models import \
+    Kit_Post,\
+    Kit_Detailm,\
+    Kit_Photo
 
 # Create your models here.
 Numeric = RegexValidator(
@@ -34,24 +36,17 @@ CATEGORY_SELECT =((1,'for Baby'),
                   (6,'for Tast'),
                   (7, 'for Beauty'),)
 
-class ClassCreateForm(forms.ModelForm):
+class KitCreateForm(forms.ModelForm):
 
-    category_error= {'required':_(u"카테고리를 입력해주세요"), }
+    category_error= {'required':_(u"카테고리를 한개이상 선택해주세요"), }
     title_error= {'required':_(u"제목을 입력해주세요"), }
-    price_error= {'required':_(u"수강료를 입력해주세요,"),
+    price_error= {'required':_(u"가격 입력해주세요,"),
                   'invalid':_(u"숫자만 입력해주세요")}
-    describe_error= {'required':_(u"강의 설명을 입해주세요."),
+    describe_error= {'required':_(u"제품 특징을 입해주세요."),
                      'max_length':_(u"500자 이하로 입력해주세요"),}
-    lessonday_error= {'required':_(u"클래스 날짜를 입력해주세요"), }
-    start_time_error= {'required':_(u"클래스 시작시간을 입력해주세요"), }
-    end_time_error= {'required':_(u"클래스 종료시간을 입력해주세요"), }
-    minimum_error= {'required':_(u"최소인원을 입력해주세요"),
-                    'invalid':_(u"숫자만 입력해주세요")}
-    maximum_error= {'required':_(u"최소인원을 입력해주세요"),
-                    'invalid':_(u"숫자만 입력해주세요")}
     contact_tel_error= {'required':_(u"연락처를 입력해주세요"),
                         'invalid':_(u"숫자만 입력해주세요")}
-    address_error= {'required':_(u"클래스가 열리는 주소를 입력해주세요"), }
+    address_error= {'required':_(u"판매처 주소를 입력해주세요"), }
 
 
     category = forms.MultipleChoiceField(required=True,
@@ -61,21 +56,15 @@ class ClassCreateForm(forms.ModelForm):
     title = forms.CharField(error_messages=title_error)
     price = forms.IntegerField(error_messages=price_error,)
     describe = forms.CharField(max_length=500, error_messages=describe_error,)
-    lessonday = forms.DateField(error_messages=lessonday_error)
-    start_time = forms.TimeField(error_messages=start_time_error)
-    end_time = forms.TimeField(error_messages=end_time_error)
-    minimum = forms.IntegerField(error_messages=minimum_error,)
-    maximum = forms.IntegerField(error_messages=maximum_error,)
     contact_tel = forms.IntegerField(error_messages=contact_tel_error)
     address = forms.CharField(error_messages=address_error)
 
     class Meta:
-        model = ClassPost
-        fields = ('category', 'title','price','describe','lessonday','start_time','end_time', 'minimum', 'maximum',
-        'contact_tel', 'address')
+        model = Kit_Post
+        fields = ('category', 'title','price','describe','contact_tel', 'address',)
 
 
-class ClassPicCreateForm(forms.ModelForm):
+class KitPicCreateForm(forms.ModelForm):
 
     photo_error ={'required':u"한개 이상의 사진을 입력해 주세요",
                   'invalid':u'',
@@ -84,20 +73,19 @@ class ClassPicCreateForm(forms.ModelForm):
     class_photo = forms.DateField(error_messages=photo_error)
 
     class Meta :
-        model = ClassPic
+        model = Kit_Photo
         fields = ('class_photo',)
 
+class KitDetailForm(forms.ModelForm):
 
+    kit_detail_error={'required':_(u"상세한 정보를 입력해주세요"),}
 
-class ClassdetailForm(forms.ModelForm):
+    kit_detail = summer_fields.SummernoteTextFormField(error_messages=kit_detail_error,
+                                                        label='')
 
-    class_detail_error= {'required':_(u"상세한 정보를 입력해주세요"), }
-
-    class_detail = summer_fields.SummernoteTextFormField(error_messages=class_detail_error,
-                                                         label='')
-    class Meta:
-        model = ClassDetail
-        fields = ('class_detail',)
+    class Meta :
+        model = Kit_Detailm
+        fields=('kit_detail',)
         widgets = {
             'foo': SummernoteWidget(),
             'bar': SummernoteInplaceWidget(),

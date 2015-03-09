@@ -1,12 +1,13 @@
 <!DOCTYPE html>
+{% load static from staticfiles%}
 <html>
 
   <head lang="ko">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="{{ STATIC_URL }}bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'bootstrap/dist/css/bootstrap.min.css'%}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="{{ STATIC_URL }}bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="{% static 'bootstrap/dist/js/bootstrap.min.js'%}"></script>
     <title>
 
       회원가입 페이지
@@ -14,8 +15,8 @@
     </title>
 
     <!-- Custom style -->
-    <link href="{{ STATIC_URL}}media/css/signin.css" rel="stylesheet">
-    <script src="{{ STATIC_URL }}bootstrap/docs/assets/js/ie-emulation-modes-warning.js"></script>
+    <link href="{% static 'media/css/signin.css'%}" rel="stylesheet">
+    <script src="{% static 'bootstrap/docs/assets/js/ie-emulation-modes-warning.js'%}"></script>
 
   </head>
 
