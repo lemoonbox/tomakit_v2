@@ -26,13 +26,13 @@ Tel_Numeric = RegexValidator(
     r'^[0-9]{8,16}$', message = _(u'지역번호를 포함해서 숫자만 입력해주세요.')
 )
 
-CATEGORY_SELECT =((1,'for Baby'),
-                  (2,'for Home'),
-                  (3, 'for Funny'),
-                  (4, 'for Art'),
-                  (5, 'for Fashion'),
-                  (6,'for Tast'),
-                  (7, 'for Beauty'),)
+CATEGORY_SELECT =(('baby','for Baby'),
+                  ('home','for Home'),
+                  ('funny', 'for Funny'),
+                  ('art', 'for Art'),
+                  ('fashion', 'for Fashion'),
+                  ('tast','for Tast'),
+                  ('beauty', 'for Beauty'),)
 
 class ClassCreateForm(forms.ModelForm):
 

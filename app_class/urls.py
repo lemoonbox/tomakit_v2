@@ -7,5 +7,4 @@ urlpatterns = patterns('app_class.views',
     url(r'^create/', 'classcreate',name='classcreate'),
     url(r'^(?P<class_num>[0-9]+)/$', 'class_detail', name="class_detail"),
 
-    #url(r'^summernote/', include('django_summernote.urls')),
     )

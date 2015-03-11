@@ -28,13 +28,13 @@ Tel_Numeric = RegexValidator(
     r'^[0-9]{8,16}$', message = _(u'지역번호를 포함해서 숫자만 입력해주세요.')
 )
 
-CATEGORY_SELECT =((1,'for Baby'),
-                  (2,'for Home'),
-                  (3, 'for Funny'),
-                  (4, 'for Art'),
-                  (5, 'for Fashion'),
-                  (6,'for Tast'),
-                  (7, 'for Beauty'),)
+CATEGORY_SELECT =(('Baby','for Baby'),
+                  ('Home','for Home'),
+                  ('Funny', 'for Funny'),
+                  ('Art', 'for Art'),
+                  ('Fashion', 'for Fashion'),
+                  ('Tast','for Tast'),
+                  ('Beauty', 'for Beauty'),)
 
 class KitCreateForm(forms.ModelForm):
 
@@ -61,7 +61,7 @@ class KitCreateForm(forms.ModelForm):
 
     class Meta:
         model = Kit_Post
-        fields = ('category', 'title','price','describe','contact_tel', 'address',)
+        fields = ('title', 'category','price','describe','contact_tel', 'address',)
 
 
 class KitPicCreateForm(forms.ModelForm):
@@ -70,11 +70,11 @@ class KitPicCreateForm(forms.ModelForm):
                   'invalid':u'',
     }
 
-    class_photo = forms.DateField(error_messages=photo_error)
+    kit_photo = forms.DateField(error_messages=photo_error)
 
     class Meta :
         model = Kit_Photo
-        fields = ('class_photo',)
+        fields = ('kit_photo',)
 
 class KitDetailForm(forms.ModelForm):
 

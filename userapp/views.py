@@ -135,7 +135,7 @@ def signup(request):
 
 
 
-            return HttpResponseRedirect("user/login/")
+            return HttpResponseRedirect("/user/login/")
 
     return render(request, 'userapp/signup.html',{
                     'profileform':profile_form,},)
@@ -267,7 +267,7 @@ def login(request, *args, **kwargs):
         user = login_form.login(request)
         if user:
             authlogin(request, user)
-            return HttpResponseRedirect("user/profile/")
+            return HttpResponseRedirect("/idealine")
     return render(request, 'userapp/login.html', {'login_form':login_form})
 
 def logout(request, *args, **kwargs):

@@ -50,6 +50,7 @@ INSTALLED_APPS = (
     'userapp',
     'app_class',
     'app_kit',
+    'app_idealine',
     #'social.apps.django_app.default',
     'djcelery',
     'storages',

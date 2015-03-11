@@ -11,7 +11,7 @@
 연락처 : {{kit_post.contact_tel}}<br>
 주소 : {{kit_post.address}}<br>
 사진
-{%for photo in kit_post.kit_phote_set.all%}
+{%for photo in kit_post.kit_photo_set.all%}
 <img src="{{MEDIA_URL}}{{photo.kit_photo}}">
 {% endfor %}
 

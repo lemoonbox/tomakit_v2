@@ -34,21 +34,18 @@ def kitcreate(request):
         kit_form=KitCreateForm()
         kitpic_form=KitPicCreateForm()
         kit_detail_form = KitDetailForm()
-        print 'ok'
-        print 'not ok'
-
     else:
         kit_form = KitCreateForm(request.POST)
         kitpic_form = KitPicCreateForm(request.FILES)
         kit_detail_form = KitDetailForm(request.POST)
 
         #read photo
-        photos =request.FILES.getlist("class_photo")
+        photos =request.FILES.getlist("kit_photo")
 
 
         for photo in photos:
             if photo.content_type != 'image/png' and photo.content_type !='image/jpeg':
-                kitpic_form.add_error('class_photo', u'jpeg와 png형식의 이미지만 가능합니다.')
+                kitpic_form.add_error('kit_photo', u'jpeg와 png형식의 이미지만 가능합니다.')
                 print "error"
                 error =True
 
@@ -62,17 +59,16 @@ def kitcreate(request):
                 try :
                     t = handle_uploaded_image(photo, 500, 500)
                     content = t[1]
-                    _kitpic = Kit_Photo(user=request.user, class_post=_kit, class_photo=content)
+                    _kitpic = Kit_Photo(user=request.user, kit_post=_kit, kit_photo=content)
                     _kitpic.save()
                 except Exception:
                     print Exception.message
-
                 _kit_detail =kit_detail_form.save(commit=False)
                 _kit_detail.user = request.user
                 _kit_detail.kit_post = _kit
                 _kit_detail.save()
 
-            return HttpResponseRedirect('/user/profile')
+            return HttpResponseRedirect('/kit/{0}'.format(_kit.id))
 
     return render(request, 'app_kit/create_kit_post.html',
         {

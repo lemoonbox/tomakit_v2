@@ -12,18 +12,12 @@ from datetime import datetime
 # Create your models here.
 
 def upload_to(instance, filename):
-    return 'kit_pic/%s/%s' %(instance.class_post.id,filename)
-
-def summer_filepath(instance, filename):
-    ext = filename.split('.')[-1]
-    filename = "%s.%s" % (uuid.uuid4(), ext)
-    path = datetime.now().strftime('%Y-%m-%d')
-    return os.path.join('kit_detail_pic', path, filename)
+    return 'kit_pic/%s/%s' %(instance.kit_post.id,filename)
 
 
 class Kit_Post(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
-    category = models.CharField(null=False, max_length=20)
+    category = models.CharField(null=False, max_length=120)
     title = models.CharField(max_length=150, null=False)
     price = models.IntegerField(null=False)
     describe = models.TextField(max_length=500, null=False)

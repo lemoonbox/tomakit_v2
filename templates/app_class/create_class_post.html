@@ -12,13 +12,13 @@
         {{ class_createform.category.errors|striptags }}<br/>
       {% endif %}
       카테고리:
-        <label for="id_category_0"><input id="id_category_0" name="category" type="checkbox" value="1" /> for Baby</label>
-        <label for="id_category_1"><input id="id_category_1" name="category" type="checkbox" value="2" /> for Home</label>
-        <label for="id_category_2"><input id="id_category_2" name="category" type="checkbox" value="3" /> for Funny</label><br/>
-        <label for="id_category_3"><input id="id_category_3" name="category" type="checkbox" value="4" /> for Art</label>
-        <label for="id_category_4"><input id="id_category_4" name="category" type="checkbox" value="5" /> for Fashion</label>
-        <label for="id_category_5"><input id="id_category_5" name="category" type="checkbox" value="6" /> for Tast</label>
-        <label for="id_category_6"><input id="id_category_6" name="category" type="checkbox" value="7" /> for Beauty</label><br/>
+        <label for="id_category_0"><input id="id_category_0" name="category" type="checkbox" value="baby" /> for Baby</label>
+        <label for="id_category_1"><input id="id_category_1" name="category" type="checkbox" value="home" /> for Home</label>
+        <label for="id_category_2"><input id="id_category_2" name="category" type="checkbox" value="funny" /> for Funny</label><br/>
+        <label for="id_category_3"><input id="id_category_3" name="category" type="checkbox" value="art" /> for Art</label>
+        <label for="id_category_4"><input id="id_category_4" name="category" type="checkbox" value="fashion" /> for Fashion</label>
+        <label for="id_category_5"><input id="id_category_5" name="category" type="checkbox" value="tast" /> for Tast</label>
+        <label for="id_category_6"><input id="id_category_6" name="category" type="checkbox" value="beauty" /> for Beauty</label><br/>
       {% if class_createform.title.errors %}
         {{ class_createform.title.errors|striptags }}<br/>
       {% endif %}
@@ -70,7 +70,7 @@
       사진5:<input id="id_photo5" name ="class_photo" type="file"><br /><br />
 
 줄 바꿈 안하고 이미지 삽입하면 엔터가 삽입이 안됨.<br>
-      {{class_detailform|safe}}
+      {{class_detailform}}
       <input type="submit" value="클래스 올리기">
 
   </form>

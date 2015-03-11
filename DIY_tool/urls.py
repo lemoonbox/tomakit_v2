@@ -10,6 +10,7 @@ import django_summernote.urls
 from userapp import urls as user_urls
 from app_class import urls as class_urls
 from app_kit import urls as kit_urls
+from app_idealine import urls as idealine_urls
 
 handler404='app_class.views.handler404'
 handler500='app_class.views.handler500'
@@ -23,6 +24,7 @@ urlpatterns = patterns('',
     url(r'^user/', include(user_urls)),
     url(r'^class/', include(class_urls)),
     url(r'^kit/', include(kit_urls)),
+    url(r'^idealine/', include(idealine_urls)),
 
     #url(r'', include('social.apps.django_app.urls', namespace='social')),
 

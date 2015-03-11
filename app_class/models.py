@@ -26,7 +26,7 @@ def summer_filepath(instance, filename):
 
 class ClassPost(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
-    category = models.CharField(null=False, max_length=20)
+    category = models.CharField(null=False, max_length=120)
     title = models.CharField(max_length=150, null=False)
     price = models.IntegerField(null=False)
     describe = models.TextField(max_length=500, null=False)

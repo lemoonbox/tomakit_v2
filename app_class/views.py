@@ -105,7 +105,7 @@ def classcreate(request):
                 _class_detail.class_post = _class
                 _class_detail.save()
 
-            return HttpResponseRedirect('/user/profile')
+            return HttpResponseRedirect('/class/{0}'.format(_class.id))
 
     return render(request, 'app_class/create_class_post.html',
         {
@@ -132,6 +132,8 @@ def class_detail(request, class_num):
         {
             'class_post':_class_post
         })
+
+
 
 def handler404(request):
 
