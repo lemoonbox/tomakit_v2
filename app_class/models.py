@@ -50,6 +50,9 @@ class ClassPost(models.Model):
     updated_at = models.DateTimeField(auto_now_add=True, auto_now=True)
     is_active = models.BooleanField(default=True)
 
+    def __unicode__(self):
+        return u'%s %s' % (self.category, self.title)
+
 
 class ClassPic(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
@@ -59,6 +62,9 @@ class ClassPic(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, auto_now=False)
     updated_at = models.DateTimeField(auto_now_add=True, auto_now=True)
     is_active = models.BooleanField(default=True)
+
+    def __unicode__(self):
+        return  u'%s %s' % (self.class_post.title, self.class_photo)
 
 
 
@@ -70,3 +76,6 @@ class ClassDetail(summer_model.Attachment):
     created_at = models.DateTimeField(auto_now_add=True, auto_now=False)
     updated_at = models.DateTimeField(auto_now_add=True, auto_now=True)
     is_active = models.BooleanField(default=True)
+
+    def __unicode__(self):
+        return  u'%s %s' % (self.user, self.class_detail)

@@ -21,6 +21,8 @@ class Profile(models.Model):
 
 
 
+
+
 class SignupConfirmKey(models.Model):
     key = models.CharField(max_length=64, null=False, unique=True)
     user = models.ForeignKey(Profile)
