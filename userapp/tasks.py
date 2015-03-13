@@ -14,3 +14,9 @@ def send_pwchang_mail(cont, recipient):
     send_mail(u'다음 링크를 클릭하면 패스워드를 바꾸실 수 있습니다.', "",
             'makerecipe@gmail.com', recipient, fail_silently=False,
             html_message=cont)
+
+@celery.task(name = 'tasks.contact_mail')
+def contact_mail(cont, recipient):
+    send_mail(u'고객님이 보내신 메일입니다.', "",
+            'makerecipe@gmail.com', recipient, fail_silently=False,
+            html_message=cont)

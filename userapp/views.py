@@ -32,7 +32,8 @@ from userapp.form import \
     ProfilesForm, \
     PwReset_RequestForm, \
     PwReset_ProcessForm, \
-    LoginForm
+    LoginForm,\
+    SendEmailForm
 
 from userapp import tasks
 from userapp.utils import handle_uploaded_image
@@ -122,18 +123,17 @@ def signup(request):
             recipient = [_profile.email]
 
 
-            """
-            #tasks.sendmail.delay(cont, recipient)
 
+            tasks.sendmail.delay(cont, recipient)
+
+
+            """
             #sendmail not celery
             from django.core.mail import send_mail
             send_mail(u'안녕하세요! 앞발 사용 설명서입니다. 정식 사용을 승인해주세요.', "", \
                       'makerecipe@gmail.com', recipient, fail_silently=False,
                         html_message=cont)
             """
-
-
-
 
             return HttpResponseRedirect("/user/login/")
 
@@ -288,6 +288,31 @@ def profile(request, *args, **kwargs):
     #ctx.update(csrf(request))
     return render(request, 'userapp/profile.html',{
                     'profile':_profile[0],},)
-  
-def mainpage(request):
-    return render(request, 'userapp/mainpage.html')
+
+@login_required
+def contactemail(request):
+    if request.method=="GET":
+        email_form = SendEmailForm()
+    elif request.method=="POST":
+        email_form=SendEmailForm(request.POST)
+        customer_address=request.POST["from_address"]
+        content=request.POST["content"]
+        username=request.user
+
+        if email_form.is_valid():
+            #write email
+            tpl_mail = loader.get_template('mail_form/mail_contact.html')
+            ctx_mail = Context({
+                'address':customer_address,
+                'content':content,
+                'user':username
+            })
+            cont = tpl_mail.render(ctx_mail)
+            recipient = ["makerecipe@gmail.com"]
+
+            tasks.contact_mail.delay(cont, recipient)
+
+    return render(request, 'userapp/sendemail.html',{
+        'emailform' : SendEmailForm
+
+    })

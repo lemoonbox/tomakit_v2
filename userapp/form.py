@@ -75,3 +75,18 @@ class LoginForm(forms.Form):
         password = self.cleaned_data.get('password')
         user = authenticate(username=username, password=password)
         return user
+
+class SendEmailForm(forms.Form):
+
+    email_errors={'required':u"이메일이 필요합니다.",
+                    'invalid':u'잘못된 이메일 형식입니다.',
+                    'unique':u'이미 사용 중인 이메일 주소입니다.'}
+    modil_error= {'invalid':_(u"숫자만 입력해주세요")}
+    content_error= {'required':_(u"문의하실 내용을 입력해주세")}
+
+    from_address =forms.EmailField(max_length=150, required=True,
+                                   error_messages=email_errors)
+    modile = forms.CharField(max_length=100, required=False,
+                             error_messages=modil_error)
+    content = forms.CharField(widget=forms.Textarea, required=True,
+                              error_messages=content_error)

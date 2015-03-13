@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <form method="POST" action="">
+        {% csrf_token%}
+        {% for field in emailform %}
+            {{ field.errors|striptags }}
+        {% endfor %}
+        From address:<input id="id_from_address" name="from_address" type="email" /><br>
+        Modile:<input id="id_modile" name="modile"  placeholder="숫자만 입력해주세요"><br>
+        Content:<textarea cols="40" id="id_content" name="content" rows="10"></textarea><br>
+        <input type = "submit" value="이메일 전송하기">
+    </form>
+</body>
+</html>

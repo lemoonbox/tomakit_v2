@@ -26,7 +26,7 @@ SECRET_KEY = 'sj)7m^^1u$9=s40&8de&z#$alfgx(k6fztu3gj(w2^pdsnne6n'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-TEMPLATE_DEBUG = True
+TEMPLATE_DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -118,7 +118,7 @@ DATABASES = {
         'NAME': 'testdb',
         'USER': 'root',
         'PASSWORD':'ok123456',
-        'HOST':'diy-tec-dev.cfxqbzsbzi3i.ap-northeast-1.rds.amazonaws.com',
+        'HOST':'dic-tec3.cfxqbzsbzi3i.ap-northeast-1.rds.amazonaws.com',
         'PORT':'3306',
     }
 }
@@ -165,6 +165,8 @@ AWS_HEADERS = {
 AWS_STORAGE_BUCKET_NAME = 'diytec.beta'
 AWS_ACCESS_KEY_ID = 'AKIAJG4KYTAON2HRQB7Q'
 AWS_SECRET_ACCESS_KEY = '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'
+AWS_S3_SECURE_URLS = False
+AWS_QUERYSTRING_AUTH = False
 
 
 if DEBUG :
@@ -188,13 +190,12 @@ else :
     STATICFILES_LOCATION = 'static'
     STATICFILES_STORAGE = 'DIY_tool.custom_storages.StaticStorage'
     #It's for summernote
-    STATIC_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
+    STATIC_URL = "http://%s/" % AWS_S3_CUSTOM_DOMAIN
 
     MEDIAFILES_LOCATION = 'uploads'
     DEFAULT_FILE_STORAGE = 'DIY_tool.custom_storages.MediaStorage'
-    MEDIA_URL = "https://%s/uploads/" % AWS_S3_CUSTOM_DOMAIN
+    MEDIA_URL = "http://%s/uploads/" % AWS_S3_CUSTOM_DOMAIN
 
-    from storages.backends.s3boto import S3BotoStorage
     SUMMERNOTE_CONFIG = {
         'lang': 'ko-KR',
         #'attachment_storage_class': S3BotoStorage,
