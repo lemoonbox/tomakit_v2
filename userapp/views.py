@@ -124,7 +124,7 @@ def signup(request):
 
 
 
-            tasks.sendmail.delay(cont, recipient)
+            #tasks.sendmail.delay(cont, recipient)
 
 
             """
