@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+   클래스 메인 페이지
+
+  서버에서 문제가 생겼습니다. 다시 접속해주세요.
+  {{message}}
+</body>
+</html>
