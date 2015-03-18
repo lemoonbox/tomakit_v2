@@ -38,11 +38,11 @@ CATEGORY_SELECT =(('Baby','for Baby'),
 
 class KitCreateForm(forms.ModelForm):
 
-    category_error= {'required':_(u"카테고리를 한개이상 선택해주세요"), }
+    category_error= {'required':_(u"카테고리를 하나 이상 선택해주세요"), }
     title_error= {'required':_(u"제목을 입력해주세요"), }
-    price_error= {'required':_(u"가격 입력해주세요,"),
+    price_error= {'required':_(u"가격을 입력해주세요"),
                   'invalid':_(u"숫자만 입력해주세요")}
-    describe_error= {'required':_(u"제품 특징을 입해주세요."),
+    describe_error= {'required':_(u"제품 특징을 입력해주세요"),
                      'max_length':_(u"500자 이하로 입력해주세요"),}
     contact_tel_error= {'required':_(u"연락처를 입력해주세요"),
                         'invalid':_(u"숫자만 입력해주세요")}
@@ -66,7 +66,7 @@ class KitCreateForm(forms.ModelForm):
 
 class KitPicCreateForm(forms.ModelForm):
 
-    photo_error ={'required':u"한개 이상의 사진을 입력해 주세요",
+    photo_error ={'required':u"한 장 이상의 사진을 등록해 주세요",
                   'invalid':u'',
     }
 
@@ -78,7 +78,7 @@ class KitPicCreateForm(forms.ModelForm):
 
 class KitDetailForm(forms.ModelForm):
 
-    kit_detail_error={'required':_(u"상세한 정보를 입력해주세요"),}
+    kit_detail_error={'required':_(u"상세 정보를 입력해주세요"),}
 
     kit_detail = summer_fields.SummernoteTextFormField(error_messages=kit_detail_error,
                                                         label='')

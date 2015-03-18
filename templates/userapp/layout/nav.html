@@ -1,0 +1,65 @@
+<style>
+  #hi span {font-family: sans-serif;} #hi:hover {color: skyblue;}
+/*  .navbar {max-height: 50px;}*/
+</style>
+  <!-- Static navbar -->
+  <nav class="navbar navbar-default navbar-static-top">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/idealine">AmonHand</a>
+      </div>
+
+      <div id="navbar" class="collapse navbar-collapse" aria expanded="false">
+        <ul class="nav navbar-nav">    
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">원데이 클래스 <span class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu">
+              <li class="dropdown-header">카테고리별</li>
+              <li><a href="#">for Baby </a></li>
+              <li><a href="#">for Home </a></li>
+              <li><a href="#">for Funny </a></li>
+              <li><a href="#">for Art </a></li>
+              <li><a href="#">for Fashion </a></li>
+              <li><a href="#">for Taste </a></li>
+              <li><a href="#">for Beauty </a></li>
+
+              <li class="divider"></li>
+<li class="dropdown-header">기타</li>
+<li><a href="#">Separated link</a></li>
+<li><a href="#">One more separated link</a></li>
+            </ul>
+          </li>
+          <li><a href="/class/create">강좌 등록</a></li>
+          <li><a href="/kit/create">KIT 판매 등록</a></li>
+        </ul>
+
+        <ul class="nav navbar-nav navbar-right">
+          <!--
+<form class="navbar-form navbar-left" role="search">
+<div class="form-group">
+<input type="text" class="form-control" placeholder="Search">
+</div>
+<button type="submit" class="btn btn-default">검색</button>
+</form>
+-->
+          {% if user.is_authenticated %}
+          <li><a id="hi" href="#">안녕하세요 <strong>{{ user.username }}</strong> 님!</a></li>
+          <li><a href="/user/logout">로그아웃</a></li>
+          {% else %}
+          <li><a href="#"><p class="hi">hello world!</p></a></li>
+          <li><a href="/user/signup">회원가입</a></li>
+          <li class="active"><a href="/user/login">로그인</a></li>
+          <!--            <span class="sr-only">(current)</span>-->
+
+        </ul>
+        {% endif %}
+
+      </div><!--/.nav-collapse -->
+    </div><!--/.container-fluid -->
+  </nav>

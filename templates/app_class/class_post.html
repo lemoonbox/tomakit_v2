@@ -1,29 +1,75 @@
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
-제목 : {{class_post.title}}<br/>
-수강료: {{class_post.price}}<br/>
-강의 소개 : {{class_post.describe}}<br>
-강의 날짜 : {{class_post.lessonday}}<br>
-시작 시간 : {{class_post.start_time}}<br>
-종료 시간 : {{class_post.end_time}}<br>
-최소 인원 : {{class_post.minimum}}<br>
-최대 인원 : {{class_post.maximum}}<br>
-연락처 : {{class_post.contact_tel}}<br>
-주소 : {{class_post.address}}<br>
-사진
-{%for photo in class_post.classpic_set.all%}
-<img src="{{MEDIA_URL}}{{photo.class_photo}}">
-{% endfor %}
+{% load static from staticfiles%}
+{% include "userapp/layout/header.html"%}
+{% include "userapp/layout/nav.html"%}
 
-상세 정보:
-{%for detail in class_post.classdetail_set.all%}
-    {{detail.class_detail | safe}}
-{% endfor %}
+    <title>{{class_post.title}}</title>
+</head>
+
+<style>
+  .post-content {max-width: 1000px; margin:auto;}
+  .well {background-color:white; 
+    padding:20px; box-shadow: inset 1px 1px 0 rgba(0,0,0,.1),inset 0 -1px 0 rgba(0,0,0,.07);}
+  .post-photo {padding-top:15px;}
+  .thumbnail {margin:auto; max-width:550px; padding:15px; border:0px; box-shadow: 0px 2px 2px 2px black);}
+  .post-detail {padding-top:15px;margin:auto;}
+/*  .box {padding:5px; padding-top:15px;}*/
+  .box h3 {border-bottom: 1px solid silver; padding-bottom:30px;}
+  #post-price {font-size: 18px;}
+  .content-summernote {margin:auto;padding-top:15px;padding-bottom:15px;}
+</style>
+
+<body>
+  <!--#TODO mobile에서 보이는거 조정-->
+  <div class="container">
+    <div class="post-content">
+      
+      <div class="col-md-8 well well-lg">
+        <div class="col-md-12">
+          <div class="post-photo">
+            <div class="thumbnail">
+              <div class="carousel">
+          {%for photo in class_post.classpic_set.all%}
+          <img class="img-responsive" src="{{MEDIA_URL}}{{photo.class_photo}}">
+          {% endfor %}
+              </div>
+            </div>
+          </div>
+        </div>
+</div>
+      <div class="col-md-4 well">
+        <div class="col-md-12">
+          <div class="post-detail">
+          <h3><small>제목</small><br>{{class_post.title}}</h3><br/>
+            <dd class="text-muted">수강료 </dd> 
+            <span id="post-price">{{class_post.price}} &#8361;</span><br/>
+          강의 소개 : {{class_post.describe}}<br>
+                    
+          <div class="post-date">
+          강의 날짜 : {{class_post.lessonday}}<br>
+          시간 : {{class_post.start_time}} - {{class_post.end_time}}<br>
+          최소 인원 : {{class_post.minimum}}<br>
+          최대 인원 : {{class_post.maximum}}<br>
+          연락처 : {{class_post.contact_tel}}<br>
+          주소 : {{class_post.address}}<br>
+        </div>
+        </div>
+        </div>
+        </div>
+        
+      <div class="col-md-12 well well-lg">
+        <div class="col-md-12">
+          <div class="content-summernote">
+            상세 정보:
+            {%for detail in class_post.classdetail_set.all%}
+            {{detail.class_detail | safe}}
+            {% endfor %}
+          </div>
+        </div>
+      </div>  
+      </div>
+      </div>
+    
 
 </body>
-</html>
+
+{% include "userapp/layout/footer.html" %}

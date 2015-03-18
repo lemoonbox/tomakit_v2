@@ -1,9 +1,8 @@
 {% load static from staticfiles%}
-{% include "userapp/layout/header.html" %}
-    
+{% include "userapp/layout/header.html"%}
+{% include "userapp/layout/nav.html"%}
 
-
-
+<title> AMONHAND 로그인 </title>
     
       {% if login_form.errors %}
     <div id="form-error">
@@ -39,15 +38,15 @@
         <div id="login" class="animate">
           <form method="post" action="{% url 'login_url' %}" class="form-signin" autocomplete="off">
             {% csrf_token %}
-            <h2 class="form-signin-heading">Log in</h2><br />
+            <h2 class="form-signin-heading">로그인</h2><br />
             
             <!-- TODO: email -> email and username -->
             <!-- #TODO: email -> email and username -->
-            <label for="username" name="username"> Username(Email) </label><br />
+            <label for="username" name="username"> 이메일 </label><br />
             <input type="text" name="username" class="form-control" required
-                   placeholder="username or email" autocomplete="off" value="{{is_authenticated}}"><br />
-            <label for="password" name="password"> Password </label> 
-            <a href="password.reset" class="fg-pwd">Forgot Password?</a>
+                   placeholder="ex) amonhand@gmail.com" autocomplete="off" value="{{is_authenticated}}"><br />
+            <label for="password" name="password"> 비밀번호 </label> 
+            <a href="password.reset" class="fg-pwd">비밀번호 찾기</a>
             <br />
             <input type="password" name="password" placeholder="Password" class="form-control" required 
                    autocomplete="off" value="{{valid_password}}">
@@ -65,8 +64,8 @@
             
             <div class="signin-btn-p">
             <p class="change_link">
-              Not a member yet?
-              <a href="#toregister" class="to_register">Join us</a>
+              아직 회원이 아니신가요?
+              <a href="/user/signup" class="to_register">함께해요!</a>
             </p>
             <button class="btn btn-lg btn-primary btn-block" type="submit">Log In</button>
             </div>
@@ -76,6 +75,7 @@
 
         </div> <!--/wrapper-->
       </div> <!-- /container -->
+</div>
+</body>
 
-  </body>
-</html>
+{% include "userapp/layout/footer.html" %}

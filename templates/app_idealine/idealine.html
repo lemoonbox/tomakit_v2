@@ -1,11 +1,15 @@
-<!DOCTYPE html>
+
+{% load static from staticfiles%}
+{% include "userapp/layout/header.html"%}
+{% include "userapp/layout/nav.html"%}
+
 {% load line_extras_tag%}
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title></title>
+
+<title> AmonHand </title>
 </head>
+
 <body>
+  <div class="container">
  idealine
     {% for item in lineitem%}
         {% with forloop.counter0|big_mid as check %}
@@ -39,6 +43,8 @@
                 </div>
             </div>
     {% endfor%}
-
+    </div>
 </body>
-</html>
+
+  
+  {% include 'userapp/layout/footer.html' %}
