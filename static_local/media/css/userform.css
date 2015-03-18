@@ -1,8 +1,4 @@
-body {
-  padding-top: 40px;
-  padding-bottom: 40px;
-  background: #eee url(/static/image/cherry.jpg);
-}
+#wrapper { margin-top: 100px; }
 
 .email {
   font-family: Verdana, sans-serif;
@@ -95,7 +91,7 @@ body {
 }
 
 .fg-pwd {
-  margin-left: 100px;
+  margin-left: 140px;
 }
 
 /*
@@ -115,14 +111,7 @@ body {
 }
 */
 
-.hi {
-  font-family: sans-serif;
-  text-align: center;
-  margin: auto;
-}
-.hi:hover {
-  color: skyblue;
-}
+
 
 #register{	
   z-index: 21;

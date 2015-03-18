@@ -1,9 +1,11 @@
-<!DOCTYPE html>
+
 {% load static from staticfiles%}
 {% include "userapp/layout/header.html"%}
+{% include "userapp/layout/nav.html"%}
 
-
-
+<title>회원가입</title>
+</head>
+<body>
     {% if profileform.errors %}
     <div id="form-error">
       <div class="alert alert-warning">
@@ -61,5 +63,5 @@
     </div> <!-- /container -->
 
   </body>
-</html>
 
+{% include "userapp/layout/footer.html" %}

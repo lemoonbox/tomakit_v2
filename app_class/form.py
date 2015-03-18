@@ -36,11 +36,11 @@ CATEGORY_SELECT =(('baby','for Baby'),
 
 class ClassCreateForm(forms.ModelForm):
 
-    category_error= {'required':_(u"카테고리를 입력해주세요"), }
+    category_error= {'required':_(u"카테고리를 선택해주세요"), }
     title_error= {'required':_(u"제목을 입력해주세요"), }
-    price_error= {'required':_(u"수강료를 입력해주세요,"),
+    price_error= {'required':_(u"수강료를 입력해주세요"),
                   'invalid':_(u"숫자만 입력해주세요")}
-    describe_error= {'required':_(u"강의 설명을 입해주세요."),
+    describe_error= {'required':_(u"강의 설명을 입력해주세요"),
                      'max_length':_(u"500자 이하로 입력해주세요"),}
     lessonday_error= {'required':_(u"클래스 날짜를 입력해주세요"), }
     start_time_error= {'required':_(u"클래스 시작시간을 입력해주세요"), }
@@ -77,7 +77,7 @@ class ClassCreateForm(forms.ModelForm):
 
 class ClassPicCreateForm(forms.ModelForm):
 
-    photo_error ={'required':u"한개 이상의 사진을 입력해 주세요",
+    photo_error ={'required':u"한 장 이상의 사진을 입력해 주세요",
                   'invalid':u'',
     }
 
@@ -91,7 +91,7 @@ class ClassPicCreateForm(forms.ModelForm):
 
 class ClassdetailForm(forms.ModelForm):
 
-    class_detail_error= {'required':_(u"상세한 정보를 입력해주세요"), }
+    class_detail_error= {'required':_(u"상세 정보를 입력해주세요"), }
 
     class_detail = summer_fields.SummernoteTextFormField(error_messages=class_detail_error,
                                                          label='')
