@@ -30,12 +30,23 @@ TEMPLATE_DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
-###setting for celery####
-import djcelery
-djcelery.setup_loader()
-BROKER_URL = 'redis://localhost:6379/0'
-CELERY_ACCEPT_CONTENT = ['pickle', 'json', 'msgpack', 'yaml']
+###setting for celery####close/not user redis anymore
+# import djcelery
+# djcelery.setup_loader()
+# BROKER_URL = 'redis://localhost:6379/0'
+# CELERY_ACCEPT_CONTENT = ['pickle', 'json', 'msgpack', 'yaml']
 #####setting for celery end###
+
+###setting for celery &rabbitmq
+if not DEBUG:
+    import djcelery
+    djcelery.setup_loader()
+    BROKER_URL='amqp://guest:guest@localhost:5672//'
+else:
+    import djcelery
+    djcelery.setup_loader()
+    BROKER_URL='amqp://moon:1234@localhost:5672//'
+    CELERY_IMPORTS =('userapp.tasks')
 
 
 # Application definition
@@ -169,7 +180,7 @@ AWS_S3_SECURE_URLS = False
 AWS_QUERYSTRING_AUTH = False
 
 
-if DEBUG :
+if not DEBUG :
     #local_static
     STATIC_URL = '/static/'
     STATICFILES_DIRS=(os.path.join(BASE_DIR, 'static_local'),)

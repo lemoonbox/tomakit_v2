@@ -19,7 +19,7 @@ else :
     import sys
 
     ##setting uer virtualenv##
-    activate_this = '/home/ubuntu/.virtualenv/diy_tec/bin/activate_this.py'
+    activate_this = '/home/ubuntu/.virtualenvs/diy_tec/bin/activate_this.py'
     execfile(activate_this, dict(__file__=activate_this))
     ##--##
     sys.path.append("/opt/diyroot")

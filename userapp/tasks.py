@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 #coding: utf-8
 __author__ = 'moon'
 from djcelery import celery
@@ -20,3 +21,21 @@ def contact_mail(cont, recipient):
     send_mail(u'고객님이 보내신 메일입니다.', "",
             'makerecipe@gmail.com', recipient, fail_silently=False,
             html_message=cont)
+
+
+# @celery.task(name = 'tasks.rabbitmqtest')
+# def rabbitmqtest():
+#     print "task test"
+#
+# from celery import shared_task
+# @shared_task
+# def add(x, y):
+#     return x + y
+#
+# @shared_task
+# def mul(x, y):
+#     return x * y
+#
+# @shared_task
+# def xsum(numbers):
+#     return sum(numbers)
