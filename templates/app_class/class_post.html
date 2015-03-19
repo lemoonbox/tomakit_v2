@@ -29,7 +29,7 @@
             <div class="thumbnail">
               <div class="carousel">
           {%for photo in class_post.classpic_set.all%}
-          <img class="img-responsive" src="{{MEDIA_URL}}{{photo.class_photo}}">
+            <img class="img-responsive{{forloop.counter0}}" src="{{MEDIA_URL}}{{photo.class_photo}}">
           {% endfor %}
               </div>
             </div>

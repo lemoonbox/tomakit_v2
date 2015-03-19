@@ -57,6 +57,7 @@ def categoryline(request, category):
         {
             'catgitem':catg_line,
             'HTTP_HOST':host,
+            'category':category
         })
 
 def test(reqeust, category, kindof):

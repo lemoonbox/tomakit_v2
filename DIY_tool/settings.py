@@ -24,7 +24,7 @@ TEMPLATE_DIRS ={
 SECRET_KEY = 'sj)7m^^1u$9=s40&8de&z#$alfgx(k6fztu3gj(w2^pdsnne6n'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 TEMPLATE_DEBUG = False
 
@@ -38,7 +38,7 @@ ALLOWED_HOSTS = ['*']
 #####setting for celery end###
 
 ###setting for celery &rabbitmq
-if not DEBUG:
+if DEBUG:
     import djcelery
     djcelery.setup_loader()
     BROKER_URL='amqp://guest:guest@localhost:5672//'
@@ -180,7 +180,7 @@ AWS_S3_SECURE_URLS = False
 AWS_QUERYSTRING_AUTH = False
 
 
-if not DEBUG :
+if DEBUG :
     #local_static
     STATIC_URL = '/static/'
     STATICFILES_DIRS=(os.path.join(BASE_DIR, 'static_local'),)
