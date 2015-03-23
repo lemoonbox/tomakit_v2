@@ -1,5 +1,5 @@
-from __future__ import absolute_import
 #coding: utf-8
+from __future__ import absolute_import
 __author__ = 'moon'
 from djcelery import celery
 from django.core.mail import send_mail
