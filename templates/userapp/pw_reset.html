@@ -1,15 +1,20 @@
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title></title>
+{% load static from staticfiles%}
+{% include "userapp/layout/header.html"%}
+{% include "userapp/layout/nav.html"%}
+
+{% load line_extras_tag%}
+
+<title>비밀번호 변경</title>
 </head>
 <body>
-<h1>이메일을 입력해주시면 비밀번호 변경 링크를 보내드립니다.</h1>
+  <div class="container">
+<h3>이메일을 입력해주시면 비밀번호 변경 링크를 보내드립니다.</h3>
     <form method="POST" action="{{request.path}}">
         {% csrf_token%}
         {{pwrsetform.as_p}}
         <input type = "submit" value="이메일 전송하기">
     </form>
+  </div>
 </body>
-</html>
+
+{% include "userapp/layout/footer.html" %}

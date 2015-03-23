@@ -44,9 +44,9 @@
             <!-- #TODO: email -> email and username -->
             <label for="username" name="username"> 이메일 </label><br />
             <input type="text" name="username" class="form-control" required
-                   placeholder="ex) amonhand@gmail.com" autocomplete="off" value="{{is_authenticated}}"><br />
+                   placeholder="ex) amonhand@gmail.com" autocomplete="off" value="{{is_authenticated}}" autofocus><br />
             <label for="password" name="password"> 비밀번호 </label> 
-            <a href="password.reset" class="fg-pwd">비밀번호 찾기</a>
+            <a href="/user/reset_password" class="fg-pwd">비밀번호 찾기</a>
             <br />
             <input type="password" name="password" placeholder="Password" class="form-control" required 
                    autocomplete="off" value="{{valid_password}}">

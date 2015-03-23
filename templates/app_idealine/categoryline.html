@@ -3,7 +3,7 @@
 {% include "userapp/layout/nav.html"%}
 {% load line_extras_tag%}
 
-<title> category line</title>
+<title> 원데이 클래스 for {{category}} </title>
 </head>
 <body>
 {{category}}
@@ -24,7 +24,7 @@
                                 <img src="{{MEDIA_URL}}{{item.classpic_set.first.class_photo}}"><br></a>
                             title : {{item.title}}<br>
                             종류 : ""CLASS""<br>
-                            가격 :{{item.price}}<br>
+                            가격 :{{item.price}} 원<br>
                             url :http://{{HTTP_HOST}}/class/{{item.id}}
                         {% elif type == "Kit_Post"%}
                             <!--kitpost-->

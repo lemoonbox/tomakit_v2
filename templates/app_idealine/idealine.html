@@ -26,24 +26,25 @@
                             <!--classpost-->
                             <a href="http://{{HTTP_HOST}}/class/{{item.id}}">
                                 <img src="{{MEDIA_URL}}{{item.classpic_set.first.class_photo}}"><br></a>
-                            title : {{item.title}}<br>
+                  title : <a href="http://{{HTTP_HOST}}/class/{{item.id}}">{{item.title}}</a><br>
                             종류 : ""CLASS""<br>
-                            가격 :{{item.price}}<br>
-                            url :http://{{HTTP_HOST}}/class/{{item.id}}
+                            가격 :{{item.price}} 원<br>
+
                         {% elif type == "Kit_Post"%}
                             <!--kitpost-->
                             <a href="http://{{HTTP_HOST}}/kit/{{item.id}}">
                                 <img src="{{MEDIA_URL}}{{item.kit_photo_set.first.kit_photo}}"><br></a>
-                            title:{{item.title}}<br>
+                  title:<a href="http://{{HTTP_HOST}}/kit/{{item.id}}">{{item.title}}</a><br>
                             ""KIT""<br>
                             가격 :{{item.price}}<br>
-                            url :http://{{HTTP_HOST}}/kit/{{item.id}}
+                            
                         {% endif %}
-                    {% endwith %}v
+                    {% endwith %}
                 </div>
             </div>
     {% endfor%}
     </div>
+  </div>
 </body>
 
   
