@@ -2,7 +2,7 @@
 #form-error ul {list-style: none;}
 
 
-#wrapper { margin-top: 50px; }
+#wrapper { margin-top: 15%; margin-bottom:5%; }
 
 
 .email {
@@ -40,18 +40,19 @@
   z-index: 2;
 }
 
-.form-signin #nick_name {
-  margin-bottom: -1px;
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
-}
-
 
 .form-signin input[type="email"] {
   margin-bottom: -1px;
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
 }
+
+.form-signin #nick_name {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
 .form-signin input[type="password"] {
   margin-bottom: -1px;
   border-top-left-radius: 0;
