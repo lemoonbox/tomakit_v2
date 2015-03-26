@@ -14,7 +14,7 @@
     {% for item in lineitem%}
         {% with forloop.counter0|big_mid as check %}
             {{check}}
-            {% if check == 0%}
+            {% if check == 0 %}
             <div class="big_box">
             {% else %}
             <div class="mid_box">

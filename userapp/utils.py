@@ -2,7 +2,7 @@ __author__ = 'moon'
 from DIY_tool import settings
 
 
-def handle_uploaded_image(i, x, y):
+def handle_uploaded_image2(i, x, y):
     import StringIO
     from PIL import Image, ImageOps
     import os
@@ -76,6 +76,95 @@ def handle_uploaded_image(i, x, y):
 
     #resize(doing a thumb)
     image.thumbnail([x,y], Image.ANTIALIAS)
+
+    #re-initialize imageFile and set a hash (unique filename)
+    imagefile = StringIO.StringIO()
+    filename = str(uuid.uuid1())+"."+FILE_EXTENSION
+
+    #PIL instance(image) change to imagefile
+    #return FILE instance after just resize not save
+    thumnail_io= StringIO.StringIO()
+    image.save(thumnail_io, format=PIL_SAVE)
+    thumnail_io.seek(0)
+
+    content = InMemoryUploadedFile(thumnail_io, None, filename, PIL_TYPE,
+                                   thumnail_io.len, None)
+
+    """
+    #save to disk
+    #save first and read again style
+    imagefile = open(os.path.join(settings.MEDIA_ROOT, filename), 'w')
+    image.save(imagefile, 'JPEG', quality=90)
+    image_file = open(os.path.join(settings.MEDIA_ROOT, filename), 'r')
+    content = ImageFile(image_file)
+
+    """
+
+    return (filename, content)
+
+
+
+def handle_uploaded_image(i, x, y):
+    import StringIO
+    from PIL import Image, ImageOps
+    import os
+    from django.core.files.images import ImageFile
+    from django.core.files.uploadedfile import  InMemoryUploadedFile
+    import uuid
+
+
+    IMAGE_TYPE=i.content_type
+
+    #PIL_TYPE use to save disk, FILE_EXTENSTION use to make the path
+    print
+    if IMAGE_TYPE =='image/jpeg':
+         PIL_TYPE = 'image/jpg'
+         PIL_SAVE = 'JPEG'
+         FILE_EXTENSION = 'jpg'
+    elif IMAGE_TYPE=='image/png':
+        PIL_TYPE = 'image/png'
+        PIL_SAVE = 'PNG'
+        FILE_EXTENSION = 'png'
+    else :
+        raise Exception('Image-type-error', "It's not jpeg of PNG")
+
+
+    #read image from InMemoryUploadedFile
+    image_str = ""
+    for c in i.chunks():
+        image_str +=c
+
+    #create PIL image instance
+    imagefile = StringIO.StringIO(image_str)
+    image = Image.open(imagefile)
+
+    # if not RGB, convert
+    if image.mode not in ("L", "RGB"):
+        image = image.convert("RGB")
+
+    width, height = image.size
+
+    max_width = x
+    max_height = y
+
+    target_ratio = float(max_width)/float(max_height)
+    ratio = float(width)/float(height)
+
+    target_width = 0
+    target_height = 0
+
+    if (ratio>target_ratio):
+        target_width = max_width
+        target_height = int(target_width/ratio)
+    else:
+        target_height = max_height
+        target_width = int(ratio * target_height)
+
+    #resize(doing a thumb)
+    if target_width < width or target_height < height:
+        image = image.resize((target_width, target_height), Image.ANTIALIAS)
+
+
 
     #re-initialize imageFile and set a hash (unique filename)
     imagefile = StringIO.StringIO()

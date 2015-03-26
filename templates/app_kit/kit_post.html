@@ -14,7 +14,7 @@
 주소 : {{kit_post.address}}<br>
 사진
 {%for photo in kit_post.kit_photo_set.all%}
-<img class="img-responsive {{forloop.count0}}" src="{{MEDIA_URL}}{{photo.kit_photo}}">
+<img class="img-responsive{{forloop.counter0}}" src="{{MEDIA_URL}}{{photo.kit_photo}}">
 {% endfor %}
 
 상세 정보:
