@@ -5,49 +5,67 @@
 
 {% load line_extras_tag%}
 
-<title> AmonHand </title>
+<title> TOMAKIT </title>
+
+<style>
+  .idealine {margin-top:30px}
+  .itembox {max-width:500px;margin:auto;}
+  .thumbnail {padding:10px;border-radius:1px;}
+  img{width:100%;}
+  img:hover{opacity:0.5;}
+  .tag {color:lightgray;}
+  .title {color:dimgray;}
+  .title:hover {color:skyblue;text-decoration:none;}
+</style>
+
 </head>
 
 <body>
   <div class="container">
-    
-    <div class="col-md-7">
- idealine
-    {% for item in lineitem%}
-        {% with forloop.counter0|big_mid as check %}
-            {{check}}
-            {% if check == 0%}
-            <div class="big_box">
-            {% else %}
-            <div class="mid_box">
-            {% endif%}
-        {% endwith %}
-                <div class="itembox">
-                    {% with item|classname as type %}
-                        {% if type == "ClassPost"%}
-                            <!--classpost-->
-                            <a href="http://{{HTTP_HOST}}/class/{{item.id}}">
-                                <img src="{{MEDIA_URL}}{{item.classpic_set.first.class_photo}}"><br></a>
-                  title : <a href="http://{{HTTP_HOST}}/class/{{item.id}}">{{item.title}}</a><br>
-                            종류 : ""CLASS""<br>
-                            가격 :{{item.price}} 원<br>
 
-                        {% elif type == "Kit_Post"%}
-                            <!--kitpost-->
-                            <a href="http://{{HTTP_HOST}}/kit/{{item.id}}">
-                                <img src="{{MEDIA_URL}}{{item.kit_photo_set.first.kit_photo}}"><br></a>
-                  title:<a href="http://{{HTTP_HOST}}/kit/{{item.id}}">{{item.title}}</a><br>
-                            ""KIT""<br>
-                            가격 :{{item.price}}<br>
-                            
-                        {% endif %}
-                    {% endwith %}
-                </div>
-            </div>
-    {% endfor%}
+    <div class="col-md-12 idealine">
+      {%comment%} TODO big_mid 가 0 or else로 분류되어도 괜찮나? {%endcomment%} 
+      {% for item in lineitem%}
+      {% with forloop.counter0|big_mid as check %}
+      {%comment%} {{check}} 이 아이가 숫자를 만들어내는 것임 {%endcomment%}
+      {% if check == 0%}
+      <div class="big_box">
+        {% else %}
+        <div class="mid_box">
+          {% endif%}
+          {% endwith %}
+          <div class="itembox">
+            <div class="thumbnail">
+              {% with item|classname as type %}
+              {% if type == "ClassPost"%}
+              <!--classpost-->
+              <a href="http://{{HTTP_HOST}}/class/{{item.id}}">
+                <img class="img-responsive{{forloop.counter0}}}" src="{{MEDIA_URL}}{{item.classpic_set.first.class_photo}}"><br></a>
+              
+              <a href="http://{{HTTP_HOST}}/class/{{item.id}}" class="title">{{item.title}}</a><br>
+              &#8361;{{item.price}}<p class="sr-only">원</p> <span class="tag"> · CLASS</span>
+
+              {% elif type == "Kit_Post"%}
+              <!--kitpost-->
+              <a href="http://{{HTTP_HOST}}/kit/{{item.id}}">
+                <img class="img-responsive{{forloop.counter0}}" src="{{MEDIA_URL}}{{item.kit_photo_set.first.kit_photo}}"></a>
+              
+              <a href="http://{{HTTP_HOST}}/kit/{{item.id}}" class="title">{{item.title}}</a><br>
+              &#8361;{{item.price}}<p class="sr-only">원</p> <span class="tag"> · KIT</span>
+              <!--              <span class="category">{{item.category}}</span>-->
+
+              {% endif %}
+              {% endwith %}
+<!--            </div>-->
+          </div>
+        </div>
+        {% endfor%}
+      </div>
     </div>
   </div>
   </div>
+  </div>
+
 </body>
 
   

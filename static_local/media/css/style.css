@@ -1,48 +1,16 @@
 body {
   background-color: #eee;
   min-width:600px;}
-}
 /*
-
-.jumbotron {
-    width: 400px;
-    height: 70%;
-}
-    
-.container {
-    width: 450px;
-    height: 70%;
-    margin: 200px;
-
-}
-
-.outer {
-    display: table;
-    width: 100%;
-    height: 100%;
-}
-.inner {
-    display: table-cell;
-    vertical-align: middle;
-}
-
-.centered {
-    position: relative;
-    display: inline-block;
-    
-    width: 100%;
-    padding: 1em;
-*/
-/*
-    background: #b5ffda;
-    color: #3A4741;
-*/
-}
-
 table {
   display: table;
   border-collapse: seperate;
   border-spacing: 2px;
   border-color: gray;
 }
+*/
 
+
+.footer-wrapper {border-top: 2px solid white; margin-top:5%; max-height:200px; vertical-align: bottom;}
+.footer-inner {text-align: center; padding:30px; }
+.footer-logo h2 {font-family:cursive;}

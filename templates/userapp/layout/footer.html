@@ -1,29 +1,17 @@
 {%load static from staticfiles%}
 
-<script src="{% static 'bootstrap/docs/assets/js/ie-emulation-modes-warning.js'%}"></script>
-<script type="text/javascript">
-  $(function () {
-    var isIE = window.ActiveXObject || "ActiveXObject" in window;
-    if (isIE) {
-      $('.modal').removeClass('fade');
-    }
-  });
-</script>
 
-<style>
-  #footer {border-top: 2px solid white;margin-top:100px;margin-bottom:0;}
-  .footer-wrapper {text-align: center; padding:30px;}
-  .footer-logo h2 {font-family:cursive;}
-</style>
+<div class="clearfix footer">
 
-<div id="footer">
-<div class="container">
-  <div class="footer-wrapper">
-  <div class="footer-logo">
-  <h2>AmonHand</h2></div>
-  <div class="footer-contents">
-  <p>Hosted by Moon | Designed by Minaminimi</p></div>
-  </div>
-  </div>
+
+    <div class="footer-wrapper">
+      <div class="footer-inner">
+        <div class="footer-logo">
+          <h2>TOMAKIT</h2></div>
+        <div class="footer-contents">
+          <p>Hosted by Moon | Designed by Minaminimi</p></div>
+      </div>
+    </div>
 </div>
+
 </html>
