@@ -1,63 +1,21 @@
 {% load static from staticfiles%}
 {% include "userapp/layout/header.html"%}
-{% include "userapp/layout/nav.html"%}
+
   
   <title></title>
 
-  <style>
-    body {
-      font-family: "Segoe UI", 'sans-serif';
-      
-    }
-
-    h2 {
-/*      font-size:36px; */
-      padding-top: 20px;
-      color:#5CB85C;
-    }
-
-    .details {
-      min-height: 355px;
-      display: inline-block;
-    }
-    
-    
-
-  </style>
-
 </head>
 <body>
+  <div id="wrap">
+  {% include "userapp/layout/nav.html"%}
+  <div class="container">
   <h1>프로파일 화면 power 수정</h1>
 
   이메일 : {{profile.email}} <br/>
   별명 : {{profile.nick_name}}<br/>
   <img src="{{MEDIA_URL}}{{profile.pro_photo}}" class="img-responsive"/>
   
-    <div class="container">
-    <div class="row">
-      <div class="col-md-offset-2 col-md-8 col-lg-offset-3 col-lg-6">
-        <div class="well details">
-        <div class="col-sm-12">
-          <div class="col-xs-12 col-sm-12">
- 
 
-            <div class="panel-body">
-              <h2 style="text-decoration:underline;">{{profile.email}}님</h2><br />
-
-              <div class="row">
-                <div class="col-md-3 col-lg-3" align="center">
-                  <img alt="User Pic" src="{{MEDIA_URL}}{{profile.pro_photo}}" class="img-responsive" width=200px hegith=200px><br />
-                </div>
-
-
-                <div class= "col-md-9 col-lg-9">
-                  <table class="table table-user-information">
-              
-                    <tbody>
-                      <tr>
-                        <td>이메일 : </td>
-                        <td>{{profile.email}}</td>
-                      </tr>
                       <tr>
                         <td>전화번호 : </td>
                         <td>{{profile.mobile}}</td>
@@ -66,21 +24,13 @@
                         <td>주소 : </td>
                         <td>{{profile.address}}</td>
                       </tr>
-                    </tbody>
-                  </table>
-                </div>
 
-              </div> <!-- /row -->
-              
-            </div> <!-- /panel-body -->
-          </div>
-          </div>
-        </div>
-      </div>
-      </div>
-    </div> <!-- /container -->
 
-  </body>
-
+    
+    
+    </div>
+    <div id="push"></div>
+    </div> <!-- /#wrap -->
 
 {% include "userapp/layout/footer.html" %}
+</body>

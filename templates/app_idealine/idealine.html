@@ -1,0 +1,68 @@
+{% load static from staticfiles%}
+{% include "userapp/layout/header.html"%}
+
+
+{% load line_extras_tag%}
+
+
+<title> TOMAKIT </title>
+
+<style>
+  .itembox {max-width:500px;margin:auto;}
+  .thumbnail {padding:10px;border-radius:1px;}
+  img{width:100%;}
+  img:hover{opacity:0.5;}
+  .tag {color:lightgray;}
+  .title {color:dimgray;}
+  .title:hover {color:skyblue;text-decoration:none;}
+</style>
+
+</head>
+
+<body>
+  <div id="wrap">
+    {% include "userapp/layout/nav.html"%}
+    <div class="container">
+
+      <div class="col-md-12 idealine">
+        {% for item in lineitem%}
+        {% with forloop.counter0|big_mid as check %}
+        {%comment%} {{check}} {%endcomment%}
+        {% if check == 0%}
+        <div class="big_box">
+          {% else %}
+          <div class="mid_box">
+            {% endif%}
+            {% endwith %}
+            <div class="itembox">
+              <div class="thumbnail">
+                {% with item|classname as type %}
+                {% if type == "ClassPost"%}
+                <!--classpost-->
+                <a href="http://{{HTTP_HOST}}/class/{{item.id}}">
+                  <img class="img-responsive{{forloop.counter0}}}" src="{{MEDIA_URL}}{{item.classpic_set.first.class_photo}}"><br></a>
+                <a href="http://{{HTTP_HOST}}/class/{{item.id}}" class="title">{{item.title}}</a><br>
+                &#8361;{{item.price}}<p class="sr-only">원</p> <span class="tag"> · CLASS</span>
+
+                {% elif type == "Kit_Post"%}
+                <!--kitpost-->
+                <a href="http://{{HTTP_HOST}}/kit/{{item.id}}">
+                  <img class="img-responsive{{forloop.counter0}}" src="{{MEDIA_URL}}{{item.kit_photo_set.first.kit_photo}}"><br></a>
+                <a href="http://{{HTTP_HOST}}/kit/{{item.id}}" class="title">{{item.title}}</a><br>
+                &#8361;{{item.price}}<p class="sr-only">원</p> <span class="tag"> · KIT</span>
+                <!--              <span class="category">{{item.category}}</span>-->
+            {% endif %}
+            {% endwith %}
+              </div> <!-- /.thumbnail -->
+            </div> <!-- .itembox -->
+
+          </div>
+        </div>
+        {% endfor%}
+      </div> <!-- /.idealine -->
+
+  </div> <!-- /.container -->
+<div id="push"></div>
+    
+</div> <!--/#wrap-->
+{% include 'userapp/layout/footer.html' %}
