@@ -3,42 +3,59 @@
 {% include "userapp/layout/nav.html"%}
 {% load line_extras_tag%}
 
-<title> 원데이 클래스 for {{category}} </title>
+<title> 원데이 클래스 {{category}} </title>
+
+<style>
+.idealine {margin-top:30px}
+.itembox {margin:auto;}
+.thumbnail {border-radius:1px;height:100%;}
+img{width:100%;}
+img:hover{opacity:0.5;}
+.tag {color:lightgray;}
+.title {color:dimgray;}
+.title:hover {color:skyblue;text-decoration:none;}
+  .row {display:inline;}
+</style>
+
 </head>
+
 <body>
-{{category}}
 <div class="container">
+  <div class="row">
     {% for item in catgitem%}
-        {% with forloop.counter0|big_mid as check %}
-            {% if check == 0%}
-            <div class="big_box">
-            {% else %}
-            <div class="mid_box">
-            {% endif%}
-        {% endwith %}
+
                 <div class="itembox">
+                 
+                    <div class="col-sm-6 col-md-3">
+                      <div class="thumbnail">
                     {% with item|classname as type %}
-                        {% if type == "ClassPost"%}
-                            <!--classpost-->
-                            <a href="http://{{HTTP_HOST}}/class/{{item.id}}">
-                                <img src="{{MEDIA_URL}}{{item.classpic_set.first.class_photo}}"><br></a>
-                            title : {{item.title}}<br>
-                            종류 : ""CLASS""<br>
-                            가격 :{{item.price}} 원<br>
-                            url :http://{{HTTP_HOST}}/class/{{item.id}}
-                        {% elif type == "Kit_Post"%}
-                            <!--kitpost-->
-                            <a href="http://{{HTTP_HOST}}/kit/{{item.id}}">
-                                <img src="{{MEDIA_URL}}{{item.kit_photo_set.first.kit_photo}}"><br></a>
-                            title:{{item.title}}<br>
-                            ""KIT""<br>
-                            가격 :{{item.price}}<br>
-                            url :http://{{HTTP_HOST}}/kit/{{item.id}}
-                        {% endif %}
-                    {% endwith %}
-                </div>
-            </div>
+                      {% if type == "ClassPost"%}
+                      <!--classpost-->
+                        <a href="http://{{HTTP_HOST}}/class/{{item.id}}">
+                          <img src="{{MEDIA_URL}}{{item.classpic_set.first.class_photo}}"></a>
+                        <div class="caption">
+                          <a href="http://{{HTTP_HOST}}/class/{{item.id}}" class="title">{{item.title}}</a><br>
+                          &#8361;{{item.price}}<p class="sr-only">원</p>
+<!--                          <p><a href="#" class="btn btn-default">구매하기</a> <a href="#" class="btn btn-default">좋아요</a></p>-->
+
+                      {% elif type == "Kit_Post"%}
+                      <!--kitpost-->
+                        <a href="http://{{HTTP_HOST}}/kit/{{item.id}}">
+                          <img src="{{MEDIA_URL}}{{item.kit_photo_set.first.kit_photo}}"></a>
+                        <div class="caption">
+                          <a href="http://{{HTTP_HOST}}/kit/{{item.id}}" class="title">{{item.title}}</a><br>
+                          &#8361;{{item.price}}<p class="sr-only">원</p>
+                          <!--                          <p><a href="#" class="btn btn-default">구매하기</a> <a href="#" class="btn btn-default">좋아요</a></p>-->
+                      
+                      {% endif %}
+                      {% endwith %}
+                      </div>
+                    </div>
+                    </div>
+                  </div>
+  
     {% endfor%}
+    </div>
   </div>
 </body>
   {% include "userapp/layout/footer.html" %}

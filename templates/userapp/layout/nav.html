@@ -1,10 +1,18 @@
 <style>
   #hi span {font-family: sans-serif;} #hi:hover {color: skyblue;}
 /*  .navbar {max-height: 50px;}*/
+/*  .navbar-static-top {padding-left:5%; padding-right:5%}*/
+  .container-fluid {padding:0px;}
+  .container {padding-left:5%;padding-right:5%;}
+  #navbar a:hover {background-color:#ddd;}
+  #nav-user a:first-child:hover{background-color:transparent;}
+  #nav-user li:nth-child(2):hover{background-color:#ddd;}
+  
 </style>
   <!-- Static navbar -->
   <nav class="navbar navbar-default navbar-static-top">
     <div class="container-fluid">
+      <div class="container">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
           <span class="sr-only">Navigation</span>
@@ -12,7 +20,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="/idealine">AmonHand</a>
+        <a class="navbar-brand" href="/idealine">TOMAKIT</a>
       </div>
 
       <div id="navbar" class="collapse navbar-collapse" aria expanded="false">
@@ -20,7 +28,26 @@
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">원데이 클래스 <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
-              <li class="dropdown-header">카테고리별</li>
+              <li class="dropdown-header">CATEGORY</li>
+              <li><a href="/idealine/category/baby">for Baby </a></li>
+              <li><a href="/idealine/category/home">Home and Decoration </a></li>
+              <li><a href="/idealine/category/funny">Kidult and Fun </a></li>
+              <li><a href="/idealine/category/art">Art and Design </a></li>
+              <li><a href="/idealine/category/fashion">Fashion and accesories</a></li>
+              <li><a href="/idealine/category/tast">Food and Dessert </a></li>
+              <li><a href="/idealine/category/beauty">Beauty and Cosmetics</a></li>
+<!--
+
+              <li class="divider"></li>
+<li class="dropdown-header">기타</li>
+<li><a href="#">Separated link</a></li>
+<li><a href="#">One more separated link</a></li>
+-->
+            </ul>
+          </li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">DIY KIT <span class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu">
               <li><a href="/idealine/category/baby">for Baby </a></li>
               <li><a href="/idealine/category/home">for Home </a></li>
               <li><a href="/idealine/category/funny">for Funny </a></li>
@@ -28,18 +55,23 @@
               <li><a href="/idealine/category/fashion">for Fashion </a></li>
               <li><a href="/idealine/category/tast">for Taste </a></li>
               <li><a href="/idealine/category/beauty">for Beauty </a></li>
-
-              <li class="divider"></li>
-<li class="dropdown-header">기타</li>
-<li><a href="#">Separated link</a></li>
-<li><a href="#">One more separated link</a></li>
             </ul>
           </li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">제휴 신청 <span class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu">
+<!--              <li class="dropdown-header">분류</li>-->
+              <li><a href="/class/create">만들기 강좌 등록</a></li>
+              <li><a href="/kit/create">DIY KIT 판매 등록</a></li>
+            </ul>
+          </li>
+<!--
           <li><a href="/class/create">강좌 등록</a></li>
           <li><a href="/kit/create">KIT 판매 등록</a></li>
+-->
         </ul>
 
-        <ul class="nav navbar-nav navbar-right">
+        <ul id=nav-user class="nav navbar-nav navbar-right">
           <!--
 <form class="navbar-form navbar-left" role="search">
 <div class="form-group">
@@ -49,7 +81,7 @@
 </form>
 -->
           {% if user.is_authenticated %}
-          <li><a id="hi" href="#">안녕하세요 <strong>{{ user.username }}</strong> 님!</a></li>
+          <li><a id="hi" href="#">안녕하세요 <strong>{{user.username}}</strong> 님!</a></li>
           <li><a href="/user/logout">로그아웃</a></li>
           {% else %}
           <li><a class="hi" href="#">hello world!</a></li>
@@ -61,5 +93,6 @@
         {% endif %}
 
       </div><!--/.nav-collapse -->
+      </div>
     </div><!--/.container-fluid -->
   </nav>

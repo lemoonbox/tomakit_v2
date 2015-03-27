@@ -1,16 +1,6 @@
-<!DOCTYPE html>
-
-<html>
-  
-<head lang="en">
-    <meta charset="UTF-8">
-    <title></title>
-  <meta charset="UTF-8">
-  <meta name="viewport" contet="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="/static/media/css/bootstrap.min.css">
-  <link rel="stylesheet" type="text/css" href="
-
-  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+{% load static from staticfiles%}
+{% include "userapp/layout/header.html"%}
+{% include "userapp/layout/nav.html"%}
   
   <title></title>
 
@@ -41,12 +31,8 @@
 
   이메일 : {{profile.email}} <br/>
   별명 : {{profile.nick_name}}<br/>
-  <img src="{{MEDIA_URL}}{{profile.pro_photo}}" class="img-responsive"/></a></p>
-</body>
-=======
+  <img src="{{MEDIA_URL}}{{profile.pro_photo}}" class="img-responsive"/>
   
-
-  <body>
     <div class="container">
     <div class="row">
       <div class="col-md-offset-2 col-md-8 col-lg-offset-3 col-lg-6">
@@ -95,5 +81,6 @@
     </div> <!-- /container -->
 
   </body>
->>>>>>> e424bfef1ad0e98f56ef2482782b4a335eb4afef
-</html>
+
+
+{% include "userapp/layout/footer.html" %}

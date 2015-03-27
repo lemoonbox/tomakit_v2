@@ -2,24 +2,28 @@
 {% include "userapp/layout/header.html"%}
 {% include "userapp/layout/nav.html"%}
 
+
     <title>{{class_post.title}}</title>
 </head>
 
 <style>
+  
   .container {display:block;}
-  .post-content {max-width: 1100px; margin:auto;vertical-align: text-bottom;}
+  .post-content {margin:auto;vertical-align:text-bottom;}
   .well {background-color:white; 
     padding:15px; border-radius:0px; box-shadow: inset 1px 1px 0 rgba(0,0,0,.1),inset 0 -1px 0 rgba(0,0,0,.07);}
   .detail {padding-left:15;padding-right:15;}
   
-  .post-photo {padding-top:15px;}
-  .thumbnail {margin:auto; margin-bottom:20px; max-width:500px; padding:0px; border:0px; box-shadow: 0px 2px 2px 2px black);}
-  .post-detail {margin:auto; margin-bottom:15px;
+  .post-photo {margin:auto;margin-top:15px;width:100%}
+  .thumbnail {margin:auto; padding:0px; border:0px; } /* max-width:500px deleted */
+  .post-detail {margin:auto; margin-bottom:10px;
     padding-bottom:10px;}
 /*  .box {padding:5px; padding-top:15px;}*/
   .box {padding-bottom:15px; margin-bottom:15px;}
   
-  .post-heading{border-bottom: 5px double #ddd; margin-left:-5px; margin-right:-5px;padding: 10px 5px 10px 5px;margin-bottom:20px;}
+  .post-heading{
+/*    border-bottom: 5px double #ddd; */
+    width:100%; padding-bottom: 10px;margin-bottom:15px;font-family:Verdana;}
   #post-price {font-size: 18px;display:block; margin-bottom:20px;}
 /*    border-bottom:1px solid silver;padding-bottom:10px;*/
   }
@@ -29,28 +33,49 @@
   #post-time {font-size:18px;}
   #post-minmax {font-size:18px;}
 */
-  #post-add {}
+  #post-add {padding-bottom:10px;}
   
-  .panel {margin-bottom:0px; margin-left:-5px; margin-right:-5px; border:0px; border-radius:0px;}
+  .panel {width:100%; border:0px; border-radius:0px;margin-bottom:10px;}
   .panel .contact {border-radius:3px;border-color:red;}
+  .thumb {;margin:auto;margin-bottom:5%;}
+  .mini-thumb{padding:0px; margin-right:-1px;display:inline:block;}
+  .mini-thumb img{border:1px solid #eee;}
+  .mini-thumb:hover{opacity:0.5;}
   .panel-heading {border-top:1px solid;}
 
-  .panel-title {margin-left:-10px;margin-right:-10px; font-size:1em; vertical-align: text-bottom;}
-  .panel-title:nth-child(1):hover{color:skyblue;text-decoration-line: none;}
+  .panel-title {margin-left:-10px;margin-right:-10px; font-size:1em; vertical-align: text-bottom; text-decoration:none;}
+  .panel-title a:hover{color:skyblue;text-decoration:none;}
+  .glyphicon-chevron-down {color:#ddd;margin-left:30px;}
   .panel-body {margin-left:-10px;margin-right:-10px;}
   
-  .content-summernote {margin:auto;padding-top:15px;padding-bottom:15px;}
+  .content-summernote {margin:auto;padding-top:10px;padding-bottom:15px;}
   .title-summer {border-bottom: 5px double #ddd; padding-bottom:10px;}
 
   dd {margin-top:10px;}
   h4 {margin-top:10px;margin-left:-1px;}
   .icon {margin-left:5px; margin-right:5px; display:inline-block;vertical-align: text-bottom;}
+  
+
+  .carousel-inner img{margin:auto; width:100%} /*if want width:500px img delete this */
+  #cont-btn {margin-top:5px; background-color:lemonchiffon;width:100%;color:black;border:1px solid transparent;}
+  #cont-btn:hover {background-color:lightcoral; color:white;}
+  .carousel-control {width:10%;}
+  .carousel-control.left, .carousel-control.right {
+    background-image: none;opacity:0;}
+  .carousel-control.left:hover, .carousel-control.right:hover {
+    background-image: none;opacity:0.8;}
+/*  .carousel-indicators li {color:black;}*/
+/*  .glyphicon-chevron-left, .glyphicon-chevron-right {color:black;}*/
+  .modal-dialog {max-width:450px;}
+  .modal-body {height:450px;margin:auto;text-align: center;}
 
 
 
 </style>
 
 <body>
+
+  
   <!--#TODO mobile에서 보이는거 조정-->
   <div class="container">
     <div class="post-content">
@@ -62,42 +87,50 @@
         <div class="col-md-12 photo">
           <div class="post-photo">
             <div class="thumbnail">
-              <div id="myCarousel" class="carousel slide" data-ride="carousel">
+              <div id="class-post-Carousel" class="carousel slide" data-ride="carousel">
                 <!--Indicators -->
                 <ol class="carousel-indicators">
-                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                <li data-target="mCarousel" data-slide-to="1"></li>
-                <li data-target="myCarousel" data-slide-to="2"></li>
-                <li data-target="myCarousel" data-slide-to="3"></li>
+                
+                  {% for photo in class_post.classpic_set.all %}
+                  {% if forloop.counter0 == 0 %}
+                  <li data-target="#class-post-Carousel" data-slide-to="{{forloop.counter0}}" class="active"></li>
+                  {% else %}
+                  <li data-target="#class-post-Carousel" data-slide-to="{{forloop.counter0}}"></li>
+                  {% endif %}
+                  {%endfor%}
                 </ol>
                 
                 <!-- Wrapper for slides -->
                 <div class="carousel-inner" role="listbox">
-                  <div class="item active">
-                    {%for photo in class_post.classpic_set.all%}
-                    <img class="img-responsive{{forloop.counter0}}" src="{{MEDIA_URL}}{{photo.class_photo}}">
-                    {%endfor%}
-                  </div>
+                  
                   {%for photo in class_post.classpic_set.all%}
-                  <div class="item">
-                  <img class="img-responsive{{forloop.counter0}}" src="{{MEDIA_URL}}{{photo.class_photo}}">
-                  </div>
+                  
+                    {% if forloop.counter0 == 0 %}
+                      <div class="item active">
+                        <img class="img-responsive{{forloop.counter0}}" src="{{MEDIA_URL}}{{photo.class_photo}}">
+                      </div> 
+                    {% else %}
+                      <div class="item">
+                        <img class="img-responsive{{forloop.counter0}}" src="{{MEDIA_URL}}{{photo.class_photo}}">
+                      </div> 
+                    {% endif %}   
                   {%endfor%}
               </div>
                 
                 <!-- Left and right controls -->
-                <a class="left carousel-control" href="myCarousel" role="button" data-slide-"prev">
-                <span class="glyphicon glyphicon-chevron-left" aria-hidden"true"></span>
+                <a class="left carousel-control" href="#class-post-Carousel" role="button" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
                 <span class="sr-only">Previous</span>
                 </a>
-                <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                <a class="right carousel-control" href="#class-post-Carousel" role="button" data-slide="next">
                 <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
                 <span class="sr-only">Next</span>
                 </a>
               </div>
+              <h4>{{class_post.title}}</h4>
               </div>
               
-            <h4>{{class_post.title}}</h4>
+            
           </div>
         </div>
 </div>
@@ -106,20 +139,30 @@
         <div class="col-md-12 box">
           <div class="post-detail">
 
-            <dd class="text-muted">제목</dd>
+            <dd class="text-muted">★{{class_post.category}}</dd>
             <div class="post-heading">
             <h4>{{class_post.title}}</h4>
             </div>
             <dd class="text-muted">수강료 </dd> 
             <span id="post-price">&#8361; {{class_post.price}}</span>
             
+            <div class="row thumb">
+              {%for photo in class_post.classpic_set.all%}
+              <div class="col-md-4 col-sm-4 col-lg-4 col-xs-4 mini-thumb">
+                <a href="#" >
+                  <img class="img-responsive" src="{{MEDIA_URL}}{{photo.class_photo}}" alt="{{forloop.counter0}}">                 
+                </a>
+              </div>
+              {% endfor %}
+            </div>
             
             <div class="panel panel-default">
               <div class="panel-heading" role="tab" id="headingOne">
                 <h4 class="panel-title">
                   <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                    <img class="icon" src='{%static "media/icon/speech90.png" %}'>강좌 소개
-                  </a>
+                    <img class="icon" src='{%static "media/icon/speech90.png" %}'>
+                    강좌 소개
+                    <span class="glyphicon glyphicon-chevron-down pull-right" aria-hidden"true"></span></a>
                 </h4>
               </div>
               <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
@@ -129,26 +172,62 @@
               </div>
             </div>
             
-            <div class="panel panel-default contact">
-              <div class="panel-heading" role="tab" id="headingTwo">
-                <h4 class="panel-title">
-                  <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                    <img class="icon" src='{%static "media/icon/contacts3.png" %}'>강좌 신청하기
-                  </a>
-                </h4>
-              </div>
-              <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-                <div class="panel-body">
-                  <img class="icon" src='{%static "media/icon/phone325.png" %}'>{{class_post.contact_tel}}
+      
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-default btn-md" id="cont-btn" data-toggle="modal" data-target="#contactModal">
+              <img class="icon" src='{%static "media/icon/contacts3.png" %}'> 강좌 신청하기
+            </button>
+
+            <!-- Modal -->
+            {% if user.is_authenticated %}
+            <div class="modal fade" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="contactModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="contactModalLabel">강좌 신청 방법</h4>
+                  </div>
+                  <div class="modal-body">
+                    <img class="icon" src='{%static "media/icon/phone325.png" %}'>{{class_post.contact_tel}}
+                  </div>
+<!--
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+-->
+<!--                    <button type="button" class="btn btn-primary">Save changes</button>-->
+                  </div>
                 </div>
               </div>
             </div>
+            <!-- END MODAL -->
+            
+            {% else %}
+            
+            <!-- Modal -->
+            <div class="modal fade" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="contactModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="contactModalLabel">로그인해주세요</h4>
+                  </div>
+                  <div class="modal-body">
+                    
+                    {% include 'userapp/layout/loginform.html' %}
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+<!--                    <button type="button" class="btn btn-primary">Save changes</button>-->
+                  </div>
+                </div>
+              </div>
+            </div>
+            {% endif %}
+            <!-- END MODAL -->
+            
+            
 
-<!--
-            <dd class="text-muted">강의 소개 </dd>
-            <span id="post-describe">{{class_post.describe}}</span>
--->
-          </div> <!-- /.post-detail -->
+
           
           <div class="post-date">
             <dd class="text-muted">강의 날짜 </dd>
@@ -161,29 +240,31 @@
 
           <dd class="text-muted">모집 인원 </dd>
           <span id="post-minmax">{{class_post.minimum}} - {{class_post.maximum}} 명</span>
-          
+                    
+        </div> <!-- /.post-detail -->    
+
+      </div>
+    
+
+
+      <div class="col-md-12 col-lg-12 col-xs-12 col-sm-12 well">
+        <dd class="text-muted">위치 </dd>
+        <span id="post-add">{{class_post.address}}</span>
+        {% include 'map/mapapi.html' %}
+      </div>
         
-          <dd class="text-muted">위치 </dd>
-          <span id="post-add">{{class_post.address}}</span>
-          
-          
+      <div class="col-md-12 col-lg-12 col-xs-12 col-sm-12 well">
+        <div class="content-summernote">
+          <h4 class="title-summer">상세 정보</h4>
+          {%for detail in class_post.classdetail_set.all%}
+          {{detail.class_detail | safe}}
+          {% endfor %}
         </div>
       </div>
-    </div>
 
-      <div class="col-md-12 well well-lg">
-        <div class="col-md-12">
-          <div class="content-summernote">
-            <h4 class="title-summer">상세 정보</h4>
-            {%for detail in class_post.classdetail_set.all%}
-            {{detail.class_detail | safe}}
-            {% endfor %}
-          </div>
-        </div>
-      </div>  
-      </div>
 
-  </div>
+    </div> <!-- /.post-content -->
+  </div>  
 
 </body>
 
