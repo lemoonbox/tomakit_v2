@@ -1,14 +1,12 @@
-
 {% load static from staticfiles%}
 {% include "userapp/layout/header.html"%}
-{% include "userapp/layout/nav.html"%}
+
 
 {% load line_extras_tag%}
 
 <title> TOMAKIT </title>
 
 <style>
-  .idealine {margin-top:30px}
   .itembox {max-width:500px;margin:auto;}
   .thumbnail {padding:10px;border-radius:1px;}
   img{width:100%;}
@@ -21,52 +19,52 @@
 </head>
 
 <body>
-  <div class="container">
+  <div id="wrap">
+    {% include "userapp/layout/nav.html"%}
+    <div class="container">
 
-    <div class="col-md-12 idealine">
-      {%comment%} TODO big_mid 가 0 or else로 분류되어도 괜찮나? {%endcomment%} 
-      {% for item in lineitem%}
-      {% with forloop.counter0|big_mid as check %}
-      {%comment%} {{check}} 이 아이가 숫자를 만들어내는 것임 {%endcomment%}
-      {% if check == 0%}
-      <div class="big_box">
-        {% else %}
-        <div class="mid_box">
-          {% endif%}
-          {% endwith %}
-          <div class="itembox">
-            <div class="thumbnail">
-              {% with item|classname as type %}
-              {% if type == "ClassPost"%}
-              <!--classpost-->
-              <a href="http://{{HTTP_HOST}}/class/{{item.id}}">
-                <img class="img-responsive{{forloop.counter0}}}" src="{{MEDIA_URL}}{{item.classpic_set.first.class_photo}}"><br></a>
-              
-              <a href="http://{{HTTP_HOST}}/class/{{item.id}}" class="title">{{item.title}}</a><br>
-              &#8361;{{item.price}}<p class="sr-only">원</p> <span class="tag"> · CLASS</span>
+      <div class="col-md-12 idealine">
+        {% for item in lineitem%}
+        {% with forloop.counter0|big_mid as check %}
+        {%comment%} {{check}} {%endcomment%}
+        {% if check == 0%}
+        <div class="big_box">
+          {% else %}
+          <div class="mid_box">
+            {% endif%}
+            {% endwith %}
+            <div class="itembox">
+              <div class="thumbnail">
+                {% with item|classname as type %}
+                {% if type == "ClassPost"%}
+                <!--classpost-->
+                <a href="http://{{HTTP_HOST}}/class/{{item.id}}">
+                  <img class="img-responsive{{forloop.counter0}}}" src="{{MEDIA_URL}}{{item.classpic_set.first.class_photo}}"><br></a>
+                <a href="http://{{HTTP_HOST}}/class/{{item.id}}" class="title">{{item.title}}</a><br>
+                &#8361;{{item.price}}<p class="sr-only">원</p> <span class="tag"> · CLASS</span>
 
-              {% elif type == "Kit_Post"%}
-              <!--kitpost-->
-              <a href="http://{{HTTP_HOST}}/kit/{{item.id}}">
-                <img class="img-responsive{{forloop.counter0}}" src="{{MEDIA_URL}}{{item.kit_photo_set.first.kit_photo}}"></a>
-              
-              <a href="http://{{HTTP_HOST}}/kit/{{item.id}}" class="title">{{item.title}}</a><br>
-              &#8361;{{item.price}}<p class="sr-only">원</p> <span class="tag"> · KIT</span>
-              <!--              <span class="category">{{item.category}}</span>-->
+                {% elif type == "Kit_Post"%}
+                <!--kitpost-->
+                <a href="http://{{HTTP_HOST}}/kit/{{item.id}}">
+                  <img class="img-responsive{{forloop.counter0}}" src="{{MEDIA_URL}}{{item.kit_photo_set.first.kit_photo}}"><br></a>
+                <a href="http://{{HTTP_HOST}}/kit/{{item.id}}" class="title">{{item.title}}</a><br>
+                &#8361;{{item.price}}<p class="sr-only">원</p> <span class="tag"> · KIT</span>
+                <!--              <span class="category">{{item.category}}</span>-->
+            {% endif %}
+            {% endwith %}
+              </div> <!-- /.thumbnail -->
+            </div> <!-- .itembox -->
 
-              {% endif %}
-              {% endwith %}
-<!--            </div>-->
           </div>
         </div>
         {% endfor%}
-      </div>
-    </div>
-  </div>
-  </div>
-  </div>
+      </div> <!-- /.idealine -->
 
+  </div> <!-- /.container -->
+<div id="push"></div>
+    
+</div> <!--/#wrap-->
+{% include 'userapp/layout/footer.html' %}
 </body>
 
-  
-  {% include 'userapp/layout/footer.html' %}
+

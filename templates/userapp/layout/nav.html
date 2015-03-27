@@ -1,9 +1,6 @@
 <style>
   #hi span {font-family: sans-serif;} #hi:hover {color: skyblue;}
-/*  .navbar {max-height: 50px;}*/
-/*  .navbar-static-top {padding-left:5%; padding-right:5%}*/
-  .container-fluid {padding:0px;}
-  .container {padding-left:5%;padding-right:5%;}
+/*  .container-fluid {padding-left:5%;padding-right:5%;}*/
   #navbar a:hover {background-color:#ddd;}
   #nav-user a:first-child:hover{background-color:transparent;}
   #nav-user li:nth-child(2):hover{background-color:#ddd;}
@@ -11,8 +8,8 @@
 </style>
   <!-- Static navbar -->
   <nav class="navbar navbar-default navbar-static-top">
-    <div class="container-fluid">
-      <div class="container">
+    <div class="navbar-inner">
+    <div class="container">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
           <span class="sr-only">Navigation</span>
@@ -81,7 +78,7 @@
 </form>
 -->
           {% if user.is_authenticated %}
-          <li><a id="hi" href="#">안녕하세요 <strong>{{user.username}}</strong> 님!</a></li>
+          <li><a id="hi" href="#">안녕하세요 <strong>{{nickname}}</strong> 님!</a></li>
           <li><a href="/user/logout">로그아웃</a></li>
           {% else %}
           <li><a class="hi" href="#">hello world!</a></li>
@@ -92,7 +89,7 @@
         </ul>
         {% endif %}
 
-      </div><!--/.nav-collapse -->
-      </div>
-    </div><!--/.container-fluid -->
+      </div> <!--/.nav-collapse -->
+    </div> <!--/.container -->
+    </div>
   </nav>

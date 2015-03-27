@@ -224,24 +224,23 @@
           </div>
           {% endif %}
           <!-- END MODAL -->
-          
+
         </div> <!-- /.post-detail -->    
-
       </div>
+    </div>
 
+    <div class="col-md-12 col-lg-12 col-xs-12 col-sm-12 well">
+      <div class="content-summernote">
+        <h4 class="title-summer">상세 정보</h4>
 
-      <div class="col-md-12 col-lg-12 col-xs-12 col-sm-12 well">
-        <div class="content-summernote">
-          <h4 class="title-summer">상세 정보</h4>
-
-          {%for detail in kit_post.kit_detailm_set.all%}
-          {{detail.kit_detail|safe}}
-          {% endfor %}
-        </div>
+        {%for detail in kit_post.kit_detailm_set.all%}
+        {{detail.kit_detail|safe}}
+        {% endfor %}
       </div>
+    </div>
 
 
-    </div> <!-- /.post-content -->
+  </div> <!-- /.post-content -->
   </div>  
 
 </body>
