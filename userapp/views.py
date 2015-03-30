@@ -319,7 +319,7 @@ def contactemail(request):
             tasks.contact_mail.delay(cont, recipient)
             # tasks.rabbitmqtest.delay()
 
-    return render(request, 'userapp/sendemail.html',{
+    return render(request, 'userapp/partnershipmail.html',{
         'emailform' : SendEmailForm
 
     })
