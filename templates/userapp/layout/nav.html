@@ -78,7 +78,8 @@
 </form>
 -->
           {% if user.is_authenticated %}
-          <li><a id="hi" href="#">안녕하세요 <strong>{{nickname}}</strong> 님!</a></li>
+          <li><a id="hi" href="#">안녕하세요 <strong>
+              {{user.profile_set.first.nick_name}}</strong> 님!</a></li>
           <li><a href="/user/logout">로그아웃</a></li>
           {% else %}
           <li><a class="hi" href="#">hello world!</a></li>
