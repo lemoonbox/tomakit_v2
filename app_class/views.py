@@ -59,6 +59,8 @@ def classcreate(request):
         class_detail_form = ClassdetailForm(request.POST)
 
 
+        category = request.POST['category']
+        print category
         u_day = request.POST['lessonday']
         u_start_time = request.POST['start_time']
         u_end_time = request.POST['end_time']
