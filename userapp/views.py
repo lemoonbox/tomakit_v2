@@ -124,16 +124,16 @@ def signup(request):
 
 
 
-            tasks.sendmail.delay(cont, recipient)
+            #tasks.sendmail.delay(cont, recipient)
 
 
-            """
+
             #sendmail not celery
             from django.core.mail import send_mail
             send_mail(u'안녕하세요! 앞발 사용 설명서입니다. 정식 사용을 승인해주세요.', "", \
                       'makerecipe@gmail.com', recipient, fail_silently=False,
                         html_message=cont)
-            """
+
 
             return HttpResponseRedirect("/user/login/")
 
@@ -152,6 +152,7 @@ def signup_confirm(request, *args, **kwargs):
 
     if(_conkey):
         _conkey[0].user.email_confirm= True
+        _conkey[0].user.save()
         ctx["message"] = "이메일 인증이 완료 되었습니다. 서비스를 이용해주세요!"
         ctx["error"] = True
 

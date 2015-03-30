@@ -16,6 +16,7 @@ handler404='app_class.views.handler404'
 handler500='app_class.views.handler500'
 
 urlpatterns = patterns('',
+    url(r'^$', 'app_idealine.views.idealine', name = "index"),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^user/', include(user_urls)),
     url(r'^class/', include(class_urls)),
