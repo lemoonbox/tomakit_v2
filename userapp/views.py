@@ -124,7 +124,7 @@ def signup(request):
 
 
 
-            #tasks.sendmail.delay(cont, recipient)
+            tasks.sendmail.delay(cont, recipient)
 
 
             """
@@ -315,14 +315,10 @@ def contactemail(request):
                       'makerecipe@gmail.com', recipient, fail_silently=False,
                         html_message=cont)
 
-            #tasks.contact_mail.delay(cont, recipient)
+            tasks.contact_mail.delay(cont, recipient)
             # tasks.rabbitmqtest.delay()
 
     return render(request, 'userapp/sendemail.html',{
         'emailform' : SendEmailForm
 
     })
-
-
-def test(request):
-  return HttpResponse(tasks.add.delay(2,5))

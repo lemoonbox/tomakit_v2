@@ -24,7 +24,8 @@ TEMPLATE_DIRS ={
 SECRET_KEY = 'sj)7m^^1u$9=s40&8de&z#$alfgx(k6fztu3gj(w2^pdsnne6n'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
+LOCAL = True
 
 TEMPLATE_DEBUG = True
 
@@ -38,7 +39,7 @@ ALLOWED_HOSTS = ['*']
 #####setting for celery end###
 
 ###setting for celery &rabbitmq
-if DEBUG:
+if LOCAL:
     import djcelery
     djcelery.setup_loader()
     BROKER_URL='amqp://guest:guest@localhost:5672//'
@@ -115,25 +116,24 @@ WSGI_APPLICATION = 'DIY_tool.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+if LOCAL :
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
     }
-}
-
-"""
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'testdb',
-        'USER': 'root',
-        'PASSWORD':'ok123456',
-        'HOST':'dic-tec3.cfxqbzsbzi3i.ap-northeast-1.rds.amazonaws.com',
-        'PORT':'3306',
+else :
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'testdb',
+            'USER': 'root',
+            'PASSWORD':'ok123456',
+            'HOST':'dic-tec3.cfxqbzsbzi3i.ap-northeast-1.rds.amazonaws.com',
+            'PORT':'3306',
+        }
     }
-}
-"""
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
@@ -180,7 +180,7 @@ AWS_S3_SECURE_URLS = False
 AWS_QUERYSTRING_AUTH = False
 
 
-if DEBUG :
+if LOCAL :
     #local_static
     STATIC_URL = '/static/'
     STATICFILES_DIRS=(os.path.join(BASE_DIR, 'static_local'),)
