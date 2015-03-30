@@ -282,13 +282,15 @@ def profile(request, *args, **kwargs):
         'error':None
     })
     user = request.user
+
     _profile = Profile.objects.filter(email = user)
     ctx['profile']= _profile[0]
 
     #tpl = loader.get_template('userapp/profile.html')
     #ctx.update(csrf(request))
     return render(request, 'userapp/profile.html',{
-                    'profile':_profile[0],},)
+                    'profile':_profile[0],
+                    },)
 
 @login_required
 def contactemail(request):
