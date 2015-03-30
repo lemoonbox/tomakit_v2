@@ -1,8 +1,8 @@
-#form-error {max-width: 600px; margin:auto;}
+#form-error {max-width: 600px; margin:auto; margin-top:-50px;}
 #form-error ul {list-style: none;}
 
 
-#wrapper { margin-top: 15%; margin-bottom:5%; }
+/*#wrapper { margin-top: 7%;}*/
 
 
 .email {
@@ -92,9 +92,8 @@
 #signin-btn-p {
   align-content: center;
   height: 300px;
-
-  background-color: red;
 }
+
 
 .fg-pwd {
   margin-left: 150px;

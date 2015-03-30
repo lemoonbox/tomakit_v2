@@ -6,14 +6,13 @@
 <title> 원데이 클래스 {{category}} </title>
 
 <style>
-  /*  .container{margin-left:0;}*/
-  .idealine {margin-top:30px}
-
+  .row {margin-left:0px;}
   .thumbnail {border-radius:1px;}
   img{width:100%;}
   img:hover{opacity:0.5;}
   .tag {color:lightgray;}
-  .title {color:dimgray;}
+  .title {color:dimgray; }
+  .ellipsis {width:100%;overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
   .title:hover {color:skyblue;text-decoration:none;}
 
 </style>
@@ -38,7 +37,7 @@
               <a href="http://{{HTTP_HOST}}/class/{{item.id}}">
                 <img src="{{MEDIA_URL}}{{item.classpic_set.first.class_photo}}"></a>
               <div class="caption">
-                <a href="http://{{HTTP_HOST}}/class/{{item.id}}" class="title">{{item.title}}</a><br>
+                <div class="ellipsis"><a href="http://{{HTTP_HOST}}/class/{{item.id}}" class="title">{{item.title}}</a><br></div>
                 &#8361;{{item.price}}<p class="sr-only">원</p>
                 <!--                          <p><a href="#" class="btn btn-default">Share</a></p>-->
 
@@ -47,7 +46,8 @@
                 <a href="http://{{HTTP_HOST}}/kit/{{item.id}}">
                   <img src="{{MEDIA_URL}}{{item.kit_photo_set.first.kit_photo}}"></a>
                 <div class="caption">
-                  <a href="http://{{HTTP_HOST}}/kit/{{item.id}}" class="title">{{item.title}}</a><br>
+                  <div class="ellipsis">
+                    <a href="http://{{HTTP_HOST}}/kit/{{item.id}}" class="title">{{item.title}}</a><br></div>
                   &#8361;{{item.price}}<p class="sr-only">원</p>
                   <!--                          <p><a href="#" class="btn btn-default">구매하기</a> <a href="#" class="btn btn-default">좋아요</a></p>-->
 
@@ -61,7 +61,7 @@
           {% endfor%}
         </div>
       </div>
+      <div id="push"></div>
     </div> <!-- /#wrap -->
-
     {% include "userapp/layout/footer.html" %}
-    
+  </body>
