@@ -8,7 +8,7 @@
 <title> TOMAKIT </title>
 
 <style>
-  .itembox {max-width:500px;margin:auto;}
+  #wrap {margin-bottom:60px;}.itembox {max-width:500px;margin:auto;}
   .thumbnail {padding:10px;border-radius:1px;}
   img{width:100%;}
   img:hover{opacity:0.5;}
@@ -55,10 +55,11 @@
             {% endwith %}
               </div> <!-- /.thumbnail -->
             </div> <!-- .itembox -->
-
           </div>
+            {% endfor%}          
         </div>
-        {% endfor%}
+        
+
       </div> <!-- /.idealine -->
 
   </div> <!-- /.container -->

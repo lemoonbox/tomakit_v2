@@ -1,34 +1,22 @@
-
 {% load static from staticfiles%}
 {% include "userapp/layout/header.html"%}
-{% include "userapp/layout/nav.html"%}
 
 <title>Kit 등록</title>
 
 </head>
 
 <style>
-
-  .container .icon{
-    height:30px;
-    width:30px;
-    display: inline-block;
-    vertical-align:text-bottom;
-  }
-
+  .icon{height:30px; width:30px; display: inline-block; vertical-align:text-bottom;}
   legend {margin-bottom: 30px; padding-bottom: 15px; display:inline-block; vertical-align: middle;}
-
-
-  .well { width: 760px; margin:auto; padding-bottom: 60px;}
+  .well { width: 760px; margin:auto;margin-bottom: 60px;}
   .form-control {margin-bottom: 10px; display:inline-block;}
   /*  form > label {display:list-item;list-style:inside;}*/ /* #TODO label list로 필수 항목 정의하기 */
-
-  .form-category { margin-bottom: 15px; border-bottom: 1px solid #eee;}
+  .form-category {margin-bottom: 15px; border-bottom: 1px solid #eee;}
   .form-category > label {font-weight: 100;}
   .form-photo {margin-top: 15px; margin-bottom: 30px;}
   .form-photo > input[type=file] {color:gray; display:inline-block; margin-bottom:5px;}
-  .form-photo p {margin-bottom: 10px; }
-  .error {font-weight: 100; display:inline-block; }
+  .form-photo p {margin-bottom: 10px;}
+  .error {font-weight: 100; display:inline-block;}
   label .form-hint {font-weight: 100; color:#eee;}
   textarea {resize:none;}
   .info {margin-left:5px; margin-right:1px; display:inline-block; vertical-align:text-bottom;}
@@ -41,7 +29,9 @@
 </style>
 
 <body>
-  <div class="container">
+  <div id="wrap">
+    {% include "userapp/layout/nav.html"%}
+    <div class="container">
     <fieldset>
       <div class="well">
         <legend><h3><img class="icon" src='{%static "media/icon/configure.png" %}'> KIT 판매 등록 <small> 항목을 정확히 기입해주세요.</small></h3></legend>
@@ -157,15 +147,10 @@
       </div>
     </fieldset>
   </div>
-
+    <div id="push"></div>
+  </div> <!--wrap-->
+  {% include 'userapp/layout/footer.html' %}
 </body>
 
 
 <!--Icons made by <a href="http://www.flaticon.com/authors/elegant-themes" title="Elegant Themes">Elegant Themes</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a>is licensed by<a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a></div>-->
-
-<!--
-#NOTE: Button type error message
-<button type="button" class="close" aria-hidden="true" onClick="hide"></button>
--->
-
-{% include 'userapp/layout/footer.html' %}

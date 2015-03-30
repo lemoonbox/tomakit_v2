@@ -1,36 +1,30 @@
 {% load static from staticfiles%}
 {% include "userapp/layout/header.html"%}
-{% include "userapp/layout/nav.html"%}
 
-<title> AMONHAND 로그인 </title>
-    
-      {% if login_form.errors %}
-    <div id="form-error">
-      <div class="alert alert-warning">
-        <a href="#" class="close" data-dismiss="alert">&times;</a>
-        <p>The operation could not be performed because one or more error(s) occurred.<br />Please resubmit the form after making the following changes:</p>
-        <br />
-        <table>
-          {% for field in login_form %}
-          {{ field.errors|striptags }}
-          {% endfor %}
-        </table>
-      </div>
-    </div>
-    {% endif %}
 
-    <!-- auth test. remove required-->
-<!--
-    {% if user.is_authenticated %}
-    <p class="hi"><strong>안녕하세요 {{user.username }}님!</strong></p>
-    {% else %}
-    <p class="hi">hello world!</p><br />
-    {% endif %}
-    <br><br>
--->
-    <!-- end -->    
+<title> TOMAKIT- 로그인 </title>
+
+<body>
+  <div id="wrap">
+  {% include "userapp/layout/nav.html"%}
     
     <div class="container">
+      
+      {% if login_form.errors %}
+      <div id="form-error">
+        <div class="alert alert-warning">
+          <a href="#" class="close" data-dismiss="alert">&times;</a>
+          <p>The operation could not be performed because one or more error(s) occurred.<br />Please resubmit the form after making the following changes:</p>
+          <br />
+          <table>
+            {% for field in login_form %}
+            {{ field.errors|striptags }}
+            {% endfor %}
+          </table>
+        </div>
+      </div>
+      {% endif %}
+      
       <a class="hiddenanchor" id="toregister"></a>
       <a class="hiddenanchor" id="tologin"></a>
       
@@ -76,6 +70,9 @@
         </div> <!--/wrapper-->
       </div> <!-- /container -->
 </div>
-</body>
 
-{% include "userapp/layout/footer.html" %}
+    <div id="push"></div>
+    </div> <!-- wrap -->
+
+  {% include "userapp/layout/footer.html" %}
+</body>

@@ -1,11 +1,13 @@
-
 {% load static from staticfiles%}
 {% include "userapp/layout/header.html"%}
-{% include "userapp/layout/nav.html"%}
 
 <title>회원가입</title>
 </head>
 <body>
+  <div id="wrap">
+    {% include "userapp/layout/nav.html"%}
+    
+<div class="container">
     {% if profileform.errors %}
     <div id="form-error">
       <div class="alert alert-warning">
@@ -21,8 +23,6 @@
     </div>
     {% endif %}
 
-
-    <div class="container">
       <a class="hiddenanchor" id="toregister"></a>
       <a class="hiddenanchor" id="tologin"></a>
 
@@ -64,7 +64,8 @@
         </div> <!--/register-->
       </div> <!--/wrapper-->
     </div> <!-- /container -->
-
+    <div id="push"></div>
+  </div> <!-- wrap -->
+  {% include "userapp/layout/footer.html" %}    
   </body>
 
-{% include "userapp/layout/footer.html" %}
