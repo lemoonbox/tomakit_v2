@@ -1,12 +1,15 @@
-{% load static from staticfiles%}
-{% include "userapp/layout/header.html"%}
+{% load static from staticfiles %}
+{% include "userapp/layout/header.html" %}
 
 
 <title> TOMAKIT- 로그인 </title>
 
+<style>
+#wrap {margin-bottom:0px;}
+</style>
 <body>
   <div id="wrap">
-  {% include "userapp/layout/nav.html"%}
+  {% include "userapp/layout/nav.html" %}
     
     <div class="container">
       
@@ -24,29 +27,23 @@
         </div>
       </div>
       {% endif %}
-      
-      <a class="hiddenanchor" id="toregister"></a>
-      <a class="hiddenanchor" id="tologin"></a>
-      
+
       <div id="wrapper">
         <div id="login" class="animate">
+          <fieldset>
+            
           <form method="post" action="{% url 'login_url' %}" class="form-signin" autocomplete="off">
             {% csrf_token %}
             <h2 class="form-signin-heading">로그인</h2><br />
-            
-            <!-- TODO: email -> email and username -->
-            <!-- #TODO: email -> email and username -->
+
             <label for="username" name="username"> 이메일 </label><br />
             <input type="text" name="username" class="form-control" required
-                   placeholder="ex) amonhand@gmail.com" autocomplete="off" value="{{is_authenticated}}" autofocus><br />
+                   placeholder="Ex) tomakit@gmail.com" autocomplete="off" value="{{is_authenticated}}" autofocus><br />
             <label for="password" name="password"> 비밀번호 </label> 
             <a href="/user/reset_password" class="fg-pwd">비밀번호 찾기</a>
-            <br />
+         
             <input type="password" name="password" placeholder="Password" class="form-control" required 
-                   autocomplete="off" value="{{valid_password}}">
-            
-<!--            <img src="{% static 'image/default_profile.jpg' %}" class="img-responsive"/>-->
-            
+                   autocomplete="off" value="{{valid_password}}">            
             
             <br /><br /><br />
 <!--
@@ -63,16 +60,14 @@
             </p>
             <button class="btn btn-lg btn-primary btn-block" type="submit">Log In</button>
             </div>
-          
           </form>
- 
+            
+          </fieldset>
+        </div>
+      </div> <!--/wrapper-->
+    </div> <!-- /container -->
 
-        </div> <!--/wrapper-->
-      </div> <!-- /container -->
-</div>
 
-    <div id="push"></div>
     </div> <!-- wrap -->
-
   {% include "userapp/layout/footer.html" %}
 </body>

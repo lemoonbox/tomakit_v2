@@ -1,25 +1,24 @@
 {% load static from staticfiles%}
 {% include "userapp/layout/header.html"%}
-{% include "userapp/layout/nav.html"%}
-
-{% load line_extras_tag%}
 
 <title>비밀번호 변경</title>
 </head>
+
+<style>
+  .reset-form {width: 340px; margin:auto; padding-top: 100px; text-align: center;}
+  .reset-form input[type=email] {width:340px;margin:auto;}
+  /*    .form-inline {width:350px;}*/
+  .cancel {width:100px;}
+  .reset-pwd {background-color: #FFCC00; width:220px;}
+  #wrap {margin-bottom:0px;}
+</style>
+
 <body>
-  <style>
-    .reset-form {width: 340px; margin:auto; margin-top:150px; padding-top: 150px; text-align: center;}
-    .reset-form input[type=email] {width:340px;margin:auto;}
-/*    .form-inline {width:350px;}*/
-    .cancel {width:100px;}
-    .reset-pwd {background-color: #FFCC00; width:220px;}
+  <div id="wrap">
+  {% include "userapp/layout/nav.html"%}
+<div class="container">
 
-  </style>
-
-  <div class="container">
-    <div class="reset-form">
-
-      
+    <div class="reset-form">      
         <form class="form-inline" role="form" method="POST" action="{{request.path}}">
           {% csrf_token%}
           <label for="id_email" class="sr-only">Email</label>
@@ -29,7 +28,9 @@
           <button class="btn btn-lg btn-default reset-pwd pull-right" type = "submit" value="이메일 전송하기">비밀번호 변경</button>
 
         </form>
-
     </div>
   </div>
+    <div id="push"></div>
+  </div> <!--wrap-->
+  {% include "userapp/layout/footer.html" %}
 </body>

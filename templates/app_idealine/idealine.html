@@ -1,14 +1,14 @@
 {% load static from staticfiles%}
 {% include "userapp/layout/header.html"%}
 
-
 {% load line_extras_tag%}
 
 
 <title> TOMAKIT </title>
 
 <style>
-  #wrap {margin-bottom:60px;}.itembox {max-width:500px;margin:auto;}
+  #wrap {margin-bottom:60px;}
+  .itembox {max-width:500px;margin:auto;}
   .thumbnail {padding:10px;border-radius:1px;}
   img{width:100%;}
   img:hover{opacity:0.5;}
@@ -61,9 +61,10 @@
         
 
       </div> <!-- /.idealine -->
-
+      <div id="push"></div>
   </div> <!-- /.container -->
-<div id="push"></div>
+
     
 </div> <!--/#wrap-->
 {% include 'userapp/layout/footer.html' %}
+</body>

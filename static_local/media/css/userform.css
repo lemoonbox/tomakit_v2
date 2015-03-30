@@ -2,9 +2,6 @@
 #form-error ul {list-style: none;}
 
 
-/*#wrapper { margin-top: 7%;}*/
-
-
 .email {
   font-family: Verdana, sans-serif;
   font-size: 1em;
@@ -40,25 +37,24 @@
   z-index: 2;
 }
 
+/* FORM INPUT 
+=====================================================*/
 
 .form-signin input[type="email"] {
   margin-bottom: -1px;
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
 }
-
 .form-signin #nick_name {
   margin-bottom: -1px;
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
 }
-
 .form-signin input[type="password"] {
   margin-bottom: -1px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
-
 .form-signin input[type="confirm password"] {
     margin-bottom: 20px;
     border-top-left-radius: 0;
@@ -99,30 +95,16 @@
   margin-left: 150px;
 }
 
-/*
-.hi {
-  font-family: cursive;
-  font-size: 30px;
-  text-align: center;
-  color: white;
-  margin: auto;
-  margin-top: 50px;
-  border: 10px solid;
-  width: 30%;
-}
-
-.hi:hover {
-  color: skyblue;
-}
-*/
-
-
-
 #register{	
   z-index: 21;
   opacity: 100;
 }
 
+
+/* ANIMATION
+=======================================================*/
+
+/*
 #toregister:target ~ #wrapper #register,
 #tologin:target ~ #wrapper #login{
   z-index: 22;
@@ -162,4 +144,4 @@
     opacity: 0;
     transform: translateX(-20px);
   }
-}
+}*/

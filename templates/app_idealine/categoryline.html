@@ -6,12 +6,13 @@
 <title> 원데이 클래스 {{category}} </title>
 
 <style>
+  #wrap {margin-bottom:60px;}
   .row {margin-left:0px;}
   .thumbnail {border-radius:1px;}
-  img{width:100%;}
+  .thumbnail > img{width:100%;}
   img:hover{opacity:0.5;}
   .tag {color:lightgray;}
-  .title {color:dimgray; }
+  .title {color:dimgray;}
   .ellipsis {width:100%;overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
   .title:hover {color:skyblue;text-decoration:none;}
 
@@ -64,4 +65,5 @@
       <div id="push"></div>
     </div> <!-- /#wrap -->
     {% include "userapp/layout/footer.html" %}
+  </div>
   </body>
