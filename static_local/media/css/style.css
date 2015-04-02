@@ -23,7 +23,7 @@ body {
 /* Set the fixed height of the footer here */
 #push,
 #footer {
-  height: 60px;
+  height: 80px;
 }
 #footer {
   background-color: #f5f5f5;
@@ -36,7 +36,8 @@ body {
     margin-right: -20px;
     padding-left: 20px;
     padding-right: 20px;
-  }
+    text-align: center;
+   }
 }
 
 
@@ -46,7 +47,7 @@ body {
 /* Not required for template or sticky footer method. */
 
 #wrap > .container {
-  padding-top: 60px;
+  padding-top: 30px;
 }
 .container .credit {
   margin: 20px 0;

@@ -1,0 +1,41 @@
+{% load static from staticfiles %}
+{%include "userapp/layout/header.html" %}
+
+    <title></title>
+</head>
+
+<style>
+  .well {margin:auto; max-width:800px;}
+  #wrap {margin-bottom:0px;}
+  textarea {resize:none;}
+  button [type="submit"] {right:0;}
+</style>
+
+<body>
+  <div id="wrap">
+    
+  {% include "userapp/layout/nav.html" %}
+  <div class="container">
+    <div class="well">
+  <form method="POST" action="">
+        {% csrf_token%}
+        {% for field in emailform %}
+            {{ field.errors|striptags }}
+        {% endfor %}
+        <label for="form_address">이메일</label>
+    <input id="id_from_address" class="form-control" name="from_address" type="email" placeholder="연락 가능한 이메일 주소를 입력해주세요"/><br>
+    
+        <label for="modile">핸드폰</label>
+    <input id="id_modile" name="modile"  class="form-control" placeholder="숫자만 입력해주세요"><br>
+        <label for="content">토마킷과 어떤 아이템을 제휴하고 싶으신가요? 최대한 자세히 설명해주세요.</label>
+    <textarea cols="40" class="form-control" id="id_content" name="content" rows="10"></textarea><br>
+        <button type = "submit" value="이메일 전송하기" class="btn btn-primary">이메일 보내기</button>
+<!--                <input type = "submit" value="이메일 전송하기">-->
+    </form>
+    </div>
+</div>
+    <div id="push"></div>
+  </div>
+  {% include "userapp/layout/footer.html" %}
+</body>
+</html>
