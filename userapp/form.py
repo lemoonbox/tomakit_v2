@@ -10,7 +10,7 @@ from django.utils.translation import ugettext as _
 
 
 AlphaNumeric = RegexValidator(
-    r'^[0-9a-zA-z@.]{1,}$', message = _(u'알파벳과, 숫자만 허용됩니다.')
+    r'^[0-9a-zA-z@.]{6,20}$', message = _(u'알파벳과, 숫자로된 6~20자리 비밀번호가 필요합니다.')
 )
 
 class ProfilesForm(forms.ModelForm):
