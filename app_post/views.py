@@ -134,3 +134,21 @@ def classcreate(request):
             'classpic_createform':post_pic_form,
             'class_detailform': post_detail_form,
         })
+
+
+def class_detail(request, class_num):
+
+    ctx = Context({
+        'error':None
+    })
+    error = False
+
+    if request.method == "GET":
+        try:
+            _class_post = Post.objects.filter
+        except _class_post.DoesNotExist:
+            raise Http404("Class does not exist")
+    return render(request, 'app_class/class_post.html',
+        {
+            'class_post':_class_post
+        })
