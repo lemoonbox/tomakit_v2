@@ -1,16 +1,39 @@
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
-비밀 번호를 변경 합니다. 원하시는 비밀 번호를 입력해주세요.
-<form action="{{request.path}}" method="post">
-    {%csrf_token%}
-    {{pwresetform.as_p}}
-    <input type = "submit" value="비밀번호 변경하기">
+{% load static from staticfiles%}
+{% include "userapp/layout/header.html"%}
 
-</form>
+<title>비밀번호 변경</title>
+</head>
+
+<style>
+  .reset-form {width: 340px; margin:auto; padding-top: 100px; text-align: center;}
+  .reset-form input[type=email] {width:340px;margin:auto;}
+  /*    .form-inline {width:350px;}*/
+  .cancel {width:100px;}
+  .reset-pwd {background-color: #FFCC00; width:220px;}
+  #wrap {margin-bottom:0px;}
+</style>
+
+<body>
+  <div id="wrap">
+    {% include "userapp/layout/nav.html"%}
+    <div class="container">
+
+      <div class="reset-form">      
+        <form class="form-inline" role="form" method="POST" action="{{request.path}}">
+          {% csrf_token%}
+          <label for="id_email" class="sr-only">Email</label>
+          <input id="id_email" class="form-control input-lg" placeholder="Email" maxlength="100" name="email" type="email">
+          
+          {{pwresetform.as_p}}
+          <span class="help-block">비밀 번호를 변경 합니다. 원하시는 비밀 번호를 입력해주세요.</span>
+
+          <a href="/user/login"><button type="button" class="btn btn-lg btn-default cancel pull-left">취소</button></a>
+          <button class="btn btn-lg btn-default reset-pwd pull-right" type = "submit" value="이메일 전송하기">비밀번호 변경</button>
+
+        </form>
+      </div>
+    </div>
+    <div id="push"></div>
+  </div> <!--wrap-->
+  {% include "userapp/layout/footer.html" %}
 </body>
-</html>

@@ -1,9 +1,9 @@
 <style>
-  #hi span {font-family: sans-serif;} #hi:hover {color: skyblue;}
+  #hi span {font-family: sans-serif;} #hi strong:hover {color: white;}
 /*  .container-fluid {padding-left:5%;padding-right:5%;}*/
   #navbar a:hover {background-color:#ddd;}
-  #nav-user a:first-child:hover{background-color:transparent;}
-  #nav-user li:nth-child(2):hover{background-color:#ddd;}
+  #nav-user a:first-child:hover{background-color:transparent; background-color:#ddd;}
+
   
 </style>
   <!-- Static navbar -->
@@ -23,7 +23,7 @@
       <div id="navbar" class="collapse navbar-collapse" aria expanded="false">
         <ul class="nav navbar-nav">    
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">원데이 클래스 <span class="caret"></span></a>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">CATEGORY <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
               <li class="dropdown-header">CATEGORY</li>
               <li><a href="/idealine/category/baby">for Baby </a></li>
@@ -42,6 +42,7 @@
 -->
             </ul>
           </li>
+<!--
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">DIY KIT <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
@@ -54,18 +55,19 @@
               <li><a href="/idealine/category/beauty">for Beauty </a></li>
             </ul>
           </li>
+-->
+<!--
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">제휴 신청 <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
-<!--              <li class="dropdown-header">분류</li>-->
+
               <li><a href="/class/create">만들기 강좌 등록</a></li>
               <li><a href="/kit/create">DIY KIT 판매 등록</a></li>
             </ul>
           </li>
-<!--
-          <li><a href="/class/create">강좌 등록</a></li>
-          <li><a href="/kit/create">KIT 판매 등록</a></li>
 -->
+      <li><a href="/user/contact">컨텐츠 제안하기</a></li>
+          
         </ul>
 
         <ul id=nav-user class="nav navbar-nav navbar-right">
@@ -78,13 +80,13 @@
 </form>
 -->
           {% if user.is_authenticated %}
-          <li><a id="hi" href="#">안녕하세요 <strong>
+          <li><a id="hi" href="/user/profile">안녕하세요 <strong>
               {{user.profile_set.first.nick_name}}</strong> 님!</a></li>
           <li><a href="/user/logout">로그아웃</a></li>
           {% else %}
           <li><a class="hi" href="#">hello world!</a></li>
           <li><a href="/user/signup">회원가입</a></li>
-          <li class="active"><a href="/user/login">로그인</a></li>
+          <li><a href="/user/login">로그인</a></li>
           <!--            <span class="sr-only">(current)</span>-->
 
         </ul>

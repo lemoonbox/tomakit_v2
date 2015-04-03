@@ -1,17 +1,29 @@
-<!DOCTYPE html>
-<html>
-<head lang="ko">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+{% load static from staticfiles %}
+{% include "userapp/layout/header.html" %}
 
     <title>WC 0402</title>
 </head>
+<style>
+  #wrap {margin-bottom:0px;}
+  .well {max-width: 600px;margin:auto; border-radius:1px;}
+</style>
+
 <body>
 
-<h4>password 재설정</h4>
+  <div id="wrap">
+    {%include "userapp/layout/nav.html" %}
+  <div class="container">
+    <div class="well">
+<h4>비밀번호 변경</h4>
 
 잘못된 링크입니다.<br />
-키 유효 시간이 지났을 수 있습니다.<br />
+키 유효 시간이 지났을 수 있습니다.<br /><br>
 <a href="/user/reset_password">키 다시 발급받기</a>
 
+    </div>
+    </div>
+    <div id="push"></div>
+  </div>
+  {% include "userapp/layout/footer.html" %}
 </body>
 </html>

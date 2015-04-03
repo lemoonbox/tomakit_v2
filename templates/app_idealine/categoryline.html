@@ -8,9 +8,17 @@
 <style>
   #wrap {margin-bottom:60px;}
   .row {margin-left:0px;}
-  .thumbnail {border-radius:1px;}
-  .thumbnail > img{width:100%;}
-  img:hover{opacity:0.5;}
+
+  .thumbnail {border-radius:1px; height:34vh;}
+  .thumbnail img{width:100%; position:absolute;height:100%;margin: 0px;}
+  .ttt img:hover {opacity: 0.3;}
+  .thumbnail .ttt {height:28vh; position:relative; z-index:10; overflow:hidden;}
+  .caption {position:relative; z-index: 11; background-color:white;bottom:11%;}
+
+
+  .caption button {opacity:0; position: relative; z-index:100; bottom:0; right:0;}
+  .caption button:hover {position:relative; border-radius: 0px; z-index:100; bottom:0px; right:0; border:none; background-color:#FFCC00; opacity:1;}
+
   .tag {color:lightgray;}
   .title {color:dimgray;}
   .ellipsis {width:100%;overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
@@ -35,22 +43,42 @@
               {% with item|classname as type %}
               {% if type == "ClassPost"%}
               <!--classpost-->
+              <div class="ttt">
               <a href="http://{{HTTP_HOST}}/class/{{item.id}}">
                 <img src="{{MEDIA_URL}}{{item.classpic_set.first.class_photo}}"></a>
+              </div>
+              
               <div class="caption">
-                <div class="ellipsis"><a href="http://{{HTTP_HOST}}/class/{{item.id}}" class="title">{{item.title}}</a><br></div>
+                <div class="ellipsis"><a href="http://{{HTTP_HOST}}/class/{{item.id}}" class="title">{{item.title}}</a></div>
                 &#8361;{{item.price}}<p class="sr-only">원</p>
-                <!--                          <p><a href="#" class="btn btn-default">Share</a></p>-->
+                
+                {% if user.is_authenticated %}
+                <a href="http://{{HTTP_HOST}}/class/{{item.id}}">
+                {% else %}
+                <a href="/user/login">
+                  {% endif %}
+                <button class="btn btn-default btn-sm pull-right">신청하기</button>
+                </a>
+
+
 
                 {% elif type == "Kit_Post"%}
                 <!--kitpost-->
+                <div class="ttt">
                 <a href="http://{{HTTP_HOST}}/kit/{{item.id}}">
                   <img src="{{MEDIA_URL}}{{item.kit_photo_set.first.kit_photo}}"></a>
-                <div class="caption">
+                </div>
+                <div class="caption hidden-xs">
                   <div class="ellipsis">
-                    <a href="http://{{HTTP_HOST}}/kit/{{item.id}}" class="title">{{item.title}}</a><br></div>
+                    <a href="http://{{HTTP_HOST}}/kit/{{item.id}}" class="title">{{item.title}}</a></div>
                   &#8361;{{item.price}}<p class="sr-only">원</p>
-                  <!--                          <p><a href="#" class="btn btn-default">구매하기</a> <a href="#" class="btn btn-default">좋아요</a></p>-->
+                  {% if user.is_authenticated %}
+                  <a href="http://{{HTTP_HOST}}/class/{{item.id}}">
+                    {% else %}
+                    <a href="/user/login">
+                      {% endif %}
+                      <button class="btn btn-default btn-sm pull-right">구매하기</button>
+                    </a>
 
                   {% endif %}
                   {% endwith %}

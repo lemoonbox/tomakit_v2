@@ -1,36 +1,44 @@
 {% load static from staticfiles%}
 {% include "userapp/layout/header.html"%}
 
-  
-  <title>{{profile.nick_name}}님의 프로필</title>
 
+<title>{{profile.nick_name}}님의 프로필</title>
+<style>
+  .well {background-color: white; max-width:400px; margin:auto; padding:30px;}
+  .well h2 {tmargin-bottom:10px; padding:10px; padding-right:0px;}
+  .profile-inner ul {padding:10px; padding-right:0px;}
+  .profile-inner ul li {list-style:none; max-width:100%; margin-left:0px;margin-right:10px; padding-left:0; padding:5px; border-bottom:1px solid silver;}
+  .thumbnail {max-width:320px; border-radius:0;vertical-align:text-bottom;}
+  .profile-inner
+</style>
 </head>
 <body>
   <div id="wrap">
-  {% include "userapp/layout/nav.html"%}
-  <div class="container">
-  <h1>프로파일 화면 power 수정</h1>
+    {% include "userapp/layout/nav.html"%}
+    <div class="container">
+      <div class="well">
+        <div class="profile-inner pull left">
+          <h2>{{profile.nick_name}}님의 프로필</h2>
+          <a href="/user/reset_password" class="fg-pwd">비밀번호 찾기</a>
+          <ul>
 
-  이메일 : {{profile.email}} <br/>
-  별명 : {{profile.nick_name}}<br/>
-  <img src="{{MEDIA_URL}}{{profile.pro_photo}}" class="img-responsive"/>
-  
+            
+            <li><div class="thumbnail">
+              <img src="{{MEDIA_URL}}{{profile.pro_photo}}" class="img-responsive"/>
+              </div></li>
+            
+            <li>이메일 <span class="pull-right">{{profile.email}} </span></li>
+            <li>별명 <span class="pull-right">{{profile.nick_name}}</span></li>
+            <li>전화번호 <span class="pull-right">{{profile.mobile}}</span></li>
+            <li>주소 <span class="pull-right">{{profile.address}}</span></li>
+          </ul>
 
-                      <tr>
-                        <td>전화번호 : </td>
-                        <td>{{profile.mobile}}</td>
-                      </tr>
-                      <tr>
-                        <td>주소 : </td>
-                        <td>{{profile.address}}</td>
-                      </tr>
-
-
-    
-    
+        </div>
+      </div>
     </div>
     <div id="push"></div>
-    </div> <!-- /#wrap -->
+  </div> <!-- /#wrap -->
 
-{% include "userapp/layout/footer.html" %}
+  {% include "userapp/layout/footer.html" %}
 </body>
+</html>
