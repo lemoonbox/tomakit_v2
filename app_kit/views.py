@@ -17,7 +17,7 @@ from app_kit.form import \
 from app_kit.models import \
     Kit_Post,\
     Kit_Photo, \
-    Kit_Detailm
+    Kit_Detail
 from userapp.utils import \
     handle_uploaded_image
 # Create your views here.

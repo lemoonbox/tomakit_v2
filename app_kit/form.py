@@ -16,7 +16,7 @@ from django_summernote import \
 
 from app_kit.models import \
     Kit_Post,\
-    Kit_Detailm,\
+    Kit_Detail,\
     Kit_Photo
 
 # Create your models here.
@@ -84,7 +84,7 @@ class KitDetailForm(forms.ModelForm):
                                                         label='')
 
     class Meta :
-        model = Kit_Detailm
+        model = Kit_Detail
         fields=('kit_detail',)
         widgets = {
             'foo': SummernoteWidget(),

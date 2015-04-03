@@ -41,7 +41,7 @@ class Kit_Photo(models.Model):
 
 
 
-class Kit_Detailm(summer_model.Attachment):
+class Kit_Detail(summer_model.Attachment):
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
     kit_post = models.ForeignKey(Kit_Post)
     kit_detail = summer_fields.SummernoteTextField()
