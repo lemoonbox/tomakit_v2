@@ -50,7 +50,7 @@
               
               <div class="caption">
                 <div class="ellipsis"><a href="http://{{HTTP_HOST}}/class/{{item.id}}" class="title">{{item.title}}</a></div>
-                &#8361;{{item.price}}<p class="sr-only">원</p>
+                &#8361;{{item.price}}<p class="sr-only">원</p> <span class="tag"> · CLASS</span>
                 
                 {% if user.is_authenticated %}
                 <a href="http://{{HTTP_HOST}}/class/{{item.id}}">
@@ -68,10 +68,10 @@
                 <a href="http://{{HTTP_HOST}}/kit/{{item.id}}">
                   <img src="{{MEDIA_URL}}{{item.kit_photo_set.first.kit_photo}}"></a>
                 </div>
-                <div class="caption hidden-xs">
+                <div class="caption">
                   <div class="ellipsis">
                     <a href="http://{{HTTP_HOST}}/kit/{{item.id}}" class="title">{{item.title}}</a></div>
-                  &#8361;{{item.price}}<p class="sr-only">원</p>
+                  &#8361;{{item.price}}<p class="sr-only">원</p> <span class="tag"> · KIT</span>
                   {% if user.is_authenticated %}
                   <a href="http://{{HTTP_HOST}}/class/{{item.id}}">
                     {% else %}
