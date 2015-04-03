@@ -1,5 +1,5 @@
 from django.contrib import admin
-from app_kit.models import Kit_Post, Kit_Detailm, Kit_Photo
+from app_kit.models import Kit_Post, Kit_Detail, Kit_Photo
 
 class KitPostAdmin(admin.ModelAdmin):
     list_filter =['user', 'category', 'title']
@@ -26,5 +26,5 @@ class KitDetailAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Kit_Photo, KitPhotoAdmin)
-admin.site.register(Kit_Detailm, KitDetailAdmin)
+admin.site.register(Kit_Detail, KitDetailAdmin)
 admin.site.register(Kit_Post, KitPostAdmin)

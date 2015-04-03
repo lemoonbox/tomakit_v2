@@ -15,7 +15,6 @@ from django_summernote import \
 
 from app_post.models import Post, PostPic, PostDetail
 
-# Create your models here.
 Numeric = RegexValidator(
     r'^[0-9]$', message = _(u'숫자만 입력해주세요')
 )
@@ -31,10 +30,8 @@ CATEGORY_SELECT =(('baby','for Baby'),
                   ('fashion', 'for Fashion'),
                   ('tast','for Tast'),
                   ('beauty', 'for Beauty'),)
-Type_SELECT = (('class', 'Class'),
-               ('kit', "Kit"),)
 
-class PostCreateForm(forms.ModelForm):
+class ClassForm(forms.ModelForm):
 
     category_error= {'required':_(u"카테고리를 선택해주세요"), }
     title_error= {'required':_(u"제목을 입력해주세요"), }
@@ -75,13 +72,13 @@ class PostCreateForm(forms.ModelForm):
         'contact_tel', 'address')
 
 
-class PostPicCreateForm(forms.ModelForm):
+class PostPicForm(forms.ModelForm):
 
-    photo_error ={'required':u"한 장 이상의 사진을 입력해 주세요",
+    post_photo_error ={'required':u"한 장 이상의 사진을 입력해 주세요",
                   'invalid':u'',
     }
 
-    class_photo = forms.DateField(error_messages=photo_error)
+    post_photo = forms.DateField(error_messages=post_photo_error)
 
     class Meta :
         model = PostPic
@@ -93,7 +90,7 @@ class PostdetailForm(forms.ModelForm):
 
     post_detail_error= {'required':_(u"상세 정보를 입력해주세요"), }
 
-    post_detail = summer_fields.SummernoteTextFormField(error_messages=class_detail_error,
+    post_detail = summer_fields.SummernoteTextFormField(error_messages=post_detail_error,
                                                          label='')
     class Meta:
         model = PostDetail

@@ -257,9 +257,6 @@ def pw_reset_process(request, key):
     })
 
 
-
-
-
 def login(request, *args, **kwargs):
 
     login_form = LoginForm(request.POST or None)
