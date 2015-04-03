@@ -67,6 +67,7 @@ INSTALLED_APPS = (
     'djcelery',
     'storages',
     'django_summernote',
+    'app_post',
 
 )
 
