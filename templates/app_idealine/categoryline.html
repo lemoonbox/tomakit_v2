@@ -9,21 +9,22 @@
   #wrap {margin-bottom:60px;}
   .row {margin-left:0px;}
 
-  .thumbnail {border-radius:1px; height:34vh;}
-  .thumbnail img{width:100%; position:absolute;height:100%;margin: 0px;}
-  .ttt img:hover {opacity: 0.3;}
-  .thumbnail .ttt {height:28vh; position:relative; z-index:10; overflow:hidden;}
-  .caption {position:relative; z-index: 11; background-color:white;bottom:11%;}
+  .thumbnail {border-radius:1px; height:100%;}
+  .thumbnail img{width:100%; position:relative; z-index:9;margin:0px;}
+  .ttt {height:28rem; position:relative; z-index:10; overflow:hidden;}
+  .ttt img:hover {opacity: 0.3;margin:0;}
+
+  .caption {position:relative; z-index: 11; background-color:white;margin:0;width:100%;height:6rem;}
+  .tag {color:lightgray;margin:0;}
+  .title {color:dimgray;margin:0;}
+  .ellipsis {width:80%;overflow:hidden; text-overflow:ellipsis; white-space:nowrap;margin:0;}
+  .title:hover {color:skyblue;text-decoration:none;margin:0;}
 
 
-  .caption button {opacity:0; position: relative; z-index:100; bottom:0; right:0;}
-  .caption button:hover {position:relative; border-radius: 0px; z-index:100; bottom:0px; right:0; border:none; background-color:#FFCC00; opacity:1;}
-
-  .tag {color:lightgray;}
-  .title {color:dimgray;}
-  .ellipsis {width:100%;overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
-  .title:hover {color:skyblue;text-decoration:none;}
-
+  .caption button {opacity:0;border:none;}
+  .caption button:hover {border-radius: 20px; border:none; background-color:#FFCC00; opacity:1;margin-right:-1vh;margin-top:-5px;}
+  
+  
 </style>
 
 </head>
@@ -72,6 +73,7 @@
                   <div class="ellipsis">
                     <a href="http://{{HTTP_HOST}}/kit/{{item.id}}" class="title">{{item.title}}</a></div>
                   &#8361;{{item.price}}<p class="sr-only">원</p> <span class="tag"> · KIT</span>
+                  
                   {% if user.is_authenticated %}
                   <a href="http://{{HTTP_HOST}}/class/{{item.id}}">
                     {% else %}
@@ -94,4 +96,5 @@
     </div> <!-- /#wrap -->
     {% include "userapp/layout/footer.html" %}
   </div>
-  </body>
+</body>
+</html>
