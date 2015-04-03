@@ -12,24 +12,24 @@ from django.utils.translation import ugettext as _
 AlphaNumeric = RegexValidator(
     r'^[0-9a-zA-z@.]{6,20}$', message = _(u'알파벳과, 숫자로된 6~20자리 비밀번호가 필요합니다.')
 )
+AlphaNumeric_confirm = RegexValidator(
+    r'^[0-9a-zA-z@.]{6,20}$', message = _(u' ')
+)
 
 class ProfilesForm(forms.ModelForm):
 
     email_errors={'required':u"이메일이 필요합니다.",
                     'invalid':u'잘못된 이메일 형식입니다.',
                     'unique':u'이미 사용 중인 이메일 주소입니다.'}
-    pw_errors={'required':u"비밀번호가 필요합니다.",
-                'invalid':u"6자리 이상의 비밀번호가 안전합니다."}
+    pw_errors={'required':u"비밀번호가 필요합니다."}
     #image_errors={'invalid_image':u"이미지 파일만 올릴 수 있습니다."}
     
     email = forms.EmailField(error_messages=email_errors,
                             validators=[AlphaNumeric,])
     password = forms.CharField(max_length=100, widget=forms.PasswordInput,
-                           validators=[AlphaNumeric,], required=True,
-                           error_messages=pw_errors, label=u'비밀번호')
+                           validators=[AlphaNumeric,], required=True, label=u'비밀번호')
     password_confirm = forms.CharField(max_length=100, widget=forms.PasswordInput,
-                                       validators=[AlphaNumeric,], required=True,
-                                       error_messages=pw_errors, label=u'비밀번호확인')
+                                       validators=[AlphaNumeric_confirm,], required=True, label=u'비밀번호확인')
     pro_photo = forms.ImageField(required=False, label=u'프로필이미지(선택)')
 
     class Meta:
