@@ -11,10 +11,9 @@ from django.http import \
     Http404
 import datetime
 
-
 from app_post.models import \
-    PostType, \
     PostCategory, \
+    PostType,\
     Post, \
     PostPic, \
     PostDetail
@@ -105,13 +104,11 @@ def classcreate(request):
                 try :
                     t = handle_uploaded_image(photo, 500, 500)
                     content = t[1]
-                    print content
                 except Exception:
                     print Exception.message
 
                 _postpic = PostPic(user=request.user, post=_class,type=_type, post_photo=content)
                 _postpic.save()
-                print _postpic
                 for category in category_list:
                     _postpic.category.add(category)
                 _postpic.save()
@@ -126,7 +123,7 @@ def classcreate(request):
                 _class_detail.save()
 
 
-            return HttpResponseRedirect('/class/{0}'.format(_class.id))
+            return HttpResponseRedirect('/post/class/{0}'.format(_class.id))
 
     return render(request, 'app_class/create_class_post.html',
         {
@@ -145,7 +142,7 @@ def class_detail(request, class_num):
 
     if request.method == "GET":
         try:
-            _class_post = Post.objects.filter
+            _class_post = Post.objects.get(pk=class_num)
         except _class_post.DoesNotExist:
             raise Http404("Class does not exist")
     return render(request, 'app_class/class_post.html',
