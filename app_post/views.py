@@ -20,7 +20,8 @@ from app_post.models import \
 from app_post.form import \
     ClassForm, \
     PostPicForm,  \
-    PostdetailForm
+    PostdetailForm,\
+    KitForm
 from userapp.utils import handle_uploaded_image
 
 @login_required
@@ -52,7 +53,6 @@ def classcreate(request):
         u_min_num = request.POST['minimum']
         u_max_num = request.POST['maximum']
 
-        #read photo
         photos =request.FILES.getlist("class_photo")
 
 
@@ -77,11 +77,11 @@ def classcreate(request):
 
         #start make post
         if class_form.is_valid() and not error and post_detail_form.is_valid():
-            category_list=[]
             _type, type_created = PostType.objects.get_or_create(type_name="class")
             if type_created:
                 _type.save()
 
+            category_list=[]
             for category in u_categorys:
                 _category, categ_created = PostCategory.objects.get_or_create(category_name=category)
                 if categ_created:
@@ -113,14 +113,14 @@ def classcreate(request):
                     _postpic.category.add(category)
                 _postpic.save()
 
-                _class_detail =post_detail_form.save(commit=False)
-                _class_detail.type=_type
-                _class_detail.user = request.user
-                _class_detail.post = _class
-                _class_detail.save()
+                _post_detail =post_detail_form.save(commit=False)
+                _post_detail.type=_type
+                _post_detail.user = request.user
+                _post_detail.post = _class
+                _post_detail.save()
                 for category in category_list:
-                        _class_detail.category.add(category)
-                _class_detail.save()
+                        _post_detail.category.add(category)
+                _post_detail.save()
 
 
             return HttpResponseRedirect('/post/class/{0}'.format(_class.id))
@@ -131,6 +131,85 @@ def classcreate(request):
             'classpic_createform':post_pic_form,
             'class_detailform': post_detail_form,
         })
+
+@login_required
+def kitcreate(request):
+
+    ctx = Context({
+        'error':None
+    })
+    error = False
+
+    if request.method == "GET":
+        kit_form=KitForm()
+        pic_form=PostPicForm()
+        detail_form = PostdetailForm()
+    elif request.method == "POST":
+        kit_form = KitForm(request.POST)
+        pic_form = PostPicForm(request.FILES)
+        detail_form = PostdetailForm(request.POST)
+
+        u_categorys = request.POST.getlist(u'category')
+        photos =request.FILES.getlist("kit_photo")
+
+
+        for photo in photos:
+            if photo.content_type != 'image/png' and photo.content_type !='image/jpeg':
+                pic_form.add_error('kit_photo', u'jpeg와 png형식의 이미지만 가능합니다.')
+                print "error"
+                error =True
+
+        #start make post
+        if kit_form.is_valid() and not error and detail_form.is_valid():
+            _type, type_created = PostType.objects.get_or_create(type_name="class")
+            if type_created:
+                _type.save()
+
+            category_list=[]
+            for category in u_categorys:
+                _category, categ_created = PostCategory.objects.get_or_create(category_name=category)
+                if categ_created:
+                    _category.save()
+                category_list.append(_category)
+
+            _kit = kit_form.save(commit=False)
+            _kit.type = _type
+            _kit.user = request.user
+            _kit.save()
+            for category in category_list:
+                _kit.category.add(category)
+            _kit.save()
+
+            for photo in photos:
+                try :
+                    t = handle_uploaded_image(photo, 500, 500)
+                    content = t[1]
+                except Exception:
+                    print Exception.message
+                _postpic = PostPic(user=request.user, post=_kit, type=_type, post_photo=content)
+                _postpic.save()
+                for category in category_list:
+                    _postpic.category.add(category)
+                _postpic.save()
+
+                _post_detail =detail_form.save(commit=False)
+                _post_detail.type=_type
+                _post_detail.user = request.user
+                _post_detail.post = _kit
+                _post_detail.save()
+                for category in category_list:
+                        _post_detail.category.add(category)
+                _post_detail.save()
+
+            return HttpResponseRedirect('/post/kit/{0}'.format(_kit.id))
+
+    return render(request, 'app_kit/create_kit_post.html',
+        {
+            'kit_createform':kit_form,
+            'kit_pic_createform':pic_form,
+            'kit_detailform': detail_form,
+        })
+
 
 
 def class_detail(request, class_num):
@@ -144,8 +223,25 @@ def class_detail(request, class_num):
         try:
             _class_post = Post.objects.get(pk=class_num)
         except _class_post.DoesNotExist:
-            raise Http404("Class does not exist")
+            raise Http404("post does not exist")
     return render(request, 'app_class/class_post.html',
         {
             'class_post':_class_post
+        })
+
+def kit_detail(request, kit_num):
+
+    ctx = Context({
+        'error':None
+    })
+    error = False
+    if request.method == "GET":
+        try:
+            _kit_post = Post.objects.get(pk=kit_num)
+
+        except _kit_post.DoesNotExist:
+            raise Http404("post does not exist")
+    return render(request, 'app_kit/kit_post.html',
+        {
+            'kit_post':_kit_post
         })

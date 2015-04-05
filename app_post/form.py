@@ -72,6 +72,34 @@ class ClassForm(forms.ModelForm):
         'contact_tel', 'address')
 
 
+class KitForm(forms.ModelForm):
+
+    category_error= {'required':_(u"카테고리를 하나 이상 선택해주세요"), }
+    title_error= {'required':_(u"제목을 입력해주세요"), }
+    price_error= {'required':_(u"가격을 입력해주세요"),
+                  'invalid':_(u"숫자만 입력해주세요")}
+    describe_error= {'required':_(u"제품 특징을 입력해주세요"),
+                     'max_length':_(u"500자 이하로 입력해주세요"),}
+    contact_tel_error= {'required':_(u"연락처를 입력해주세요"),
+                        'invalid':_(u"숫자만 입력해주세요")}
+    address_error= {'required':_(u"판매처 주소를 입력해주세요"), }
+
+
+    category = forms.MultipleChoiceField(required=True,
+                                         widget=forms.CheckboxSelectMultiple,
+                                         choices=CATEGORY_SELECT,
+                                         error_messages=category_error)
+    title = forms.CharField(error_messages=title_error)
+    price = forms.IntegerField(error_messages=price_error,)
+    describe = forms.CharField(max_length=500, error_messages=describe_error,)
+    contact_tel = forms.IntegerField(error_messages=contact_tel_error)
+    address = forms.CharField(error_messages=address_error)
+
+    class Meta:
+        model = Post
+        fields = ('title', 'category','price','describe','contact_tel', 'address',)
+
+
 class PostPicForm(forms.ModelForm):
 
     post_photo_error ={'required':u"한 장 이상의 사진을 입력해 주세요",
