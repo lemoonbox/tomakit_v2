@@ -38,44 +38,40 @@
         {% for item in catgitem%}
         <div class="col-xs-6 col-md-4 col-lg-4">
           <div class="itembox">
-
-
             <div class="thumbnail">
-              {% with item|classname as type %}
-              {% if type == "ClassPost"%}
+              {% if item.type.type_name == "class"%}
+                class
               <!--classpost-->
               <div class="ttt">
-              <a href="http://{{HTTP_HOST}}/class/{{item.id}}">
-                <img src="{{MEDIA_URL}}{{item.classpic_set.first.class_photo}}"></a>
+              <a href="http://{{HTTP_HOST}}/post/class/{{item.id}}">
+                <img src="{{MEDIA_URL}}{{item.postpic_set.first.post_photo}}"></a>
               </div>
               
               <div class="caption">
-                <div class="ellipsis"><a href="http://{{HTTP_HOST}}/class/{{item.id}}" class="title">{{item.title}}</a></div>
+                <div class="ellipsis"><a href="http://{{HTTP_HOST}}/post/class/{{item.id}}" class="title">{{item.title}}</a></div>
                 &#8361;{{item.price}}<p class="sr-only">원</p> <span class="tag"> · CLASS</span>
                 
                 {% if user.is_authenticated %}
-                <a href="http://{{HTTP_HOST}}/class/{{item.id}}">
+                <a href="http://{{HTTP_HOST}}/post/class/{{item.id}}">
                 {% else %}
                 <a href="/user/login">
                   {% endif %}
                 <button class="btn btn-default btn-sm pull-right">신청하기</button>
                 </a>
-
-
-
-                {% elif type == "Kit_Post"%}
+                {% elif item.type.type_name == "kit"%}
                 <!--kitpost-->
+                    kit
                 <div class="ttt">
-                <a href="http://{{HTTP_HOST}}/kit/{{item.id}}">
-                  <img src="{{MEDIA_URL}}{{item.kit_photo_set.first.kit_photo}}"></a>
+                <a href="http://{{HTTP_HOST}}/post/kit/{{item.id}}">
+                  <img src="{{MEDIA_URL}}{{item.postpic_set.first.post_photo}}"></a>
                 </div>
                 <div class="caption">
                   <div class="ellipsis">
-                    <a href="http://{{HTTP_HOST}}/kit/{{item.id}}" class="title">{{item.title}}</a></div>
+                    <a href="http://{{HTTP_HOST}}/post/kit/{{item.id}}" class="title">{{item.title}}</a></div>
                   &#8361;{{item.price}}<p class="sr-only">원</p> <span class="tag"> · KIT</span>
                   
                   {% if user.is_authenticated %}
-                  <a href="http://{{HTTP_HOST}}/class/{{item.id}}">
+                  <a href="http://{{HTTP_HOST}}/post/class/{{item.id}}">
                     {% else %}
                     <a href="/user/login">
                       {% endif %}
@@ -83,7 +79,6 @@
                     </a>
 
                   {% endif %}
-                  {% endwith %}
                 </div>
               </div>
             </div>

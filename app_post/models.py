@@ -17,7 +17,7 @@ class PostType(models.Model):
 
 
     def __unicode__(self):
-        return u'%s' % (self.Type_name)
+        return '%s' % (self.type_name)
 
 class PostCategory(models.Model):
     category_name = models.CharField(max_length=100, null=False)

@@ -1,6 +1,8 @@
 #coding: utf-8
 
-from django.shortcuts import render
+from django.shortcuts import \
+    render,\
+    loader
 from django.contrib.auth.decorators import \
     login_required
 from django.template import\
@@ -161,7 +163,7 @@ def kitcreate(request):
 
         #start make post
         if kit_form.is_valid() and not error and detail_form.is_valid():
-            _type, type_created = PostType.objects.get_or_create(type_name="class")
+            _type, type_created = PostType.objects.get_or_create(type_name="kit")
             if type_created:
                 _type.save()
 
@@ -245,3 +247,22 @@ def kit_detail(request, kit_num):
         {
             'kit_post':_kit_post
         })
+
+def handler404(request):
+
+    template = loader.get_template('error/404.html')
+    context = Context({
+        'message':'All:%s'%request,
+    })
+
+    return HttpResponse(contet = template.render(context),
+                        content_type='text/html; charset=utf-8', status=404)
+
+def handler500(request):
+    template = loader.get_template('error/500.html')
+    context = Context({
+        'message':'All:%s'%request,
+    })
+
+    return HttpResponse(content=template.render(context),
+                        content_type='text/html; charset=utf-8', status=404)

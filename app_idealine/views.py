@@ -14,6 +14,9 @@ from app_class.models import \
 from app_kit.models import \
     Kit_Post
 
+from app_post.models import \
+    Post
+
 #not need login
 def idealine(request):
 
@@ -23,18 +26,12 @@ def idealine(request):
     error = False
 
     if request.method=="GET":
-        _class_line=ClassPost.objects.order_by('-id')[:9]
-        _kit_line=Kit_Post.objects.order_by('-id')[:9]
-
-        itea_line=[i for i in itertools.chain(*itertools.izip_longest(
-            _class_line, _kit_line)) if i is not None]
-
+        _post_line=Post.objects.order_by('-id')[:18]
         host= request.META['HTTP_HOST']
-
 
     return render(request, 'app_idealine/idealine.html',
         {
-            'lineitem':itea_line,
+            'lineitem':_post_line,
             'HTTP_HOST':host,
         })
 
@@ -71,24 +68,14 @@ def categoryline(request, category):
     error = False
 
     if request.method=="GET":
-        _class_catg=ClassPost.objects.filter(category__contains=category)[:9]
-        _kit_catg=Kit_Post.objects.filter(category__contains=category)[:9]
-
-        catg_line=[i for i in itertools.chain(*itertools.izip_longest(
-             _class_catg, _kit_catg)) if i is not None]
         host= request.META['HTTP_HOST']
+
+        _category_line = Post.objects.filter(category__category_name=category).order_by('-id')[:18]
 
 
     return render(request, 'app_idealine/categoryline.html',
         {
-            'catgitem':catg_line,
+            'catgitem':_category_line,
             'HTTP_HOST':host,
             'category':category
         })
-
-def test(reqeust, category, kindof):
-
-    print category
-    print kindof
-
-    return HttpResponseRedirect('/user/profile')
