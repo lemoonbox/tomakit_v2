@@ -99,7 +99,7 @@
                 <!--Indicators -->
                 <ol class="carousel-indicators">
                 
-                  {% for photo in class_post.classpic_set.all %}
+                  {% for photo in class_post.postpic_set.all %}
                   {% if forloop.counter0 == 0 %}
                   <li data-target="#class-post-Carousel" data-slide-to="{{forloop.counter0}}" class="active"></li>
                   {% else %}
@@ -111,15 +111,14 @@
                 <!-- Wrapper for slides -->
                 <div class="carousel-inner" role="listbox">
                   
-                  {%for photo in class_post.classpic_set.all%}
-                  
+                  {%for photo in class_post.postpic_set.all%}
                     {% if forloop.counter0 == 0 %}
                       <div class="item active">
-                        <img class="img-responsive{{forloop.counter0}}" src="{{MEDIA_URL}}{{photo.class_photo}}">
+                        <img class="img-responsive{{forloop.counter0}}" src="{{MEDIA_URL}}{{photo.post_photo}}">
                       </div> 
                     {% else %}
                       <div class="item">
-                        <img class="img-responsive{{forloop.counter0}}" src="{{MEDIA_URL}}{{photo.class_photo}}">
+                        <img class="img-responsive{{forloop.counter0}}" src="{{MEDIA_URL}}{{photo.post_photo}}">
                       </div> 
                     {% endif %}   
                   {%endfor%}
@@ -149,7 +148,7 @@
         <div class="col-md-12 box">
           <div class="post-detail">
 
-            <dd class="text-muted">★{{class_post.category}}</dd>
+            <dd class="text-muted">★</dd>
             <div class="post-heading">
             <h4>{{class_post.title}}</h4>
             </div>
@@ -159,24 +158,24 @@
             <div class="row thumb">              
               
               <!-- Button trigger modal -->
-              {%for photo in class_post.classpic_set.all%}
+              {%for photo in class_post.postpic_set.all%}
               <div class="col-md-3 col-sm-2 col-lg-4 col-xs-2 mini-thumb">
                 <a type="button" class="btn" id="thumbimg" data-toggle="modal" data-target="#imageModal{{forloop.counter0}}">
 
-                  <img class="img-responsive{{forloop.counter0}}" src="{{MEDIA_URL}}{{photo.class_photo}}" alt="{{forloop.counter0}}">                 
+                  <img class="img-responsive{{forloop.counter0}}" src="{{MEDIA_URL}}{{photo.post_photo}}" alt="{{forloop.counter0}}">
                 </a>
               </div>
               {% endfor %}
 
 
               <!-- Modal -->
-              {%for photo in class_post.classpic_set.all%}
+              {%for photo in class_post.postpic_set.all%}
               <div class="modal fade" id="imageModal{{forloop.counter0}}" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel" aria-hidden="true">
                 <div class="modal-dialog2">
                   <div class="modal-content2">
                     <div class="modal-body2">
 
-                      <img type="button" data-dismiss="modal" aria-lable="Close" class="img-responsive{{forloop.counter0}}" src="{{MEDIA_URL}}{{photo.class_photo}}" alt="{{forloop.counter0}}">
+                      <img type="button" data-dismiss="modal" aria-lable="Close" class="img-responsive{{forloop.counter0}}" src="{{MEDIA_URL}}{{photo.post_photo}}" alt="{{forloop.counter0}}">
 
                     </div>
                   </div>                    
@@ -294,8 +293,8 @@
       <div class="col-md-12 col-lg-12 col-xs-12 col-sm-12 well">
         <div class="content-summernote">
           <h4 class="title-summer">상세 정보</h4>
-          {%for detail in class_post.classdetail_set.all%}
-          {{detail.class_detail | safe}}
+          {%for detail in class_post.postdetail_set.all%}
+          {{detail.post_detail | safe}}
           {% endfor %}
         </div>
       </div>

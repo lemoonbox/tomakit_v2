@@ -67,8 +67,7 @@ INSTALLED_APPS = (
     'djcelery',
     'storages',
     'django_summernote',
-    'app_post',
-
+    'app_post'
 )
 
 MIDDLEWARE_CLASSES = (

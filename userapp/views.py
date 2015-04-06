@@ -122,12 +122,7 @@ def signup(request):
             cont = tpl_mail.render(ctx_mail)
             recipient = [_profile.email]
 
-
-
             #tasks.sendmail.delay(cont, recipient)
-
-
-
             #sendmail not celery
             from django.core.mail import send_mail
             send_mail(u'안녕하세요! 앞발 사용 설명서입니다. 정식 사용을 승인해주세요.', "", \
