@@ -254,16 +254,16 @@ def handler404(request):
 
     template = loader.get_template('error/404.html')
     context = Context({
-        'message': '404::잘못된 주소입니다.',
+        'message': 'HTTP 404:: 잘못된 주소입니다.',
     })
 
-    return HttpResponse(contet = template.render(context),
+    return HttpResponse(content = template.render(context),
                         content_type='text/html; charset=utf-8', status=404)
 
 def handler500(request):
     template = loader.get_template('error/500.html')
     context = Context({
-        'message':'500:::알수 없는 서버 에러 입니다. 다시 접속 해주세요',
+        'message':'HTTP 500:: 서버 에러 입니다.',
     })
 
     return HttpResponse(content=template.render(context),

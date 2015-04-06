@@ -1,6 +1,8 @@
-#form-error {max-width: 600px; margin:auto; margin-top:-50px;}
-#form-error ul {list-style: none;}
-
+#form-error {max-width: 100%; margin:auto;position:relative;z-index:6;opacity:0.9;}
+#form-error ul {list-style:circle;}
+.alert-warning {margin:auto;margin-top:30px;width:100%;height:27vh;z-index:6;position:absolute;text-align: center;
+}
+.alert-warning p {margin-top:15%;font-weight: 300;}
 
 .email {
   font-family: Verdana, sans-serif;
@@ -13,8 +15,9 @@
 }
 
 .form-signin {
-  max-width: 330px;
   padding: 15px;
+  padding-left:40px;
+  padding-right:40px;
   margin: 0 auto;
 }
 .form-signin .form-signin-heading,
@@ -60,6 +63,7 @@
     border-top-left-radius: 0;
     border-top-right-radius: 0;
 }
+.form-signin input[type="file"] {}
 
 #login {
   background-color: white;
@@ -70,19 +74,21 @@
   padding: 10px;
   margin: auto;
   border-radius: 4px;
- 
+  position:relative;
+  z-index:2;
 }
 
 #register {
   background-color: white;
+  margin-top: 200px;
   max-width: 400px;
   height: 450px;
   border: 1px solid silver;
   padding: 10px;
-  margin-top: 200px;
   margin: auto;
   border-radius: 4px;
-
+  position:relative;
+  z-index:2;
 }
 
 #signin-btn-p {
@@ -90,54 +96,3 @@
   height: 300px;
 }
 
-
-#register{	
-  z-index: 21;
-  opacity: 100;
-}
-
-
-/* ANIMATION
-=======================================================*/
-
-/*
-#toregister:target ~ #wrapper #register,
-#tologin:target ~ #wrapper #login{
-  z-index: 22;
-  animation-name: fadeInLeft;
-  animation-delay: .1s;
-}
-
-.animate{
-  animation-duration: 0.5s;
-  animation-timing-function: ease;
-  animation-fill-mode: both;
-}
-@keyframes fadeInLeft {
-  0% {
-    opacity: 0;
-    transform: translateX(-20px);
-  }
-
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-#toregister:target ~ #wrapper #login,
-#tologin:target ~ #wrapper #register{
-  animation-name: fadeOutLeftBig;
-}
-
-@keyframes fadeOutLeft {
-  0% {
-    opacity: 1;
-    transform: translateX(0);
-  }
-
-  100% {
-    opacity: 0;
-    transform: translateX(-20px);
-  }
-}*/

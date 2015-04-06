@@ -1,8 +1,7 @@
 {% load static from staticfiles%}
 {% include "userapp/layout/header.html"%}
 
-<title>회원가입</title>
-</head>
+<title> Tomakit - 회원가입 </title>
 
 <style>
 #wrap {margin-bottom:0px;}
@@ -11,33 +10,31 @@
 <body>
   <div id="wrap">
     {% include "userapp/layout/nav.html"%}
-    
-<div class="container">
-    {% if profileform.errors %}
-    <div id="form-error">
-      <div class="alert alert-warning">
-        <a href="#" class="close" data-dismiss="alert">&times;</a>
-        <p>정보를 정확히 입력해주세요:</p>
-        <br />
-        <table>
-          {% for field in profileform %}
-          {{ field.errors|striptags }}
-          {% endfor %}
-        </table>
-      </div>
-    </div>
-    {% endif %}
 
-      <a class="hiddenanchor" id="toregister"></a>
-      <a class="hiddenanchor" id="tologin"></a>
-
+    <div class="container">
       <div id="wrapper">
-        <div id="register" class="animate">
+
+        <div id="register">
+          {% if profileform.errors %}
+          <div id="form-error">
+            <div class="alert alert-warning">
+              <a href="#" class="close" data-dismiss="alert">&times;</a>
+              <p>정보를 정확히 입력해주세요:</p>
+              <table>
+                {% for field in profileform %}
+                {{field.label}}: {{field.errors|striptags}}<br>
+                {% endfor %}
+              </table>
+            </div>
+          </div>
+          {% endif %}
+          
+          
           <form method="POST" action="" enctype="multipart/form-data" class="form-signin">
 
             {% csrf_token%}
 
-            <h2 class="form-signin-heading">LOGIN</h2>
+            <h2 class="form-signin-heading">SIGN UP</h2>
             
             <label for="id_email" class="sr-only">이메일 주소</label>
             <input id="id_email" name="email" type="email"
@@ -57,8 +54,7 @@
             <input id="id_pro_photo" name="pro_photo" type="file"/>
 
             <p class="change_link">이미 회원이신가요?
-              
-              {# have to change link #tologin to other link #}
+
               <a href="/user/login" class="to_register">로그인하기</a>
             </p>
 
@@ -69,8 +65,8 @@
         </div> <!--/register-->
       </div> <!--/wrapper-->
     </div> <!-- /container -->
-    <div id="push"></div>
+
   </div> <!-- wrap -->
   {% include "userapp/layout/footer.html" %}    
   </body>
-
+</html>
