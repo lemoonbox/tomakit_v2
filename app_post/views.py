@@ -225,7 +225,8 @@ def class_detail(request, class_num):
         try:
             _class_post = Post.objects.get(pk=class_num)
         except _class_post.DoesNotExist:
-            raise Http404("post does not exist")
+            pass
+            #raise Http404("post does not exist")
     return render(request, 'app_class/class_post.html',
         {
             'class_post':_class_post
@@ -242,7 +243,8 @@ def kit_detail(request, kit_num):
             _kit_post = Post.objects.get(pk=kit_num)
 
         except _kit_post.DoesNotExist:
-            raise Http404("post does not exist")
+            pass
+            #raise Http404("post does not exist")
     return render(request, 'app_kit/kit_post.html',
         {
             'kit_post':_kit_post
@@ -252,7 +254,7 @@ def handler404(request):
 
     template = loader.get_template('error/404.html')
     context = Context({
-        'message':'All:%s'%request,
+        'message': '404::잘못된 주소입니다.',
     })
 
     return HttpResponse(contet = template.render(context),
@@ -261,8 +263,8 @@ def handler404(request):
 def handler500(request):
     template = loader.get_template('error/500.html')
     context = Context({
-        'message':'All:%s'%request,
+        'message':'500:::알수 없는 서버 에러 입니다. 다시 접속 해주세요',
     })
 
     return HttpResponse(content=template.render(context),
-                        content_type='text/html; charset=utf-8', status=404)
+                        content_type='text/html; charset=utf-8', status=500)

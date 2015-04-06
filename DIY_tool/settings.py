@@ -24,10 +24,10 @@ TEMPLATE_DIRS ={
 SECRET_KEY = 'sj)7m^^1u$9=s40&8de&z#$alfgx(k6fztu3gj(w2^pdsnne6n'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 LOCAL = True
 
-TEMPLATE_DEBUG = True
+TEMPLATE_DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -60,8 +60,6 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'userapp',
-    'app_class',
-    'app_kit',
     'app_idealine',
     #'social.apps.django_app.default',
     'djcelery',
@@ -211,6 +209,3 @@ else :
         'lang': 'ko-KR',
         #'attachment_storage_class': S3BotoStorage,
          }
-
-
-

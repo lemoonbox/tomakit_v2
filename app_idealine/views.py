@@ -8,12 +8,6 @@ from django.template import\
 from django.http import \
     HttpResponseRedirect
 
-
-from app_class.models import \
-    ClassPost
-from app_kit.models import \
-    Kit_Post
-
 from app_post.models import \
     Post
 
@@ -34,31 +28,6 @@ def idealine(request):
             'lineitem':_post_line,
             'HTTP_HOST':host,
         })
-
-def idealine_page(request, page_num=1):
-
-    ctx = Context({
-        'error':None
-    })
-    error = False
-
-    if request.method=="GET":
-        _class_line=ClassPost.objects.order_by('-id')[:9]
-        _kit_line=Kit_Post.objects.order_by('-id')[:9]
-
-        itea_line=[i for i in itertools.chain(*itertools.izip_longest(
-            _class_line, _kit_line)) if i is not None]
-
-        host= request.META['HTTP_HOST']
-
-
-    return render(request, 'app_idealine/idealine.html',
-        {
-            'lineitem':itea_line,
-            'HTTP_HOST':host,
-        })
-
-
 
 
 def categoryline(request, category):
