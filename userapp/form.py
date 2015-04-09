@@ -23,14 +23,16 @@ class ProfilesForm(forms.ModelForm):
                     'unique':u'이미 사용 중인 이메일 주소입니다.'}
     pw_errors={'required':u"비밀번호가 필요합니다."}
     #image_errors={'invalid_image':u"이미지 파일만 올릴 수 있습니다."}
+    nick_name_errors={'required':u""}
     
     email = forms.EmailField(error_messages=email_errors,
                             validators=[AlphaNumeric,])
     password = forms.CharField(max_length=100, widget=forms.PasswordInput,
-                           validators=[AlphaNumeric,], required=True, label=u'비밀번호')
+                           validators=[AlphaNumeric,], required=True, error_messages=pw_errors, label=u'비밀번호')
     password_confirm = forms.CharField(max_length=100, widget=forms.PasswordInput,
-                                       validators=[AlphaNumeric_confirm,], required=True, label=u'비밀번호확인')
+                                       validators=[AlphaNumeric_confirm,], required=True, error_messages=pw_errors, label=u'비밀번호확인')
     pro_photo = forms.ImageField(required=False, label=u'프로필이미지(선택)')
+    nick_name = forms.CharField(required=True, error_messages=nick_name_errors)
 
     class Meta:
         model = Profile
@@ -67,7 +69,7 @@ class LoginForm(forms.Form):
         password = self.cleaned_data.get('password')
         user = authenticate(username = username, password=password)
         if not user or not user.is_active:
-            self.add_error('username', '아이디 혹은 비밀번호가 잘 못되었습니다.')
+            self.add_error('username', '아이디 혹은 비밀번호가 잘못되었습니다.')
         return self.cleaned_data
 
     def login(self, request):

@@ -5,7 +5,7 @@
 <title>{{profile.nick_name}}님의 프로필</title>
 <style>
   .well {background-color: white; max-width:400px; margin:auto; padding:30px;}
-  .well h2 {tmargin-bottom:10px; padding:10px; padding-right:0px;}
+  .well h2 {margin-bottom:10px; padding:10px; padding-right:0px;}
   .profile-inner ul {padding:10px; padding-right:0px;}
   .profile-inner ul li {list-style:none; max-width:100%; margin-left:0px;margin-right:10px; padding-left:0; padding:5px; border-bottom:1px solid silver;}
   .thumbnail {max-width:320px; border-radius:0;vertical-align:text-bottom;}
@@ -13,6 +13,54 @@
 </style>
 </head>
 <body>
+  
+  <script type="text/javascript">
+    var tempX = 0;
+    var tempY = 0;
+
+    document.onmousemove = getMouseXY;
+
+    function getMouseXY(e) {
+      tempX = e.pageX;
+      tempY = e.pageY;
+
+      // catch possible negative values in NS4
+      if (tempX < 0){tempX = 0}
+      if (tempY < 0){tempY = 0}
+
+      // show the position values in the form named Show
+      // in the text fields named MouseX and MouseY
+      document.getElementById('MouseX').value = tempX;
+      document.getElementById('MouseY').value = tempY;
+      return true;
+    }
+
+    function search(){
+      // position of input field
+      var distanceFromTop = 60;
+      var distanceFromLeft = 8;
+
+      // size of input field
+      var inputWidth = 204;
+      var inputHeight = 20;
+
+      // size of picture
+      var pictureWitdh = 20;
+
+      // dont need to check mouse position on axis y
+      // because onclick event already is on input field
+
+      // check mouse position on axis x
+      if(tempX > (distanceFromLeft+inputWidth-pictureWitdh)){
+        alert('Did click on the right');
+      }
+    }
+  </script>
+  <input type="text" id="MouseX" value="0" size="4"> X<br>
+  <input type="text" id="MouseY" value="0" size="4"> Y<br>
+  <input type="text" id="search" onclick="search(this)" />
+  
+  
   <div id="wrap">
     {% include "userapp/layout/nav.html"%}
     <div class="container">

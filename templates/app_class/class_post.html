@@ -67,13 +67,14 @@
   #cont-btn:hover {background-color:lightcoral; color:white;}
 
   .modal-dialog {max-width:450px;}
-  .modal-body {height:450px;margin:auto;text-align: center;}
-  .modal-body p {margin-top: 150px;}
+  .modal-body {margin:auto;text-align: center;}
+  .modal-body p {margin-top: 10px;}
 
   .modal-dialog2 {width:60%;vertical-align: middle; margin:auto;background-color:transparent;padding:0;}
   .modal-body2{width:100%;margin:auto;margin-top:20px;background-color:transparent;padding:0;}
   .modal-content2{background-color:black;padding:-20px;margin:0;}
   .modal-body2 > img {width:100%;padding-top:20px; padding-bottom:20px;margin:0;}
+  .modal-header {height:50px;}
 
 
 
@@ -231,7 +232,6 @@
                   <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 -->
-<!--                    <button type="button" class="btn btn-primary">Save changes</button>-->
                   </div>
                 </div>
               </div>
@@ -244,18 +244,20 @@
             <div class="modal fade" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="contactModalLabel" aria-hidden="true">
               <div class="modal-dialog">
                 <div class="modal-content">
-                  <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="contactModalLabel">로그인해주세요</h4>
-                  </div>
+<div class="modal-header">
+  <button type="button" class="close pull-right" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>
                   <div class="modal-body">
-                    
                     {% include 'userapp/layout/loginform.html' %}
                   </div>
+<!--
                   <div class="modal-footer">
+<p class="change-link">
+토마킷에 대해 더 알고 싶으신가요?
+<a href="#" class="#to_register">함께해요!</a>
+</p>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-<!--                    <button type="button" class="btn btn-primary">Save changes</button>-->
                   </div>
+-->
                 </div>
               </div>
             </div>

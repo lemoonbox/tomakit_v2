@@ -1,40 +1,39 @@
 {% load static from staticfiles %}
 {% include "userapp/layout/header.html" %}
 
-
-<title> TOMAKIT- 로그인 </title>
+<title> TOMAKIT - 로그인 </title>
 
 <style>
 #wrap {margin-bottom:0px;}
 </style>
+
 <body>
   <div id="wrap">
-  {% include "userapp/layout/nav.html" %}
-    
-    <div class="container">
-      
-      {% if login_form.errors %}
-      <div id="form-error">
-        <div class="alert alert-warning">
-          <a href="#" class="close" data-dismiss="alert">&times;</a>
-          <br />
-          <table>
-            {% for field in login_form %}
-            {{ field.errors|striptags }}
-            {% endfor %}
-          </table>
-        </div>
-      </div>
-      {% endif %}
+    {% include "userapp/layout/nav.html" %}
 
+    <div class="container">
       <div id="wrapper">
-        <div id="login" class="animate">
-          <fieldset>
+
+        <div id="login">
+          {% if login_form.errors %}
+          <div id="form-error">
+            <div class="alert alert-warning">
+              <a href="#" class="close" data-dismiss="alert">&times;</a>
+              <p>정보를 정확히 입력해주세요:</p>
+              <table>
+                {% for field in login_form %}
+                {{ field.errors|striptags }}
+                {% endfor %}
+              </table>
+            </div>
+          </div>
+          {% endif %}
+
             
           <form method="post" action="{% url 'login_url' %}" class="form-signin" autocomplete="off">
             {% csrf_token %}
+            
             <h2 class="form-signin-heading">로그인</h2><br />
-
             <label for="username" name="username"> 이메일 </label><br />
             <input type="text" name="username" class="form-control" required
                    placeholder="ex) tomakit@gmail.com" autocomplete="off" value="{{is_authenticated}}" autofocus><br />
@@ -60,8 +59,7 @@
             <button class="btn btn-lg btn-primary btn-block" type="submit">Log In</button>
             </div>
           </form>
-            
-          </fieldset>
+
         </div>
       </div> <!--/wrapper-->
     </div> <!-- /container -->
@@ -70,3 +68,4 @@
     </div> <!-- wrap -->
   {% include "userapp/layout/footer.html" %}
 </body>
+</html>
