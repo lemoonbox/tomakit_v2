@@ -30,6 +30,11 @@ class PostCategory(models.Model):
     def __unicode__(self):
         return u'%s' % (self.category_name)
 
+class PostInteract(models.Model):
+    view_count = models.IntegerField(default=0)
+    share_count = models.IntegerField(default=0)
+    contact_count = models.IntegerField(default=0)
+
 
 class Post(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
@@ -50,6 +55,7 @@ class Post(models.Model):
     contact_tel = models.CharField(max_length= 30, null=False)
     address = models.CharField(max_length= 200, null=False)
 
+    postinteract = models.OneToOneField(PostInteract, null=True)
     created_at = models.DateTimeField(auto_now_add=True, auto_now=False)
     updated_at = models.DateTimeField(auto_now_add=True, auto_now=True)
     is_active = models.BooleanField(default=True)

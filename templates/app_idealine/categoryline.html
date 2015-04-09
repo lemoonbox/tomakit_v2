@@ -83,9 +83,28 @@
               </div>
             </div>
           </div>
-
           {% endfor%}
+
         </div>
+          <!-- paginations -->
+          {% for arrow in arrows%}
+              {% if arrow.nav_before %}
+              <a href="httP://{{HTTP_HOST}}/idealine/category/{{category}}/{{arrow.befor_page}}/"><b><</b></a>
+              {% endif %}
+          {% endfor %}
+
+          {% for page in pages %}
+            {% if page.page_current %}
+            <b>[{{page.page}}]</b>
+            {% else %}
+            <a href="httP://{{HTTP_HOST}}/idealine/category/{{category}}/{{page.page}}/">[{{page.page}}]</a>
+            {% endif %}
+          {% endfor %}
+          {% for arrow in arrows%}
+              {% if arrow.nav_next %}
+              <a href="httP://{{HTTP_HOST}}/idealine/category/{{category}}/{{arrow.next_page}}/"><b>></b></a>
+              {% endif %}
+          {% endfor %}
       </div>
       <div id="push"></div>
     </div> <!-- /#wrap -->
