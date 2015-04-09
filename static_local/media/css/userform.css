@@ -1,8 +1,8 @@
-#form-error {max-width: 100%; margin:auto;position:relative;z-index:6;opacity:0.9;}
+#form-error {max-width: 100%; margin:auto;position:relative;z-index:6;opacity:0.9;background-color:white;}
 #form-error ul {list-style:circle;}
-.alert-warning {margin:auto;margin-top:30px;width:100%;height:27vh;z-index:6;position:absolute;text-align: center;
-}
-.alert-warning p {margin-top:15%;font-weight: 300;}
+.alert-warning {margin-top:-10px;width:100%;height:100px;z-index:6;position:absolute;text-align: center;
+  box-shadow: 0px 1px 5px 0px; background-color:white; border-color:silver;color:dimgray;}
+/*.alert-warning p {margin-top:15%;}*/
 
 .email {
   font-family: Verdana, sans-serif;
@@ -44,17 +44,17 @@
 =====================================================*/
 
 .form-signin input[type="email"] {
-  margin-bottom: -1px;
+/*  margin-bottom: -1px;*/
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
 }
 .form-signin #nick_name {
-  margin-bottom: -1px;
+/*  margin-bottom: -1px;*/
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
 }
 .form-signin input[type="password"] {
-  margin-bottom: -1px;
+/*  margin-bottom: -1px;*/
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
@@ -65,6 +65,7 @@
 }
 .form-signin input[type="file"] {}
 
+/*
 #login {
   background-color: white;
   margin-top: 200px;
@@ -90,9 +91,9 @@
   position:relative;
   z-index:2;
 }
+*/
 
 #signin-btn-p {
   align-content: center;
-  height: 300px;
 }
 

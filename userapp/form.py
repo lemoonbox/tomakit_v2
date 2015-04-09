@@ -23,7 +23,7 @@ class ProfilesForm(forms.ModelForm):
                     'unique':u'이미 사용 중인 이메일 주소입니다.'}
     pw_errors={'required':u"비밀번호가 필요합니다."}
     #image_errors={'invalid_image':u"이미지 파일만 올릴 수 있습니다."}
-    nick_name_errors={'required':u"닉네임을 입력해주세요."}
+    nick_name_errors={'required':u""}
     
     email = forms.EmailField(error_messages=email_errors,
                             validators=[AlphaNumeric,])

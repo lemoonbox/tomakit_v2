@@ -22,7 +22,7 @@
               <p>정보를 정확히 입력해주세요:</p>
               <table>
                 {% for field in profileform %}
-                {{field.label}}: {{field.errors|striptags}}<br>
+                {{field.errors|striptags}}<br>
                 {% endfor %}
               </table>
             </div>
@@ -38,7 +38,7 @@
             
             <label for="id_email" class="sr-only">이메일 주소</label>
             <input id="id_email" name="email" type="email"
-                   class="form-control" placeholder="이메일" />
+                   class="form-control" placeholder="이메일" autofocus/>
             
             <label for="nick_name" class="sr-only">이름</label>
             <input id="nick_name" name="nick_name" type="text"
