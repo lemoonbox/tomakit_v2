@@ -9,9 +9,9 @@
   #wrap {margin-bottom:60px;}
   .row {margin-left:0px;}
 
-  .thumbnail {border-radius:1px; height:100%;}
-  .thumbnail img{width:100%; position:relative; z-index:9;margin:0px;}
-  .ttt {height:28rem; position:relative; z-index:10; overflow:hidden;}
+  .thumbnail {border-radius:1px;}
+  .thumbnail img{ position:relative; z-index:9;margin:0px;}
+  .ttt {height:25rem; position:relative; z-index:10; overflow:hidden;}
   .ttt img:hover {opacity: 0.3;margin:0;}
 
   .caption {position:relative; z-index: 11; background-color:white;margin:0;width:100%;height:6rem;}
@@ -19,10 +19,11 @@
   .title {color:dimgray;margin:0;}
   .ellipsis {width:80%;overflow:hidden; text-overflow:ellipsis; white-space:nowrap;margin:0;}
   .title:hover {color:skyblue;text-decoration:none;margin:0;}
-
-
   .caption button {opacity:0;border:none;}
   .caption button:hover {border-radius: 20px; border:none; background-color:#FFCC00; opacity:1;margin-right:-1vh;margin-top:-5px;}
+  .arrow {max-width:500px;margin:auto;margin-top:30px;font-size:20px;text-align: center;}
+  .glyphicon:hover {opacity:1;}
+  .glyphicon {color:#66FFCC;opacity:.5;}
   
   
 </style>
@@ -40,7 +41,7 @@
           <div class="itembox">
             <div class="thumbnail">
               {% if item.type.type_name == "class"%}
-                class
+              <span class="tag">CLASS</span>
               <!--classpost-->
               <div class="ttt">
               <a href="http://{{HTTP_HOST}}/post/class/{{item.id}}">
@@ -49,7 +50,8 @@
               
               <div class="caption">
                 <div class="ellipsis"><a href="http://{{HTTP_HOST}}/post/class/{{item.id}}" class="title">{{item.title}}</a></div>
-                &#8361;{{item.price}}<p class="sr-only">원</p> <span class="tag"> · CLASS</span>
+                &#8361;{{item.price}}<p class="sr-only">원</p> 
+<!--                <span class="tag"> · CLASS</span>-->
                 
                 {% if user.is_authenticated %}
                 <a href="http://{{HTTP_HOST}}/post/class/{{item.id}}">
@@ -60,7 +62,7 @@
                 </a>
                 {% elif item.type.type_name == "kit"%}
                 <!--kitpost-->
-                    kit
+                  <span class="tag">KIT</span>
                 <div class="ttt">
                 <a href="http://{{HTTP_HOST}}/post/kit/{{item.id}}">
                   <img src="{{MEDIA_URL}}{{item.postpic_set.first.post_photo}}"></a>
@@ -68,7 +70,8 @@
                 <div class="caption">
                   <div class="ellipsis">
                     <a href="http://{{HTTP_HOST}}/post/kit/{{item.id}}" class="title">{{item.title}}</a></div>
-                  &#8361;{{item.price}}<p class="sr-only">원</p> <span class="tag"> · KIT</span>
+                  &#8361;{{item.price}}<p class="sr-only">원</p> 
+<!--                  <span class="tag"> · KIT</span>-->
                   
                   {% if user.is_authenticated %}
                   <a href="http://{{HTTP_HOST}}/post/class/{{item.id}}">
@@ -87,9 +90,10 @@
 
         </div>
           <!-- paginations -->
+            <div class="arrow">
           {% for arrow in arrows%}
               {% if arrow.nav_before %}
-              <a href="httP://{{HTTP_HOST}}/idealine/category/{{category}}/{{arrow.befor_page}}/"><b><</b></a>
+            <a href="http://{{HTTP_HOST}}/idealine/{{arrow.befor_page}}/"> <span class="glyphicon glyphicon-chevron-left pull-left" aria-hidden="true"></span></a>
               {% endif %}
           {% endfor %}
 
@@ -97,14 +101,15 @@
             {% if page.page_current %}
             <b>[{{page.page}}]</b>
             {% else %}
-            <a href="httP://{{HTTP_HOST}}/idealine/category/{{category}}/{{page.page}}/">[{{page.page}}]</a>
+            <a href="http://{{HTTP_HOST}}/idealine/category/{{category}}/{{page.page}}/">[{{page.page}}]</a>
             {% endif %}
           {% endfor %}
           {% for arrow in arrows%}
               {% if arrow.nav_next %}
-              <a href="httP://{{HTTP_HOST}}/idealine/category/{{category}}/{{arrow.next_page}}/"><b>></b></a>
+                <a href="http://{{HTTP_HOST}}/idealine/{{arrow.next_page}}/"> <span class="glyphicon glyphicon-chevron-right pull-right" aria-hidden="true"></span></a>
               {% endif %}
           {% endfor %}
+            </div>
       </div>
       <div id="push"></div>
     </div> <!-- /#wrap -->
