@@ -28,11 +28,9 @@
             </div>
           </div>
           {% endif %}
-
-            
           <form method="post" action="{% url 'login_url' %}" class="form-signin" autocomplete="off">
-            {% csrf_token %}
-            
+            <input type="hidden" name="next" value="{{next}}"/>
+              {% csrf_token %}
             <h2 class="form-signin-heading">로그인</h2><br />
             <label for="username" name="username"> 이메일 </label><br />
             <input type="text" name="username" class="form-control" required

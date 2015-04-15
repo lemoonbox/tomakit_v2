@@ -74,8 +74,8 @@
           <li><a href="/user/logout">로그아웃</a></li>
           {% else %}
           <li><a class="hi" href="#">hello world!</a></li>
-          <li><a href="/user/signup">회원가입</a></li>
-          <li><a href="/user/login">로그인</a></li>
+          <li><a href="{% url 'signup' %}?next={{request.path}}">회원가입</a></li>
+          <li><a href="{% url 'login_url' %}?next={{request.path}}">로그인</a></li>
           <!--            <span class="sr-only">(current)</span>-->
 
         </ul>

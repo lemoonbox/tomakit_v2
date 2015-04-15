@@ -7,7 +7,7 @@ urlpatterns = patterns('userapp.views',
     url(r'profile/', 'profile',name='profile'),
 
     url(r'login/', 'login', {'template_name':'userapp/login.html'}, name="login_url"),
-    url(r'^logout/$', 'logout', {'next_page':'/user/login/'}, name = "logout_url"),
+    url(r'^logout/$', 'logout', {'next_page':'/'}, name = "logout_url"),
     #siugnup
     url(r'signup/$', 'signup', name='signup'),
     url(r'signup_confirm/(?P<key>[\w.@+-]+)/$', 'signup_confirm', name="email_confirm"),

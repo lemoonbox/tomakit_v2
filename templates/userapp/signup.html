@@ -31,7 +31,7 @@
           
           
           <form method="POST" action="" enctype="multipart/form-data" class="form-signin">
-
+              <input type="hidden" name="next" value="{{next}}"/>
             {% csrf_token%}
 
             <h2 class="form-signin-heading">SIGN UP</h2>
