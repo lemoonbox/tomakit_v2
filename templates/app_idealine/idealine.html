@@ -15,6 +15,19 @@
   .tag {color:lightgray;}
   .title {color:dimgray;}
   .title:hover {color:skyblue;text-decoration:none;}
+  .arrow {max-width:500px;margin:auto;margin-top:30px;font-size:50px;}
+  .glyphicon {color:#66FFCC;opacity:.5;}
+  .glyphicon:hover {opacity:1;}
+  
+  .loader {
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background: url('images/page-loader.gif') 50% 50% no-repeat rgb(249,249,249);
+  }
 </style>
 
 </head>
@@ -23,7 +36,12 @@
   <div id="wrap">
     {% include "userapp/layout/nav.html"%}
     <div class="container">
-
+<div class="loader"></div>
+      <script type="text/javascript">
+        $(window).load(function() {
+          $(".loader").fadeOut("slow");
+        })
+      </script>
       <div class="col-md-12 idealine">
         {% for item in lineitem %}
         {% with forloop.counter0|big_mid as check %}
@@ -55,16 +73,18 @@
           </div>
             {% endfor%}          
         </div>
+        <div class="arrow">
           {% for arrow in arrows%}
               {% if arrow.nav_before %}
-              <a href="httP://{{HTTP_HOST}}/idealine/{{arrow.befor_page}}/"><b><</b></a>
+        <a href="http://{{HTTP_HOST}}/idealine/{{arrow.befor_page}}/"> <span class="glyphicon glyphicon-chevron-left pull-left" aria-hidden="true"></span></a>
               {% endif %}
           {% endfor %}
           {% for arrow in arrows%}
               {% if arrow.nav_next %}
-              <a href="httP://{{HTTP_HOST}}/idealine/{{arrow.next_page}}/"><b>></b></a>
+        <a href="httP://{{HTTP_HOST}}/idealine/{{arrow.next_page}}/"> <span class="glyphicon glyphicon-chevron-right pull-right" aria-hidden="true"></span></a>
               {% endif %}
           {% endfor %}
+        </div> <!--/.arrow-->
 
       </div> <!-- /.idealine -->
       <div id="push"></div>

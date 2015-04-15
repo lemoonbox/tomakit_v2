@@ -1,24 +1,25 @@
 {% load static from staticfiles%}
 {% include "userapp/layout/header.html"%}
 
-    <title>{{kit_post.title}}</title>
+<title>{{kit_post.title}}</title>
 </head>
 
 <style>
 
   .container {display:block;}
   .post-content {margin:auto;vertical-align:text-bottom;}
-  .well {background-color:white; 
+  .well {background-color:white;
     padding:15px; border-radius:0px; box-shadow: inset 1px 1px 0 rgba(0,0,0,.1),inset 0 -1px 0 rgba(0,0,0,.07);}
   .well {height:60rem;}
-  .detail {padding-left:15;padding-right:15;}
+
+  .detail {padding-left:15;padding-right:15;overflow:auto;}
   .post-detail {margin:auto; margin-bottom:10px;
     padding-bottom:10px;}
   /*  .box {padding:5px; padding-top:15px;}*/
   .box {padding-bottom:15px; margin-bottom:15px;}
   .post-heading{
     /*    border-bottom: 5px double #ddd; */
-    width:100%; padding-bottom: 10px;margin-bottom:15px;font-family:Verdana; word-break:break-all;}
+    width:100%; padding-bottom:10px;margin-bottom:15px;word-break:break-all;}
   /* #NOTE : word-break: break-all ======================== */
 
   #post-price {font-size: 18px;display:block; margin-bottom:20px;}
@@ -27,12 +28,13 @@
   .panel {width:100%; border:0px; border-radius:0px;margin-bottom:10px;}
   .panel .contact {border-radius:3px;border-color:red;}
   .panel-heading {border-top:1px solid;}
-  .panel-title {margin-left:-10px;margin-right:-10px; font-size:1em; vertical-align: text-bottom; text-decoration:none;}
-  .panel-title a:hover{color:skyblue;text-decoration:none;}
+  .panel-heading:hover{text-decoration: none;}
+  .panel-title {margin-left:-10px;margin-right:-10px; font-size:1em; vertical-align: text-bottom;}
+  .panel-title a:hover{text-decoration:none;}
   .glyphicon-chevron-down {color:#ddd;margin-left:30px;}
   .panel-body {margin-left:-10px;margin-right:-5px;}
   .panel-body p {word-break:break-all;}
-
+:after {clear}
   .content-summernote {margin:auto;padding-top:10px;padding-bottom:15px;overflow:auto;}
   .title-summer {border-bottom: 5px double #ddd; padding-bottom:10px;}
 
@@ -57,33 +59,28 @@
   .mini-thumb a {padding:0;height:60px;overflow:hidden;position:relative;z-index:10;}
   .mini-thumb img{border:1px solid #eee;width:100%;position:relative;z-index:5;}
   .mini-thumb:hover{opacity:0.5;}
-  
+
   .caption {postion: absolute; z-index:15; background-color:white;bottom:0;}
   .caption > h4 {postion:relative;margin:0;padding:0;}
   /*======================================================== */
-
-  #cont-btn {margin-top:5px; background-color:lemonchiffon;width:100%;color:black;border:1px solid transparent;}
-  #cont-btn:hover {background-color:lightcoral; color:white;}
+  #cont-btn {margin-top:5px;width:100%;color:black;border:2px solid #66CC99;}
+  #cont-btn:hover {background-color:#eee; opacity:0.8; border:2px solid #66cc99;}
 
   .modal-dialog {max-width:450px;}
-  .modal-body {height:450px;margin:auto;text-align: center;}
-  .modal-body p {margin-top: 150px;}
+  .modal-body {margin:auto;text-align: center;}
+  .modal-body p {margin-top: 10px;}
 
   .modal-dialog2 {width:60%;vertical-align: middle; margin:auto;background-color:transparent;padding:0;}
   .modal-body2{width:100%;margin:auto;margin-top:20px;background-color:transparent;padding:0;}
   .modal-content2{background-color:black;padding:-20px;margin:0;}
   .modal-body2 > img {width:100%;padding-top:20px; padding-bottom:20px;margin:0;}
-  
-
-
-
+  .modal-header {height:50px;}
 </style>
 
-
 <body>
-  
-  <div id="wrap">
-    {% include "userapp/layout/nav.html"%}
+
+<div id="wrap">
+  {% include "userapp/layout/nav.html"%}
   <div class="container">
 
     <div class="post-content">
@@ -113,12 +110,12 @@
                   {% if forloop.counter0 == 0 %}
                   <div class="item active">
                     <img class="img-responsive{{forloop.counter0}}" src="{{MEDIA_URL}}{{photo.post_photo}}">
-                  </div> 
+                  </div>
                   {% else %}
                   <div class="item">
                     <img class="img-responsive{{forloop.counter0}}" src="{{MEDIA_URL}}{{photo.post_photo}}">
-                  </div> 
-                  {% endif %}   
+                  </div>
+                  {% endif %}
                   {%endfor%}
                 </div>
 
@@ -133,8 +130,8 @@
                 </a>
               </div>
               <div class="caption">
-              <h4>{{kit_post.title}}</h4>
-            </div>
+                <h4>{{kit_post.title}}</h4>
+              </div>
             </div>
 
 
@@ -150,43 +147,43 @@
             <div class="post-heading">
               <h4>{{kit_post.title}}</h4>
             </div>
-            <dd class="text-muted">가격 </dd> 
+            <dd class="text-muted">가격 </dd>
             <span id="post-price">&#8361; {{kit_post.price}}</span>
 
-          
-          <div class="row thumb">
-            <!------------------------------------------------- #TODO 여기부터 작업중 ------------->  
 
-            <!-- Button trigger modal -->
-            {%for photo in kit_post.postpic_set.all%}
-            <div class="col-md-3 col-sm-2 col-lg-4 col-xs-2 mini-thumb">
-              <a type="button" class="btn" id="thumbimg" data-toggle="modal" data-target="#imageModal{{forloop.counter0}}">
+            <div class="row thumb">
+              <!------------------------------------------------- #TODO 여기부터 작업중 ------------->
 
-                <img class="img-responsive{{forloop.counter0}}" src="{{MEDIA_URL}}{{photo.post_photo}}" alt="{{forloop.counter0}}">
-              </a>
-            </div>
-            {% endfor %}
+              <!-- Button trigger modal -->
+              {%for photo in kit_post.postpic_set.all%}
+              <div class="col-md-3 col-sm-2 col-lg-4 col-xs-2 mini-thumb">
+                <a type="button" class="btn" id="thumbimg" data-toggle="modal" data-target="#imageModal{{forloop.counter0}}">
+
+                  <img class="img-responsive{{forloop.counter0}}" src="{{MEDIA_URL}}{{photo.post_photo}}" alt="{{forloop.counter0}}">
+                </a>
+              </div>
+              {% endfor %}
 
 
-            <!-- Modal -->
-            {%for photo in kit_post.postpic_set.all%}
-            <div class="modal fade" id="imageModal{{forloop.counter0}}" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel" aria-hidden="true">
-              <div class="modal-dialog2">
-                <div class="modal-content2">
-                  <div class="modal-body2">
+              <!-- Modal -->
+              {%for photo in kit_post.postpic_set.all%}
+              <div class="modal fade" id="imageModal{{forloop.counter0}}" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel" aria-hidden="true">
+                <div class="modal-dialog2">
+                  <div class="modal-content2">
+                    <div class="modal-body2">
 
                       <img type="button" data-dismiss="modal" aria-lable="Close" class="img-responsive{{forloop.counter0}}" src="{{MEDIA_URL}}{{photo.post_photo}}" alt="{{forloop.counter0}}">
 
+                    </div>
                   </div>
-                </div>                    
 
+                </div>
               </div>
-            </div>
-            {% endfor %}
+              {% endfor %}
 
-            <!-- END MODAL -->
-          </div> <!-- .row thumb -->
-          <!------------------------------------------------- #TODO 여기 작업중 END ------------->      
+              <!-- END MODAL -->
+            </div> <!-- .row thumb -->
+            <!------------------------------------------------- #TODO 여기 작업중 END ------------->
 
             <div class="panel panel-default">
               <div class="panel-heading" role="tab" id="headingOne">
@@ -247,35 +244,32 @@
 
                   {% include 'userapp/layout/loginform.html' %}
                 </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                  <!--                    <button type="button" class="btn btn-primary">Save changes</button>-->
-                </div>
               </div>
             </div>
           </div>
           {% endif %}
           <!-- END MODAL -->
 
-        </div> <!-- /.post-detail -->    
+        </div> <!-- /.post-detail -->
       </div>
     </div>
 
-    <div class="col-md-12 col-lg-12 col-xs-12 col-sm-12 well">
+    <div class="col-md-12 col-lg-12 col-xs-12 col-sm-12 well" style="height:100%;">
       <div class="content-summernote">
         <h4 class="title-summer">상세 정보</h4>
-
-        {%for detail in kit_post.postdetail_set.all%}
-        {{detail.post_detail|safe}}
-        {% endfor %}
+        <div>
+          {%for detail in kit_post.postdetail_set.all%}
+          {{detail.post_detail|safe}}
+          {% endfor %}
+        </div>
       </div>
     </div>
 
 
   </div> <!-- /.post-content -->
-  </div>
-  
-  </div> <!-- /#wrap -->
+</div>
+
+</div> <!-- /#wrap -->
 <div id="push"></div>
 {% include "userapp/layout/footer.html" %}
 </body>
