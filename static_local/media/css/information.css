@@ -1,0 +1,3 @@
+.before-create {width:100%; height:100%; position:fixed; background:#47c9af;z-index:100;text-align:center;}
+.before-create-btn {padding-top:0;font-size:150px;position:relative;z-index:9999;}
+.before-create-btn img{margin-top:20rem;}

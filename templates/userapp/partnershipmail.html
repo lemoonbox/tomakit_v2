@@ -9,14 +9,19 @@
 /*  #wrap {margin-bottom:0px;}*/
   textarea {resize:none;}
   button [type="submit"] {right:0;}
+
 </style>
 
 <body>
-  <div id="wrap">
-    
+
+  <!-- information -->
+  {%include "information/before-create.html"%}
+  <!-- /end information -->
+  
+  <div id="wrap">    
   {% include "userapp/layout/nav.html" %}
   <div class="container">
-    <div class="well">
+    <div id="class-form" class="well hidden">
   <form method="POST" action="">
         {% csrf_token%}
         {% for field in emailform %}

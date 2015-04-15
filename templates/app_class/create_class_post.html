@@ -22,21 +22,46 @@
   textarea {resize:none; margin-top:5px;}
   .info {margin-left:5px; margin-right:1px; display:inline-block; vertical-align:text-bottom;}
 
-  #id_address {margin-top:5px; max-width:500px;}
+  #id_address {margin-top:5px; max-width:400px;
+/*    background:url("{%static 'media/icon/magnifier13.png'%}") no-repeat center right;*/
+  }
 
   .errorlist {list-style-image: url('{% static "media/icon/info.png" %}');vertical-align: middle; list-style-position: outside; padding-left:25px;}
   .well .btn {margin-top:5px;}
-
+  .before-create {width:100%; height:100%; position:fixed; background:#47c9af;z-index:100;text-align:center;}
+  .before-create-btn {padding-top:0;font-size:150px;position:relative;z-index:9999;}
+  .before-create-btn img{margin-top:20rem;}
+  #id_post_detail_iframe {width:99%;padding:1px;}
 </style>
 
 <body>
+  
+  <!-- information -->
+  {%include 'userapp/layout/loader.html'%}
+<!--
+  <div class="before-create">
+    <a class="before-create-btn" href="#class-form"><img src="{%static 'media/icon/create-emerald.png'%}"></a>
+  </div>
+  <script type="text/javascript">
+    $(function () {
+      $('.before-create-btn').click(function (event) {
+        event.preventDefault();
+        var target = $(this).attr('href');
+        $('.before-create-btn, .before-create').fadeOut('slow');
+        $(target).toggleClass('hidden show');
+      });
+    });
+  </script>
+-->
+  <!-- /end information -->
+   
   <div id="wrap">
     {% include "userapp/layout/nav.html"%}
     
-  <div class="container">
-    <fieldset>
-
-      <div class="well">
+      <div class="container">
+    
+    <fieldset>      
+      <div id="class-form" class="well">
         <legend><h3><img class="icon" src='{%static "media/icon/configure.png" %}'> 강좌 등록 <small> 항목을 정확히 기입해주세요.</small></h3></legend>
         <form method="POST" action="{{request.path}}" enctype="multipart/form-data">
           {% csrf_token%}
@@ -66,7 +91,7 @@
               <input id="id_category_6" name="category" type="checkbox" value="beauty" /> for Beauty</label><br/>
           </div>
 
-          <label for="title">제목 : </label>
+          <label for="title">강좌명 : </label>
           <input id="id_title" name ="title" placeholder ="ex) 마음을 가라앉히는 민화 그리기, 세상에 하나뿐인 가죽 클러치 만들기" class="form-control" style="max-width: 480px;" autofocus>
           <span class="error"> 
             {% if class_createform.title.errors %}
@@ -76,7 +101,7 @@
           <br />
 
 
-          <label for="price">가격 : </label>
+          <label for="price">수강료 : </label>
           <input id="id_price" name ="price" placeholder="숫자만 입력해주세요" class="form-control" style="max-width:170px;"><span> 원</span>
           <span class="error">        
             {% if class_createform.price.errors %}
@@ -165,9 +190,7 @@
             {{ class_createform.address.errors|striptags }}
             {% endif %}
           </span>
-          <input id="id_address" name = "address" placeholder="정확한 주소를 입력해주세요" class="form-control">
-          <br />
-
+          {%include "map/postcode.html"%}
 
 
           <div class="form-photo">
@@ -199,6 +222,8 @@
 
         </form>
       </div>
+
+
     </fieldset>
   </div>
     <div id="push"></div>
