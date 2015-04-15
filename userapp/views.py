@@ -42,11 +42,14 @@ from DIY_tool import settings
 # Create your views here.
 def signup(request):
 
+
     ctx = Context({
         'error':None
     })
+    next=""
     if request.method == "GET":
         profile_form = ProfilesForm()
+        next=request.GET["next"]
 
     elif request.method =="POST" :
         profile_form = ProfilesForm(request.POST, request.FILES)
@@ -57,6 +60,7 @@ def signup(request):
             password = request.POST['password']
             password_confirm = request.POST['password_confirm']
             nick_name = request.POST['nick_name']
+            next=request.POST["next"]
 
             if password != password_confirm:
                 profile_form.add_error('password','비밀번호가 일치하지 않습니다. 정확히 입력해주세요.')
@@ -129,11 +133,11 @@ def signup(request):
                       'makerecipe@gmail.com', recipient, fail_silently=False,
                         html_message=cont)
 
-
-            return HttpResponseRedirect("/user/login/")
+            return HttpResponseRedirect("/user/login/?next="+next)
 
     return render(request, 'userapp/signup.html',{
-                    'profileform':profile_form,},)
+                    'profileform':profile_form,
+                    'next':next,},)
 
 
 def signup_confirm(request, *args, **kwargs):
@@ -254,17 +258,28 @@ def pw_reset_process(request, key):
 
 def login(request, *args, **kwargs):
 
-    login_form = LoginForm(request.POST or None)
-    print login_form.is_valid()
-    if request.POST and login_form.is_valid():
-        user = login_form.login(request)
-        if user:
-            authlogin(request, user)
-            return HttpResponseRedirect("/idealine")
-    return render(request, 'userapp/login.html', {'login_form':login_form})
+    next=""
+    if request.method=="GET":
+        login_form = LoginForm(None)
+        next=request.GET["next"]
+
+    elif request.method=="POST":
+        login_form = LoginForm(request.POST)
+        next=request.POST["next"]
+        if login_form.is_valid():
+            user = login_form.login(request)
+            if user:
+                authlogin(request, user)
+                return HttpResponseRedirect(next)
+
+    return render(request, 'userapp/login.html',
+                  {'login_form':login_form,
+                   'next':next
+                   })
 
 def logout(request, *args, **kwargs):
     res = django_logout(request, *args, **kwargs)
+    print request.path
     return res
 
 @login_required

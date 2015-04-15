@@ -21,8 +21,9 @@
   <div role="tabpanel" class="tab-pane active" id="signup">
     <div class="pop">
       <div id="register">
-        <form method="POST" action="" enctype="multipart/form-data" class="form-signin">
-
+        <form method="POST" action="{% url 'signup' %}" enctype="multipart/form-data" class="form-signin">
+            <input type="hidden" name="next" value="{{request.path}}"/>
+            {{request.path}}
           {% csrf_token%}
 
                   <h2 class="form-signin-heading">TOMAKIT 회원 등록</h2>
@@ -58,7 +59,7 @@
     <div class="modal-footer">
       <span class="change-link">
         이미 토마킷의 회원이신가요?
-        <a href="/user/login" class="#to_register">로그인하기!</a>
+        <a href="{% url 'login_url'%}?next={{request.path}}" class="#to_register">로그인하기!</a>
       </span>
     </div>
   </div>

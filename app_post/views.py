@@ -225,8 +225,7 @@ def class_detail(request, class_num):
         try:
             _class_post = Post.objects.get(pk=class_num)
         except _class_post.DoesNotExist:
-            pass
-            #raise Http404("post does not exist")
+            raise Http404("post does not exist")
     return render(request, 'app_class/class_post.html',
         {
             'class_post':_class_post
@@ -243,8 +242,7 @@ def kit_detail(request, kit_num):
             _kit_post = Post.objects.get(pk=kit_num)
 
         except _kit_post.DoesNotExist:
-            pass
-            #raise Http404("post does not exist")
+            raise Http404("post does not exist")
     return render(request, 'app_kit/kit_post.html',
         {
             'kit_post':_kit_post
