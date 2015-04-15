@@ -36,7 +36,7 @@
 
     dd {margin-top:10px;}
     h4 {margin-top:10px;margin-left:-1px;}
-    .icon {margin-left:5px; margin-right:5px; display:inline-block;vertical-align: text-bottom;}
+    .icon {margin-left:5px; margin-right:5px; display:inline-block;vertical-align:middle;}
 
     /* PHOTO / CAROUSEL / MEDIA / CAPTION
     ========================================================== */
@@ -276,7 +276,7 @@
 
 
         <div class="col-md-12 col-lg-12 col-xs-12 col-sm-12 well">
-            <dd class="text-muted">위치 </dd>
+          <dd class="text-muted"><img class="icon" src='{%static 'media/icon/mapico-ego.png' %}'>위치 </dd>
             <span id="post-add">{{class_post.address}}</span>
             {% include 'map/mapapi.html' %}
         </div>
