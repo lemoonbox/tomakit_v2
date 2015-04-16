@@ -1,3 +1,5 @@
+@import url("webfont.css");
+
 body {
   background-color: #eee;}
 /*
@@ -12,12 +14,14 @@ body {
 }
 */
 
+
 /* Sticky footer styles
 -------------------------------------------------- */
 html,
 body {
   height: 100%;
   /* The html and body elements cannot have any padding or margin. */
+  font-family:Nanum Gothic;
 }
 
 /* Wrapper for page content to push down footer */
@@ -30,25 +34,59 @@ body {
 }
 
 /* Set the fixed height of the footer here */
-#push,
+#push{height:80px;}
 #footer {
-  height: 80px;
+  height: 240px;
 }
 #footer {
-  background-color: #f5f5f5;
+  background-color: 
+    #47c9af;
+/*  #f5f5f5;*/
+/*  border-top:10px solid white;*/
+}
 
-}
+#footer div {font-family:Titillium web;}
+
+#upper-footer {height:120px;background-color:#47c9af;width:100%;padding-top:10px;margin-left:-20px;}
+.footer-nav {margin:auto;margin-top:20px;font-family:Nanum Gothic;}
+.footer-nav ul{text-align: center; list-style:outside;list-style-type: none;}
+.footer-nav li {display:inline;padding:10px;}
+.footer-nav a {color:white;font-size:16px;font-weight:600;}
+
+
+#bi .logo {font-family:Titillium web, sans-serif; color:cornsilk;font-size:24px;font-weight:600;word-break:none;white-space:nowrap;}
+.credit {padding-left:10px;}
+/*.name {color:silver;}*/
 
 /* Lastly, apply responsive CSS fixes as necessary */
+
+@media (max-width: 1600px) {
+  .container .logo {
+    margin: 10px 0;
+  }
+  .container .credit {
+    margin: 20px 0;
+  }
+}
+
 @media (max-width: 767px) {
-  #footer {
+  #footer, #upper-footer,{
     margin-left: -20px;
     margin-right: -20px;
     padding-left: 20px;
     padding-right: 20px;
     text-align: center;
    }
+  #upper-footer {height:80px;}
+  .container .logo {
+    margin: 10px 0;margin-top:10px;margin-bottom:0px;
+  }
+  .container .credit {
+    margin: 10px 0; margin-left:-10px;
+  }
 }
+
+*/
 /* Custom page CSS
 -------------------------------------------------- */
 /* Not required for template or sticky footer method. */
@@ -56,9 +94,11 @@ body {
 #wrap > .container {
   padding-top: 30px;
 }
-.container .credit {
-  margin: 20px 0;
+.container #bi {
+  margin: 10px 0;
 }
+.container hr {
+  width:100%;border-top:3px solid cornsilk;}
 
 code {
   font-size: 80%;

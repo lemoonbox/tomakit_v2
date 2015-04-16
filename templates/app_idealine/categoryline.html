@@ -7,7 +7,7 @@
 
 <style>
   #wrap {margin-bottom:60px;}
-  .row {margin-left:0px;}
+  .row {margin-left:0px;margin-top:40px;}
 
   .thumbnail {border-radius:1px;}
   .thumbnail img{ position:relative; z-index:9;margin:0px;}
@@ -42,7 +42,7 @@
           <div class="itembox">
             <div class="thumbnail">
               {% if item.type.type_name == "class"%}
-              <span class="tag">CLASS</span>
+<!--              <span class="tag">CLASS</span>-->
               <!--classpost-->
               <div class="ttt">
               <a href="http://{{HTTP_HOST}}/post/class/{{item.id}}">
@@ -52,7 +52,7 @@
               <div class="caption">
                 <div class="ellipsis"><a href="http://{{HTTP_HOST}}/post/class/{{item.id}}" class="title">{{item.title}}</a></div>
                 &#8361;{{item.price}}<p class="sr-only">원</p> 
-<!--                <span class="tag"> · CLASS</span>-->
+                <span class="tag"> · CLASS</span>
                 
                 {% if user.is_authenticated %}
                 <a href="http://{{HTTP_HOST}}/post/class/{{item.id}}">
@@ -63,7 +63,7 @@
                 </a>
                 {% elif item.type.type_name == "kit"%}
                 <!--kitpost-->
-                  <span class="tag">KIT</span>
+<!--                  <span class="tag">KIT</span>-->
                 <div class="ttt">
                 <a href="http://{{HTTP_HOST}}/post/kit/{{item.id}}">
                   <img src="{{MEDIA_URL}}{{item.postpic_set.first.post_photo}}"></a>
@@ -72,7 +72,7 @@
                   <div class="ellipsis">
                     <a href="http://{{HTTP_HOST}}/post/kit/{{item.id}}" class="title">{{item.title}}</a></div>
                   &#8361;{{item.price}}<p class="sr-only">원</p> 
-<!--                  <span class="tag"> · KIT</span>-->
+                  <span class="tag"> · KIT</span>
                   
                   {% if user.is_authenticated %}
                   <a href="http://{{HTTP_HOST}}/post/class/{{item.id}}">
