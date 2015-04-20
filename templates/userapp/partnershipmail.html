@@ -5,18 +5,23 @@
 </head>
 
 <style>
-  .well {margin:auto; max-width:800px;}
-/*  #wrap {margin-bottom:0px;}*/
+  .well {margin:auto;margin-top:80px; max-width:800px;}
+  #wrap {margin-bottom:0px;}
   textarea {resize:none;}
   button [type="submit"] {right:0;}
+
 </style>
 
 <body>
-  <div id="wrap">
-    
+
+  <!-- information -->
+  {%include "information/before-create.html"%}
+  <!-- /end information -->
+  
+  <div id="wrap">    
   {% include "userapp/layout/nav.html" %}
   <div class="container">
-    <div class="well">
+    <div id="class-form" class="well hidden">
   <form method="POST" action="">
         {% csrf_token%}
         {% for field in emailform %}
@@ -29,9 +34,27 @@
     <input id="id_modile" name="modile"  type="tel" class="form-control" placeholder="숫자만 입력해주세요"><br>
         <label for="content">토마킷과 어떤 아이템을 제휴하고 싶으신가요? 최대한 자세히 설명해주세요.</label>
     <textarea cols="40" class="form-control" id="id_content" name="content" rows="10"></textarea><br>
-        <button type = "submit" value="이메일 전송하기" class="btn btn-primary">이메일 보내기</button>
+        <button id="submit" type = "submit" value="이메일 전송하기" class="btn btn-primary">이메일 보내기</button>
 <!--                <input type = "submit" value="이메일 전송하기">-->
     </form>
+
+<!--
+      <link rel="stylesheet" type="text/css" href="{%static 'media/css/loader.css'%}">
+      <div class="loader">
+        <div class="loader7"></div>
+      </div>
+      <script type="text/javascript">
+      $(".loader").hide(){
+        $("loader7").fadeOut('slow')}
+      $('#submit').click(function(){
+        $(".loader").show();
+        $ajax({
+          success:function(result){
+            $('.loader}').hide();
+          }
+        })
+      </script>
+-->
     </div>
 </div>
     <div id="push"></div>

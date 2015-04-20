@@ -1,0 +1,21 @@
+{% load static from staticfiles %}
+
+
+<link rel="stylesheet" type="text/css" href="{%static 'media/css/information.css'%}">
+
+<!-- information -->
+
+<div class="before-create">
+  <a class="before-create-btn" href="#class-form"><img src="{%static 'media/icon/create-emerald.png'%}"></a>
+</div>
+<script type="text/javascript">
+  $(function () {
+    $('.before-create-btn').click(function (event) {
+      event.preventDefault();
+      var target = $(this).attr('href');
+      $('.before-create-btn, .before-create').fadeOut('slow');
+      $(target).toggleClass('hidden show');
+    });
+  });
+</script>
+<!-- /end information -->
