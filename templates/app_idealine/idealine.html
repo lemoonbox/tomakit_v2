@@ -5,11 +5,12 @@
 
 
 <title> TOMAKIT </title>
-<link rel="stylesheet" type="text/css" href="{%static 'media/css/loader.css'%}">
+
 <style>
   #wrap {margin-bottom:60px;}
-  .itembox {max-width:600px;margin:auto;}
+  .itembox {max-width:800px;margin:auto;}
   .thumbnail {padding:10px;border-radius:1px;}
+  .idealine {margin-top:150px;}
   img{width:100%;}
   img:hover{opacity:0.5;}
   .tag {color:lightgray;}
@@ -18,6 +19,7 @@
   .arrow {max-width:500px;margin:auto;margin-top:30px;font-size:50px;}
   .glyphicon {color:#47c9af;opacity:.5;}
   .glyphicon:hover {opacity:1;}
+
 </style>
 
 </head>
@@ -26,15 +28,16 @@
   <div id="wrap">
     {% include "userapp/layout/nav.html"%}
     <div class="container">
-      {%include "userapp/layout/loader.html"%}
+    {%include "userapp/layout/loader.html"%}
 
+<!--
       <script>
         $(function() {
           $("img.lazy").lazyload({effect : "fadeIn"});
         });
       </script>
-      
-      
+-->
+
       <div class="col-md-12 idealine">
         {% for item in lineitem %}
         {% with forloop.counter0|big_mid as check %}
@@ -44,27 +47,33 @@
           {% else %}
           <div class="mid_box">
             {% endif%}
+            
             {% endwith %}
             <div class="itembox">
               <div class="thumbnail">
                 {% if item.type.type_name == "class"%}
                 <!--classpost-->
                 <a href="http://{{HTTP_HOST}}/post/class/{{item.id}}">
-                  <img class="lazy img-responsive{{forloop.counter0}}" data-original="{{MEDIA_URL}}{{item.postpic_set.first.post_photo}}" alt="{{item.title}}"><br></a>
+                  <img class="img-responsive{{forloop.counter0}}" src="{{MEDIA_URL}}{{item.postpic_set.first.post_photo}}" alt="{{item.title}}"><br></a>
                 <a href="http://{{HTTP_HOST}}/post/class/{{item.id}}" class="title">{{item.title}}</a><br>
                 &#8361;{{item.price}}<p class="sr-only">원</p> <span class="tag"> · CLASS</span>
 
+
+                
                 {% elif item.type.type_name == "kit"%}
                 <!--kitpost-->
                 <a href="http://{{HTTP_HOST}}/post/kit/{{item.id}}">
-                  <img class="lazy img-responsive{{forloop.counter0}}" data-original="{{MEDIA_URL}}{{item.postpic_set.first.post_photo}}" alt="{{item.title}}"><br></a>
+                  <img class="img-responsive{{forloop.counter0}}" src="{{MEDIA_URL}}{{item.postpic_set.first.post_photo}}" alt="{{item.title}}"><br></a>
                 <a href="http://{{HTTP_HOST}}/post/kit/{{item.id}}" class="title">{{item.title}}</a><br>
                 &#8361;{{item.price}}<p class="sr-only">원</p> <span class="tag"> · KIT</span>
+                
             {% endif %}
               </div> <!-- /.thumbnail -->
             </div> <!-- .itembox -->
           </div>
-            {% endfor%}          
+
+            {% endfor%}
+          
         </div>
         <div class="arrow">
           {% for arrow in arrows%}
@@ -82,7 +91,6 @@
       </div> <!-- /.idealine -->
       <div id="push"></div>
   </div> <!-- /.container -->
-
 </div> <!--/#wrap-->
 {% include 'userapp/layout/footer.html' %}
 </body>

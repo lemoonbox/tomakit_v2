@@ -1,0 +1,8 @@
+#hi span {font-family: sans-serif;} #hi strong:hover {color: white;}
+/*  .container-fluid {padding-left:5%;padding-right:5%;}*/
+/*
+#navbar a:hover {background-color:#ddd;}
+#nav-user a:first-child:hover{background-color:transparent; background-color:#ddd;}
+*/
+.navbar-static-top {z-index:501;position:relative;top:100px;}
+.navbar-brand {color:black;font-family:Titillium Web;font-weight: 900;font-size:24px;}

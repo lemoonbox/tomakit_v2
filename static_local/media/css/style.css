@@ -13,7 +13,41 @@ body {
   background: 50% 50% no-repeat rgb(249,249,249);
 }
 */
+/* Sticky Header stylex
+----------------------------------------------------*/
+header{
+  top:0;
+  position: fixed;
+  width: 100%;
+  text-align: center;
+  line-height: 150px;
+  height: 150px;
+  background: #47c9af;
+  color: #fff;
+  z-index: 501;
+  // set animation
+  -webkit-transition: all 0.4s ease;
+  transition: all 0.4s ease;
+}
+header h1 {font-family:Hanna;
+/*  font-weight:600;*/
+  font-size:50px;}
 
+header.sticky { 
+  line-height: 30px;
+  height: 30px; 
+  text-align: left;
+  z-index:502;
+}
+
+header.sticky h1 {
+  margin-top:7px;
+  font-size:14px;
+  padding-left:20px;
+}
+
+nav {z-index:501;top:100px;}
+nav.sticky {z-index:500;top:0px;}
 
 /* Sticky footer styles
 -------------------------------------------------- */
@@ -32,20 +66,13 @@ body {
   /* Negative indent footer by it's height */
   margin: 0 auto -60px;
 }
-
 /* Set the fixed height of the footer here */
 #push{height:80px;}
 #footer {
   height: 240px;
 }
-#footer {
-  background-color: 
-    #47c9af;
-/*  #f5f5f5;*/
-/*  border-top:10px solid white;*/
-}
 
-#footer div {font-family:Titillium web;}
+#footer {font-family:Titillium web;background-color:#47c9af;}
 
 #upper-footer {height:120px;background-color:#47c9af;width:100%;padding-top:10px;margin-left:-20px;}
 .footer-nav {margin:auto;margin-top:20px;font-family:Nanum Gothic;}
@@ -60,14 +87,13 @@ body {
 
 /* Lastly, apply responsive CSS fixes as necessary */
 
-@media (max-width: 1600px) {
   .container .logo {
     margin: 10px 0;
   }
   .container .credit {
     margin: 20px 0;
   }
-}
+
 
 @media (max-width: 767px) {
   #footer, #upper-footer,{
@@ -82,7 +108,7 @@ body {
     margin: 10px 0;margin-top:10px;margin-bottom:0px;
   }
   .container .credit {
-    margin: 10px 0; margin-left:-10px;
+    margin: 10px 0;
   }
 }
 
@@ -98,7 +124,7 @@ body {
   margin: 10px 0;
 }
 .container hr {
-  width:100%;border-top:3px solid cornsilk;}
+  width:100%;border-top:3px solid cornsilk;margin-bottom:10px;}
 
 code {
   font-size: 80%;

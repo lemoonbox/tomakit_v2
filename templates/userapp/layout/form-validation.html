@@ -1,0 +1,102 @@
+<html>
+<head></head>
+<body>
+  <form action="" class="form">
+    <p>(*) 항목은 반드시 입력해 주세요.</p>
+    <ul>
+      <li>
+        <label for="uid">ID(*):</label>
+        <input id="uid" />
+        영문, 숫자, 언더스코어(_), 하이픈(-)이 포함된 3~16 문자.
+      </li>
+      <li>
+        <label for="upw">PW(*):</label>
+        <input id="upw" type="password" />
+        영문, 숫자, 언더스코어(_), 하이픈(-)이 포함된 6~18 문자.
+      </li>
+      <li>
+        <label for="mail">Email(*):</label>
+        <input id="mail" value="@" />
+      </li>
+      <li>
+        <label for="url">Web(*):</label>
+        <input id="url" value="http://" />
+      </li>
+      <li>
+        <label for="tel">Tel(*):</label>
+        <input id="tel" />
+        하이픈(-)은 입력하지 마세요.
+      </li>
+    </ul>
+    <input type="submit" value="전송" />
+  </form>
+  
+  <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript">
+  // <![CDATA[
+  jQuery( fucntion($) { //HTML 문서를 모두 읽으면 포함한 코드를 실행
+         var re_id = /^[a-z0-9_-]{3,16}$/; //아이디 검사식
+         var re_pw= /^[a-z0-9_-]{6,18}$/; //pw
+         var re_mail = /^([\w\.-]+)@([a-z\d\.-]\.([a-z\.]{2,6})$/; //email
+         var re_url = /^(https?:\/\)?([a-z\d\.-]+)\/([a-z\.]{2,6})([\/\w\.-]*)*\/?$/; //url
+         var re_tel = /^[0-9]{8,11}$/; //tel
+         
+         var
+         form = $('.form'),
+    uid = $('#uid'),
+    upw = $('#upw'),
+    mail = $('#mail'),
+    url = $('#url'),
+    tel = $('#tel');
+  
+  
+  form.submit( function() {
+    if (re_id.test(uid.val()) != true {
+        alert('[ID 입력 오류] 유효한 ID를 입력해 주세요. ');
+        uid.focus();
+        return flase;
+  } else if(re_pw.test(upw.val()) != true) {
+        alert('[PW 입력 오류] 유효한 PW를 입력해 주세요.');
+        upw.focus();
+        return false;
+  } else if(re_mail.test(mail.val()) != true {
+        alert('[Email 입력 오류] 유효한 이메일 주소를 입력해 주세요.');
+        mail.focus();
+        return false;
+  } else if(re_url.test(url.val()) != true) {
+        alert('[Web 입력 오휴] 유효한 웹 사이트 주소를 입력해 주세요.');
+        url.focus();
+        return false;
+  } else if(re_tel.test(tel.val()) != true) {
+        alert('[Tel 입력 오류] 유효한 전화번호를 입력해 주세요.');
+        tel.focus();
+        return false;
+  }
+  });
+  
+  $('#uid, #upw').after('<strong></strong>');
+  
+  uid.keyup( function() {
+    var s = $(this).next('strong');
+    if (uid.val().length == 0) {
+      s.text('');
+    } else if (uid.val().length <3) {
+      s.text('너무 짧아요.')'
+    } else if (uid.val().length > 16) {
+      s.text('너무 길어요.');
+    } else {
+      s.text('적당해요.');
+    }
+  });
+  
+  tel.keydown( function() {
+    if(event.keyCode==109 || event.keyCode==189 {
+       return false;
+       }
+       });
+  });
+  //]]>  
+  </script>  
+  
+  </body>
+</html>

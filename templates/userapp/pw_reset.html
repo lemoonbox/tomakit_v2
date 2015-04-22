@@ -5,7 +5,7 @@
 </head>
 
 <style>
-  .reset-form {width: 340px; margin:auto; padding-top: 100px; text-align: center;}
+  .reset-form {width: 340px; margin:auto;margin-top:150px; padding-top: 100px; text-align: center;}
   .reset-form input[type=email] {width:340px;margin:auto;}
   /*    .form-inline {width:350px;}*/
   .cancel {width:100px;}
@@ -24,7 +24,7 @@
           <label for="id_email" class="sr-only">Email</label>
           <input id="id_email" class="form-control input-lg" placeholder="Email" maxlength="100" name="email" type="email">
           <span class="help-block">입력하신 이메일로 비밀번호 변경 링크가 전송됩니다.</span>
-          <a href="/user/login"><button type="button" class="btn btn-lg btn-default cancel pull-left">취소</button></a>
+          <a href="javascript:history.back()"><button type="button" class="btn btn-lg btn-default cancel pull-left">취소</button></a>
           <button class="btn btn-lg btn-default reset-pwd pull-right" type = "submit" value="이메일 전송하기">비밀번호 변경</button>
 
         </form>

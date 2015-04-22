@@ -1,10 +1,11 @@
 {% load static from staticfiles %}
 {% include "userapp/layout/header.html" %}
 
-<title> TOMAKIT - 로그인 </title>
+<title> 로그인 </title>
 
 <style>
 #wrap {margin-bottom:0px;}
+  #wrapper {margin-top:150px;}
 </style>
 
 <body>
@@ -52,7 +53,7 @@
             <div class="signin-btn-p">
             <p class="change_link">
               아직 회원이 아니신가요?
-              <a href="/user/signup" class="to_register">함께해요!</a>
+              <a href="/user/signup/?next=/user/login/" class="to_register">함께해요!</a>
             </p>
             <button class="btn btn-lg btn-primary btn-block" type="submit">Log In</button>
             </div>

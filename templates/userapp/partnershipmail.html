@@ -1,11 +1,11 @@
 {% load static from staticfiles %}
 {%include "userapp/layout/header.html" %}
 
-    <title></title>
+    <title>제휴하기</title>
 </head>
 
 <style>
-  .well {margin:auto;margin-top:80px; max-width:800px;}
+  .well {margin:auto;margin-top:150px; max-width:800px;}
   #wrap {margin-bottom:0px;}
   textarea {resize:none;}
   button [type="submit"] {right:0;}
@@ -15,13 +15,14 @@
 <body>
 
   <!-- information -->
-  {%include "information/before-create.html"%}
+  {%comment%}  {%include "information/before-create.html"%}{%endcomment%}
   <!-- /end information -->
   
   <div id="wrap">    
   {% include "userapp/layout/nav.html" %}
   <div class="container">
-    <div id="class-form" class="well hidden">
+        
+    <div id="class-form" class="well">
   <form method="POST" action="">
         {% csrf_token%}
         {% for field in emailform %}

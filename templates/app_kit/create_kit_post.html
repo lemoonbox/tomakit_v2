@@ -6,6 +6,7 @@
 </head>
 
 <style>
+  fieldset {margin-top:150px;}
   .icon{height:30px; width:30px; display: inline-block; vertical-align:text-bottom;}
   legend {margin-bottom: 30px; padding-bottom: 15px; display:inline-block; vertical-align: middle;}
   .well {max-width: 800px; margin:auto;margin-bottom: 60px;}
@@ -25,11 +26,13 @@
 
   .errorlist {list-style-image: url('{% static "media/icon/info.png" %}');vertical-align: middle; list-style-position: outside; padding-left:25px;}
   .well .btn {margin-top:5px;}
+  #id_post_detail_iframe {width:95%;padding:1px;}
 </style>
 
 
 <body>
   <div id="wrap">
+
     {% include "userapp/layout/nav.html"%}
     <div class="container">
     <fieldset>
