@@ -74,7 +74,7 @@ def classcreate(request):
 
         if class_form.is_valid() and not error:
             if u_min_num > u_max_num:
-                class_form.add_error('minimum', u'최소인원은 최대 인원보다 많아야 합니다.')
+                class_form.add_error('minimum', u'최대인원은 최소인원보다 많아야 합니다.')
                 error =True
 
         #start make post
