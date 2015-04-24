@@ -2,13 +2,6 @@
 {% include "userapp/layout/header.html"%}
 
 <title> 회원가입 </title>
-
-<style>
-#wrap {margin-bottom:0px;}
-  #wrapper {margin-top:140px;}
-  .help-text {line-height:2;}
-  .ok {background-image:url({%static 'media/icon/tick11.png'%});width:100%;height:100%;display:inline;}
-</style>
   
 <body>
   <div id="wrap">
@@ -16,22 +9,16 @@
 
     <div class="container">
       <div id="wrapper">
-
-        <div id="register">
-          
-          
+        <div id="register" class="well">
           <form method="POST" action="" enctype="multipart/form-data" class="form-signin">
               <input type="hidden" name="next" value="{{next}}"/>
             {% csrf_token%}
 
             <h2 class="form-signin-heading">SIGN UP</h2>
-
             <label for="id_email" class="sr-only">이메일 주소</label>
             <input id="id_email" name="email" type="email"
                    class="form-control" placeholder="이메일" autofocus/>
 <!--            <p class="ok">&nbsp;</p>-->
-            
-            
             <label for="nick_name" class="sr-only">이름</label>
             <input id="nick_name" name="nick_name" type="text"
                    class="form-control" placeholder="사용자 별명" />
@@ -39,26 +26,15 @@
             <label for="id_password" class="sr-only">Password</label>
             <input id="id_password" name="password" type="password" 
                    class="form-control" placeholder="비밀번호" />
-            
-            
-            
-            
-
-              
             <label for="id_password_confirm" class="sr-only">Confirm Password</label>
             <input id="id_password_confirm" name="password_confirm" type="password"
                    class="form-control" placeholder="비밀번호 확인"/>
-
-            
             <br><label for="id_pro_photo" style="color: gray; font-family: sans-serif; font-size: 0.9em">프로필 이미지(선택):</label>
             <input id="id_pro_photo" name="pro_photo" type="file"/>
-
             <p class="change_link">이미 회원이신가요?
-
               <a href="/user/login/?next=/user/signup/" class="to_register">로그인하기</a>
             </p>
-            <button type="submit" class="btn btn-lg btn-primary btn-block ">회원가입</button>
-          </form>  
+            <input type="submit" class="btn btn-lg btn-primary" value="회원가입">          </form>  
  
         </div> <!--/register-->
       </div> <!--/wrapper-->
@@ -66,7 +42,7 @@
 
 
     <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
-    <script type="text/javascript" src="{% static 'media/js/form-validation.js' %}"></script>
+    <script type="text/javascript" src="{% static 'media/js/userform-validation.js' %}"></script>
     
     
   </div> <!-- wrap -->

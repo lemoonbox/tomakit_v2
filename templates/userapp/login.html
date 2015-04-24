@@ -3,33 +3,15 @@
 
 <title> 로그인 </title>
 
-<style>
-#wrap {margin-bottom:0px;}
-  #wrapper {margin-top:150px;}
-</style>
-
 <body>
+
   <div id="wrap">
     {% include "userapp/layout/nav.html" %}
 
     <div class="container">
       <div id="wrapper">
-
-        <div id="login">
-          {% if login_form.errors %}
-          <div id="form-error">
-            <div class="alert alert-warning">
-              <a href="#" class="close" data-dismiss="alert">&times;</a>
-              <p>정보를 정확히 입력해주세요:</p>
-              <table>
-                {% for field in login_form %}
-                {{ field.errors|striptags }}
-                {% endfor %}
-              </table>
-            </div>
-          </div>
-          {% endif %}
-          <form method="post" action="{% url 'login_url' %}" class="form-signin" autocomplete="off">
+        <div id="login" class="well">
+          <form method="POST" action="{% url 'login_url' %}" class="form-signin" autocomplete="off">
             <input type="hidden" name="next" value="{{next}}"/>
               {% csrf_token %}
             <h2 class="form-signin-heading">로그인</h2><br />
@@ -41,8 +23,21 @@
          
             <input type="password" name="password" placeholder="Password" class="form-control" required 
                    autocomplete="off" value="{{valid_password}}">            
-            
-            <br /><br /><br />
+            <br>
+
+            {% if login_form.errors %}
+            <div id="form-error">
+              <div class="alert alert-warning">
+                <a href="#" class="close" data-dismiss="alert">&times;</a>
+                <p>정보를 정확히 입력해주세요:</p>
+                <table>
+                  {% for field in login_form %}
+                  {{ field.errors|striptags }}
+                  {% endfor %}
+                </table>
+              </div>
+            </div>
+            {% endif %}
 <!--
             <p class="kepplogin">
               <input type="checkbox" name="loginkeeping" id="loginkeeping" value="loginkeeping" />
@@ -62,6 +57,7 @@
         </div>
       </div> <!--/wrapper-->
     </div> <!-- /container -->
+
 
 
     </div> <!-- wrap -->

@@ -6,9 +6,11 @@
 </head>
 
 <style>
+  
+  #class-form {margin-top:15%;}
   .icon{height:30px; width:30px; display: inline-block; vertical-align:text-bottom;}
   legend {margin-bottom: 30px; padding-bottom: 15px; display:inline-block; vertical-align: middle;}
-  #class-form {margin-top:150px;}
+
   .well { max-width: 800px; margin:auto; margin-bottom:60px; }
   .form-control {margin-bottom: 10px; display:inline-block;}
   /*  form > label {display:list-item;list-style:inside;}*/ /* #TODO label list로 필수 항목 정의하기 */
@@ -18,7 +20,7 @@
   .form-photo {margin-top: 15px; margin-bottom: 30px;}
   .form-photo > input[type=file] {color:gray; display:inline-block; margin-bottom:5px;}
   .form-photo p {margin-bottom: 10px; }
-  .error {font-weight: 100; display:inline-block; }
+
   label .form-hint {font-weight: 100; color:#eee;}
   textarea {resize:none; margin-top:5px;}
   .info {margin-left:5px; margin-right:1px; display:inline-block; vertical-align:text-bottom;}
@@ -27,6 +29,7 @@
 /*    background:url("{%static 'media/icon/magnifier13.png'%}") no-repeat center right;*/
   }
 
+  .error {font-weight: 100; display:inline-block; }
   .errorlist {list-style-image: url('{% static "media/icon/info.png" %}');vertical-align: middle; list-style-position: outside; padding-left:25px;}
   .well .btn {margin-top:5px;}
   .before-create {width:100%; height:100%; position:fixed; background:#47c9af;z-index:100;text-align:center;}
@@ -60,149 +63,150 @@
     {% include "userapp/layout/nav.html"%}
     
       <div class="container">
+      
     
-    <fieldset>      
-      <div id="class-form" class="well">
-        <legend><h3><img class="icon" src='{%static "media/icon/configure.png" %}'> 강좌 등록 <small> 항목을 정확히 기입해주세요.</small></h3></legend>
-        <form method="POST" action="{{request.path}}" enctype="multipart/form-data">
-          {% csrf_token%}
+        <fieldset>      
+          <div id="class-form" class="well">
+            <legend><h3><img class="icon" src='{%static "media/icon/configure.png" %}'> 강좌 등록 <small> 항목을 정확히 기입해주세요.</small></h3></legend>
+            <form method="POST" onsubmit="return checkForm(this);" class="create" action="{{request.path}}" enctype="multipart/form-data">
+              {% csrf_token%}
 
-          <label>카테고리 : </label>
-          <span class="error">
-            {% if class_createform.category.errors %}
-            <img class="error-icon" src='{% static "media/icon/triangle38.png" %}'>
-            {{ class_createform.category.errors|striptags }}<br/>
-            {% endif %}
-          </span>
+              <label>카테고리 : </label>
+              <span class="error">
+                {% if class_createform.category.errors %}
+                <img class="error-icon" src='{% static "media/icon/triangle38.png" %}'>
+                {{ class_createform.category.errors|striptags }}<br/>
+                {% endif %}
+              </span>
 
-          <div class="form-category">
-            <label class="checkbox-inline">
-              <input id="id_category_0" name="category" type="checkbox" value="baby" /> for Baby</label>
-            <label class="checkbox-inline">
-              <input id="id_category_1" name="category" type="checkbox" value="home" /> for Home</label>
-            <label class="checkbox-inline">
-              <input id="id_category_2" name="category" type="checkbox" value="funny" /> for Funny</label>
-            <label class="checkbox-inline">
-              <input id="id_category_3" name="category" type="checkbox" value="art" /> for Art</label>
-            <label class="checkbox-inline">
-              <input id="id_category_4" name="category" type="checkbox" value="fashion" /> for Fashion</label>
-            <label class="checkbox-inline">
-              <input id="id_category_5" name="category" type="checkbox" value="tast" /> for Taste</label>
-            <label class="checkbox-inline">
-              <input id="id_category_6" name="category" type="checkbox" value="beauty" /> for Beauty</label><br/>
-          </div>
+              <div class="form-category">
+                <label class="checkbox-inline">
+                  <input id="id_category_0" name="category" type="checkbox" value="baby" /> for Baby</label>
+                <label class="checkbox-inline">
+                  <input id="id_category_1" name="category" type="checkbox" value="home" /> for Home</label>
+                <label class="checkbox-inline">
+                  <input id="id_category_2" name="category" type="checkbox" value="funny" /> for Funny</label>
+                <label class="checkbox-inline">
+                  <input id="id_category_3" name="category" type="checkbox" value="art" /> for Art</label>
+                <label class="checkbox-inline">
+                  <input id="id_category_4" name="category" type="checkbox" value="fashion" /> for Fashion</label>
+                <label class="checkbox-inline">
+                  <input id="id_category_5" name="category" type="checkbox" value="tast" /> for Taste</label>
+                <label class="checkbox-inline">
+                  <input id="id_category_6" name="category" type="checkbox" value="beauty" /> for Beauty</label><br/>
+              </div>
 
-          <label for="title">강좌명 : </label>
-          <input id="id_title" name ="title" placeholder ="ex) 마음을 가라앉히는 민화 그리기, 세상에 하나뿐인 가죽 클러치 만들기" class="form-control" style="max-width: 480px;" autofocus>
-          <span class="error"> 
-            {% if class_createform.title.errors %}
-            <img class="info" src='{% static "media/icon/info.png" %}'>
-            <span style="">{{ class_createform.title.errors|striptags }}</span>
-            {% endif %}</span>
-          <br />
-
-
-          <label for="price">수강료 : </label>
-          <input id="id_price" name ="price" placeholder="숫자만 입력해주세요" class="form-control" style="max-width:170px;"><span> 원</span>
-          <span class="error">        
-            {% if class_createform.price.errors %}
-            <img class="info" src='{% static "media/icon/info.png" %}'>
-            {{ class_createform.price.errors|striptags }}
-            {% endif %}</span>
-          <br />
-
-
-
-          <label for="describe">강의 소개 : <span class="error">
-            {% if class_createform.describe.errors %}
-            <img class="info" src='{% static "media/icon/info.png" %}'>
-            {{ class_createform.describe.errors|striptags }}<br/>
-            {% endif %}
-            </span></label>
-          <textarea id="id_describe" name = "describe" rows=5 cols=50 maxlength=200 class="form-control"></textarea><br />
-
-
-          <label for="lessonday">강의 날짜 : </label>
-          <input data-provide="datepicker" type="date" class="form-control" id="id_lessonday" name="lessonday" style="max-width:200px;">          
-          
-          <span class="error">
-            {% if class_createform.lessonday.errors %}
-            <img class="info" src='{% static "media/icon/info.png" %}'>
-            {{ class_createform.lessonday.errors|striptags }}
-            {% endif %}
-          </span>
-          <br />
-
-
-          <label for="start_time">시작 시간 : </label>
-          <input id= "id_start_time" name ="start_time" type="time" class="form-control" style="max-width:200px;">
-          <span class="error"> 
-            {% if class_createform.start_time.errors %}
-            <img class="info" src='{% static "media/icon/info.png" %}'>
-            {{ class_createform.start_time.errors|striptags }}
-            {% endif %}</span>
-          <br />
-
-
-          <label for="end_time">종료 시간 : </label>
-          <input id= "id_end_time" name ="end_time" type="time" class="form-control" style="max-width:200px;">
-          <span class="error">
-            {% if class_createform.end_time.errors %}
-            <img class="info" src='{% static "media/icon/info.png" %}'>
-            {{ class_createform.end_time.errors|striptags }}
-            {% endif %}
-          </span>
-          <br />
-
-
-          <label for="minimum">최소 인원 : </label>
-          <input id="id_minimum" name = 'minimum' class="form-control" style="max-width:60px;"><span> 명</span>
-          <span class="error">
-            {% if class_createform.minimum.errors %}
-            <img class="info" src='{% static "media/icon/info.png" %}'>
-            {{ class_createform.minimum.errors|striptags }}
-            {% endif %}
-          </span><br />
-
-
-          <label for="maximum">최대 인원 : </label>
-          <input id="id_maximum" name = 'maximum' class="form-control" style="max-width:60px;"><span> 명</span>
-          <span class="error">      
-            {% if class_createform.maximum.errors %}
-            <img class="info" src='{% static "media/icon/info.png" %}'>
-            {{ class_createform.maximum.errors|striptags }}
-            {% endif %}</span>
-          <br />
-
-
-          <label for="contact_tel">연락처 : </label>
-          <input id="id_contact_tel" name="contact_tel" placeholder="숫자만 입력해주세요" class="form-control" style="max-width:200px;">
-          <span class="error">
-            {% if class_createform.contact_tel.errors %}
-            <img class="info" src='{% static "media/icon/info.png" %}'>
-            {{ class_createform.contact_tel.errors|striptags }}
-            {% endif %}</span>
-          <br />
-
-
-          <label for="address">주소 : </label>
-          <span class="error">
-            {% if class_createform.address.errors %}
-            <img class="info" src='{% static "media/icon/info.png" %}'>
-            {{ class_createform.address.errors|striptags }}
-            {% endif %}
-          </span>
-          {%include "map/postcode.html"%}
-
-
-          <div class="form-photo">
-            <label>사진 : </label>
-              <span class="error">          
-                {% if classpic_createform.class_photo.errors %}
+              <label for="title">강좌명 : </label>
+              <input id="id_title" name ="title" placeholder ="ex) 마음을 가라앉히는 민화 그리기, 세상에 하나뿐인 가죽 클러치 만들기" class="form-control" style="max-width: 480px;" autofocus>
+              <span class="error"> 
+                {% if class_createform.title.errors %}
                 <img class="info" src='{% static "media/icon/info.png" %}'>
-                {{ classpic_createform.class_photo.errors|striptags }}
+                <span style="">{{ class_createform.title.errors|striptags }}</span>
                 {% endif %}</span>
-            <p class="text-muted">(파일을 하나 이상 선택해주세요)</p>
+              <br />
+
+
+              <label for="price">수강료 : </label>
+              <input id="id_price" name ="price" placeholder="숫자만 입력해주세요" class="form-control" style="max-width:170px;"><span> 원</span>
+              <span class="error">        
+                {% if class_createform.price.errors %}
+                <img class="info" src='{% static "media/icon/info.png" %}'>
+                {{ class_createform.price.errors|striptags }}
+                {% endif %}</span>
+              <br />
+
+
+
+              <label for="describe">강의 소개 : <span class="error">
+                {% if class_createform.describe.errors %}
+                <img class="info" src='{% static "media/icon/info.png" %}'>
+                {{ class_createform.describe.errors|striptags }}<br/>
+                {% endif %}
+                </span></label>
+              <textarea id="id_describe" name = "describe" rows=5 cols=50 maxlength=200 class="form-control"></textarea><br />
+
+
+              <label for="lessonday">강의 날짜 : </label>
+              <input data-provide="datepicker" type="date" class="form-control" id="id_lessonday" name="lessonday" style="max-width:200px;">          
+
+              <span class="error">
+                {% if class_createform.lessonday.errors %}
+                <img class="info" src='{% static "media/icon/info.png" %}'>
+                {{ class_createform.lessonday.errors|striptags }}
+                {% endif %}
+              </span>
+              <br />
+
+
+              <label for="start_time">시작 시간 : </label>
+              <input id= "id_start_time" name ="start_time" type="time" class="form-control" style="max-width:200px;">
+              <span class="error"> 
+                {% if class_createform.start_time.errors %}
+                <img class="info" src='{% static "media/icon/info.png" %}'>
+                {{ class_createform.start_time.errors|striptags }}
+                {% endif %}</span>
+              <br />
+
+
+              <label for="end_time">종료 시간 : </label>
+              <input id= "id_end_time" name ="end_time" type="time" class="form-control" style="max-width:200px;">
+              <span class="error">
+                {% if class_createform.end_time.errors %}
+                <img class="info" src='{% static "media/icon/info.png" %}'>
+                {{ class_createform.end_time.errors|striptags }}
+                {% endif %}
+              </span>
+              <br />
+
+
+              <label for="minimum">최소 인원 : </label>
+              <input id="id_minimum" name = 'minimum' class="form-control" style="max-width:60px;"><span> 명</span>
+              <span class="error">
+                {% if class_createform.minimum.errors %}
+                <img class="info" src='{% static "media/icon/info.png" %}'>
+                {{ class_createform.minimum.errors|striptags }}
+                {% endif %}
+              </span><br />
+
+
+              <label for="maximum">최대 인원 : </label>
+              <input id="id_maximum" name = 'maximum' class="form-control" style="max-width:60px;"><span> 명</span>
+              <span class="error">      
+                {% if class_createform.maximum.errors %}
+                <img class="info" src='{% static "media/icon/info.png" %}'>
+                {{ class_createform.maximum.errors|striptags }}
+                {% endif %}</span>
+              <br />
+
+
+              <label for="contact_tel">연락처 : </label>
+              <input id="id_contact_tel" name="contact_tel" placeholder="숫자만 입력해주세요" class="form-control" style="max-width:200px;">
+              <span class="error">
+                {% if class_createform.contact_tel.errors %}
+                <img class="info" src='{% static "media/icon/info.png" %}'>
+                {{ class_createform.contact_tel.errors|striptags }}
+                {% endif %}</span>
+              <br />
+
+
+              <label for="address">주소 : </label>
+              <span class="error">
+                {% if class_createform.address.errors %}
+                <img class="info" src='{% static "media/icon/info.png" %}'>
+                {{ class_createform.address.errors|striptags }}
+                {% endif %}
+              </span>
+              {%include "map/postcode.html"%}
+
+
+              <div class="form-photo">
+                <label>사진 : </label>
+                <span class="error">          
+                  {% if classpic_createform.class_photo.errors %}
+                  <img class="info" src='{% static "media/icon/info.png" %}'>
+                  {{ classpic_createform.class_photo.errors|striptags }}
+                  {% endif %}</span>
+                <p class="text-muted">(파일을 하나 이상 선택해주세요)</p>
 
 
             <label for="id_photo1" class="sr-only">사진 1 : </label> 
@@ -221,12 +225,33 @@
           <p class="text-muted">줄 바꿈 안하고 이미지 삽입하면 엔터가 삽입이 안됨.</p>
           {{class_detailform}}
           <input type="submit" class="btn btn-default" value="클래스 올리기">
-
+          
+  
         </form>
       </div>
-
-
     </fieldset>
+        
+        
+        
+        <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript">
+
+  function checkForm(form)
+  {
+    if (form.id_address.value == "") {
+      alert("빈 칸을 채워주세요");
+      form.id_address.focus();
+      return false;
+    }
+  }
+        </script>
+        
+        <!--
+        <script type="text/javascript" src="{% static 'media/js/createform-validation.js' %}"></script>
+        
+-->
+        
+        
   </div>
     <div id="push"></div>
   </div> <!--wrap-->

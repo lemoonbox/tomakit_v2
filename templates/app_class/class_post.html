@@ -90,7 +90,7 @@
 
           <div class="col-md-12 photo">
             <div class="post-photo">
-              <section class="ha-waypoint" data-animate-down="ha-header-show" data-animate-up="ha-header-show">
+             
               <div class="thumbnail">
                 <div id="class-post-Carousel" class="carousel slide" data-ride="carousel">
                   <!--Indicators -->
@@ -137,7 +137,6 @@
                   <h4>{{class_post.title}}</h4>
                 </div>
               </div>
-                </section>
             </div>
           </div>
         </div>
@@ -288,12 +287,12 @@
 
       <div class="col-md-12 col-lg-12 col-xs-12 col-sm-12 well">
         <div class="content-summernote">
-          <section class="ha-waypoint" data-animate-down="ha-header-hide" data-animate-up="ha-header-show">
+
           <h4 class="title-summer">상세 정보</h4>
           {%for detail in class_post.postdetail_set.all%}
           {{detail.post_detail | safe}}
           {% endfor %}
-          </section>
+
         </div>
       </div>
       

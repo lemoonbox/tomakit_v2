@@ -38,7 +38,7 @@
     <fieldset>
       <div class="well">
         <legend><h3><img class="icon" src='{%static "media/icon/configure.png" %}'> KIT 판매 등록 <small> 항목을 정확히 기입해주세요.</small></h3></legend>
-        <form method="POST" action="{{request.path}}" enctype="multipart/form-data">
+        <form method="POST" class="create" action="{{request.path}}" enctype="multipart/form-data">
           {% csrf_token%}
 
           <label>카테고리 : </label>
