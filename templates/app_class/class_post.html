@@ -7,10 +7,11 @@
 <style>
 
   .container {display:block;}
-  .post-content {margin:auto;margin-top:150px;vertical-align:text-bottom;}
+  .post-content {margin:auto;margin-top:150px;height:650px;}
   .well {background-color:white;
-    padding:15px; border-radius:0px; box-shadow: inset 1px 1px 0 rgba(0,0,0,.1),inset 0 -1px 0 rgba(0,0,0,.07);}
-  .photo {height:60rem;}
+    padding:15px; border-radius:0px;
+    box-shadow:inset 1px 3px 0 rgba(0,0,0,.1),inset 0 -1px 0 rgba(0,0,0,.07);}
+  .photo {padding:5px;}
 
   .post-detail {margin:auto; margin-bottom:10px;
     padding-bottom:10px;}
@@ -20,7 +21,7 @@
     width:100%; padding-bottom: 10px;margin-bottom:15px; word-break:break-all;}
   /* #NOTE : word-break: break-all ======================== */
   #post-price {font-size: 18px;display:block; margin-bottom:20px;}
-  #post-add {padding-bottom:10px;}
+  #post-add {padding-bottom:5px;}
 
   .panel {width:100%; border:0px; border-radius:0px;margin-bottom:10px;}
   .panel .contact {border-radius:3px;border-color:red;}
@@ -33,6 +34,7 @@
 
   .content-summernote {margin:auto;padding-top:10px;padding-bottom:15px;overflow:auto;}
   .title-summer {border-bottom: 5px double #ddd; padding-bottom:10px;}
+  .summer {height:450px;}
 
   dd {margin-top:10px;}
   h4 {margin-top:10px;margin-left:-1px;}
@@ -40,10 +42,11 @@
 
   /* PHOTO / CAROUSEL / MEDIA / CAPTION
   ========================================================== */
-  .post-photo {margin:auto;margin-top:10px;padding-top:0px;margin-bottom:15px; width:100%}
-  .thumbnail {margin:auto;height:52rem; padding:0px; border:0px;}
-  .carousel-inner {height: 48rem;overflow:hidden; position: relative; z-index: 1;margin-bottom:1em;}
+  .post-photo {margin:auto;padding-top:0px;width:100%}
+  .thumbnail {padding:0px; border:0px;}
+  .carousel-inner {overflow:hidden; position: relative; z-index: 1;margin-bottom:1em;}
   .carousel-inner img{margin:auto;width:100%;position:relative;z-index:0;} /*if want width:500px img delete this */
+  .item {height:30em; overflow:hidden;}
   .carousel-control {width:10%;}
   .carousel-control.left, .carousel-control.right {
     background-image: none; opacity:0.5; z-index: 2; color:#ddd;}
@@ -56,14 +59,16 @@
   .mini-thumb img{border:1px solid #eee;width:100%;position:relative;z-index:5;}
   .mini-thumb:hover{opacity:0.5;}
 
-  .caption {z-index:15; background-color:white;}
+  .caption {z-index:15; background-color:white;height:15px;padding-top:0px;}
   .caption > h4 {margin:0;padding:0;}
+  .map {height:450px;}
   /*======================================================== */
 
-  #cont-btn {margin-top:5px;width:100%;color:black;border:2px solid #66CC99;}
+  #cont-btn {margin-top:5px;width:100%;color:#66CC99;font-weight:400;border:2px solid #66CC99;}
   #cont-btn:hover {background-color:#eee; opacity:0.8; border:2px solid #66cc99;}
 
-  .modal-dialog {max-width:450px;}
+
+  .modal-dialog {max-width:450px;top:250px;}
   .modal-body {margin:auto;text-align: center;}
   .modal-body p {margin-top: 10px;}
   .modal-dialog2 {width:60%;vertical-align: middle; margin:auto;background-color:transparent;padding:0;}
@@ -84,7 +89,7 @@
 
 
 
-        <div class="col-md-7 well col-md-offset-0 well-lg photo">
+        <div class="col-md-8 well col-md-offset-0 well-lg photo">
 
 
 
@@ -141,7 +146,7 @@
           </div>
         </div>
 
-        <div class="col-md-4 col-md-offset-1 well detail">
+        <div class="col-md-4 well detail">
           <div class="col-md-12 box">
             <div class="post-detail">
 
@@ -279,13 +284,13 @@
 
 
 
-      <div class="col-md-12 col-lg-12 col-xs-12 col-sm-12 well">
+      <div class="col-md-4 col-lg-4 col-xs-12 col-sm-4 well map">
         <dd class="text-muted"><img class="icon" src="{%static 'media/icon/mapico-ego.png'%}">위치 </dd>
         <span id="post-add">{{class_post.address}}</span>
         {% include 'map/mapapi.html' %}
       </div>
 
-      <div class="col-md-12 col-lg-12 col-xs-12 col-sm-12 well">
+      <div class="col-md-8 col-lg-8 col-xs-12 col-sm-8 well summer">
         <div class="content-summernote">
 
           <h4 class="title-summer">상세 정보</h4>
