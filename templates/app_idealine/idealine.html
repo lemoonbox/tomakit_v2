@@ -9,12 +9,17 @@
 <style>
   #wrap {margin-bottom:60px;}
   .itembox {max-width:800px;margin:auto;}
-  .thumbnail {padding:10px;border-radius:1px;}
-  .idealine {margin-top:150px;}
-  img{width:100%;}
-  img:hover{opacity:0.5;}
+  .thumbnail {padding:5px;border-radius:1px;padding-bottom:20px;}
+  .idealine {margin-top:150px;text-align: center;}
+  .big_box img{width:100%;}
+  .ttt img:hover{opacity:0.3;z-index:1;}
+  .ttt {background:url('{%static "media/icon/tomato2.jpg" %}') no-repeat center;}
+  .ttt:hover{z-index:2;opacity:1;}
+  .mid_box .ttt {height:240px; overflow:hidden;margin-bottom:20px;}
+  .mid_box {height:350px;width:50%;max-width:400px;margin:auto; margin-right:-1px;display:inline-block;}
+  .mid_box .ttt a img {width:600px;}
   .tag {color:lightgray;}
-  .title {color:dimgray;}
+  .title {color:dimgray;font-weight:800;}
   .title:hover {color:skyblue;text-decoration:none;}
   .arrow {max-width:500px;margin:auto;margin-top:30px;font-size:50px;}
   .glyphicon {color:#47c9af;opacity:.5;}
@@ -46,26 +51,30 @@
         <div class="big_box">
           {% else %}
           <div class="mid_box">
-            {% endif%}
+            {% endif %}
             
             {% endwith %}
             <div class="itembox">
               <div class="thumbnail">
                 {% if item.type.type_name == "class"%}
                 <!--classpost-->
+                <div class="ttt">
                 <a href="http://{{HTTP_HOST}}/post/class/{{item.id}}">
-                  <img class="img-responsive{{forloop.counter0}}" src="{{MEDIA_URL}}{{item.postpic_set.first.post_photo}}" alt="{{item.title}}"><br></a>
+                  <img class="img{{forloop.counter0}}" src="{{MEDIA_URL}}{{item.postpic_set.first.post_photo}}" alt="{{item.title}}"><br></a>
+                </div>
                 <a href="http://{{HTTP_HOST}}/post/class/{{item.id}}" class="title">{{item.title}}</a><br>
-                &#8361;{{item.price}}<p class="sr-only">원</p> <span class="tag"> · CLASS</span>
+                <span class="">&#8361;{{item.price}}</span><p class="sr-only">원</p> <span class="tag"> · CLASS</span>
 
 
                 
                 {% elif item.type.type_name == "kit"%}
                 <!--kitpost-->
+                <div class="ttt">
                 <a href="http://{{HTTP_HOST}}/post/kit/{{item.id}}">
-                  <img class="img-responsive{{forloop.counter0}}" src="{{MEDIA_URL}}{{item.postpic_set.first.post_photo}}" alt="{{item.title}}"><br></a>
+                  <img class="img{{forloop.counter0}}" src="{{MEDIA_URL}}{{item.postpic_set.first.post_photo}}" alt="{{item.title}}"><br></a>
+                </div>
                 <a href="http://{{HTTP_HOST}}/post/kit/{{item.id}}" class="title">{{item.title}}</a><br>
-                &#8361;{{item.price}}<p class="sr-only">원</p> <span class="tag"> · KIT</span>
+                <span class="">&#8361;{{item.price}}</span><p class="sr-only">원</p> <span class="tag"> · KIT</span>
                 
             {% endif %}
               </div> <!-- /.thumbnail -->

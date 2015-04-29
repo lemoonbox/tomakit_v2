@@ -123,7 +123,7 @@ body {
 .container #bi {
   margin: 10px 0;
 }
-.container hr {
+#bi hr {
   width:100%;border-top:3px solid cornsilk;margin-bottom:10px;}
 
 code {
