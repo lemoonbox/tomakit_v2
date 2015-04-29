@@ -11,6 +11,7 @@ urlpatterns = patterns('userapp.views',
     #siugnup
     url(r'signup/$', 'signup', name='signup'),
     url(r'signup_confirm/(?P<key>[\w.@+-]+)/$', 'signup_confirm', name="email_confirm"),
+    url(r'userprivacy/$', 'userprivacy', name="userprivacy"),
 
     #chang pw
     url(r'reset_password/$', 'pw_reset_request', name='pw_reset_request'),

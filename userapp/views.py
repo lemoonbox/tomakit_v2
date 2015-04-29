@@ -332,3 +332,8 @@ def contactemail(request):
         'emailform' : SendEmailForm
 
     })
+
+def userprivacy(request):
+
+    return render(request, 'userapp/userprivacy.html', {
+    })
