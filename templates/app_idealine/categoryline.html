@@ -21,7 +21,7 @@
   .title:hover {color:skyblue;text-decoration:none;margin:0;}
 /*  .caption button {opacity:0;border:none;}*/
   .caption button{border-radius: 15px; border:none;
-    background-color:orange;font-size:15px;color:white;margin-right:1px;margin-top:-8px;width:30px;height:30px;padding:0;text-align:center;}
+    background-color:orange;font-size:15px;color:white;margin-right:1px;margin-top:-10px;width:30px;height:30px;padding:0;text-align:center;}
   .caption button:hover {background-color:red; color:white;}
 
   .arrow {max-width:500px;margin:auto;margin-top:30px;font-size:20px;text-align: center;font-family:Verdana;}
@@ -42,7 +42,7 @@
       {% include "userapp/layout/loader.html"%}
       <div class="row">
         {% for item in catgitem%}
-        <div class="col-xs-12 col-md-4 col-lg-3">
+        <div class="col-xs-6 col-md-4 col-lg-3">
           <div class="itembox">
             <div class="thumbnail">
               {% if item.type.type_name == "class"%}

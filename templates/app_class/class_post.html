@@ -10,9 +10,9 @@
   .post-content {margin:auto;margin-top:150px;height:650px;}
   .well {background-color:white;
     padding:15px; border-radius:0px;
-    box-shadow:inset 1px 3px 0 rgba(0,0,0,.1),inset 0 -1px 0 rgba(0,0,0,.07);}
-  .photo {padding:5px;}
-
+    box-shadow:inset 1px 1px 0 rgba(0,0,0,.1),inset 0 -1px 0 rgba(0,0,0,.07);}
+  .detail {border-left:0px;height:500px;}
+  .photo {marigin-bottom:0px;height:500px;padding-top:10px;}
   .post-detail {margin:auto; margin-bottom:10px;
     padding-bottom:10px;}
   /*  .box {padding:5px; padding-top:15px;}*/
@@ -33,7 +33,7 @@
   .panel-body p {word-break:break-all;}
 
   .content-summernote {margin:auto;padding-top:10px;padding-bottom:15px;overflow:auto;}
-  .title-summer {border-bottom: 5px double #ddd; padding-bottom:10px;}
+  .title-summer {border-bottom: 3px solid #ddd; padding-bottom:10px;}
   .summer {height:450px;}
 
   dd {margin-top:10px;}
@@ -43,28 +43,29 @@
   /* PHOTO / CAROUSEL / MEDIA / CAPTION
   ========================================================== */
   .post-photo {margin:auto;padding-top:0px;width:100%}
-  .thumbnail {padding:0px; border:0px;}
+  .thumbnail {padding:0px; border:0px;margin-bottom:0px;}
   .carousel-inner {overflow:hidden; position: relative; z-index: 1;margin-bottom:1em;}
   .carousel-inner img{margin:auto;width:100%;position:relative;z-index:0;} /*if want width:500px img delete this */
-  .item {height:30em; overflow:hidden;}
-  .carousel-control {width:10%;}
+  .item {height:28em; overflow:hidden;}
+  @media (max-width : 472px){.item {height:15em;}}
+    .carousel-control {width:10%;}
   .carousel-control.left, .carousel-control.right {
-    background-image: none; opacity:0.5; z-index: 2; color:#ddd;}
+    background-image: none; opacity:0.5; z-index: 2; color:mediumseagreen;}
   .carousel-control.left:hover, .carousel-control.right:hover {
     background-image: none;opacity:1;}
 
-  .thumb {margin:auto;margin-bottom:5%;}
-  .mini-thumb{padding:0px; margin-right:-1px;}
-  .mini-thumb a {padding:0;height:60px;overflow:hidden;position:relative;z-index:10;}
-  .mini-thumb img{border:1px solid #eee;width:100%;position:relative;z-index:5;}
-  .mini-thumb:hover{opacity:0.5;}
-
+  .thumb {margin:auto;}
+  .mini-thumb{padding:0px;margin:0px;margin-right:-40px;}
+/*  .mini-thumb a {padding:0;height:60px;overflow:hidden;position:relative;z-index:10;}*/
+  .mini-thumb img{opacity:0.5; border:1px solid #eee;width:80px;}
+  .mini-thumb img:hover{opacity:1;}
+  .mini-thumb .ttt {width:50px;height:50px;overflow:hidden;display:block;}
   .caption {z-index:15; background-color:white;height:15px;padding-top:0px;}
   .caption > h4 {margin:0;padding:0;}
-  .map {height:450px;}
+  .map {height:450px;border-left:0px;}
   /*======================================================== */
 
-  #cont-btn {margin-top:5px;width:100%;color:#66CC99;font-weight:400;border:2px solid #66CC99;}
+  #cont-btn {border-radius:0px; margin-top:5px;width:100%;color:#66CC99;font-weight:400;border:2px solid #66CC99;}
   #cont-btn:hover {background-color:#eee; opacity:0.8; border:2px solid #66cc99;}
 
 
@@ -88,8 +89,8 @@
       <div class="post-content">
 
 
-
-        <div class="col-md-8 well col-md-offset-0 well-lg photo">
+<section class="title clearfix" style="text-align:center;font-size:36px;background-color:none;font-weight:800;color:grey;margin-bottom:15px;height:100px;">{{class_post.title}}</section>
+        <div class="col-md-8 well col-md-offset-0 well-lg photo" style="background-color:white;padding:10px;">
 
 
 
@@ -138,9 +139,48 @@
                     
                 </div>
                   
+<!--
                 <div class="caption">
                   <h4>{{class_post.title}}</h4>
                 </div>
+-->
+                
+                
+                <div class="row thumb">
+
+                  <!-- Button trigger modal -->
+                  {%for photo in class_post.postpic_set.all%}
+                  <div class="col-md-2 col-sm-2 col-lg-2 col-xs-2 mini-thumb">
+                    <a type="button" class="button" id="thumbimg" data-toggle="modal" data-target="#imageModal{{forloop.counter0}}">
+<div class="ttt">
+                      <img class="img-responsive{{forloop.counter0}}" src="{{MEDIA_URL}}{{photo.post_photo}}" alt="{{forloop.counter0}}">
+                      </div>
+                    </a>
+                  </div>
+                  {% endfor %}
+
+
+                  <!-- Modal -->
+                  {%for photo in class_post.postpic_set.all%}
+                  <div class="modal fade" id="imageModal{{forloop.counter0}}" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel" aria-hidden="true">
+                    <div class="modal-dialog2">
+                      <div class="modal-content2">
+                        <div class="modal-body2">
+
+<!--                         <div class="ttt">-->
+                           <img type="button" data-dismiss="modal" aria-lable="Close" class="img-responsive{{forloop.counter0}}" src="{{MEDIA_URL}}{{photo.post_photo}}" alt="{{forloop.counter0}}">
+<!--                           </div>-->
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  {% endfor %}
+
+                  <!-- END MODAL -->
+                </div> <!-- .row thumb -->
+
+                
               </div>
             </div>
           </div>
@@ -150,43 +190,15 @@
           <div class="col-md-12 box">
             <div class="post-detail">
 
+<!--
               <dd class="text-muted">★</dd>
               <div class="post-heading">
                 <h4>{{class_post.title}}</h4>
               </div>
+-->
               <dd class="text-muted">수강료 </dd>
               <span id="post-price">&#8361; {{class_post.price}}</span>
 
-              <div class="row thumb">
-
-                <!-- Button trigger modal -->
-                {%for photo in class_post.postpic_set.all%}
-                <div class="col-md-3 col-sm-2 col-lg-4 col-xs-2 mini-thumb">
-                  <a type="button" class="btn" id="thumbimg" data-toggle="modal" data-target="#imageModal{{forloop.counter0}}">
-
-                    <img class="img-responsive{{forloop.counter0}}" src="{{MEDIA_URL}}{{photo.post_photo}}" alt="{{forloop.counter0}}">
-                  </a>
-                </div>
-                {% endfor %}
-
-
-                <!-- Modal -->
-                {%for photo in class_post.postpic_set.all%}
-                <div class="modal fade" id="imageModal{{forloop.counter0}}" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel" aria-hidden="true">
-                  <div class="modal-dialog2">
-                    <div class="modal-content2">
-                      <div class="modal-body2">
-
-                        <img type="button" data-dismiss="modal" aria-lable="Close" class="img-responsive{{forloop.counter0}}" src="{{MEDIA_URL}}{{photo.post_photo}}" alt="{{forloop.counter0}}">
-
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                {% endfor %}
-
-                <!-- END MODAL -->
-              </div> <!-- .row thumb -->
 
 
 
@@ -210,7 +222,7 @@
 
 
               <!-- Button trigger modal -->
-              <button type="button" class="btn btn-default btn-md" id="cont-btn" data-toggle="modal" data-target="#contactModal">
+              <button type="button" class="btn btn-default btn-lg" id="cont-btn" data-toggle="modal" data-target="#contactModal">
                 <img class="icon" src='{%static "media/icon/contacts3.png" %}'> 강좌 신청하기
               </button>
 
@@ -281,7 +293,8 @@
         </div>
       </div>
 
-
+<section style=
+         "margin-bottom:15px;positon:relative;"></section>
       <div class="col-md-8 col-lg-8 col-xs-12 col-sm-8 well summer">
         <div class="content-summernote">
 
