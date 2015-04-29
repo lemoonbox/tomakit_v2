@@ -34,6 +34,10 @@ class DetailAdmin(admin.ModelAdmin):
     fieldsets = [(None, {'fields':['user', 'category', 'type', 'post', 'post_detail']}),
                  ('Datainfo',{'fields':['is_active']})]
 
+
+class TestAdmin(admin.ModelAdmin):
+    pass
+
 admin.site.register(PostType, TypeAdmin)
 admin.site.register(PostCategory, CategoryAdmin)
 admin.site.register(Post, PostAdmin)
