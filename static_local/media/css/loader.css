@@ -345,6 +345,7 @@
   100%{left:-12px; top:-12px;}
 }
 
+/*
 @-webkit-keyframes loader72{
   0%{width: 0px;}
   70%{width: 40px; opacity: 1;}
@@ -358,6 +359,7 @@
   90%{opacity: 0; width: 40px;}
   100%{opacity: 0;width: 0px;}
 }
+*/
 
 
 /* -------------- loader10 -------------- */
