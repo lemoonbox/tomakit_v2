@@ -13,41 +13,7 @@ body {
   background: 50% 50% no-repeat rgb(249,249,249);
 }
 */
-/* Sticky Header stylex
-----------------------------------------------------*/
-header{
-  top:0;
-  position: fixed;
-  width: 100%;
-  text-align: center;
-  line-height: 150px;
-  height: 150px;
-  background: #47c9af;
-  color: #fff;
-  z-index: 501;
-  // set animation
-  -webkit-transition: all 0.4s ease;
-  transition: all 0.4s ease;
-}
-header h1 {font-family:Hanna;
-/*  font-weight:600;*/
-  font-size:50px;}
 
-header.sticky { 
-  line-height: 30px;
-  height: 30px; 
-  text-align: left;
-  z-index:502;
-}
-
-header.sticky h1 {
-  margin-top:7px;
-  font-size:14px;
-  padding-left:20px;
-}
-
-nav {z-index:501;top:100px;}
-nav.sticky {z-index:500;top:0px;}
 
 /* Sticky footer styles
 -------------------------------------------------- */
@@ -65,6 +31,7 @@ body {
   height: 100%;
   /* Negative indent footer by it's height */
   margin: 0 auto -60px;
+  background-color:white;
 }
 /* Set the fixed height of the footer here */
 #push{height:80px;}

@@ -9,22 +9,24 @@
 <style>
   #wrap {margin-bottom:60px;}
   .itembox {max-width:800px;margin:auto;}
-  .thumbnail {padding:5px;border-radius:1px;padding-bottom:20px;}
+  .thumbnail {padding:0px;border-radius:0px;padding-bottom:20px;
+    /*  box-shadow:inset 1px 1px 0 rgba(0,0,0,.1),inset 0 -1px 0 rgba(0,0,0,.07);*/
+  }
   .idealine {margin-top:150px;text-align: center;}
   .big_box img{width:100%;}
   .ttt img:hover{opacity:0.3;z-index:1;}
-  .ttt {background:url('{%static "media/icon/tomato2.jpg" %}') no-repeat center;}
+/*  .ttt {background:url('{%static "media/icon/tomato2.jpg" %}') no-repeat center;}*/
   .ttt:hover{z-index:2;opacity:1;}
   .mid_box .ttt {height:240px; overflow:hidden;margin-bottom:20px;}
   .mid_box {height:350px;width:50%;max-width:400px;margin:auto; margin-right:-0.2em;display:inline-block;}
-  .mid_box .ttt a img {width:600px;}
+  .mid_box .ttt a img {width:600px;position:relative;}
   .tag {color:lightgray;}
   .title {color:dimgray;font-weight:800;}
   .title:hover {color:skyblue;text-decoration:none;}
   .arrow {max-width:500px;margin:auto;margin-top:30px;font-size:50px;}
-  .glyphicon {color:#47c9af;opacity:.5;}
-  .glyphicon:hover {opacity:1;}
-
+  .arrow .glyphicon {color:#47c9af;opacity:.5;}
+  .arrow .glyphicon:hover {opacity:1;}
+  @media (max-width:472px) {.mid_box .ttt {max-height:120px;}.mid_box {margin-bottom:20px;max-height:200px;}}
 </style>
 
 </head>

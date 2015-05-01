@@ -27,7 +27,7 @@
   .arrow {max-width:500px;margin:auto;margin-top:30px;font-size:20px;text-align: center;font-family:Verdana;}
   .arrow .glyphicon:hover {opacity:1;}
   .arrow .glyphicon {color:#66FFCC;opacity:.5;}
-  .arrow button{border-radius: 20px; border:none; margin-top:-5px; background-color:#FFF;}
+  .arrow button{border-radius: 20px; border:none; margin-top:-5px; color:white;background-color:#66cc99;}
   .arrow-top {width:200px;text-align:center;margin-top:50px;border:1px solid #47C9AF;}
 
   
@@ -111,7 +111,7 @@
               
         </div>
           <!-- paginations -->
-            <hr class="arrow-top">
+            
             <div class="arrow">
               
           {% for arrow in arrows%}
@@ -122,6 +122,7 @@
 
           {% for page in pages %}
             {% if page.page_current %}
+              <hr class="arrow-top">
               <button class="btn btn-default btn-sm">{{page.page}}</button>
             {% else %}
               <a href="http://{{HTTP_HOST}}/idealine/category/{{category}}/{{page.page}}/">

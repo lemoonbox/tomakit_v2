@@ -5,63 +5,63 @@
   #login {border:none; margin-bottom:20px; margin-top:0px; text-align:left;}
   #register {border:none; margin-bottom:20px; margin-top:0px; text-align:left; }
   .nav-tabs {width: 85%;margin:auto;}
-  .modal-footer {text-align: center;padding-bottom:0;}
+  .modal-footer {text-align:center;padding-bottom:0;}
+  .modal-body{padding-top:0px;}
+  .nav-tabs {border:none;width:70%;}
+  .nav-tabs li a, .nav-tabs li a:hover {border:0px; background-color:transparent;display:inline;}
+  .nav-tabs >li.active {display:none;}
+  .nav-tabs > li.active > a{display:none;}
+/*  .nav-tabs li, .nav-tabs li:hover {border:1px solid white;}*/
+  .change_link {display:inline;}
+  .form-signin-heading {font-family:hanna;}
   
 </style>
 
-<!--
-<ul class="nav nav-tabs" role="tablist" id="loginmodal">
-<li role="presentation" class="active"><a href="#signup" aria-controls="signup" role="tab" data-toggle="tab">회원가입</a></li>
-<li role="presentation"><a href="#login" aria-controls="login" role="tab" data-toggle="tab">로그인</a></li>
-</ul>
--->
+
 
 <div class="tab-content">
   
   <div role="tabpanel" class="tab-pane active" id="signup">
     <div class="pop">
-      <div id="register">
+      <div id="register-modal">
+
         <form method="POST" action="{% url 'signup' %}" enctype="multipart/form-data" class="form-signin">
-            <input type="hidden" name="next" value="{{request.path}}"/>
-            {{request.path}}
+          <input type="hidden" name="next" value="{{request.path}}"/>
+          <span class="hidden">{{request.path}}</span>
           {% csrf_token%}
 
-                  <h2 class="form-signin-heading">TOMAKIT 회원 등록</h2>
-          <p class="text-muted">DIY 강좌 데이터베이스 토마킷은 <b>무료</b>입니다! 간편하게 등록하고 DIY에 대해 더 많은 정보를 얻으세요.</p>
-
+          <h2 class="form-signin-heading">토마킷 계정 만들기</h2>
+          <p class="text-muted">DIY 강좌 데이터베이스 토마킷은 <b>무료</b>입니다! 간편하게 등록하고 더 많은 강좌 정보를 얻으세요.</p>
+          
           <label for="id_email" class="sr-only">이메일 주소</label>
           <input id="id_email" name="email" type="email"
-                 class="form-control" placeholder="이메일" autofocus/>
-
+                 class="form-control" placeholder="이메일" required autofocus/>
+          <!--            <p class="ok">&nbsp;</p>-->
           <label for="nick_name" class="sr-only">이름</label>
           <input id="nick_name" name="nick_name" type="text"
-                 class="form-control" placeholder="사용자 별명" />
+                 class="form-control" required placeholder="사용자 별명" />
 
           <label for="id_password" class="sr-only">Password</label>
-          <input id="id_password" maxlength="100" name="password" type="password" 
-                 class="form-control" placeholder="비밀번호" />
+          <input id="id_password" name="password" type="password" 
+                 class="form-control" placeholder="비밀번호" required />
           <label for="id_password_confirm" class="sr-only">Confirm Password</label>
-          <input id="id_password_confirm" maxlength="100" name="password_confirm" type="password"
-                 class="form-control" placeholder="비밀번호 확인" /><br />
-          <!--
-<label for="id_pro_photo" style="color: gray; font-family: sans-serif; font-size: 0.9em">프로필 이미지(선택):</label>
-<input id="id_pro_photo" name="pro_photo" type="file"/>
+          <input id="id_password_confirm" name="password_confirm" type="password"
+                 class="form-control" required placeholder="비밀번호 확인"/>
+          <br>
+<!--
+          <label for="id_pro_photo" style="color: gray; font-family: sans-serif; font-size: 0.9em">프로필 이미지(선택):</label>
+          <input id="id_pro_photo" name="pro_photo" type="file"/>
 -->
 
-<!--          <p class="text-muted">회원 가입하고 강좌에 대해 더 많은 정보를 얻으세요.</p>-->
-
-          <button class="btn btn-lg btn-primary btn-block" type="submit">회원 가입</button>
-
+          <input type="submit" class="btn btn-lg btn-primary btn-block" value="회원가입">
         </form>  
 
       </div> <!--/register-->
+      <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+      <script type="text/javascript" src="{% static 'media/js/userform-validation.js' %}"></script>
+  
     </div>
-    <div class="modal-footer">
-      <span class="change-link">
-        이미 토마킷의 회원이신가요?
-        <a href="{% url 'login_url'%}?next={{request.path}}" class="#to_register">로그인하기!</a>
-      </span>
-    </div>
+<!--footer position here-->
   </div>
 
     
@@ -71,7 +71,7 @@
     <div id="login" class="animate">
       <form method="post" action="{% url 'login_url' %}" class="form-signin" autocomplete="off">
         {% csrf_token %}
-<!--        <h2 class="form-signin-heading">로그인</h2><br />-->
+        <h2 class="form-signin-heading">토마킷 로그인</h2>
 
 
         <label for="username" name="username"> 이메일 </label><br />
@@ -82,25 +82,32 @@
         <br />
         <input type="password" name="password" placeholder="Password" class="form-control" required autocomplete="off" value="{{valid_password}}">
 
-        <!--                    <img src="{% static 'image/default_profile.jpg' %}" class="img-responsive"/>-->
-
-        <!--       
+        <!--                    <img src="{% static 'image/default_profile.jpg' %}" class="img-responsive"/>-->            
+<!--
 <p class="kepplogin">
 <input type="checkbox" name="loginkeeping" id="loginkeeping" value="loginkeeping" />
-<label for="loginkeeping">Keep me logged in</label>
+<label for="loginkeeping">로그인 유지</label>
 </p>
 -->
-
         <div class="signin-btn-p">
           <br><br>
-          <button class="btn btn-lg btn-primary btn-block" type="submit">Log In</button>
+          <button class="btn btn-lg btn-primary btn-block" type="submit">로그인</button>
         </div>
-
       </form>
-
     </div>
     </div>
   </div>
   
+  <div class="modal-footer">
 
+
+
+<!--      <a href="{% url 'login_url'%}?next={{request.path}}" class="#to_register">로그인하기!</a>-->
+      <ul class="nav nav-tabs" role="tablist" id="loginmodal">
+        <li role="presentation" class="active"><span class="change-link">아직 토마킷 계정이 없으신가요?</span><a href="#signup" aria-controls="signup" role="tab" data-toggle="tab">회원가입</a></li>
+        <li role="presentation">    <span class="change-link">
+          이미 토마킷의 회원이신가요? </span><a href="#login" aria-controls="login" role="tab" data-toggle="tab">로그인 하기</a></li>
+      </ul>
+    
+  </div>
 </div>

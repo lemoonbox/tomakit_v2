@@ -4,80 +4,8 @@
 <title>{{class_post.title}}</title>
 </head>
 
-<style>
+<link rel="stylesheet" type="text/css" href="{%static 'media/css/post.css'%}">
 
-  .container {display:block;}
-  .post-content {margin:auto;margin-top:150px;}
-  .well {background-color:white;
-    padding:15px; border-radius:0px;
-    box-shadow:inset 1px 1px 0 rgba(0,0,0,.1),inset 0 -1px 0 rgba(0,0,0,.07);}
-  .detail {border-left:0px;height:500px;}
-  .photo {marigin-bottom:0px;height:500px;padding-top:10px;}
-  .post-detail {margin:auto; margin-bottom:10px;
-    padding-bottom:10px;}
-  /*  .box {padding:5px; padding-top:15px;}*/
-  .box {padding-bottom:15px; margin-bottom:15px;}
-  .post-heading{
-    width:100%; padding-bottom: 10px;margin-bottom:15px; word-break:break-all;}
-  /* #NOTE : word-break: break-all ======================== */
-  #post-price {font-size: 18px;display:block; margin-bottom:20px;}
-  #post-add {padding-bottom:5px;}
-
-  .panel {width:100%; border:0px; border-radius:0px;margin-bottom:10px;}
-  .panel .contact {border-radius:3px;border-color:red;}
-  .panel-heading {border-top:1px solid;}
-  .panel-title {margin-left:-10px;margin-right:-10px; font-size:1em; vertical-align: text-bottom; text-decoration:none;}
-  .panel-title a:hover{color:skyblue;text-decoration:none;}
-  .glyphicon-chevron-down {color:#ddd;margin-left:30px;}
-  .panel-body {margin-left:-10px;margin-right:-5px;}
-  .panel-body p {word-break:break-all;}
-
-  .content-summernote {margin:auto;padding-top:10px;padding-bottom:15px;overflow:auto;}
-  .title-summer {border-bottom: 3px solid #ddd; padding-bottom:10px;}
-  .summer {height:450px;}
-
-  dd {margin-top:10px;}
-  h4 {margin-top:10px;margin-left:-1px;}
-  .icon {margin-left:5px; margin-right:5px; display:inline-block;vertical-align:middle;}
-
-  /* PHOTO / CAROUSEL / MEDIA / CAPTION
-  ========================================================== */
-  .post-photo {margin:auto;padding-top:0px;width:100%}
-  .thumbnail {padding:0px; border:0px;margin-bottom:0px;}
-  .carousel-inner {overflow:hidden; position: relative; z-index: 1;margin-bottom:1em;}
-  .carousel-inner img{margin:auto;width:100%;position:relative;z-index:0;} /*if want width:500px img delete this */
-  .item {height:28em; overflow:hidden;}
-  @media (max-width : 472px){.item {height:15em;}}
-    .carousel-control {width:10%;}
-  .carousel-control.left, .carousel-control.right {
-    background-image: none; opacity:0.5; z-index: 2; color:mediumseagreen;}
-  .carousel-control.left:hover, .carousel-control.right:hover {
-    background-image: none;opacity:1;}
-
-  .thumb {margin:auto;}
-  .mini-thumb{padding:0px;margin:0px;margin-right:-40px;}
-/*  .mini-thumb a {padding:0;height:60px;overflow:hidden;position:relative;z-index:10;}*/
-  .mini-thumb img{opacity:0.5; border:1px solid #eee;width:80px;}
-  .mini-thumb img:hover{opacity:1;}
-  .mini-thumb .ttt {width:50px;height:50px;overflow:hidden;display:block;}
-  .caption {z-index:15; background-color:white;height:15px;padding-top:0px;}
-  .caption > h4 {margin:0;padding:0;}
-  .map {height:450px;border-left:0px;}
-  /*======================================================== */
-
-  #cont-btn {border-radius:0px; margin-top:5px;width:100%;color:#66CC99;font-weight:400;border:2px solid #66CC99;}
-  #cont-btn:hover {background-color:#eee; opacity:0.8; border:2px solid #66cc99;}
-
-
-  .modal-dialog {max-width:450px;top:250px;}
-  .modal-body {margin:auto;text-align: center;}
-  .modal-body p {margin-top: 10px;}
-  .modal-dialog2 {width:60%;vertical-align: middle; margin:auto;background-color:transparent;padding:0;}
-  .modal-body2{width:100%;margin:auto;margin-top:20px;background-color:transparent;padding:0;}
-  .modal-content2{background-color:black;padding:-20px;margin:0;}
-  .modal-body2 > img {width:100%;padding-top:20px; padding-bottom:20px;margin:0;}
-  .modal-header {height:50px;}
-</style>
 
 <body>
   <div id="wrap">
@@ -89,10 +17,11 @@
       <div class="post-content">
 
 
-<section class="title clearfix" style="text-align:center;font-size:36px;background-color:none;font-weight:800;color:grey;margin-bottom:15px;height:100px;">{{class_post.title}}</section>
+        <section class="title clearfix" style="text-align:center;background-color:none;margin-bottom:15px;">
+          <h2 style="font-weight:800;">{{class_post.title}}</h2>
+        </section>
+        
         <div class="col-md-8 well col-md-offset-0 well-lg photo" style="background-color:white;padding:10px;">
-
-
 
           <div class="col-md-12 photo">
             <div class="post-photo">
@@ -117,11 +46,11 @@
                     {%for photo in class_post.postpic_set.all%}
                     {% if forloop.counter0 == 0 %}
                     <div class="item active">
-                      <img class="img-responsive{{forloop.counter0}}" src="{{MEDIA_URL}}{{photo.post_photo}}">
+                      <img class="img-responsive{{forloop.counter0}}" src="{{MEDIA_URL}}{{photo.post_photo}}" alt="{{class_post.title}} image{{forloop.counter0}}">
                     </div>
                     {% else %}
                     <div class="item">
-                      <img class="img-responsive{{forloop.counter0}}" src="{{MEDIA_URL}}{{photo.post_photo}}">
+                      <img class="img-responsive{{forloop.counter0}}" src="{{MEDIA_URL}}{{photo.post_photo}}" alt="{{class_post.title}} image{{forloop.counter0}}">
                     </div>
                     {% endif %}
                     {%endfor%}
@@ -153,7 +82,7 @@
                   <div class="col-md-2 col-sm-2 col-lg-2 col-xs-2 mini-thumb">
                     <a type="button" class="button" id="thumbimg" data-toggle="modal" data-target="#imageModal{{forloop.counter0}}">
 <div class="ttt">
-                      <img class="img-responsive{{forloop.counter0}}" src="{{MEDIA_URL}}{{photo.post_photo}}" alt="{{forloop.counter0}}">
+                      <img class="img-responsive{{forloop.counter0}}" src="{{MEDIA_URL}}{{photo.post_photo}}" alt="thumbnail image {{forloop.counter0}}">
                       </div>
                     </a>
                   </div>
@@ -208,7 +137,7 @@
                 <div class="panel-heading" role="tab" id="headingOne">
                   <h4 class="panel-title">
                     <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                      <img class="icon" src='{%static "media/icon/speech90.png" %}'>
+                      <span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span>
                       강좌 소개
                       <span class="glyphicon glyphicon-chevron-down pull-right"></span></a>
                   </h4>
@@ -223,7 +152,7 @@
 
               <!-- Button trigger modal -->
               <button type="button" class="btn btn-default btn-lg" id="cont-btn" data-toggle="modal" data-target="#contactModal">
-                <img class="icon" src='{%static "media/icon/contacts3.png" %}'> 강좌 신청하기
+                <span class="glyphicon glyphicon-phone-alt" aria-hidden="true"></span> 강좌 신청하기
               </button>
 
               <!-- Modal -->
@@ -275,19 +204,20 @@
             </div>
             {% endif %}
             <!-- END MODAL -->
+            
 
-            <div class="post-date">
-              <dd class="text-muted"><img class="icon" src='{%static 'media/icon/calender-ego.png' %}'>강의 날짜 </dd>
+            <div class="post-detail2">
+              <dd class="text-muted"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>강의 날짜 </dd>
               <span id="post-day">{{class_post.lessonday}}</span>
-              <dd class="text-muted"><img class="icon" src='{%static 'media/icon/clock-ego.png' %}'>시간 </dd>
+              <dd class="text-muted"><span class="glyphicon glyphicon-time" aria-hidden="true"></span>시간 </dd>
               <span id="post-time">
                 {{class_post.start_time}} - {{class_post.end_time}}
               </span>
-            </div>
+            
 
-            <dd class="text-muted"><img class="icon" src='{%static 'media/icon/person-badge-ego.png' %}'>모집 인원 </dd>
+            <dd class="text-muted"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>모집 인원 </dd>
             <span id="post-minmax">{{class_post.minimum}} - {{class_post.maximum}} 명</span>
-
+            </div>
           </div> <!-- /.post-detail -->
 
         </div>
@@ -307,7 +237,7 @@
       </div>
 
       <div class="col-md-4 col-lg-4 col-xs-12 col-sm-4 well map">
-        <dd class="text-muted"><img class="icon" src="{%static 'media/icon/mapico-ego.png'%}">위치 </dd>
+        <dd class="text-muted"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>위치 </dd>
         <span id="post-add">{{class_post.address}}</span>
         {% include 'map/mapapi.html' %}
       </div>
@@ -318,8 +248,8 @@
 
     </div> <!-- /.post-content -->
   </div>
-  </div>
-<br><br><br>
+  
+
 <div id="push"></div>
 {% include "userapp/layout/footer.html" %}
 
