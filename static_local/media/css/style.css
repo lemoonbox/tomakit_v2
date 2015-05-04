@@ -105,3 +105,21 @@ code {
     margin-right: -20px;
     margin-left: -20px;
   }
+
+
+/* MODAL
+----------------------------------------------------*/
+
+#cont-btn {border-radius:0px; margin-top:5px;width:100%;color:#66CC99;font-weight:400;border:2px solid #66CC99;font-size:1.2em;}
+#cont-btn span {vertical-align:text-top;margin-right:5px;}
+#cont-btn:hover {background-color:#66cc99; color:white;opacity:0.8; border:2px solid #66cc99;}
+
+
+.modal-dialog {max-width:450px;}
+.modal-body {margin:auto;}
+.modal-body p {margin-top: 10px;}
+.modal-dialog2 {width:60%;vertical-align: middle; margin:auto;background-color:transparent;padding:0;}
+.modal-body2{width:100%;margin:auto;margin-top:20px;background-color:transparent;padding:0;}
+.modal-content2{background-color:black;padding:-20px;margin:0;}
+.modal-body2 > img {width:100%;padding-top:20px; padding-bottom:20px;margin:0;}
+.modal-header {height:50px;}

@@ -26,8 +26,7 @@
       <div id="register-modal">
 
         <form method="POST" action="{% url 'signup' %}" enctype="multipart/form-data" class="form-signin">
-          <input type="hidden" name="next" value="{{request.path}}"/>
-          <span class="hidden">{{request.path}}</span>
+            <input type="hidden" name="next" value="{{next}}"/>
           {% csrf_token%}
 
           <h2 class="form-signin-heading">토마킷 계정 만들기</h2>
@@ -69,7 +68,8 @@
   <div role="tabpanel" class="tab-pane" id="login">
     <div class="pop">
     <div id="login" class="animate">
-      <form method="post" action="{% url 'login_url' %}" class="form-signin" autocomplete="off">
+      <form method="POST" action="{% url 'login_url' %}" class="form-signin" autocomplete="off">
+        <input type="hidden" name="next" value="{{next}}"/>
         {% csrf_token %}
         <h2 class="form-signin-heading">토마킷 로그인</h2>
 

@@ -41,3 +41,4 @@
   #register .form-signin input{margin-bottom:3px;margin-top:3px;width:100%;}
   .help-text {width:100%;padding:0;}
   }
+#login {max-width:500px;}
