@@ -1,8 +1,18 @@
 {%load static from staticfiles%}
 
+<style>
+  .go-top {position:fixed;bottom:0px; right:20px;z-index: 1000;
+    font-size:50px;
+    color:#cdbfe3;
+  }
+  .go-top:hover {color:lightsalmon;}
 
+
+</style>
+<a href="#" class="go-top hidden">
+  <span class="glyphicon glyphicon-circle-arrow-up" alt="go top"></span>
+  </a>
 <div id="footer">
-
   <div class="container">
     <div id="upper-footer">
       <div class="footer-nav">
@@ -27,4 +37,16 @@
     </div>
   </div>
 </div>
+
+<script type="text/javascript">
+  $(window).scroll(function() {
+    if ($(this).scrollTop() > 600){  
+      $('.go-top').removeClass("hidden");
+    }
+    else{
+      $('.go-top').addClass("hidden");
+    }
+  });
+
+</script>
 

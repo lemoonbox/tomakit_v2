@@ -1,36 +1,125 @@
-{% load static from staticfiles%}
-{% include "userapp/layout/header.html"%}
-
-{% load line_extras_tag%}
+{% load static from staticfiles%} {% include "userapp/layout/header.html"%} {% load line_extras_tag%}
 
 <title> 원데이 클래스 {{category}} </title>
 
 <style>
-  #wrap {margin-bottom:60px;}
-  .row {margin-left:0px;margin-top:40px;margin-top:150px;}
-
-  .thumbnail {border-radius:1px;overflow:hidden;padding:0px;}
+  #wrap {
+    margin-bottom: 60px;
+  }
   
-  .thumbnail img{width:100%;position:relative;margin:0px;}
-  .ttt {width:350px;height:15em;z-index:9;overflow:hidden;}
-  .ttt img:hover {opacity:0.3;}
-  .caption {position:relative; z-index: 11; background-color:white;margin:0;width:100%;height:6rem;}
-  .tag {color:lightgray;margin:0;}
-  .title {color:black;margin:0;font-weight: 600;}
-  .ellipsis {width:80%;overflow:hidden; text-overflow:ellipsis; white-space:nowrap;margin:0;}
-  .title:hover {color:skyblue;text-decoration:none;margin:0;}
-/*  .caption button {opacity:0;border:none;}*/
-  .caption button{border-radius: 15px; border:none;
-    background-color:orange;font-size:15px;color:white;margin-right:1px;margin-top:-10px;width:30px;height:30px;padding:0;text-align:center;}
-  .caption button:hover {background-color:red; color:white;}
-
-  .arrow {max-width:500px;margin:auto;margin-top:30px;font-size:20px;text-align: center;font-family:Verdana;}
-  .arrow .glyphicon:hover {opacity:1;}
-  .arrow .glyphicon {color:#66FFCC;opacity:.5;}
-  .arrow button{border-radius: 20px; border:none; margin-top:-5px; background-color:#FFF;}
-  .arrow-top {width:200px;text-align:center;margin-top:50px;border:1px solid #47C9AF;}
-
+  .row {
+    margin-left: 0px;
+    margin-top: 40px;
+    margin-top: 150px;
+  }
   
+  .thumbnail {
+    border-radius: 1px;
+    overflow: hidden;
+    padding: 0px;
+  }
+  
+  .thumbnail img {
+    width: 100%;
+    position: relative;
+    margin: 0px;
+  }
+  
+  .ttt {
+    width: 350px;
+    height: 15em;
+    overflow: hidden;
+  }
+  
+  .ttt img:hover {
+    opacity: 0.3;
+  }
+  
+  .caption {
+    z-index: 1;
+    background-color: white;
+    margin: 0;
+    width: 100%;
+    height: 6rem;
+  }
+  
+  .tag {
+    color: lightgray;
+    margin: 0;
+  }
+  
+  .title {
+    color: black;
+    margin: 0;
+    font-weight: 600;
+  }
+  
+  .ellipsis {
+    width: 80%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin: 0;
+  }
+  
+  .title:hover {
+    color: skyblue;
+    text-decoration: none;
+    margin: 0;
+  }
+  /*  .caption button {opacity:0;border:none;}*/
+  
+  .favorite {
+    border-radius: 15px;
+    border: none;
+    background-color: orange;
+    font-size: 15px;
+    color: white;
+    margin-right: 1px;
+    margin-top: -10px;
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    text-align: center;
+  }
+  
+  .favorite:hover {
+    background-color: red;
+    color: white;
+  }
+  
+  .arrow {
+    max-width: 500px;
+    margin: auto;
+    margin-top: 30px;
+    font-size: 20px;
+    text-align: center;
+    font-family: Verdana;
+  }
+  
+  .arrow .glyphicon:hover {
+    opacity: 1;
+  }
+  
+  .arrow .glyphicon {
+    color: #66FFCC;
+    opacity: .5;
+  }
+  
+  .arrow button {
+    border-radius: 20px;
+    border: none;
+    margin-top: -5px;
+    color: white;
+    background-color: #66cc99;
+  }
+  
+  .arrow-top {
+    width: 200px;
+    text-align: center;
+    margin-top: 50px;
+    border: 1px solid #47C9AF;
+  }
 </style>
 
 </head>
@@ -46,54 +135,91 @@
           <div class="itembox">
             <div class="thumbnail">
               {% if item.type.type_name == "class"%}
-<!--              <span class="tag">CLASS</span>-->
+              <!--              <span class="tag">CLASS</span>-->
               <!--classpost-->
               <div class="ttt">
-              <a href="http://{{HTTP_HOST}}/post/class/{{item.id}}">
-                <img src="{{MEDIA_URL}}{{item.postpic_set.first.post_photo}}"></a>
-              </div>
-              
-              <div class="caption">
-                <div class="ellipsis"><a href="http://{{HTTP_HOST}}/post/class/{{item.id}}" class="title">{{item.title}}</a></div>
-                &#8361;{{item.price}}<p class="sr-only">원</p> 
-                <span class="tag"> · CLASS</span>
-                
-                {% if user.is_authenticated %}
                 <a href="http://{{HTTP_HOST}}/post/class/{{item.id}}">
-                {% else %}
-                <a href="/user/login">
-                  {% endif %}
-                <button class="btn btn-default btn-sm pull-right">★</button>
+                  <img src="{{MEDIA_URL}}{{item.postpic_set.first.post_photo}}">
                 </a>
+              </div>
+
+              <div class="caption">
+                <div class="ellipsis"><a href="http://{{HTTP_HOST}}/post/class/{{item.id}}" class="title">{{item.title}}</a>
+                </div>
+                &#8361;{{item.price}}
+                <p class="sr-only">원</p>
+                <span class="tag"> · CLASS</span>
+
+
+                {% if user.is_authenticated %}
+                <button type="button" class="btn btn-default btn-sm pull-right favorite" href="#">★</button>
+                {%else%}
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-default btn-sm pull-right favorite" data-toggle="modal" data-target="#contactModal">★</button>
+                <!-- Modal -->
+                <div class="modal fade" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="contactModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title" id="contactModalLabel"></h4>
+                      </div>
+                      <div class="modal-body">
+                        {% include 'userapp/layout/loginform.html' %}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {%endif%}
+
+
                 {% elif item.type.type_name == "kit"%}
                 <!--kitpost-->
-<!--                  <span class="tag">KIT</span>-->
+                <!--                  <span class="tag">KIT</span>-->
                 <div class="ttt">
-                <a href="http://{{HTTP_HOST}}/post/kit/{{item.id}}">
-                  <img src="{{MEDIA_URL}}{{item.postpic_set.first.post_photo}}"></a>
+                  <a href="http://{{HTTP_HOST}}/post/kit/{{item.id}}">
+                    <img src="{{MEDIA_URL}}{{item.postpic_set.first.post_photo}}">
+                  </a>
                 </div>
                 <div class="caption">
                   <div class="ellipsis">
-                    <a href="http://{{HTTP_HOST}}/post/kit/{{item.id}}" class="title">{{item.title}}</a></div>
-                  &#8361;{{item.price}}<p class="sr-only">원</p> 
-                  <span class="tag"> · KIT</span>
+                    <a href="http://{{HTTP_HOST}}/post/kit/{{item.id}}" class="title">{{item.title}}</a>
+                  </div>
+                  &#8361;{{item.price}}
+                  <p class="sr-only">원</p>
+                  <span class="tag"> · KIT</span> 
                   
                   {% if user.is_authenticated %}
-                  <a href="http://{{HTTP_HOST}}/post/class/{{item.id}}">
-                    {% else %}
-                    <a href="/user/login">
-                      {% endif %}
-                      <button class="btn btn-default pull-right">★</button>
-                    </a>
-
+                  <button type="button" class="btn btn-default btn-sm pull-right favorite" href="#">★</button>
+                  {%else%}
+                  <!-- Button trigger modal -->
+                  <button type="button" action="{% url 'login_url' %}?next={{request.path}}" class="btn btn-default btn-sm pull-right favorite" data-toggle="modal" data-target="#contactModal">★</button>
+                  <!-- Modal -->
+                  <div class="modal fade" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="contactModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                          </button>
+                          <h4 class="modal-title" id="contactModalLabel"></h4>
+                        </div>
+                        <div class="modal-body">
+                          {% include 'userapp/layout/loginform.html' %}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  {%endif%}
+                  
                   {% endif %}
                 </div>
               </div>
             </div>
           </div>
           {% endfor%}
-              
-<!--
+
+          <!--
               <script type="text/javascript">    
                 $(document).ready(function() {
                     $(".ttt").each(function() {
@@ -108,18 +234,11 @@
                   });
               </script>
 -->
-              
-        </div>
-          <!-- paginations -->
-            <hr class="arrow-top">
-            <div class="arrow">
-              
-          {% for arrow in arrows%}
-              {% if arrow.nav_before %}
-            <a href="http://{{HTTP_HOST}}/idealine/{{arrow.befor_page}}/"> <span class="glyphicon glyphicon-chevron-left pull-left" aria-hidden="true"></span></a>
-              {% endif %}
-          {% endfor %}
 
+        </div>
+        <!-- paginations -->
+
+<<<<<<< HEAD
           {% for page in pages %}
             {% if page.page_current %}
               <button class="btn btn-default btn-sm">{{page.page}}</button>
@@ -135,10 +254,31 @@
           {% endif %}
       {% endfor %}
             </div>
+=======
+        <div class="arrow">
+
+          {% for arrow in arrows%} {% if arrow.nav_before %}
+          <a href="http://{{HTTP_HOST}}/idealine/{{arrow.befor_page}}/"> <span class="glyphicon glyphicon-chevron-left pull-left" aria-hidden="true"></span>
+          </a>
+          {% endif %} {% endfor %} {% for page in pages %} {% if page.page_current %}
+          <hr class="arrow-top">
+          <button class="btn btn-default btn-sm">{{page.page}}</button>
+          {% else %}
+          <a href="http://{{HTTP_HOST}}/idealine/category/{{category}}/{{page.page}}/">
+            <button class="btn btn-default btn-sm">{{page.page}}</button>
+          </a>
+          {% endif %} {% endfor %} {% for arrow in arrows%} {% if arrow.nav_next %}
+          <a href="http://{{HTTP_HOST}}/idealine/{{arrow.next_page}}/"> <span class="glyphicon glyphicon-chevron-right pull-right" aria-hidden="true"></span>
+          </a>
+          {% endif %} {% endfor %}
+        </div>
+>>>>>>> 5cdf31d0592ee16e41e7498b5529ea1f36044534
       </div>
       <div id="push"></div>
-    </div> <!-- /#wrap -->
+    </div>
+    <!-- /#wrap -->
     {% include "userapp/layout/footer.html" %}
   </div>
 </body>
+
 </html>
