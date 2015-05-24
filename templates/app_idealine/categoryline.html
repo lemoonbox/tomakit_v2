@@ -237,43 +237,32 @@
 
         </div>
         <!-- paginations -->
-
-<<<<<<< HEAD
-          {% for page in pages %}
-            {% if page.page_current %}
-              <button class="btn btn-default btn-sm">{{page.page}}</button>
-            {% else %}
-              <a href="http://{{HTTP_HOST}}/idealine/category/{{category}}/{{page.page}}/">
-                <button class="btn btn-default btn-sm">{{page.page}}</button>
-              </a>
-            {% endif %}
-          {% endfor %}
-      {% for arrow in arrows%}
-          {% if arrow.nav_next %}
-            <a href="http://{{HTTP_HOST}}/idealine/{{arrow.next_page}}/"> <span class="glyphicon glyphicon-chevron-right pull-right" aria-hidden="true"></span></a>
-          {% endif %}
-      {% endfor %}
-            </div>
-=======
+        <hr class="arrow-top">
         <div class="arrow">
 
-          {% for arrow in arrows%} {% if arrow.nav_before %}
-          <a href="http://{{HTTP_HOST}}/idealine/{{arrow.befor_page}}/"> <span class="glyphicon glyphicon-chevron-left pull-left" aria-hidden="true"></span>
-          </a>
-          {% endif %} {% endfor %} {% for page in pages %} {% if page.page_current %}
-          <hr class="arrow-top">
+          {% for arrow in arrows%}
+          {% if arrow.nav_before %}
+          <a href="http://{{HTTP_HOST}}/idealine/{{arrow.befor_page}}/"> <span class="glyphicon glyphicon-chevron-left pull-left" aria-hidden="true"></span></a>
+          {% endif %}
+          {% endfor %}
+
+          {% for page in pages %}
+          {% if page.page_current %}
           <button class="btn btn-default btn-sm">{{page.page}}</button>
           {% else %}
           <a href="http://{{HTTP_HOST}}/idealine/category/{{category}}/{{page.page}}/">
             <button class="btn btn-default btn-sm">{{page.page}}</button>
           </a>
-          {% endif %} {% endfor %} {% for arrow in arrows%} {% if arrow.nav_next %}
-          <a href="http://{{HTTP_HOST}}/idealine/{{arrow.next_page}}/"> <span class="glyphicon glyphicon-chevron-right pull-right" aria-hidden="true"></span>
-          </a>
-          {% endif %} {% endfor %}
+          {% endif %}
+          {% endfor %}
+          {% for arrow in arrows%}
+          {% if arrow.nav_next %}
+          <a href="http://{{HTTP_HOST}}/idealine/{{arrow.next_page}}/"> <span class="glyphicon glyphicon-chevron-right pull-right" aria-hidden="true"></span></a>
+          {% endif %}
+          {% endfor %}
         </div>
->>>>>>> 5cdf31d0592ee16e41e7498b5529ea1f36044534
       </div>
+
       <div id="push"></div>
     </div>
     <!-- /#wrap -->
