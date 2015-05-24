@@ -129,11 +129,11 @@
               </a>
             {% endif %}
           {% endfor %}
-          {% for arrow in arrows%}
-              {% if arrow.nav_next %}
-                <a href="http://{{HTTP_HOST}}/idealine/{{arrow.next_page}}/"> <span class="glyphicon glyphicon-chevron-right pull-right" aria-hidden="true"></span></a>
-              {% endif %}
-          {% endfor %}
+      {% for arrow in arrows%}
+          {% if arrow.nav_next %}
+            <a href="http://{{HTTP_HOST}}/idealine/{{arrow.next_page}}/"> <span class="glyphicon glyphicon-chevron-right pull-right" aria-hidden="true"></span></a>
+          {% endif %}
+      {% endfor %}
             </div>
       </div>
       <div id="push"></div>
