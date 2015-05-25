@@ -6,7 +6,10 @@
 
 <link rel="stylesheet" type="text/css" href="{%static 'media/css/post.css'%}">
 
-
+<style>
+  #wrap {background-color:#eee;}
+  .box {background-color:#f5f5f5;box-shadow: 0px 1px 1px 0px #ddd;}
+</style>
 <body>
   <div id="wrap">
     {% include "userapp/layout/nav.html"%}
@@ -18,19 +21,21 @@
 
 
         <section class="title clearfix" style="text-align:center;background-color:none;margin-bottom:15px;">
-          <h2 style="font-weight:800;">{{class_post.title}}</h2>
+          <h2>{{class_post.title}}</h2>
+          <h5>by 비즈공예가 <span class="name">{{class_post.user}}</span><img class="profile-pic"></h5>
         </section>
-        
-        <div class="col-md-8 well col-md-offset-0 well-lg photo" style="background-color:white;padding:10px;">
+
+        <div class="col-md-8 well col-md-offset-0 well-lg photo" style="background-color:transparent;padding:0px">
 
           <div class="col-md-12 photo">
             <div class="post-photo">
-             
+
               <div class="thumbnail">
                 <div id="class-post-Carousel" class="carousel slide" data-ride="carousel">
                   <!--Indicators -->
+
                   <ol class="carousel-indicators">
-                    
+
                     {% for photo in class_post.postpic_set.all %}
                     {% if forloop.counter0 == 0 %}
                     <li data-target="#class-post-Carousel" data-slide-to="{{forloop.counter0}}" class="active"></li>
@@ -39,6 +44,7 @@
                     {% endif %}
                     {%endfor%}
                   </ol>
+
 
                   <!-- Wrapper for slides -->
                   <div class="carousel-inner" role="listbox">
@@ -55,7 +61,7 @@
                     {% endif %}
                     {%endfor%}
                   </div>
-
+                  {%comment%}
                   <!-- Left and right controls -->
                   <a class="left carousel-control" href="#class-post-Carousel" role="button" data-slide="prev">
                     <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
@@ -65,29 +71,21 @@
                     <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
                     <span class="sr-only">Next</span>
                   </a>
-                    
+                  {%endcomment%}
                 </div>
-                  
-<!--
-                <div class="caption">
-                  <h4>{{class_post.title}}</h4>
-                </div>
--->
-                
-                
-                <div class="row thumb">
 
+                {%comment%}
+                <div class="row thumb">
                   <!-- Button trigger modal -->
                   {%for photo in class_post.postpic_set.all%}
                   <div class="col-md-2 col-sm-2 col-lg-2 col-xs-2 mini-thumb">
                     <a type="button" class="button" id="thumbimg" data-toggle="modal" data-target="#imageModal{{forloop.counter0}}">
-<div class="ttt">
-                      <img class="img-responsive{{forloop.counter0}}" src="{{MEDIA_URL}}{{photo.post_photo}}" alt="thumbnail image {{forloop.counter0}}">
+                      <div class="ttt">
+                        <img class="img-responsive{{forloop.counter0}}" src="{{MEDIA_URL}}{{photo.post_photo}}" alt="thumbnail image {{forloop.counter0}}">
                       </div>
                     </a>
                   </div>
                   {% endfor %}
-
 
                   <!-- Modal -->
                   {%for photo in class_post.postpic_set.all%}
@@ -96,9 +94,9 @@
                       <div class="modal-content2">
                         <div class="modal-body2">
 
-<!--                         <div class="ttt">-->
-                           <img type="button" data-dismiss="modal" aria-lable="Close" class="img-responsive{{forloop.counter0}}" src="{{MEDIA_URL}}{{photo.post_photo}}" alt="{{forloop.counter0}}">
-<!--                           </div>-->
+                          <!--                         <div class="ttt">-->
+                          <img type="button" data-dismiss="modal" aria-lable="Close" class="img-responsive{{forloop.counter0}}" src="{{MEDIA_URL}}{{photo.post_photo}}" alt="{{forloop.counter0}}">
+                          <!--                           </div>-->
 
                         </div>
                       </div>
@@ -107,148 +105,170 @@
                   {% endfor %}
 
                   <!-- END MODAL -->
-                </div> <!-- .row thumb -->
+                </div> <!-- /.row thumb -->
+                {%endcomment%}
 
-                
               </div>
             </div>
           </div>
         </div>
 
-        <div class="col-md-4 well detail">
+        <div class="col-md-4 card"><!--well detail-->
           <div class="col-md-12 box">
             <div class="post-detail">
-
-<!--
-              <dd class="text-muted">★</dd>
-              <div class="post-heading">
-                <h4>{{class_post.title}}</h4>
-              </div>
--->
-              <dd class="text-muted">수강료 </dd>
+              <div class="post-price">
+                <label class="sr-only">수강료</label>
+              <span id="price-label" class="glyphicon glyphicon-star">50%</span>
+              <!--#TODO catch how to use humanize tag-->
               <span id="post-price">&#8361; {{class_post.price}}</span>
-
-
-
-
-
-
-              <div class="panel panel-default">
-                <div class="panel-heading" role="tab" id="headingOne">
-                  <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                      <span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span>
-                      강좌 소개
-                      <span class="glyphicon glyphicon-chevron-down pull-right"></span></a>
-                  </h4>
-                </div>
-                <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-                  <div class="panel-body">
-                    <p>{{class_post.describe}}</p>
-                  </div>
-                </div>
               </div>
-
-
-              <!-- Button trigger modal -->
-              <button type="button" class="btn btn-default btn-lg" id="cont-btn" data-toggle="modal" data-target="#contactModal">
-                <span class="glyphicon glyphicon-phone-alt" aria-hidden="true"></span> 강좌 신청하기
-              </button>
-
-              <!-- Modal -->
-              {% if user.is_authenticated %}
-              <div class="modal fade" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="contactModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                      <h4 class="modal-title" id="contactModalLabel">강좌 신청 방법</h4>
-                    </div>
-                    <div class="modal-body">
-
-                      <p><img class="icon" src='{%static "media/icon/phone325.png" %}'>{{class_post.contact_tel}}</p>
-
-                    </div>
-                    <!--
-<div class="modal-footer">
-<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
--->
-                  </div>
-                </div>
+              <hr style="border:1px solid #ddd;margin:5px;margin-left:-5%;width:110%;">
+             <div class="class-tag">
+               <span class="glyphicon glyphicon-tag"></span> 초보자 가능
+               <span class="glyphicon glyphicon-tag"></span> 공방 제공
               </div>
             </div>
-            <!-- END MODAL -->
+          </div>
+          <br>
 
-            {% else %}
-
-            <!-- Modal -->
-            <div class="modal fade" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="contactModalLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <button type="button" class="close pull-right" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>
-                  <div class="modal-body">
-                    {% include 'userapp/layout/loginform.html' %}
-                  </div>
-                  <!--
-<div class="modal-footer">
-<p class="change-link">
-토마킷에 대해 더 알고 싶으신가요?
-<a href="#" class="#to_register">함께해요!</a>
-</p>
-<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-</div>
--->
-                </div>
-              </div>
+          {%comment%}
+          <div class="col-md-12 box">
+            <div class="post-detail">
+              <span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span>
+              <b>강좌 소개</b>
+              <p>{{class_post.describe}}</p>
             </div>
-            {% endif %}
-            <!-- END MODAL -->
-            
+          </div>
+          {%endcomment%}
 
-            <div class="post-detail2">
-              <dd class="text-muted"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>강의 날짜 </dd>
-              <span id="post-day">{{class_post.lessonday}}</span>
-              <dd class="text-muted"><span class="glyphicon glyphicon-time" aria-hidden="true"></span>시간 </dd>
+
+
+
+          <div class="col-md-12 box">
+            <div class="post-detail">
+              <h5 style="margin-left:-5px;"><b>수업정보</b></h5>
+
+            <p><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
+              <label class="sr-only">위치</label>
+              <span id="post-add">{{class_post.address}}</span>
+            </p>
+
+            <p><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+              <label class="sr-only">강의 날짜</label>
+              <span id="post-day">{{class_post.lessonday}} 시작 주 2회 수업</span>
+            </p>
+            <p>
+              <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+              <label class="sr-only">시간</label>
               <span id="post-time">
-                {{class_post.start_time}} - {{class_post.end_time}}
+                {{class_post.start_time}} ~ {{class_post.end_time}} (시간)
               </span>
-            
+            </p>
+            <p>
+              <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+              <label class="sr-only">모집 인원</label>
+              <span id="post-minmax">{{class_post.minimum}} - {{class_post.maximum}} 명 모집</span>
+            </p>
+          </div>
 
-            <dd class="text-muted"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>모집 인원 </dd>
-            <span id="post-minmax">{{class_post.minimum}} - {{class_post.maximum}} 명</span>
+
+          <!-- Button trigger modal -->
+          <button type="button" class="btn btn-default btn-lg" id="cont-btn" data-toggle="modal" data-target="#contactModal">
+            <!--              <span class="glyphicon glyphicon-phone-alt" aria-hidden="true"></span>-->
+            수업 신청
+          </button>
+          <!-- Modal -->
+          {% if user.is_authenticated %}
+          <div class="modal fade" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="contactModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <h4 class="modal-title" id="contactModalLabel">강좌 신청 방법</h4>
+                </div>
+                <div class="modal-body">
+
+                  <p><img class="icon" src='{%static "media/icon/phone325.png" %}'>{{class_post.contact_tel}}</p>
+
+                </div>
+                <!--
+<div class="modal-footer">
+<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+-->
+              </div>
             </div>
-          </div> <!-- /.post-detail -->
-
+          </div>        
+        <!-- END MODAL -->
+        {% else %}
+        <!-- Modal -->
+        <div class="modal fade" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="contactModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close pull-right" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>
+              <div class="modal-body">
+                {% include 'userapp/layout/loginform.html' %}
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
+        {% endif %}
+        <!-- END MODAL -->
 
-<section style=
-         "margin-bottom:15px;positon:relative;"></section>
-      <div class="col-md-8 col-lg-8 col-xs-12 col-sm-8 well summer">
-        <div class="content-summernote">
+          </div>
+      </div> <!-- /.post-detail -->
+    </div>
 
-          <h4 class="title-summer">상세 정보</h4>
-          {%for detail in class_post.postdetail_set.all%}
-          {{detail.post_detail | safe}}
-          {% endfor %}
 
+
+    <section class="col-lg-12 col-md-12" style="width:100%; margin-bottom:15px;positon:relative;">
+    <div class="col-lg-12 well">
+      <div role="tabpanel">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+          <li role="presentation" class="active"><a href="overview" aria-controls="overview" role="tab" data-toggle="tab">Overview</a></li>
+          <li role="presentation"><a href="#classinfo" aria-controls="classinfo" role="tab" data-toggle="tab">수업소개</a></li>
+          <li role="presentation"><a href="#teacherinfo" aria-controls="teacherinfo" role="tab" data-toggle="tab">작가소개</a></li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+          <div role="tabpanel" class="tab-pane active" id="overview">
+          
+            <div class="content-summernote">
+
+              <h4 class="title-summer">상세 정보</h4>
+              {%for detail in class_post.postdetail_set.all%}
+              {{detail.post_detail | safe}}
+              {% endfor %}
+
+            </div>
+            
+            
+          </div>
+          <div role="tabpanel" class="tab-pane" id="classinfo">...</div>
+          <div role="tabpanel" class="tab-pane" id="teacherinfo">...</div>
         </div>
+
       </div>
+    </div>
+      </section>
 
-      <div class="col-md-4 col-lg-4 col-xs-12 col-sm-4 well map">
-        <dd class="text-muted"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>위치 </dd>
-        <span id="post-add">{{class_post.address}}</span>
-        {% include 'map/mapapi.html' %}
-      </div>
+    {%comment%}<!--
+<div class="col-md-4 col-lg-4 col-xs-12 col-sm-4 well map">
+<dd class="text-muted"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>위치 </dd>
+<span id="post-add">{{class_post.address}}</span>
+{% include 'map/mapapi.html' %}
+</div>
+-->{%endcomment%}
 
 
-      
-      
 
-    </div> <!-- /.post-content -->
+
+
+  </div> <!-- /.post-content -->
   </div>
-  
+
 
 <div id="push"></div>
 {% include "userapp/layout/footer.html" %}
