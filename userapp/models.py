@@ -55,19 +55,6 @@ class PasswordResetKeys(models.Model):
 
         return ret[0]
 
-<<<<<<< HEAD
-class SellerProfile(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL)
-    email = models.EmailField(max_length=100, unique=True, null=False, blank=False)
-    nick_name = models.CharField(max_length=20, null=False, blank=False)
-    pro_photo = models.ImageField(upload_to=upload_to)
-    mobile = models.CharField(max_length=30, unique=True, null=True)
-    address = models.CharField(max_length=255, null=True)
-    email_confirm = models.BooleanField(default=False)
-
-    created_at = models.DateTimeField(auto_now_add=True, auto_now=False)
-    updated_at = models.DateTimeField(auto_now_add=True, auto_now=True)
-=======
 
 class SellerProfile(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
@@ -81,4 +68,3 @@ class SellerProfile(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, auto_now=False)
     updated_at = models.DateTimeField(auto_now_add=True, auto_now=True)
 
->>>>>>> 4257f018c564e68ee47942df3cc399453627cc83
