@@ -128,8 +128,8 @@ else :
             'ENGINE': 'django.db.backends.mysql',
             'NAME': 'testdb',
             'USER': 'root',
-            'PASSWORD':'ok123456',
-            'HOST':'dic-tec3.cfxqbzsbzi3i.ap-northeast-1.rds.amazonaws.com',
+            'PASSWORD':'city1000',
+            'HOST':'diytec-beta.cfxqbzsbzi3i.ap-northeast-1.rds.amazonaws.com',
             'PORT':'3306',
         }
     }

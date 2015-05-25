@@ -2,7 +2,6 @@
 from django.db import models
 from django.conf import settings
 # Create your models here.
-#http://stackoverflow.com/questions/7183830/django-multiple-file-upload
 def upload_to(instance, filename):
     path_arr = filename.split('/')
     return '%s/profile/%s' %(instance.email,path_arr[-1])
@@ -18,8 +17,6 @@ class Profile(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True, auto_now=False)
     updated_at = models.DateTimeField(auto_now_add=True, auto_now=True)
-
-
 
 
 
@@ -58,6 +55,7 @@ class PasswordResetKeys(models.Model):
 
         return ret[0]
 
+<<<<<<< HEAD
 class SellerProfile(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
     email = models.EmailField(max_length=100, unique=True, null=False, blank=False)
@@ -69,3 +67,18 @@ class SellerProfile(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True, auto_now=False)
     updated_at = models.DateTimeField(auto_now_add=True, auto_now=True)
+=======
+
+class SellerProfile(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL)
+    email = models.EmailField(max_length=100, unique=True, null=False, blank=False)
+    name = models.CharField(max_length=20, null=False, blank=False)
+    special = models.CharField(max_length=100, null=False)
+    pro_photo = models.ImageField(upload_to=upload_to)
+    mobile = models.CharField(max_length=30, unique=True, null=True)
+    address = models.CharField(max_length=255)
+
+    created_at = models.DateTimeField(auto_now_add=True, auto_now=False)
+    updated_at = models.DateTimeField(auto_now_add=True, auto_now=True)
+
+>>>>>>> 4257f018c564e68ee47942df3cc399453627cc83
