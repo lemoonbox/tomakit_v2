@@ -116,70 +116,42 @@
         리뷰X3<br>
 
         <label for="reviewer_name">수강생 이름 : </label>
-          <input name="reviewer_name">
-          <span class="error">
-            {% if reviewform.reviewer_name.errors %}
-            {{ reviewform.reviewer_name.errors|striptags }}
-            {% endif %}</span>
-          <br />
+          <input name="reviewer_name"><br />
         <label for="reviewer_photo">수강생 사진 : </label>
-          <input name="reviewer_photo" type="file">
-          <span class="error">
-            {% if reviewform.reviewer_photo.errors %}
-            {{ reviewform.reviewer_photo.errors|striptags }}
-            {% endif %}</span>
-          <br />
+          <input name="reviewer_photo" type="file"><br />
         <label for="review"> 리뷰: </label>
-          <input name="review">
-          <span class="error">
-            {% if reviewform.review.errors %}
-            {{ reviewform.review.errors|striptags }}
-            {% endif %}</span>
-          <br /><br>
+          <input name="review"><br/><br>
+
+        <label for="reviewer_name">수강생 이름 : </label>
+          <input name="reviewer_name"><br />
+        <label for="reviewer_photo">수강생 사진 : </label>
+          <input name="reviewer_photo" type="file"><br />
+        <label for="review"> 리뷰: </label>
+          <input name="review"><br />
+
         <label for="reviewer_name">수강생 이름 : </label>
           <input name="reviewer_name">
-          <span class="error">
-            {% if reviewform.reviewer_name.errors %}
-            {{ reviewform.reviewer_name.errors|striptags }}
-            {% endif %}</span>
           <br />
         <label for="reviewer_photo">수강생 사진 : </label>
           <input name="reviewer_photo" type="file">
-          <span class="error">
-            {% if reviewform.reviewer_photo.errors %}
-            {{ reviewform.reviewer_photo.errors|striptags }}
-            {% endif %}</span>
           <br />
         <label for="review"> 리뷰: </label>
           <input name="review">
-          <span class="error">
-            {% if reviewform.review.errors %}
-            {{ reviewform.review.errors|striptags }}
-            {% endif %}</span>
           <br />
-        <label for="reviewer_name">수강생 이름 : </label>
-          <input name="reviewer_name">
-          <span class="error">
-            {% if reviewform.reviewer_name.errors %}
-            {{ reviewform.reviewer_name.errors|striptags }}
-            {% endif %}</span>
-          <br />
-        <label for="reviewer_photo">수강생 사진 : </label>
-          <input name="reviewer_photo" type="file">
-          <span class="error">
-            {% if reviewform.reviewer_photo.errors %}
-            {{ reviewform.reviewer_photo.errors|striptags }}
-            {% endif %}</span>
-          <br />
-        <label for="review"> 리뷰: </label>
-          <input name="review">
-          <span class="error">
-            {% if reviewform.review.errors %}
-            {{ reviewform.review.errors|striptags }}
-            {% endif %}</span>
-          <br />
-        플러스 버튼 만들어 주세여
-        <input type="submit" class="btn btn-default btn-primary" value="클래스 올리기">
+        <span class="error">
+        {% if reviewform.reviewer_name.errors %}
+        {{ reviewform.reviewer_name.errors|striptags }}
+        {% endif %}</span>
+        <span class="error">
+        {% if reviewform.reviewer_photo.errors %}
+        {{ reviewform.reviewer_photo.errors|striptags }}
+        {% endif %}</span>
+        <span class="error">
+        {% if reviewform.review.errors %}
+        {{ reviewform.review.errors|striptags }}
+        {% endif %}</span>
+        플러스 버튼으로로 만들어 주세여
+       <input type="submit" class="btn btn-default btn-primary" value="클래스 올리기">
     </form>
 </body>
 </html>

@@ -66,6 +66,18 @@ class Migration(migrations.Migration):
             bases=('django_summernote.attachment',),
         ),
         migrations.CreateModel(
+            name='PostInteract',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('view_count', models.IntegerField(default=0)),
+                ('share_count', models.IntegerField(default=0)),
+                ('contact_count', models.IntegerField(default=0)),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
             name='PostPic',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
@@ -121,6 +133,12 @@ class Migration(migrations.Migration):
             model_name='post',
             name='category',
             field=models.ManyToManyField(to='app_post.PostCategory'),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='post',
+            name='postinteract',
+            field=models.OneToOneField(null=True, to='app_post.PostInteract'),
             preserve_default=True,
         ),
         migrations.AddField(

@@ -27,7 +27,7 @@ class PriceTag(models.Model):
     updated_at = models.DateTimeField(auto_now_add=True, auto_now=True)
     is_active = models.BooleanField(default=True)
 
-class PostInteract(models.Model):
+class ClassInteract(models.Model):
     view_count = models.IntegerField(default=0)
     share_count = models.IntegerField(default=0)
     contact_count = models.IntegerField(default=0)
@@ -47,7 +47,7 @@ class ClassPost(models.Model):
     address = models.CharField(max_length= 200, null=False)
 
 
-    postinteract = models.OneToOneField(PostInteract, null=True)
+    postinteract = models.OneToOneField(ClassInteract, null=True)
     created_at = models.DateTimeField(auto_now_add=True, auto_now=False)
     updated_at = models.DateTimeField(auto_now_add=True, auto_now=True)
     is_active = models.BooleanField(default=True)
