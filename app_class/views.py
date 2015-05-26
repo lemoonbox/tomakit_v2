@@ -6,8 +6,25 @@ from django.template import\
 from django.contrib.auth.decorators import \
     login_required
 
-from app_class.form import ClassForm, Price_Tag_Form, ClassPicForm, ReviewForm, ClassCurriForm, ClassdetailForm
-from app_class.models import ClassPost, PriceTag, ClassCategory, ClassPic, Review, ClassCurri, ClassDetail
+from django.http import \
+    HttpResponseRedirect,\
+    HttpResponse, \
+    Http404
+
+from app_class.form import ClassForm, \
+    Price_Tag_Form, \
+    ClassPicForm, \
+    ReviewForm, \
+    ClassCurriForm, \
+    ClassdetailForm
+from app_class.models import \
+    ClassPost, \
+    PriceTag, \
+    ClassCategory, \
+    ClassPic, \
+    Review, \
+    ClassCurri, \
+    ClassDetail
 
 from userapp.utils import handle_uploaded_image
 
@@ -54,6 +71,7 @@ def classcreate(request):
         curri_names=request.POST.getlist('curri_name')
         curri_detail=request.POST.getlist('curri_detail')
 
+        video_url=request.POST["video_url"]
 
         for photo in photos:
             if photo.content_type != 'image/png' and photo.content_type !='image/jpeg':
@@ -79,8 +97,12 @@ def classcreate(request):
                     _tag.save()
                 price_tags_list.append(_tag)
 
+            video_url=video_url.replace(" ","")
+            video_urls=video_url.split('/')
+            print video_urls[-1]
             _class = classform.save(commit=False)
             _class.user = request.user
+            _class.video_url=video_urls[-1]
             _class.save()
             for category in category_list:
                 _class.category.add(category)
@@ -148,4 +170,24 @@ def classcreate(request):
             'curriform':curri_form,
             'classdetail':classdetail,
 
+        })
+
+def class_detail(request, class_num):
+
+    ctx = Context({
+        'error':None
+    })
+    error = False
+
+    if request.method == "GET":
+        try:
+            _class_post = ClassPost.objects.get(pk=class_num)
+        except _class_post.DoesNotExist:
+            raise Http404("post does not exist")
+
+    print dir(_class_post.classpic_set)
+    print _class_post.classpic_set.all
+    return render(request, 'app_class/class_post_dev_moon.html',
+        {
+            'class_post':_class_post
         })

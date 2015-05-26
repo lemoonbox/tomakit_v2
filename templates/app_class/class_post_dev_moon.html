@@ -1,0 +1,93 @@
+{% load static from staticfiles%}
+{% include "userapp/layout/header.html"%}
+
+<title>{{class_post.title}}</title>
+</head>
+
+<link rel="stylesheet" type="text/css" href="{%static 'media/css/post.css'%}">
+
+<style>
+  #wrap {background-color:#eee;}
+  .box {background-color:#f5f5f5;box-shadow: 0px 1px 1px 0px #ddd;}
+</style>
+<body>
+타이틀
+{{class_post.title}}<br>
+{{user.profile_set.first.nick_name}}<br>
+<img src="{{MEDIA_URL}}{{user.profile_set.first.pro_photo}}">
+
+동영상 or 사진5
+{% if class_post.video_url %}
+{{class_post.video_url}}
+<iframe width="420" height="315" src="https://www.youtube.com/embed/{{class_post.video_url}}" frameborder="0" allowfullscreen></iframe>
+    <br>
+{% else %}
+  <div class="carousel-inner" role="listbox">
+{%for photo in class_post.classpic_set.all %}
+    {% if forloop.counter0 == 0 %}
+    <div class="item active">
+      <img class="img-responsive{{forloop.counter0}}" src="{{MEDIA_URL}}{{photo.class_photo}}" alt="{{class_post.title}} image{{forloop.counter0}}">
+    </div><br>
+    {% else %}
+    <div class="items">
+      <img class="img-responsive{{forloop.counter0}}" src="{{MEDIA_URL}}{{photo.class_photo}}" alt="{{class_post.title}} image{{forloop.counter0}}">
+    </div><br>
+    {% endif %}
+    {%endfor%}
+  </div>
+{% endif %}
+
+수업정보
+가격:{{class_post.price}}원<br>
+{% for tag in class_post.price_tag.all %}
+    {{tag.price_tag}}
+{% endfor%}<br>
+
+주소:{{class_post.address}}<br>
+날짜:{{class_post.day}}<br>
+시간:{{class_post.time}}<br>
+인원:{{class_post.mem_num}}<br>
+
+강사 정보
+{{user.profile_set.first.nick_name}}
+<img src="{{MEDIA_URL}}{{user.profile_set.first.pro_photo}}">
+<br><br>
+필요한 사람들<br>
+필요한사람1:{{class_post.need1}}<br>
+상세묘사:{{class_post.need1_detail}}<br>
+필요한사람2:{{class_post.need2}}<br>
+상세묘사:{{class_post.need2_detail}}<br>
+<br>
+수업소개
+{%for detail in class_post.classdetail_set.all%}
+{{detail.class_detail | safe}}
+{% endfor %}
+
+<br>
+커리큘럼<br>
+{%for curri in class_post.classcurri_set.all%}
+    <div class="step{{forloop.counter0}}">
+    step{{forloop.counter0}}
+    {{curri.curri_name}}</div>
+
+    <div class="detail{{forloop.counter0}}">
+    {{curri.curri_detail}}<br></div>
+{% endfor %}
+<br>
+수강생 후기<br>
+{%for review in class_post.review_set.all%}
+<div class="review{{forloop.counter0}}">
+{{review.review}}
+{{review.reviewer_name}}
+<img src="{{MEDIA_URL}}{{review.reviewer_photo}}">
+</div>
+{% endfor %}
+
+{% include "userapp/layout/footer.html" %}
+
+
+
+
+</body>
+
+</html>
