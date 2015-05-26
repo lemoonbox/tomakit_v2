@@ -41,11 +41,14 @@ class ClassPost(models.Model):
     day=models.CharField(max_length=70, null=False)
     time=models.CharField(max_length=70, null=False)
     mem_num=models.IntegerField(null=False)
-    video_url=models.URLField(null=True, blank=True)
+    video_url=models.URLField(blank=True)
+    need1=models.CharField(max_length=50, null=False)
+    need1_detail=models.CharField(max_length=150, null=False)
+    need2=models.CharField(max_length=50, null=False)
+    need2_detail=models.CharField(max_length=150, null=False)
 
     contact_tel = models.CharField(max_length= 30, null=False)
     address = models.CharField(max_length= 200, null=False)
-
 
     postinteract = models.OneToOneField(ClassInteract, null=True)
     created_at = models.DateTimeField(auto_now_add=True, auto_now=False)
@@ -67,7 +70,7 @@ class ClassPic(models.Model):
     is_active = models.BooleanField(default=True)
 
     def __unicode__(self):
-        return  u'%s %s' % (self.post.title, self.post_photo)
+        return  u'%s %s' % (self.classpost.title, self.class_photo)
 
 class Review(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
@@ -82,10 +85,22 @@ class Review(models.Model):
     is_active = models.BooleanField(default=True)
 
     def __unicode__(self):
-        return  u'%s %s' % (self.post.title, self.reviewer_name)
+        return  u'%s' % (self.reviewer_name)
 
 
+class ClassCurri(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL)
+    classpost = models.ForeignKey(ClassPost)
+    category = models.ManyToManyField(ClassCategory, null=False)
+    curri_name=models.CharField(max_length=100, null=False)
+    curri_detail=models.TextField(null=False)
 
+    created_at = models.DateTimeField(auto_now_add=True, auto_now=False)
+    updated_at = models.DateTimeField(auto_now_add=True, auto_now=True)
+    is_active = models.BooleanField(default=True)
+
+    def __unicode__(self):
+        return  u'%s' % (self.curri_title)
 
 
 
