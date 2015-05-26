@@ -10,6 +10,7 @@ import django_summernote.urls
 from userapp import urls as user_urls
 from app_post import urls as post_urls
 from app_idealine import urls as idealine_urls
+from app_class import urls as class_urls
 
 handler404='app_post.views.handler404'
 handler500='app_post.views.handler500'
@@ -18,6 +19,7 @@ urlpatterns = patterns('',
     url(r'^$', 'app_idealine.views.idealine', name = "index"),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^user/', include(user_urls)),
+    url(r'^class/', include(class_urls)),
     url(r'^post/', include(post_urls)),
     url(r'^idealine/', include(idealine_urls)),
 

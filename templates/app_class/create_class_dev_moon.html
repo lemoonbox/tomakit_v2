@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <form method="POST" action="{{request.path}}" enctype="multipart/form-data">
+        {% csrf_token%}
+        <label>카테고리 : </label>
+          <span class="error">
+            {% if classcreateform.category.errors %}
+            {{ classcreateform.category.errors|striptags }}<br/>
+            {% endif %}
+          </span>
+        <div class="form-category">
+            <label class="checkbox-inline">
+              <input id="id_category_0" name="category" type="checkbox" value="baby" /> for Baby</label>
+            <label class="checkbox-inline">
+              <input id="id_category_1" name="category" type="checkbox" value="home" /> for Home</label>
+            <label class="checkbox-inline">
+              <input id="id_category_2" name="category" type="checkbox" value="funny" /> for Funny</label>
+            <label class="checkbox-inline">
+              <input id="id_category_3" name="category" type="checkbox" value="art" /> for Art</label>
+            <label class="checkbox-inline">
+              <input id="id_category_4" name="category" type="checkbox" value="fashion" /> for Fashion</label>
+            <label class="checkbox-inline">
+              <input id="id_category_5" name="category" type="checkbox" value="tast" /> for Taste</label>
+            <label class="checkbox-inline">
+              <input id="id_category_6" name="category" type="checkbox" value="beauty" /> for Beauty</label><br/>
+          </div>
+        제목 :<input id="id_title" name ="title">
+          <span class="error">
+            {% if classcreateform.title.errors %}
+            <span style="">{{ classcreateform.title.errors|striptags }}</span>
+            {% endif %}</span><br>
+
+        가격:<input name ="price">
+            <span class="error">
+            {% if classcreateform.price.errors %}
+            {{ classcreateform.price.errors|striptags }}
+            {% endif %}</span>
+            <br>
+        가격태그:<input name ="price_tag">
+        <span class="error">
+            {% if pricetagform.price_tag.errors %}
+            {{ pricetagform.price_tag.errors|striptags }}
+            {% endif %}</span>
+            <br>
+        수업날짜:<input name ="day">
+        <span class="error">
+            {% if classcreateform.day.errors %}
+            {{ classcreateform.day.errors|striptags }}
+            {% endif %}</span>
+            <br>
+        수업시간:<input name ="time">
+        <span class="error">
+            {% if classcreateform.time.errors %}
+            {{ classcreateform.time.errors|striptags }}
+            {% endif %}</span>
+            <br>
+        수업인원:<input name ="mem_num">
+        <span class="error">
+            {% if classcreateform.mem_num.errors %}
+            {{ classcreateform.mem_num.errors|striptags }}
+            {% endif %}</span>
+            <br>
+
+        <label for="contact_tel">연락처 : </label>
+          <input name="contact_tel">
+          <span class="error">
+            {% if classcreateform.contact_tel.errors %}
+            {{ classcreateform.contact_tel.errors|striptags }}
+            {% endif %}</span>
+          <br />
+
+
+          <label for="address">주소 : </label>
+          <span class="error">
+            {% if classcreateform.address.errors %}
+            {{ classcreateform.address.errors|striptags }}
+            {% endif %}
+          </span>
+          {%include "map/postcode.html"%}
+
+
+        <label for="video_url">동영상주소 : </label>
+          <input type="url" name="video_url">
+          <span class="error">
+            {% if classcreateform.video_url.errors %}
+            {{ classcreateform.video_url.errors|striptags }}
+            {% endif %}</span>
+          <br />
+
+          <div class="form-photo">
+            <label>사진 : </label>
+            <span class="error">
+              {% if classpicform.class_photo.errors %}
+              {{ classpicform.class_photo.errors|striptags }}
+              {% endif %}</span>
+            <p class="text-muted">(파일을 하나 이상 선택해주세요)</p>
+
+
+            <label for="id_photo1" class="sr-only">사진 1 : </label>
+            <input id="id_photo1" name="class_photo" type="file"><br>
+            <label for="id_photo2" class="sr-only">사진 2 : </label>
+            <input id="id_photo2" name ="class_photo" type="file"><br>
+            <label for="id_photo3" class="sr-only">사진 3 : </label>
+            <input id="id_photo3" name ="class_photo" type="file"><br>
+            <label for="id_photo4" class="sr-only">사진 4 : </label>
+            <input id="id_photo4" name ="class_photo" type="file"><br>
+            <label for="id_photo5" class="sr-only">사진 5 : </label>
+            <input id="id_photo5" name ="class_photo" type="file"><br>
+          </div>
+        <br>
+        리뷰X3<br>
+
+        <label for="reviewer_name">수강생 이름 : </label>
+          <input name="reviewer_name">
+          <span class="error">
+            {% if reviewform.reviewer_name.errors %}
+            {{ reviewform.reviewer_name.errors|striptags }}
+            {% endif %}</span>
+          <br />
+        <label for="reviewer_photo">수강생 사진 : </label>
+          <input name="reviewer_photo" type="file">
+          <span class="error">
+            {% if reviewform.reviewer_photo.errors %}
+            {{ reviewform.reviewer_photo.errors|striptags }}
+            {% endif %}</span>
+          <br />
+        <label for="review"> 리뷰: </label>
+          <input name="review">
+          <span class="error">
+            {% if reviewform.review.errors %}
+            {{ reviewform.review.errors|striptags }}
+            {% endif %}</span>
+          <br /><br>
+        <label for="reviewer_name">수강생 이름 : </label>
+          <input name="reviewer_name">
+          <span class="error">
+            {% if reviewform.reviewer_name.errors %}
+            {{ reviewform.reviewer_name.errors|striptags }}
+            {% endif %}</span>
+          <br />
+        <label for="reviewer_photo">수강생 사진 : </label>
+          <input name="reviewer_photo" type="file">
+          <span class="error">
+            {% if reviewform.reviewer_photo.errors %}
+            {{ reviewform.reviewer_photo.errors|striptags }}
+            {% endif %}</span>
+          <br />
+        <label for="review"> 리뷰: </label>
+          <input name="review">
+          <span class="error">
+            {% if reviewform.review.errors %}
+            {{ reviewform.review.errors|striptags }}
+            {% endif %}</span>
+          <br />
+        <label for="reviewer_name">수강생 이름 : </label>
+          <input name="reviewer_name">
+          <span class="error">
+            {% if reviewform.reviewer_name.errors %}
+            {{ reviewform.reviewer_name.errors|striptags }}
+            {% endif %}</span>
+          <br />
+        <label for="reviewer_photo">수강생 사진 : </label>
+          <input name="reviewer_photo" type="file">
+          <span class="error">
+            {% if reviewform.reviewer_photo.errors %}
+            {{ reviewform.reviewer_photo.errors|striptags }}
+            {% endif %}</span>
+          <br />
+        <label for="review"> 리뷰: </label>
+          <input name="review">
+          <span class="error">
+            {% if reviewform.review.errors %}
+            {{ reviewform.review.errors|striptags }}
+            {% endif %}</span>
+          <br />
+        플러스 버튼 만들어 주세여
+        <input type="submit" class="btn btn-default btn-primary" value="클래스 올리기">
+    </form>
+</body>
+</html>

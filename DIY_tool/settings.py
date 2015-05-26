@@ -65,7 +65,8 @@ INSTALLED_APPS = (
     'djcelery',
     'storages',
     'django_summernote',
-    'app_post'
+    'app_post',
+    'app_class',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -208,5 +209,4 @@ else :
 
     SUMMERNOTE_CONFIG = {
         'lang': 'ko-KR',
-        #'attachment_storage_class': S3BotoStorage,
          }

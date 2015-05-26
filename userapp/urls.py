@@ -13,9 +13,6 @@ urlpatterns = patterns('userapp.views',
     url(r'signup_confirm/(?P<key>[\w.@+-]+)/$', 'signup_confirm', name="email_confirm"),
     url(r'userprivacy/$', 'userprivacy', name="userprivacy"),
 
-    #sellersignup
-    url(r'seller/signup/$', 'sellersignup', name='sellersugnup'),
-
     #chang pw
     url(r'reset_password/$', 'pw_reset_request', name='pw_reset_request'),
     url(r'reset_process/(?P<key>[\w.@+-]+)/$', 'pw_reset_process', name='pw_reset_process_get'),
