@@ -6,8 +6,8 @@ from django.template import\
 from django.contrib.auth.decorators import \
     login_required
 
-from app_class.form import ClassForm, Price_Tag_Form, ClassPicForm, ReviewForm, ClassCurriForm
-from app_class.models import ClassPost, PriceTag, ClassCategory, ClassPic, Review, ClassCurri
+from app_class.form import ClassForm, Price_Tag_Form, ClassPicForm, ReviewForm, ClassCurriForm, ClassdetailForm
+from app_class.models import ClassPost, PriceTag, ClassCategory, ClassPic, Review, ClassCurri, ClassDetail
 
 from userapp.utils import handle_uploaded_image
 
@@ -28,6 +28,7 @@ def classcreate(request):
         class_pic_form=ClassPicForm()
         review_form=ReviewForm()
         curri_form=ClassCurriForm()
+        classdetail=ClassdetailForm()
 
     elif request.method=="POST":
         classform=ClassForm(request.POST)
@@ -35,6 +36,8 @@ def classcreate(request):
         class_pic_form=ClassPicForm(request.FILES)
         review_form=ReviewForm(request.POST, request.FILES)
         curri_form=ClassCurriForm(request.POST)
+        classdetail=ClassdetailForm(request.POST)
+
 
         u_categorys = request.POST.getlist(u'category')
         u_pricetag=request.POST['price_tag']
@@ -127,6 +130,13 @@ def classcreate(request):
                     _curri.category.add(category)
                 _curri.save()
                 i+=1
+            _class_detail =classdetail.save(commit=False)
+            _class_detail.user = request.user
+            _class_detail.post = _class
+            _class_detail.save()
+            for category in category_list:
+                    _class_detail.category.add(category)
+            _class_detail.save()
 
 
     return render(request, 'app_class/create_class_dev_moon.html',
@@ -136,5 +146,6 @@ def classcreate(request):
             'classpicform':class_pic_form,
             'reviewform':review_form,
             'curriform':curri_form,
+            'classdetail':classdetail,
 
         })

@@ -1,6 +1,8 @@
 from django.db import models
 from django.conf import settings
 
+from django_summernote import models as summer_model
+from django_summernote import fields as summer_fields
 # Create your models here.
 
 def upload_to(instance, filename):
@@ -102,5 +104,18 @@ class ClassCurri(models.Model):
     def __unicode__(self):
         return  u'%s' % (self.curri_title)
 
+#####summer
+class ClassDetail(summer_model.Attachment):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL)
+    post = models.ForeignKey(ClassPost)
+    category = models.ManyToManyField(ClassCategory)
+    class_detail = summer_fields.SummernoteTextField()
+
+    created_at = models.DateTimeField(auto_now_add=True, auto_now=False)
+    updated_at = models.DateTimeField(auto_now_add=True, auto_now=True)
+    is_active = models.BooleanField(default=True)
+
+    def __unicode__(self):
+        return  u'%s %s' % (self.user, self.class_detail)
 
 

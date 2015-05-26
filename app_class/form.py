@@ -8,7 +8,14 @@ from django.utils.translation import \
     ugettext as _
 
 
-from app_class.models import ClassPost, PriceTag, ClassPic, Review
+from app_class.models import ClassPost, PriceTag, ClassPic, Review, ClassDetail
+
+
+from django_summernote.widgets import \
+    SummernoteWidget, \
+    SummernoteInplaceWidget
+from django_summernote import \
+    fields as summer_fields
 
 class ClassForm(forms.ModelForm):
 
@@ -92,3 +99,17 @@ class ClassCurriForm(forms.ModelForm):
     class Meta :
         model = Review
         fields = ('curri_name', 'curri_detail')
+
+class ClassdetailForm(forms.ModelForm):
+
+    class_detail_error= {'required':_(u"상세 정보를 입력해주세요"), }
+
+    class_detail = summer_fields.SummernoteTextFormField(error_messages=class_detail_error,
+                                                         label='')
+    class Meta:
+        model = ClassDetail
+        fields = ('class_detail',)
+        widgets = {
+            'foo': SummernoteWidget(),
+            'bar': SummernoteInplaceWidget(),
+        }
