@@ -110,7 +110,7 @@ code {
 /* MODAL
 ----------------------------------------------------*/
 
-#cont-btn {border-radius:0px; margin-top:5px;width:100%;color:#66CC99;font-weight:400;border:2px solid #66CC99;font-size:1.2em;}
+#cont-btn {border-radius:0px; margin:auto;width:50%;color:#fff;background-color: #47c9af;font-weight:400;border:2px solid #47c9af;font-size:1em;}
 #cont-btn span {vertical-align:text-top;margin-right:5px;}
 #cont-btn:hover {background-color:#66cc99; color:white;opacity:0.8; border:2px solid #66cc99;}
 

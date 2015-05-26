@@ -4,23 +4,21 @@
   .pop {width:100%;}
   #login {border:none; margin-bottom:20px; margin-top:0px; text-align:left;}
   #register {border:none; margin-bottom:20px; margin-top:0px; text-align:left; }
-  .nav-tabs {width: 85%;margin:auto;}
+  .madal-footer .nav-tabs {width: 85%;margin:auto;}
   .modal-footer {text-align:center;padding-bottom:0;}
   .modal-body{padding-top:0px;}
-  .nav-tabs {border:none;width:70%;}
-  .nav-tabs li a, .nav-tabs li a:hover {border:0px; background-color:transparent;display:inline;}
-  .nav-tabs >li.active {display:none;}
-  .nav-tabs > li.active > a{display:none;}
+  .modal-footer .nav-tabs {border:none;width:70%;}
+  .modal-footer .nav-tabs li a, .nav-tabs li a:hover {border:0px; background-color:transparent;display:inline;}
+  .modal-footer .nav-tabs >li.active {display:none;}
+  .modal-footer .nav-tabs > li.active > a{display:none;}
 /*  .nav-tabs li, .nav-tabs li:hover {border:1px solid white;}*/
   .change_link {display:inline;}
   .form-signin-heading {font-family:hanna;}
-  
 </style>
 
 
 
 <div class="tab-content">
-  
   <div role="tabpanel" class="tab-pane active" id="signup">
     <div class="pop">
       <div id="register-modal">
@@ -99,14 +97,15 @@
   </div>
   
   <div class="modal-footer">
-
-
-
 <!--      <a href="{% url 'login_url'%}?next={{request.path}}" class="#to_register">로그인하기!</a>-->
       <ul class="nav nav-tabs" role="tablist" id="loginmodal">
-        <li role="presentation" class="active"><span class="change-link">아직 토마킷 계정이 없으신가요?</span><a href="#signup" aria-controls="signup" role="tab" data-toggle="tab">회원가입</a></li>
-        <li role="presentation">    <span class="change-link">
-          이미 토마킷의 회원이신가요? </span><a href="#login" aria-controls="login" role="tab" data-toggle="tab">로그인 하기</a></li>
+        <li role="presentation" class="active">
+          <span class="change-link">아직 토마킷 계정이 없으신가요?</span>
+          <a href="#signup" aria-controls="signup" role="tab" data-toggle="tab">회원가입</a></li>
+        <li role="presentation">    
+          <span class="change-link">이미 토마킷의 회원이신가요? </span>
+          <a href="#login" aria-controls="login" role="tab" data-toggle="tab">로그인 하기</a>
+        </li>
       </ul>
     
   </div>
