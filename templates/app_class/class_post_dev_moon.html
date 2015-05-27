@@ -48,8 +48,11 @@
 시간:{{class_post.time}}<br>
 인원:{{class_post.mem_num}}<br>
 
-강사 정보
-{{user.profile_set.first.nick_name}}
+강사 정보::
+{{user.profile_set.first.nick_name}}<br>
+{{user.profile_set.first.sellerinfo_set.first.special}}<br>
+자기소개::
+{{user.profile_set.first.sellerinfo_set.first.intro}}<br>
 <img src="{{MEDIA_URL}}{{user.profile_set.first.pro_photo}}">
 <br><br>
 필요한 사람들<br>

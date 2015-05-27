@@ -33,6 +33,7 @@ from userapp.utils import handle_uploaded_image
 
 @login_required
 def classcreate(request):
+    print "class create"
 
     ctx = Context({
         'error':None
@@ -160,6 +161,7 @@ def classcreate(request):
                     _class_detail.category.add(category)
             _class_detail.save()
 
+            return HttpResponseRedirect('/class/{0}'.format(_class.id))
 
     return render(request, 'app_class/create_class_dev_moon.html',
         {
