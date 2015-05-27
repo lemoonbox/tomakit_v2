@@ -1,5 +1,5 @@
 from django.contrib import admin
-from app_post.models import Post, PostCategory, PostType, PostDetail, PostPic
+from app_post.models import Post, PostCategory, PostType, PostPic,PostDetail
 
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ('category_name',)

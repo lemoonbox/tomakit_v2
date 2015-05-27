@@ -1,5 +1,6 @@
 __author__ = 'moon'
 from django.conf.urls import patterns, include, url
+import django_summernote.urls
 
 urlpatterns = patterns('app_post.views',
 
@@ -9,4 +10,6 @@ urlpatterns = patterns('app_post.views',
 
     url(r'^class/(?P<class_num>[0-9]+)/$', 'class_detail', name="class_detail"),
     url(r'^kit/(?P<kit_num>[0-9]+)/$', 'kit_detail', name="kit_detail"),
+
+    url(r'^summernote/', include('django_summernote.urls')),
     )

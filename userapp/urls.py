@@ -8,10 +8,15 @@ urlpatterns = patterns('userapp.views',
 
     url(r'login/', 'login', {'template_name':'userapp/login.html'}, name="login_url"),
     url(r'^logout/$', 'logout', {'next_page':'/'}, name = "logout_url"),
+
+
     #signnup
     url(r'signup/$', 'signup', name='signup'),
     url(r'signup_confirm/(?P<key>[\w.@+-]+)/$', 'signup_confirm', name="email_confirm"),
     url(r'userprivacy/$', 'userprivacy', name="userprivacy"),
+
+    #sellersignup
+    url(r'signup/seller', 'sellersignup', name='sellersignup'),
 
     #chang pw
     url(r'reset_password/$', 'pw_reset_request', name='pw_reset_request'),

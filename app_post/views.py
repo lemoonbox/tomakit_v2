@@ -22,8 +22,9 @@ from app_post.models import \
 from app_post.form import \
     ClassForm, \
     PostPicForm,  \
-    PostdetailForm,\
-    KitForm
+    KitForm, \
+    PostdetailForm
+
 from userapp.utils import handle_uploaded_image
 
 @login_required
@@ -78,7 +79,7 @@ def classcreate(request):
                 error =True
 
         #start make post
-        if class_form.is_valid() and not error and post_detail_form.is_valid():
+        if class_form.is_valid() and not error:# and post_detail_form.is_valid():
             _type, type_created = PostType.objects.get_or_create(type_name="class")
             if type_created:
                 _type.save()
@@ -145,11 +146,12 @@ def kitcreate(request):
     if request.method == "GET":
         kit_form=KitForm()
         pic_form=PostPicForm()
-        detail_form = PostdetailForm()
+
+        #detail_form = PostdetailForm()
     elif request.method == "POST":
         kit_form = KitForm(request.POST)
         pic_form = PostPicForm(request.FILES)
-        detail_form = PostdetailForm(request.POST)
+        #detail_form = PostdetailForm(request.POST)
 
         u_categorys = request.POST.getlist(u'category')
         photos =request.FILES.getlist("kit_photo")
@@ -162,7 +164,7 @@ def kitcreate(request):
                 error =True
 
         #start make post
-        if kit_form.is_valid() and not error and detail_form.is_valid():
+        if kit_form.is_valid() and not error: #and detail_form.is_valid():
             _type, type_created = PostType.objects.get_or_create(type_name="kit")
             if type_created:
                 _type.save()
@@ -194,14 +196,14 @@ def kitcreate(request):
                     _postpic.category.add(category)
                 _postpic.save()
 
-                _post_detail =detail_form.save(commit=False)
-                _post_detail.type=_type
-                _post_detail.user = request.user
-                _post_detail.post = _kit
-                _post_detail.save()
-                for category in category_list:
-                        _post_detail.category.add(category)
-                _post_detail.save()
+                # _post_detail =detail_form.save(commit=False)
+                # _post_detail.type=_type
+                # _post_detail.user = request.user
+                # _post_detail.post = _kit
+                # _post_detail.save()
+                # for category in category_list:
+                #         _post_detail.category.add(category)
+                # _post_detail.save()
 
             return HttpResponseRedirect('/post/kit/{0}'.format(_kit.id))
 
@@ -209,7 +211,7 @@ def kitcreate(request):
         {
             'kit_createform':kit_form,
             'kit_pic_createform':pic_form,
-            'kit_detailform': detail_form,
+            #'kit_detailform': detail_form,
         })
 
 

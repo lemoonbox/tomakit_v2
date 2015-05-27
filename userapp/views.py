@@ -27,7 +27,9 @@ from django.core.files.images import \
 from userapp.models import \
     Profile, \
     SignupConfirmKey, \
-    PasswordResetKeys
+    PasswordResetKeys, \
+    SellerInfo
+
 from userapp.form import \
     ProfilesForm, \
     PwReset_RequestForm, \
@@ -41,8 +43,6 @@ from DIY_tool import settings
 
 # Create your views here.
 def signup(request):
-
-
     ctx = Context({
         'error':None
     })
@@ -138,6 +138,108 @@ def signup(request):
                     'profileform':profile_form,
                     'next':next,},)
 
+
+def sellersignup(request):
+    ctx = Context({
+        'error':None
+    })
+    next=""
+    if request.method == "GET":
+        profile_form = ProfilesForm()
+        next=request.GET.get("next", "/")
+
+    elif request.method =="POST" :
+        profile_form = ProfilesForm(request.POST, request.FILES)
+
+        if profile_form.is_valid():
+            valid_error = False
+            email = request.POST['email'].strip()
+            password = request.POST['password']
+            password_confirm = request.POST['password_confirm']
+            nick_name = request.POST['nick_name']
+            next=request.POST["next"]
+            intro=request.POST['special']
+            special=request.POST['intro']
+
+            if password != password_confirm:
+                profile_form.add_error('password','비밀번호가 일치하지 않습니다. 정확히 입력해주세요.')
+                valid_error =True
+
+            #upload image or user defualt
+            if bool(request.FILES):
+                image_type = request.FILES['pro_photo'].content_type
+                if image_type != 'image/png' and image_type !='image/jpeg':
+                    print "error"
+                    profile_form.add_error('pro_photo','jpg와 png 형식의 이미지만 가능합니다.')
+                    valid_error =True
+                try :
+                    t = handle_uploaded_image(request.FILES['pro_photo'], 50, 50)
+                    content = t[1]
+                except :
+                    image_file = open(os.path.join(settings.BASE_DIR,
+                                               'resource/image/default_profile.jpg'),'r')
+                    content = ImageFile(image_file)
+            else :
+                image_file = open(os.path.join(settings.BASE_DIR,
+                                               'resource/image/default_profile.jpg'),'r')
+                content = ImageFile(image_file)
+
+
+            if valid_error:
+                return render(request, 'userapp/signup.html',{
+                    'profileform':profile_form,},
+                  )
+
+            User = get_user_model()
+            _u = User(username = email)
+            _u.set_password(password)
+            _u.save()
+            #chang form
+            _profile = Profile(user = _u, email = email,pro_photo=content, nick_name=nick_name)
+            _profile.save()
+
+            #seller info
+            _seinfo=SellerInfo(user=_profile,intro=intro, special=special)
+            _seinfo.save()
+
+            #send_email confirm
+            import string , random
+            key =""
+
+            while True:
+                for i in xrange(32):
+                    key = key+random.choice(string.ascii_letters\
+                        +string.digits)
+
+                if (SignupConfirmKey.find(key)==None):break
+
+            #save the key
+            conkey = SignupConfirmKey(key=key, user=_profile)
+            conkey.save()
+
+            host = request.META['HTTP_HOST']
+
+            #write email
+            tpl_mail = loader.get_template('mail_form/mail_confirm.html')
+            ctx_mail = Context({
+                'host':host,
+                'key':key,
+            })
+            cont = tpl_mail.render(ctx_mail)
+            recipient = [_profile.email]
+
+            #tasks.sendmail.delay(cont, recipient)
+            #sendmail not celery
+            from django.core.mail import send_mail
+            send_mail(u'안녕하세요! 앞발 사용 설명서입니다. 정식 사용을 승인해주세요.', "", \
+                      'makerecipe@gmail.com', recipient, fail_silently=False,
+                        html_message=cont)
+
+            return HttpResponseRedirect("/user/login/?next="+next)
+
+    return render(request, 'userapp/sellersignup.html',{
+                    'profileform':profile_form,
+                    'next':next,},)
 
 
 def signup_confirm(request, *args, **kwargs):
@@ -332,7 +434,6 @@ def contactemail(request):
         'emailform' : SendEmailForm
 
     })
-
 
 def userprivacy(request):
 

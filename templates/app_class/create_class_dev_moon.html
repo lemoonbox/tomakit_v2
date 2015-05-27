@@ -141,16 +141,70 @@
         <span class="error">
         {% if reviewform.reviewer_name.errors %}
         {{ reviewform.reviewer_name.errors|striptags }}
-        {% endif %}</span>
+        {% endif %}</span><br>
         <span class="error">
         {% if reviewform.reviewer_photo.errors %}
         {{ reviewform.reviewer_photo.errors|striptags }}
-        {% endif %}</span>
+        {% endif %}</span><br>
         <span class="error">
         {% if reviewform.review.errors %}
         {{ reviewform.review.errors|striptags }}
-        {% endif %}</span>
-        플러스 버튼으로로 만들어 주세여
+        {% endif %}</span><br>
+        플러스 버튼으로로 만들어 주세여<br>
+
+        커리큘럼X7<br><br>
+        <label for="reviewer_name">단계별 이름 : </label>
+          <input name="curri_name"><br />
+        <label for="review"> 상세내용: </label>
+          <input name="curri_detail"><br/><br>
+
+        <label for="reviewer_name">단계별 이름 : </label>
+          <input name="curri_name"><br />
+        <label for="review"> 상세내용: </label>
+          <input name="curri_detail"><br/><br>
+
+        <label for="reviewer_name">단계별 이름 : </label>
+          <input name="curri_name"><br />
+        <label for="review"> 상세내용: </label>
+          <input name="curri_detail"><br/><br>
+        <span class="error">
+        {% if curriform.curri_name.errors %}
+        {{ curriform.curri_name.errors|striptags }}
+        {% endif %}</span><br>
+        <span class="error">
+        {% if curriform.curri_detail.errors %}
+        {{ curriform.curri_detail.errors|striptags }}
+        {% endif %}</span><br>
+        플러스 버튼으로 만들어 주셔요!
+
+        누구를 위한 수업인가요?<br><br>
+        <label for="reviewer_name">타겟1 : </label>
+          <input name="need1"><br />
+        <label for="review"> 상세내용: </label>
+          <input name="need1_detail"><br/><br>
+
+        <label for="reviewer_name">타겟2 : </label>
+          <input name="need2"><br />
+        <label for="review"> 상세내용: </label>
+          <input name="need2_detail"><br/><br>
+
+        <span class="error">
+        {% if classform.need1.errors %}
+        {{ classform.need1.errors|striptags }}
+        {% endif %}</span><br>
+        <span class="error">
+        {% if classform.need1_detail.errors %}
+        {{ classform.need1_detail.errors|striptags }}
+        {% endif %}</span><br>
+        <span class="error">
+        {% if classform.need2.errors %}
+        {{ classform.need2.errors|striptags }}
+        {% endif %}</span><br>
+        <span class="error">
+        {% if classform.need2_detail.errors %}
+        {{ classform.need2_detail.errors|striptags }}
+        {% endif %}</span><br>
+        {{classdetail}}
        <input type="submit" class="btn btn-default btn-primary" value="클래스 올리기">
     </form>
 </body>
