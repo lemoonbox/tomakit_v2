@@ -60,7 +60,7 @@ h4 {margin-top:10px;margin-left:-1px;}
 .thumbnail {padding:0px; border:0px;margin-bottom:0px;}
 .carousel-inner {overflow:hidden; position: relative; z-index: 1;margin-bottom:1em;}
 .carousel-inner img{margin:auto;width:100%;position:relative;z-index:0;} /*if want width:500px img delete this */
-.item {overflow:hidden;}
+.item {overflow:hidden;height:470px;}
 @media (max-width : 472px){.item {max-height:360px;}}
 /*
 .carousel-control {width:10%;}
