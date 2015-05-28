@@ -13,7 +13,9 @@ body {
   background: 50% 50% no-repeat rgb(249,249,249);
 }
 */
-
+nav-tabs a {color:#47C9AF;}
+a, a:hover, a:focus {text-decoration:none;!important}
+a > h4, a:hover > h4, a:focus >h4 {text-decoration:none;}
 
 /* Sticky footer styles
 -------------------------------------------------- */
@@ -123,3 +125,8 @@ code {
 .modal-content2{background-color:black;padding:-20px;margin:0;}
 .modal-body2 > img {width:100%;padding-top:20px; padding-bottom:20px;margin:0;}
 .modal-header {height:50px;}
+
+
+/* SOMETHING
+------------------------------------------------------*/
+

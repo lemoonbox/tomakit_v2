@@ -25,12 +25,11 @@
           <h5>by 비즈공예가 <span class="name">{{class_post.user}}</span><img class="profile-pic"></h5>
         </section>
 
-        <div class="col-md-8 well col-md-offset-0 well-lg photo" style="background-color:transparent;padding:0px">
-
+        <div class="col-md-8 col-md-offset-0" style="background-color:transparent;padding:0px;">
           <div class="col-md-12 photo">
             <div class="post-photo">
 
-              <div class="thumbnail">
+              <div class="thumbnail" style="border-radius:0px;">
                 <div id="class-post-Carousel" class="carousel slide" data-ride="carousel">
                   <!--Indicators -->
 
@@ -113,23 +112,23 @@
           </div>
         </div>
 
-        <div class="col-md-4 card"><!--well detail-->
+        <div class="col-md-4 card" id="card-sticky"><!--well detail-->
           <div class="col-md-12 box">
             <div class="post-detail">
-              <div class="post-price">
+              <h5 class="post-price">
                 <label class="sr-only">수강료</label>
               <span id="price-label" class="glyphicon glyphicon-star">50%</span>
               <!--#TODO catch how to use humanize tag-->
               <span id="post-price">&#8361; {{class_post.price}}</span>
-              </div>
-              <hr style="border:1px solid #ddd;margin:5px;margin-left:-5%;width:110%;">
-             <div class="class-tag">
-               <span class="glyphicon glyphicon-tag"></span> 초보자 가능
-               <span class="glyphicon glyphicon-tag"></span> 공방 제공
+              </h5>
+              <hr style="border:1px solid #ddd;margin:10px;margin-left:-2%;width:104%;">
+              <div class="class-tag">
+                <span class="glyphicon glyphicon-tag"></span>초보자 가능
+                <span class="glyphicon glyphicon-tag"></span>공방 제공
               </div>
             </div>
           </div>
-          <br>
+
 
           {%comment%}
           <div class="col-md-12 box">
@@ -169,7 +168,7 @@
               <label class="sr-only">모집 인원</label>
               <span id="post-minmax">{{class_post.minimum}} - {{class_post.maximum}} 명 모집</span>
             </p>
-          </div>
+         
 
 
           <!-- Button trigger modal -->
@@ -215,39 +214,105 @@
         {% endif %}
         <!-- END MODAL -->
 
+            <button type="button" class="btn btn-default btn-lg" id="cont-btn" style="background-color:transparent;color:black;display:inline-block;border:none;width:50%;margin-left:0px;">★ 관심수업 추가</button>
+            
           </div>
-      </div> <!-- /.post-detail -->
+          </div> <!--/.post-detail-->
+            
+      </div> <!-- /#card-sticky gadget -->
     </div>
 
 
 
-    <section class="col-lg-12 col-md-12" style="width:100%; margin-bottom:15px;positon:relative;">
-    <div class="col-lg-12 well">
+    <section class="col-lg-8 col-md-8" style="width:100%; margin-bottom:15px;positon:relative;background-color:#f5f5f5;height:600px;border-top:1px solid #ddd;">
+<!--      <hr style="border-bottom:1px solid #ddd;box-shadow:none;">-->
+    <div class="col-lg-8 col-md-8 post-detail">
       <div role="tabpanel">
         <!-- Nav tabs -->
         <ul class="nav nav-tabs" role="tablist">
-          <li role="presentation" class="active"><a href="overview" aria-controls="overview" role="tab" data-toggle="tab">Overview</a></li>
+          <li role="presentation" class="active"><a href="#overview" aria-controls="overview" role="tab" data-toggle="tab">Overview</a></li>
           <li role="presentation"><a href="#classinfo" aria-controls="classinfo" role="tab" data-toggle="tab">수업소개</a></li>
           <li role="presentation"><a href="#teacherinfo" aria-controls="teacherinfo" role="tab" data-toggle="tab">작가소개</a></li>
         </ul>
 
         <!-- Tab panes -->
-        <div class="tab-content">
-          <div role="tabpanel" class="tab-pane active" id="overview">
+        <div class="tab-content"> <!--tab content #1-->
+          <div role="tabpanel" class="tab-pane fade in active" id="overview">
           
-            <div class="content-summernote">
+...
 
-              <h4 class="title-summer">상세 정보</h4>
-              {%for detail in class_post.postdetail_set.all%}
-              {{detail.post_detail | safe}}
-              {% endfor %}
-
-            </div>
-            
-            
           </div>
-          <div role="tabpanel" class="tab-pane" id="classinfo">...</div>
-          <div role="tabpanel" class="tab-pane" id="teacherinfo">...</div>
+        
+          
+<!--
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+          <link rel="stylesheet" href="/static_local/media/css/post.css">
+          <link rel="stylesheet" href="/static_local/media/css/style.css">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+-->
+          
+          
+        <div role="tabpanel" class="tab-pane fade" id="classinfo"> <!--tab content #2: curriculum-->
+            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+            <div class="panel panel-default">
+              
+              <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+              <div class="panel-heading" role="tab" id="headingOne">
+              <h4 class="panel-title">
+<!--                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">-->
+                  1주차: 강의명
+<!--                </a>-->
+                </h4>
+              </div>
+              </a>
+              <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+              <div class="panel-body">
+                블라블라 1주차 강의 소개 상세 내용
+                </div>
+              </div>
+              </div>
+            
+            <div class="panel panel-default">
+              <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+              <div class="panel-heading" role="tab" id="headingTwo">
+                <h4 class="panel-title">
+
+                    2주차: 강의명
+                  
+                </h4>
+              </div>
+              </a>
+              <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                <div class="panel-body">
+                  블라블라 2주차 강의 소개 상세 내용
+                </div>
+              </div>
+              </div>
+              
+              <div class="panel panel-default"> <!--tab content #3 Artist-->
+                <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+
+              <div class="panel-heading" role="tab" id="headingThree">
+                <h4 class="panel-title">
+               
+                  3주차: 강의명
+
+                </h4>
+                </div>
+                </a>
+                <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                <div class="panel-body">
+                  블라블라 3주차 강의 소개 상세 내용
+                  </div>
+                </div>
+              </div>    
+              </div>
+                        
+                
+                
+          </div>
+          <div role="tabpanel" class="tab-pane fade" id="teacherinfo">...</div>
         </div>
 
       </div>
