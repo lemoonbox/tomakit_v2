@@ -35,6 +35,8 @@ section .name {color:#47c9af;}
 .post-detail .glyphicon:hover {color:red;}
 .post-detail #cont-btn {margin-left:-10px;border-radius:4px;}
 
+.tab-content {padding:15px;}
+.tab-content img {width:100%;}
 /*
 .panel {width:100%; border:0px; border-radius:0px;margin-bottom:10px;max-height:300px;overflow:auto;}
 .panel .glyphicon:first-child {margin-left:5px;margin-right:5px;font-size:1.2em;vertical-align:text-top;}
@@ -109,3 +111,4 @@ h4 {margin-top:10px;margin-left:-1px;}
 .nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {border:none;color:#47C9AF;}
 .nav-tabs > li > a {border:none;color:black;}
 .nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {border:none;background-color:transparent; color:#47C9AF;}
+/*.nav-tabs li a:hover {display:block;}*/
