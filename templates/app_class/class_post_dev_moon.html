@@ -1,7 +1,7 @@
 {% load static from staticfiles%}
 {% include "userapp/layout/header.html"%}
 
-<title>{{class_post.title}}</title>
+<title>{{class_post.seo_title}}</title>
 </head>
 
 <link rel="stylesheet" type="text/css" href="{%static 'media/css/post.css'%}">
@@ -65,11 +65,11 @@
                     {%for photo in class_post.classpic_set.all%}
                     {% if forloop.counter0 == 0 %}
                     <div class="item active">
-                      <img class="img-responsive{{forloop.counter0}}" src="{{MEDIA_URL}}{{photo.class_photo}}" alt="{{class_post.title}} image{{forloop.counter0}}">
+                      <img class="img-responsive{{forloop.counter0}}" src="{{MEDIA_URL}}{{photo.class_photo}}" alt="{{photo.photo_title}} image{{forloop.counter0}}">
                     </div>
                     {% else %}
                     <div class="item">
-                      <img class="img-responsive{{forloop.counter0}}" src="{{MEDIA_URL}}{{photo.class_photo}}" alt="{{class_post.title}} image{{forloop.counter0}}">
+                      <img class="img-responsive{{forloop.counter0}}" src="{{MEDIA_URL}}{{photo.class_photo}}" alt="{{photo.photo_title}} image{{forloop.counter0}}">
                     </div>
                     {% endif %}
                     {%endfor%}

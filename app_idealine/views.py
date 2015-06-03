@@ -8,54 +8,10 @@ from django.template import\
 from django.http import \
     HttpResponseRedirect
 
-from app_post.models import \
-    Post
+from app_class.models import ClassPost
 
 #not need login
-def idealine(request, page = 1):
-
-    ctx = Context({
-        'error':None
-    })
-    error = False
-
-    if request.method=="GET":
-        page = int(page)
-
-        navline_num=5
-        onepage_post_num=18
-
-
-        start_pos=(page-1)*onepage_post_num
-        end_pos=(page)*onepage_post_num
-
-
-        host= request.META['HTTP_HOST']
-        _line_post = Post.objects.order_by('-id')[start_pos:end_pos+1]
-        _line_post_count=_line_post.count()
-
-        arrows=[]
-        before_next_arrow={}
-        before_next_arrow["nav_next"]=(_line_post_count>onepage_post_num)
-        before_next_arrow["next_page"]=page+1
-        arrows.append(before_next_arrow)
-
-
-        before_next_arrow={}
-        before_next_arrow["nav_before"]=(page!=1)
-        before_next_arrow["befor_page"]=page-1
-        arrows.append(before_next_arrow)
-
-    return render(request, 'app_idealine/idealine.html',
-        {
-            'lineitem':_line_post,
-            'HTTP_HOST':host,
-
-            'arrows':arrows,
-        })
-
-
-def categoryline(request, category, page = 1):
+def category(request, category='all', page = 1):
     ctx = Context({
         'error':None
     })
@@ -77,9 +33,18 @@ def categoryline(request, category, page = 1):
 
 
         host= request.META['HTTP_HOST']
-        _line_post = Post.objects.filter(category__category_name=category).order_by('-id')[start_pos:end_pos]
-        _nav_post=Post.objects.filter(category__category_name=category).order_by('-id')[start_nav_pos:end_nav_pos+1]
-        _nav_post_count=_nav_post.count()
+
+        if category=="all":
+            _line_post = ClassPost.objects.order_by('-id')[start_pos:end_pos]
+            _nav_post=ClassPost.objects.order_by('-id')[start_nav_pos:end_nav_pos+1]
+            _nav_post_count=_nav_post.count()
+
+        else :
+            _line_post = ClassPost.objects.filter(category__category_name=category).order_by('-id')[start_pos:end_pos]
+            _nav_post=ClassPost.objects.filter(category__category_name=category).order_by('-id')[start_nav_pos:end_nav_pos+1]
+            _nav_post_count=_nav_post.count()
+
+        print _line_post
 
 
         page_start=(_nav_paging-1)*5+1
@@ -112,7 +77,7 @@ def categoryline(request, category, page = 1):
 
 
 
-    return render(request, 'app_idealine/categoryline.html',
+    return render(request, 'app_idealine/categoryline_dev_moon.html',
         {
             'catgitem':_line_post,
             'HTTP_HOST':host,
@@ -121,3 +86,46 @@ def categoryline(request, category, page = 1):
             'pages':pages,
             'arrows':arrows,
         })
+
+
+# def idealine(request, page = 1):
+#
+#     ctx = Context({
+#         'error':None
+#     })
+#     error = False
+#
+#     if request.method=="GET":
+#         page = int(page)
+#
+#         navline_num=5
+#         onepage_post_num=18
+#
+#
+#         start_pos=(page-1)*onepage_post_num
+#         end_pos=(page)*onepage_post_num
+#
+#
+#         host= request.META['HTTP_HOST']
+#         _line_post = ClassPost.objects.order_by('-id')[start_pos:end_pos+1]
+#         _line_post_count=_line_post.count()
+#
+#         arrows=[]
+#         before_next_arrow={}
+#         before_next_arrow["nav_next"]=(_line_post_count>onepage_post_num)
+#         before_next_arrow["next_page"]=page+1
+#         arrows.append(before_next_arrow)
+#
+#
+#         before_next_arrow={}
+#         before_next_arrow["nav_before"]=(page!=1)
+#         before_next_arrow["befor_page"]=page-1
+#         arrows.append(before_next_arrow)
+#
+#     return render(request, 'app_idealine/idealine.html',
+#         {
+#             'lineitem':_line_post,
+#             'HTTP_HOST':host,
+#
+#             'arrows':arrows,
+#         })

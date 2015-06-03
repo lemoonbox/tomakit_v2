@@ -29,10 +29,15 @@
             <label class="checkbox-inline">
               <input id="id_category_6" name="category" type="checkbox" value="beauty" /> for Beauty</label><br/>
           </div>
-        제목 :<input id="id_title" name ="title">
+        seo 제목 :<input id="id_seo_title" name ="seo_title">
           <span class="error">
             {% if classcreateform.title.errors %}
             <span style="">{{ classcreateform.title.errors|striptags }}</span>
+            {% endif %}</span><br>
+        제목 :<input id="id_title" name ="title">
+          <span class="error">
+            {% if classcreateform.seo_title.errors %}
+            <span style="">{{ classcreateform.seo_title.errors|striptags }}</span>
             {% endif %}</span><br>
 
         가격:<input name ="price">
@@ -102,15 +107,25 @@
 
 
             <label for="id_photo1" class="sr-only">사진 1 : </label>
-            <input id="id_photo1" name="class_photo" type="file"><br>
+            <input id="id_photo1" name="class_photo" type="file">
+            사진설명:<input id="id_photo_tl1" name="photo_title"><br>
+
             <label for="id_photo2" class="sr-only">사진 2 : </label>
-            <input id="id_photo2" name ="class_photo" type="file"><br>
+            <input id="id_photo2" name ="class_photo" type="file">
+            사진설명:<input id="id_photo_tl2" name="photo_title"><br>
+
             <label for="id_photo3" class="sr-only">사진 3 : </label>
-            <input id="id_photo3" name ="class_photo" type="file"><br>
+            <input id="id_photo3" name ="class_photo" type="file">
+            사진설명:<input id="id_photo_tl3" name="photo_title"><br>
+
             <label for="id_photo4" class="sr-only">사진 4 : </label>
-            <input id="id_photo4" name ="class_photo" type="file"><br>
+            <input id="id_photo4" name ="class_photo" type="file">
+            사진설명:<input id="id_photo_tl4" name="photo_title"><br>
+
             <label for="id_photo5" class="sr-only">사진 5 : </label>
-            <input id="id_photo5" name ="class_photo" type="file"><br>
+            <input id="id_photo5" name ="class_photo" type="file">
+            사진설명:<input id="id_photo_tl5" name="photo_title"><br>
+
           </div>
         <br>
         리뷰X3<br>

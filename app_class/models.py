@@ -36,6 +36,7 @@ class ClassInteract(models.Model):
 
 class ClassPost(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
+    seo_title=models.CharField(max_length=150, null=False)
     title = models.CharField(max_length=150, null=False)
     category = models.ManyToManyField(ClassCategory, null=False)
     price = models.IntegerField(null=True)
@@ -66,6 +67,7 @@ class ClassPic(models.Model):
     classpost = models.ForeignKey(ClassPost)
     category = models.ManyToManyField(ClassCategory, null=False)
     class_photo = models.ImageField(null=True, upload_to=upload_to)
+    photo_title = models.CharField(max_length=100, null=False)
 
     created_at = models.DateTimeField(auto_now_add=True, auto_now=False)
     updated_at = models.DateTimeField(auto_now_add=True, auto_now=True)

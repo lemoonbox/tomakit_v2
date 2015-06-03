@@ -19,6 +19,8 @@ from django_summernote import \
 
 class ClassForm(forms.ModelForm):
 
+
+    seo_title_error={'required':_(u"seo용 title 태그를 입력해주세요")}
     title_error= {'required':_(u"제목을 입력해주세요"), }
     price_error= {'required':_(u"수강료를 입력해주세요"),
                   'invalid':_(u"숫자만 입력해주세요")}
@@ -33,6 +35,7 @@ class ClassForm(forms.ModelForm):
     need_error={'required':_(u"어떤 사람에게 좋은 수업인가요?"), }
 
 
+    seo_title=forms.CharField(error_messages=seo_title_error)
     title = forms.CharField(error_messages=title_error)
     price = forms.IntegerField(error_messages=price_error,)
     day=forms.CharField(error_messages=day_error)
@@ -48,7 +51,7 @@ class ClassForm(forms.ModelForm):
 
     class Meta:
         model = ClassPost
-        fields = ('title','price', 'day', 'time', 'mem_num', 'contact_tel', 'address'
+        fields = ('seo_title','title','price', 'day', 'time', 'mem_num', 'contact_tel', 'address'
         ,'video_url', 'need1', 'need1_detail', 'need2', 'need2_detail')
 
 class Price_Tag_Form(forms.ModelForm):
@@ -65,13 +68,17 @@ class Price_Tag_Form(forms.ModelForm):
 
 class ClassPicForm(forms.ModelForm):
 
-    class_photo_error ={'invalid':u'',}
+    class_photo_error ={'invalid':u'사진이 한장 이상 필요합니다.',}
+    photo_title_error ={'invalid':u'설명을 입력해주세요.',}
+
 
     class_photo = forms.ImageField(required=False, error_messages=class_photo_error)
+    photo_title = forms.CharField(required=False, error_messages=photo_title_error)
+
 
     class Meta :
         model = ClassPic
-        fields = ('class_photo',)
+        fields = ('class_photo','photo_title')
 
 class ReviewForm(forms.ModelForm):
 

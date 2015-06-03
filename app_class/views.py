@@ -64,6 +64,7 @@ def classcreate(request):
 
 
         photos =request.FILES.getlist("class_photo")
+        photo_titles=request.POST.getlist("photo_title")
 
         u_reviewers=request.POST.getlist('reviewer_name')
         reviewer_photos=request.FILES.getlist('reviewer_photo')
@@ -73,6 +74,8 @@ def classcreate(request):
         curri_detail=request.POST.getlist('curri_detail')
 
         video_url=request.POST["video_url"]
+
+
 
         for photo in photos:
             if photo.content_type != 'image/png' and photo.content_type !='image/jpeg':
@@ -111,6 +114,7 @@ def classcreate(request):
                 _class.price_tag.add(tag)
             _class.save()
 
+            i=0
             #save photos
             for photo in photos:
                 try:
@@ -118,12 +122,14 @@ def classcreate(request):
                     content=t[1]
                 except Exception:
                     print Exception.message
-                _classpic=ClassPic(user=request.user, classpost=_class, class_photo=content)
+                _classpic=ClassPic(user=request.user, classpost=_class, class_photo=content, photo_title=photo_titles[i])
                 _classpic.save()
 
                 for category in category_list:
                     _classpic.category.add(category)
                 _classpic.save()
+                i+=1
+
 
             #save review
             i=0
