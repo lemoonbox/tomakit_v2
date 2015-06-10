@@ -21,7 +21,7 @@ a > h4, a:hover > h4, a:focus >h4 {text-decoration:none;}
 -------------------------------------------------- */
 html,
 body {
-  height: 100%;
+  height: 100%; 
   /* The html and body elements cannot have any padding or margin. */
   font-family:Nanum Gothic;
 }
@@ -34,11 +34,12 @@ body {
   /* Negative indent footer by it's height */
   margin: 0 auto -60px;
   background-color:white;
+  padding-bottom:50px;
 }
 /* Set the fixed height of the footer here */
 #push{height:80px;}
 #footer {
-  height: 240px;
+  position:absolute;margin-top:20px;width:100%;height: 180px;
 }
 
 #footer {font-family:Titillium web;background-color:#47c9af;}
@@ -50,7 +51,7 @@ body {
 .footer-nav a {color:white;font-size:16px;font-weight:600;}
 
 
-#bi .logo {font-family:Titillium web, sans-serif; color:cornsilk;font-size:24px;font-weight:600;word-break:none;white-space:nowrap;}
+#bi .logo {font-family:Titillium web, sans-serif; color:cornsilk;font-weight:600;word-break:none;white-space:nowrap;}
 .credit {padding-left:10px;}
 /*.name {color:silver;}*/
 

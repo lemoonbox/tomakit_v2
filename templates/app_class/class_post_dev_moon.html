@@ -16,6 +16,17 @@
     box-shadow: 0px 1px 1px 0px #ddd;
   }
   .thumbnail {background-color:#eee;}
+  .review-card {margin-top:34px;}
+  .review {min-height:150px;margin-top:15px;background-color:#eee;box-shadow: 1px 1px 1px 1px #ddd;padding:15px;padding-top:5px;padding-bottom:5px;width:100%;display:block;text-align:center;}
+  .nav-tabs > li, .nav-pills > li {
+    float:none;
+    display:inline-block;
+    *display:inline; /* ie7 fix */
+    zoom:1; /* hasLayout ie7 trigger */
+  }
+  .nav-tabs, .nav-pills {
+    text-align:center;
+  }
 </style>
 
 <body>
@@ -129,6 +140,18 @@
               </div>
             </div>
           </div>
+          
+          <!--누구를 위한 수업인가요-->
+          <div class="col-md-12" style="text-align:center;">
+            <div class="col-md-6"><span style="font-size: 1.5em;"class="glyphicon glyphicon-pushpin"></span>
+            
+              
+              <!--여기에 내용 입력 누구를 위한 강좌 태그 -->
+              
+              
+            </div>
+            <div class="col-md-6"><span style="font-size: 1.5em;"class="glyphicon glyphicon-pushpin"></span></div>
+          </div>
         </div>
 
         <div class="col-md-4 card" id="card-sticky">
@@ -191,7 +214,7 @@
               </p>
 
               <!-- Button trigger modal -->
-              <button type="button" class="btn btn-default btn-lg" id="cont-btn" data-toggle="modal" data-target="#contactModal">
+              <button type="button" class="btn btn-default btn-lg" id="cont-btn" style="width:100%;float:none;margin:auto;" data-toggle="modal" data-target="#contactModal">
                 <!--              <span class="glyphicon glyphicon-phone-alt" aria-hidden="true"></span>-->
                 수업 신청
               </button>
@@ -236,20 +259,20 @@
               {% endif %}
               <!-- END MODAL -->
 
-              <button type="button" class="btn btn-default btn-lg" id="cont-btn" style="background-color:transparent;color:black;display:inline-block;border:none;width:50%;margin-left:0px;">★ 관심수업 추가</button>
+<!--              <button type="button" class="btn btn-default btn-lg" id="cont-btn" style="background-color:transparent;color:black;display:inline-block;border:none;width:50%;margin-left:0px;">★ 관심수업 추가</button>-->
 
             </div>
           </div>
           <!--/.post-detail-->
           <div class="col-md-12 box">
-            <div class="post-detail">
-              <div class="col-md-8">
-              <p>강사 정보:{{user.profile_set.first.nick_name}}</p>
+            <div class="post-detail" style="min-height:200px;">
+              <div class="col-md-8"> <!--강사 소개 -->
+                <p><b>{{user.profile_set.first.nick_name}}, OOO</b></p>
               {{user.profile_set.first.sellerinfo_set.first.special}}
               <span><em>"{{user.profile_set.first.sellerinfo_set.first.intro}}"</em></span>
               </div>
               <div class="col-md-4">
-                <img src="{{MEDIA_URL}}{{user.profile_set.first.pro_photo}}" style="border-radius:50%;">
+                <img src="{{MEDIA_URL}}{{user.profile_set.first.pro_photo}}" style="border-radius:50%;height:50px;width:50px;">
               </div>
             </div>
           </div>
@@ -261,15 +284,15 @@
     </div>
     
       
-      <section style="margin-bottom:15px;positon:relative;z-index:1;min-height:500px;border-top:1px solid #ddd;background-color:#f5f5f5;">
+      <section style="margin-bottom:30px;positon:relative;z-index:1;min-height:600px;border-top:1px solid #ddd;background-color:#f5f5f5;">
 <div class="container">
-        <div class="col-lg-8 col-md-8 post-detail">
+        <div class="col-lg-8 col-md-8 post-detail" style="margin:0;">
           <div role="tabpanel">
             <!-- Nav tabs -->
-            <ul class="nav nav-tabs" role="tablist">
+            <ul class="nav nav-tabs" style="align:center;" role="tablist">
               <li role="presentation" class="active"><a href="#overview" aria-controls="overview" role="tab" data-toggle="tab">Overview</a></li>
               <li role="presentation"><a href="#classinfo" aria-controls="classinfo" role="tab" data-toggle="tab">수업소개</a></li>
-              <li role="presentation"><a href="#teacherinfo" aria-controls="teacherinfo" role="tab" data-toggle="tab">작가소개(임시 수강후기)</a></li>
+              <li role="presentation"><a href="#teacherinfo" aria-controls="teacherinfo" role="tab" data-toggle="tab">작가소개</a></li>
             </ul>
 
             <!-- Tab panes -->
@@ -308,23 +331,60 @@
               <div role="tabpanel" class="tab-pane fade" id="teacherinfo">
               
               
-                <br> 수강생 후기
-                <br> {%for review in class_post.review_set.all%}
-                <div class="review{{forloop.counter0}}">
-                  {{review.review}} {{review.reviewer_name}}
-                  <div style="height:60px;width:60px;border-radius:50%;overflow:hidden;">
-                  <img src="{{MEDIA_URL}}{{review.reviewer_photo}}">
-                  </div>
-                </div>
-                {% endfor %}
+:Nothing:
               
               </div>
             </div>
 
           </div>
         </div>
+
+        
+ 
+    
+  <div class="col-lg-4 col-md-4 review-card">
+    
+
+
+    
+    <div id="customer-review-Carousel" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+
+      {%for review in class_post.review_set.all%}
+      {% if forloop.counter0 == 0 %}
+      <li data-target="#customer-review-Carousel" data-slide-to="{{forloop.counter0}}" class="active"></li>
+      {% else %}
+      <li data-target="#customer-review-Carousel" data-slide-to="{{forloop.counter0}}"></li>
+      {% endif %} {%endfor%}
+    </ol>
+    
+      <div class="carousel-inner" style="max-height:400px;" role="listbox">
+    {%for review in class_post.review_set.all%}
+{%if forloop.counter0 == 0 %}
+    <div class="col-lg-12 review{{forloop.counter0}} review item active">
+      <h5>수강생 후기</h5>
+      <em style="text-align:center;">" {{review.review}} "</em><br>
+      <div class="reviewer_photo{{forloop.couter0}}" style="text-align:right;">
+        <span style="color:#47c9af;right:0;">{{review.reviewer_name}}</span>      <img style="border-radius:50%;height:2em;width:2em;" src="{{MEDIA_URL}}{{review.reviewer_photo}}">
+      </div>
+    </div>
+{% else%}
+    <div class="col-lg-12 review{{forloop.counter0}} review item">
+      <h5>수강생 후기</h5>
+      <em style="text-align:center;">" {{review.review}} "</em><br>
+      <div class="reviewer_photo{{forloop.couter0}}" style="text-align:right;">
+
+        <span style="color:#47c9af;right:0;">{{review.reviewer_name}}</span>      <img style="border-radius:50%;height:2em;width:2em;" src="{{MEDIA_URL}}{{review.reviewer_photo}}">
+      </div>
+    </div>
+    {%endif%}
+    {% endfor %}
+    </div>
+  </div>
         </div>
-      </section>
+
+
+    </section>
 
     
     
@@ -339,7 +399,7 @@
     {% include "userapp/layout/footer.html" %}
 
 
-  </div>
+
 
 </body>
 
