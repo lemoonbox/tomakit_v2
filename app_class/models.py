@@ -29,10 +29,17 @@ class PriceTag(models.Model):
     updated_at = models.DateTimeField(auto_now_add=True, auto_now=True)
     is_active = models.BooleanField(default=True)
 
+    def __unicode__(self):
+        return u'%s' % (self.price_tag)
+
+
 class ClassInteract(models.Model):
     view_count = models.IntegerField(default=0)
     share_count = models.IntegerField(default=0)
-    contact_count = models.IntegerField(default=0)
+    buy_count = models.IntegerField(default=0)
+
+    def __unicode__(self):
+        return u'view: %s, shar: %s, buy:%s' %(self.view_count, self.share_count, self.buy_count)
 
 class ClassPost(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
@@ -44,7 +51,8 @@ class ClassPost(models.Model):
     day=models.CharField(max_length=70, null=False)
     time=models.CharField(max_length=70, null=False)
     mem_num=models.IntegerField(null=False)
-    video_url=models.URLField(blank=True)
+
+    video_url=models.CharField(max_length=150, blank=True)
     need1=models.CharField(max_length=50, null=False)
     need1_detail=models.CharField(max_length=150, null=False)
     need2=models.CharField(max_length=50, null=False)
@@ -53,7 +61,8 @@ class ClassPost(models.Model):
     contact_tel = models.CharField(max_length= 30, null=False)
     address = models.CharField(max_length= 200, null=False)
 
-    postinteract = models.OneToOneField(ClassInteract, null=True)
+
+    postinteract=models.OneToOneField(ClassInteract, null=True, related_name='class_post')
     created_at = models.DateTimeField(auto_now_add=True, auto_now=False)
     updated_at = models.DateTimeField(auto_now_add=True, auto_now=True)
     is_active = models.BooleanField(default=True)
@@ -104,7 +113,7 @@ class ClassCurri(models.Model):
     is_active = models.BooleanField(default=True)
 
     def __unicode__(self):
-        return  u'%s' % (self.curri_title)
+        return  u'%s' % (self.curri_name)
 
 #####summer
 class ClassDetail(summer_model.Attachment):
