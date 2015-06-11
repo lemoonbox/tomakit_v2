@@ -38,7 +38,7 @@
 
         <div class="title clearfix" style="text-align:center;background-color:none;margin-bottom:15px;">
           <h2>{{class_post.title}}</h2>
-          <h5>by 비즈공예가 <span class="name">{{user.profile_set.first.nick_name}}</span><img class="profile-pic" src="{{MEDIA_URL}}{{user.profile_set.first.pro_photo}}"></h5>
+          <h5>by {{class_post.user.profile_set.first.sellerinfo_set.first.special}}<span class="name">{{class_post.user.profile_set.first.nick_name}}</span><img class="profile-pic" src="{{MEDIA_URL}}{{class_post.user.profile_set.first.pro_photo}}"></h5>
         </div>
 
         <div class="col-md-8 col-md-offset-0" style="background-color:transparent;padding:0px;">
@@ -144,13 +144,14 @@
           <!--누구를 위한 수업인가요-->
           <div class="col-md-12" style="text-align:center;">
             <div class="col-md-6"><span style="font-size: 1.5em;"class="glyphicon glyphicon-pushpin"></span>
-            
-              
-              <!--여기에 내용 입력 누구를 위한 강좌 태그 -->
-              
+                {{class_post.need1}}<br><br>
+                {{class_post.need1_detail}}
               
             </div>
-            <div class="col-md-6"><span style="font-size: 1.5em;"class="glyphicon glyphicon-pushpin"></span></div>
+            <div class="col-md-6"><span style="font-size: 1.5em;"class="glyphicon glyphicon-pushpin"></span>
+                {{class_post.need2}}<br><br>
+                {{class_post.need2_detail}}
+            </div>
           </div>
         </div>
 
@@ -229,9 +230,11 @@
                       <h4 class="modal-title" id="contactModalLabel">강좌 신청 방법</h4>
                     </div>
                     <div class="modal-body">
-
-                      <p><img class="icon" src='{%static "media/icon/phone325.png" %}'>{{class_post.contact_tel}}</p>
-
+                      <p><img class="icon" src='{%static "media/icon/phone325.png" %}'>문의 전화하기 <br>010-3379-4189</bt></p>
+                        <a href="{{class_post.costinfo.apply_url}}" target="_blank" class="button btn-lg">
+                            <button type="button" class="btn btn-default btn-lg" id="cont-btn" style="width:91%;float:none;margin:auto;" data-toggle="modal" data-target="#contactModal">
+                                바로 신청 하기
+                            </button></a>
                     </div>
                     <!--
 <div class="modal-footer">
@@ -267,12 +270,12 @@
           <div class="col-md-12 box">
             <div class="post-detail" style="min-height:200px;">
               <div class="col-md-8"> <!--강사 소개 -->
-                <p><b>{{user.profile_set.first.nick_name}}, OOO</b></p>
-              {{user.profile_set.first.sellerinfo_set.first.special}}
-              <span><em>"{{user.profile_set.first.sellerinfo_set.first.intro}}"</em></span>
+                <p><b>{{class_post.user.profile_set.first.nick_name}}</b></p>
+              {{class_post.user.profile_set.first.sellerinfo_set.first.special}}
+              <span><em>"{{class_post.user.profile_set.first.sellerinfo_set.first.intro}}"</em></span>
               </div>
               <div class="col-md-4">
-                <img src="{{MEDIA_URL}}{{user.profile_set.first.pro_photo}}" style="border-radius:50%;height:50px;width:50px;">
+                <img src="{{MEDIA_URL}}{{class_post.user.profile_set.first.pro_photo}}" style="border-radius:50%;height:50px;width:50px;">
               </div>
             </div>
           </div>
@@ -291,7 +294,7 @@
             <!-- Nav tabs -->
             <ul class="nav nav-tabs" style="align:center;" role="tablist">
               <li role="presentation" class="active"><a href="#overview" aria-controls="overview" role="tab" data-toggle="tab">Overview</a></li>
-              <li role="presentation"><a href="#classinfo" aria-controls="classinfo" role="tab" data-toggle="tab">수업소개</a></li>
+              <li role="presentation"><a href="#classinfo" aria-controls="classinfo" role="tab" data-toggle="tab">커리큘럼</a></li>
               <li role="presentation"><a href="#teacherinfo" aria-controls="teacherinfo" role="tab" data-toggle="tab">작가소개</a></li>
             </ul>
 

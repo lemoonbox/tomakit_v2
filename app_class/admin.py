@@ -1,5 +1,13 @@
 from django.contrib import admin
-from app_class.models import ClassCategory, PriceTag, ClassInteract, ClassPost, ClassPic, Review, ClassCurri, ClassDetail
+from app_class.models import ClassCategory, \
+    PriceTag, \
+    ClassInteract, \
+    ClassPost, \
+    ClassPic, \
+    Review, \
+    ClassCurri, \
+    ClassDetail, \
+    CostInfo
 
 
 ##inline classes#####
@@ -96,6 +104,12 @@ class C_DetailAdmin(admin.ModelAdmin):
     fieldsets = [(None, {'fields':['user', 'category', 'post', 'class_detail']}),
                  ('Datainfo',{'fields':['is_active']})]
 
+class C_CostInfoAdmin(admin.ModelAdmin):
+    search_fields = ['classpost__title',]
+    list_display = ('id','classpost', 'apply_url',)
+    fieldsets = [(None, {'fields':['classpost', 'apply_url']}),]
+
+
 
 # class TestAdmin(admin.ModelAdmin):
 #     pass
@@ -108,3 +122,4 @@ admin.site.register(ClassPic, C_PicAdmin)
 admin.site.register(ClassDetail, C_DetailAdmin)
 admin.site.register(Review,C_ReviewAdmin)
 admin.site.register(ClassCurri,C_CurriAdmin)
+admin.site.register(CostInfo, C_CostInfoAdmin)

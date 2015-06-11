@@ -129,4 +129,15 @@ class ClassDetail(summer_model.Attachment):
     def __unicode__(self):
         return  u'%s %s' % (self.user, self.class_detail)
 
+class CostInfo(models.Model):
+    classpost = models.OneToOneField(ClassPost)
+    apply_url= models.CharField(max_length=150, null=True)
+
+    created_at = models.DateTimeField(auto_now_add=True, auto_now=False)
+    updated_at = models.DateTimeField(auto_now_add=True, auto_now=True)
+
+    def __unicode__(self):
+        return u'%s %s' %(self.classpost, self.apply_url)
+
+
 

@@ -1,9 +1,7 @@
 from django.contrib import admin
-from userapp.models import Profile
+from userapp.models import Profile, SellerInfo
 
 # Register your models here.
-
-
 
 class ProfileAdmin(admin.ModelAdmin):
     list_filter =['created_at', 'email']
@@ -13,3 +11,12 @@ class ProfileAdmin(admin.ModelAdmin):
         ('Datainfo',{'fields':['email_confirm']})]
 
 admin.site.register(Profile, ProfileAdmin)
+
+
+class SellerInfoAdmin(admin.ModelAdmin):
+    search_fields = ['user']
+    list_display=('user', 'special','intro', )
+    fieldsets = [('SellerInfo', {'fields':['user', 'intro', 'special',]}),
+                 ]
+
+admin.site.register(SellerInfo, SellerInfoAdmin)
