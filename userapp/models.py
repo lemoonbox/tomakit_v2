@@ -18,6 +18,9 @@ class Profile(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, auto_now=False)
     updated_at = models.DateTimeField(auto_now_add=True, auto_now=True)
 
+    def __unicode__(self):
+        return "%s" %(self.email)
+
 class SellerInfo(models.Model):
     user=models.ForeignKey(Profile)
     intro=models.CharField(max_length=150)

@@ -41,6 +41,8 @@ from userapp import tasks
 from userapp.utils import handle_uploaded_image
 from DIY_tool import settings
 
+
+Local=True
 # Create your views here.
 def signup(request):
     ctx = Context({
@@ -60,7 +62,7 @@ def signup(request):
             password = request.POST['password']
             password_confirm = request.POST['password_confirm']
             nick_name = request.POST['nick_name']
-            next=request.POST["next"]
+            next=request.POST.get("next","/")
 
             if password != password_confirm:
                 profile_form.add_error('password','비밀번호가 일치하지 않습니다. 정확히 입력해주세요.')
@@ -125,12 +127,15 @@ def signup(request):
             cont = tpl_mail.render(ctx_mail)
             recipient = [_profile.email]
 
-            #tasks.sendmail.delay(cont, recipient)
-            #sendmail not celery
-            from django.core.mail import send_mail
-            send_mail(u'안녕하세요! 앞발 사용 설명서입니다. 정식 사용을 승인해주세요.', "", \
-                      'makerecipe@gmail.com', recipient, fail_silently=False,
-                        html_message=cont)
+            if Local:
+                #sendmail not celery
+                from django.core.mail import send_mail
+                send_mail(u'안녕하세요! 앞발 사용 설명서입니다. 정식 사용을 승인해주세요.', "", \
+                          'makerecipe@gmail.com', recipient, fail_silently=False,
+                            html_message=cont)
+            else:
+                tasks.sendmail.delay(cont, recipient)
+
 
             return HttpResponseRedirect("/user/login/?next="+next)
 
@@ -157,7 +162,7 @@ def sellersignup(request):
             password = request.POST['password']
             password_confirm = request.POST['password_confirm']
             nick_name = request.POST['nick_name']
-            next=request.POST["next"]
+            next=request.POST.get("next","/")
             intro=request.POST['special']
             special=request.POST['intro']
 
@@ -228,12 +233,14 @@ def sellersignup(request):
             cont = tpl_mail.render(ctx_mail)
             recipient = [_profile.email]
 
-            #tasks.sendmail.delay(cont, recipient)
-            #sendmail not celery
-            from django.core.mail import send_mail
-            send_mail(u'안녕하세요! 앞발 사용 설명서입니다. 정식 사용을 승인해주세요.', "", \
-                      'makerecipe@gmail.com', recipient, fail_silently=False,
-                        html_message=cont)
+            if Local:
+                #sendmail not celery
+                from django.core.mail import send_mail
+                send_mail(u'안녕하세요! 앞발 사용 설명서입니다. 정식 사용을 승인해주세요.', "", \
+                          'makerecipe@gmail.com', recipient, fail_silently=False,
+                            html_message=cont)
+            else:
+                tasks.sendmail.delay(cont, recipient)
 
             return HttpResponseRedirect("/user/login/?next="+next)
 
@@ -307,7 +314,10 @@ def pw_reset_request(request):
                 recipient = [_u[0].username]
                 print _u[0].username
 
-                tasks.send_pwchang_mail.delay(cont, recipient)
+                if Local:
+                    pass
+                else:
+                    tasks.send_pwchang_mail.delay(cont, recipient)
 
     pwresetform = PwReset_RequestForm()
     return render(request, 'userapp/pw_reset.html', {
@@ -363,11 +373,12 @@ def login(request, *args, **kwargs):
     next=""
     if request.method=="GET":
         login_form = LoginForm(None)
-        next=request.GET["next"]
+        next=request.GET.get("next","/")
 
     elif request.method=="POST":
         login_form = LoginForm(request.POST)
-        next=request.POST["next"]
+        next=request.POST.get("next","/")
+        print next
         if login_form.is_valid():
             user = login_form.login(request)
             if user:
@@ -422,12 +433,15 @@ def contactemail(request):
             cont = tpl_mail.render(ctx_mail)
             recipient = ["makerecipe@gmail.com"]
 
-            from django.core.mail import send_mail
-            send_mail(u'안녕하세요! 토마킷입니다. 정식 사용을 승인해주세요.', "", \
-                      'tencity.info@gmail.com', recipient, fail_silently=False,
-                        html_message=cont)
 
-            tasks.contact_mail.delay(cont, recipient)
+            if Local:
+                from django.core.mail import send_mail
+                send_mail(u'안녕하세요! 앞발 사용 설명서입니다. 정식 사용을 승인해주세요.', "", \
+                          'makerecipe@gmail.com', recipient, fail_silently=False,
+                            html_message=cont)
+            else:
+                tasks.contact_mail.delay(cont, recipient)
+
             # tasks.rabbitmqtest.delay()
 
     return render(request, 'userapp/partnershipmail.html',{
