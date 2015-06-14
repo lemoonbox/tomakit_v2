@@ -42,3 +42,10 @@
   .help-text {width:100%;padding:0;}
   }
 #login {max-width:500px;}
+
+
+.about {padding:10px;border-radius:0px;margin-bottom:20px;background-color:#eee;}
+.text-muted {margin-top:10px;}
+.text-muted b:hover {color:coral;}
+.about .glyphicon {margin-right:1%;}
+.about .glyphicon:hover {color:coral;}

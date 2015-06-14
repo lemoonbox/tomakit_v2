@@ -1,11 +1,10 @@
+{%extends "base.html" %}
 {% load static from staticfiles%}
-{% include "userapp/layout/header.html"%}
-
 {% load line_extras_tag%}
 
 
-<title> TOMAKIT </title>
-
+<title> {%block title %}TOMAKIT {%endblock%}</title>
+{%block content%}
 <style>
   #wrap {margin-bottom:60px;}
   .itembox {max-width:800px;margin:auto;}
@@ -30,13 +29,10 @@
   .price-tag {position:absolute;height:30px;padding-right:5px;padding-left:5px;margin-top:10px;background-color:orange;color:white;font-family:Titllium web;font-weight:600;font-size:20px;z-index:100;}
 </style>
 
-</head>
 
-<body>
   <div id="wrap">
-    {% include "userapp/layout/nav.html"%}
+
     <div class="container">
-    {%include "userapp/layout/loader.html"%}
 
 <!--
       <script>
@@ -107,6 +103,4 @@
       <div id="push"></div>
   </div> <!-- /.container -->
 </div> <!--/#wrap-->
-{% include 'userapp/layout/footer.html' %}
-</body>
-</html>
+{%endblock%}

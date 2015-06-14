@@ -1,9 +1,9 @@
+{%extends 'base.html' %}
 {% load static from staticfiles%}
-{% include "userapp/layout/header.html"%}
 
-<title>비밀번호 변경</title>
-</head>
+<title>{%block title%}비밀번호 변경{%endblock%}</title>
 
+{% block content %}
 <style>
   .reset-form {width: 340px; margin:auto; padding-top: 100px; text-align: center;}
   .reset-form input[type=email] {width:340px;margin:auto;}
@@ -13,11 +13,8 @@
   #wrap {margin-bottom:0px;}
 </style>
 
-<body>
   <div id="wrap">
-    {% include "userapp/layout/nav.html"%}
     <div class="container">
-
       <div class="reset-form">      
         <form class="form-inline" role="form" method="POST" action="{{request.path}}">
           {% csrf_token%}
@@ -25,7 +22,7 @@
           <input id="id_email" class="form-control input-lg" placeholder="Email" maxlength="100" name="email" type="email">
           
           {{pwresetform.as_p}}
-          <span class="help-block">비밀 번호를 변경 합니다. 원하시는 비밀 번호를 입력해주세요.</span>
+          <span class="help-block">비밀 번호를 변경합니다. 원하시는 비밀 번호를 입력해주세요.</span>
 
           <a href="/user/login"><button type="button" class="btn btn-lg btn-default cancel pull-left">취소</button></a>
           <button class="btn btn-lg btn-default reset-pwd pull-right" type = "submit" value="이메일 전송하기">비밀번호 변경</button>
@@ -35,5 +32,4 @@
     </div>
     <div id="push"></div>
   </div> <!--wrap-->
-  {% include "userapp/layout/footer.html" %}
-</body>
+{% endblock %}

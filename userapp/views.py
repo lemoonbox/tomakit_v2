@@ -423,8 +423,8 @@ def contactemail(request):
             recipient = ["makerecipe@gmail.com"]
 
             from django.core.mail import send_mail
-            send_mail(u'안녕하세요! 앞발 사용 설명서입니다. 정식 사용을 승인해주세요.', "", \
-                      'makerecipe@gmail.com', recipient, fail_silently=False,
+            send_mail(u'안녕하세요! 토마킷입니다. 정식 사용을 승인해주세요.', "", \
+                      'tencity.info@gmail.com', recipient, fail_silently=False,
                         html_message=cont)
 
             tasks.contact_mail.delay(cont, recipient)

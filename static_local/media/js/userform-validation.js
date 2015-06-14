@@ -17,7 +17,7 @@ jQuery( function ($) {
   //            tel = $('#tel');
 
 
-  form.submit(function () {
+//  form.submit(function () {
 //    if (form.val() === "") {
 //      alert('모든 항목을 정확히 기입해주세요.');
 //      return false;
@@ -29,12 +29,12 @@ jQuery( function ($) {
 //      return false;
 //    } else 
   
-  if(id_password.val().length < 6) {
-      alert('비밀번호는 6자리 이상 18자리 이하로 입력해주세요.');
-      id_password.focus();
-      return false;
-    }
-  });
+//  if(id_password.val().length < 6) {
+//      alert('비밀번호는 6자리 이상 18자리 이하로 입력해주세요.');
+//      id_password.focus();
+//      return false;
+//    }
+//  });
 //    else if(re_nick_name.test(nick_name.val()) != true) {
 //      alert('닉네임이 올바르지 않습니다.');
 //      nick_name.focus();

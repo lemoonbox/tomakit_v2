@@ -1,7 +1,5 @@
-{% load static from staticfiles%}
-{% include "userapp/layout/header.html"%}
-
-
+{%extends "base.html" %}{% load static from staticfiles%}
+{%block content%}
 <title>{{profile.nick_name}}님의 프로필</title>
 <style>
   #wrap {margin-bottom:0px;}
@@ -12,13 +10,9 @@
   .thumbnail {max-width:320px; border-radius:0;vertical-align:text-bottom;}
   .profile-inner
 </style>
-</head>
-<body>
 
   
-  
   <div id="wrap">
-    {% include "userapp/layout/nav.html"%}
     <div class="container">
       <div class="well">
         <div class="profile-inner pull left">
@@ -43,6 +37,4 @@
     <div id="push"></div>
   </div> <!-- /#wrap -->
 
-  {% include "userapp/layout/footer.html" %}
-</body>
-</html>
+{%endblock%}
