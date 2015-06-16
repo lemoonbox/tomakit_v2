@@ -14,4 +14,4 @@ class FB_item_code(models.Model):
     is_active = models.BooleanField(default=True)
 
     def __unicode__(self):
-        return u'%s' % (self.class_post)
+        return u'%s' % (self.classpost)
