@@ -154,17 +154,6 @@
           </div>
 
 
-          {%comment%}
-          <div class="col-md-12 box">
-            <div class="post-detail">
-              <span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span>
-              <b>강좌 소개</b>
-              <p>{{class_post.describe}}</p>
-            </div>
-          </div>
-          {%endcomment%}
-
-
 
 
           <div class="col-md-12 box">
@@ -199,35 +188,42 @@
                 수업 신청
               </button>
               <!-- Modal -->
-              {% if user.is_authenticated %}
+             {%comment%}<!--before payment-->
+              {% if user.is_authenticated %}{%endcomment%}
               <div class="modal fade" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="contactModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                      <button type="button" class="close pull-right" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
                       </button>
                       <h4 class="modal-title" id="contactModalLabel">강좌 신청 방법</h4>
                     </div>
+                    
                     <div class="modal-body">
-
-                      <p><img class="icon" src='{%static "media/icon/phone325.png" %}'>{{class_post.contact_tel}}</p>
-
+                      {{class_post.contact_tel}}
                     </div>
-                    <!--
+                    
+<!--
 <div class="modal-footer">
 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
--->
                   </div>
+-->
                 </div>
               </div>
+              </div>
+
+               
               <!-- END MODAL -->
+              {%comment%}
               {% else %}
               <!-- Modal -->
               <div class="modal fade" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="contactModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <button type="button" class="close pull-right" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                      <button type="button" class="close pull-right" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
                       </button>
                     </div>
                     <div class="modal-body">
@@ -236,7 +232,7 @@
                   </div>
                 </div>
               </div>
-              {% endif %}
+              {% endif %}{%endcomment%}
               <!-- END MODAL -->
 
               <!--              <button type="button" class="btn btn-default btn-lg" id="cont-btn" style="background-color:transparent;color:black;display:inline-block;border:none;width:50%;margin-left:0px;">★ 관심수업 추가</button>-->

@@ -24,7 +24,7 @@
       <div id="register-modal">
 
         <form method="POST" action="{% url 'signup' %}" enctype="multipart/form-data" class="form-signin">
-            /class/{{class_post.id}}
+            {{%comment%}/class/{{class_post.id}}{%endcomment%}
             <input type="hidden" name="next" value="/class/{{class_post.id}}"/>
           {% csrf_token%}
 

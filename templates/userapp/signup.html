@@ -42,6 +42,19 @@
             <p class="change_link">이미 회원이신가요?
               <a href="/user/login/?next=/user/signup/" class="to_register">로그인하기</a>
             </p>
+            {% if profileform.errors %}
+            <div id="form-error">
+              <div class="alert alert-warning">
+                <a href="#" class="close" data-dismiss="alert">&times;</a>
+                <p>정보를 정확히 입력해주세요:</p>
+                <table>
+                  {% for field in profileform %}
+                  {{ field.errors|striptags }}
+                  {% endfor %}
+                </table>
+              </div>
+            </div>
+            {% endif %}
             <input type="submit" class="btn btn-lg btn-primary" value="회원가입">
           </form>  
  
@@ -50,8 +63,10 @@
     </div> <!-- /container -->
 
 
+<!--
     <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script type="text/javascript" src="{% static 'media/js/userform-validation.js' %}"></script>
+-->
     
     
   </div> <!-- wrap -->
