@@ -6,7 +6,6 @@
 <title> {%block title %}TOMAKIT {%endblock%}</title>
 {%block content%}
 <style>
-  #wrap {margin-bottom:60px;}
   .itembox {max-width:800px;margin:auto;}
   .thumbnail {padding:0px;border-radius:0px;padding-bottom:20px;
     /*  box-shadow:inset 1px 1px 0 rgba(0,0,0,.1),inset 0 -1px 0 rgba(0,0,0,.07);*/
@@ -31,9 +30,7 @@
 
 
   <div id="wrap">
-
     <div class="container">
-
 <!--
       <script>
         $(function() {
@@ -41,7 +38,6 @@
         });
       </script>
 -->
-
       <div class="col-md-12 idealine">
         {% for item in lineitem %}
         {% with forloop.counter0|big_mid as check %}
