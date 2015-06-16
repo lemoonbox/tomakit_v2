@@ -6,65 +6,23 @@
 <link rel="stylesheet" type="text/css" href="{%static 'media/css/post.css'%}">
 
 <style>
-  #wrap {
-    background-color: #eee;
-  }
-  
-  .box {
-    background-color: #f5f5f5;
-    box-shadow: 0px 1px 1px 0px #ddd;
-  }
-  
-  .thumbnail {
-    background-color: #eee;
-  }
-  
-  .review-card {
-    margin-top: 34px;
-  }
-  
-  .review {
-    min-height: 150px;
-    margin-top: 15px;
-    background-color: #eee;
-    box-shadow: 1px 1px 1px 1px #ddd;
-    padding: 15px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    width: 100%;
-    display: block;
-    text-align: center;
-  }
-  
-  .nav-tabs > li,
-  .nav-pills > li {
-    float: none;
-    display: inline-block;
-    *display: inline;
-    /* ie7 fix */
-    
-    zoom: 1;
-    /* hasLayout ie7 trigger */
-  }
-  
-  .nav-tabs,
-  .nav-pills {
-    text-align: center;
-  }
+
 </style>
 
   <div id="wrap">
 
-    <div class="container">
+    <div class="container class-post-media-content">
       <div class="post-content">
 
 
         <div class="title clearfix" style="text-align:center;background-color:none;margin-bottom:15px;">
           <h2>{{class_post.title}}</h2>
-          <h5>by 비즈공예가 <span class="name">{{user.profile_set.first.nick_name}}</span><img class="profile-pic" src="{{MEDIA_URL}}{{user.profile_set.first.pro_photo}}"></h5>
+          <h5>
+            by 누구누구 뭐뭐뭐 
+            <span class="name">{{user.profile_set.first.nick_name}}</span><img class="profile-pic" src="{{MEDIA_URL}}{{user.profile_set.first.pro_photo}}"></h5>
         </div>
 
-        <div class="col-md-8 col-md-offset-0" style="background-color:transparent;padding:0px;">
+        <div class="col-md-8 col-md-offset-0 class-post-media-thumbnail">
           <div class="col-md-12 photo">
             <div class="post-photo">
 
@@ -161,26 +119,19 @@
 
           <!--누구를 위한 수업인가요-->
           <div class="col-md-12" style="text-align:center;">
-            <div class="col-md-6"><span style="font-size: 1.5em;" class="glyphicon glyphicon-pushpin"></span>
 
 
               <!--여기에 내용 입력 누구를 위한 강좌 태그 -->
-
-                  {{class_post.need1}}<br><br>
+                <div class="col-md-6"><span style="font-size: 1em;"class="glyphicon glyphicon-pushpin"></span><br>
+                  <b>{{class_post.need1}}</b><br>
                   {{class_post.need1_detail}}
-
                 </div>
-                <div class="col-md-6"><span style="font-size: 1.5em;"class="glyphicon glyphicon-pushpin"></span>
-                  {{class_post.need2}}<br><br>
+                <div class="col-md-6"><span style="font-size: 1em;"class="glyphicon glyphicon-pushpin"></span><br>
+                  <b>{{class_post.need2}}</b><br>
                   {{class_post.need2_detail}}
                 </div>
               </div>
-            </div>
 
-
-            </div>
-            <div class="col-md-6"><span style="font-size: 1.5em;" class="glyphicon glyphicon-pushpin"></span>
-            </div>
           </div>
         </div>
 
@@ -315,7 +266,7 @@
     </div>
 
 
-    <section style="margin-bottom:30px;positon:relative;z-index:1;min-height:600px;border-top:1px solid #ddd;background-color:#f5f5f5;">
+    <div class="tmk-class-post-main-content">
       <div class="container">
         <div class="col-lg-8 col-md-8 post-detail" style="margin:0;">
           <div role="tabpanel">
@@ -418,7 +369,7 @@
         </div>
 
 
-    </section>
+    </div>
 
 
 

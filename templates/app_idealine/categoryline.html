@@ -23,7 +23,10 @@
               </div>
               &#8361;{{item.price}}
               <p class="sr-only">원</p>
-              <span class="tag"> · CLASS</span> {% if user.is_authenticated %}
+              <span class="tag"> · CLASS</span> 
+              
+              {%comment%}
+              {% if user.is_authenticated %}
               <button type="button" class="btn btn-default btn-sm pull-right favorite" href="#">★</button>
               {%else%}
               <!-- Button trigger modal -->
@@ -44,6 +47,7 @@
                 </div>
               </div>
               {%endif%}
+              {%endcomment%}
             </div>
           </div>
         </div>
