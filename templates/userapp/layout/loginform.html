@@ -24,7 +24,8 @@
       <div id="register-modal">
 
         <form method="POST" action="{% url 'signup' %}" enctype="multipart/form-data" class="form-signin">
-            <input type="hidden" name="next" value="{{next}}"/>
+            /class/{{class_post.id}}
+            <input type="hidden" name="next" value="/class/{{class_post.id}}"/>
           {% csrf_token%}
 
           <h2 class="form-signin-heading">토마킷 계정 만들기</h2>

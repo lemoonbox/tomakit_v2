@@ -45,6 +45,7 @@ from DIY_tool import settings
 Local=True
 # Create your views here.
 def signup(request):
+    print "signup"
     ctx = Context({
         'error':None
     })
@@ -54,15 +55,18 @@ def signup(request):
         next=request.GET.get("next", "/")
 
     elif request.method =="POST" :
+        print "signup post"
         profile_form = ProfilesForm(request.POST, request.FILES)
 
         if profile_form.is_valid():
+            print "test:: signup valid"
             valid_error = False
             email = request.POST['email'].strip()
             password = request.POST['password']
             password_confirm = request.POST['password_confirm']
             nick_name = request.POST['nick_name']
             next=request.POST.get("next","/")
+            print next
 
             if password != password_confirm:
                 profile_form.add_error('password','비밀번호가 일치하지 않습니다. 정확히 입력해주세요.')
@@ -137,7 +141,8 @@ def signup(request):
                 tasks.sendmail.delay(cont, recipient)
 
 
-            return HttpResponseRedirect("/user/login/?next="+next)
+
+        return HttpResponseRedirect("/user/login/?next="+next)
 
     return render(request, 'userapp/signup.html',{
                     'profileform':profile_form,
@@ -372,10 +377,12 @@ def login(request, *args, **kwargs):
 
     next=""
     if request.method=="GET":
+        print "login get"
         login_form = LoginForm(None)
         next=request.GET.get("next","/")
 
     elif request.method=="POST":
+        print "login post"
         login_form = LoginForm(request.POST)
         next=request.POST.get("next","/")
         print next

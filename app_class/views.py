@@ -193,8 +193,6 @@ def class_detail(request, class_num):
         except _class_post.DoesNotExist:
             raise Http404("post does not exist")
 
-    print dir(_class_post.classpic_set)
-    print _class_post.classpic_set.all
     return render(request, 'app_class/class_post.html',
         {
             'class_post':_class_post
