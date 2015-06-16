@@ -1,29 +1,68 @@
+{%extends 'base.html'%}
 {% load static from staticfiles%}
-{% include "userapp/layout/header.html"%}
+<title>{%block title%}{{class_post.seo_title}}{%endblock%}</title>
 
-<title>{{class_post.title}}</title>
-</head>
-
+{% block content %}
 <link rel="stylesheet" type="text/css" href="{%static 'media/css/post.css'%}">
 
 <style>
-  #wrap {background-color:#eee;}
-  .box {background-color:#f5f5f5;box-shadow: 0px 1px 1px 0px #ddd;}
+  #wrap {
+    background-color: #eee;
+  }
+  
+  .box {
+    background-color: #f5f5f5;
+    box-shadow: 0px 1px 1px 0px #ddd;
+  }
+  
+  .thumbnail {
+    background-color: #eee;
+  }
+  
+  .review-card {
+    margin-top: 34px;
+  }
+  
+  .review {
+    min-height: 150px;
+    margin-top: 15px;
+    background-color: #eee;
+    box-shadow: 1px 1px 1px 1px #ddd;
+    padding: 15px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    width: 100%;
+    display: block;
+    text-align: center;
+  }
+  
+  .nav-tabs > li,
+  .nav-pills > li {
+    float: none;
+    display: inline-block;
+    *display: inline;
+    /* ie7 fix */
+    
+    zoom: 1;
+    /* hasLayout ie7 trigger */
+  }
+  
+  .nav-tabs,
+  .nav-pills {
+    text-align: center;
+  }
 </style>
-<body>
+
   <div id="wrap">
-    {% include "userapp/layout/nav.html"%}
 
-    <!--#TODO mobile에서 보이는거 조정-->
     <div class="container">
-
       <div class="post-content">
 
 
-        <section class="title clearfix" style="text-align:center;background-color:none;margin-bottom:15px;">
+        <div class="title clearfix" style="text-align:center;background-color:none;margin-bottom:15px;">
           <h2>{{class_post.title}}</h2>
-          <h5>by 비즈공예가 <span class="name">{{class_post.user}}</span><img class="profile-pic"></h5>
-        </section>
+          <h5>by 비즈공예가 <span class="name">{{user.profile_set.first.nick_name}}</span><img class="profile-pic" src="{{MEDIA_URL}}{{user.profile_set.first.pro_photo}}"></h5>
+        </div>
 
         <div class="col-md-8 col-md-offset-0" style="background-color:transparent;padding:0px;">
           <div class="col-md-12 photo">
@@ -33,44 +72,52 @@
                 <div id="class-post-Carousel" class="carousel slide" data-ride="carousel">
                   <!--Indicators -->
 
+                  {% if class_post.video_url %} {%else%}
                   <ol class="carousel-indicators">
 
-                    {% for photo in class_post.postpic_set.all %}
-                    {% if forloop.counter0 == 0 %}
+                    {%for photo in class_post.classpic_set.all %} {% if forloop.counter0 == 0 %}
                     <li data-target="#class-post-Carousel" data-slide-to="{{forloop.counter0}}" class="active"></li>
                     {% else %}
                     <li data-target="#class-post-Carousel" data-slide-to="{{forloop.counter0}}"></li>
-                    {% endif %}
-                    {%endfor%}
+                    {% endif %} {%endfor%}
                   </ol>
 
+                  {%endif%}
 
                   <!-- Wrapper for slides -->
+                  {% if class_post.video_url %} {%comment%}{{class_post.video_url}}{%endcomment%}
                   <div class="carousel-inner" role="listbox">
-
-                    {%for photo in class_post.postpic_set.all%}
-                    {% if forloop.counter0 == 0 %}
+                    <div class="embed-responsive embed-responsive-16by9">
+                      <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{class_post.video_url}}" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                  </div>
+                  {%else%}
+                  <div class="carousel-inner" role="listbox">
+                    {%for photo in class_post.classpic_set.all%} {% if forloop.counter0 == 0 %}
                     <div class="item active">
-                      <img class="img-responsive{{forloop.counter0}}" src="{{MEDIA_URL}}{{photo.post_photo}}" alt="{{class_post.title}} image{{forloop.counter0}}">
+                      <img class="img-responsive{{forloop.counter0}}" src="{{MEDIA_URL}}{{photo.class_photo}}" alt="{{photo.photo_title}} image{{forloop.counter0}}">
                     </div>
                     {% else %}
                     <div class="item">
-                      <img class="img-responsive{{forloop.counter0}}" src="{{MEDIA_URL}}{{photo.post_photo}}" alt="{{class_post.title}} image{{forloop.counter0}}">
+                      <img class="img-responsive{{forloop.counter0}}" src="{{MEDIA_URL}}{{photo.class_photo}}" alt="{{photo.photo_title}} image{{forloop.counter0}}">
                     </div>
-                    {% endif %}
-                    {%endfor%}
+                    {% endif %} {%endfor%}
                   </div>
-                  {%comment%}
+                  {%endif%}
+
+
                   <!-- Left and right controls -->
-                  <a class="left carousel-control" href="#class-post-Carousel" role="button" data-slide="prev">
-                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                  </a>
-                  <a class="right carousel-control" href="#class-post-Carousel" role="button" data-slide="next">
-                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                  </a>
-                  {%endcomment%}
+                  <!--
+<a class="left carousel-control" href="#class-post-Carousel" role="button" data-slide="prev">
+<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+<span class="sr-only">Previous</span>
+</a>
+<a class="right carousel-control" href="#class-post-Carousel" role="button" data-slide="next">
+<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+<span class="sr-only">Next</span>
+</a>
+-->
+
                 </div>
 
                 {%comment%}
@@ -104,27 +151,53 @@
                   {% endfor %}
 
                   <!-- END MODAL -->
-                </div> <!-- /.row thumb -->
+                </div>
+                <!-- /.row thumb -->
                 {%endcomment%}
 
               </div>
             </div>
           </div>
+
+          <!--누구를 위한 수업인가요-->
+          <div class="col-md-12" style="text-align:center;">
+            <div class="col-md-6"><span style="font-size: 1.5em;" class="glyphicon glyphicon-pushpin"></span>
+
+
+              <!--여기에 내용 입력 누구를 위한 강좌 태그 -->
+
+                  {{class_post.need1}}<br><br>
+                  {{class_post.need1_detail}}
+
+                </div>
+                <div class="col-md-6"><span style="font-size: 1.5em;"class="glyphicon glyphicon-pushpin"></span>
+                  {{class_post.need2}}<br><br>
+                  {{class_post.need2_detail}}
+                </div>
+              </div>
+            </div>
+
+
+            </div>
+            <div class="col-md-6"><span style="font-size: 1.5em;" class="glyphicon glyphicon-pushpin"></span>
+            </div>
+          </div>
         </div>
 
-        <div class="col-md-4 card" id="card-sticky"><!--well detail-->
+        <div class="col-md-4 card" id="card-sticky">
+          <!--well detail-->
           <div class="col-md-12 box">
             <div class="post-detail">
               <h5 class="post-price">
                 <label class="sr-only">수강료</label>
-              <span id="price-label" class="glyphicon glyphicon-star">50%</span>
-              <!--#TODO catch how to use humanize tag-->
-              <span id="post-price">&#8361; {{class_post.price}}</span>
+                <span id="price-label" class="glyphicon glyphicon-star">50%</span>
+                <!--#TODO catch how to use humanize tag-->
+                <span id="post-price">&#8361; {{class_post.price}}</span>
               </h5>
               <hr style="border:1px solid #ddd;margin:10px;margin-left:-2%;width:104%;">
               <div class="class-tag">
-                <span class="glyphicon glyphicon-tag"></span>초보자 가능
-                <span class="glyphicon glyphicon-tag"></span>공방 제공
+                {% for tag in class_post.price_tag.all %}
+                <span class="glyphicon glyphicon-tag"></span>{{tag.price_tag}} {% endfor %}
               </div>
             </div>
           </div>
@@ -147,197 +220,207 @@
             <div class="post-detail">
               <h5 style="margin-left:-5px;"><b>수업정보</b></h5>
 
-            <p><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
-              <label class="sr-only">위치</label>
-              <span id="post-add">{{class_post.address}}</span>
-            </p>
+              <p><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
+                <label class="sr-only">위치</label>
+                <span id="post-add">{{class_post.address}}</span>
+              </p>
 
-            <p><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
-              <label class="sr-only">강의 날짜</label>
-              <span id="post-day">{{class_post.lessonday}} 시작 주 2회 수업</span>
-            </p>
-            <p>
-              <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
-              <label class="sr-only">시간</label>
-              <span id="post-time">
-                {{class_post.start_time}} ~ {{class_post.end_time}} (시간)
-              </span>
-            </p>
-            <p>
-              <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-              <label class="sr-only">모집 인원</label>
-              <span id="post-minmax">{{class_post.minimum}} - {{class_post.maximum}} 명 모집</span>
-            </p>
-         
+              <p><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+                <label class="sr-only">강의 날짜</label>
+                <span id="post-day">{{class_post.day}}</span>
+              </p>
+              <p>
+                <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+                <label class="sr-only">시간</label>
+                <span id="post-time">
+                  {{class_post.time}} (시간)
+                </span>
+              </p>
+              <p>
+                <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                <label class="sr-only">모집 인원</label>
+                <span id="post-minmax">{{class_post.mem_num}} 명 모집</span>
+              </p>
 
+              <!-- Button trigger modal -->
+              <button type="button" class="btn btn-default btn-lg" id="cont-btn" style="width:100%;float:none;margin:auto;" data-toggle="modal" data-target="#contactModal">
+                <!--              <span class="glyphicon glyphicon-phone-alt" aria-hidden="true"></span>-->
+                수업 신청
+              </button>
+              <!-- Modal -->
+              {% if user.is_authenticated %}
+              <div class="modal fade" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="contactModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                      </button>
+                      <h4 class="modal-title" id="contactModalLabel">강좌 신청 방법</h4>
+                    </div>
+                    <div class="modal-body">
 
-          <!-- Button trigger modal -->
-          <button type="button" class="btn btn-default btn-lg" id="cont-btn" data-toggle="modal" data-target="#contactModal">
-            <!--              <span class="glyphicon glyphicon-phone-alt" aria-hidden="true"></span>-->
-            수업 신청
-          </button>
-          <!-- Modal -->
-          {% if user.is_authenticated %}
-          <div class="modal fade" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="contactModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                  <h4 class="modal-title" id="contactModalLabel">강좌 신청 방법</h4>
-                </div>
-                <div class="modal-body">
+                      <p><img class="icon" src='{%static "media/icon/phone325.png" %}'>{{class_post.contact_tel}}</p>
 
-                  <p><img class="icon" src='{%static "media/icon/phone325.png" %}'>{{class_post.contact_tel}}</p>
-
-                </div>
-                <!--
+                    </div>
+                    <!--
 <div class="modal-footer">
 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 -->
-              </div>
-            </div>
-          </div>        
-        <!-- END MODAL -->
-        {% else %}
-        <!-- Modal -->
-        <div class="modal fade" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="contactModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close pull-right" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>
-              <div class="modal-body">
-                {% include 'userapp/layout/loginform.html' %}
-              </div>
-            </div>
-          </div>
-        </div>
-        {% endif %}
-        <!-- END MODAL -->
-
-            <button type="button" class="btn btn-default btn-lg" id="cont-btn" style="background-color:transparent;color:black;display:inline-block;border:none;width:50%;margin-left:0px;">★ 관심수업 추가</button>
-            
-          </div>
-          </div> <!--/.post-detail-->
-            
-      </div> <!-- /#card-sticky gadget -->
-    </div>
-
-
-
-    <section class="col-lg-8 col-md-8" style="width:100%; margin-bottom:15px;positon:relative;background-color:#f5f5f5;height:600px;border-top:1px solid #ddd;">
-<!--      <hr style="border-bottom:1px solid #ddd;box-shadow:none;">-->
-    <div class="col-lg-8 col-md-8 post-detail">
-      <div role="tabpanel">
-        <!-- Nav tabs -->
-        <ul class="nav nav-tabs" role="tablist">
-          <li role="presentation" class="active"><a href="#overview" aria-controls="overview" role="tab" data-toggle="tab">Overview</a></li>
-          <li role="presentation"><a href="#classinfo" aria-controls="classinfo" role="tab" data-toggle="tab">수업소개</a></li>
-          <li role="presentation"><a href="#teacherinfo" aria-controls="teacherinfo" role="tab" data-toggle="tab">작가소개</a></li>
-        </ul>
-
-        <!-- Tab panes -->
-        <div class="tab-content"> <!--tab content #1-->
-          <div role="tabpanel" class="tab-pane fade in active" id="overview">
-          
-...
-
-          </div>
-        
-          
-<!--
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-          <link rel="stylesheet" href="/static_local/media/css/post.css">
-          <link rel="stylesheet" href="/static_local/media/css/style.css">
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
--->
-          
-          
-        <div role="tabpanel" class="tab-pane fade" id="classinfo"> <!--tab content #2: curriculum-->
-            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-            <div class="panel panel-default">
-              
-              <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-              <div class="panel-heading" role="tab" id="headingOne">
-              <h4 class="panel-title">
-<!--                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">-->
-                  1주차: 강의명
-<!--                </a>-->
-                </h4>
-              </div>
-              </a>
-              <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
-              <div class="panel-body">
-                블라블라 1주차 강의 소개 상세 내용
-                </div>
-              </div>
-              </div>
-            
-            <div class="panel panel-default">
-              <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-              <div class="panel-heading" role="tab" id="headingTwo">
-                <h4 class="panel-title">
-
-                    2주차: 강의명
-                  
-                </h4>
-              </div>
-              </a>
-              <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-                <div class="panel-body">
-                  블라블라 2주차 강의 소개 상세 내용
-                </div>
-              </div>
-              </div>
-              
-              <div class="panel panel-default"> <!--tab content #3 Artist-->
-                <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-
-              <div class="panel-heading" role="tab" id="headingThree">
-                <h4 class="panel-title">
-               
-                  3주차: 강의명
-
-                </h4>
-                </div>
-                </a>
-                <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-                <div class="panel-body">
-                  블라블라 3주차 강의 소개 상세 내용
                   </div>
                 </div>
-              </div>    
               </div>
-                        
-                
-                
+              <!-- END MODAL -->
+              {% else %}
+              <!-- Modal -->
+              <div class="modal fade" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="contactModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close pull-right" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      {% include 'userapp/layout/loginform.html' %}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {% endif %}
+              <!-- END MODAL -->
+
+              <!--              <button type="button" class="btn btn-default btn-lg" id="cont-btn" style="background-color:transparent;color:black;display:inline-block;border:none;width:50%;margin-left:0px;">★ 관심수업 추가</button>-->
+
+            </div>
           </div>
-          <div role="tabpanel" class="tab-pane fade" id="teacherinfo">...</div>
+          <!--/.post-detail-->
+          <div class="col-md-12 box">
+            <div class="post-detail" style="min-height:200px;">
+              <div class="col-md-8">
+                <!--강사 소개 -->
+                <p><b>{{user.profile_set.first.nick_name}}, OOO</b>
+                </p>
+                {{user.profile_set.first.sellerinfo_set.first.special}}
+                <span><em>"{{user.profile_set.first.sellerinfo_set.first.intro}}"</em></span>
+              </div>
+              <div class="col-md-4">
+                <img src="{{MEDIA_URL}}{{user.profile_set.first.pro_photo}}" style="border-radius:50%;height:50px;width:50px;">
+              </div>
+            </div>
+          </div>
         </div>
 
+        <!-- /#card-sticky gadget -->
       </div>
+
     </div>
-      </section>
-
-    {%comment%}<!--
-<div class="col-md-4 col-lg-4 col-xs-12 col-sm-4 well map">
-<dd class="text-muted"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>위치 </dd>
-<span id="post-add">{{class_post.address}}</span>
-{% include 'map/mapapi.html' %}
-</div>
--->{%endcomment%}
 
 
+    <section style="margin-bottom:30px;positon:relative;z-index:1;min-height:600px;border-top:1px solid #ddd;background-color:#f5f5f5;">
+      <div class="container">
+        <div class="col-lg-8 col-md-8 post-detail" style="margin:0;">
+          <div role="tabpanel">
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" style="align:center;" role="tablist">
+              <li role="presentation" class="active"><a href="#overview" aria-controls="overview" role="tab" data-toggle="tab">Overview</a>
+              </li>
+              <li role="presentation"><a href="#classinfo" aria-controls="classinfo" role="tab" data-toggle="tab">수업소개</a>
+              </li>
+              <li role="presentation"><a href="#teacherinfo" aria-controls="teacherinfo" role="tab" data-toggle="tab">공방위치</a>
+              </li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+              <!--tab content #1-->
+              <div role="tabpanel" class="tab-pane fade in active" id="overview">
+
+                {%for detail in class_post.classdetail_set.all%} {{detail.class_detail | safe}} {% endfor %}
+              </div>
+
+
+              <div role="tabpanel" class="tab-pane fade" id="classinfo">
+                <!--tab content #2: curriculum-->
+                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+
+                  {%for curri in class_post.classcurri_set.all%}
+                  <div class="panel panel-default">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{forloop.counter0}}" aria-expanded="true" aria-controls="collapse{{forloop.counter0}}">
+                      <div class="panel-heading" role="tab" id="heading{{forloop.counter0}}">
+                        <h4 class="panel-title">
+                          <!--                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">-->
+                          STEP {{forloop.counter0}} : {{curri.curri_name}}
+                          <!--                </a>-->
+                        </h4>
+                      </div>
+                    </a>
+                    <div id="collapse{{forloop.counter0}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading{{forloop.counter0}}">
+                      <div class="panel-body">
+                        {{curri.curri_detail}}
+                      </div>
+                    </div>
+                  </div>
+                  {% endfor %}
+                </div>
+              </div>
+              <div role="tabpanel" class="tab-pane fade" id="teacherinfo">
+
+
+                {% include "map/mapapi.html" %}
+
+              </div>
+            </div>
+
+          </div>
+        </div>
 
 
 
-  </div> <!-- /.post-content -->
-  </div>
+
+        <div class="col-lg-4 col-md-4 review-card">
 
 
-<div id="push"></div>
-{% include "userapp/layout/footer.html" %}
 
-</body>
 
-</html>
+          <div id="customer-review-Carousel" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+
+              {%for review in class_post.review_set.all%} {% if forloop.counter0 == 0 %}
+              <li data-target="#customer-review-Carousel" data-slide-to="{{forloop.counter0}}" class="active"></li>
+              {% else %}
+              <li data-target="#customer-review-Carousel" data-slide-to="{{forloop.counter0}}"></li>
+              {% endif %} {%endfor%}
+            </ol>
+
+            <div class="carousel-inner" style="max-height:400px;" role="listbox">
+              {%for review in class_post.review_set.all%} {%if forloop.counter0 == 0 %}
+              <div class="col-lg-12 review{{forloop.counter0}} review item active">
+                <h5>수강생 후기</h5>
+                <em style="text-align:center;">" {{review.review}} "</em>
+                <br>
+                <div class="reviewer_photo{{forloop.couter0}}" style="text-align:right;">
+                  <span style="color:#47c9af;right:0;">{{review.reviewer_name}}</span> <img style="border-radius:50%;height:2em;width:2em;" src="{{MEDIA_URL}}{{review.reviewer_photo}}">
+                </div>
+              </div>
+              {% else%}
+              <div class="col-lg-12 review{{forloop.counter0}} review item">
+                <h5>수강생 후기</h5>
+                <em style="text-align:center;">" {{review.review}} "</em>
+                <br>
+                <div class="reviewer_photo{{forloop.couter0}}" style="text-align:right;">
+
+                  <span style="color:#47c9af;right:0;">{{review.reviewer_name}}</span> <img style="border-radius:50%;height:2em;width:2em;" src="{{MEDIA_URL}}{{review.reviewer_photo}}">
+                </div>
+              </div>
+              {% endif %}
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+
+
+    </section>
+
+
+
+    </div>
+{% endblock %}

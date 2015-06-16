@@ -64,3 +64,111 @@
     
 <!--     Include all compiled plugins (below), or include individual files as needed -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+{% load static from staticfiles %}
+<a href="/">
+  <header>
+    <h1><span class="glyphicon glyphicon-send"></span>토마킷</h1>
+  </header>
+</a>
+
+<!-- Static navbar -->
+<nav class="navbar navbar-default navbar-static-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <!--        <a class="navbar-brand" href="/idealine">TOMAKIT</a>-->
+      </div>
+
+      <div id="navbar" class="collapse navbar-collapse" aria-expanded="false">
+        <ul class="nav navbar-nav">
+          <li><a href="/">TOMAKIT HOME</a></li>
+          {%comment%}
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">CATEGORY <span class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu">
+              <li class="dropdown-header">CATEGORY</li>
+              <li><a href="/idealine/category/baby"><h4>유아</h4> <span>의류/유기농 화장품/장난감/가구/이유식/태교</span> </a></li>
+              <li><a href="/idealine/category/home"><h4>Food</h4> <span>디저트/음식/요리/도시락/반찬/국가별/제빵/음료</span> </a></li>
+              <li><a href="/idealine/category/funny"><h4>Fun</h4> <span>장난감/퍼즐/건담/취미/클레이아트</span></a></li>
+              <li><a href="/idealine/category/art"><h4>Art</h4> <span>공예/사군자/유화/수채화/팝아트/도자기</span> </a></li>
+              <li><a href="/idealine/category/fashion"><h4>Living</h4> <span>생활/인테리어/가구/가드닝/플라워/펠트/퀼트/의류/가죽공예</span></a></li>
+              <li><a href="/idealine/category/tast"><h4>Beauty</h4> <span>화장품/향수/악세사리/패션소품/패션/핸드폰/메이크업</span> </a></li>
+              <li><a href="/idealine/category/beauty"><h4>Tech</h4> <span>기술/3D프린팅/아두이노/영상제작/프로그래밍/오큘러스</span></a></li>
+              <li><a href="/idealine/category/pet"><h4>반려동물</h4> <span>사료/화장품/악세사리/의류</span></a></li>
+              <!--
+
+<li class="divider"></li>
+<li class="dropdown-header">기타</li>
+<li><a href="#">Separated link</a></li>
+<li><a href="#">One more separated link</a></li>
+-->
+            </ul>
+          </li>
+          {%endcomment%}
+          {%comment%}
+          <!--
+<li class="dropdown">
+<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">제휴 신청 <span class="caret"></span></a>
+<ul class="dropdown-menu" role="menu">
+
+<li><a href="/class/create">만들기 강좌 등록</a></li>
+<li><a href="/kit/create">DIY KIT 판매 등록</a></li>
+</ul>
+</li>
+-->{%endcomment%}
+          <li><a href="/user/contact">컨텐츠 제휴하기</a></li>
+        </ul>
+
+        <ul id=nav-user class="nav navbar-nav navbar-right">
+          {%comment%}
+          <!--
+<form class="navbar-form navbar-left" role="search">
+<div class="form-group">
+<input type="text" class="form-control" placeholder="Search">
+</div>
+<button type="submit" class="btn btn-default">검색</button>
+</form>
+-->{%endcomment%}
+          {% if user.is_authenticated %}
+          <li><a id="hi" href="/user/profile">안녕하세요 <strong>
+            {{user.profile_set.first.nick_name}}</strong> 님!</a></li>
+          <li><a href="/user/logout">로그아웃</a></li>
+          {% else %}
+          <li><a class="hi" href="#">hello world!</a></li>
+          <li><a href="{% url 'signup' %}?next={{request.path}}">회원가입</a></li>
+          <li><a href="{% url 'login_url' %}?next={{request.path}}">로그인</a></li>
+          <!--            <span class="sr-only">(current)</span>-->
+
+        </ul>
+        {% endif %}
+
+      </div> <!--/.nav-collapse -->
+    </div> <!--/.container -->
+  </div>
+</nav>
+
+
+<script>
+  $(window).scroll(function() {
+    if ($(this).scrollTop() > 1){  
+      $('header').addClass("sticky");
+    }
+    else{
+      $('header').removeClass("sticky");
+    }
+  });
+  $(window).scroll(function() {
+    if ($(this).scrollTop() > 1){ 
+      $('nav').addClass("sticky");
+    }
+    else{
+      $('nav').removeClass("sticky");
+    }
+  });
+</script>

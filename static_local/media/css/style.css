@@ -1,7 +1,6 @@
-@import url("webfont.css");
-
 body {
-  background-color: #eee;}
+  background-color: #eee;
+}
 /*
 .loader {
   position: fixed;
@@ -13,69 +12,133 @@ body {
   background: 50% 50% no-repeat rgb(249,249,249);
 }
 */
-nav-tabs a {color:#47C9AF;}
-a, a:hover, a:focus {text-decoration:none;!important}
-a > h4, a:hover > h4, a:focus >h4 {text-decoration:none;}
 
-/* Sticky footer styles
--------------------------------------------------- */
-html,
-body {
-  height: 100%; 
-  /* The html and body elements cannot have any padding or margin. */
-  font-family:Nanum Gothic;
+nav-tabs a {
+  color: #47C9AF;
 }
 
+a,
+a:hover,
+a:focus {
+  text-decoration: none;
+  !important
+}
+
+a > h4,
+a:hover > h4,
+a:focus >h4 {
+  text-decoration: none;
+}
+/* Sticky footer styles
+-------------------------------------------------- */
+
+html,
+body {
+  height: 100%;
+  /* The html and body elements cannot have any padding or margin. */
+  
+  font-family: Nanum Gothic;
+}
 /* Wrapper for page content to push down footer */
+
 #wrap {
   min-height: 100%;
   height: auto !important;
   height: 100%;
   /* Negative indent footer by it's height */
+  
   margin: 0 auto -60px;
-  background-color:white;
-  padding-bottom:50px;
+  background-color: #eee;
+  padding-bottom: 50px;
 }
 /* Set the fixed height of the footer here */
-#push{height:80px;}
-#footer {
-  position:absolute;margin-top:20px;width:100%;height: 180px;
+
+#push {
+  height: 80px;
 }
 
-#footer {font-family:Titillium web;background-color:#47c9af;}
+#footer {
+  position: absolute;
+  margin-top: 20px;
+  width: 100%;
+  height: 180px;
+}
 
-#upper-footer {height:120px;background-color:#47c9af;width:100%;padding-top:10px;margin-left:-20px;}
-.footer-nav {margin:auto;margin-top:20px;font-family:Nanum Gothic;}
-.footer-nav ul{text-align: center; list-style:outside;list-style-type: none;}
-.footer-nav li {display:inline;padding:10px;}
-.footer-nav a {color:white;font-size:16px;font-weight:600;}
+#footer {
+  font-family: Titillium web;
+  background-color: #47c9af;
+}
 
+#upper-footer {
+  height: 120px;
+  background-color: #47c9af;
+  width: 100%;
+  padding-top: 10px;
+  margin-left: -20px;
+}
 
-#bi .logo {font-family:Titillium web, sans-serif; color:cornsilk;font-weight:600;word-break:none;white-space:nowrap;}
-.credit {padding-left:10px;}
+.footer-nav {
+  margin: auto;
+  margin-top: 20px;
+  font-family: Nanum Gothic;
+}
+
+.footer-nav ul {
+  text-align: center;
+  list-style: outside;
+  list-style-type: none;
+}
+
+.footer-nav li {
+  display: inline;
+  padding: 10px;
+}
+
+.footer-nav a {
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+#bi .logo {
+  font-family: Titillium web, sans-serif;
+  color: cornsilk;
+  font-weight: 600;
+  word-break: none;
+  white-space: nowrap;
+}
+
+.credit {
+  padding-left: 10px;
+}
 /*.name {color:silver;}*/
-
 /* Lastly, apply responsive CSS fixes as necessary */
 
-  .container .logo {
-    margin: 10px 0;
-  }
-  .container .credit {
-    margin: 20px 0;
-  }
+.container .logo {
+  margin: 10px 0;
+}
 
+.container .credit {
+  margin: 20px 0;
+}
 
 @media (max-width: 767px) {
-  #footer, #upper-footer,{
+  #footer,
+  #upper-footer,
+  {
     margin-left: -20px;
     margin-right: -20px;
     padding-left: 20px;
     padding-right: 20px;
     text-align: center;
-   }
-  #upper-footer {height:80px;}
+  }
+  #upper-footer {
+    height: 80px;
+  }
   .container .logo {
-    margin: 10px 0;margin-top:10px;margin-bottom:0px;
+    margin: 10px 0;
+    margin-top: 10px;
+    margin-bottom: 0px;
   }
   .container .credit {
     margin: 10px 0;
@@ -90,44 +153,320 @@ body {
 #wrap > .container {
   padding-top: 30px;
 }
+
 .container #bi {
   margin: 10px 0;
 }
+
 #bi hr {
-  width:100%;border-top:3px solid cornsilk;margin-bottom:10px;}
+  width: 100%;
+  border-top: 3px solid cornsilk;
+  margin-bottom: 10px;
+}
 
 code {
   font-size: 80%;
 }
-
-
 /* Navbar
 -------------------------------------------------- */
-@media (max-width: 767px)
-  .navbar-fixed-top, .navbar-fixed-bottom, .navbar-static-top {
-    margin-right: -20px;
-    margin-left: -20px;
-  }
 
-
+@media (max-width: 767px) .navbar-fixed-top,
+.navbar-fixed-bottom,
+.navbar-static-top {
+  margin-right: -20px;
+  margin-left: -20px;
+}
 /* MODAL
 ----------------------------------------------------*/
 
-#cont-btn {border-radius:0px; margin:auto;width:50%;color:#fff;background-color: #47c9af;font-weight:400;border:2px solid #47c9af;font-size:1em;}
-#cont-btn span {vertical-align:text-top;margin-right:5px;}
-#cont-btn:hover {background-color:#66cc99; color:white;opacity:0.8; border:2px solid #66cc99;}
+#cont-btn {
+  border-radius: 0px;
+  margin: auto;
+  width: 50%;
+  color: #fff;
+  background-color: #47c9af;
+  font-weight: 400;
+  border: 2px solid #47c9af;
+  font-size: 1em;
+}
 
+#cont-btn span {
+  vertical-align: text-top;
+  margin-right: 5px;
+}
 
-.modal-dialog {max-width:450px;}
-.modal-body {margin:auto;}
-.modal-body p {margin-top: 10px;}
-.modal-dialog2 {width:60%;vertical-align: middle; margin:auto;background-color:transparent;padding:0;}
-.modal-body2{width:100%;margin:auto;margin-top:20px;background-color:transparent;padding:0;}
-.modal-content2{background-color:black;padding:-20px;margin:0;}
-.modal-body2 > img {width:100%;padding-top:20px; padding-bottom:20px;margin:0;}
-.modal-header {height:50px;}
+#cont-btn:hover {
+  background-color: #66cc99;
+  color: white;
+  opacity: 0.8;
+  border: 2px solid #66cc99;
+}
 
+.modal-dialog {
+  max-width: 450px;
+}
 
+.modal-body {
+  margin: auto;
+}
+
+.modal-body p {
+  margin-top: 10px;
+}
+
+.modal-dialog2 {
+  width: 60%;
+  vertical-align: middle;
+  margin: auto;
+  background-color: transparent;
+  padding: 0;
+}
+
+.modal-body2 {
+  width: 100%;
+  margin: auto;
+  margin-top: 20px;
+  background-color: transparent;
+  padding: 0;
+}
+
+.modal-content2 {
+  background-color: black;
+  padding: -20px;
+  margin: 0;
+}
+
+.modal-body2 > img {
+  width: 100%;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin: 0;
+}
+
+.modal-header {
+  height: 50px;
+}
 /* SOMETHING
 ------------------------------------------------------*/
+/* HEADER - Navigation
+=====================================================*/
 
+#hi span {
+  font-family: sans-serif;
+}
+
+#hi strong:hover {
+  color: white;
+}
+
+header .glyphicon {
+  font-size: 40%;
+  color: white;
+  margin-right: 1%;
+  opacity: 0.8;
+}
+
+header .glyphicon:hover {
+  opacity: 1;
+}
+
+header small {
+  font-size: 30%;
+  vertical-align: text-top;
+  margin-left: 5px;
+  color: aquamarine;
+}
+/*  .container-fluid {padding-left:5%;padding-right:5%;}*/
+/*
+#navbar a:hover {background-color:#ddd;}
+#nav-user a:first-child:hover{background-color:transparent; background-color:#ddd;}
+*/
+
+.navbar-static-top {
+  z-index: 501;
+  position: relative;
+  top: 100px;
+}
+
+.navbar-brand {
+  color: black;
+  font-family: Titillium Web;
+  font-weight: 900;
+  font-size: 24px;
+}
+/* Sticky Header stylex
+----------------------------------------------------*/
+
+header {
+  top: 0;
+  position: fixed;
+  width: 100%;
+  text-align: center;
+  line-height: 150px;
+  height: 150px;
+  background: #48CFAD;
+  color: #fff;
+  z-index: 501;
+  // set animation
+  -webkit-transition: all 0.4s ease;
+  transition: all 0.4s ease;
+}
+
+header h1 {
+  font-family: Hanna;
+  /*  font-weight:600;*/
+  
+  font-size: 50px;
+}
+
+header.sticky {
+  line-height: 30px;
+  height: 30px;
+  text-align: left;
+  z-index: 502;
+}
+
+header.sticky h1 {
+  margin-top: 7px;
+  font-size: 14px;
+  padding-left: 20px;
+}
+
+nav {
+  z-index: 501;
+  top: 100px;
+}
+
+nav.sticky {
+  z-index: 500;
+  top: 0px;
+}
+/*  .dropdown-menu {margin-right:25%;}*/
+
+.dropdown-menu > li > a > h4 {
+  font-weight: 600;
+  width: 100px;
+  display: inline-block;
+}
+
+.dropdown-menu > li > a > h4:hover {
+  color: #66cc99;
+}
+
+
+/*Categoryline
+--------------------------------------------------*/
+
+.row {
+  margin-left: 0px;
+  margin-top: 40px;
+  margin-top: 150px;
+}
+
+.thumbnail {
+  border-radius: 1px;
+  overflow: hidden;
+  padding: 0px;
+}
+
+.thumbnail img {
+  width: 100%;
+  position: relative;
+  margin: 0px;
+}
+
+.ttt {
+  width: 350px;
+  height: 15em;
+  overflow: hidden;
+}
+
+.ttt img:hover {
+  opacity: 0.3;
+}
+
+.caption {
+  z-index: 1;
+  background-color: white;
+  margin: 0;
+  width: 100%;
+  height: 6rem;
+}
+
+.tag {
+  color: lightgray;
+  margin: 0;
+}
+
+.title {
+  color: black;
+  margin: 0;
+  font-weight: 600;
+}
+
+.ellipsis {
+  width: 80%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin: 0;
+}
+
+.title:hover {
+  color: skyblue;
+  text-decoration: none;
+  margin: 0;
+}
+/*  .caption button {opacity:0;border:none;}*/
+
+.favorite {
+  border-radius: 15px;
+  border: none;
+  background-color: orange;
+  font-size: 15px;
+  color: white;
+  margin-right: 1px;
+  margin-top: -10px;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  text-align: center;
+}
+
+.favorite:hover {
+  background-color: red;
+  color: white;
+}
+
+.arrow {
+  max-width: 500px;
+  margin: auto;
+  margin-top: 30px;
+  font-size: 20px;
+  text-align: center;
+  font-family: Verdana;
+}
+
+.arrow .glyphicon:hover {
+  opacity: 1;
+}
+
+.arrow .glyphicon {
+  color: #66FFCC;
+  opacity: .5;
+}
+
+.arrow button {
+  border-radius: 20px;
+  border: none;
+  margin-top: -5px;
+  color: white;
+  background-color: #66cc99;
+}
+
+.arrow-top {
+  width: 200px;
+  text-align: center;
+  margin-top: 50px;
+  border: 1px solid #47C9AF;
+}

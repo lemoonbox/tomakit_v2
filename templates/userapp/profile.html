@@ -1,24 +1,17 @@
-{% load static from staticfiles%}
-{% include "userapp/layout/header.html"%}
-
-
+{%extends "base.html" %}{% load static from staticfiles%}
+{%block content%}
 <title>{{profile.nick_name}}님의 프로필</title>
 <style>
-  #wrap {margin-bottom:0px;}
   .well {background-color: white; max-width:400px; margin:auto;margin-top:150px; padding:30px;}
   .well h2 {margin-bottom:10px; padding:10px; padding-right:0px;}
   .profile-inner ul {padding:10px; padding-right:0px;}
   .profile-inner ul li {list-style:none; max-width:100%; margin-left:0px;margin-right:10px; padding-left:0; padding:5px; border-bottom:1px solid silver;}
   .thumbnail {max-width:320px; border-radius:0;vertical-align:text-bottom;}
-  .profile-inner
+
 </style>
-</head>
-<body>
 
   
-  
   <div id="wrap">
-    {% include "userapp/layout/nav.html"%}
     <div class="container">
       <div class="well">
         <div class="profile-inner pull left">
@@ -43,6 +36,4 @@
     <div id="push"></div>
   </div> <!-- /#wrap -->
 
-  {% include "userapp/layout/footer.html" %}
-</body>
-</html>
+{%endblock%}

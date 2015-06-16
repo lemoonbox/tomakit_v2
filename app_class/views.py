@@ -169,7 +169,7 @@ def classcreate(request):
 
             return HttpResponseRedirect('/class/{0}'.format(_class.id))
 
-    return render(request, 'app_class/create_class_dev_moon.html',
+    return render(request, 'app_class/create_class.html',
         {
             'classcreateform':classform,
             'pricetagform':pricetagform,
@@ -195,7 +195,7 @@ def class_detail(request, class_num):
 
     print dir(_class_post.classpic_set)
     print _class_post.classpic_set.all
-    return render(request, 'app_class/class_post_dev_moon.html',
+    return render(request, 'app_class/class_post.html',
         {
             'class_post':_class_post
         })

@@ -123,103 +123,59 @@
 </style>
 
 </head>
+{% extends 'base.html' %}
+{% load static from staticfiles%}
+{% load line_extras_tag%}
+{% block content %}
 
-<body>
-  <div id="wrap">
-    {% include "userapp/layout/nav.html"%}
-    <div class="container">
-      {% include "userapp/layout/loader.html"%}
-      <div class="row">
-        {% for item in catgitem%}
-        <div class="col-xs-6 col-md-4 col-lg-3">
-          <div class="itembox">
-            <div class="thumbnail">
-              {% if item.type.type_name == "class"%}
-              <!--              <span class="tag">CLASS</span>-->
-              <!--classpost-->
-              <div class="ttt">
-                <a href="http://{{HTTP_HOST}}/post/class/{{item.id}}">
-                  <img src="{{MEDIA_URL}}{{item.postpic_set.first.post_photo}}">
-                </a>
+<div id="wrap">
+  <div class="container">
+    <div class="row">
+      {% for item in catgitem%}
+      <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+        <div class="itembox">
+          <div class="thumbnail">
+            <!--              <span class="tag">CLASS</span>-->
+            <!--classpost-->
+            <div class="ttt">
+              <a href="http://{{HTTP_HOST}}/class/{{item.id}}">
+                <img src="{{MEDIA_URL}}{{item.classpic_set.first.class_photo}}">
+              </a>
+            </div>
+
+            <div class="caption">
+              <div class="ellipsis"><a href="http://{{HTTP_HOST}}/class/{{item.id}}" class="title">{{item.title}}</a>
               </div>
-
-              <div class="caption">
-                <div class="ellipsis"><a href="http://{{HTTP_HOST}}/post/class/{{item.id}}" class="title">{{item.title}}</a>
-                </div>
-                &#8361;{{item.price}}
-                <p class="sr-only">원</p>
-                <span class="tag"> · CLASS</span>
-
-
-                {% if user.is_authenticated %}
-                <button type="button" class="btn btn-default btn-sm pull-right favorite" href="#">★</button>
-                {%else%}
-                <!-- Button trigger modal -->
-                <button type="button" class="btn btn-default btn-sm pull-right favorite" data-toggle="modal" data-target="#contactModal">★</button>
-                <!-- Modal -->
-                <div class="modal fade" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="contactModalLabel" aria-hidden="true">
-                  <div class="modal-dialog">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-                        </button>
-                        <h4 class="modal-title" id="contactModalLabel"></h4>
-                      </div>
-                      <div class="modal-body">
-                        {% include 'userapp/layout/loginform.html' %}
-                      </div>
+              &#8361;{{item.price}}
+              <p class="sr-only">원</p>
+              <span class="tag"> · CLASS</span> {% if user.is_authenticated %}
+              <button type="button" class="btn btn-default btn-sm pull-right favorite" href="#">★</button>
+              {%else%}
+              <!-- Button trigger modal -->
+              <button type="button" class="btn btn-default btn-sm pull-right favorite" data-toggle="modal" data-target="#contactModal">★</button>
+              <!-- Modal -->
+              <div class="modal fade" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="contactModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                      </button>
+                      <h4 class="modal-title" id="contactModalLabel"></h4>
+                    </div>
+                    <div class="modal-body">
+                      {% include 'userapp/layout/loginform.html' %}
                     </div>
                   </div>
                 </div>
-                {%endif%}
-
-
-                {% elif item.type.type_name == "kit"%}
-                <!--kitpost-->
-                <!--                  <span class="tag">KIT</span>-->
-                <div class="ttt">
-                  <a href="http://{{HTTP_HOST}}/post/kit/{{item.id}}">
-                    <img src="{{MEDIA_URL}}{{item.postpic_set.first.post_photo}}">
-                  </a>
-                </div>
-                <div class="caption">
-                  <div class="ellipsis">
-                    <a href="http://{{HTTP_HOST}}/post/kit/{{item.id}}" class="title">{{item.title}}</a>
-                  </div>
-                  &#8361;{{item.price}}
-                  <p class="sr-only">원</p>
-                  <span class="tag"> · KIT</span> 
-                  
-                  {% if user.is_authenticated %}
-                  <button type="button" class="btn btn-default btn-sm pull-right favorite" href="#">★</button>
-                  {%else%}
-                  <!-- Button trigger modal -->
-                  <button type="button" action="{% url 'login_url' %}?next={{request.path}}" class="btn btn-default btn-sm pull-right favorite" data-toggle="modal" data-target="#contactModal">★</button>
-                  <!-- Modal -->
-                  <div class="modal fade" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="contactModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-                          </button>
-                          <h4 class="modal-title" id="contactModalLabel"></h4>
-                        </div>
-                        <div class="modal-body">
-                          {% include 'userapp/layout/loginform.html' %}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  {%endif%}
-                  
-                  {% endif %}
-                </div>
               </div>
+              {%endif%}
             </div>
           </div>
-          {% endfor%}
+        </div>
+      </div>
+      {% endfor%}
 
-          <!--
+      <!--
               <script type="text/javascript">    
                 $(document).ready(function() {
                     $(".ttt").each(function() {
@@ -235,39 +191,34 @@
               </script>
 -->
 
-        </div>
-        <!-- paginations -->
-        <hr class="arrow-top">
-        <div class="arrow">
-
-          {% for arrow in arrows%}
-          {% if arrow.nav_before %}
-          <a href="http://{{HTTP_HOST}}/idealine/{{arrow.befor_page}}/"> <span class="glyphicon glyphicon-chevron-left pull-left" aria-hidden="true"></span></a>
-          {% endif %}
-          {% endfor %}
-
-          {% for page in pages %}
-          {% if page.page_current %}
-          <button class="btn btn-default btn-sm">{{page.page}}</button>
-          {% else %}
-          <a href="http://{{HTTP_HOST}}/idealine/category/{{category}}/{{page.page}}/">
-            <button class="btn btn-default btn-sm">{{page.page}}</button>
-          </a>
-          {% endif %}
-          {% endfor %}
-          {% for arrow in arrows%}
-          {% if arrow.nav_next %}
-          <a href="http://{{HTTP_HOST}}/idealine/{{arrow.next_page}}/"> <span class="glyphicon glyphicon-chevron-right pull-right" aria-hidden="true"></span></a>
-          {% endif %}
-          {% endfor %}
-        </div>
-      </div>
-
-      <div id="push"></div>
     </div>
-    <!-- /#wrap -->
-    {% include "userapp/layout/footer.html" %}
-  </div>
-</body>
+    <!-- paginations -->
+<!--    <hr class="arrow-top">-->
+    <div class="arrow">
 
-</html>
+      {% for arrow in arrows%}
+      {% if arrow.nav_before %}
+      <a href="http://{{HTTP_HOST}}/idealine/{{arrow.befor_page}}/"> <span class="glyphicon glyphicon-chevron-left pull-left" aria-hidden="true"></span>
+      </a>
+      {% endif %}
+      {% endfor %}
+      {% for page in pages %}
+      {% if page.page_current %}
+      <button class="btn btn-default btn-sm">{{page.page}}</button>
+      {% else %}
+      <a href="http://{{HTTP_HOST}}/idealine/category/{{category}}/{{page.page}}/">
+        <button class="btn btn-default btn-sm">{{page.page}}</button>
+      </a>
+      {% endif %}
+      {% endfor %}
+      {% for arrow in arrows%}
+      {% if arrow.nav_next %}
+      <a href="http://{{HTTP_HOST}}/idealine/{{arrow.next_page}}/"> <span class="glyphicon glyphicon-chevron-right pull-right" aria-hidden="true"></span>
+      </a>
+      {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{%endblock %}

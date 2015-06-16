@@ -1,21 +1,16 @@
+{% extends 'base.html' %}
 {% load static from staticfiles%}
-{% include "userapp/layout/header.html"%}
 
-<title> 회원가입 </title>
-  
+{%block content%}
 <style>
   .about {padding:10px;border-radius:0px;margin-bottom:20px;background-color:#eee;}
   .text-muted {margin-top:10px;}
   .text-muted b:hover {color:coral;}
   .about .glyphicon {margin-right:1%;}
   .about .glyphicon:hover {color:coral;}
-
-
 </style>
-<body>
-  <div id="wrap">
-    {% include "userapp/layout/nav.html"%}
 
+  <div id="wrap">
     <div class="container">
       <div id="wrapper">
         <div id="register" class="well">
@@ -23,7 +18,7 @@
               <input type="hidden" name="next" value="{{next}}"/>
             {% csrf_token%}
 
-            <h2 class="form-signin-heading">회원가입</h2>
+            <h2 class="form-signin-heading">{%block title%}회원가입{%endblock%}</h2>
             <div class="about">
               <p class="text-muted"><span class="glyphicon glyphicon-send"></span>
                 모두를 위한 DIY 놀이터 <b>토마킷</b>에서는 다양한 공예 분야의 <b> 전문 공방/작업실</b>, <b>예술인</b>, <b>공예가</b>들의 <b>강좌 정보</b>를 한 눈에 모아서 볼 수 있는 서비스를 제공하고 있습니다. 토마킷 가입은 완전히 <b>무료</b>입니다! 간편하게 가입하고 오늘 신청 가능한 강좌 정보를 찾아보세요.</p>
@@ -60,6 +55,5 @@
     
     
   </div> <!-- wrap -->
-  {% include "userapp/layout/footer.html" %}    
-  </body>
-</html>
+
+{% endblock %}

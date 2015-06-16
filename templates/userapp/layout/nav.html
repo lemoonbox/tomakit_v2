@@ -1,14 +1,7 @@
 {% load static from staticfiles %}
 
+<a href="/"><header><h3><span class="glyphicon glyphicon-send"></span>토마킷</h3></header></a>
 
-<a href="/"><header><h1><span class="glyphicon glyphicon-send"></span>토마킷</h1></header></a>
-
-  <link rel="stylesheet" type="text/css" href="{%static 'media/css/navigation.css'%}">
-<style type="text/css">
-/*  .dropdown-menu {margin-right:25%;}*/
-  .dropdown-menu > li > a > h4 {font-weight:600;width:100px;display:inline-block;}
-  .dropdown-menu > li > a > h4:hover {color:#66cc99;}
-</style>
 
 <!-- Static navbar -->
 <nav class="navbar navbar-default navbar-static-top">
@@ -97,16 +90,10 @@
   $(window).scroll(function() {
     if ($(this).scrollTop() > 1){  
       $('header').addClass("sticky");
-    }
-    else{
-      $('header').removeClass("sticky");
-    }
-  });
-  $(window).scroll(function() {
-    if ($(this).scrollTop() > 1){ 
       $('nav').addClass("sticky");
     }
     else{
+      $('header').removeClass("sticky");
       $('nav').removeClass("sticky");
     }
   });

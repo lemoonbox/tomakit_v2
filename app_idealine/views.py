@@ -77,7 +77,7 @@ def category(request, category='all', page = 1):
 
 
 
-    return render(request, 'app_idealine/categoryline_dev_moon.html',
+    return render(request, 'app_idealine/categoryline.html',
         {
             'catgitem':_line_post,
             'HTTP_HOST':host,

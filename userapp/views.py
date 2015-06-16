@@ -433,6 +433,7 @@ def contactemail(request):
             cont = tpl_mail.render(ctx_mail)
             recipient = ["makerecipe@gmail.com"]
 
+
             if Local:
                 from django.core.mail import send_mail
                 send_mail(u'안녕하세요! 앞발 사용 설명서입니다. 정식 사용을 승인해주세요.', "", \
@@ -440,6 +441,7 @@ def contactemail(request):
                             html_message=cont)
             else:
                 tasks.contact_mail.delay(cont, recipient)
+
             # tasks.rabbitmqtest.delay()
 
     return render(request, 'userapp/partnershipmail.html',{
