@@ -35,16 +35,15 @@ def category(request, category='all', page = 1):
         host= request.META['HTTP_HOST']
 
         if category=="all":
-            _line_post = ClassPost.objects.order_by('-id')[start_pos:end_pos]
-            _nav_post=ClassPost.objects.order_by('-id')[start_nav_pos:end_nav_pos+1]
+            _line_post = ClassPost.objects.filter(is_active=True).order_by('-id')[start_pos:end_pos]
+            _nav_post=ClassPost.objects.filter(is_active=True).order_by('-id')[start_nav_pos:end_nav_pos+1]
             _nav_post_count=_nav_post.count()
 
         else :
-            _line_post = ClassPost.objects.filter(category__category_name=category).order_by('-id')[start_pos:end_pos]
-            _nav_post=ClassPost.objects.filter(category__category_name=category).order_by('-id')[start_nav_pos:end_nav_pos+1]
+            _line_post = ClassPost.objects.filter(category__category_name=category, is_active=True).order_by('-id')[start_pos:end_pos]
+            _nav_post=ClassPost.objects.filter(category__category_name=category, is_active=True).order_by('-id')[start_nav_pos:end_nav_pos+1]
             _nav_post_count=_nav_post.count()
 
-        print _line_post
 
 
         page_start=(_nav_paging-1)*5+1
