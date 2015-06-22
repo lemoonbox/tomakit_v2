@@ -1,15 +1,9 @@
+{% extends 'base.html' %}
 {% load static from staticfiles%}
-{% include "userapp/layout/header.html"%}
 
+    <title>{%block title%}수업 상세 업로드 Form{%endblock%}</title>
 
-<style>.form-control{width:90%;}.error {color:indianred;border-radius:2px}
-  .well {max-width:744px;border-radius:0px;margin:auto;padding:10px;}
-</style>
-    <title></title>
-</head>
-
-<body>
-  {%include "userapp/layout/nav.html"%}
+{%block content%}
   <section style="margin-top:150px;"></section>
   <div id="wrap">
 
@@ -242,5 +236,5 @@
 <!--  </div>-->
     </div>
   </div>
+  {%endblock%}
 </body>
-</html>

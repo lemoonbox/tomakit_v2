@@ -78,7 +78,7 @@ jQuery( function ($) {
     var s = $(this).next('span');
     if (id_password.val().length === 0) {
       s.text('');
-    } else if (id_password.val().length <= 6) {
+    } else if (id_password.val().length < 6) {
       s.text(' 비밀번호를 6자리 이상 입력해주세요.');
     } else if (id_password.val().length >= 18) {
       s.text(' 18자리 이하로 입력해주세요.');

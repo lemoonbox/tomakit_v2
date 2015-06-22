@@ -46,7 +46,7 @@ body {
   height: auto !important;
   height: 100%;
   /* Negative indent footer by it's height */
-  
+  padding-top:50px;
   margin: 0 auto -60px;
   background-color: #eee;
   padding-bottom: 50px;
@@ -106,6 +106,15 @@ body {
   word-break: none;
   white-space: nowrap;
 }
+
+/*go-top button*/
+.go-top {position:fixed;bottom:0px; right:20px;z-index: 1000;
+  font-size:40px;
+  color:#cdbfe3;
+}
+.go-top:hover {color:lightsalmon;}
+
+
 
 .credit {
   padding-left: 10px;
@@ -181,12 +190,12 @@ code {
 #cont-btn {
   border-radius: 0px;
   margin: auto;
-  width: 50%;
+  width: 98%;
   color: #fff;
   background-color: #47c9af;
   font-weight: 400;
   border: 2px solid #47c9af;
-  font-size: 1em;
+/*  font-size: 1em;*/
 }
 
 #cont-btn span {
@@ -206,12 +215,21 @@ code {
 }
 
 .modal-body {
-  margin: auto;
+  text-align: center;
+  width:100%;
+  padding:15px;
 }
 
+.modal-content {
+
+  width:100%;
+  padding:15px;
+}
+/*
 .modal-body p {
   margin-top: 10px;
 }
+*/
 
 .modal-dialog2 {
   width: 60%;
@@ -397,7 +415,7 @@ nav.sticky {
   margin: 0;
 }
 
-.title {
+.thumbnail-title {
   color: black;
   margin: 0;
   font-weight: 600;
@@ -411,7 +429,7 @@ nav.sticky {
   margin: 0;
 }
 
-.title:hover {
+.thumbnail-title:hover {
   color: skyblue;
   text-decoration: none;
   margin: 0;
@@ -469,3 +487,8 @@ nav.sticky {
   margin-top: 50px;
   border: 1px solid #47C9AF;
 }
+
+
+/* post create form */
+.form-control{width:90%;}.error {color:indianred;border-radius:2px}
+.well {max-width:744px;border-radius:0px;margin:auto;padding:10px;}

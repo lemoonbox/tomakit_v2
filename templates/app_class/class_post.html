@@ -3,11 +3,6 @@
 <title>{%block title%}{{class_post.seo_title}}{%endblock%}</title>
 
 {% block content %}
-<link rel="stylesheet" type="text/css" href="{%static 'media/css/post.css'%}">
-
-<style>
-
-</style>
 
   <div id="wrap">
 
@@ -15,7 +10,7 @@
       <div class="post-content">
 
 
-        <div class="title clearfix" style="text-align:center;background-color:none;margin-bottom:15px;">
+        <div class="title" style="text-align:center;background-color:none;margin-bottom:15px;">
           <h2>{{class_post.title}}</h2>
           <h5>
             by 누구누구 뭐뭐뭐 
@@ -43,7 +38,8 @@
                   {%endif%}
 
                   <!-- Wrapper for slides -->
-                  {% if class_post.video_url %} {%comment%}{{class_post.video_url}}{%endcomment%}
+                  {% if class_post.video_url %}
+                  {%comment%}{{class_post.video_url}}{%endcomment%}
                   <div class="carousel-inner" role="listbox">
                     <div class="embed-responsive embed-responsive-16by9">
                       <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{class_post.video_url}}" frameborder="0" allowfullscreen></iframe>
@@ -51,7 +47,8 @@
                   </div>
                   {%else%}
                   <div class="carousel-inner" role="listbox">
-                    {%for photo in class_post.classpic_set.all%} {% if forloop.counter0 == 0 %}
+                    {%for photo in class_post.classpic_set.all%}
+                    {% if forloop.counter0 == 0 %}
                     <div class="item active">
                       <img class="img-responsive{{forloop.counter0}}" src="{{MEDIA_URL}}{{photo.class_photo}}" alt="{{photo.photo_title}} image{{forloop.counter0}}">
                     </div>
@@ -59,7 +56,8 @@
                     <div class="item">
                       <img class="img-responsive{{forloop.counter0}}" src="{{MEDIA_URL}}{{photo.class_photo}}" alt="{{photo.photo_title}} image{{forloop.counter0}}">
                     </div>
-                    {% endif %} {%endfor%}
+                    {% endif %}
+                    {%endfor%}
                   </div>
                   {%endif%}
 
@@ -107,7 +105,6 @@
                     </div>
                   </div>
                   {% endfor %}
-
                   <!-- END MODAL -->
                 </div>
                 <!-- /.row thumb -->
@@ -141,14 +138,15 @@
             <div class="post-detail">
               <h5 class="post-price">
                 <label class="sr-only">수강료</label>
-                <span id="price-label" class="glyphicon glyphicon-star">50%</span>
+                <span id="price-label" class="glyphicon glyphicon-star"></span>
                 <!--#TODO catch how to use humanize tag-->
                 <span id="post-price">&#8361; {{class_post.price}}</span>
               </h5>
               <hr style="border:1px solid #ddd;margin:10px;margin-left:-2%;width:104%;">
               <div class="class-tag">
                 {% for tag in class_post.price_tag.all %}
-                <span class="glyphicon glyphicon-tag"></span>{{tag.price_tag}} {% endfor %}
+                <span class="glyphicon glyphicon-tag"></span>{{tag.price_tag}}
+                {% endfor %}
               </div>
             </div>
           </div>
@@ -173,7 +171,7 @@
                 <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
                 <label class="sr-only">시간</label>
                 <span id="post-time">
-                  {{class_post.time}} (시간)
+                  {{class_post.time}}
                 </span>
               </p>
               <p>
@@ -183,60 +181,28 @@
               </p>
 
               <!-- Button trigger modal -->
-              <button type="button" class="btn btn-default btn-lg" id="cont-btn" style="width:100%;float:none;margin:auto;" data-toggle="modal" data-target="#contactModal">
+              <button type="button" class="btn btn-default btn-lg" id="cont-btn" style="width:100%;float:none;margin:auto;" data-toggle="modal" data-target="#applyModal">
                 <!--              <span class="glyphicon glyphicon-phone-alt" aria-hidden="true"></span>-->
                 수업 신청
               </button>
               <!-- Modal -->
-             {%comment%}<!--before payment-->
-              {% if user.is_authenticated %}{%endcomment%}
-              <div class="modal fade" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="contactModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <button type="button" class="close pull-right" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                      <h4 class="modal-title" id="contactModalLabel">강좌 신청 방법</h4>
-                    </div>
-                    
-                    <div class="modal-body">
-                        <p>
-                            <img class="icon" src="http://diytec.beta.s3.amazonaws.com/static/media/icon/phone325.png">
-                            "문의 전화하기"
-                            <br>
-                            "010-3379-4189"
-                        </p>
-                        <a href="{{class_post.costinfo.apply_url}}" target="_blank" class="button btn-lg">
-                            <button type="button" class="btn btn-default btn-lg" id="cont-btn" style="width:91%;float:none;margin:auto;" data-toggle="modal"data-target="#contactModal">
-                                바로 신청하기
-                            </button>
-                        </a>
-                    </div>
-                </div>
-              </div>
-              </div>
 
-               
-              <!-- END MODAL -->
-              {%comment%}
-              {% else %}
-              <!-- Modal -->
-              <div class="modal fade" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="contactModalLabel" aria-hidden="true">
+              <div class="modal fade" id="applyModal" tabindex="-1" role="dialog" aria-labelledby="applyModal" aria-hidden="false">
                 <div class="modal-dialog">
                   <div class="modal-content">
                     <div class="modal-header">
                       <button type="button" class="close pull-right" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                       </button>
+                      <h4 class="modal-title" id="contactModal">강좌 신청 방법</h4>
                     </div>
+
                     <div class="modal-body">
-                      {% include 'userapp/layout/loginform.html' %}
+                      {% include 'component/post-apply-typeform.html' %}
                     </div>
                   </div>
                 </div>
               </div>
-              {% endif %}{%endcomment%}
               <!-- END MODAL -->
 
               <!--              <button type="button" class="btn btn-default btn-lg" id="cont-btn" style="background-color:transparent;color:black;display:inline-block;border:none;width:50%;margin-left:0px;">★ 관심수업 추가</button>-->
@@ -335,11 +301,13 @@
           <div id="customer-review-Carousel" class="carousel slide" data-ride="carousel">
             <ol class="carousel-indicators">
 
-              {%for review in class_post.review_set.all%} {% if forloop.counter0 == 0 %}
+              {%for review in class_post.review_set.all%}
+              {% if forloop.counter0 == 0 %}
               <li data-target="#customer-review-Carousel" data-slide-to="{{forloop.counter0}}" class="active"></li>
               {% else %}
               <li data-target="#customer-review-Carousel" data-slide-to="{{forloop.counter0}}"></li>
-              {% endif %} {%endfor%}
+              {% endif %}
+              {%endfor%}
             </ol>
 
             <div class="carousel-inner" style="max-height:400px;" role="listbox">
