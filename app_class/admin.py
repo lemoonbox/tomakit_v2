@@ -11,6 +11,20 @@ from app_class.models import ClassCategory, \
 
 
 ##inline classes#####
+class C_PicInline(admin.TabularInline):
+
+    fieldsets =((None,
+                 {'fields':('user', 'classpost', 'category',
+                            'class_photo', 'photo_title',)}
+                ),)
+    model = ClassPic
+
+    def get_max_num(self, request, obj=None, **kwargs):
+        max_num =5
+
+        return max_num
+    extra = 0
+
 class ReviewInline(admin.TabularInline):
 
     fieldsets = ((None,
@@ -72,7 +86,7 @@ class C_PostAdmin(admin.ModelAdmin):
                                     'price_tag', 'day','time','mem_num', 'video_url',
                                     'need1','need1_detail','need2','need2_detail','contact_tel', 'address',]}),
                  ('postinfo',{'fields':['postinteract','is_active']})]
-    inlines = (ReviewInline, CurriInline, DetailInline)
+    inlines = (C_PicInline, ReviewInline, CurriInline, DetailInline)
 
 class C_PicAdmin(admin.ModelAdmin):
     list_filter = ['category', 'classpost__title']
