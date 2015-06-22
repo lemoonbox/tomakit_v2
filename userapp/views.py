@@ -45,7 +45,6 @@ from DIY_tool import settings
 Local=True
 # Create your views here.
 def signup(request):
-    print "signup"
     ctx = Context({
         'error':None
     })
@@ -55,18 +54,17 @@ def signup(request):
         next=request.GET.get("next", "/")
 
     elif request.method =="POST" :
-        print "signup post"
         profile_form = ProfilesForm(request.POST, request.FILES)
 
+        print profile_form.is_valid()
+
         if profile_form.is_valid():
-            print "test:: signup valid"
             valid_error = False
             email = request.POST['email'].strip()
             password = request.POST['password']
             password_confirm = request.POST['password_confirm']
             nick_name = request.POST['nick_name']
             next=request.POST.get("next","/")
-            print next
 
             if password != password_confirm:
                 profile_form.add_error('password','비밀번호가 일치하지 않습니다. 정확히 입력해주세요.')
@@ -76,7 +74,6 @@ def signup(request):
             if bool(request.FILES):
                 image_type = request.FILES['pro_photo'].content_type
                 if image_type != 'image/png' and image_type !='image/jpeg':
-                    print "error"
                     profile_form.add_error('pro_photo','jpg와 png 형식의 이미지만 가능합니다.')
                     valid_error =True
                 try :
@@ -140,9 +137,7 @@ def signup(request):
             else:
                 tasks.sendmail.delay(cont, recipient)
 
-
-
-        return HttpResponseRedirect("/user/login/?next="+next)
+            return HttpResponseRedirect("/user/login/?next="+next)
 
     return render(request, 'userapp/signup.html',{
                     'profileform':profile_form,
@@ -179,7 +174,6 @@ def sellersignup(request):
             if bool(request.FILES):
                 image_type = request.FILES['pro_photo'].content_type
                 if image_type != 'image/png' and image_type !='image/jpeg':
-                    print "error"
                     profile_form.add_error('pro_photo','jpg와 png 형식의 이미지만 가능합니다.')
                     valid_error =True
                 try :
@@ -317,7 +311,6 @@ def pw_reset_request(request):
                 cont = tpl_mail.render(ctx_mail)
 
                 recipient = [_u[0].username]
-                print _u[0].username
 
                 if Local:
                     pass
@@ -377,15 +370,12 @@ def login(request, *args, **kwargs):
 
     next=""
     if request.method=="GET":
-        print "login get"
         login_form = LoginForm(None)
         next=request.GET.get("next","/")
 
     elif request.method=="POST":
-        print "login post"
         login_form = LoginForm(request.POST)
         next=request.POST.get("next","/")
-        print next
         if login_form.is_valid():
             user = login_form.login(request)
             if user:
@@ -399,7 +389,6 @@ def login(request, *args, **kwargs):
 
 def logout(request, *args, **kwargs):
     res = django_logout(request, *args, **kwargs)
-    print request.path
     return res
 
 @login_required

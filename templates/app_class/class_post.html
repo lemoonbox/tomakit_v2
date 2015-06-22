@@ -1,5 +1,6 @@
 {%extends 'base.html'%}
 {% load static from staticfiles%}
+{% load humanize %}
 <title>{%block title%}{{class_post.seo_title}}{%endblock%}</title>
 
 {% block content %}
@@ -140,7 +141,7 @@
                 <label class="sr-only">수강료</label>
                 <span id="price-label" class="glyphicon glyphicon-star"></span>
                 <!--#TODO catch how to use humanize tag-->
-                <span id="post-price">&#8361; {{class_post.price}}</span>
+                <span id="post-price">&#8361; {{class_post.price |intcomma}}</span>
               </h5>
               <hr style="border:1px solid #ddd;margin:10px;margin-left:-2%;width:104%;">
               <div class="class-tag">

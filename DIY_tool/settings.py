@@ -59,6 +59,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
     'userapp',
     'app_idealine',
     #'social.apps.django_app.default',
@@ -148,6 +149,8 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+USE_THOUSAND_SEPARATOR = True
 
 # email with TLS
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
