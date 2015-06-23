@@ -23,12 +23,14 @@
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" type="text/css" href="{% static 'media/css/webfont.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'media/css/style.css' %}">
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <!-- Custom style -->
     <link type="text/css" rel="stylesheet" href="{% static 'media/css/userform.css'%}">
     <link type="text/css" rel="stylesheet" href="{% static 'media/css/post.css'%}">
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    
     <!-- google anayltics-->
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -73,27 +75,7 @@
     '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
     })(window,document,'script','dataLayer','GTM-MKSGJT');</script>
     <!-- End Google Tag Manager -->
-
-
-    <!--     Include all compiled plugins (below), or include individual files as needed -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-
-    <script type="text/javascript">
-      $(document).ready(function(){
-        $(window).scroll(function() {
-          if ($(this).scrollTop() > 600){  
-            $('.go-top').removeClass("hidden");
-          }
-          else{
-            $('.go-top').addClass("hidden");
-          }
-        });
-      });
-    </script>
-
     {%include "userapp/layout/footer.html"%}
-    <a href="#" class="go-top hidden">
-      <span class="glyphicon glyphicon-circle-arrow-up" alt="go top"></span>
-    </a>
+    <script type="text/javascript" src="{% static 'media/js/userform-validation.js' %}"></script>
   </body>
 </html>

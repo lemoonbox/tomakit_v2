@@ -1,5 +1,5 @@
 body {
-  background-color: #eee;
+  background-color: #e7e7e7!important;
 }
 /*
 .loader {
@@ -36,7 +36,6 @@ html,
 body {
   height: 100%;
   /* The html and body elements cannot have any padding or margin. */
-  
   font-family: Nanum Gothic;
 }
 /* Wrapper for page content to push down footer */
@@ -46,7 +45,6 @@ body {
   height: auto !important;
   height: 100%;
   /* Negative indent footer by it's height */
-  padding-top:50px;
   margin: 0 auto -60px;
   background-color: #eee;
   padding-bottom: 50px;
@@ -276,17 +274,6 @@ code {
   color: white;
 }
 
-header .glyphicon {
-  font-size: 40%;
-  color: white;
-  margin-right: 1%;
-  opacity: 0.8;
-}
-
-header .glyphicon:hover {
-  opacity: 1;
-}
-
 header small {
   font-size: 30%;
   vertical-align: text-top;
@@ -320,10 +307,10 @@ header {
   width: 100%;
   text-align: center;
   line-height: 150px;
-  height: 150px;
+  height: 100px;
   background: #48CFAD;
   color: #fff;
-  z-index: 501;
+  z-index: 9999;
   // set animation
   -webkit-transition: all 0.4s ease;
   transition: all 0.4s ease;
@@ -332,15 +319,19 @@ header {
 header h1 {
   font-family: Hanna;
   /*  font-weight:600;*/
-  
-  font-size: 50px;
+  font-size: 45px;
+  // set animation
+/*
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+*/
 }
 
 header.sticky {
   line-height: 30px;
   height: 30px;
   text-align: left;
-  z-index: 502;
+  z-index: 9999;
 }
 
 header.sticky h1 {
@@ -350,13 +341,14 @@ header.sticky h1 {
 }
 
 nav {
-  z-index: 501;
-  top: 100px;
+/*  top: 100px;*/
+  // set animation
+  -webkit-transition: all 0.4s ease;
+  transition: all 0.4s ease;
 }
 
 nav.sticky {
-  z-index: 500;
-  top: 0px;
+  top: -100px;
 }
 /*  .dropdown-menu {margin-right:25%;}*/
 
