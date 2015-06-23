@@ -40,9 +40,10 @@ from userapp.form import \
 from userapp import tasks
 from userapp.utils import handle_uploaded_image
 from DIY_tool import settings
+from DIY_tool.settings import LOCAL as SET_LOCAL
 
 
-Local=True
+Local=SET_LOCAL
 # Create your views here.
 def signup(request):
     ctx = Context({

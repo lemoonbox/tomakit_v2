@@ -129,10 +129,10 @@ else :
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
-            'NAME': 'testdb',
+            'NAME': 'proddb',
             'USER': 'root',
-            'PASSWORD':'city1000',
-            'HOST':'diytec-beta.cfxqbzsbzi3i.ap-northeast-1.rds.amazonaws.com',
+            'PASSWORD':'20tencity15',
+            'HOST':'diy-tec-prod.cfxqbzsbzi3i.ap-northeast-1.rds.amazonaws.com',
             'PORT':'3306',
         }
     }
