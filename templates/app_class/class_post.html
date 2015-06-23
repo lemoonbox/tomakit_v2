@@ -14,8 +14,7 @@
       <div class="title" style="text-align:center;background-color:none;margin-bottom:15px;">
         <h2>{{class_post.title}}</h2>
         <h5>
-          by 누구누구 뭐뭐뭐 
-          <span class="name">{{user.profile_set.first.nick_name}}</span><img class="profile-pic" src="{{MEDIA_URL}}{{user.profile_set.first.pro_photo}}"></h5>
+          <span class="name">{{class_post.user.profile_set.first.nick_name}}</span><img class="profile-pic" src="{{MEDIA_URL}}{{class_post.user.profile_set.first.pro_photo}}"></h5>
       </div>
 
       <div class="col-md-8 col-md-offset-0 class-post-media-thumbnail">
@@ -215,13 +214,13 @@
         <div class="post-detail" style="min-height:200px;">
           <div class="col-md-8">
             <!--강사 소개 -->
-            <p><b>{{user.profile_set.first.nick_name}}, OOO</b>
+            <p><b>{{class_post.user.profile_set.first.nick_name}},</b>
             </p>
-            {{user.profile_set.first.sellerinfo_set.first.special}}
-            <span><em>"{{user.profile_set.first.sellerinfo_set.first.intro}}"</em></span>
+            {{class_post.user.profile_set.first.sellerinfo_set.first.special}}
+            <span><em>"{{class_post.user.profile_set.first.sellerinfo_set.first.intro}}"</em></span>
           </div>
           <div class="col-md-4">
-            <img src="{{MEDIA_URL}}{{user.profile_set.first.pro_photo}}" style="border-radius:50%;height:50px;width:50px;">
+            <img src="{{MEDIA_URL}}{{class_post.user.profile_set.first.pro_photo}}" style="border-radius:50%;height:50px;width:50px;">
           </div>
         </div>
       </div>
