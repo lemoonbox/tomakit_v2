@@ -5,15 +5,9 @@
 # Directory #
 uploads/
 
-# Migrations#
-app_class/migrations/0001_initial.py
-app_class/migrations/0001_initial.pyc
-app_class/migrations/0002_auto_20150525_1421.py
-app_class/migrations/0002_auto_20150525_1421.pyc
-app_class/migrations/0003_classpost_video_url.py
-app_class/migrations/0003_classpost_video_url.pyc
-app_class/migrations/0004_review.py
-app_class/migrations/0004_review.pyc
-uploads/classpic/
+# Migrations #
+**/migrations/00*.py
+**/migrations/00*.pyc
 
+# Node Modules #
 /node_modules
