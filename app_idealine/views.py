@@ -76,7 +76,7 @@ def category(request, category='all', page = 1):
 
 
 
-    return render(request, 'app_idealine/categoryline.html',
+    return render(request, 'contents/main/categoryline.html',
         {
             'catgitem':_line_post,
             'HTTP_HOST':host,
@@ -121,7 +121,7 @@ def category(request, category='all', page = 1):
 #         before_next_arrow["befor_page"]=page-1
 #         arrows.append(before_next_arrow)
 #
-#     return render(request, 'app_idealine/idealine.html',
+#     return render(request, 'contents/main/idealine.html',
 #         {
 #             'lineitem':_line_post,
 #             'HTTP_HOST':host,

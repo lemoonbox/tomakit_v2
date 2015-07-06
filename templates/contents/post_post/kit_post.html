@@ -1,0 +1,214 @@
+{%extends 'base.html'%}
+{% load static from staticfiles%}
+{% load humanize %}
+<title>{%block title%}{{kit_post.title}}{%endblock%}</title>
+<body>
+  {%block content%}
+
+<div id="wrap">
+  <div class="container">
+
+    <div class="post-content">
+
+      <section class="title clearfix" style="text-align:center;background-color:none;margin-bottom:15px;">
+        <h2 style="font-weight:800;">{{kit_post.title}}</h2>
+      </section>
+      {%comment%}"text-align:center;font-size:36px;background-color:none;font-weight:800;color:white;padding-top:20px;margin-bottom:15px;height:100px; background:url('http://previews.123rf.com/images/tashatuvango/tashatuvango1303/tashatuvango130300178/18653625-Wooden-Cork-Board-Seamless-Tileable-Texture--Stock-Photo-background.jpg')no-repeat;background-size: 95%;background-position:center;"{%endcomment%}
+      <div class="col-md-8 well col-md-offset-0 well-lg photo" style="background-color:white;padding:10px;">
+        <div class="col-md-12 photo">
+          <div class="post-photo">
+            <div class="thumbnail">
+              <div id="class-post-Carousel" class="carousel slide" data-ride="carousel">
+                <!--Indicators -->
+                <ol class="carousel-indicators">
+
+                  {%for photo in kit_post.postpic_set.all%}
+                  {% if forloop.counter0 == 0 %}
+                  <li data-target="#class-post-Carousel" data-slide-to="{{forloop.counter0}}" class="active"></li>
+                  {% else %}
+                  <li data-target="#class-post-Carousel" data-slide-to="{{forloop.counter0}}"></li>
+                  {% endif %}
+                  {%endfor%}
+                </ol>
+
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner" role="listbox">
+
+                  {%for photo in kit_post.postpic_set.all%}
+
+                  {% if forloop.counter0 == 0 %}
+                  <div class="item active">
+                    <img class="img-responsive{{forloop.counter0}}" src="{{MEDIA_URL}}{{photo.post_photo}}">
+                  </div>
+                  {% else %}
+                  <div class="item">
+                    <img class="img-responsive{{forloop.counter0}}" src="{{MEDIA_URL}}{{photo.post_photo}}">
+                  </div>
+                  {% endif %}
+                  {%endfor%}
+                </div>
+
+                <!-- Left and right controls -->
+                <a class="left carousel-control" href="#class-post-Carousel" role="button" data-slide="prev">
+                  <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                  <span class="sr-only">Previous</span>
+                </a>
+                <a class="right carousel-control" href="#class-post-Carousel" role="button" data-slide="next">
+                  <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                  <span class="sr-only">Next</span>
+                </a>
+              </div>
+<!--
+              <div class="caption">
+                <h4>{{kit_post.title}}</h4>
+              </div>
+-->
+            </div>
+
+
+
+
+            <div class="row thumb">
+
+              <!-- Button trigger modal -->
+              {%for photo in kit_post.postpic_set.all%}
+              <div class="col-md-2 col-sm-2 col-lg-2 col-xs-2 mini-thumb">
+                <a type="button" class="button" id="thumbimg" data-toggle="modal" data-target="#imageModal{{forloop.counter0}}">
+                  <div class="ttt">
+                    <img class="img-responsive{{forloop.counter0}}" src="{{MEDIA_URL}}{{photo.post_photo}}" alt="thumbnail image {{forloop.counter0}}">
+                  </div>
+                </a>
+              </div>
+              {% endfor %}
+
+
+              <!-- Modal -->
+              {%for photo in kit_post.postpic_set.all%}
+              <div class="modal fade" id="imageModal{{forloop.counter0}}" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel" aria-hidden="true">
+                <div class="modal-dialog2">
+                  <div class="modal-content2">
+                    <div class="modal-body2">
+
+                      <!--                         <div class="ttt">-->
+                      <img type="button" data-dismiss="modal" aria-lable="Close" class="img-responsive{{forloop.counter0}}" src="{{MEDIA_URL}}{{photo.post_photo}}" alt="{{forloop.counter0}}">
+                      <!--                           </div>-->
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+
+              <!-- END MODAL -->
+            </div> <!-- .row thumb -->
+
+
+          </div>
+
+        </div>
+      </div>
+
+      <div class="col-md-4 well detail">
+        <div class="col-md-12 box">
+          <div class="post-detail">
+
+<!--
+            <dd class="text-muted">★</dd>
+            <div class="post-heading">
+              <h4>{{kit_post.title}}</h4>
+            </div>
+-->
+            <dd class="text-muted">가격 </dd>
+            <span id="post-price">&#8361; {{kit_post.price}}</span>
+
+
+
+
+            <div class="panel panel-default">
+              <div class="panel-heading" role="tab" id="headingOne">
+                <h4 class="panel-title">
+                  <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    <img class="icon" src='{%static "media/icon/speech90.png" %}'>
+                    제품 소개
+                    <span class="glyphicon glyphicon-chevron-down pull-right" aria-hidden"true"></span></a>
+                </h4>
+              </div>
+              <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                <div class="panel-body">
+                  {{kit_post.describe}}
+                </div>
+              </div>
+            </div>
+
+
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-default btn-lg" id="cont-btn" data-toggle="modal" data-target="#contactModal">
+              <span class="glyphicon glyphicon-phone-alt" aria-hidden="true"></span> 구매 문의하기
+            </button>
+
+
+
+            <!-- Modal -->
+            {% if user.is_authenticated %}
+            <div class="modal fade" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="contactModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="contactModalLabel">판매자 연락처</h4>
+                  </div>
+                  <div class="modal-body">
+                    <img class="icon" src='{%static "media/icon/phone325.png" %}'>{{kit_post.contact_tel}}
+                  </div>
+                  <!--
+<div class="modal-footer">
+<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+-->
+                  <!--                    <button type="button" class="btn btn-primary">Save changes</button>-->
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- END MODAL -->
+
+          {% else %}
+
+          <!-- Modal -->
+          <div class="modal fade" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="contactModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <h4 class="modal-title" id="contactModalLabel">로그인해주세요</h4>
+                </div>
+                <div class="modal-body">
+
+                  {% include 'component/user_login/loginform.html' %}
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endif %}
+          <!-- END MODAL -->
+
+        </div> <!-- /.post-detail -->
+      </div>
+    </div>
+
+    <div class="col-md-12 col-lg-12 col-xs-12 col-sm-12 well" style="height:100%;">
+      <div class="content-summernote">
+        <h4 class="title-summer">상세 정보</h4>
+        <div>
+          {%for detail in kit_post.postdetail_set.all%}
+          {{detail.post_detail|safe}}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+
+
+  </div> <!-- /.post-content -->
+</div>
+
+</div> <!-- /#wrap -->
+{%endblock%}

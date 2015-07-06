@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load static from staticfiles%}
+
+{%block content%}
+<style>
+  .about {padding:10px;border-radius:0px;margin-bottom:20px;background-color:#eee;}
+  .text-muted {margin-top:10px;}
+  .text-muted b:hover {color:coral;}
+  .about .glyphicon {margin-right:1%;}
+  .about .glyphicon:hover {color:coral;}
+</style>
+
+  <div id="wrap">
+    <div class="container">
+      <div id="wrapper">
+        <div id="register" class="well">
+          <form method="POST" action="{% url 'signup' %}" enctype="multipart/form-data" class="form-signin">
+              <input type="hidden" name="next" value="{{next}}"/>
+            {% csrf_token%}
+
+            <h2 class="form-signin-heading">{%block title%}회원가입{%endblock%}</h2>
+            <div class="about">
+              <p class="text-muted"><span class="glyphicon glyphicon-send"></span>
+                모두를 위한 DIY 놀이터 <b>토마킷</b>에서는 다양한 공예 분야의 <b> 전문 공방/작업실</b>, <b>예술인</b>, <b>공예가</b>들의 <b>강좌 정보</b>를 한 눈에 모아서 볼 수 있는 서비스를 제공하고 있습니다. 토마킷 가입은 완전히 <b>무료</b>입니다! 간편하게 가입하고 오늘 신청 가능한 강좌 정보를 찾아보세요.</p>
+            </div>
+            <label for="id_email" class="sr-only">이메일 주소</label>
+            <input id="id_email" name="email" type="email"
+                   class="form-control" placeholder="이메일" required autofocus/>
+<!--            <p class="ok">&nbsp;</p>-->
+            <label for="nick_name" class="sr-only">이름</label>
+            <input id="nick_name" name="nick_name" type="text"
+                   class="form-control" required placeholder="사용자 별명" />
+
+            <label for="id_password" class="sr-only">Password</label>
+            <input id="id_password" name="password" type="password" 
+                   class="form-control" placeholder="비밀번호" required />
+            <label for="id_password_confirm" class="sr-only">Confirm Password</label>
+            <input id="id_password_confirm" name="password_confirm" type="password"
+                   class="form-control" required placeholder="비밀번호 확인"/>
+            <br><label for="id_pro_photo" style="color: gray; font-family: sans-serif; font-size: 0.9em">프로필 이미지(선택):</label>
+            <input id="id_pro_photo" name="pro_photo" type="file"/>
+            <p class="change_link">이미 회원이신가요?
+              <a href="/user/login/?next=/user/signup/" class="to_register">로그인하기</a>
+            </p>
+            {% if profileform.errors %}
+            <div id="form-error">
+              <div class="alert alert-warning">
+                <a href="#" class="close" data-dismiss="alert">&times;</a>
+                <p>정보를 정확히 입력해주세요:</p>
+                <table>
+                  {% for field in profileform %}
+                  {{ field.errors|striptags }}
+                  {% endfor %}
+                </table>
+              </div>
+            </div>
+            {% endif %}
+            <input type="submit" class="btn btn-lg btn-primary" value="회원가입">
+          </form>  
+ 
+        </div> <!--/register-->
+      </div> <!--/wrapper-->
+    </div> <!-- /container -->
+
+
+<!--    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>-->
+    <script type="text/javascript" src="{% static 'media/js/userform-validation.js' %}"></script>
+    
+    
+  </div> <!-- wrap -->
+
+{% endblock %}

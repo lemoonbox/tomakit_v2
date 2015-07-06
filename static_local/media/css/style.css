@@ -40,61 +40,71 @@ body {
 }
 /* Wrapper for page content to push down footer */
 
-#wrap {
+/*#wrap {
   min-height: 100%;
   height: auto !important;
-  height: 100%;
+  height: 100%;*/
   /* Negative indent footer by it's height */
-  margin: 0 auto -60px;
+  /*margin: 0 auto -60px;
   background-color: #eee;
   padding-bottom: 50px;
-}
+}*/
 /* Set the fixed height of the footer here */
 
 #push {
-  height: 80px;
+  /*height: 80px;*/
 }
 
 #footer {
-  position: absolute;
+  /*position: absolute;*/
+  position:fixed;
+  bottom:0px;
+  padding:15px;
+  z-index:500;
+  padding-bottom:5px;
   width: 100%;
-  height: 180px;
+  /*min-height:50px;*/
+  /*height: 180px;*/
 }
 
 #footer {
   font-family: Titillium web;
-  background-color: #47c9af;
+  background-color:#4a4a4a;
 }
 
-#upper-footer {
+/*#upper-footer {
   height: 120px;
   background-color: #47c9af;
   width: 100%;
   padding-top: 10px;
   margin-left: -20px;
-}
+}*/
 
 .footer-nav {
-  margin: auto;
-  margin-top: 20px;
+  /*margin: auto;*/
+  /*margin-top: 10px;*/
   font-family: Nanum Gothic;
 }
 
 .footer-nav ul {
-  text-align: center;
+  /*text-align: center;*/
   list-style: outside;
   list-style-type: none;
 }
 
 .footer-nav li {
   display: inline;
-  padding: 10px;
+  padding: 5px;
 }
 
 .footer-nav a {
   color: white;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 600;
+}
+.footer-nav a:hover {
+  color: #f23392;
+  text-decoration-line:none;
 }
 
 #bi .logo {
@@ -107,16 +117,16 @@ body {
 
 /*go-top button*/
 .go-top {position:fixed;bottom:0px; right:20px;z-index: 1000;
-  font-size:40px;
-  color:#cdbfe3;
+  font-size:30px;
+  color:#eee;
 }
-.go-top:hover {color:lightsalmon;}
+.go-top:hover {color:#f23392;}
 
 
 
-.credit {
+/*.credit {
   padding-left: 10px;
-}
+}*/
 /*.name {color:silver;}*/
 /* Lastly, apply responsive CSS fixes as necessary */
 
@@ -124,18 +134,14 @@ body {
   margin: 10px 0;
 }
 
-.container .credit {
-  margin: 20px 0;
-}
-
-@media (max-width: 767px) {
+/*@media (max-width: 767px) {
   #footer,
   #upper-footer,
   {
     margin-left: -20px;
     margin-right: -20px;
-    padding-left: 20px;
     padding-right: 20px;
+    padding-left: 20px;
     text-align: center;
   }
   #upper-footer {
@@ -156,7 +162,7 @@ body {
 -------------------------------------------------- */
 /* Not required for template or sticky footer method. */
 
-#wrap > .container {
+/*#wrap > .container {
   padding-top: 30px;
 }
 
@@ -172,15 +178,15 @@ body {
 
 code {
   font-size: 80%;
-}
+}*/
 /* Navbar
 -------------------------------------------------- */
 
-@media (max-width: 767px) .navbar-fixed-top,
+/*@media (max-width: 767px) .navbar-fixed-top,
 .navbar-fixed-bottom,
 .navbar-static-top {
   margin-right: -20px;
-  margin-left: -20px;
+  margin-left: -20px;*/
 }
 /* MODAL
 ----------------------------------------------------*/
@@ -289,12 +295,11 @@ header small {
 .navbar-static-top {
   z-index: 501;
   position: relative;
-  top: 100px;
+  /*top: 100px;*/
 }
 
 .navbar-brand {
-  color: black;
-  font-family: Titillium Web;
+  color: #f23392;
   font-weight: 900;
   font-size: 24px;
 }
@@ -317,7 +322,7 @@ header {
 }
 
 header h1 {
-  font-family: Hanna;
+  font-family: Hanna !important;
   /*  font-weight:600;*/
   font-size: 45px;
   // set animation

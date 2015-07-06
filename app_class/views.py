@@ -169,7 +169,7 @@ def classcreate(request):
 
             return HttpResponseRedirect('/class/{0}'.format(_class.id))
 
-    return render(request, 'app_class/create_class.html',
+    return render(request, 'contents/post_create/create_class.html',
         {
             'classcreateform':classform,
             'pricetagform':pricetagform,
@@ -193,7 +193,7 @@ def class_detail(request, class_num):
         except _class_post.DoesNotExist:
             raise Http404("post does not exist")
 
-    return render(request, 'app_class/class_post.html',
+    return render(request, 'contents/post_post/class_post.html',
         {
             'class_post':_class_post
         })

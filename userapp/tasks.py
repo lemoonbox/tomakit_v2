@@ -6,7 +6,7 @@ from django.core.mail import send_mail
 
 @celery.task(name = 'tasks.send_mail')
 def sendmail(cont, recipient):
-    send_mail(u'안녕하세요! 앞발 사용 설명서입니다. 정식 사용을 승인해주세요.', "",
+    send_mail(u'안녕하세요! 토마킷입니다. 정식 사용을 승인해주세요.', "",
             'makerecipe@gmail.com', recipient, fail_silently=False,
             html_message=cont)
 

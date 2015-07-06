@@ -1,0 +1,66 @@
+{% load static from staticfiles%}
+<!-- <a href="/">
+  <header>
+    <h1>토마킷 <span style="color:cornsilk;">tomakit</span></h1>
+  </header>
+</a> -->
+<!-- Static navbar -->
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+               <a class="navbar-brand" href="/">TOMAKIT</a>
+      </div>
+
+      <div id="navbar" class="collapse navbar-collapse" aria-expanded="false">
+        <!-- <ul class="nav navbar-nav">
+          <li><a href="/">HOME</a></li>
+          <li><a href="/user/contact">컨텐츠 제휴하기</a></li>
+        </ul> -->
+
+        <ul id=nav-user class="nav navbar-nav navbar-right">
+          <li><a href="/">HOME</a></li>
+          <li><a href="/user/contact">수업 문의</a></li>
+          {% if user.is_authenticated %}
+          <li><a id="hi" href="/user/profile">안녕하세요 <strong>
+            {{user.profile_set.first.nick_name}}</strong> 님!</a></li>
+          <li><a href="/user/logout">로그아웃</a></li>
+          {% else %}
+          <!-- <li><a class="hi" href="#">hello world!</a></li> -->
+          <li><a href="{% url 'signup' %}?next={{request.path}}">회원가입</a></li>
+          <li><a href="{% url 'login_url' %}?next={{request.path}}">로그인</a></li>
+          <!--            <span class="sr-only">(current)</span>-->
+
+        </ul>
+        {% endif %}
+
+      </div> <!--/.nav-collapse -->
+    </div> <!--/.container -->
+  </div>
+</nav>
+
+
+<script>
+  // $(window).scroll(function() {
+  //   if ($(this).scrollTop() > 5){
+  //     $('header').addClass("sticky");
+  //   }
+  //   else{
+  //     $('header').removeClass("sticky");
+  //   }
+  // });
+  $(window).scroll(function() {
+    if ($(this).scrollTop() > 5){
+      $('nav').addClass("sticky");
+    }
+    else{
+      $('nav').removeClass("sticky");
+    }
+  });
+</script>

@@ -128,7 +128,7 @@ def classcreate(request):
 
             return HttpResponseRedirect('/post/class/{0}'.format(_class.id))
 
-    return render(request, 'app_class/create_class_post.html',
+    return render(request, 'contents/post_create/create_class_post.html',
         {
             'class_createform':class_form,
             'classpic_createform':post_pic_form,
@@ -207,7 +207,7 @@ def kitcreate(request):
 
             return HttpResponseRedirect('/post/kit/{0}'.format(_kit.id))
 
-    return render(request, 'app_kit/create_kit_post.html',
+    return render(request, 'contents/post_create/create_kit_post.html',
         {
             'kit_createform':kit_form,
             'kit_pic_createform':pic_form,

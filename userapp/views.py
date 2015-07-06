@@ -121,7 +121,7 @@ def signup(request):
             host = request.META['HTTP_HOST']
 
             #write email
-            tpl_mail = loader.get_template('mail_form/mail_confirm.html')
+            tpl_mail = loader.get_template('contents/mail_form/mail_confirm.html')
             ctx_mail = Context({
                 'host':host,
                 'key':key,
@@ -132,7 +132,7 @@ def signup(request):
             if Local:
                 #sendmail not celery
                 from django.core.mail import send_mail
-                send_mail(u'안녕하세요! 앞발 사용 설명서입니다. 정식 사용을 승인해주세요.', "", \
+                send_mail(u'안녕하세요! 토마킷입니다. 정식 사용을 승인해주세요.', "", \
                           'makerecipe@gmail.com', recipient, fail_silently=False,
                             html_message=cont)
             else:
@@ -140,7 +140,7 @@ def signup(request):
 
             return HttpResponseRedirect("/user/login/?next="+next)
 
-    return render(request, 'userapp/signup.html',{
+    return render(request, 'contents/user/signup.html',{
                     'profileform':profile_form,
                     'next':next,},)
 
@@ -191,7 +191,7 @@ def sellersignup(request):
 
 
             if valid_error:
-                return render(request, 'userapp/signup.html',{
+                return render(request, 'contents/user/signup.html',{
                     'profileform':profile_form,},
                   )
 
@@ -225,7 +225,7 @@ def sellersignup(request):
             host = request.META['HTTP_HOST']
 
             #write email
-            tpl_mail = loader.get_template('mail_form/mail_confirm.html')
+            tpl_mail = loader.get_template('contents/mail_form/mail_confirm.html')
             ctx_mail = Context({
                 'host':host,
                 'key':key,
@@ -236,7 +236,7 @@ def sellersignup(request):
             if Local:
                 #sendmail not celery
                 from django.core.mail import send_mail
-                send_mail(u'안녕하세요! 앞발 사용 설명서입니다. 정식 사용을 승인해주세요.', "", \
+                send_mail(u'안녕하세요! 토마킷입니다. 정식 사용을 승인해주세요.', "", \
                           'makerecipe@gmail.com', recipient, fail_silently=False,
                             html_message=cont)
             else:
@@ -244,7 +244,7 @@ def sellersignup(request):
 
             return HttpResponseRedirect("/user/login/?next="+next)
 
-    return render(request, 'userapp/sellersignup.html',{
+    return render(request, 'contents/user/sellersignup.html',{
                     'profileform':profile_form,
                     'next':next,},)
 
@@ -264,14 +264,14 @@ def signup_confirm(request, *args, **kwargs):
         ctx["message"] = "이메일 인증이 완료 되었습니다. 서비스를 이용해주세요!"
         ctx["error"] = True
 
-        tpl = loader.get_template('userapp/confirm_result.html')
+        tpl = loader.get_template('contents/user_pw/confirm_result.html')
         ctx.update(csrf(request))
         return HttpResponse(tpl.render(ctx))
 
 
-    ctx["message"] = "이메일 인증이 실패 하였습니다. 인증메일을 다시 보내주세요!"
+    ctx["message"] = "이메일 인증이 실패 하였습니다. 인증 메일을 다시 보내주세요!"
     ctx["error"] = False
-    tpl = loader.get_template('userapp/confirm_result.html')
+    tpl = loader.get_template('contents/user_pw/confirm_result.html')
     ctx.update(csrf(request))
     return HttpResponse(tpl.render(ctx))
 
@@ -304,7 +304,7 @@ def pw_reset_request(request):
                 host = request.META['HTTP_HOST']
 
                 #wirte email
-                tpl_mail = loader.get_template('mail_form/pw_chang.html')
+                tpl_mail = loader.get_template('contents/mail_form/pw_chang.html')
                 ctx_mail = Context({
                     'host':host,
                     'key':key,
@@ -319,7 +319,7 @@ def pw_reset_request(request):
                     tasks.send_pwchang_mail.delay(cont, recipient)
 
     pwresetform = PwReset_RequestForm()
-    return render(request, 'userapp/pw_reset.html', {
+    return render(request, 'contents/user_pw/pw_reset.html', {
         'pwrsetform':pwresetform
     })
 
@@ -332,14 +332,14 @@ def pw_reset_process(request, key):
     _reset_obj = PasswordResetKeys.find(key)
 
     if(_reset_obj == None):
-        tpl = loader.get_template('userapp/pw_reset_fail.html')
+        tpl = loader.get_template('contents/user_pw/pw_reset_fail.html')
         ctx.update(csrf(request))
         return HttpResponse(tpl.render(ctx))
 
     if (request.method=="GET"):
         pwresetform = PwReset_ProcessForm()
 
-        return render(request, 'userapp/pw_reset_process.html', {
+        return render(request, 'contents/user_pw/pw_reset_process.html', {
             'pwresetform' : pwresetform
         })
 
@@ -347,13 +347,13 @@ def pw_reset_process(request, key):
         pwresetform = PwReset_ProcessForm(request.POST)
 
         if( not pwresetform.is_valid()):
-            return render(request, 'userapp/pw_reset_process.html', {
+            return render(request, 'contents/user_pw/pw_reset_process.html', {
             'pwresetform' : pwresetform})
 
 
         if(pwresetform.cleaned_data['password'] != pwresetform.cleaned_data['password_confirm']):
             pwresetform.add_error('password_confirm', u'비밀 번호가 일치하지 않습니다.')
-            return render(request, 'userapp/pw_reset_process.html', {
+            return render(request, 'contents/user_pw/pw_reset_process.html', {
                 'pwresetform' : pwresetform})
 
         _u = _reset_obj.user
@@ -362,7 +362,7 @@ def pw_reset_process(request, key):
         return HttpResponseRedirect('user/login')
 
     pwreset_process_form = PwReset_ProcessForm()
-    return render(request, 'userapp/pw_reset_process.html', {
+    return render(request, 'contents/user_pw/pw_reset_process.html', {
         'pwrset_process_form':pwreset_process_form
     })
 
@@ -383,7 +383,7 @@ def login(request, *args, **kwargs):
                 authlogin(request, user)
                 return HttpResponseRedirect(next)
 
-    return render(request, 'userapp/login.html',
+    return render(request, 'contents/user/login.html',
                   {'login_form':login_form,
                    'next':next
                    })
@@ -405,7 +405,7 @@ def profile(request, *args, **kwargs):
 
     #tpl = loader.get_template('userapp/profile.html')
     #ctx.update(csrf(request))
-    return render(request, 'userapp/profile.html',{
+    return render(request, 'contents/user/profile.html',{
                     'profile':_profile[0],
                     },)
 
@@ -421,7 +421,7 @@ def contactemail(request):
 
         if email_form.is_valid():
             #write email
-            tpl_mail = loader.get_template('mail_form/mail_contact.html')
+            tpl_mail = loader.get_template('contents/mail_form/mail_contact.html')
             ctx_mail = Context({
                 'address':customer_address,
                 'content':content,
@@ -433,20 +433,20 @@ def contactemail(request):
 
             if Local:
                 from django.core.mail import send_mail
-                send_mail(u'안녕하세요! 앞발 사용 설명서입니다. 정식 사용을 승인해주세요.', "", \
-                          'makerecipe@gmail.com', recipient, fail_silently=False,
+                send_mail(u'안녕하세요! 토마킷입니다. 정식 사용을 승인해주세요.', "", \
+                          'tencity.info@gmail.com', recipient, fail_silently=False,
                             html_message=cont)
             else:
                 tasks.contact_mail.delay(cont, recipient)
 
             # tasks.rabbitmqtest.delay()
 
-    return render(request, 'userapp/partnershipmail.html',{
+    return render(request, 'contents/contact_mail/partnershipmail.html',{
         'emailform' : SendEmailForm
 
     })
 
 def userprivacy(request):
 
-    return render(request, 'userapp/userprivacy.html', {
+    return render(request, 'contents/site_info/userprivacy.html', {
     })

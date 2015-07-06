@@ -4,5 +4,6 @@
     <content url="file://$MODULE_DIR$" />
     <orderEntry type="jdk" jdkName="Python 2.7.6 virtualenv at ~/.virtualenvs/diy_tec" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="dev_diy node_modules" level="project" />
   </component>
 </module>
