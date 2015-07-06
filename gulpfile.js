@@ -1,9 +1,9 @@
 var gulp = require('gulp');
-var webserver = require('gulp-webserver'); //this is not needed in this project
+//var webserver = require('gulp-webserver'); //this is not needed in this project
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
-var minifyhtml = require('gulp-minify-html');
-var minifycss = require('gulp-minify-css');
+//var minifyhtml = require('gulp-minify-html');
+//var minifycss = require('gulp-minify-css');
 var sass = require('gulp-sass');
 var livereload = require('gulp-livereload');
 var gutil = require('gulp-util');
@@ -19,11 +19,17 @@ var paths = {
     html: src + '/**/*.html'
 };
 
-//localhost:8000
-gulp.task('server', function() {
-    return gulp.src(dist + '/')
-        .pipe(webserver());
+
+//clean files
+gulp.task('clean', function(cb){
+    del(['public/dist/css/*'], cb);
 });
+
+//localhost:8000
+//gulp.task('server', function() {
+//    return gulp.src(dist + '/')
+//        .pipe(webserver());
+//});
 
 //combine javascript files
 gulp.task('combine-js', function () {
@@ -33,20 +39,15 @@ gulp.task('combine-js', function () {
         .pipe(gulp.dest('dist' + '/js'));
 });
 
-gulp.task('clean', function(cb){
-  del(['public/dist/css/*'], cb);
-});
-
-
 //compile sass files to css
 gulp.task('sass', function() {
   return gulp.src(paths.scss)
   .pipe(sass({
     errLogToConsole: true
   }))
-  .pipe(minifycss())
-  .pipe(gulp.dest(dist+ '/css'))
-      .on('error', gutil.log)
+  //.pipe(minifycss())
+  .pipe(gulp.dest(dist + '/css'))
+      .on('error', gutil.log);
       //reload browser
       //.pipe(pulgins.autoprefixer(
       //    {
@@ -68,19 +69,19 @@ gulp.task('sass', function() {
 });
 
 //minify html files
-gulp.task('compress-html', function() {
-    return gulp.src(paths.html)
-        .pipe(minifyhtml())
-        .pipe(gulp.dest(dist + '/'));
-});
+//gulp.task('compress-html', function() {
+//    return gulp.src(paths.html)
+//        .pipe(minifyhtml())
+//        .pipe(gulp.dest(dist + '/'));
+//});
 
 //auto reload browser when files change
 gulp.task('watch', function() {
     //plugins.
-    livereaload.listen();
+    //livereaload.listen();
     gulp.watch(paths.js, ['combine-js']);
     gulp.watch(paths.scss, ['sass']);
-    gulp.watch(paths.html, ['compress-html']);
+    //gulp.watch(paths.html, ['compress-html']);
     gulp.watch(dist + '/**').on('change', livereload.changed);
 });
 
@@ -88,5 +89,6 @@ gulp.task('watch', function() {
 gulp.task('default', [
     //'server',
     'clean', 'combine-js',
-    'sass', 'compress-html',
+    'sass',
+    //'compress-html',
     'watch']);

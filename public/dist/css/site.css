@@ -1,1 +1,27 @@
-body{color:#eee}body .wrap{width:g-width}body .card{width:500px}.nav .navbar{background:#e5e5e5}.div{color:red}
+@import "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css";
+body {
+  background: #e5e5e5;
+  color: #eee; }
+  body .wrap {
+    width: 1400px; }
+
+nav {
+  background: #f29999; }
+  nav .navbar {
+    background: #f29999; }
+
+.footer-nav {
+  color: #000000;
+  text-decoration-line: no-underline !important; }
+  .footer-nav ul {
+    /*text-align: center;*/
+    list-style: none; }
+  .footer-nav li {
+    display: inline;
+    padding: 5px; }
+  .footer-nav a {
+    font-size: 14px;
+    font-weight: 600; }
+    .footer-nav a:hover {
+      color: #f23392;
+      text-decoration-line: line-through; }

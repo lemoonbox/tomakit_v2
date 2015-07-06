@@ -80,32 +80,6 @@ body {
   margin-left: -20px;
 }*/
 
-.footer-nav {
-  /*margin: auto;*/
-  /*margin-top: 10px;*/
-  font-family: Nanum Gothic;
-}
-
-.footer-nav ul {
-  /*text-align: center;*/
-  list-style: outside;
-  list-style-type: none;
-}
-
-.footer-nav li {
-  display: inline;
-  padding: 5px;
-}
-
-.footer-nav a {
-  color: white;
-  font-size: 14px;
-  font-weight: 600;
-}
-.footer-nav a:hover {
-  color: #f23392;
-  text-decoration-line:none;
-}
 
 #bi .logo {
   font-family: Titillium web, sans-serif;
@@ -121,8 +95,6 @@ body {
   color:#eee;
 }
 .go-top:hover {color:#f23392;}
-
-
 
 /*.credit {
   padding-left: 10px;
