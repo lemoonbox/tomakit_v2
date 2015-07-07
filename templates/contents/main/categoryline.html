@@ -3,9 +3,8 @@
 {% load line_extras_tag%}
 <title>{%block title%}토마킷 :: 기초부터 공방 창업까지. 현업 작가들의 공예 수업을 만나보세요.{%endblock%}</title>
 
-
   {% block content %}
-  <div id="wrap">
+  <!--<div id="wrap">-->
     <div class="container">
       <div class="row">
         {% for item in catgitem %}
@@ -43,7 +42,7 @@
                         <h4 class="title" id="contactModalLabel"></h4>
                       </div>
                       <div class="modal-body">
-                        {% include 'userapp/layout/loginform.html' %}
+                        {% include '/component/layout/_loginform.html' %}
                       </div>
                     </div>
                   </div>
@@ -55,22 +54,6 @@
           </div>
         </div>
         {% endfor%}
-
-        <!--
-<script type="text/javascript">    
-$(document).ready(function() {
-$(".ttt").each(function() {
-
-var width = $(".ttt img").width();
-var height = $(".ttt img").height();
-
-if (height > width) {
-$(".ttt").addClass("fixed-height");
-}
-});
-});
-</script>
--->
 
       </div>
       <!-- paginations -->
@@ -100,5 +83,6 @@ $(".ttt").addClass("fixed-height");
         {% endfor %}
       </div>
     </div>
-  </div>
+  <!--</div>-->
+<!--<div id="push"></div>-->
   {%endblock %}

@@ -91,7 +91,7 @@ def signup(request):
 
 
             if valid_error:
-                return render(request, 'userapp/signup.html',{
+                return render(request, 'user/signup.html',{
                     'profileform':profile_form,},
                   )
 
@@ -403,7 +403,7 @@ def profile(request, *args, **kwargs):
     _profile = Profile.objects.filter(email = user)
     ctx['profile']= _profile[0]
 
-    #tpl = loader.get_template('userapp/profile.html')
+    #tpl = loader.get_template('user/profile.html')
     #ctx.update(csrf(request))
     return render(request, 'contents/user/profile.html',{
                     'profile':_profile[0],

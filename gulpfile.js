@@ -1,9 +1,10 @@
 var gulp = require('gulp');
+
 //var webserver = require('gulp-webserver'); //this is not needed in this project
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 //var minifyhtml = require('gulp-minify-html');
-//var minifycss = require('gulp-minify-css');
+var minifycss = require('gulp-minify-css');
 var sass = require('gulp-sass');
 var livereload = require('gulp-livereload');
 var gutil = require('gulp-util');
@@ -18,7 +19,6 @@ var paths = {
     scss: src + '/scss/*.scss',
     html: src + '/**/*.html'
 };
-
 
 //clean files
 gulp.task('clean', function(cb){
@@ -45,9 +45,9 @@ gulp.task('sass', function() {
   .pipe(sass({
     errLogToConsole: true
   }))
-  //.pipe(minifycss())
+  .pipe(minifycss())
   .pipe(gulp.dest(dist + '/css'))
-      .on('error', gutil.log);
+      .on('error', gutil.log)
       //reload browser
       //.pipe(pulgins.autoprefixer(
       //    {
@@ -65,7 +65,7 @@ gulp.task('sass', function() {
       //        cascade:false
       //    }
       //))
-      //.pipe(plugins.livereload());
+      .pipe(livereload());
 });
 
 //minify html files
@@ -91,4 +91,5 @@ gulp.task('default', [
     'clean', 'combine-js',
     'sass',
     //'compress-html',
-    'watch']);
+    'watch'
+]);

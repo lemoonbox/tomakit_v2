@@ -17,27 +17,12 @@ nav-tabs a {
   color: #47C9AF;
 }
 
-a,
-a:hover,
-a:focus {
-  text-decoration: none;
-  !important
-}
 
-a > h4,
-a:hover > h4,
-a:focus >h4 {
-  text-decoration: none;
-}
 /* Sticky footer styles
 -------------------------------------------------- */
 
 html,
-body {
-  height: 100%;
-  /* The html and body elements cannot have any padding or margin. */
-  font-family: Nanum Gothic;
-}
+
 /* Wrapper for page content to push down footer */
 
 /*#wrap {
@@ -67,10 +52,6 @@ body {
   /*height: 180px;*/
 }
 
-#footer {
-  font-family: Titillium web;
-  background-color:#4a4a4a;
-}
 
 /*#upper-footer {
   height: 120px;

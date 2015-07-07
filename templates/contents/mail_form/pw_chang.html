@@ -1,15 +1,10 @@
-<!DOCTYPE html>
 {% autoescape on %}
-<html>
-<head lang="ko">
-    <meta charset="UTF-8">
-    <title></title>
-</head>
 <body>
-  다음의 링크를 클릭하시면 패스워드를 변경 할 수 있습니다. <br/>
+<div>
+    다음의 링크를 클릭하시면 패스워드를 변경 할 수 있습니다. <br/>
   <br/>
-  http://{{host}}/user/reset_process/{{key}}
+  <a href="http://{{host}}/user/reset_process/{{key}}">http://{{host}}/user/reset_process/{{key}}</a>
   <br/>
+</div>
 </body>
-</html>
 {% endautoescape %}
