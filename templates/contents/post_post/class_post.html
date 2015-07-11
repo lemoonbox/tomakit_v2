@@ -2,9 +2,7 @@
 {% load static from staticfiles%}
 {% load humanize %}
 <title>{%block title%}{{class_post.seo_title}}{%endblock%}</title>
-
 {% block content %}
-
 <div id="wrap">
 
   <div class="container class-post-media-content">
@@ -198,7 +196,7 @@
                 </div>
 
                 <div class="modal-body">
-                  {% include 'component/post_payment/post-apply-typeform.html' %}
+                  {% include 'component/post_payment/_post-apply-typeform.html' %}
                 </div>
               </div>
             </div>
@@ -282,7 +280,7 @@
           <div role="tabpanel" class="tab-pane fade" id="teacherinfo">
 
 
-            {% include "component/map/mapapi.html" %}
+            {% include "component/map/_mapapi.html" %}
 
           </div>
         </div>

@@ -1,0 +1,52 @@
+{%load static from staticfiles%}
+<!-- Static navbar -->
+<nav class="navbar navbar-static-top">
+        <div class="container">
+            <div class="navbar-inner">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">
+                    <img src="{%static 'img/logo-header.png'%}">
+                </a>
+            </div>
+
+            <div id="navbar" class="collapse navbar-collapse" aria-expanded="false">
+                <ul class="nav navbar-nav">
+                  <li><a href="/">문의 핸드메이드</a></li>
+                  <li><a href="/user/contact">정규 핸드메이드 과정</a></li>
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <!--<li><a href="/">HOME</a></li>-->
+
+                    {% if user.is_authenticated %}
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <img src="{{MEDIA_URL}}{{profile.pro_photo}}">{{user.profile_set.first.nick_name}} <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/user/profile">프로필</a></li>
+                            <li><a href="/user/logout">로그아웃</a></li>
+                            <!--<li><a href="#">기능 없음</a></li>-->
+                            <!--<li role="separator" class="divider"></li>-->
+                            <!--<li><a href="/user/logout">로그아웃</a></li>-->
+                        </ul>
+                    </li>
+                    {% else %}
+                    <!-- <li><a class="hi" href="#">hello world!</a></li> -->
+                    <!--<li><a href="{% url 'signup' %}?next={{request.path}}">회원가입</a></li>-->
+                    <li><a href="{% url 'login_url' %}?next={{request.path}}">로그인</a></li>
+                    <!--            <span class="sr-only">(current)</span>-->
+                {% endif %}
+                    <li><a href="#">수업개설</a></li>
+                    <li><a href="#">수업문의</a></li>
+                </ul>
+
+            </div> <!--/.nav-collapse -->
+        </div> <!--/.container -->
+    </div>
+</nav>
