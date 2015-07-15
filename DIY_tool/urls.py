@@ -2,6 +2,7 @@ from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from django.conf.urls.static import static
 from django.conf import settings
+from social.apps.django_app import urls
 
 
 from userapp import urls as user_urls
@@ -20,7 +21,7 @@ urlpatterns = patterns('',
     url(r'^post/', include(post_urls)),
     url(r'^idealine/', include(idealine_urls)),
 
-    #url(r'', include('social.apps.django_app.urls', namespace='social')),
+    url(r'', include('social.apps.django_app.urls', namespace='social')),
 
 
 
