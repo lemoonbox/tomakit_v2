@@ -69,6 +69,7 @@ INSTALLED_APPS = (
     'app_post',
     'app_class',
     'app_analytic',
+    'app_user',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -108,6 +109,24 @@ SOCIAL_AUTH_URL_NAMESPACE = 'social'
 SOCIAL_AUTH_FACEBOOK_KEY = '1035953116420715'
 SOCIAL_AUTH_FACEBOOK_SECRET = '84ef6ed0e0815ffea885ea022cdc6768'
 SESSION_SERIALIZER='django.contrib.sessions.serializers.PickleSerializer'
+
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
+SOCIAL_AUTH_USERNAME_IS_FULL_EMAIL = True
+
+SOCIAL_AUTH_PIPELINE = (
+        'social.pipeline.social_auth.social_details',
+        'social.pipeline.social_auth.social_uid',
+        'social.pipeline.social_auth.auth_allowed',
+        'social.pipeline.social_auth.social_user',
+        'social.pipeline.user.get_username',
+        'social.pipeline.user.create_user',
+        'social.pipeline.social_auth.associate_user',
+        'social.pipeline.social_auth.load_extra_data',
+        'social.pipeline.user.user_details',
+        'app_user.social_auth.user_account',
+        'app_user.social_auth.save_profile'
+    )
+
 ###facebook auth end ###
 
 ROOT_URLCONF = 'DIY_tool.urls'
