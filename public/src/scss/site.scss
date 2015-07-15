@@ -1,61 +1,180 @@
-//global color
-$g-bg-color:#ffffff;
-$g-color: black;
-$g-bgsz-width:1400px;
-$g-font:Nanum Gothic;
+* {
+  margin: 0;
+  padding: 0;
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  //font-family: '³ª´®°íµñ', NanumGothic,'ÇÑ³ª', Hanna, 'µ¸¿ò', Dotum, '±¼¸²', Gulim, Helvetica, sans-serif !important;
+}
+
+body {
+  text-align: center;
+}
 
 //global btn
 $g-btn-color:#e86460;
 $g-btn-h-color:#e86460;
 
+.tmk-main-body{
+  text-align: center;
+  display: inline-block;
+  width: 1250px;
+}
 
-body {
-  background: $g-bg-color;
-  #wrap {
-    //height: 100% !important;
-    min-height: 1000px;
+ul{
+  list-style-type: none;
+}
+
+.tmk-body-picks{
+  padding: 15px;
+
+  .tmk-picks-list{
+    padding: 15px 14px 24px 14px;
+    vertical-align: top;
+    height: 380px;
+    border: 1px solid #eee;
+
+    span:first-child{
+      font-size: 16px;
+      font-weight: bold;
+    }
+  }
+
+  >div {
+    display: inline-block;
+    margin: 15px;
+    border-radius: 10px;
+  }
+  .tmk-picks-main{
+    width: 570px;
+    height: 380px;
+    background-image: url("http://danmee.chosun.com/site/data/img_dir/2011/10/03/2011100300672_0.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .tmk-picks-sub{
+    width: 270px;
+    height: 380px;
+    background-image: url("http://marcheat.net/wp-content/uploads/2014/03/Marche@2014Feb_web-39.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
   }
 }
 
-li {
-  &:hover{
-    background-color: none;
+.tmk-picks-list-ul{
+  li{
+    margin-top: 15px;
   }
-  &:focus {
-    background-color: none;
+  .list-ul-img{
+    display: inline-block;
+    width: 55px;
+    height: 37px;
+    margin-right: 10px;
+    background-image:url('http://papers.co/wp-content/uploads/papers.co-ma39-lovely-moss-flower-nature-1-wallpaper-300x300.jpg');
+    background-repeat:no-repeat;
+    background-size:cover;
+  }
+  .list-ul-span{
+    display: inline-block;
+    float: right;
+  }
+  .span-title{
+    font-size: 16px;
+    font-weight: bolder;
+  }
+  .span-by{
+    font-size: 14px;
+    color: #999;
+  }
+}
+
+.tmk-main-border{
+  text-align: center;
+  position: relative;
+  border-top: 1px solid #ddd;
+  margin: 64px 40px 20px 40px;
+  div {
+    position: absolute;
+    display: inline-block;
+    margin-top: -12px;
+    margin-left: -115px;
+    left: 50%;
+    width: 230px;
+    font-size: 18px;
+    background-color: #fff;
+    font-weight: bold;
+  }
+}
+
+.tmk-main-picks{
+  margin-top: 25px;
+
+  .picks-title{
+    font-size: 14px;
+    height: 18px;
+    .title-main {
+
+    }
+    .titele-seeAll{
+      color: #f0922e;
+    }
+  }
+}
+
+.picks-cards{
+  margin-top: 26px;
+
+  ul{
+    position: relative;
+    width: 100%;
+    height: 380px;
+  }
+
+  li{
+    display: inline-block;
+    width: 270px;
+    height: 380px;
+    margin: 0px 15px;
+    background-color:#CCB97C;
+    &:nth-child(2) {background-color:#997500;}
+    &:nth-child(3) {background-color:#FF8E00;}
+    &:nth-child(4) {background-color:#33EFFF;}
+    &:nth-child(5) {background-color:#00CCA3;}
+  }
+}
+
+nav {
+  > li {
+    &:hover, &:focus {
+      background-color: none;
+    }
   }
 }
 
 
 //.container {background-color:transparent;}
 
-#nav {background-color:$g-bg-color;}
-
 .navbar {
-  //vertical-align: middle;
-  background-color: $g-bg-color;
   box-shadow: 0.5px 0.5px #4f4f4f;
   padding: 10px;
-  //padding-bottom: 5px;
   height: 70px;
-  .navbar-brand {padding:7px;}
-
-
-  .navbar-static-top {
-    height:70px;
+  .navbar-brand {
+    padding: 7px;
   }
-
+  .navbar-static-top {
+    height: 70px;
+  }
 }
 
 #navbar {height:70px}
-.collapse {@extend #navbar;
+.collapse {
   height: 70px;
-  .navbar-collapse {@extend #navbar;
-    padding:0px;
+  .navbar-collapse {
     ul {
       height: 70px;
       //padding:0px;
-      vertical-align: middle;
     }
   }
 }
@@ -117,15 +236,25 @@ li {
   }
 }
 
-//components
-
-//background-color:#9e54bd;
-
-
 .main {
   width:100%;
-  height:100px;
+  height:300px;
   background-color:#e5e5e5;
   .banner {@extend .main;
+  }
+}
+
+
+
+/*go-top button*/
+.go-top {
+  position: fixed;
+  bottom: 0px;
+  right: 20px;
+  z-index: 1000;
+  font-size: 30px;
+  color: #eee;
+  &:hover {
+    color: #f23392;
   }
 }
