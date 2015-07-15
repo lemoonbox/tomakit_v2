@@ -200,7 +200,7 @@ else :
     MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
 
 
-    STATICFILES_DIRS=(os.path.join(BASE_DIR, 'static_local'),)
+    STATICFILES_DIRS=(os.path.join(BASE_DIR, 'static_local'), 'public/dist',)
     AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
     STATICFILES_LOCATION = 'static'
     STATICFILES_STORAGE = 'DIY_tool.custom_storages.StaticStorage'

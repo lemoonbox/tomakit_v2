@@ -1,9 +1,9 @@
 var gulp = require('gulp');
 
-//var webserver = require('gulp-webserver'); //this is not needed in this project
+var server = require('gulp-webserver'); //this is not needed in this project
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
-//var minifyhtml = require('gulp-minify-html');
+var minifyhtml = require('gulp-minify-html');
 var minifycss = require('gulp-minify-css');
 var sass = require('gulp-sass');
 var livereload = require('gulp-livereload');
@@ -26,10 +26,10 @@ gulp.task('clean', function(cb){
 });
 
 //localhost:8000
-//gulp.task('server', function() {
-//    return gulp.src(dist + '/')
-//        .pipe(webserver());
-//});
+gulp.task('server', function() {
+    return gulp.src(dist + '/')
+        .pipe(server());
+});
 
 //combine javascript files
 gulp.task('combine-js', function () {
@@ -69,11 +69,11 @@ gulp.task('sass', function() {
 });
 
 //minify html files
-//gulp.task('compress-html', function() {
-//    return gulp.src(paths.html)
-//        .pipe(minifyhtml())
-//        .pipe(gulp.dest(dist + '/'));
-//});
+gulp.task('compress-html', function() {
+    return gulp.src(paths.html)
+        .pipe(minifyhtml())
+        .pipe(gulp.dest(dist + '/'));
+});
 
 //auto reload browser when files change
 gulp.task('watch', function() {
@@ -90,6 +90,6 @@ gulp.task('default', [
     //'server',
     'clean', 'combine-js',
     'sass',
-    //'compress-html',
+    'compress-html',
     'watch'
 ]);

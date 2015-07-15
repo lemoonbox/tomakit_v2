@@ -10,18 +10,17 @@
   .reset-form input[type=email] {width:330px;margin:auto;border-radius: 0px;}
   .reset-form h1 {font-family:hanna;color:white;}
   .reset-form .btn {border-radius:0px;}
-  /*    .form-inline {width:350px;}*/
   .cancel {width:100px;border:2px solid cornsilk;}
   .cancel .glyphicon {font-size:18px;color:black;vertical-align: text-top;}
   .cancel .glyphicon:hover {color:red;}
   .cancel:hover {border:2px solid cornsilk; color:red;background:white;}
   .reset-pwd {background:#66cc99;border:2px solid #66cc99; color:white;width:210px;}
   .reset-pwd:hover {border:2px solid #66cc99; background:white;color:#66cc99;}
-  #wrap {margin-bottom:0px;background:#cdbfe3;}
+  #wrap {border-top:10px solid #47c9af;padding:100px auto 160px auto;margin:auto auto 300px auto;height:100%;background:#cdbfe3;}
 </style>
 
   <div id="wrap">
-    <section style="background:#47c9af; height:15px;top:0px;"></section>
+
 <div class="container">
     <div class="reset-form">      
         <form class="form-inline" role="form" method="POST" action="{{request.path}}">
@@ -36,6 +35,5 @@
         </form>
     </div>
   </div>
-    <div id="push"></div>
   </div> <!--wrap-->
 {%endblock%}
