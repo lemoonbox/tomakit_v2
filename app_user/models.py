@@ -3,15 +3,12 @@ from django.conf import settings
 
 def upload_to(instance, filename):
     path_arr = filename.split('/')
-    return '%s/profile/%s' %(instance.email, path_arr[-1])
+    return '%s/profile/%s' %(instance.djgouser.username, path_arr[-1])
 
 
 
-class UserAccount(models.Model):
+class UserProfile(models.Model):
     djgouser = models.ForeignKey(settings.AUTH_USER_MODEL)
-    email = models.EmailField(max_length=100, unique=True, blank=False)
-    firstname = models.CharField(max_length=20, null=False)
-    lastname = models.CharField(max_length=20, null=False)
     propic= models.ImageField(upload_to=upload_to)
 
     mailcnfirm= models.BooleanField(default=False)
@@ -21,4 +18,17 @@ class UserAccount(models.Model):
     updated_at = models.DateTimeField(auto_now_add=True, auto_now=True)
 
     def __unicode__(self):
-        return "%s %s" %(self.lastname, self.firstname)
+        return "%s" %(self.djgouser)
+
+class SignupConfirmKey(models.Model):
+    key = models.CharField(max_length=64, null=False, unique=True)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL)
+
+    created_at = models.DateField(auto_now_add=True, auto_now=False)
+
+    @staticmethod
+    def find(key):
+        ret = SignupConfirmKey.objects.filter(key=key)
+        if (not ret.exists()): return None
+
+        return ret

@@ -1,14 +1,13 @@
 from django.contrib import admin
-from app_user.models import UserAccount
+from app_user.models import UserProfile
 # Register your models here.
 
 
 
-class UserAccountAdmin(admin.ModelAdmin):
-    search_fields = ['email', 'firstname', 'lastname']
-    list_display = ('email', 'firstname', 'lastname', 'created_at')
+class ProfileAdmin(admin.ModelAdmin):
+    list_display = ('djgouser', 'created_at')
 
-    fieldsets = [("AccountInfo",{'fields':['djgouser', 'email', 'firstname', 'lastname', 'propic']})]
+    fieldsets = [("AccountInfo",{'fields':['djgouser', 'propic']})]
 
 
-admin.site.register(UserAccount, UserAccountAdmin)
+admin.site.register(UserProfile, ProfileAdmin)
