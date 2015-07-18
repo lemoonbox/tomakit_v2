@@ -7,26 +7,34 @@ from django.shortcuts import \
 from django.contrib.auth.models import \
     User
 from django.http import \
-    HttpResponseRedirect
+    HttpResponseRedirect, \
+    HttpResponse
 import \
     string, \
     random
 from django.shortcuts import \
     loader,\
     render
+from django.core.context_processors import \
+    csrf
 
 from DIY_tool import \
     template_match as TEMP
 from DIY_tool.settings import \
     LOCAL as SET_LOCAL
-from utils import tasks
+from utils import \
+    tasks,\
+    utils
 from app_user.form import \
-    UserForm
+    UserForm,\
+    PwReset_RequestForm, \
+    PwReset_ProcessForm,\
+    Send_ConfirmForm
 from app_user.models import \
     UserProfile, \
-    SignupConfirmKey
+    SignupConfirmKey, \
+    PWResetKeys
 # Create your views here.
-
 
 def signup(request):
     ctx = Context({
@@ -54,34 +62,147 @@ def signup(request):
                 _userprofile.save()
 
                 #send email
-                key=""
+                key = utils.generate_key(32,SignupConfirmKey,_user[0])
 
-                while True:
-                    for i in xrange(32):
-                        key = key+random.choice(string.ascii_letters\
-                            +string.digits)
-                    if (SignupConfirmKey.find(key)==None):break
-
-                _conkey = SignupConfirmKey(key=key, user=_user)
-                _conkey.save()
-
-                host=request.META['HTTP_HOST']
-                mail_tpl = loader.get_template('contents/mail_form/mail_confirm.html')
-                mail_ctx = Context({'host':host, 'key':key})
-                cont = mail_tpl.render(mail_ctx)
-                recipient = [_user.email]
+                host =request.META['HTTP_HOST']
+                title = u"안녕하세요! 토마킷입니다. 정식 사용을 승인해주세요."
+                sender = "makerecipe@gmail.com"
 
                 if SET_LOCAL:
-                    from django.core.mail import send_mail
-                    send_mail(u'안녕하세요! 토마킷입니다. 정식 사용을 승인해주세요.', "", \
-                          'makerecipe@gmail.com', recipient, fail_silently=False,
-                            html_message=cont)
+                   utils.send_key_email(request, title, sender,
+                        _user.email, TEMP.V2_CONFIRM_MAIL, key)
 
                 else:
-                    tasks.sendmail.delay(cont, recipient)
+                    tasks.send_key_email.delay(request, title, sender,
+                    _user.email, TEMP.V2_PW_RESET_EMAIL, key)
 
                 return HttpResponseRedirect("/v2/user/login/?next="+next)
 
     return render(request, TEMP.V2_SIGNUP_TEM,{
         'accountform':userForm,
         'next':next,})
+
+def signup_confirm(request, *args, **kwargs):
+
+    ctx = Context({
+        'error':None
+    })
+    ctx["host"] = request.META['HTTP_HOST']
+
+    _conkey = SignupConfirmKey.find(kwargs['key'])
+
+    if(_conkey):
+        _conkey[0].user.email_confirm= True
+        _conkey[0].user.save()
+        ctx["message"] = "이메일 인증이 완료 되었습니다. 서비스를 이용해주세요!"
+        ctx["error"] = True
+
+        tpl = loader.get_template(TEMP.V2_CONFIRM_RESULT)
+        ctx.update(csrf(request))
+        return HttpResponse(tpl.render(ctx))
+
+
+    ctx["message"] = "이메일 인증이 실패 하였습니다. 인증 메일을 다시 보내주세요!"
+    ctx["error"] = False
+    tpl = loader.get_template(TEMP.V2_CONFIRM_RESULT)
+    ctx.update(csrf(request))
+    return HttpResponse(tpl.render(ctx))
+
+def send_confirm(request):
+
+    if request.method == "GET":
+        send_confirm_form = Send_ConfirmForm()
+    elif request.method == "POST":
+        print "POST"
+        send_confirm_form = Send_ConfirmForm(request.POST)
+
+        if send_confirm_form.is_valid():
+            _user = User.objects.filter(username=send_confirm_form.cleaned_data['email'])
+            print _user
+
+            if(_user.exists()):
+                key = utils.generate_key(32,SignupConfirmKey,_user[0])
+
+                host =request.META['HTTP_HOST']
+                title = u"안녕하세요! 토마킷입니다. 정식 사용을 승인해주세요."
+                sender = "makerecipe@gmail.com"
+
+                if SET_LOCAL:
+                    utils.send_key_email(request, title, sender,
+                        _user[0].email, TEMP.V2_CONFIRM_MAIL, key)
+                else:
+                    tasks.send_key_email.delay(request, title, sender,
+                        _user[0].email, TEMP.V2_CONFIRM_MAIL, key)
+
+
+    return render(request, TEMP.V2_SEND_CONFIRM, {
+        "send_conf_for":send_confirm_form,
+
+    })
+
+
+def pw_reset_request(request):
+
+    if request.method =="GET":
+        pwresetform = PwReset_RequestForm()
+    elif request.method =="POST":
+        pwresetform = PwReset_RequestForm(request.POST)
+
+        if pwresetform.is_valid():
+            _user = User.objects.filter(username=pwresetform.cleaned_data['email'])
+
+            if(_user.exists() and _user[0].has_usable_password()):
+                key = utils.generate_key(32,PWResetKeys,_user[0])
+
+                host =request.META['HTTP_HOST']
+                title = u"안녕하세요. 토마킷 패스워드 변경 이메일을 보내드려요.."
+                sender = "makerecipe@gmail.com"
+
+                if SET_LOCAL:
+                    utils.send_key_email(request, title, sender,
+                        _user[0].email, TEMP.V2_PW_RESET_EMAIL, key)
+                else:
+                    tasks.send_key_email.delay(request, title, sender,
+                        _user[0].email, TEMP.V2_PW_RESET_EMAIL, key)
+
+    return render(request, TEMP.V2_PW_RESET, {
+        'pwrsetform':pwresetform
+    })
+
+def pw_reset_process(request, key):
+
+    ctx =Context({
+        'error':None
+    })
+
+    _reset_obj = PWResetKeys.find(key)
+
+    if(_reset_obj == None):
+        tpl = loader.get_template(TEMP.V2_PW_RESET_FAIL)
+        ctx.update(csrf(request))
+        return HttpResponse(tpl.render(ctx))
+
+    if (request.method=="GET"):
+        pwresetform = PwReset_ProcessForm()
+        return render(request, TEMP.V2_PW_RESET_PROCESS, {
+            'pwresetform':pwresetform})
+
+    if (request.method=="POST"):
+        pwresetform = PwReset_ProcessForm(request.POST)
+
+        if(not pwresetform.is_valid()):
+            return render(request, TEMP.V2_PW_RESET_PROCESS, {
+                'pwresetform':pwresetform})
+
+        _user = _reset_obj.user
+        _user.set_password(pwresetform.cleaned_data['password'])
+        _user.save()
+        return HttpResponseRedirect('/v2/user/login')
+
+    pwreset_process_form = PwReset_ProcessForm()
+    return render(request, TEMP.V2_PW_RESET_PROCESS, {
+        'pwrset_process_form':pwreset_process_form
+    })
+
+
+

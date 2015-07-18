@@ -1,5 +1,15 @@
 __author__ = 'moon'
 from DIY_tool import settings
+from django.shortcuts import \
+    render, \
+    loader
+from django.template import \
+    Context
+from django.core.mail import \
+    send_mail
+import \
+    string, \
+    random
 
 
 def handle_uploaded_image(i, x, y):
@@ -188,3 +198,29 @@ def handle_uploaded_image2(i, x, y):
     """
 
     return (filename, content)
+
+def send_key_email(request, title, sender, recipient,template, key, *args, **kargs):
+
+    mail_tpl = loader.get_template(template)
+    mail_ctx = Context({
+        'host':request.META['HTTP_HOST'],
+        'key':key,
+    })
+    cont = mail_tpl.render(mail_ctx)
+
+    send_mail(title,"",sender,[recipient,],fail_silently=False, html_message=cont)
+
+
+def generate_key(keyleng, model, user):
+    key = ""
+
+    while True:
+        for i in xrange(keyleng):
+            key = key+random.choice(string.ascii_letters\
+                +string.digits)
+        if (model.find(key)==None):break
+
+    _conkey = model(key=key, user=user)
+    _conkey.save()
+
+    return key

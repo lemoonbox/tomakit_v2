@@ -323,7 +323,7 @@ def pw_reset_request(request):
         'pwrsetform':pwresetform
     })
 
-def pw_reset_process(request, key):
+def pw_reset_process(request, key=None):
 
     ctx =Context({
         'error':None
@@ -438,8 +438,6 @@ def contactemail(request):
                             html_message=cont)
             else:
                 tasks.contact_mail.delay(cont, recipient)
-
-            # tasks.rabbitmqtest.delay()
 
     return render(request, 'contents/contact_mail/partnershipmail.html',{
         'emailform' : SendEmailForm

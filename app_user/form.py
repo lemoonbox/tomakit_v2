@@ -20,3 +20,18 @@ class UserForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ('username', 'first_name', 'last_name','password')
+
+
+class PwReset_RequestForm(forms.Form):
+
+    email = forms.EmailField(max_length=100)
+
+class Send_ConfirmForm(forms.Form):
+
+    email = forms.EmailField(max_length=100)
+
+class PwReset_ProcessForm(forms.Form):
+
+
+    password = forms.CharField(max_length=100, widget=forms.PasswordInput, required=True)
+    password_confirm = forms.CharField(max_length=100, widget=forms.PasswordInput, required=True)

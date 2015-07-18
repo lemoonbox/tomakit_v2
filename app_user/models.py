@@ -32,3 +32,31 @@ class SignupConfirmKey(models.Model):
         if (not ret.exists()): return None
 
         return ret
+
+class PWResetKeys(models.Model):
+    key = models.CharField(max_length=64, null=False, unique=True)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL)
+
+    created_at = models.DateTimeField(auto_now_add=True, auto_now=False)
+
+
+    @staticmethod
+
+    def find(key):
+        ret = PWResetKeys.objects.filter(key=key)
+        if not ret.exists(): return None
+
+        import datetime
+        from django.utils.timezone import utc
+        now = datetime.datetime.utcnow().replace(tzinfo=utc)
+        print type(now)
+        print now
+        print type(ret[0].created_at)
+        print ret[0].created_at
+        timeoff = now - ret[0].created_at
+
+        if timeoff.total_seconds()>60*5:
+            ret[0].delete()
+            return None
+
+        return ret[0]

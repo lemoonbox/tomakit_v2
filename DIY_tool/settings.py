@@ -70,6 +70,7 @@ INSTALLED_APPS = (
     'app_class',
     'app_analytic',
     'app_user',
+    'utils',
 )
 
 MIDDLEWARE_CLASSES = (
