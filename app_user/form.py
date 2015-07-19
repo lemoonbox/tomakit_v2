@@ -3,7 +3,9 @@ __author__ = 'moon'
 
 
 from django import forms
-from app_user.models import UserProfile
+from app_user.models import \
+    UserProfile,\
+    HostProfile
 from django.contrib.auth.models import User
 
 
@@ -20,6 +22,17 @@ class UserForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ('username', 'first_name', 'last_name','password')
+
+class Host_Signup(forms.Form):
+
+    TYPE_CHOICES = (
+        (u'out', 'outclass'),
+        (u'shop', 'shopclass')
+    )
+
+    mobile = forms.CharField(max_length=50, required=True)
+    hosttype = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple,
+                                         choices=TYPE_CHOICES)
 
 
 class PwReset_RequestForm(forms.Form):

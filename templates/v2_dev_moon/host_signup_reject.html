@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static from staticfiles%}
+
+{%block content%}
+<style>
+  .about {padding:10px;border-radius:0px;margin-bottom:20px;background-color:#eee;}
+  .text-muted {margin-top:10px;}
+  .text-muted b:hover {color:coral;}
+  .about .glyphicon {margin-right:1%;}
+  .about .glyphicon:hover {color:coral;}
+</style>
+
+이미 작가 등록한 경우에는 다시 등록할 수 없습니다.
+
+
+<!--    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>-->
+    <script type="text/javascript" src="{% static 'media/js/userform-validation.js' %}"></script>
+    
+    
+  </div> <!-- wrap -->
+
+{% endblock %}

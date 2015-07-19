@@ -20,6 +20,20 @@ class UserProfile(models.Model):
     def __unicode__(self):
         return "%s" %(self.djgouser)
 
+class HostProfile(models.Model):
+
+    TYPE_CHOICES = (
+        (u'out', 'outclass'),
+        (u'shop', 'shopclass')
+    )
+    djgouser = models.ForeignKey(settings.AUTH_USER_MODEL)
+    mobile = models.CharField(max_length=50, null=False, unique=True)
+    hosttype= models.CharField(max_length=50, null=False, unique=True,
+                               choices=TYPE_CHOICES)
+
+    created_at = models.DateTimeField(auto_now_add=True, auto_now=False)
+    updated_at = models.DateTimeField(auto_now_add=True, auto_now=True)
+
 class SignupConfirmKey(models.Model):
     key = models.CharField(max_length=64, null=False, unique=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL)

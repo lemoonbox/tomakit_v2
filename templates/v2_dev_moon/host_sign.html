@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static from staticfiles%}
+
+{%block content%}
+<style>
+  .about {padding:10px;border-radius:0px;margin-bottom:20px;background-color:#eee;}
+  .text-muted {margin-top:10px;}
+  .text-muted b:hover {color:coral;}
+  .about .glyphicon {margin-right:1%;}
+  .about .glyphicon:hover {color:coral;}
+</style>
+          <form method="POST" action="{% url 'v2_host_signup' %}" enctype="multipart/form-data" class="form-signin">
+              <input type="hidden" name="next" value="{{next}}"/>
+            {% csrf_token%}
+<!--            <p class="ok">&nbsp;</p>-->
+            <label for="mobile" class="sr-only">전화번호</label>
+            <input id="mobile" name="mobile" type="text"
+                   class="form-control" required placeholder="전화번호" />
+              <input type="checkbox" name="hosttype" value="out"> 출강
+              <input type="checkbox" name="hosttype" value="shop"> 공방강의
+
+            {% for field in hostform %}
+              {{ field.errors|striptags }}
+              {% endfor %}
+
+            <input type="submit" class="btn btn-lg btn-primary" value="회원가입">
+          </form>  
+ 
+        </div> <!--/register-->
+      </div> <!--/wrapper-->
+    </div> <!-- /container -->
+
+
+<!--    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>-->
+    <script type="text/javascript" src="{% static 'media/js/userform-validation.js' %}"></script>
+    
+    
+  </div> <!-- wrap -->
+
+{% endblock %}

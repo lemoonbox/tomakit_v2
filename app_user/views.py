@@ -6,6 +6,8 @@ from django.shortcuts import \
     render
 from django.contrib.auth.models import \
     User
+from django.contrib.auth.decorators import \
+    login_required
 from django.http import \
     HttpResponseRedirect, \
     HttpResponse
@@ -29,11 +31,13 @@ from app_user.form import \
     UserForm,\
     PwReset_RequestForm, \
     PwReset_ProcessForm,\
-    Send_ConfirmForm
+    Send_ConfirmForm, \
+    Host_Signup
 from app_user.models import \
     UserProfile, \
     SignupConfirmKey, \
-    PWResetKeys
+    PWResetKeys, \
+    HostProfile
 # Create your views here.
 
 def signup(request):
@@ -49,6 +53,7 @@ def signup(request):
         userForm = UserForm(request.POST)
 
         if userForm.is_valid():
+            next=request.POST.get("next","/")
             user_data={
                 'username': request.POST.get("username", "null"),
                 'email':request.POST.get("username", "null"),
@@ -81,6 +86,42 @@ def signup(request):
     return render(request, TEMP.V2_SIGNUP_TEM,{
         'accountform':userForm,
         'next':next,})
+
+@login_required
+def host_signup(request):
+    ctx = Context({
+        'error':None
+    })
+
+    _hostprofile = HostProfile.objects.filter(djgouser=request.user)
+
+    if(_hostprofile.exists()):
+        tpl = loader.get_template(TEMP.V2_HOST_SIGNUP_REJECT)
+        return HttpResponse(tpl.render(ctx))
+
+    if request.method == "GET":
+        hostform = Host_Signup()
+        next=request.GET.get("next", "/")
+
+
+    elif request.method=="POST":
+        next=request.POST.get("next","/")
+        hostform = Host_Signup(request.POST)
+        print request.POST["hosttype"]
+        print hostform.data
+
+        if hostform.is_valid():
+            _hostprofile = HostProfile(djgouser=request.user, mobile=hostform.cleaned_data['mobile'],
+                                       hosttype=hostform.cleaned_data['hosttype'])
+            _hostprofile.save()
+
+        return HttpResponseRedirect(next)
+
+    return render(request, TEMP.V2_HOST_SIGNUP,{
+        'hostform':hostform,
+    })
+
+
 
 def signup_confirm(request, *args, **kwargs):
 
@@ -137,7 +178,6 @@ def send_confirm(request):
 
     return render(request, TEMP.V2_SEND_CONFIRM, {
         "send_conf_for":send_confirm_form,
-
     })
 
 
