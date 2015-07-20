@@ -11,5 +11,9 @@ urlpatterns = patterns('app_user.views',
 
     url(r'reset_password/$', 'pw_reset_request', name="v2_reset_request"),
     url(r'reset_process/(?P<key>[\w.@+-]+)/$', 'pw_reset_process', name='pw_reset_process_get'),
-    url(r'reset_process/$', 'pw_reset_process', name='pw_reset_process_get')
+    url(r'reset_process/$', 'pw_reset_process', name='pw_reset_process_post'),
+
+
+    url(r'login/$', 'login', name='v2_login'),
+    url(r'logout/$', 'logout', name='v2_login'),
 )

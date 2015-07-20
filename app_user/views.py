@@ -11,14 +11,15 @@ from django.contrib.auth.decorators import \
 from django.http import \
     HttpResponseRedirect, \
     HttpResponse
-import \
-    string, \
-    random
 from django.shortcuts import \
     loader,\
     render
 from django.core.context_processors import \
     csrf
+from django.contrib.auth import \
+    login as auth_login
+from django.contrib.auth.views import \
+    logout as django_logout
 
 from DIY_tool import \
     template_match as TEMP
@@ -32,7 +33,8 @@ from app_user.form import \
     PwReset_RequestForm, \
     PwReset_ProcessForm,\
     Send_ConfirmForm, \
-    Host_Signup
+    Host_Signup, \
+    LoginForm
 from app_user.models import \
     UserProfile, \
     SignupConfirmKey, \
@@ -67,7 +69,7 @@ def signup(request):
                 _userprofile.save()
 
                 #send email
-                key = utils.generate_key(32,SignupConfirmKey,_user[0])
+                key = utils.generate_key(32,SignupConfirmKey, _userprofile.djgouser)
 
                 host =request.META['HTTP_HOST']
                 title = u"안녕하세요! 토마킷입니다. 정식 사용을 승인해주세요."
@@ -120,7 +122,6 @@ def host_signup(request):
     return render(request, TEMP.V2_HOST_SIGNUP,{
         'hostform':hostform,
     })
-
 
 
 def signup_confirm(request, *args, **kwargs):
@@ -179,7 +180,6 @@ def send_confirm(request):
     return render(request, TEMP.V2_SEND_CONFIRM, {
         "send_conf_for":send_confirm_form,
     })
-
 
 def pw_reset_request(request):
 
@@ -244,5 +244,32 @@ def pw_reset_process(request, key):
         'pwrset_process_form':pwreset_process_form
     })
 
+def login(request, *args, **kwargs):
 
+    next=""
 
+    if request.method=="GET":
+        login_form = LoginForm()
+        next=request.GET.get("next","/")
+
+        if request.user.is_authenticated:
+            return HttpResponseRedirect(next)
+
+    elif request.method=="POST":
+        print "login post"
+        login_form = LoginForm(request.POST)
+        next=request.POST.get("next","/")
+        if login_form.is_valid():
+            user = login_form.authenticate(request)
+            if user:
+                auth_login(request, user)
+                return HttpResponseRedirect(next)
+
+    return render(request, TEMP.V2_LOGIN,
+                  {'login_form':login_form,
+                   'next':next
+                   })
+
+def logout(request, *args, **kwargs):
+    res = django_logout(request, *args, **kwargs)
+    return res
