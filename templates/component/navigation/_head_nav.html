@@ -18,7 +18,7 @@
             <div id="navbar" class="collapse navbar-collapse" aria-expanded="false">
                 <ul class="nav navbar-nav">
                   <li><a href="/">클래스 개설사례</a></li>
-                  <li><a href="/user/contact">문의중인 클래스</a></li>
+                  <li><a href="/">문의중인 클래스</a></li>
                     <li><a href="">클래스 문의하기</a></li>
                 </ul>
 
@@ -40,8 +40,8 @@
                     </li>
                     {% else %}
                     <!-- <li><a class="hi" href="#">hello world!</a></li> -->
-                    <!--<li><a href="{% url 'signup' %}?next={{request.path}}">회원가입</a></li>-->
-                    <li><a href="{% url 'login_url' %}?next={{request.path}}"><i style="color:gray;" class="xi-user-circle xi-2x"></i></a></li>
+                    <li><a href="{% url 'signup' %}?next={{request.path}}"><i class="fa fa-user-plus"></i> 작가신청</a></li>
+                    <li><a href="{% url 'login_url' %}?next={{request.path}}">로그인/가입</a></li>
                     <!--            <span class="sr-only">(current)</span>-->
                 {% endif %}
                     <!--<li><a href="#">수업개설</a></li>-->
