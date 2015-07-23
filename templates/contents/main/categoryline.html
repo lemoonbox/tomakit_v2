@@ -3,13 +3,13 @@
 {% load line_extras_tag%}
 <title>{%block title%}토마킷 :: 기초부터 공방 창업까지. 현업 작가들의 공예 수업을 만나보세요.{%endblock%}</title>
 
-  {% block content %}
+{% block content %}
 <div class="tmk-main-banner">
     <div class="main-banner-title">직접 즐기는 리얼 핸드메이드</div>
     <div class="main-banner-subtitle">내손으로 직접 즐기는 DIY 핸드메이드, 무엇을 만들어 볼까요?</div>
 
     <video autoplay loop muted poster="https://d3ce7jb7ih53ua.cloudfront.net/verloca_new_design/main_page/first-page-1.png" id="bgvid">
-    <source src="https://d3ce7jb7ih53ua.cloudfront.net/verloca_new_design/main_page/verlocal+header_3.mp4"></source>
+        <source src="https://d3ce7jb7ih53ua.cloudfront.net/verloca_new_design/main_page/verlocal+header_3.mp4"></source>
     </video>
     <div></div>
 </div>
@@ -25,77 +25,120 @@
         </div>
     </div>
 
-    <div class="tmk-body-picks">
-        <div class="tmk-picks-main">
-            <div class="tmk-picks-title"> 지금까지 4,065개의 핸드메이드 클래스가 만들어졌어요
-            <div class="tmk-picks-subtitle">만들거나 배우고 싶은 것을 문의하면 클래스가 이루어져요.</div>
-            </div>
-        </div>
-        <div class="tmk-picks-sub"></div>
-</div>
     <div class="picks-cards rows">
         <ul>
-            <li>
-            </li>
-
-            <li>
-                <div class="picks-cards-credit">
-                    <div style="font-size:20px; font-weight:bolder;">Q.</div>
-                    <div style="font-size:18px;margin-top:10px;">우드카빙으로 직접 수저를 만들어보고 싶어요.</div>
-                    <br>
-                    <div style="vertical-align:text-bottom;">희망 수업일 <h4 style="display:inline;margin-left:50px;">월<span style="color:orangered;">화</span>수목<span style="color:orangered;">금</span>토일</h4></div>
-                    <div>
-                        <div class="cards-credit-label">
-                            <i class="fa fa-map-marker"></i> 서울시 마포구 상암동
-                        <!--<i style="margin-left:20px;" class="fa fa-tag"></i>-->
-                            <span style="margin-left:22px;"># 만들기 문의</span>
-                        </div>
-                        </div>
+            <li class="tmk-picks-main">
+                <div class="tmk-picks-title"> 지금까지 4,065개의 핸드메이드 클래스가 만들어졌어요
+                    <div class="tmk-picks-subtitle">만들거나 배우고 싶은 것을 문의하면 클래스가 이루어져요.</div>
                 </div>
             </li>
-            <li>
-                <div></div>
-            </li>
+            <li class="tmk-picks-sub" style="background-image:url(https://s-media-cache-ak0.pinimg.com/736x/c3/59/32/c359324722c8e1e3fee69a1d9fa512e4.jpg)"></li>
+
         </ul>
+        <!--</div>-->
+        <!--<div class="tmk-main-border">-->
+        <!--<div></div>-->
+        <!--</div>-->
     </div>
 
-<div class="tmk-body-picks">
-        <div class="tmk-picks-sub"></div>
-        <div class="tmk-picks-main" style="background:url(https://s-media-cache-ak0.pinimg.com/736x/1f/7e/c1/1f7ec10c3588de792ee8696236f0490d.jpg);">
+
+
+<div class="picks-cards rows">
+    <ul>
+        <li>
+        </li>
+        <li>
+            <div class="picks-cards-photo">
+                <div class="picks-cards-profile"><i class="fa fa-user fa-2x"></i></div>
+            </div>
+            <div class="picks-cards-credit">
+                <div class="h3" style="font-family:hanna;">Q. </div>
+                <div class="credit-title" style="font-family:hanna;">이런 나무 수저는 어디서 만들 수 있어요?</div>
+                <div class="cards-date">희망 수업일&nbsp;&nbsp;
+                    <h4 style="display:inline;"> <i class="fa fa-clock-o"></i> 화/수/목</h4>
+                </div>
+                <div class="cards-credit-label">
+                    <span class="label-address"><i class="fa fa-map-marker"></i> 서울시 마포구 상암동</span>
+                    <!--<i style="margin-left:20px;" class="fa fa-tag"></i>-->
+                    <span class="btn btn-default btn-sm" style="margin-left:22px;border-radius:20px;margin-top:-3px; padding: 1px 6px 1px 6px;"># 만들기 문의</span>
+                </div>
+            </div>
+        </li>
+        <li>
+        </li>
+    </ul>
+</div>
+
+<div class="picks-cards row">
+    <ul>
+        <li>
+            <div class="picks-cards-photo"></div>
+            <div class="picks-cards-credit">
+                <div class="h3" style="font-family:hanna;">Q. </div>
+                <div class="credit-title" style="font-family:hanna;">일이삼사오육칠팔구십일이삼사오 만들고싶어요</div>
+                <div class="cards-date" style="text-align:center;">3개의 클래스가 만들어졌어요
+                    <!--<h4 style="display:inline;"> <i class="fa fa-clock-o"></i> 화/수/목</h4>-->
+                </div>
+                <div class="cards-credit-label">
+                    <span class="label-address"><i class="fa fa-map-marker"></i> 서울시 마포구 상암동</span>
+                    <!--<i style="margin-left:20px;" class="fa fa-tag"></i>-->
+                    <span class="btn btn-default btn-sm" style="margin-left:22px;border-radius:20px;margin-top:-3px; padding: 1px 6px 1px 6px;"># 만들기 문의</span>
+                </div>
+            </div>
+        </li>
+        <li class="tmk-picks-main" style="background:url(https://s-media-cache-ak0.pinimg.com/736x/1f/7e/c1/1f7ec10c3588de792ee8696236f0490d.jpg);">
             <div class="tmk-picks-title"> 만들고, 배우고 싶은 핸드메이드가 있나요?
                 <div class="tmk-picks-subtitle">나만의 핸드메이드를 시작하기 위해, 질문해보세요!</div>
             </div>
-        </div>
-</div>
-
-    <div class="tmk-main-border">
-        <div></div>
-    </div>
-</div>
-        <div class="tmk-footer-banner">
-            <div class="footer-frame">
-                <div>토마킷은 32명의 핸드메이드 작가님과 함께하고 있습니다.</div>
-                <div>배우고 싶은 클래스가 있으세요? 친절한 작가님들을 만나보세요!</div>
-            <!--<ul class="footer-banner-ul">-->
-                <!--<li></li>-->
-                <!--<li></li>-->
-                <!--<li></li>-->
-            <!--</ul>-->
-        </div>
-</div>
-
-    <!--<div class="tmk-main-border">-->
-        <!--<div>개설된 핸드메이드 문의</div>-->
+        </li>
+    </ul>
     <!--</div>-->
 
-    <!--<div class="tmk-main-picks">-->
-        <!--<div class="picks-title rows">-->
-            <!--<span class="col-md-2"></span>-->
-            <!--<span class="title-main col-md-8">수업이 만들어진 핸드메이드 수업을 만나보세요</span>-->
-            <!--<span class="title-seeAll col-md-2">모두보기</span>-->
-        <!--</div>-->
-     <!--
-  --> <!-- </div-->
+    <!--<div class="tmk-main-border">-->
+    <!--<div></div>-->
+    <!--</div>-->
+</div>
+</div>
+
+<div class="tmk-footer-banner">
+
+    <div class="footer-frame" style="left:0px!important;"></div>
+
+    <div class="tmk-picks-title" style="padding-top:15px;">토마킷은 32명의 핸드메이드 작가님과 함께하고 있습니다.
+        <div class="tmk-picks-subtitle">배우고 싶은 클래스가 있으세요? 친절한 작가님들을 만나보세요!</div>
+    </div>
+    <ul class="footer-banner-ul">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+    <ul class="footer-banner-ul2">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+
+</div>
 
 
-  {%endblock %}
+<!--<div class="tmk-main-border">-->
+<!--<div>개설된 핸드메이드 문의</div>-->
+<!--</div>-->
+
+<!--<div class="tmk-main-picks">-->
+<!--<div class="picks-title rows">-->
+<!--<span class="col-md-2"></span>-->
+<!--<span class="title-main col-md-8">수업이 만들어진 핸드메이드 수업을 만나보세요</span>-->
+<!--<span class="title-seeAll col-md-2">모두보기</span>-->
+<!--</div>-->
+<!--
+--> <!-- </div-->
+
+{%endblock %}
