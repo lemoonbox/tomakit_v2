@@ -19,3 +19,6 @@ V2_HOST_SIGNUP_REJECT = 'v2_dev_moon/host_signup_reject.html'
 
 #login
 V2_LOGIN = "v2_dev_moon/login.html"
+
+#question
+V2_CREATE_QITEM = 'v2_dev_moon/app_question/qitem_create.html'
