@@ -22,3 +22,4 @@ V2_LOGIN = "v2_dev_moon/login.html"
 
 #question
 V2_CREATE_QITEM = 'v2_dev_moon/app_question/qitem_create.html'
+V2_DETAIL_QITEM = 'v2_dev_moon/app_question/qitem_detail.html'

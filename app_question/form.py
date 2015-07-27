@@ -7,8 +7,6 @@ from django import forms
 from app_question.models import QItem
 
 
-
-
 class CreateQItem(forms.ModelForm):
 
     title_error ={'required':u"배우고 싶은 것을 입력해 주세요",}
@@ -26,5 +24,5 @@ class CreateQItem(forms.ModelForm):
 
     class Meta:
         model = QItem
-        exclude = ('djgouser',)
+        exclude = ('djgouser','category', 'state')
         field = ('title', 'mylocal', 'wantedu', 'memnum', 'mobile')
