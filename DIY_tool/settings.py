@@ -73,6 +73,7 @@ INSTALLED_APPS = (
     'utils',
     'app_question',
     'app_comminfo',
+    'app_board',
 )
 
 MIDDLEWARE_CLASSES = (
