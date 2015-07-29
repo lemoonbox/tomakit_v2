@@ -4,6 +4,17 @@
 <title>{%block title%}토마킷 :: 기초부터 공방 창업까지. 현업 작가들의 공예 수업을 만나보세요.{%endblock%}</title>
 
 {% block content %}
+<style>
+    .navbar-default {
+        background-color: transparent !important;
+        border-color:transparent !important;
+        color: white !important;
+    }
+    .navbar-nav>li>a {
+        color: white !important;
+    }
+</style>
+
 <div class="tmk-main-banner">
     <div class="main-banner-title">직접 즐기는 리얼 핸드메이드</div>
     <div class="main-banner-subtitle">내손으로 직접 즐기는 DIY 핸드메이드, 무엇을 만들어 볼까요?</div>
@@ -16,7 +27,7 @@
 
 <div class="tmk-main-body">
     <div class="tmk-main-border">
-        <div>두근두근 핸드메이드</div>
+        <div style="font-family: NanumMyeongjo, Serif;">두근두근 핸드메이드</div>
     </div>
     <div class="tmk-main-picks">
         <div class="picks-title rows">
@@ -28,11 +39,28 @@
     <div class="picks-cards rows">
         <ul>
             <li class="tmk-picks-main">
-                <div class="tmk-picks-title"> 지금까지 4,065개의 핸드메이드 클래스가 만들어졌어요
-                    <div class="tmk-picks-subtitle">만들거나 배우고 싶은 것을 문의하면 클래스가 이루어져요.</div>
+                <div class="tmk-picks-title"> 지금까지 4,065개의 클래스가 만들어졌어요<br>
+                    <div class="tmk-picks-subtitle">만들거나 배우고 싶은 것을 문의하면 클래스가 이루어져요</div>
                 </div>
             </li>
-            <li class="tmk-picks-sub" style="background-image:url(https://s-media-cache-ak0.pinimg.com/736x/c3/59/32/c359324722c8e1e3fee69a1d9fa512e4.jpg)"></li>
+            <li class="tmk-picks-sub" style="background-image:url(https://s-media-cache-ak0.pinimg.com/736x/c3/59/32/c359324722c8e1e3fee69a1d9fa512e4.jpg)">
+                <div class="picks-cards-photo">
+                    <div class="picks-cards-profile"><i class="fa fa-user fa-2x"></i></div>
+                    <div class="profile-name">by 홍길동</div>
+                </div>
+                <div class="picks-cards-credit">
+                    <div class="h3">Q. </div>
+                    <div class="credit-title">이런 나무 수저는 어디서 만들 수 있어요?</div>
+                    <div class="cards-date">희망 수업일&nbsp;&nbsp;
+                        <h4 style="display:inline;"> <i class="fa fa-clock-o"></i> 화/수/목</h4>
+                    </div>
+                    <div class="cards-credit-label">
+                        <span class="label-address"><i class="fa fa-map-marker"></i> 서울시 마포구 상암동</span>
+                        <!--<i style="margin-left:20px;" class="fa fa-tag"></i>-->
+                        <span class="btn btn-default btn-sm" style="margin-left:40px;border-radius:20px;margin-top:-4px; background-color:transparent;padding: 2px 6px 2px 6px;">만들기 문의</span>
+                    </div>
+                </div>
+            </li>
 
         </ul>
         <!--</div>-->
@@ -52,15 +80,15 @@
                 <div class="picks-cards-profile"><i class="fa fa-user fa-2x"></i></div>
             </div>
             <div class="picks-cards-credit">
-                <div class="h3" style="font-family:hanna;">Q. </div>
-                <div class="credit-title" style="font-family:hanna;">이런 나무 수저는 어디서 만들 수 있어요?</div>
+                <div class="h3">Q. </div>
+                <div class="credit-title">이런 나무 수저는 어디서 만들 수 있어요?</div>
                 <div class="cards-date">희망 수업일&nbsp;&nbsp;
                     <h4 style="display:inline;"> <i class="fa fa-clock-o"></i> 화/수/목</h4>
                 </div>
                 <div class="cards-credit-label">
                     <span class="label-address"><i class="fa fa-map-marker"></i> 서울시 마포구 상암동</span>
                     <!--<i style="margin-left:20px;" class="fa fa-tag"></i>-->
-                    <span class="btn btn-default btn-sm" style="margin-left:22px;border-radius:20px;margin-top:-3px; padding: 1px 6px 1px 6px;"># 만들기 문의</span>
+                    <span class="btn btn-default btn-sm" style="margin-left:40px;border-radius:20px;margin-top:-4px; background-color:transparent;padding: 2px 6px 2px 6px;">만들기 문의</span>
                 </div>
             </div>
         </li>
@@ -74,8 +102,8 @@
         <li>
             <div class="picks-cards-photo"></div>
             <div class="picks-cards-credit">
-                <div class="h3" style="font-family:hanna;">Q. </div>
-                <div class="credit-title" style="font-family:hanna;">일이삼사오육칠팔구십일이삼사오 만들고싶어요</div>
+                <div class="h3">Q. </div>
+                <div class="credit-title">일이삼사오육칠팔구십일이삼사오 만들고싶어요</div>
                 <div class="cards-date" style="text-align:center;">3개의 클래스가 만들어졌어요
                     <!--<h4 style="display:inline;"> <i class="fa fa-clock-o"></i> 화/수/목</h4>-->
                 </div>

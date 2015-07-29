@@ -5,12 +5,13 @@
   -o-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
-  font-family: '³ª´®°íµñ', NanumGothic,'ÇÑ³ª', Hanna, 'µ¸¿ò', Dotum, '±¼¸²', Gulim, Helvetica, sans-serif;
+  font-family: '³ª´®°íµñ', NanumGothic,'ÇÑ³ª', Hanna, 'µ¸¿ò', Dotum, '³ª´®¸íÁ¶', NanumMyeongjo, '±¼¸²', Gulim, Helvetica, sans-serif;
 }
 
 body {
   text-align: center;
-  overflow-x:hidden !important;
+  //overflow-x:hidden !important;
+  background-color: #e0e0e0 !important;
 }
 
 //global btn
@@ -18,6 +19,7 @@ $g-btn-color:#e86460;
 $g-btn-h-color:#e86460;
 
 .tmk-main-body{
+  //background-color:transparent;
   margin-top:500px;
   text-align: center;
   display: inline-block;
@@ -38,8 +40,9 @@ ul{
 .tmk-main-banner {
   min-width:1250px;
   width: 100%;
-  height: 470px;
+  height: 500px;
   position: absolute;
+  top:0;
   overflow: hidden;
   //overflow-x:hidden !important;
 
@@ -123,18 +126,19 @@ ul{
   text-align:center;
 
   .tmk-picks-title {
-    width:100%;
+    width:90%;
     //float:left;
-    background: rgba(255, 255, 255, 0.7);
-    margin-top:200px;
+    background: rgba(255, 255, 255, 0.9);
+    margin: 200px 5%;
     position:inherit;
-    padding: 10px 0px 10px 0px;
-    font-size: 20px;
-    font-weight: 700;
+    padding: 20px 0px 20px 0px;
+    font-size: 24px;
+    font-weight: bolder;
     letter-spacing: 1px;
+    //font-family: '³ª´®¸íÁ¶', NanumMyeongjo, Serif;
   }
   .tmk-picks-subtitle {
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 400;
   }
 }
@@ -179,7 +183,6 @@ ul{
     left: 50%;
     width: 230px;
     font-size: 18px;
-    background-color: #fff;
     font-weight: bold;
   }
 }
@@ -202,7 +205,7 @@ ul{
     background-position: 0px -200px;
   }
   .footer-banner-ul {
-    margin-top: 40px;
+    margin-top: -120px;
     text-align:center;
     li {
       margin: 15px;
@@ -314,6 +317,12 @@ ul{
     position: absolute;
     border-radius: 50%;
   }
+  .profile-name {
+    height:34px;
+    margin-left: 38px;
+    padding:15px;
+    text-align:left;
+  }
 }
 
 .picks-cards-credit {
@@ -332,15 +341,13 @@ ul{
   }
 
   .h3 {
-    height:58%;
-    width:15%;
-    float:left;
     margin: 0px auto 5px !important;
+    color:#e0e0e0;
   }
   .credit-title {
-    height: 58%;
-    width:80%;
-    font-size:20px;
+    height: 150px;
+    //width:80%;
+    font-size:16px;
     padding: 5 auto auto 0px;
   }
   .cards-date {
@@ -360,7 +367,7 @@ ul{
     width:100%;
     text-align:center;
     position: absolute;
-    background: rgba(255, 255, 255, 0.5);
+    background: #e0e0e0;
     height: 40px;
     //margin: auto -10px;
     padding:12px 0 0;
@@ -372,9 +379,9 @@ ul{
     border-radius: 0px 0px 10px 10px;
     font-size:12px;
     //border: 1px solid #eee;
-    &:hover {
-      background-color: #e0e0e0;
-    }
+    //&:hover {
+    //  background-color: #e0e0e0;
+    //}
   }
 }
 
@@ -394,6 +401,7 @@ nav {
   //box-shadow: 0.5px 0.5px #4f4f4f;
   padding: 10px;
   height: 70px;
+  z-index:997;
   margin-bottom: 0px !important;
   .navbar-brand {
     padding: 7px;
@@ -402,6 +410,9 @@ nav {
     height: 70px;
   }
 }
+
+
+
 
 #navbar {height:70px}
 .collapse {
@@ -520,7 +531,7 @@ nav {
   position: fixed;
   bottom: 0px;
   right: 20px;
-  z-index: 1000;
+  z-index: 998;
   font-size: 30px;
   color: orangered;
   animation: ani 1s linear 1 normal;
@@ -530,3 +541,9 @@ nav {
     color: gold;
   }
 }
+
+
+/* Modal / pop-ups */
+
+.modal-backdrop {z-index:999 !important;}
+.modal {z-index:1041 !important;}

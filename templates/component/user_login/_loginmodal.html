@@ -1,7 +1,7 @@
 
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-default btn-md" id="cont-btn" data-toggle="modal" data-target="#contactModal">
-  <img class="icon" src='{%static "media/icon/contacts3.png" %}'> 강좌 신청하기
+  <i class="fa fa-sign-in"></i> 로그인
 </button>
 <!-- Modal -->
 <div class="modal fade" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="contactModalLabel" aria-hidden="true">
@@ -13,7 +13,7 @@
       </div>
       <div class="modal-body">
 
-        {% include 'userapp/layout/loginform.html' %}
+        {% include 'component/user_login/_loginform.html' %}
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

@@ -1,19 +1,8 @@
 {%load static from staticfiles%}
 
 <style>
-  .pop {width:100%;}
-  #login {border:none; margin-bottom:20px; margin-top:0px; text-align:left;}
-  #register {border:none; margin-bottom:20px; margin-top:0px; text-align:left; }
-  .madal-footer .nav-tabs {width: 85%;margin:auto;}
-  .modal-footer {text-align:center;padding-bottom:0;}
-  .modal-body{padding-top:0px;}
-  .modal-footer .nav-tabs {border:none;width:70%;}
-  .modal-footer .nav-tabs li a, .modal-footer .nav-tabs li a:hover {border:0px; background-color:transparent;display:inline;padding:0px;}
-  .modal-footer .nav-tabs > li.active {display:none;}
-  .modal-footer .nav-tabs > li.active > a {display:none;}
-/*  .nav-tabs li, .nav-tabs li:hover {border:1px solid white;}*/
-  .change_link {display:inline;}
-  .form-signin-heading {font-family:hanna;}
+    .pop {z-index:9999;}
+
 </style>
 
 
@@ -24,14 +13,13 @@
       <div id="register-modal">
 
         <form method="POST" action="{% url 'signup' %}" enctype="multipart/form-data" class="form-signin">
-            {{%comment%}/class/{{class_post.id}}{%endcomment%}
-            <input type="hidden" name="next" value="/class/{{class_post.id}}"/>
+                        <input type="hidden" name="next" value="/class/{{class_post.id}}"/>
           {% csrf_token%}
 
           <h2 class="form-signin-heading">토마킷 계정 만들기</h2>
-          <p class="text-muted">DIY 강좌 데이터베이스 토마킷은 <b>무료</b>입니다! 간편하게 등록하고 더 많은 강좌 정보를 얻으세요.</p>
+          <!--<p class="text-muted">DIY 강좌 데이터베이스 토마킷은 <b>무료</b>입니다! 간편하게 등록하고 더 많은 강좌 정보를 얻으세요.</p>-->
           
-          <label for="id_email" class="sr-only">이메일 주소</label>
+          <label for="id_email" class="sr-only">이메일</label>
           <input id="id_email" name="email" type="email"
                  class="form-control" placeholder="이메일" required autofocus/>
           <!--            <p class="ok">&nbsp;</p>-->
