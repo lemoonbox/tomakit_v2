@@ -18,6 +18,7 @@ from app_question.form import \
     CreateQSkill
 from app_comminfo.models import Category, State
 from app_question.models import QItem, QPic, QSkill
+from app_board.models import Questionbox
 
 
 from DIY_tool import template_match as TEMP
@@ -62,8 +63,18 @@ def create_q_item(request):
             for photo in photos:
                 _qpic = QPic(user=user,qitem=_qitempost,pic=photo)
                 _qpic.save()
-                _qpic.category.add(_category[0])
+                _qpic.category = _category
                 _qpic.save()
+
+            picpic=_qitempost.qpic_set.first().pic
+            _qbox = Questionbox(djgouser=user, title =_qitempost.title,
+                                mylocal=_qitempost.mylocal, qtype="I",
+                                qitempost = _qitempost,
+                                item_pic=picpic)
+            _qbox.save()
+            _qbox.category=_category
+            _qbox.state=_state
+            _qbox.save()
 
             return HttpResponseRedirect("/v2/question/item/{0}".format(_qitempost.id))
 
@@ -110,6 +121,14 @@ def create_q_skill(request):
             _qskillpost.state = _state
             _qskillpost.save()
 
+            _qbox = Questionbox(djgouser=user, title =_qskillpost.title,
+                                mylocal=_qskillpost.mylocal, qtype="S",
+                                qskillpost = _qskillpost,skill_class=_qskillpost.wantclass,
+                                skill_goal=_qskillpost.wantgoal, skill_edu=_qskillpost.wantedu)
+            _qbox.save()
+            _qbox.category=_category
+            _qbox.state=_state
+            _qbox.save()
             return HttpResponseRedirect("/v2/question/skill/{0}".format(_qskillpost.id))
 
 

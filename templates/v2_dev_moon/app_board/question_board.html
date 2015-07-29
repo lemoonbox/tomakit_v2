@@ -1,0 +1,55 @@
+{% load static from staticfiles%}
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+{%for que in questions %}
+    {% if que.qtype == "I" %}
+        프로필 사진: <img src="{{MEDIA_URL}}{{que.djgouser.userprofile_set.first.propic}}"><br>
+        이름 : {{que.djgouser.last_name}}{{que.djgouser.first_name}}<br>
+        질문사진 : <img src="{{MEDIA_URL}}{{que.item_pic}}"><br>
+        카테고리 : {{que.category.first.category}}<br>
+        제목 : {{que.title}}<br>
+        희망 수업일 :{{que.weekday}}<br>
+        지역 : {{que.state.first.state}}/{{que.mylocal}}<br>
+====================================================================================
+    <br><br>
+    {% elif que.qtype == "S" %}
+        프로필 사진: <img src="{{MEDIA_URL}}{{que.djgouser.userprofile_set.first.propic}}"><br>
+        이름 : {{que.djgouser.last_name}}{{que.djgouser.first_name}}<br>
+        카테고리 : {{que.category.first.category}}<br>
+        제목 : {{que.title}}<br>
+        원하는 클래스 :{{que.skill_class}}<br>
+        배우는 목표 :{{que.skill_goal}}<br>
+        배우고 싶은 내용 :{{que.skill_edu}}<br>
+        희망 수업일 :{{que.weekday}}<br>
+        지역 : {{que.state.first.state}}/{{que.mylocal}}<br>
+        <br>
+====================================================================================
+    <br><br>
+    {% endif %}
+{% endfor %}
+
+----------------paging------------------------------<br>
+{% for arrow in arrows %}
+    {% if arrow.nav_before %}
+        <a href="http://{{HTTP_HOST}}/v2/board/question/{{arrow.befor_page}}"><|</a>
+    {% endif %}
+{% endfor %}
+{% for page in pages %}
+    {% if page.page_current %}
+        <b>{{page.page}}</b>|
+    {% else %}
+        <a href="http://{{HTTP_HOST}}/v2/board/question/{{page.page}}">{{page.page}}</a>|
+    {% endif %}
+{% endfor %}
+{% for arrow in arrows %}
+    {% if arrow.nav_next %}
+        <a href="http://{{HTTP_HOST}}/v2/board/question/{{arrow.next_page}}">|></a>
+    {% endif %}
+{% endfor %}
+</body>
+</html>

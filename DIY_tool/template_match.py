@@ -25,3 +25,7 @@ V2_CREATE_QITEM = 'v2_dev_moon/app_question/qitem_create.html'
 V2_DETAIL_QITEM = 'v2_dev_moon/app_question/qitem_detail.html'
 V2_CREATE_QSKILL = 'v2_dev_moon/app_question/qskill_create.html'
 V2_DETAIL_QSKILL = 'v2_dev_moon/app_question/qskill_detail.html'
+
+#board
+V2_BOARD_QUESTION = 'v2_dev_moon/app_board/question_board.html'
+V2_BOARD_CASE = 'v2_dev_moon/app_board/case_board.html'
