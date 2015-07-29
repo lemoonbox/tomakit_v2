@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>{{qitem_post.title}}</title>
+</head>
+<body>
+
+{{qitem_post.title}}를 만들고 싶어요.<br><br>
+
+{% for photo in qitem_post.qpic_set.all %}
+<img src="{{MEDIA_URL}}{{photo.pic}}">
+{% endfor %}<br>
+
+
+------만들기 문의---------<br>
+카테고리 : {{qitem_post.category.first.category}}<br>
+이름 : {{qitem_post.djgouser.last_name}}{{qitem_post.djgouser.first_name}}<br>
+자기 소개 : <br>
+
+
+
+------수업 정보 --------<br>
+무엇을 배우고 싶으신가요?<br>
+{{qitem_post.wantedu}}<br><br>
+수업인원은 몇명인가요?<br>
+{{qitem_post.memnum}}명입니다 <br><br>
+수업 희망 지역<br>
+{{qitem_post.mylocal}}
+</body>
+</html>

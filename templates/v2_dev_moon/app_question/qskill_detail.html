@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>{{qskill_post.title}}</title>
+</head>
+<body>
+
+{{qskill_post.title}}를 만들고 싶어요.<br><br>
+
+
+
+------만들기 문의---------<br>
+카테고리 : {{qskill_post.category.first.category}}<br>
+이름 : {{qskill_post.djgouser.last_name}}{{qskill_post.djgouser.first_name}}<br>
+자기 소개 : <br>
+
+
+
+------수업 정보 --------<br>
+어떤 수업을 찾고 계세요?<br>
+{{qskill_post.wantclass}}<br><br>
+
+어떤 수업을 찾고 계세요?<br>
+{{qskill_post.wantgoal}}<br><br>
+
+무엇을 배우고 싶으신가요?<br>
+{{qskill_post.wantedu}}<br><br>
+수업인원은 몇명인가요?<br>
+{{qskill_post.memnum}}명입니다 <br><br>
+수업 희망 지역<br>
+{{qskill_post.mylocal}}
+</body>
+</html>

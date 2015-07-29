@@ -10,7 +10,9 @@ from app_post import urls as post_urls
 from app_idealine import urls as idealine_urls
 from app_class import urls as class_urls
 
+
 from app_user import urls as v2_user_urls
+from app_question import urls as v2_question_urls
 
 handler404='app_post.views.handler404'
 handler500='app_post.views.handler500'
@@ -24,6 +26,7 @@ urlpatterns = patterns('',
     url(r'^idealine/', include(idealine_urls)),
 
     url(r'^v2/user/', include(v2_user_urls)),
+    url(r'^v2/question/', include(v2_question_urls)),
     url(r'', include('social.apps.django_app.urls', namespace='social')),
 
 
