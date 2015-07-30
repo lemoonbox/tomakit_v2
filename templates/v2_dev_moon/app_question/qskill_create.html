@@ -1,11 +1,7 @@
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
+{%extends 'base.html'%}
     <title></title>
-</head>
-<body>
 
+{%block content%}
     <form method="POSt" action="{{request.path}}" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="title">
@@ -55,5 +51,5 @@
           {% endfor %}
         </div>
     </form>
-</body>
-</html>
+
+{%endblock%}

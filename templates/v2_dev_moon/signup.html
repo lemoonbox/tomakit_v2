@@ -2,6 +2,7 @@
 {% load static from staticfiles%}
 
 {%block content%}
+<div class="tmk-sub-body">
     <div class="container">
         <div id="register" class="well">
           <form method="POST" action="{% url 'v2_signup' %}" enctype="multipart/form-data" class="form-signin">
@@ -54,7 +55,7 @@
 
     </div> <!-- /container -->
 
-
+</div>
 <!--    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>-->
     <!--<script type="text/javascript" src="{% static 'media/js/userform-validation.js' %}"></script>-->
 {% endblock %}

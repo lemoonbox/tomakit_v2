@@ -1,22 +1,4 @@
 {%load static from staticfiles%}
-
-<!--<style>-->
-    <!--#login {border:none; margin-bottom:20px; margin-top:0px; text-align:left;}-->
-    <!--#register {border:none; margin-bottom:20px; margin-top:0px; text-align:left; }-->
-    <!--.madal-footer .nav-tabs {width: 85%;margin:auto;}-->
-    <!--.modal-footer {text-align:center;padding-bottom:0;}-->
-    <!--.modal-body{padding-top:0px;}-->
-    <!--.modal-footer .nav-tabs {border:none;width:70%;}-->
-    <!--.modal-footer .nav-tabs li a, .modal-footer .nav-tabs li a:hover {border:0px; background-color:transparent;display:inline;padding:0px;}-->
-    <!--.modal-footer .nav-tabs > li.active {display:none;}-->
-    <!--.modal-footer .nav-tabs > li.active > a {display:none;}-->
-    <!--/*  .nav-tabs li, .nav-tabs li:hover {border:1px solid white;}*/-->
-    <!--.change_link {display:inline;}-->
-    <!--.form-signin-heading {font-family:hanna;}-->
-<!--</style>-->
-
-
-
 <div class="tab-content">
   <div role="tabpanel" class="tab-pane active" id="signup">
     <div class="pop">
@@ -26,7 +8,7 @@
               <input type="hidden" name="next" value="{{next}}"/>
               {% csrf_token%}
 
-              <h2 class="form-signin-heading">{%block title%}회원가입{%endblock%}</h2>
+              <h2 class="form-signin-heading">회원가입</h2>
               <div class="about">
                   <p class="text-muted"><span class="glyphicon glyphicon-send"></span>
                       모두를 위한 DIY 놀이터 <b>토마킷</b>에서는 다양한 공예 분야의 <b> 전문 공방/작업실</b>, <b>예술인</b>, <b>공예가</b>들의 <b>강좌 정보</b>를 한 눈에 모아서 볼 수 있는 서비스를 제공하고 있습니다. 토마킷 가입은 완전히 <b>무료</b>입니다! 간편하게 가입하고 오늘 신청 가능한 강좌 정보를 찾아보세요.</p>
@@ -50,7 +32,7 @@
                      class="form-control" required placeholder="비밀번호 확인"/>
 
               <p class="change_link">이미 회원이신가요?
-                  <a href="/v2/user/login/?next=/v2/user/signup/" class="to_register">로그인하기</a>
+                  <a href="/v2/user/login/?next=/v2/user/login" class="to_register">로그인하기</a>
               </p>
               {% if accountform.errors %}
               <div id="form-error">
@@ -119,7 +101,7 @@
                     아직 회원이 아니신가요?
                     <a href="{% url 'v2_signup' %}?next=/user/login/" class="to_register">함께해요!</a>
                 </p>
-                <button class="btn btn-lg btn-primary btn-block" type="submit">Log In</button>
+                <button class="btn btn-primary btn-block" type="submit">Log In</button>
             </div>
         </form>
 
