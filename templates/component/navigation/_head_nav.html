@@ -40,9 +40,10 @@
                     </li>
                     {% else %}
                     <!-- <li><a class="hi" href="#">hello world!</a></li> -->
+
+                    <li><button class="btn btn-primary"><i class="fa fa-user-plus"></i> 작가신청</button></li>
                     <li>{% include 'component/user_login/_loginmodal.html'%}</li>
-                    <li><a href="{% url 'signup' %}?next={{request.path}}"><i class="fa fa-user-plus"></i> 작가신청</a></li>
-                    <li><a href="{% url 'login_url' %}?next={{request.path}}">로그인/가입</a></li>
+                    <!--<li><a href="{% url 'login_url' %}?next={{request.path}}">로그인/가입</a></li>-->
                     <!--            <span class="sr-only">(current)</span>-->
                 {% endif %}
                     <!--<li><a href="#">수업개설</a></li>-->
