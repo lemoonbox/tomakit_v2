@@ -29,12 +29,13 @@ class Questionbox(models.Model):
     skill_class = models.TextField(null=True, blank=True)
     skill_goal = models.TextField(null=True, blank=True)
     skill_edu = models.TextField(null=True, blank=True)
-    item_pic = models.ImageField(QPic)
+    item_pic = models.ImageField(QPic, blank=True)
 
     updated_at = models.DateTimeField(auto_now_add=True, auto_now=True)
     created_at = models.DateTimeField(auto_now_add=True, auto_now=False)
 
     is_active = models.BooleanField(default=True)
+    is_solved = models.BooleanField(default=False)
 
     def __unicode__(self):
         return "%s::%s::%s" %(self.qtype, self.title, self.id)
@@ -49,8 +50,9 @@ class SolutionBox(models.Model):
     title = models.CharField(max_length=150, null=False)
     qtype = models.CharField(max_length=1,
                              choices=Q_TYPE_CHOICES,)
-    qitempost = models.OneToOneField(QItem, null=True, blank=True)
-    qskillpost = models.OneToOneField(QSkill, null=True, blank=True)
+    qoubox = models.ForeignKey(Questionbox, null=True)
+    qitempost = models.ForeignKey(QItem, null=True, blank=True, related_name='solustionbox')
+    qskillpost = models.ForeignKey(QSkill, null=True, blank=True, related_name='solustionbox')
     state = models.ManyToManyField(State)
     mylocal = models.CharField(max_length=150, null=False)
     repeat = models.IntegerField(default=1, null=True, blank=True)
@@ -67,7 +69,7 @@ class SolutionBox(models.Model):
         return "%s::%s::%s" %(self.qtype, self.title, self.id)
 
 
-#not yet
+
 class Casebox(models.Model):
     Q_TYPE_CHOICES =(
         ("S", 'Skill'),
@@ -77,8 +79,8 @@ class Casebox(models.Model):
                              choices=Q_TYPE_CHOICES,)
     category = models.ManyToManyField(Category)
     state = models.ManyToManyField(State)
-    quebox= models.OneToOneField(Questionbox, null=False)
-    solubox = models.OneToOneField(SolutionBox, null=False)
+    quebox= models.ForeignKey(Questionbox, null=False, related_name='Casebox')
+    solubox = models.ForeignKey(SolutionBox, null=False, related_name='Casebox')
 
     updated_at = models.DateTimeField(auto_now_add=True, auto_now=True)
     created_at = models.DateTimeField(auto_now_add=True, auto_now=False)

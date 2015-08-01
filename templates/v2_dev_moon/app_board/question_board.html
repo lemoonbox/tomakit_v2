@@ -6,6 +6,27 @@
     <title></title>
 </head>
 <body>
+category선택 :::
+{% for cate in categoryies %}
+    {% if cate.category_current %}
+        <a class="active" href="http://{{HTTP_HOST}}/v2/board/questionboard/1/{{cate.category}}/{{cate.state}}">{{cate.category}}</a>//
+    {% else %}
+        <a href="http://{{HTTP_HOST}}/v2/board/questionboard/1/{{cate.category}}/{{cate.state}}">{{cate.category}}</a>//
+    {% endif %}
+{% endfor %}<br><br><br>ddddd
+
+지역 선택 :::
+{% for state in states %}
+    {% if state.state_current %}
+            <a class="active" href="http://{{HTTP_HOST}}/v2/board/questionboard/1/{{state.category}}/{{state.state}}">{{state.state}}</a>//
+    {% else %}
+            <a href="http://{{HTTP_HOST}}/v2/board/questionboard/1/{{state.category}}/{{state.state}}">{{state.state}}</a>//
+    {% endif %}
+
+{% endfor%}<br><br>
+
+
+===================================================================================
 {%for que in questions %}
     {% if que.qtype == "I" %}
         프로필 사진: <img src="{{MEDIA_URL}}{{que.djgouser.userprofile_set.first.propic}}"><br>
@@ -36,19 +57,19 @@
 ----------------paging------------------------------<br>
 {% for arrow in arrows %}
     {% if arrow.nav_before %}
-        <a href="http://{{HTTP_HOST}}/v2/board/question/{{arrow.befor_page}}"><|</a>
+        <a href="http://{{HTTP_HOST}}/v2/board/questionboard/{{arrow.befor_page}}/{{cate_current}}/{{state_current}}"><|</a>
     {% endif %}
 {% endfor %}
 {% for page in pages %}
     {% if page.page_current %}
         <b>{{page.page}}</b>|
     {% else %}
-        <a href="http://{{HTTP_HOST}}/v2/board/question/{{page.page}}">{{page.page}}</a>|
+        <a href="http://{{HTTP_HOST}}/v2/board/questionboard/{{page.page}}/{{cate_current}}/{{state_current}}">{{page.page}}</a>|
     {% endif %}
 {% endfor %}
 {% for arrow in arrows %}
     {% if arrow.nav_next %}
-        <a href="http://{{HTTP_HOST}}/v2/board/question/{{arrow.next_page}}">|></a>
+        <a href="http://{{HTTP_HOST}}/v2/board/questionboard/{{arrow.next_page}}/{{cate_current}}/{{state_current}}">|></a>
     {% endif %}
 {% endfor %}
 </body>

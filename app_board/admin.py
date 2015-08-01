@@ -3,6 +3,34 @@ from app_board.models import Questionbox, SolutionBox, Casebox
 # Register your models here.
 
 
+##inline classes#####
+class CaseBoxInline(admin.TabularInline):
+
+    fieldsets =(('casebox',
+                 {'fields':('qtype', 'category', 'state',
+                            'quebox', 'solubox',)}
+                ),)
+    model = Casebox
+
+    def get_max_num(self, request, obj=None, **kwargs):
+        max_num =1
+
+        return max_num
+    extra = 0
+
+class QueBoxInline(admin.StackedInline):
+
+    fieldsets =(('solubox_is_solved',
+                 {'fields':('is_solved',)}
+                ),)
+    model = Questionbox
+
+    def get_max_num(self, request, obj=None, **kwargs):
+        max_num =1
+
+        return max_num
+    extra = 0
+
 class QusetionBoxAdmin(admin.ModelAdmin):
     list_filter = ['title', 'djgouser', 'mylocal',]
 
@@ -24,6 +52,8 @@ class SolutionBoxAdmin(admin.ModelAdmin):
                                       'qitempost','qskillpost',
                                       'state','mylocal', 'repeat',
                                       'perhour', 'weekday_time', 'price']}),]
+    inlines = (CaseBoxInline,)
+
 admin.site.register(SolutionBox, SolutionBoxAdmin)
 
 

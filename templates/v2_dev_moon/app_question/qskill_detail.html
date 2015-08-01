@@ -13,6 +13,8 @@
 ------만들기 문의---------<br>
 카테고리 : {{qskill_post.category.first.category}}<br>
 이름 : {{qskill_post.djgouser.last_name}}{{qskill_post.djgouser.first_name}}<br>
+프로필 사진 :<img src="{{MEDIA_URL}}{{qskill_post.djgouser.userprofile_set.first.propic}}"><br>
+
 자기 소개 : <br>
 
 
@@ -29,6 +31,17 @@
 수업인원은 몇명인가요?<br>
 {{qskill_post.memnum}}명입니다 <br><br>
 수업 희망 지역<br>
-{{qskill_post.mylocal}}
+{{qskill_post.mylocal}}<br>
+--------------------수업 개설 사례----------------<br>
+{% for solution in qskill_post.solustionbox.all %}
+        답변 타이틀 :{{solution.title}}<br>
+        프로필 사진 :<img src="{{MEDIA_URL}}{{solution.djgouser.userprofile_set.first.propic}}"><br>
+        이름 : {{solution.djgouser.last_name}}{{solution.djgouser.first_name}}<br>
+        클래스 정보 <br>
+        지역 {{solution.state.first.state}}/{{solution.mylocal}}<br>
+        수업횟수 {{solution.repeat}}회/총 {% widthratio solution.repeat 1 solution.perhour%}시간<br>
+        수업요일 {{solution.weekday_time}}<br>
+=================================<br>
+{% endfor %}
 </body>
 </html>

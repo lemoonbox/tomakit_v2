@@ -23,7 +23,7 @@ class QItem(models.Model):
     is_active = models.BooleanField(default=True)
 
     def __unicode__(self):
-        return "%s" %(self.title)
+        return "%s::%s" %(self.title, self.id)
 
 
 class QSkill(models.Model):
@@ -44,7 +44,7 @@ class QSkill(models.Model):
     is_active = models.BooleanField(default=True)
 
     def __unicode__(self):
-        return "%s" %(self.title)
+        return "%s::%s" %(self.title, self.id)
 
 
 

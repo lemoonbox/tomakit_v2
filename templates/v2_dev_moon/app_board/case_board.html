@@ -1,3 +1,4 @@
+{% load static from staticfiles%}
 <!DOCTYPE html>
 <html>
 <head lang="en">
@@ -5,6 +6,79 @@
     <title></title>
 </head>
 <body>
- 케이스 보드
+category선택 :::
+{% for cate in categoryies %}
+    {% if cate.category_current %}
+        <a class="active" href="http://{{HTTP_HOST}}/v2/board/questionboard/1/{{cate.category}}/{{cate.state}}">{{cate.category}}</a>//
+    {% else %}
+        <a href="http://{{HTTP_HOST}}/v2/board/questionboard/1/{{cate.category}}/{{cate.state}}">{{cate.category}}</a>//
+    {% endif %}
+{% endfor %}<br><br><br>ddddd
+
+지역 선택 :::
+{% for state in states %}
+    {% if state.state_current %}
+            <a class="active" href="http://{{HTTP_HOST}}/v2/board/questionboard/1/{{state.category}}/{{state.state}}">{{state.state}}</a>//
+    {% else %}
+            <a href="http://{{HTTP_HOST}}/v2/board/questionboard/1/{{state.category}}/{{state.state}}">{{state.state}}</a>//
+    {% endif %}
+
+{% endfor%}<br><br>
+
+===========================================================================
+{%for case in questions %}
+    {% if case.qtype == "I" %}
+        프로필 사진: <img src="{{MEDIA_URL}}{{case.quebox.djgouser.userprofile_set.first.propic}}"><br>
+        이름 : {{case.quebox.djgouser.last_name}}{{case.quebox.djgouser.first_name}}<br>
+        질문사진 : <img src="{{MEDIA_URL}}{{case.quebox.item_pic}}"><br>
+        카테고리 : {{case.quebox.category.first.category}}<br>
+        제목 : {{case.quebox.title}}<br>
+        희망 수업일 :{{case.quebox.weekday}}<br>
+        지역 : {{case.quebox.state.first.state}}/{{case.quebox.mylocal}}<br>
+
+====================================================================================
+    <br><br>
+    {% elif case.qtype == "S" %}
+        프로필 사진: <img src="{{MEDIA_URL}}{{case.quebox.djgouser.userprofile_set.first.propic}}"><br>
+        이름 : {{case.quebox.djgouser.last_name}}{{case.quebox.djgouser.first_name}}<br>
+        카테고리 : {{case.quebox.category.first.category}}<br>
+        제목 : {{case.quebox.title}}<br>
+        원하는 클래스 :{{case.quebox.skill_class}}<br>
+        배우는 목표 :{{case.quebox.skill_goal}}<br>
+        배우고 싶은 내용 :{{case.quebox.skill_edu}}<br>
+        희망 수업일 :{{case.quebox.weekday}}<br>
+        지역 : {{case.quebox.state.first.state}}/{{case.quebox.mylocal}}<br>
+        <br>
+====================================================================================
+    <br><br>
+    {% endif %}
+    >>>>>>>>>>>>>답변 사례>>>>>>>>>>>>>><br>
+        답변 타이틀 :{{case.solubox.title}}<br>
+        프로필 사진 :<img src="{{MEDIA_URL}}{{case.solubox.djgouser.userprofile_set.first.propic}}"><br>
+        이름 : {{case.solubox.djgouser.last_name}}{{case.solubox.djgouser.first_name}}<br>
+        클래스 정보 <br>
+        지역 {{case.solubox.state.first.state}}/{{case.solubox.mylocal}}<br>
+        수업횟수 {{case.solubox.repeat}}회/총 {% widthratio case.solubox.repeat 1 case.solubox.perhour%}시간<br>
+        수업요일 {{case.solubox.weekday_time}}<br>
+{% endfor %}
+
+----------------paging------------------------------<br>
+{% for arrow in arrows %}
+    {% if arrow.nav_before %}
+        <a href="http://{{HTTP_HOST}}/v2/board/question/{{arrow.befor_page}}/{{cate_current}}/{{state_current}}"><|</a>
+    {% endif %}
+{% endfor %}
+{% for page in pages %}
+    {% if page.page_current %}
+        <b>{{page.page}}</b>|
+    {% else %}
+        <a href="http://{{HTTP_HOST}}/v2/board/question/{{page.page}}/{{cate_current}}/{{state_current}}">{{page.page}}</a>|
+    {% endif %}
+{% endfor %}
+{% for arrow in arrows %}
+    {% if arrow.nav_next %}
+        <a href="http://{{HTTP_HOST}}/v2/board/question/{{arrow.next_page}}/{{cate_current}}/{{state_current}}}">|></a>
+    {% endif %}
+{% endfor %}
 </body>
 </html>
