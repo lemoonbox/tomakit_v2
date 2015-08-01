@@ -15,5 +15,5 @@ urlpatterns = patterns('app_user.views',
 
 
     url(r'login/$', 'login', name='v2_login'),
-    url(r'logout/$', 'logout', name='v2_login'),
+    url(r'logout/$', 'logout', name='v2_logout'),
 )
