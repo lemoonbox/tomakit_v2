@@ -249,11 +249,9 @@ def login(request, *args, **kwargs):
     next=""
 
     if request.method=="GET":
+        print "login"
         login_form = LoginForm()
         next=request.GET.get("next","/")
-
-        if request.user.is_authenticated:
-            return HttpResponseRedirect(next)
 
     elif request.method=="POST":
         print "login post"
