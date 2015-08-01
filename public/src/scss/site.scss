@@ -5,7 +5,7 @@
   -o-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
-  font-family: '³ª´®°íµñ', NanumGothic,'ÇÑ³ª', Hanna, AppleSDGothicNeo-Bold, 'µ¸¿ò', Dotum, '³ª´®¸íÁ¶', NanumMyeongjo, '±¼¸²', Gulim, Helvetica, sans-serif;
+  font-family: 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½', NanumGothic,'ï¿½Ñ³ï¿½', Hanna, AppleSDGothicNeo-Bold, 'ï¿½ï¿½ï¿½ï¿½', Dotum, 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½', NanumMyeongjo, 'ï¿½ï¿½ï¿½ï¿½', Gulim, Helvetica, sans-serif;
 }
 
 body {
@@ -226,7 +226,7 @@ ul{
     width: 100%;
     height: 470px;
     //background: url();
-    background-size: cosver;
+    background-size: cover;
     opacity: 0.3;
     z-index:-100;
     background-position: 0px -200px;
@@ -431,7 +431,7 @@ ul{
     height: 72px;
     //width:80%;
     font-size:16px;
-    padding: 5 auto auto 0px;
+    padding: 5px auto auto 0px;
     font-weight:bolder;
   }
   .cards-date {
@@ -447,7 +447,7 @@ ul{
     }
   }
   .success
-  /*ÃßÈÄ ´Ù¸¥ ÀÌ¸§À¸·Î º¯°æ */
+  /*ï¿½ï¿½ï¿½ï¿½ ï¿½Ù¸ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ */
   {
     background-color: #F5515F;
     color: #ffffff;
@@ -464,7 +464,7 @@ nav {
     }
     &:hover, &:focus {
     }
-    background-color: none;
+    background-color: initial;
   }
 }
 
@@ -524,7 +524,7 @@ nav {
 
 .dropdown-menu {
   position:relative;
-  min-width:!important;
+  min-width: !important;
 
   > li {
     padding: 2px;
