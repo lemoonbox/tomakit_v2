@@ -1,0 +1,240 @@
+{% extends 'base.html' %}
+{% load static from staticfiles%}
+
+    <title>{%block title%}수업 상세 업로드 Form{%endblock%}</title>
+
+{%block content%}
+  <section style="margin-top:150px;"></section>
+  <div id="wrap">
+
+    <div class="well">
+
+    <form method="POST" action="{{request.path}}" enctype="multipart/form-data">
+        {% csrf_token%}
+        <label>카테고리를 선택해 주세요</label>
+          <span class="error">
+            {% if classcreateform.category.errors %}
+            {{ classcreateform.category.errors|striptags }}<br/>
+            {% endif %}
+          </span>
+        <div class="form-category">
+            <label class="checkbox-inline">
+              <input id="id_category_0" name="category" type="checkbox" value="baby" /> for Baby</label>
+            <label class="checkbox-inline">
+              <input id="id_category_1" name="category" type="checkbox" value="home" /> for Home</label>
+            <label class="checkbox-inline">
+              <input id="id_category_2" name="category" type="checkbox" value="funny" /> for Funny</label>
+            <label class="checkbox-inline">
+              <input id="id_category_3" name="category" type="checkbox" value="art" /> for Art</label>
+            <label class="checkbox-inline">
+              <input id="id_category_4" name="category" type="checkbox" value="fashion" /> for Fashion</label>
+            <label class="checkbox-inline">
+              <input id="id_category_5" name="category" type="checkbox" value="tast" /> for Taste</label>
+            <label class="checkbox-inline">
+              <input id="id_category_6" name="category" type="checkbox" value="beauty" /> for Beauty</label>
+          </div><br>
+      <label>seo 제목 :</label>
+      <input class="form-control" id="id_seo_title" name ="seo_title">
+      <span class="error">
+        {% if classcreateform.seo_title.errors %}
+        <span>{{ classcreateform.seo_title.errors|striptags }}</span>
+        {% endif %}</span><br>
+        제목 :<input class="form-control" id="id_title" name ="title">
+      <span class="error">
+        {% if classcreateform.title.errors %}
+        <span style="">{{ classcreateform.title.errors|striptags }}</span>
+        {% endif %}</span><br>
+
+      가격:<input class="form-control" name ="price">
+            <span class="error">
+            {% if classcreateform.price.errors %}
+            {{ classcreateform.price.errors|striptags }}
+            {% endif %}</span>
+            <br>
+      가격태그:<input class="form-control" name ="price_tag">
+        <span class="error">
+            {% if pricetagform.price_tag.errors %}
+            {{ pricetagform.price_tag.errors|striptags }}
+            {% endif %}</span>
+            <br>
+      수업날짜:<input class="form-control" name ="day">
+        <span class="error">
+            {% if classcreateform.day.errors %}
+            {{ classcreateform.day.errors|striptags }}
+            {% endif %}</span>
+            <br>
+        수업시간:<input class="form-control" name ="time">
+        <span class="error">
+            {% if classcreateform.time.errors %}
+            {{ classcreateform.time.errors|striptags }}
+            {% endif %}</span>
+            <br>
+      수업인원:<input class="form-control" name ="mem_num">
+        <span class="error">
+            {% if classcreateform.mem_num.errors %}
+            {{ classcreateform.mem_num.errors|striptags }}
+            {% endif %}</span>
+            <br>
+
+      <label for="contact_tel">연락처 : </label>
+      <input class="form-control" name="contact_tel"><br>
+          <span class="error">
+            {% if classcreateform.contact_tel.errors %}
+            {{ classcreateform.contact_tel.errors|striptags }}
+            {% endif %}</span>
+          <br />
+
+
+          <label for="address">주소 : </label>
+      {%include "component/map/postcode.html"%}
+      <span class="error">
+      {% if classcreateform.address.errors %}
+      {{ classcreateform.address.errors|striptags }}
+      {% endif %}
+      </span><br>
+
+
+        <label for="video_url">동영상주소 : </label>
+      <input class="form-control" type="url" name="video_url"><br>
+          <span class="error">
+            {% if classcreateform.video_url.errors %}
+            {{ classcreateform.video_url.errors|striptags }}
+            {% endif %}</span>
+          <br />
+
+          <div class="form-photo">
+            <label>사진 :</label><span class="text-muted">(파일을 하나 이상 선택해주세요)</span>
+            <span class="error">
+              {% if classpicform.class_photo.errors %}
+              {{ classpicform.class_photo.errors|striptags }}
+              {% endif %}</span>
+
+
+<div class="form-group">
+            <label for="id_photo1" class="sr-only">사진 1 : </label>
+  <input id="id_photo1" name="class_photo" type="file">
+            사진설명:<input class="form-control" id="id_photo_tl1" name="photo_title">
+
+            <label for="id_photo2" class="sr-only">사진 2 : </label>
+  <input id="id_photo2" name ="class_photo" type="file">
+  사진설명:<input class="form-control" id="id_photo_tl2" name="photo_title">
+            <label for="id_photo3" class="sr-only">사진 3 : </label>
+  <input id="id_photo3" name ="class_photo" type="file">
+  사진설명:<input class="form-control" id="id_photo_tl3" name="photo_title">
+            <label for="id_photo4" class="sr-only">사진 4 : </label>
+  <input id="id_photo4" name ="class_photo" type="file">
+  사진설명:<input class="form-control" id="id_photo_tl4" name="photo_title">
+            <label for="id_photo5" class="sr-only">사진 5 : </label>
+  <input id="id_photo5" name ="class_photo" type="file">
+  사진설명:<input class="form-control" id="id_photo_tl5" name="photo_title">
+          </div>
+      </div>
+
+      <br>
+
+
+        <!-- 리뷰X3 <br> -->
+      <h5>수강생 리뷰</h5>
+
+        <label for="reviewer_name">수강생 이름 : </label>
+      <input class="form-control" name="reviewer_name">
+      <span class="error">
+        {% if reviewform.reviewer_name.errors %}
+        {{ reviewform.reviewer_name.errors|striptags }}
+        {% endif %}</span><br>
+        <label for="reviewer_photo">수강생 사진 : </label>
+      <input name="reviewer_photo" type="file">
+      <span class="error">
+        {% if reviewform.reviewer_photo.errors %}
+        {{ reviewform.reviewer_photo.errors|striptags }}
+        {% endif %}</span><br>
+      <label for="review"> 리뷰: </label>
+      <input class="form-control" name="review">
+
+      <span class="error">
+        {% if reviewform.review.errors %}
+        {{ reviewform.review.errors|striptags }}
+        {% endif %}</span><br>
+
+        <label for="reviewer_name">수강생 이름 : </label>
+      <input class="form-control" name="reviewer_name">
+        <label for="reviewer_photo">수강생 사진 : </label>
+      <input name="reviewer_photo" type="file">
+        <label for="review"> 리뷰: </label>
+      <input class="form-control" name="review"><br />
+
+        <label for="reviewer_name">수강생 이름 : </label>
+      <input class="form-control" name="reviewer_name">
+        <label for="reviewer_photo">수강생 사진 : </label>
+      <input name="reviewer_photo" type="file">
+        <label for="review"> 리뷰: </label>
+      <input class="form-control" name="review">
+          <br />
+
+
+      <!-- 플러스 버튼으로로 만들어 주세여<br>
+        커리큘럼X7 -->
+      <h5>커리큘럼</h5>
+      <span class="error">
+      {% if curriform.curri_name.errors %}
+      {{ curriform.curri_name.errors|striptags }}
+      {% endif %}</span><br>
+      <span class="error">
+        {% if curriform.curri_detail.errors %}
+        {{ curriform.curri_detail.errors|striptags }}
+        {% endif %}</span><br>
+ <div class="curri-group" name="curri-group">
+      <label for="reviewer_name">단계별 이름 : </label>
+      <input class="form-control" id="curri_name" name="curri_name">
+        <label for="review"> 상세내용: </label>
+      <input class="form-control" name="curri_detail">
+
+        <label for="reviewer_name">단계별 이름 : </label>
+      <input class="form-control" name="curri_name">
+        <label for="review"> 상세내용: </label>
+      <input class="form-control" name="curri_detail">
+
+        <label for="reviewer_name">단계별 이름 : </label>
+      <input class="form-control" name="curri_name">
+        <label for="review"> 상세내용: </label>
+      <input class="form-control" name="curri_detail">
+      </div><br>
+
+        <!-- 플러스 버튼으로 만들어 주셔요! -->
+
+      <h5>누구를 위한 수업인가요?</h5>
+        <label for="reviewer_name">타겟1 : </label>
+      <input class="form-control" name="need1">
+        <label for="review"> 상세내용: </label>
+      <input class="form-control" name="need1_detail"><br/>
+
+        <label for="reviewer_name">타겟2 : </label>
+          <input class="form-control" name="need2">
+        <label for="review"> 상세내용: </label>
+      <input class="form-control" name="need2_detail"><br/>
+
+        <span class="error">
+        {% if classform.need1.errors %}
+        {{ classform.need1.errors|striptags }}
+        {% endif %}</span><br>
+        <span class="error">
+        {% if classform.need1_detail.errors %}
+        {{ classform.need1_detail.errors|striptags }}
+        {% endif %}</span><br>
+        <span class="error">
+        {% if classform.need2.errors %}
+        {{ classform.need2.errors|striptags }}
+        {% endif %}</span><br>
+        <span class="error">
+        {% if classform.need2_detail.errors %}
+        {{ classform.need2_detail.errors|striptags }}
+        {% endif %}</span><br>
+        {{classdetail}}
+      <br>
+       <input type="submit" class="btn btn-default btn-primary" value="클래스 올리기">
+    </form>
+<!--  </div>-->
+    </div>
+  </div>
+  {%endblock%}
+</body>

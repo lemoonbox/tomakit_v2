@@ -1,38 +1,63 @@
-{%extends "base.html" %}{% load static from staticfiles%}
-{%block content%}
+{%extends "base.html" %}
+{% load static from staticfiles%}
+
 <title>{{profile.nick_name}}님의 프로필</title>
+<!--<style>-->
+  <!--.well {background-color: white; max-width:400px; margin:auto;margin-top:150px; padding:30px;}-->
+  <!--.well h2 {margin-bottom:10px; padding:10px; padding-right:0px;}-->
+  <!--.profile-inner ul {padding:10px; padding-right:0px;}-->
+  <!--.profile-inner ul li {list-style:none; max-width:100%; margin-left:0px;margin-right:10px; padding-left:0; padding:5px; border-bottom:1px solid silver;}-->
+  <!--.thumbnail {max-width:320px; border-radius:0;vertical-align:text-bottom;}-->
+<!--</style>-->
+{%block content%}
 <style>
-  .well {background-color: white; max-width:400px; margin:auto;margin-top:150px; padding:30px;}
-  .well h2 {margin-bottom:10px; padding:10px; padding-right:0px;}
-  .profile-inner ul {padding:10px; padding-right:0px;}
-  .profile-inner ul li {list-style:none; max-width:100%; margin-left:0px;margin-right:10px; padding-left:0; padding:5px; border-bottom:1px solid silver;}
-  .thumbnail {max-width:320px; border-radius:0;vertical-align:text-bottom;}
+    .tmk-profile-banner{text-align:left;background: #F5515F;color:#ffffff; width:1000px;height:280px;margin:auto;display:inline-block;}
+    .profile-photo{margin: 40px 40px; width:130px;height:130px;border-radius:50%;background-size:cover;overflow:hidden;background-image:url(https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRyFsODskAwD5TCmTB-8NdzejNWAeii-0U-kyciW5k1h9aa0enOCV2CjGo4);}
+
 </style>
 
+  <!--<div id="wrap">-->
+    <div class="tmk-sub-body">
+        <!--<div class="container">-->
+      <div class="tmk-profile-banner">
 
-  <div id="wrap">
-    <div class="container">
-      <div class="well">
-        <div class="profile-inner pull left">
-          <h2>{{profile.nick_name}}님의 프로필</h2>
+          <div class="profile-photo col-md-offset-1 col-md-4">
+              <img src="{%static '{{MEDIA_URL}}{{profile.pro_photo}}'%}" class="img-responsive"/>
+          </div>
+          <div class="user-profile-name">
+              <div class="col-md-6 h1">{{profile.nick_name}}</div>
+          <div class="col-md-6">안녕하세요, {{profile.nick_name}}입니다.</div>
+</div>
+      </div>
+
+        <div class="profile-inner">
           <a href="/user/reset_password" class="fg-pwd">비밀번호 찾기</a>
           <ul>
 
 
-            <li><div class="thumbnail">
-              <img src="{%static '{{MEDIA_URL}}{{profile.pro_photo}}'%}" class="img-responsive"/>
-              </div></li>
+            <!--<li><div class="thumbnail">-->
+              <!--->
+              <!--</div></li>-->
 
-            <li>이메일 <span class="pull-right">{{profile.email}} </span></li>
-            <li>별명 <span class="pull-right">{{profile.nick_name}}</span></li>
-            <li>전화번호 <span class="pull-right">{{profile.mobile}}</span></li>
-            <li>주소 <span class="pull-right">{{profile.address}}</span></li>
+            <li>이메일 <span>{{profile.email}} </span></li>
+            <li>별명 <span >{{profile.nick_name}}</span></li>
+            <li>전화번호 <span>{{profile.mobile}}</span></li>
+            <li>주소 <span>{{profile.address}}</span></li>
           </ul>
 
         </div>
       </div>
-    </div>
-    <div id="push"></div>
-  </div> <!-- /#wrap -->
 
+<div class="picks-cards row">
+<ul>
+    <li></li>
+    <li></li>
+<li>    </li>
+</ul>
+    <div></div>
+    <div></div>
+    <div></div>
+</div>
+
+    <!--</div>-->
 {%endblock%}

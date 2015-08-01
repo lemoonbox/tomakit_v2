@@ -1,11 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title>{{qskill_post.title}}</title>
-</head>
-<body>
+{%extends 'base.html'%}
 
+    <title>{{qskill_post.title}}</title>
+<body>
+{%block content %}
 {{qskill_post.title}}를 만들고 싶어요.<br><br>
 
 
@@ -43,5 +40,7 @@
         수업요일 {{solution.weekday_time}}<br>
 =================================<br>
 {% endfor %}
+
+
+{%endblock%}
 </body>
-</html>

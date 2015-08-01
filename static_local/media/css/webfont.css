@@ -41,3 +41,5 @@
     url(//fonts.gstatic.com/ea/nanumgothic/v5/NanumGothic-ExtraBold.woff) format('woff'),
     url(//fonts.gstatic.com/ea/nanumgothic/v5/NanumGothic-ExtraBold.ttf) format('truetype');
 }
+
+@import url(http://fonts.googleapis.com/earlyaccess/nanummyeongjo.css);

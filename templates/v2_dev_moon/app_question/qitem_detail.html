@@ -1,11 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
+{%extends 'base.html'%}
     <title>{{qitem_post.title}}</title>
-</head>
-<body>
 
+<body>
+{%block content%}
 {{qitem_post.title}}를 만들고 싶어요.<br><br>
 
 {% for photo in qitem_post.qpic_set.all %}
@@ -28,6 +25,7 @@
 {{qitem_post.memnum}}명입니다 <br><br>
 수업 희망 지역<br>
 {{qitem_post.mylocal}}<br>
+
 ------개설 수업-------------<br>
 {% for solution in qitem_post.solustionbox.all %}
         답변 타이틀 :{{solution.title}}<br>
@@ -39,5 +37,6 @@
         수업요일 {{solution.weekday_time}}<br>
 =================================<br>
 {% endfor %}
+=======
+{%endblock%}
 </body>
-</html>
