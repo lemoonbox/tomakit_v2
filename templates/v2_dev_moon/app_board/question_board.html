@@ -1,11 +1,9 @@
+{%extends 'base.html'%}
 {% load static from staticfiles%}
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
     <title></title>
-</head>
+
 <body>
+{%block content%}
 category선택 :::
 {% for cate in categoryies %}
     {% if cate.category_current %}
@@ -72,5 +70,5 @@ category선택 :::
         <a href="http://{{HTTP_HOST}}/v2/board/questionboard/{{arrow.next_page}}/{{cate_current}}/{{state_current}}">|></a>
     {% endif %}
 {% endfor %}
+{%endblock%}
 </body>
-</html>

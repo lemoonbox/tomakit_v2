@@ -31,9 +31,9 @@
               <input id="id_password_confirm" name="password_confirm" type="password"
                      class="form-control" required placeholder="비밀번호 확인"/>
 
-              <p class="change_link">이미 회원이신가요?
-                  <a href="/v2/user/login/?next=/v2/user/login" class="to_register">로그인하기</a>
-              </p>
+              <!--<p class="change_link">이미 회원이신가요?-->
+                  <!--<a href="/v2/user/login/?next=/" class="to_register">로그인하기</a>-->
+              <!--</p>-->
               {% if accountform.errors %}
               <div id="form-error">
                   <div class="alert alert-warning">
@@ -97,10 +97,10 @@
             -->
 
             <div class="signin-btn-p">
-                <p class="change_link">
-                    아직 회원이 아니신가요?
-                    <a href="{% url 'v2_signup' %}?next=/user/login/" class="to_register">함께해요!</a>
-                </p>
+                <!--<p class="change_link">-->
+                    <!--아직 회원이 아니신가요?-->
+                    <!--<a href="{% url 'v2_signup' %}?next=/" class="to_register">함께해요!</a>-->
+                <!--</p>-->
                 <button class="btn btn-primary btn-block" type="submit">Log In</button>
             </div>
         </form>
