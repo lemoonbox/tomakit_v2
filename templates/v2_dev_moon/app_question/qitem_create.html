@@ -1,80 +1,243 @@
 {%extends 'base.html'%}
     <title></title>
-
 <body>
 {%block content%}
-<div class="tmk-sub-body">
-<div class="well">
-    <form class="" method="POSt" action="{{request.path}}" enctype="multipart/form-data">
-        {% csrf_token %}
-        <div class="title">
+<style>
+    .tmk-qitem-wrapper{
+        max-width: 900px;
+    }
+    .tmk-qitem-header{
+        padding: 40px 10px;
+        border-bottom: 1px solid rgba(0,0,0,0.22);
+    }
+    .tmk-qitem-header > span{
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .tmk-qitem-hdr-contents{
+        margin: 30px 0px;
+    }
+    .tmk-qitem-hdr-contents  span.tmk-ctns-text{
+        font-size: 20px;
+    }
+    .tmk-qitem-hdr-contents > div{
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    .tmk-qitem-selecter-wrapper{
+        display: inline-block;
+        vertical-align: middle;
+        min-width: 200px;
+    }
+
+    .tmk-panel{
+        display: inline-block;
+        padding: 20px;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        width: 60%;
+    }
+
+    .selecter .selecter-selected{
+        color: #000;
+    }
+
+    .filedrag {
+        border: 2px dashed #AAA;
+        border-radius: 7px;
+        cursor: default;
+        padding: 15px;
+        margin-bottom: 20px;
+    }
+
+    .filedrag .drag-label {
+        font-weight: bold;
+        text-align: center;
+        display: block;
+        color: #AAA;
+        margin-top: 10px;
+        margin-bottom: -10px;
+    }
+
+    .filedrag.hover {
+        border-color: #F00;
+        border-style: solid;
+        box-shadow: inset 0 3px 4px #888;
+    }
+
+    .filedrag.hover .drag-label {
+        color: #F00;
+    }
+
+    .custom-file-input-wrapper {
+        position: relative;
+    }
+
+    .custom-file-input-wrapper .custom-file-input-button {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .custom-file-input-wrapper .custom-file-input-button * {
+        cursor: pointer;
+    }
+
+    .custom-file-input-wrapper .custom-file-input-button input[type="file"] {
+        position: absolute;
+        right: 0;
+        top: 0;
+        cursor: pointer;
+        opacity: 0;
+    }
 
 
-            <!-- Large button group -->
-            <select name="category" class="btn btn-default btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <ul class="dropdown-menu">
-                        <option value="leather">가죽공예</option>
-                        <option value="woodword">목공예</option>
-                        <option value="flowerart">꽃꽂이</option>
-                        <option value="dyeing">천연염색</option>
-                        <option value="toreutics">금속공예</option>
-                        <option value="painting">미술</option>
-                        <option value="knot">매듭공예</option>
-                        <option value="knitting">뜨개질</option>
-                        <option value="etc">기타</option>
-                </ul>
-            </select>
+    .tmk-imgs img{
+        width: 50px;
+        height: 100px;
+    }
+    .tmk-imgs input{
+        display: none;
+    }
+    .tmk-imgs div{
+        position: relative;
+        display: inline-block;
+    }
 
-            <!--<select name="category">-->
-                <!--<option value="leather">가죽공예</option>-->
-                <!--<option value="woodword">목공예</option>-->
-                <!--<option value="flowerart">꽃꽂이</option>-->
-                <!--<option value="dyeing">천연염색</option>-->
-                <!--<option value="toreutics">금속공예</option>-->
-                <!--<option value="painting">미술</option>-->
-                <!--<option value="knot">매듭공예</option>-->
-                <!--<option value="knitting">뜨개질</option>-->
-                <!--<option value="etc">기타</option>-->
-            <!--</select>으로-->
 
-            <input name="title">을 만들고 싶어요.<br>
-            <input id="id_photo1" name="Qphoto" type="file"><br>
-            <input id="id_photo2" name="Qphoto" type="file"><br>
-            <input id="id_photo3" name="Qphoto" type="file"><br>
-            <input id="id_photo4" name="Qphoto" type="file"><br>
-            <input id="id_photo5" name="Qphoto" type="file"><br>
 
-            무엇을 배우고 싶으세요?<br>
-            <input type="text" name="wantedu"><br>
-            수업 인원은 몇명인가요?<br>
-            <input type="number" name="memnum" min="1" max="50"><br>
-            편하신 지역을 자유롭게 입력해주세요
-            <select name="state">
-                <option value="seoul">서울</option>
-                <option value="gyeoggi">경기도</option>
-                <option value="gwangju">광주</option>
-                <option value="daegu">대구</option>
-                <option value="daejeon">대전</option>
-                <option value="busan">부산</option>
-                <option value="ulsan">울산</option>
-                <option value="incheon">인천</option>
-            </select>
-            <input name = "mylocal"><br>
-            희망 수업일<br>
-            나중에 입력 <br>
+    .tmk-imgs div span{
+        background-image: url("/static/media/image/icon/icon-close.png");
+        position: absolute;
+        top: 6px;
+        width: 23px;
+        right: 2px;
+        height: 20px;
+        cursor: pointer;
+        z-index: 1000;
+        background-repeat: no-repeat;
+        visibility: hidden;
 
-            저희가 어디로 연락드리면 될까요?
-            <input name="mobile">
-            <input type="submit" class="btn btn-default btn-primary" value="질문 올리기">
-          {% for field in create_qform %}
-          {{ field.errors|striptags }}
-            {% if field.errors %}
-                {{field.html_name}}
-            {% endif %}
-          {% endfor %}
+    }
+
+    .tmk-imgs div:hover span{
+        visibility: visible;
+    }
+
+</style>
+    <div class="tmk-qitem-wrapper container">
+        <div class="row">
+            <div class="tmk-qitem-header">
+                <span>길동님께서 만들고 싶은 것은 무엇인가요?</span>
+                <div class="tmk-qitem-hdr-contents">
+                    <div><span class="tmk-ctns-text">나는</span></div>
+                    <div class="tmk-qitem-selecter-wrapper">
+                        <div class="selecter cover" tabindex="0">
+                            <select name="name" class="selecter_3 selecter-element" data-selecter-options="{&quot;cover&quot;:&quot;true&quot;}" tabindex="-1">
+                                <option value="">label</option>
+                                <option value="id">name</option>
+                            </select>
+                            <span class="selecter-selected" onclick="btnClick(this)">label</span>
+                            <div class="selecter-options" data-value="">
+                                <span class="selecter-item selected" data-value="" onclick="selecting(this, '')">label</span>
+                                <div class="selecter-item"
+                                     data-value="id"
+                                     onclick="selecting(this, '')">name</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div><span class="tmk-ctns-text">분야의</span></div>
+                    <div class="tmk-qitem-search-wrapper">
+                        <input type="text" class="form-control" placeholder="ex)뜨개">
+                    </div>
+                    <div><span class="tmk-ctns-text">만들고 싶어요</span></div>
+                </div>
+            </div>
+            <div class="tmk-qitem-contents">
+                <div class="tmk-qitem-phupload">
+                    <div class="tmk-phupload-contents tmk-panel">
+                        <div class="tmk-panel-header">사진 올리기</div>
+                        <div class="tmk-panel-contents">
+                            <div class="well filedrag" id="filedrag">
+                                <div class="form-group row">
+                                    <div class="col-md-6">
+                                        <div>
+                                            <label class="drag-label">사진을 이곳에 끌어다 놓아주세요 JPG,PNG 파일만 업로드가 가능합니다. 사이즈는 가로 770픽셀 이상에 최적화 도어 있습니다.</label>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-6">
+                                        <span id="uploader" onclick="findLastInput(true);" class="custom-file-input-button btn btn-success">
+                                            <span class="custom-file-input-button-text">PC에서 가져오</span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tmk-imgs" id="tmk-imgs">
+                                <div>
+                                    <img src="">
+                                    <span onclick="deleteImg(this);"></span>
+                                </div>
+                                <div>
+                                    <img src="">
+                                    <span onclick="deleteImg(this);"></span>
+                                </div>
+                                <div>
+                                    <img src="">
+                                    <span onclick="deleteImg(this);"></span>
+                                </div>
+                                <div>
+                                    <img src="">
+                                    <span onclick="deleteImg(this);"></span>
+                                </div>
+                                <div>
+                                    <img src="">
+                                    <span onclick="deleteImg(this);"></span>
+                                </div>
+                                <input type="file" name="user_upload_pic1"  id="filePhoto1" />
+                                <input type="file" name="user_upload_pic2"  id="filePhoto2" />
+                                <input type="file" name="user_upload_pic3"  id="filePhoto3" />
+                                <input type="file" name="user_upload_pic4"  id="filePhoto4" />
+                                <input type="file" name="user_upload_pic5"  id="filePhoto5" />
+                            </div>
+                        </div>
+                        <div class="tmk-panel-footer"></div>
+                    </div>
+                    <aside class="tmk-phupload-aside-right">123123123</aside>
+                </div>
+                <div class="tmk-qitem-learnWhat">
+                    <div class="tmk-learnWhat-contents tmk-panel">
+                        <div class="tmk-panel-header">내용</div>
+                        <div class="tmk-panel-contents">
+
+                        </div>
+                        <div class="tmk-panel-footer"></div>
+                    </div>
+                    <aside class="tmk-phupload-aside-right">ㅂㅈㄷㅂㅈㄷㅂㅈㄷ</aside>
+                </div>
+                <div class="tmk-qitem-region">
+                    <div class="tmk-phupload-contents tmk-panel">
+                        <div class="tmk-panel-header">희망지역</div>
+                        <div class="tmk-panel-contents"></div>
+                        <div class="tmk-panel-footer"></div>
+                    </div>
+                    <aside class="tmk-phupload-aside-right">ㅁㄴㅇㅁㄴㅇ</aside>
+                </div>
+                <div class="tmk-qitem-calenda">
+                    <div class="tmk-phupload-contents tmk-panel">
+                        <div class="tmk-panel-header">수업희망일</div>
+                        <div class="tmk-panel-contents"></div>
+                        <div class="tmk-panel-footer"></div>
+                    </div>
+                    <aside class="tmk-phupload-aside-right">ㅍㅌㅊㅍㅌㅊㅍ</aside>
+                </div>
+            </div>
+            <div class="tmk-qitem-footer">
+            </div>
         </div>
-    </form>
-</div>
     </div>
+
 {%endblock%}
 </body>
