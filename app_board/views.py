@@ -217,7 +217,5 @@ def pagination(navline_num=5, onepage_post_num=20,target_model=None,
     states.append(state_item)
 
 
-
-
     return {'pageitme':_line_post, 'pages':pages, 'arrows':arrows,
             'categories':categoris, 'states':states}

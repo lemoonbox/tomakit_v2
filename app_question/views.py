@@ -76,7 +76,12 @@ def create_q_item(request):
             _qbox.state=_state
             _qbox.save()
 
-            return HttpResponseRedirect("/v2/question/item/{0}".format(_qitempost.id))
+            HTTP_HOST = request.META['HTTP_HOST']
+            return render(request, TEMP.V2_NEXT_GUIDE,{
+                'HTTP_HOST':HTTP_HOST,
+                "myq_id":_qitempost.id,
+            })
+            #return HttpResponseRedirect("/v2/question/item/{0}".format(_qitempost.id))
 
 
     return render(request, TEMP.V2_CREATE_QITEM,{
@@ -129,7 +134,12 @@ def create_q_skill(request):
             _qbox.category=_category
             _qbox.state=_state
             _qbox.save()
-            return HttpResponseRedirect("/v2/question/skill/{0}".format(_qskillpost.id))
+
+            HTTP_HOST = request.META['HTTP_HOST']
+            return render(request, TEMP.V2_NEXT_GUIDE,{
+                'HTTP_HOST':HTTP_HOST,
+            })
+            # return HttpResponseRedirect("/v2/question/skill/{0}".format(_qskillpost.id))
 
 
     return render(request, TEMP.V2_CREATE_QSKILL,{
