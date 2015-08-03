@@ -32,13 +32,32 @@
         min-width: 200px;
     }
 
+    .tmk-qitem-contents > div{
+        text-align: center;
+        margin: 10px 0px;
+    }
+
     .tmk-panel{
         display: inline-block;
+        float: left;
         padding: 20px;
         background-color: #fff;
         border: 1px solid #ddd;
         border-radius: 4px;
         width: 60%;
+    }
+
+    .tmk-aside-right{
+        width: 20%;
+        float: left;
+        display: inline-block;
+        height: 300px;
+        margin-left: 10px;
+        background-color: red;
+    }
+
+    .tmk-panel{
+        margin-left: 100px;
     }
 
     .selecter .selecter-selected{
@@ -156,7 +175,7 @@
                 </div>
             </div>
             <div class="tmk-qitem-contents">
-                <div class="tmk-qitem-phupload">
+                <div class="tmk-qitem-phupload clearfix">
                     <div class="tmk-phupload-contents tmk-panel">
                         <div class="tmk-panel-header">사진 올리기</div>
                         <div class="tmk-panel-contents">
@@ -177,24 +196,19 @@
                             </div>
                             <div class="tmk-imgs" id="tmk-imgs">
                                 <div>
-                                    <img src="">
-                                    <span onclick="deleteImg(this);"></span>
+                                    <img src=""><span onclick="deleteImg(this);"></span>
                                 </div>
                                 <div>
-                                    <img src="">
-                                    <span onclick="deleteImg(this);"></span>
+                                    <img src=""><span onclick="deleteImg(this);"></span>
                                 </div>
                                 <div>
-                                    <img src="">
-                                    <span onclick="deleteImg(this);"></span>
+                                    <img src=""><span onclick="deleteImg(this);"></span>
                                 </div>
                                 <div>
-                                    <img src="">
-                                    <span onclick="deleteImg(this);"></span>
+                                    <img src=""><span onclick="deleteImg(this);"></span>
                                 </div>
                                 <div>
-                                    <img src="">
-                                    <span onclick="deleteImg(this);"></span>
+                                    <img src=""><span onclick="deleteImg(this);"></span>
                                 </div>
                                 <input type="file" name="user_upload_pic1"  id="filePhoto1" />
                                 <input type="file" name="user_upload_pic2"  id="filePhoto2" />
@@ -205,33 +219,37 @@
                         </div>
                         <div class="tmk-panel-footer"></div>
                     </div>
-                    <aside class="tmk-phupload-aside-right">123123123</aside>
+                    <aside class="tmk-aside-right">123123123</aside>
                 </div>
-                <div class="tmk-qitem-learnWhat">
-                    <div class="tmk-learnWhat-contents tmk-panel">
-                        <div class="tmk-panel-header">내용</div>
+                <div class="tmk-qitem-phupload clearfix">
+                    <div class="tmk-phupload-contents tmk-panel">
+                        <div class="tmk-panel-header">사진 올리기</div>
                         <div class="tmk-panel-contents">
 
                         </div>
                         <div class="tmk-panel-footer"></div>
                     </div>
-                    <aside class="tmk-phupload-aside-right">ㅂㅈㄷㅂㅈㄷㅂㅈㄷ</aside>
+                    <aside class="tmk-aside-right">123123123</aside>
                 </div>
-                <div class="tmk-qitem-region">
+                <div class="tmk-qitem-phupload clearfix">
                     <div class="tmk-phupload-contents tmk-panel">
-                        <div class="tmk-panel-header">희망지역</div>
-                        <div class="tmk-panel-contents"></div>
+                        <div class="tmk-panel-header">사진 올리기</div>
+                        <div class="tmk-panel-contents">
+
+                        </div>
                         <div class="tmk-panel-footer"></div>
                     </div>
-                    <aside class="tmk-phupload-aside-right">ㅁㄴㅇㅁㄴㅇ</aside>
+                    <aside class="tmk-aside-right">123123123</aside>
                 </div>
-                <div class="tmk-qitem-calenda">
+                <div class="tmk-qitem-phupload clearfix">
                     <div class="tmk-phupload-contents tmk-panel">
-                        <div class="tmk-panel-header">수업희망일</div>
-                        <div class="tmk-panel-contents"></div>
+                        <div class="tmk-panel-header">사진 올리기</div>
+                        <div class="tmk-panel-contents">
+
+                        </div>
                         <div class="tmk-panel-footer"></div>
                     </div>
-                    <aside class="tmk-phupload-aside-right">ㅍㅌㅊㅍㅌㅊㅍ</aside>
+                    <aside class="tmk-aside-right">123123123</aside>
                 </div>
             </div>
             <div class="tmk-qitem-footer">
