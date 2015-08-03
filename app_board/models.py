@@ -89,3 +89,15 @@ class Casebox(models.Model):
 
     def __unicode__(self):
         return "%s::%s" %(self.quebox.title, self.solubox.title)
+
+
+class MainQoubox(models.Model):
+
+    quebox= models.ForeignKey(Questionbox, null=False, related_name='Mainbox')
+    updated_at = models.DateTimeField(auto_now_add=True, auto_now=True)
+    created_at = models.DateTimeField(auto_now_add=True, auto_now=False)
+
+    is_active = models.BooleanField(default=True)
+
+    def __unicode__(self):
+        return "%s" %(self.quebox.title,)

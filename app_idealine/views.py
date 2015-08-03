@@ -84,6 +84,7 @@ def category(request, category='all', page = 1):
 
             'pages':pages,
             'arrows':arrows,
+            'next':"/",
         })
 
 

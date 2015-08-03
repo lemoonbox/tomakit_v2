@@ -1,5 +1,9 @@
 from django.contrib import admin
-from app_board.models import Questionbox, SolutionBox, Casebox
+from app_board.models import \
+    Questionbox,\
+    SolutionBox, \
+    Casebox, \
+    MainQoubox
 # Register your models here.
 
 
@@ -64,4 +68,13 @@ class CaseBoxAdmin(admin.ModelAdmin):
 
     fieldsets = [("Casebox", {'fields':['qtype','category', 'state',
                                       'quebox','solubox','is_active',]}),]
+
 admin.site.register(Casebox, CaseBoxAdmin)
+
+class MainboxAdmin(admin.ModelAdmin):
+
+    list_display = ('quebox', 'updated_at')
+
+    fieldsets = [("MainQoubox", {'fields':['quebox','is_active',]}),]
+
+admin.site.register(MainQoubox, MainboxAdmin)

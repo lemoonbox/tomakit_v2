@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-from app_board.models import Questionbox, SolutionBox, Casebox
+from app_board.models import Questionbox, SolutionBox, Casebox, MainQoubox
 from app_comminfo.models import State, Category
 from DIY_tool import template_match as TEMP
 # Create your views here.
@@ -219,3 +219,21 @@ def pagination(navline_num=5, onepage_post_num=20,target_model=None,
 
     return {'pageitme':_line_post, 'pages':pages, 'arrows':arrows,
             'categories':categoris, 'states':states}
+
+
+def mainboard(request):
+
+
+    if request.method=="GET":
+        _mainqoubox=MainQoubox.objects.all()[0:5]
+        HTTP_HOST= request.META['HTTP_HOST']
+
+
+
+    return render(request, 'contents/main/categoryline.html',
+        {
+            'qoubox':_mainqoubox,
+            'HTTP_HOST':HTTP_HOST,
+
+            'next':"/",
+        })

@@ -19,6 +19,9 @@ from django.contrib.auth import \
     login as auth_login
 from django.contrib.auth.views import \
     logout as django_logout
+import os
+from django.core.files.images import \
+    ImageFile
 
 from DIY_tool import \
     template_match as TEMP
@@ -39,6 +42,8 @@ from app_user.models import \
     SignupConfirmKey, \
     PWResetKeys, \
     HostProfile
+from DIY_tool import settings
+
 # Create your views here.
 
 def signup(request):
@@ -55,6 +60,7 @@ def signup(request):
 
         if userForm.is_valid():
             next=request.POST.get("next","/")
+
             user_data={
                 'username': request.POST.get("username", "null"),
                 'email':request.POST.get("username", "null"),
@@ -64,7 +70,11 @@ def signup(request):
             }
             if not "null" in user_data.values():
                 _user = User.objects.create_user(**user_data)
-                _userprofile = UserProfile(djgouser=_user)
+                image_file = open(os.path.join(settings.BASE_DIR,
+                                               'resource/image/default_prof.png'),'r')
+                content = ImageFile(image_file)
+
+                _userprofile = UserProfile(djgouser=_user, propic=content)
                 _userprofile.save()
 
                 #send email
@@ -82,6 +92,7 @@ def signup(request):
                     tasks.send_key_email.delay(request, title, sender,
                     _user.email, TEMP.V2_PW_RESET_EMAIL, key)
 
+                print next
                 return HttpResponseRedirect("/v2/user/login/?next="+next)
 
     return render(request, TEMP.V2_SIGNUP_TEM,{
@@ -254,6 +265,7 @@ def login(request, *args, **kwargs):
     elif request.method=="POST":
         login_form = LoginForm(request.POST)
         next=request.POST.get("next","/")
+        print next
         if login_form.is_valid():
             user = login_form.authenticate(request)
             if user:
@@ -273,34 +285,38 @@ def logout(request, *args, **kwargs):
 def T2W_edit_prof(request):
 
     if request.method=="GET":
-        context={}
+        _djgouser = request.user
+        context={
+            "djgouser":_djgouser,
+        }
         context.update(csrf(request))
         return render_to_response(TEMP.V2_RPO_EDIT,context)
     elif request.method=="POST":
+
+        _profile = UserProfile.objects.get(djgouser=request.user)
+
         first_name = request.POST.get('first_name')
         last_name = request.POST.get('last_name')
         inter_oneline= request.POST.get('inter_oneline')
         inter_start=request.POST.get('inter_start')
-        inter_url=request.POST.get('inter_vurl')
-        pro_pic = request.FILES.get('pro_pic')
-        inter_pic=request.FILES.get('inter_pic')
-        inter_vurl = request.POST.get('inter_vurl')
+        inter_url=request.POST.get('inter_url', _profile.inter_url)
+        pro_pic = request.FILES.get('pro_pic', _profile.propic)
+        inter_pic=request.FILES.get('inter_pic', _profile.inter_pic)
 
-        print first_name, last_name, inter_oneline, inter_start
-        print inter_url, pro_pic, inter_pic, inter_vurl
+        if "=" in inter_url:
+            shr_codes= inter_url.split("=")
 
-        _profile = UserProfile.objects.get(djgouser=request.user)
+        else:
+            shr_codes=inter_url.split("/")
+        shr_code=shr_codes[-1]
 
-        print _profile
-
-        _profile.first_name = request.POST.get('frist_name')
-        _profile.last_name = request.POST.get('last_name')
-        _profile.inter_oneline= request.POST.get('inter_oneline')
-        _profile.inter_start=request.POST.get('inter_start')
-        _profile.inter_url=request.POST.get('inter_vurl')
-        _profile.pro_pic = request.FILES.get('pro_pic')
-        _profile.inter_pic=request.FILES.get('inter_pic')
-        _profile.inter_vurl = request.POST.get('inter_vurl')
+        _profile.first_name = first_name
+        _profile.last_name = last_name
+        _profile.inter_oneline= inter_oneline
+        _profile.inter_start=inter_start
+        _profile.inter_url=shr_code
+        _profile.pro_pic = pro_pic
+        _profile.inter_pic=inter_pic
         _profile.save()
 
         return HttpResponseRedirect("/")
