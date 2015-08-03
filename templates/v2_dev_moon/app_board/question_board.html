@@ -27,8 +27,12 @@ category선택 :::
 ===================================================================================
 {%for que in questions %}
     {% if que.qtype == "I" %}
-        프로필 사진: <img src="{{MEDIA_URL}}{{que.djgouser.userprofile_set.first.propic}}"><br>
-        이름 : {{que.djgouser.last_name}}{{que.djgouser.first_name}}<br>
+        프로필 사진:
+        <a href="http://{{HTTP_HOST}}/v2/user/profile/{{que.djgouser.id}}">
+        <img src="{{MEDIA_URL}}{{que.djgouser.userprofile_set.first.propic}}"></a><br>
+        이름 :
+        <a href="http://{{HTTP_HOST}}/v2/user/profile/{{que.djgouser.id}}">
+        {{que.djgouser.last_name}}{{que.djgouser.first_name}}</a><br>
         질문사진 : <img src="{{MEDIA_URL}}{{que.item_pic}}"><br>
         카테고리 : {{que.category.first.category}}<br>
         제목 : {{que.title}}<br>
@@ -37,8 +41,12 @@ category선택 :::
 ====================================================================================
     <br><br>
     {% elif que.qtype == "S" %}
-        프로필 사진: <img src="{{MEDIA_URL}}{{que.djgouser.userprofile_set.first.propic}}"><br>
-        이름 : {{que.djgouser.last_name}}{{que.djgouser.first_name}}<br>
+        프로필 사진:
+        <a href="http://{{HTTP_HOST}}/v2/user/profile/{{que.djgouser.id}}">
+        <img src="{{MEDIA_URL}}{{que.djgouser.userprofile_set.first.propic}}"></a><br>
+        이름 :
+        <a href="http://{{HTTP_HOST}}/v2/user/profile/{{que.djgouser.id}}">
+        {{que.djgouser.last_name}}{{que.djgouser.first_name}}</a><br>
         카테고리 : {{que.category.first.category}}<br>
         제목 : {{que.title}}<br>
         원하는 클래스 :{{que.skill_class}}<br>

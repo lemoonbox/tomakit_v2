@@ -96,9 +96,12 @@ def qitem_detail(request, qitem_num):
             _qitempost = QItem.objects.get(pk=qitem_num)
         except _qitempost.DoesNotExist:
             raise Http404("post does not exist")
+
+    HTTP_HOST = request.META["HTTP_HOST"]
     return render(request, TEMP.V2_DETAIL_QITEM,
         {
-            'qitem_post':_qitempost
+            'qitem_post':_qitempost,
+            'HTTP_HOST':HTTP_HOST,
         })
 
 
@@ -154,8 +157,10 @@ def qskill_detail(request, qskill_num):
         except _qskillpost.DoesNotExist:
             raise Http404("post does not exist")
 
-        print _qskillpost
+    HTTP_HOST = request.META["HTTP_HOST"]
     return render(request, TEMP.V2_DETAIL_QSKILL,
         {
-            'qskill_post':_qskillpost
+            'qskill_post':_qskillpost,
+            'HTTP_HOST':HTTP_HOST,
+
         })

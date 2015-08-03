@@ -2,8 +2,6 @@
 from django.shortcuts import render
 from django.template import \
     Context
-from django.shortcuts import \
-    render
 from django.contrib.auth.models import \
     User
 from django.contrib.auth.decorators import \
@@ -13,7 +11,8 @@ from django.http import \
     HttpResponse
 from django.shortcuts import \
     loader,\
-    render
+    render,\
+    render_to_response
 from django.core.context_processors import \
     csrf
 from django.contrib.auth import \
@@ -249,12 +248,10 @@ def login(request, *args, **kwargs):
     next=""
 
     if request.method=="GET":
-        print "login"
         login_form = LoginForm()
         next=request.GET.get("next","/")
 
     elif request.method=="POST":
-        print "login post"
         login_form = LoginForm(request.POST)
         next=request.POST.get("next","/")
         if login_form.is_valid():
@@ -271,3 +268,54 @@ def login(request, *args, **kwargs):
 def logout(request, *args, **kwargs):
     res = django_logout(request, *args, **kwargs)
     return res
+
+@login_required
+def T2W_edit_prof(request):
+
+    if request.method=="GET":
+        context={}
+        context.update(csrf(request))
+        return render_to_response(TEMP.V2_RPO_EDIT,context)
+    elif request.method=="POST":
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
+        inter_oneline= request.POST.get('inter_oneline')
+        inter_start=request.POST.get('inter_start')
+        inter_url=request.POST.get('inter_vurl')
+        pro_pic = request.FILES.get('pro_pic')
+        inter_pic=request.FILES.get('inter_pic')
+        inter_vurl = request.POST.get('inter_vurl')
+
+        print first_name, last_name, inter_oneline, inter_start
+        print inter_url, pro_pic, inter_pic, inter_vurl
+
+        _profile = UserProfile.objects.get(djgouser=request.user)
+
+        print _profile
+
+        _profile.first_name = request.POST.get('frist_name')
+        _profile.last_name = request.POST.get('last_name')
+        _profile.inter_oneline= request.POST.get('inter_oneline')
+        _profile.inter_start=request.POST.get('inter_start')
+        _profile.inter_url=request.POST.get('inter_vurl')
+        _profile.pro_pic = request.FILES.get('pro_pic')
+        _profile.inter_pic=request.FILES.get('inter_pic')
+        _profile.inter_vurl = request.POST.get('inter_vurl')
+        _profile.save()
+
+        return HttpResponseRedirect("/")
+
+def T2W_public_prof(request, user_num):
+
+    if request.method=="GET":
+        _djgouesr=User.objects.get(id=user_num)
+        _profile = UserProfile.objects.get(djgouser=_djgouesr)
+
+        HTTP_HOST = request.META["HTTP_HOST"]
+
+    return render(request, TEMP.V2_PROF_PUBLIC, {
+        'djgouser':_djgouesr,
+        'profile':_profile,
+
+        'HTTP_HOST':HTTP_HOST,
+    })
