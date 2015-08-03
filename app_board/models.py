@@ -5,6 +5,7 @@ from datetime import datetime
 
 from app_comminfo.models import State, Category
 from app_question.models import QPic, QSkill, QItem
+import uuid
 
 # Create your models here.
 
@@ -29,7 +30,7 @@ class Questionbox(models.Model):
     skill_class = models.TextField(null=True, blank=True)
     skill_goal = models.TextField(null=True, blank=True)
     skill_edu = models.TextField(null=True, blank=True)
-    item_pic = models.ImageField(QPic, blank=True)
+    item_pic = models.ImageField(QPic,blank=True)
 
     updated_at = models.DateTimeField(auto_now_add=True, auto_now=True)
     created_at = models.DateTimeField(auto_now_add=True, auto_now=False)
