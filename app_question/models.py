@@ -5,6 +5,8 @@ from app_comminfo.models import State, Category
 
 def upload_to(instance, filenmae):
     #folder_name = instance.qitem.title + instance.qitem.id
+    nmparts=filenmae.split(".")
+    print nmparts
     return 'Qitem/%s' %(filenmae)
 
 class QItem(models.Model):

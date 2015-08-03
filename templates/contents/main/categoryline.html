@@ -38,7 +38,6 @@
             <span class="title-main col-md-8" style="font-family:AppleSDGothicNeo-Regular;">직접 창조한다는 것은 얼마나 가슴 뛰는 일인가요?</span>
         </div>
     </div>
-
     <div class="picks-cards rows">
         <ul>
             <li class="tmk-picks-main">
@@ -213,7 +212,48 @@
     <a class="btn" target="_blank" href="http://goto.kakao.com/@토마킷" style="box-shadow:-3px 6px 10px 0px #666666;position:absolute;width:40px;height:40px;left:8px;padding:8px;background: url(http://img2.kakao.co.kr/assets/icon/facebook-3dc359d9233fe406dfba651563a70c03.png);border-radius: 5px;background-size:cover;"></a>
 
 </div>
-
+<div>
+    ==================<br>
+{%for que in qouboxs %}
+    <div class="counter{{forloop.counter}}">
+    {% if que.quebox.qtype == "I" %}
+        프로필 사진:
+        <a href="http://{{HTTP_HOST}}/v2/user/profile/{{que.quebox.djgouser.id}}">
+        <img src="{{MEDIA_URL}}{{que.quebox.djgouser.userprofile_set.first.propic}}"></a><br>
+        이름 :
+        <a href="http://{{HTTP_HOST}}/v2/user/profile/{{que.quebox.djgouser.id}}">
+        {{que.quebox.djgouser.last_name}}{{que.quebox.djgouser.first_name}}</a><br>
+        질문사진 :<div class="questionboard-q-img"> <img src="{{MEDIA_URL}}{{que.quebox.item_pic}}"></div>
+        카테고리 : {{que.quebox.category.first.category}}<br>
+        제목 : {{que.quebox.title}}<br>
+        희망 수업일 :{{que.quebox.weekday}}<br>
+        지역 : {{que.quebox.state.first.state}}/{{que.quebox.mylocal}}<br>
+        총 {{que.quebox.solutionbox_set.count}}개의 수업이 개설되었습니다.<br>
+====================================================================================
+    <br><br>
+    {% elif que.qoubox.qtype == "S" %}
+        프로필 사진:
+        <a href="http://{{HTTP_HOST}}/v2/user/profile/{{que.quebox.djgouser.id}}">
+        <img src="{{MEDIA_URL}}{{que.quebox.djgouser.userprofile_set.first.propic}}"></a><br>
+        이름 :
+        <a href="http://{{HTTP_HOST}}/v2/user/profile/{{que.quebox.djgouser.id}}">
+        {{que.quebox.djgouser.last_name}}{{que.quebox.djgouser.first_name}}</a><br>
+        카테고리 : {{que.quebox.category.first.category}}<br>
+        제목 : {{que.quebox.title}}<br>
+        원하는 클래스 :{{que.quebox.skill_class}}<br>
+        배우는 목표 :{{que.quebox.skill_goal}}<br>
+        배우고 싶은 내용 :{{que.quebox.skill_edu}}<br>
+        희망 수업일 :{{que.quebox.weekday}}<br>
+        지역 : {{que.quebox.state.first.state}}/{{que.quebox.mylocal}}<br>
+        총 {{que.quebox.solutionbox_set.count}}개의 수업이 개설되었습니다.<br>
+        <br>
+====================================================================================
+    <br><br>
+    {% endif %}
+    </div>
+{% endfor %}
+==================<br>
+</div>
 
 <!--<div class="tmk-main-border">-->
 <!--<div>개설된 핸드메이드 문의</div>-->

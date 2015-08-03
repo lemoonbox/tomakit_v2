@@ -1,9 +1,10 @@
 from django.db import models
 from django.conf import settings
+import uuid
 
 def upload_to(instance, filename):
-    path_arr = filename.split('/')
-    return '%s/profile/%s' %(instance.djgouser.username, path_arr[-1])
+    path_arr = filename.split('.')
+    return 'profile/%s/%s' %(instance.djgouser.username, str(uuid.uuid4())+"."+path_arr[-1])
 
 
 
