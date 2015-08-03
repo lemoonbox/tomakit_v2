@@ -5,7 +5,8 @@ from django.shortcuts import \
     loader,\
     render
 from django.contrib.auth.decorators import \
-    login_required
+    login_required, \
+    permission_required
 from django.contrib.auth.models import \
     User
 from django.http import \
@@ -77,11 +78,8 @@ def create_q_item(request):
             _qbox.save()
 
             HTTP_HOST = request.META['HTTP_HOST']
-            return render(request, TEMP.V2_NEXT_GUIDE,{
-                'HTTP_HOST':HTTP_HOST,
-                "myq_id":_qitempost.id,
-            })
-            #return HttpResponseRedirect("/v2/question/item/{0}".format(_qitempost.id))
+
+            return HttpResponseRedirect("/v2/question/next_guid")
 
 
     return render(request, TEMP.V2_CREATE_QITEM,{
@@ -139,10 +137,8 @@ def create_q_skill(request):
             _qbox.save()
 
             HTTP_HOST = request.META['HTTP_HOST']
-            return render(request, TEMP.V2_NEXT_GUIDE,{
-                'HTTP_HOST':HTTP_HOST,
-            })
-            # return HttpResponseRedirect("/v2/question/skill/{0}".format(_qskillpost.id))
+
+            return HttpResponseRedirect("/v2/question/next_guid")
 
 
     return render(request, TEMP.V2_CREATE_QSKILL,{
@@ -164,3 +160,10 @@ def qskill_detail(request, qskill_num):
             'HTTP_HOST':HTTP_HOST,
 
         })
+
+def next_guid(request):
+
+    HTTP_HOST = request.META['HTTP_HOST']
+    return render(request, TEMP.V2_NEXT_GUIDE,{
+        'HTTP_HOST':HTTP_HOST,
+    })
