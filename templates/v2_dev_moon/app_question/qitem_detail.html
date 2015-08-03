@@ -12,8 +12,13 @@
 
 ------만들기 문의---------<br>
 카테고리 : {{qitem_post.category.first.category}}<br>
-프로필 사진 :<img src="{{MEDIA_URL}}{{qitem_post.djgouser.userprofile_set.first.propic}}"><br>
-이름 : {{qitem_post.djgouser.last_name}}{{qitem_post.djgouser.first_name}}<br>
+
+프로필 사진 :
+<a href="http://{{HTTP_HOST}}/v2/user/profile/{{qitem_post.djgouser.id}}">
+<img src="{{MEDIA_URL}}{{qitem_post.djgouser.userprofile_set.first.propic}}"></a><br>
+이름 :
+<a href="http://{{HTTP_HOST}}/v2/user/profile/{{qitem_post.djgouser.id}}">
+{{qitem_post.djgouser.last_name}}{{qitem_post.djgouser.first_name}}</a><br>
 자기 소개 : <br>
 
 
@@ -29,8 +34,12 @@
 ------개설 수업-------------<br>
 {% for solution in qitem_post.solustionbox.all %}
         답변 타이틀 :{{solution.title}}<br>
-        프로필 사진 :<img src="{{MEDIA_URL}}{{solution.djgouser.userprofile_set.first.propic}}"><br>
-        이름 : {{solution.djgouser.last_name}}{{solution.djgouser.first_name}}<br>
+        프로필 사진 :
+        <a href="http://{{HTTP_HOST}}/v2/user/profile/{{solution.djgouser.id}}">
+        <img src="{{MEDIA_URL}}{{solution.djgouser.userprofile_set.first.propic}}"></a><br>
+        이름 :
+        <a href="http://{{HTTP_HOST}}/v2/user/profile/{{solution.djgouser.id}}">
+        {{solution.djgouser.last_name}}{{solution.djgouser.first_name}}</a><br>
         클래스 정보 <br>
         지역 {{solution.state.first.state}}/{{solution.mylocal}}<br>
         수업횟수 {{solution.repeat}}회/총 {% widthratio solution.repeat 1 solution.perhour%}시간<br>
