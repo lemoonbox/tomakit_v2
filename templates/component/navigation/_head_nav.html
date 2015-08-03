@@ -27,7 +27,7 @@
                         <!--<li><a href="/">HOME</a></li>-->
 
                         {% if user.is_authenticated %}
-                        <li><button class="btn btn-default user"><i class="fa fa-user-plus"></i> 작가신청</button></li>
+                        <li><button class="btn btn-default user"><img src="{%static 'media/image/slice/buttonicon-6.png'%}"> 작가신청</button></li>
                         <li class="dropdown">
                             <a href="#" class="btn-default user dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                 <!--<i style="color:gray;" class="xi-user-circle"></i>-->
@@ -41,7 +41,7 @@
                             </ul>
                         </li>
                         {% else %}
-                        <li><button class="btn-default user"><i class="fa fa-user-plus"></i> 작가신청</button></li>
+                        <li><button class="btn-default user"><img src="{%static 'media/image/slice/buttonicon-6.png'%}"> 작가신청</button></li>
                         <li>{% include 'component/user_login/_loginmodal.html'%}</li>
                         <!--<li><a href="{% url 'login_url' %}?next={{request.path}}">로그인/가입</a></li>-->
                         <!--            <span class="sr-only">(current)</span>-->

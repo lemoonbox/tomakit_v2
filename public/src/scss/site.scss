@@ -5,15 +5,20 @@
   -o-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
-  font-family: 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿?', NanumGothic,'ï¿½Ñ³ï¿½', Hanna, AppleSDGothicNeo-Bold, 'ï¿½ï¿½ï¿½ï¿½', Dotum, 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½', NanumMyeongjo, 'ï¿½ï¿½ï¿½ï¿½', Gulim, Helvetica, sans-serif;
+  font-family: 'NanumGothic', 'Hanna', 'AppleSDGothicNeo-Bold', 'Dotum', 'NanumMyeongjo', 'Gulim', 'Helvetica', sans-serif !important;
 }
+
+a:hover {text-decoration: none !important;}
 
 body {
   text-align: center;
   //overflow-x:hidden !important;
-  background-color: #D8D8D8 !important;
+  background-color: #EBEAE5 !important;
 }
 
+.h1, .h2, .h3, .h4, .h5, .h6 {
+  font-family: 'NanumGothic', 'AppleSDGothicNeo-Bold', sans-serif !important;
+}
 //global btn
 $g-btn-color:#F5515F;
 $g-btn-h-color:#e86460;
@@ -323,7 +328,7 @@ ul{
     border-radius: 8px;
     border: 1px solid #e1e1e1;
     margin: 0px 15px;
-    background-image: url("https://s-media-cache-ak0.pinimg.com/736x/19/48/c0/1948c0fc6aabce73963164f0f14798e8.jpg");
+    //background-image: url("https://s-media-cache-ak0.pinimg.com/736x/19/48/c0/1948c0fc6aabce73963164f0f14798e8.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);
