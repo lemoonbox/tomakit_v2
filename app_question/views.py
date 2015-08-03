@@ -70,7 +70,7 @@ def create_q_item(request):
             picpic=_qitempost.qpic_set.first().pic
             _qbox = Questionbox(djgouser=user, title =_qitempost.title,
                                 mylocal=_qitempost.mylocal, qtype="I",
-                                qitempost = _qitempost,
+                                qitempost = _qitempost, weekday=_qitempost.weekday,
                                 item_pic=picpic)
             _qbox.save()
             _qbox.category=_category
@@ -128,7 +128,7 @@ def create_q_skill(request):
             _qskillpost.save()
 
             _qbox = Questionbox(djgouser=user, title =_qskillpost.title,
-                                mylocal=_qskillpost.mylocal, qtype="S",
+                                mylocal=_qskillpost.mylocal, qtype="S",weekday=_qskillpost.weekday,
                                 qskillpost = _qskillpost,skill_class=_qskillpost.wantclass,
                                 skill_goal=_qskillpost.wantgoal, skill_edu=_qskillpost.wantedu)
             _qbox.save()

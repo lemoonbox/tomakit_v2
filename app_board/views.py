@@ -225,14 +225,14 @@ def mainboard(request):
 
 
     if request.method=="GET":
-        _mainqoubox=MainQoubox.objects.all()[0:5]
+        _mainqouboxs=MainQoubox.objects.all()[0:5]
         HTTP_HOST= request.META['HTTP_HOST']
 
 
 
     return render(request, 'contents/main/categoryline.html',
         {
-            'qoubox':_mainqoubox,
+            'qouboxs':_mainqouboxs,
             'HTTP_HOST':HTTP_HOST,
 
             'next':"/",

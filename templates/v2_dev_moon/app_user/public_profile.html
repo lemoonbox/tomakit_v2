@@ -5,6 +5,10 @@
     <title></title>
 </head>
 <body>
+프로파일 편집하기 버튼<br>
+{% if page_user == req_user %}
+<a href="http://{{HTTP_HOST}}/v2/user/edit_prof/{{page_user.id}}"> <button type="button">프로필 편집하기</button></a><br>
+{% endif %}
 사용자 프로파일
 프로필 사진 :<img src="{{MEDIA_URL}}{{profile.propic}}"><br>
 {{djgouser.last_name}}{{djgouser.first_name}}<br><br>

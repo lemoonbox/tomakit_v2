@@ -282,15 +282,18 @@ def logout(request, *args, **kwargs):
     return res
 
 @login_required
-def T2W_edit_prof(request):
+def T2W_edit_prof(request, user_num):
 
     if request.method=="GET":
-        _djgouser = request.user
-        context={
-            "djgouser":_djgouser,
-        }
-        context.update(csrf(request))
-        return render_to_response(TEMP.V2_RPO_EDIT,context)
+        _req_user = request.user
+        _page_user = User.objects.get(id=user_num)
+        if _req_user == _page_user :
+            context={
+                "djgouser":_page_user,
+            }
+            context.update(csrf(request))
+            return render_to_response(TEMP.V2_RPO_EDIT,context)
+
     elif request.method=="POST":
 
         _profile = UserProfile.objects.get(djgouser=request.user)
@@ -315,7 +318,7 @@ def T2W_edit_prof(request):
         _profile.inter_oneline= inter_oneline
         _profile.inter_start=inter_start
         _profile.inter_url=shr_code
-        _profile.pro_pic = pro_pic
+        _profile.propic = pro_pic
         _profile.inter_pic=inter_pic
         _profile.save()
 
@@ -324,13 +327,15 @@ def T2W_edit_prof(request):
 def T2W_public_prof(request, user_num):
 
     if request.method=="GET":
-        _djgouesr=User.objects.get(id=user_num)
-        _profile = UserProfile.objects.get(djgouser=_djgouesr)
+        _page_uesr=User.objects.get(id=user_num)
+        _req_user = request.user
+        _profile = UserProfile.objects.get(djgouser=_page_uesr)
 
         HTTP_HOST = request.META["HTTP_HOST"]
 
     return render(request, TEMP.V2_PROF_PUBLIC, {
-        'djgouser':_djgouesr,
+        'page_user':_page_uesr,
+        'req_user':_req_user,
         'profile':_profile,
 
         'HTTP_HOST':HTTP_HOST,

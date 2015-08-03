@@ -9,7 +9,7 @@ class QItemAdmin(admin.ModelAdmin):
     list_display = ('title', 'mylocal', 'memnum')
 
     fieldsets = [("QItem", {'fields':['djgouser', 'category','title', 'state','mylocal', 'wantedu',
-                                      'memnum', 'mobile',]}),]
+                                      'memnum', 'mobile','weekday',]}),]
 admin.site.register(QItem, QItemAdmin)
 
 class QPicAdmin(admin.ModelAdmin):
@@ -28,5 +28,5 @@ class QSkillAdmin(admin.ModelAdmin):
 
     fieldsets = [("QItem", {'fields':['djgouser', 'category','title', 'state','mylocal',
                                       'wantgoal','wantclass','wantedu',
-                                      'memnum', 'mobile',]}),]
+                                      'memnum', 'mobile','weekday',]}),]
 admin.site.register(QSkill, QSkillAdmin)

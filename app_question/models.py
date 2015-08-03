@@ -1,11 +1,14 @@
 from django.db import models
 from django.conf import settings
 from app_comminfo.models import State, Category
+import uuid
 # Create your models here.
 
 def upload_to(instance, filenmae):
     #folder_name = instance.qitem.title + instance.qitem.id
-    return 'Qitem/%s' %(filenmae)
+    nmparts=filenmae.split(".")
+    print nmparts
+    return 'Qitem/post%s/%s' %(instance.qitem.id, str(uuid.uuid4())+"."+nmparts[-1])
 
 class QItem(models.Model):
     djgouser = models.ForeignKey(settings.AUTH_USER_MODEL)
@@ -16,6 +19,7 @@ class QItem(models.Model):
     wantedu = models.TextField()
     memnum = models.IntegerField(default=1)
     mobile = models.CharField(max_length=50, null=False)
+    weekday = models.CharField(max_length=150, null=False)
 
     updated_at = models.DateTimeField(auto_now_add=True, auto_now=True)
     created_at = models.DateTimeField(auto_now_add=True, auto_now=False)
@@ -40,6 +44,8 @@ class QSkill(models.Model):
 
     updated_at = models.DateTimeField(auto_now_add=True, auto_now=True)
     created_at = models.DateTimeField(auto_now_add=True, auto_now=False)
+    weekday = models.CharField(max_length=150, null=False)
+
 
     is_active = models.BooleanField(default=True)
 
