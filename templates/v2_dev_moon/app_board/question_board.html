@@ -4,6 +4,63 @@
 
 <body>
 {%block content%}
+<style>
+    .questionboard-banner-top {
+        width:100%;
+        height:200px;
+        background:#48CFAD;
+        overflow: hidden;
+    }
+
+    .questionboard-banner-wrapper {
+        max-width:900px;
+        margin:auto;
+    }
+    .banner-title{
+        padding:40px 0px;
+        float:left;
+        width:100%;
+    }
+    .banner-title .h2 {
+        font-weight: bold;
+    }
+    .banner-title .h4 {
+        font-weight: normal;
+    }
+
+    .banner-image {
+        z-index: 10;
+        margin-left: -20%;
+        float: left;
+    }
+
+    .questionboard-q-img {
+        /*overflow: hidden;*/
+        max-height: 240px;
+
+    }
+    .questionboard-q-img img{
+        max-height:300px;
+        margin-top:-30px;
+    }
+
+
+</style>
+
+<div class="questionboard-banner-top">
+<div class="questionboard-banner-wrapper">
+    <div class="banner-title">
+        <div class="h2">문의중인 클래스</div>
+        <div class="h4">다른 사람들은 지금 어떤 클래스를 만나고 싶어할까요?</div>
+    </div>
+    <div class="banner-image">
+        <img src="{%static 'media/image/slice/img-4.png'%}">
+    </div>
+</div>
+</div>
+
+
+<div class="questionboard-category-wrapper">
 category선택 :::
 {% for cate in categoryies %}
     {% if cate.category_current %}
@@ -23,21 +80,54 @@ category선택 :::
 
 {% endfor%}<br><br>
 
+</div>
 
 ===================================================================================
 {%for que in questions %}
-    {% if que.qtype == "I" %}
+
+
+<div class="picks-cards rows">
+    <ul>
+        {% if que.qtype == "I" %}
+        <li class="card-qitem">
+            <div class="picks-cards-profile"><a href="http://{{HTTP_HOST}}/v2/user/profile/{{case.quebox.djgouser.id}}">
+                <img src="{{MEDIA_URL}}{{case.quebox.djgouser.userprofile_set.first.propic}}"></a></div>
+            <div class="profile-name"><a href="http://{{HTTP_HOST}}/v2/user/profile/{{que.djgouser.id}}">
+                {{que.djgouser.last_name}}{{que.djgouser.first_name}}</a></div>
+
+            <div class="card-contents" style="background:url({{MEDIA_URL}}{{case.quebox.item_pic}})">
+                <div class="questionboard-q-img"><img src="{{MEDIA_URL}}{{que.item_pic}}"></div>
+            </div>
+
+            <div class="picks-cards-credit">
+                <div class="h3">Q. <span>{{que.category.first.category}}</span></div>
+                <div class="credit-title"> {{que.title}}</div>
+                <div class="cards-date">희망 수업일&nbsp;&nbsp;
+                    <div class="h4" style="display:inline;"> {{que.weekday}}</div>
+                </div>
+                <div class="cards-credit-label">
+                    <span class="label-address"><img src="{%static 'media/icon/map-icon.png'%}"> {{que.state.first.state}} / {{que.mylocal}}</span>
+                    <!--<i style="margin-left:20px;" class="fa fa-tag"></i>-->
+                    <span class="label-tag">만들기 문의</span>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
+
+{%comment%}
         프로필 사진:
         <a href="http://{{HTTP_HOST}}/v2/user/profile/{{que.djgouser.id}}">
         <img src="{{MEDIA_URL}}{{que.djgouser.userprofile_set.first.propic}}"></a><br>
         이름 :
         <a href="http://{{HTTP_HOST}}/v2/user/profile/{{que.djgouser.id}}">
         {{que.djgouser.last_name}}{{que.djgouser.first_name}}</a><br>
-        질문사진 : <img src="{{MEDIA_URL}}{{que.item_pic}}"><br>
+        질문사진 :<div class="questionboard-q-img"> <img src="{{MEDIA_URL}}{{que.item_pic}}"></div>
         카테고리 : {{que.category.first.category}}<br>
         제목 : {{que.title}}<br>
         희망 수업일 :{{que.weekday}}<br>
         지역 : {{que.state.first.state}}/{{que.mylocal}}<br>
+{%endcomment%}
 ====================================================================================
     <br><br>
     {% elif que.qtype == "S" %}
