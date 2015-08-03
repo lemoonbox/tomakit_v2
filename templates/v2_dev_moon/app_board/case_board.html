@@ -34,8 +34,11 @@ category선택 :::
 ===========================================================================
 {%for case in questions %}
     {% if case.qtype == "I" %}
-        프로필 사진: <img src="{{MEDIA_URL}}{{case.quebox.djgouser.userprofile_set.first.propic}}"><br>
-        이름 : {{case.quebox.djgouser.last_name}}{{case.quebox.djgouser.first_name}}<br>
+        프로필 사진:
+        <a href="http://{{HTTP_HOST}}/v2/user/profile/{{case.quebox.djgouser.id}}">
+        <img src="{{MEDIA_URL}}{{case.quebox.djgouser.userprofile_set.first.propic}}"></a><br>
+        이름 : <a href="http://{{HTTP_HOST}}/v2/user/profile/{{case.quebox.djgouser.id}}">
+                {{case.quebox.djgouser.last_name}}{{case.quebox.djgouser.first_name}}</a><br>
         질문사진 : <img src="{{MEDIA_URL}}{{case.quebox.item_pic}}"><br>
         카테고리 : {{case.quebox.category.first.category}}<br>
         제목 : {{case.quebox.title}}<br>
@@ -45,8 +48,12 @@ category선택 :::
 ====================================================================================
     <br><br>
     {% elif case.qtype == "S" %}
-        프로필 사진: <img src="{{MEDIA_URL}}{{case.quebox.djgouser.userprofile_set.first.propic}}"><br>
-        이름 : {{case.quebox.djgouser.last_name}}{{case.quebox.djgouser.first_name}}<br>
+        프로필 사진:
+        <a href="http://{{HTTP_HOST}}/v2/user/profile/{{case.quebox.djgouser.id}}">
+        <img src="{{MEDIA_URL}}{{case.quebox.djgouser.userprofile_set.first.propic}}"></a><br>
+        이름 :
+        <a href="http://{{HTTP_HOST}}/v2/user/profile/{{case.quebox.djgouser.id}}">
+        {{case.quebox.djgouser.last_name}}{{case.quebox.djgouser.first_name}}</a><br>
         카테고리 : {{case.quebox.category.first.category}}<br>
         제목 : {{case.quebox.title}}<br>
         원하는 클래스 :{{case.quebox.skill_class}}<br>
