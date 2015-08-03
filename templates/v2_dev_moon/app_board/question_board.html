@@ -34,7 +34,7 @@
         float: left;
     }
 .questionboard-cards-wrapper {
-    max-width: 900px;
+    max-width: 1200px;
     margin: auto;
 }
 
@@ -52,6 +52,30 @@
         max-height:300px;
         margin-top:-30px;
     }
+
+    .questionboard-picks-cards {
+        margin-top: 26px;}
+
+    .questionboard-picks-cards ul {
+        position: relative;
+        width: 100%;
+        min-height: 470px;
+    }
+
+    /*.questionboard-picks-cards li {*/
+        /*overflow: hidden;*/
+        /*display: inline-block;*/
+        /*width: 270px;*/
+        /*min-height: 470px;*/
+        /*border-radius: 8px;*/
+        /*border: 1px solid #e1e1e1;*/
+        /*margin: 0px 15px;*/
+        /*background-repeat: no-repeat;*/
+        /*background-size: cover;*/
+        /*box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);*/
+    /*}*/
+
+
 </style>
 
 <div class="questionboard-banner-top">
@@ -91,15 +115,13 @@ category선택 :::
 ===================================================================================
 <div class="questionboard-cards-wrapper">
         <div class="picks-cards rows">
-        <ul>
-            {%for que in questions %}
+        <ul style="height:auto!important;min-height:1500px;">
+{%for que in questions %}
 {% if que.qtype == "I" %}
 
-
-
         <li class="card-qitem" style="float:left;">
-            <div class="picks-cards-profile"><a href="http://{{HTTP_HOST}}/v2/user/profile/{{case.quebox.djgouser.id}}">
-                <img src="{{MEDIA_URL}}{{case.quebox.djgouser.userprofile_set.first.propic}}"></a></div>
+            <div class="picks-cards-profile"><a href="http://{{HTTP_HOST}}/v2/user/profile/{{que.djgouser.id}}">
+                <img src="{{MEDIA_URL}}{{que.djgouser.userprofile_set.first.propic}}"></a></div>
             <div class="profile-name"><a href="http://{{HTTP_HOST}}/v2/user/profile/{{que.djgouser.id}}">
                 {{que.djgouser.last_name}}{{que.djgouser.first_name}}</a></div>
 
@@ -159,9 +181,10 @@ category선택 :::
 
     </ul>
 </div>
-
-
 </div>
+
+<div></div>
+    <div>
 ----------------paging------------------------------<br>
 {% for arrow in arrows %}
     {% if arrow.nav_before %}
@@ -180,5 +203,8 @@ category선택 :::
         <a href="http://{{HTTP_HOST}}/v2/board/questionboard/{{arrow.next_page}}/{{cate_current}}/{{state_current}}">|></a>
     {% endif %}
 {% endfor %}
+
+
+</div>
+    </div>
 {%endblock%}
-</body>
