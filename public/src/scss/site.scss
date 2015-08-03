@@ -334,10 +334,10 @@ ul{
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);
 
     &:nth-child(2) {
-      background-image: url("https://s-media-cache-ak0.pinimg.com/736x/7a/57/c9/7a57c9e5d62265e8db0e6df919f4b88a.jpg");
+      //background-image: url("https://s-media-cache-ak0.pinimg.com/736x/7a/57/c9/7a57c9e5d62265e8db0e6df919f4b88a.jpg");
     }
     &:nth-child(3) {
-      background-image: url("http://ak-hdl.buzzfed.com/static/2015-01/25/13/enhanced/webdr07/enhanced-buzz-16252-1422208840-10.jpg");
+      //background-image: url("http://ak-hdl.buzzfed.com/static/2015-01/25/13/enhanced/webdr07/enhanced-buzz-16252-1422208840-10.jpg");
       background-position: 0px -180px;
     }
   }
@@ -399,7 +399,7 @@ ul{
 
 
 .picks-cards-credit {
-  text-align:left;
+  text-align: left;
   margin: 0px;
   padding: 5px 0 0 0;
   position: relative;
@@ -408,24 +408,30 @@ ul{
   background: rgba(255, 255, 255, 1);
   //border-radius: 0px 0px 8px 8px;
 
-  >div {
+  > div {
     padding: 10px 10px 0 10px;
     //display:inline-block;
   }
 
   .h3 {
-    margin: 0px auto 5px !important;
+    margin: 0px 0px 5px 0px !important;
     font-family: NanumMyeongjo;
     font-size: 24px;
     color: #CCCCCC;
-   > span {
-      font-family: AppleSDGothicNeo-Regular;
-      font-size: 14px;
-      color: #F5515F;
-      line-height: 17px;
-      margin-left:150px;
-    }
+    width: 60%;
+    text-align: left;
+    display:inline-block;
   }
+  .category {
+    font-family: AppleSDGothicNeo-Regular;
+    font-size: 14px;
+    color: #F5515F;
+    line-height: 17px;
+    width: 35%;
+    display:inline-block;
+    text-align:right;
+  }
+
   .h4 {
     font-family: AppleSDGothicNeo-Regular;
     //font-size: 14px;

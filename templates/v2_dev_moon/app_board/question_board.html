@@ -2,7 +2,7 @@
 {% load static from staticfiles%}
     <title></title>
 
-<body>
+<div>
 {%block content%}
 <style>
     .questionboard-banner-top {
@@ -33,6 +33,15 @@
         margin-left: -20%;
         float: left;
     }
+.questionboard-cards-wrapper {
+    max-width: 900px;
+    margin: auto;
+}
+
+    .card-contents {
+        height: 270px;
+        margin-top: -30px;
+    }
 
     .questionboard-q-img {
         /*overflow: hidden;*/
@@ -43,8 +52,6 @@
         max-height:300px;
         margin-top:-30px;
     }
-
-
 </style>
 
 <div class="questionboard-banner-top">
@@ -68,7 +75,7 @@ category선택 :::
     {% else %}
         <a href="http://{{HTTP_HOST}}/v2/board/questionboard/1/{{cate.category}}/{{cate.state}}">{{cate.category}}</a>//
     {% endif %}
-{% endfor %}<br><br><br>ddddd
+{% endfor %}
 
 지역 선택 :::
 {% for state in states %}
@@ -78,29 +85,30 @@ category선택 :::
             <a href="http://{{HTTP_HOST}}/v2/board/questionboard/1/{{state.category}}/{{state.state}}">{{state.state}}</a>//
     {% endif %}
 
-{% endfor%}<br><br>
-
+{% endfor%}
 </div>
 
 ===================================================================================
-{%for que in questions %}
+<div class="questionboard-cards-wrapper">
+        <div class="picks-cards rows">
+        <ul>
+            {%for que in questions %}
+{% if que.qtype == "I" %}
 
 
-<div class="picks-cards rows">
-    <ul>
-        {% if que.qtype == "I" %}
-        <li class="card-qitem">
+
+        <li class="card-qitem" style="float:left;">
             <div class="picks-cards-profile"><a href="http://{{HTTP_HOST}}/v2/user/profile/{{case.quebox.djgouser.id}}">
                 <img src="{{MEDIA_URL}}{{case.quebox.djgouser.userprofile_set.first.propic}}"></a></div>
             <div class="profile-name"><a href="http://{{HTTP_HOST}}/v2/user/profile/{{que.djgouser.id}}">
                 {{que.djgouser.last_name}}{{que.djgouser.first_name}}</a></div>
 
-            <div class="card-contents" style="background:url({{MEDIA_URL}}{{case.quebox.item_pic}})">
-                <div class="questionboard-q-img"><img src="{{MEDIA_URL}}{{que.item_pic}}"></div>
+            <div class="card-contents" style="background:url({{MEDIA_URL}}{{que.item_pic}}); background-size:cover;">
+                <!--<div class="questionboard-q-img"><img src="{{MEDIA_URL}}{{que.item_pic}}"></div>-->
             </div>
 
             <div class="picks-cards-credit">
-                <div class="h3">Q. <span>{{que.category.first.category}}</span></div>
+                <div class="h3">Q. </div><div class="category">{{que.category.first.category}}</div>
                 <div class="credit-title"> {{que.title}}</div>
                 <div class="cards-date">희망 수업일&nbsp;&nbsp;
                     <div class="h4" style="display:inline;"> {{que.weekday}}</div>
@@ -112,8 +120,7 @@ category선택 :::
                 </div>
             </div>
         </li>
-    </ul>
-</div>
+
 
 {%comment%}
         프로필 사진:
@@ -128,8 +135,8 @@ category선택 :::
         희망 수업일 :{{que.weekday}}<br>
         지역 : {{que.state.first.state}}/{{que.mylocal}}<br>
 {%endcomment%}
-====================================================================================
-    <br><br>
+
+<!--====================================================================================-->
     {% elif que.qtype == "S" %}
         프로필 사진:
         <a href="http://{{HTTP_HOST}}/v2/user/profile/{{que.djgouser.id}}">
@@ -145,11 +152,16 @@ category선택 :::
         희망 수업일 :{{que.weekday}}<br>
         지역 : {{que.state.first.state}}/{{que.mylocal}}<br>
         <br>
-====================================================================================
-    <br><br>
+<!--====================================================================================-->
+
     {% endif %}
 {% endfor %}
 
+    </ul>
+</div>
+
+
+</div>
 ----------------paging------------------------------<br>
 {% for arrow in arrows %}
     {% if arrow.nav_before %}
