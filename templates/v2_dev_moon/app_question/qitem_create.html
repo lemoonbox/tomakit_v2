@@ -1,10 +1,10 @@
 {%extends 'base.html'%}
-    <title></title>
+<title></title>
 <body>
 {%block content%}
 <style>
     .tmk-qitem-wrapper{
-        max-width: 900px;
+        max-width: 720px;
     }
     .tmk-qitem-header{
         padding: 40px 10px;
@@ -17,6 +17,7 @@
 
     .tmk-qitem-hdr-contents{
         margin: 30px 0px;
+
     }
     .tmk-qitem-hdr-contents  span.tmk-ctns-text{
         font-size: 20px;
@@ -32,13 +33,18 @@
         min-width: 200px;
     }
 
+    .tmk-qitem-contents {
+        margin-left: -18px;
+    }
     .tmk-panel{
+
         display: inline-block;
         padding: 20px;
         background-color: #fff;
         border: 1px solid #ddd;
         border-radius: 4px;
-        width: 60%;
+        width: 70%;
+        text-align:left;
     }
 
     .selecter .selecter-selected{
@@ -95,8 +101,8 @@
 
 
     .tmk-imgs img{
-        width: 50px;
-        height: 100px;
+        width: 80px;
+        height: 80px;
     }
     .tmk-imgs input{
         display: none;
@@ -126,8 +132,24 @@
         visibility: visible;
     }
 
+    .tmk-qitem-footer {
+        width: 700px;
+    }
+    aside {
+        width: 25%;
+        padding:10px 10px;
+        float: right;
+        text-align: left;
+        background: rgba(255, 255, 255, 0.7);
+        /*margin-left: -100px;*/
+        /*margin-right:30px;*/
+    }
+
 </style>
+<form class="" method="POSt" action="{{request.path}}" enctype="multipart/form-data">
+    {% csrf_token %}
     <div class="tmk-qitem-wrapper container">
+
         <div class="row">
             <div class="tmk-qitem-header">
                 <span>길동님께서 만들고 싶은 것은 무엇인가요?</span>
@@ -135,22 +157,55 @@
                     <div><span class="tmk-ctns-text">나는</span></div>
                     <div class="tmk-qitem-selecter-wrapper">
                         <div class="selecter cover" tabindex="0">
-                            <select name="name" class="selecter_3 selecter-element" data-selecter-options="{&quot;cover&quot;:&quot;true&quot;}" tabindex="-1">
-                                <option value="">label</option>
-                                <option value="id">name</option>
+                            <select name="category" class="selecter_3 selecter-element" data-selecter-options="{&quot;cover&quot;:&quot;true&quot;}" tabindex="-1">
+                                <option value="leather">가죽공예</option>
+                                <option value="woodword">목공예</option>
+                                <option value="flowerart">꽃꽂이</option>
+                                <option value="dyeing">천연염색</option>
+                                <option value="toreutics">금속공예</option>
+                                <option value="painting">미술</option>
+                                <option value="knot">매듭공예</option>
+                                <option value="knitting">뜨개질</option>
+                                <option value="etc">기타</option>
                             </select>
-                            <span class="selecter-selected" onclick="btnClick(this)">label</span>
+                            <span class="selecter-selected" onclick="btnClick(this)">카테고리 선택</span>
                             <div class="selecter-options" data-value="">
-                                <span class="selecter-item selected" data-value="" onclick="selecting(this, '')">label</span>
+                                <span class="selecter-item selected" data-value="" onclick="selecting(this, '')">카테고리</span>
                                 <div class="selecter-item"
                                      data-value="id"
-                                     onclick="selecting(this, '')">name</div>
+                                     onclick="selecting(this, 'leather')">가죽공예</div>
+                                <div class="selecter-item"
+                                     data-value="id"
+                                     onclick="selecting(this, 'woodword')">목공예</div>
+                                <div class="selecter-item"
+                                     data-value="id"
+                                     onclick="selecting(this, 'flowerart')">꽃꽂이</div>
+                                <div class="selecter-item"
+                                     data-value="id"
+                                     onclick="selecting(this, 'dyeing')">천연염색</div>
+                                <div class="selecter-item"
+                                     data-value="id"
+                                     onclick="selecting(this, 'toreutics')">금속공예</div>
+                                <div class="selecter-item"
+                                     data-value="id"
+                                     onclick="selecting(this, 'painting')">미술</div>
+                                <div class="selecter-item"
+                                     data-value="id"
+                                     onclick="selecting(this, 'knot')">매듭공예</div>
+                                <div class="selecter-item"
+                                     data-value="id"
+                                     onclick="selecting(this, 'knitting')">뜨개질</div>
+                                <div class="selecter-item"
+                                     data-value="id"
+                                     onclick="selecting(this, 'etc')">기타</div>
                             </div>
                         </div>
                     </div>
+
+
                     <div><span class="tmk-ctns-text">분야의</span></div>
                     <div class="tmk-qitem-search-wrapper">
-                        <input type="text" class="form-control" placeholder="ex)뜨개">
+                        <input type="text" name="title" class="form-control" placeholder="ex) 인테리어 소품">
                     </div>
                     <div><span class="tmk-ctns-text">만들고 싶어요</span></div>
                 </div>
@@ -170,7 +225,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <span id="uploader" onclick="findLastInput(true);" class="custom-file-input-button btn btn-success">
-                                            <span class="custom-file-input-button-text">PC에서 가져오</span>
+                                            <span class="custom-file-input-button-text">PC에서 가져오기</span>
                                         </span>
                                     </div>
                                 </div>
@@ -196,48 +251,119 @@
                                     <img src="">
                                     <span onclick="deleteImg(this);"></span>
                                 </div>
-                                <input type="file" name="user_upload_pic1"  id="filePhoto1" />
-                                <input type="file" name="user_upload_pic2"  id="filePhoto2" />
-                                <input type="file" name="user_upload_pic3"  id="filePhoto3" />
-                                <input type="file" name="user_upload_pic4"  id="filePhoto4" />
-                                <input type="file" name="user_upload_pic5"  id="filePhoto5" />
+                                <input type="file" name="Qphoto"  id="filePhoto1" />
+                                <input type="file" name="Qphoto"  id="filePhoto2" />
+                                <input type="file" name="Qphoto"  id="filePhoto3" />
+                                <input type="file" name="Qphoto"  id="filePhoto4" />
+                                <input type="file" name="Qphoto"  id="filePhoto5" />
+
+                                <!--<input id="id_photo1" name="Qphoto" type="file"><br>-->
+                                <!--<input id="id_photo2" name="Qphoto" type="file"><br>-->
+                                <!--<input id="id_photo3" name="Qphoto" type="file"><br>-->
+                                <!--<input id="id_photo4" name="Qphoto" type="file"><br>-->
+                                <!--<input id="id_photo5" name="Qphoto" type="file"><br>-->
                             </div>
                         </div>
                         <div class="tmk-panel-footer"></div>
                     </div>
-                    <aside class="tmk-phupload-aside-right">123123123</aside>
+                    <aside class="tmk-phupload-aside-right">만들고 싶은 제품 사진을 업로드 해주세요. JPG, PNG 파일만 업로드가 가능합니다. 썸네일에서는 570*570 픽셀(1:1 비율)로 자동변환 됩니다. 현재 보고 있는 이미지가 썸네일로 지정됩니다.</aside>
                 </div>
                 <div class="tmk-qitem-learnWhat">
                     <div class="tmk-learnWhat-contents tmk-panel">
-                        <div class="tmk-panel-header">내용</div>
+                        <div class="tmk-panel-header"> 내용
+                        </div>
                         <div class="tmk-panel-contents">
+                            무엇을 배우고 싶으세요?
+                            <input class="form-control" style="height:200px;" type="text" name="wantedu">
+                            수업 인원은 몇명인가요?<br>
+                            <input class="form-control" style="width:50px;" type="number" name="memnum" min="1" max="50">
 
                         </div>
                         <div class="tmk-panel-footer"></div>
                     </div>
-                    <aside class="tmk-phupload-aside-right">ㅂㅈㄷㅂㅈㄷㅂㅈㄷ</aside>
+                    <aside class="tmk-phupload-aside-right">나에게 꼭 맞는 작가를 찾기위해, 배우고 싶은 것을 자세히 적어주세요. 수업에 함께 함여하려는 친구가 있다면 더 입력해주세요.</aside>
                 </div>
                 <div class="tmk-qitem-region">
                     <div class="tmk-phupload-contents tmk-panel">
                         <div class="tmk-panel-header">희망지역</div>
-                        <div class="tmk-panel-contents"></div>
+                        <div class="tmk-panel-contents">
+                            편하신 지역을 자유롭게 입력해주세요
+                            <div class="tmk-qitem-selecter-wrapper">
+                                <div class="selecter cover" tabindex="0">
+                                    <select name="state" class="selecter_3 selecter-element" data-selecter-options="{&quot;cover&quot;:&quot;true&quot;}" tabindex="-1">
+                                        <option value="seoul">서울</option>
+                                        <option value="gyeoggi">경기도</option>
+                                        <option value="gwangju">광주</option>
+                                        <option value="daegu">대구</option>
+                                        <option value="daejeon">대전</option>
+                                        <option value="busan">부산</option>
+                                        <option value="ulsan">울산</option>
+                                        <option value="incheon">인천</option>
+                                    </select>
+                                    <span class="selecter-selected" onclick="btnClick(this)">지역 선택</span>
+                                    <div class="selecter-options" data-value="">
+                                        <span class="selecter-item selected" data-value="" onclick="selecting(this, 'ca')">지역 선택</span>
+                                        <div class="selecter-item"
+                                             data-value="id"
+                                             onclick="selecting(this, 'seoul')">서울</div>
+                                        <div class="selecter-item"
+                                             data-value="id"
+                                             onclick="selecting(this, 'gyeoggi')">경기</div>
+                                        <div class="selecter-item"
+                                             data-value="id"
+                                             onclick="selecting(this, 'gwangju')">광주</div>
+                                        <div class="selecter-item"
+                                             data-value="id"
+                                             onclick="selecting(this, 'daegu')">대구</div>
+                                        <div class="selecter-item"
+                                             data-value="id"
+                                             onclick="selecting(this, 'daejeon')">대전</div>
+                                        <div class="selecter-item"
+                                             data-value="id"
+                                             onclick="selecting(this, 'busan')">부산</div>
+                                        <div class="selecter-item"
+                                             data-value="id"
+                                             onclick="selecting(this, 'ulsan')">울산</div>
+                                        <div class="selecter-item"
+                                             data-value="id"
+                                             onclick="selecting(this, 'incheon')">인천</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <input class="form-control" placeholder="ex) 홍대 근처" name = "mylocal"><br>
+                        </div>
                         <div class="tmk-panel-footer"></div>
                     </div>
-                    <aside class="tmk-phupload-aside-right">ㅁㄴㅇㅁㄴㅇ</aside>
+                    <aside class="tmk-phupload-aside-right">20자 이내에서 복수로 입력해주셔도 괜찮습니다.</aside>
                 </div>
                 <div class="tmk-qitem-calenda">
                     <div class="tmk-phupload-contents tmk-panel">
                         <div class="tmk-panel-header">수업희망일</div>
-                        <div class="tmk-panel-contents"></div>
+                        <div class="tmk-panel-contents">
+                            <input type="date">
+                        </div>
                         <div class="tmk-panel-footer"></div>
                     </div>
-                    <aside class="tmk-phupload-aside-right">ㅍㅌㅊㅍㅌㅊㅍ</aside>
+                    <aside class="tmk-phupload-aside-right">작가들이 수업일정을 제안할 수 있도록 수업을 희망하는 날과 시간을 지정해주세요.</aside>
                 </div>
             </div>
             <div class="tmk-qitem-footer">
+                <div class="tmk-panel" style="background:none;text-align:left;padding-left:0px;float:left;">
+                    <div><span class="tmk-ctns-text">저희가 어디로 연락드리면 될까요?</span></div>
+                    <input class="form-control" style="width:360px;vertical-align:middle;" placeholder="전화번호를 입력해주세요" name="mobile">
+                    <input type="submit" class="btn btn-primary" value="다했어요">
+                    {% for field in create_qform %}
+                    {{ field.errors|striptags }}
+                    {% if field.errors %}
+                    {{field.html_name}}
+                    {% endif %}
+                    {% endfor %}
+                </div>
             </div>
         </div>
     </div>
 
+</form>
 {%endblock%}
 </body>
