@@ -20,6 +20,10 @@ V2_HOST_SIGNUP_REJECT = 'v2_dev_moon/host_signup_reject.html'
 #login
 V2_LOGIN = "v2_dev_moon/login.html"
 
+#profile
+V2_RPO_EDIT = 'v2_dev_moon/app_user/profile_edit.html'
+V2_PROF_PUBLIC = 'v2_dev_moon/app_user/public_profile.html'
+
 #question
 V2_CREATE_QITEM = 'v2_dev_moon/app_question/qitem_create.html'
 V2_DETAIL_QITEM = 'v2_dev_moon/app_question/qitem_detail.html'

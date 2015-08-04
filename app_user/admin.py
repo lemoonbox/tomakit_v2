@@ -7,7 +7,9 @@ from app_user.models import UserProfile, HostProfile
 class ProfileAdmin(admin.ModelAdmin):
     list_display = ('djgouser', 'created_at')
 
-    fieldsets = [("AccountInfo",{'fields':['djgouser', 'propic']})]
+    fieldsets = [("AccountInfo",{'fields':['djgouser', 'propic',
+                                            'inter_oneline', 'inter_start','inter_pic',
+                                            'inter_url', 'mailcnfirm', 'is_activate',]})]
 
 
 admin.site.register(UserProfile, ProfileAdmin)

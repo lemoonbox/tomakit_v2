@@ -10,5 +10,7 @@ urlpatterns = patterns('app_question.views',
     url(r'^skill/create/', 'create_q_skill',name='v2_create_q_skill'),
     url(r'^skill/(?P<qskill_num>[0-9]+)/$', 'qskill_detail', name="v2_qskill_detail"),
 
+    url(r'^next_guid/$', 'next_guid', name='v2_next_guid'),
+
 
     )

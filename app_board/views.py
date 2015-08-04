@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-from app_board.models import Questionbox, SolutionBox, Casebox
+from app_board.models import Questionbox, SolutionBox, Casebox, MainQoubox
 from app_comminfo.models import State, Category
 from DIY_tool import template_match as TEMP
 # Create your views here.
@@ -28,7 +28,7 @@ def questionboard(request, page=1, category = 'all', state='all'):
             state_condt.append(state)
 
 
-        paging_date = pagination(navline_num=2, onepage_post_num=2,
+        paging_date = pagination(navline_num=2, onepage_post_num=11,
                                  target_model=Questionbox, cate_condt=cate_condt, state_condt =state_condt, page=page)
 
         HTTP_HOST = request.META['HTTP_HOST']
@@ -219,3 +219,21 @@ def pagination(navline_num=5, onepage_post_num=20,target_model=None,
 
     return {'pageitme':_line_post, 'pages':pages, 'arrows':arrows,
             'categories':categoris, 'states':states}
+
+
+def mainboard(request):
+
+
+    if request.method=="GET":
+        _mainqouboxs=MainQoubox.objects.all()[0:5]
+        HTTP_HOST= request.META['HTTP_HOST']
+
+
+
+    return render(request, 'contents/main/categoryline.html',
+        {
+            'qouboxs':_mainqouboxs,
+            'HTTP_HOST':HTTP_HOST,
+
+            'next':"/",
+        })

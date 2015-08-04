@@ -8,10 +8,47 @@
 
 
 <style>
-.caseboard-banner-top {width:100%;height:200px;background:yellow;}
+.caseboard-banner-top {
+    width: 100%;
+    height: 200px;
+    background: #ffdd87;
+    overflow: hidden;
+}
+    .caseboard-banner-wrapper {
+        max-width:900px;
+        margin:auto;
+    }
+    .banner-title{
+        padding:40px 0px;
+        float:left;
+        width:100%;
+    }
+
+.banner-title .h2 {
+    font-weight: bold;
+}
+.banner-title .h4 {
+    font-weight: normal;
+}
+.banner-image {
+    z-index: 10;
+    margin-left: -20%;
+    float: left;
+}
+
 </style>
 
-<div class="caseboard-banner-top"></div>
+<div class="caseboard-banner-top">
+    <div class="caseboard-banner-wrapper">
+        <div class="banner-title">
+            <div class="h2" >클래스 개설사례</div>
+            <div class="h4" >여러분의 질문으로 만들어진 클래스들을 만나보세요!</div>
+        </div>
+        <div class="banner-image">
+            <img src="{%static 'media/image/slice/img-3.png'%}">
+        </div>
+    </div>
+</div>
 category선택 :::
 {% for cate in categoryies %}
     {% if cate.category_current %}
@@ -34,19 +71,30 @@ category선택 :::
 ===========================================================================
 {%for case in questions %}
     {% if case.qtype == "I" %}
-        프로필 사진: <img src="{{MEDIA_URL}}{{case.quebox.djgouser.userprofile_set.first.propic}}"><br>
-        이름 : {{case.quebox.djgouser.last_name}}{{case.quebox.djgouser.first_name}}<br>
+
+
+        프로필 사진:
+        <a href="http://{{HTTP_HOST}}/v2/user/profile/{{case.quebox.djgouser.id}}">
+        <img src="{{MEDIA_URL}}{{case.quebox.djgouser.userprofile_set.first.propic}}"></a><br>
+        이름 : <a href="http://{{HTTP_HOST}}/v2/user/profile/{{case.quebox.djgouser.id}}">
+                {{case.quebox.djgouser.last_name}}{{case.quebox.djgouser.first_name}}</a><br>
         질문사진 : <img src="{{MEDIA_URL}}{{case.quebox.item_pic}}"><br>
         카테고리 : {{case.quebox.category.first.category}}<br>
         제목 : {{case.quebox.title}}<br>
         희망 수업일 :{{case.quebox.weekday}}<br>
         지역 : {{case.quebox.state.first.state}}/{{case.quebox.mylocal}}<br>
+        총 {{case.quebox.solutionbox_set.count}}개의 수업이 개설되었습니다.<br>
+
 
 ====================================================================================
     <br><br>
     {% elif case.qtype == "S" %}
-        프로필 사진: <img src="{{MEDIA_URL}}{{case.quebox.djgouser.userprofile_set.first.propic}}"><br>
-        이름 : {{case.quebox.djgouser.last_name}}{{case.quebox.djgouser.first_name}}<br>
+        프로필 사진:
+        <a href="http://{{HTTP_HOST}}/v2/user/profile/{{case.quebox.djgouser.id}}">
+        <img src="{{MEDIA_URL}}{{case.quebox.djgouser.userprofile_set.first.propic}}"></a><br>
+        이름 :
+        <a href="http://{{HTTP_HOST}}/v2/user/profile/{{case.quebox.djgouser.id}}">
+        {{case.quebox.djgouser.last_name}}{{case.quebox.djgouser.first_name}}</a><br>
         카테고리 : {{case.quebox.category.first.category}}<br>
         제목 : {{case.quebox.title}}<br>
         원하는 클래스 :{{case.quebox.skill_class}}<br>
@@ -54,6 +102,7 @@ category선택 :::
         배우고 싶은 내용 :{{case.quebox.skill_edu}}<br>
         희망 수업일 :{{case.quebox.weekday}}<br>
         지역 : {{case.quebox.state.first.state}}/{{case.quebox.mylocal}}<br>
+        총 {{case.quebox.solutionbox_set.count}}개의 수업이 개설되었습니다.<br>
         <br>
 ====================================================================================
     <br><br>

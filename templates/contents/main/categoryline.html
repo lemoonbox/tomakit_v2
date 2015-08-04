@@ -38,7 +38,6 @@
             <span class="title-main col-md-8" style="font-family:AppleSDGothicNeo-Regular;">직접 창조한다는 것은 얼마나 가슴 뛰는 일인가요?</span>
         </div>
     </div>
-
     <div class="picks-cards rows">
         <ul>
             <li class="tmk-picks-main">
@@ -48,19 +47,19 @@
             </li>
             <li class="tmk-picks-sub" style="background-image:url(https://s-media-cache-ak0.pinimg.com/736x/c3/59/32/c359324722c8e1e3fee69a1d9fa512e4.jpg)">
 
-                <div class="picks-cards-profile"><i class="fa fa-user fa-2x"></i></div>
+                <div class="picks-cards-profile"><img src="{%static 'media/image/slice/buttonicon-2.png'%}"></div>
                 <div class="profile-name">by 홍길동</div>
 
                 <div class="card-contents"></div>
 
                 <div class="picks-cards-credit">
-                    <div class="h3">Q. <span>카테고리</span></div>
+                    <div class="h3">Q. <span class="category">카테고리</span></div>
                     <div class="credit-title">인테리어 소품과 아이한테 해롭지 않은 디퓨저 만들고 싶어요.</div>
                     <div class="cards-date success" style="text-align:center;"><span>A.</span> 3개의 클래스가 만들어졌어요
                         <!--<h4 style="display:inline;"> 화/수/목</h4>-->
                     </div>
                     <div class="cards-credit-label">
-                        <span class="label-address"><i class="fa fa-map-marker"></i> 서울시 마포구 상암동</span>
+                        <span class="label-address"><img src="{%static 'media/icon/map-icon.png'%}"> 서울시 마포구 상암동</span>
                         <!--<i style="margin-left:20px;" class="fa fa-tag"></i>-->
                         <span class="label-tag">만들기 문의</span>
                     </div>
@@ -79,7 +78,7 @@
 <div class="picks-cards rows">
     <ul>
         <li class="card-qskill">
-            <div class="picks-cards-profile"><i class="fa fa-user fa-2x"></i></div>
+            <div class="picks-cards-profile"><img src="{%static 'media/image/slice/buttonicon-2.png'%}"></div>
             <div class="profile-name skill">by 홍길동</div>
 
 
@@ -101,7 +100,7 @@
                     <div class="h4" style="display:inline;"> 화/수/목</div>
                 </div>
                 <div class="cards-credit-label">
-                    <span class="label-address"><i class="fa fa-map-marker"></i> 서울시 마포구 상암동</span>
+                    <span class="label-address"><img src="{%static 'media/icon/map-icon.png'%}"> 서울시 마포구 상암동</span>
                     <!--<i style="margin-left:20px;" class="fa fa-tag"></i>-->
                     <span class="label-tag">만들기 문의</span>
                 </div>
@@ -109,7 +108,7 @@
 
         </li>
         <li class="card-qitem">
-            <div class="picks-cards-profile"><i class="fa fa-user fa-2x"></i></div>
+            <div class="picks-cards-profile"><img src="{%static 'media/image/slice/buttonicon-2.png'%}"></div>
             <div class="profile-name">by 홍길동</div>
 
             <div class="card-contents"></div>
@@ -121,7 +120,7 @@
                     <div class="h4" style="display:inline;"> 화/수/목</div>
                 </div>
                 <div class="cards-credit-label">
-                    <span class="label-address"><i class="fa fa-map-marker"></i> 서울시 마포구 상암동</span>
+                    <span class="label-address"><img src="{%static 'media/icon/map-icon.png'%}"> 서울시 마포구 상암동</span>
                     <!--<i style="margin-left:20px;" class="fa fa-tag"></i>-->
                     <span class="label-tag">만들기 문의</span>
                 </div>
@@ -136,7 +135,7 @@
     <ul>
         <li class="card-qskill">
 
-            <div class="picks-cards-profile"><i class="fa fa-user fa-2x"></i></div>
+            <div class="picks-cards-profile"><img src="{%static 'media/image/slice/buttonicon-2.png'%}"></div>
             <div class="profile-name skill">by 홍길동</div>
             <div class="picks-cards-credit">
                 <div class="h3">Q. <span>카테고리</span></div>
@@ -164,7 +163,7 @@
 
             </div>
             <div class="cards-credit-label">
-                <span class="label-address"><i class="fa fa-map-marker"></i> 서울시 마포구 상암동</span>
+                <span class="label-address"><img src="{%static 'media/icon/map-icon.png'%}"> 서울시 마포구 상암동</span>
                 <!--<i style="margin-left:20px;" class="fa fa-tag"></i>-->
                 <span class="label-tag">만들기 문의</span>
             </div>
@@ -183,7 +182,7 @@
 </div>
 </div>
 
-<button class="btn btn-primary" style="margin:35px auto;;display:block;">클래스 개설사례 보러가기</button>
+<a href="/v2/board/caseboard/"><button class="btn btn-primary" style="margin:35px auto;;display:block;">클래스 개설사례 보러가기</button></a>
 
 <div class="tmk-footer-banner" style="background:url({%static 'img/img-1.png'%})">
 
@@ -213,7 +212,48 @@
     <a class="btn" target="_blank" href="http://goto.kakao.com/@토마킷" style="box-shadow:-3px 6px 10px 0px #666666;position:absolute;width:40px;height:40px;left:8px;padding:8px;background: url(http://img2.kakao.co.kr/assets/icon/facebook-3dc359d9233fe406dfba651563a70c03.png);border-radius: 5px;background-size:cover;"></a>
 
 </div>
-
+<div>
+    ==================<br>
+{%for que in qouboxs %}
+    <div class="counter{{forloop.counter}}">
+    {% if que.quebox.qtype == "I" %}
+        프로필 사진:
+        <a href="http://{{HTTP_HOST}}/v2/user/profile/{{que.quebox.djgouser.id}}">
+        <img src="{{MEDIA_URL}}{{que.quebox.djgouser.userprofile_set.first.propic}}"></a><br>
+        이름 :
+        <a href="http://{{HTTP_HOST}}/v2/user/profile/{{que.quebox.djgouser.id}}">
+        {{que.quebox.djgouser.last_name}}{{que.quebox.djgouser.first_name}}</a><br>
+        질문사진 :<div class="questionboard-q-img"> <img src="{{MEDIA_URL}}{{que.quebox.item_pic}}"></div>
+        카테고리 : {{que.quebox.category.first.category}}<br>
+        제목 : {{que.quebox.title}}<br>
+        희망 수업일 :{{que.quebox.weekday}}<br>
+        지역 : {{que.quebox.state.first.state}}/{{que.quebox.mylocal}}<br>
+        총 {{que.quebox.solutionbox_set.count}}개의 수업이 개설되었습니다.<br>
+====================================================================================
+    <br><br>
+    {% elif que.qoubox.qtype == "S" %}
+        프로필 사진:
+        <a href="http://{{HTTP_HOST}}/v2/user/profile/{{que.quebox.djgouser.id}}">
+        <img src="{{MEDIA_URL}}{{que.quebox.djgouser.userprofile_set.first.propic}}"></a><br>
+        이름 :
+        <a href="http://{{HTTP_HOST}}/v2/user/profile/{{que.quebox.djgouser.id}}">
+        {{que.quebox.djgouser.last_name}}{{que.quebox.djgouser.first_name}}</a><br>
+        카테고리 : {{que.quebox.category.first.category}}<br>
+        제목 : {{que.quebox.title}}<br>
+        원하는 클래스 :{{que.quebox.skill_class}}<br>
+        배우는 목표 :{{que.quebox.skill_goal}}<br>
+        배우고 싶은 내용 :{{que.quebox.skill_edu}}<br>
+        희망 수업일 :{{que.quebox.weekday}}<br>
+        지역 : {{que.quebox.state.first.state}}/{{que.quebox.mylocal}}<br>
+        총 {{que.quebox.solutionbox_set.count}}개의 수업이 개설되었습니다.<br>
+        <br>
+====================================================================================
+    <br><br>
+    {% endif %}
+    </div>
+{% endfor %}
+==================<br>
+</div>
 
 <!--<div class="tmk-main-border">-->
 <!--<div>개설된 핸드메이드 문의</div>-->

@@ -1,15 +1,21 @@
 from django.db import models
 from django.conf import settings
+import uuid
 
 def upload_to(instance, filename):
-    path_arr = filename.split('/')
-    return '%s/profile/%s' %(instance.djgouser.username, path_arr[-1])
+    path_arr = filename.split('.')
+    return 'profile/%s/%s' %(instance.djgouser.username, str(uuid.uuid4())+"."+path_arr[-1])
 
 
 
 class UserProfile(models.Model):
     djgouser = models.ForeignKey(settings.AUTH_USER_MODEL)
-    propic= models.ImageField(upload_to=upload_to)
+
+    propic= models.ImageField(upload_to=upload_to, null=True, blank=True)
+    inter_oneline=models.CharField(max_length=150, null=True, blank=True)
+    inter_start = models.TextField(null=True, blank=True)
+    inter_pic =models.ImageField(upload_to=upload_to, null=True, blank=True)
+    inter_url=models.CharField(max_length=150, null=True, blank=True)
 
     mailcnfirm= models.BooleanField(default=False)
     is_activate=models.BooleanField(default=True)

@@ -16,4 +16,7 @@ urlpatterns = patterns('app_user.views',
 
     url(r'login/$', 'login', name='v2_login'),
     url(r'logout/$', 'logout', name='v2_logout'),
+
+    url(r'edit_prof/(?P<user_num>[0-9]+)/$', 'T2W_edit_prof', name='v2_edit_prof'),
+    url(r'profile/(?P<user_num>[0-9]+)/$', 'T2W_public_prof', name='v2_public_prof')
 )

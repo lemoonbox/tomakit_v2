@@ -5,7 +5,8 @@ from django.shortcuts import \
     loader,\
     render
 from django.contrib.auth.decorators import \
-    login_required
+    login_required, \
+    permission_required
 from django.contrib.auth.models import \
     User
 from django.http import \
@@ -69,7 +70,7 @@ def create_q_item(request):
             picpic=_qitempost.qpic_set.first().pic
             _qbox = Questionbox(djgouser=user, title =_qitempost.title,
                                 mylocal=_qitempost.mylocal, qtype="I",
-                                qitempost = _qitempost,
+                                qitempost = _qitempost, weekday=_qitempost.weekday,
                                 item_pic=picpic)
             _qbox.save()
             _qbox.category=_category
@@ -77,11 +78,8 @@ def create_q_item(request):
             _qbox.save()
 
             HTTP_HOST = request.META['HTTP_HOST']
-            return render(request, TEMP.V2_NEXT_GUIDE,{
-                'HTTP_HOST':HTTP_HOST,
-                "myq_id":_qitempost.id,
-            })
-            #return HttpResponseRedirect("/v2/question/item/{0}".format(_qitempost.id))
+
+            return HttpResponseRedirect("/v2/question/next_guid")
 
 
     return render(request, TEMP.V2_CREATE_QITEM,{
@@ -96,9 +94,12 @@ def qitem_detail(request, qitem_num):
             _qitempost = QItem.objects.get(pk=qitem_num)
         except _qitempost.DoesNotExist:
             raise Http404("post does not exist")
+
+    HTTP_HOST = request.META["HTTP_HOST"]
     return render(request, TEMP.V2_DETAIL_QITEM,
         {
-            'qitem_post':_qitempost
+            'qitem_post':_qitempost,
+            'HTTP_HOST':HTTP_HOST,
         })
 
 
@@ -127,7 +128,7 @@ def create_q_skill(request):
             _qskillpost.save()
 
             _qbox = Questionbox(djgouser=user, title =_qskillpost.title,
-                                mylocal=_qskillpost.mylocal, qtype="S",
+                                mylocal=_qskillpost.mylocal, qtype="S",weekday=_qskillpost.weekday,
                                 qskillpost = _qskillpost,skill_class=_qskillpost.wantclass,
                                 skill_goal=_qskillpost.wantgoal, skill_edu=_qskillpost.wantedu)
             _qbox.save()
@@ -136,10 +137,8 @@ def create_q_skill(request):
             _qbox.save()
 
             HTTP_HOST = request.META['HTTP_HOST']
-            return render(request, TEMP.V2_NEXT_GUIDE,{
-                'HTTP_HOST':HTTP_HOST,
-            })
-            # return HttpResponseRedirect("/v2/question/skill/{0}".format(_qskillpost.id))
+
+            return HttpResponseRedirect("/v2/question/next_guid")
 
 
     return render(request, TEMP.V2_CREATE_QSKILL,{
@@ -154,8 +153,17 @@ def qskill_detail(request, qskill_num):
         except _qskillpost.DoesNotExist:
             raise Http404("post does not exist")
 
-        print _qskillpost
+    HTTP_HOST = request.META["HTTP_HOST"]
     return render(request, TEMP.V2_DETAIL_QSKILL,
         {
-            'qskill_post':_qskillpost
+            'qskill_post':_qskillpost,
+            'HTTP_HOST':HTTP_HOST,
+
         })
+
+def next_guid(request):
+
+    HTTP_HOST = request.META['HTTP_HOST']
+    return render(request, TEMP.V2_NEXT_GUIDE,{
+        'HTTP_HOST':HTTP_HOST,
+    })
