@@ -343,11 +343,12 @@ ul{
 
   img {
     height: 240px;
-    position:inherit;
+    position: inherit;
     top: 0;
     left: 0;
   }
 }
+  //.card-qskill {height:470px;}
 }
 .card-contents-skill {
   height:240px;
@@ -571,6 +572,9 @@ nav {
   text-align: left;
   color: white;
   min-width:1250px;
+//position:absolute;
+  left:0;
+  width:100%;
 }
 
 .tmk-footer-nav {
@@ -652,7 +656,10 @@ nav {
 .modal {
   z-index: 1041 !important;
 }
-.modal-content {  width:  520px;}
+.modal-content {
+  max-width: 400px;
+  margin: auto;
+}
 
 $g-btn-color:#F5515F;
 $g-btn-h-color:#e86460;
@@ -761,47 +768,69 @@ $g-btn-h-color:#e86460;
 
 
 
-.user {background-color:transparent; color:gray;}
+.user {
+  background-color: transparent;
+  color: gray;
+}
 
 /* error */
-#form-error {width:100%;}
-//.alert-warning {width:400px;}
 
-.text-muted{line-height:1.4em;}
+
+#form-error {
+  width: 100%;
+}
+
+.text-muted {
+  line-height: 1.4em;
+}
 
 #login, #register {
   border: none;
   text-align: left;
   width:360px;
-  min-height:600px;
   margin:auto;
 }
 
 .form-signin {
-  width:100%;
-  input {height: 50px;margin:5px;  }
+  width: 100%;
+  text-align:left;
+  input {
+    height: 50px;
+    margin: 5px 0px;
+  }
 }
 
-.form-control {display:inline-block !important;}
+.form-control {
+  display: inline-block !important;
+}
 
-.modal-body{padding-top:0px;}
+.modal-body {
+  padding-top: 0px;
+}
 
+.tab-content {
+  padding:0px !important;
+}
 .modal-footer {
+  padding:0 !important;
   text-align: center;
-  padding-bottom: 0;
   .nav-tabs {
     width: 85%;
     margin: auto;
-  }
-  .nav-tabs {
     border: none;
-    width: 70%;
+    background-color: #fff;
   }
   .nav-tabs li a, .nav-tabs li a:hover {
     border: 0px;
-    background-color: transparent;
+    background-color: transparent !important;
     display: inline;
     padding: 0px;
+    color:#e86460;
+  }
+  .nav-tabs > li {
+    border-left: none;
+    width:100%;
+    text-align:center;
   }
   .nav-tabs > li.active {
     display: none;
@@ -809,9 +838,10 @@ $g-btn-h-color:#e86460;
   .nav-tabs > li.active > a {
     display: none;
   }
-  /*  .nav-tabs li, .nav-tabs li:hover {border:1px solid white;}*/
 }
-.change_link {display:inline;}
+.change_link {
+  display: inline;
+}
 
 
 
@@ -859,4 +889,16 @@ $g-btn-h-color:#e86460;
 
 .carousel-control {
   border-radius: 8px !important;
+}
+
+
+
+#kakao {
+  position: absolute;
+  box-shadow: -3px 6px 10px 0px #666666;
+  width: 40px;
+  height: 40px;
+  left: 20px;
+  bottom: 200px;
+  border-radius: 5px;
 }

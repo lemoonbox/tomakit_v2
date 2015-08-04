@@ -50,12 +50,8 @@
 
         {%for que in qouboxs %}
 
-        {% if que.quebox.qtype = "I" %}
-        <li class="card-qitem {counter{{forloop.counter}}}">
-            {% elif que.quebox.qtype == "S" %}
-        <li class="card-qskill {counter{{forloop.counter}}}">
-            {%endif%}
             {% if que.quebox.qtype == "I" %}
+            <li class="card-qitem counter{{forloop.counter}}">
             <!--<li class="card-qitem" style="float:left;">-->
             <span class="picks-cards-profile pull-left"><a href="http://{{HTTP_HOST}}/v2/user/profile/{{que.quebox.djgouser.id}}">
                 <img src="{{MEDIA_URL}}{{que.quebox.djgouser.userprofile_set.first.propic}}"></a></span>
@@ -80,9 +76,8 @@
                     <span class="label-tag">만들기 문의</span>
                 </div>
             </div>
-
-            {% elif que.qoubox.qtype == "S" %}
-
+            {% elif que.quebox.qtype == "S" %}
+            <li class="card-qskill counter{{forloop.counter}}">
             <!--<li class="card-qskill" style="float:left;">-->
             <span class="picks-cards-profile"><a href="http://{{HTTP_HOST}}/v2/user/profile/{{que.quebox.djgouser.id}}">
                 <img src="{{MEDIA_URL}}{{que.quebox.djgouser.userprofile_set.first.propic}}"></a></span>
