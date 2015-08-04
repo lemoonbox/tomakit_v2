@@ -1,10 +1,10 @@
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
+{%extends 'base.html' %}
+{%load static from staticfiles %}
     <title></title>
-</head>
+
 <body>
+{%block content%}
+<div class="tmk-sub-body" style="height:500px;">
 프로파일 편집하기 버튼<br>
 {% if request.user.is_authenticated %}
     {% if page_user == req_user %}
@@ -20,5 +20,6 @@
 <img src="{{MEDIA_URL}}{{profile.inter_pic}}"><br>
 왜 핸드메이들르 시작하셨나요?<br>}
 {{profile.inter_start}}
+</div>
+{%endblock%}
 </body>
-</html>

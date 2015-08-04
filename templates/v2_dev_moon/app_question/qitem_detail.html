@@ -1,51 +1,179 @@
 {%extends 'base.html'%}
-    <title>{{qitem_post.title}}</title>
+{%load static from staticfiles %}
+<title>{%block title%}{{qitem_post.title}}{%endblock%}</title>
 
 <body>
+
 {%block content%}
-{{qitem_post.title}}를 만들고 싶어요.<br><br>
 
-{% for photo in qitem_post.qpic_set.all %}
-<img src="{{MEDIA_URL}}{{photo.pic}}">
-{% endfor %}<br>
+<style>
 
-
-------만들기 문의---------<br>
-카테고리 : {{qitem_post.category.first.category}}<br>
-
-프로필 사진 :
-<a href="http://{{HTTP_HOST}}/v2/user/profile/{{qitem_post.djgouser.id}}">
-<img src="{{MEDIA_URL}}{{qitem_post.djgouser.userprofile_set.first.propic}}"></a><br>
-이름 :
-<a href="http://{{HTTP_HOST}}/v2/user/profile/{{qitem_post.djgouser.id}}">
-{{qitem_post.djgouser.last_name}}{{qitem_post.djgouser.first_name}}</a><br>
-자기 소개 : <br>
-
+    .tmk-qitem-detail-wrapper{
+        max-width: 900px;
+    }
+    .tmk-qitem-header{
+        padding: 40px 10px;
+        border-bottom: 1px solid rgba(0,0,0,0.22);
+        margin:auto auto 30px;
+        width: 900px;
+    }
+    .tmk-qitem-header > span{
+        font-size: 28px;
+        font-weight: bold;
+    }
 
 
-------수업 정보 --------<br>
-무엇을 배우고 싶으신가요?<br>
-{{qitem_post.wantedu}}<br><br>
-수업인원은 몇명인가요?<br>
-{{qitem_post.memnum}}명입니다 <br><br>
-수업 희망 지역<br>
-{{qitem_post.mylocal}}<br>
+    .tmk-qitem-img {width:73%;float:left;border-radius:8px;}
+    /*.tmk-qitem-img img {width:100%}*/
 
-------개설 수업-------------<br>
-{% for solution in qitem_post.solustionbox.all %}
-        답변 타이틀 :{{solution.title}}<br>
+    .tmk-panel {
+        float: left;
+        width: 73%;
+        text-align: center;
+        padding: 30px auto;
+
+        display: inline-block;
+
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+
+    }
+    .tmk-panel div {margin:30px auto;}
+
+    .tmk-qitem-q-top {width:30px;height:5px;background:#e85460;}
+    .tmk-qitem-q {line-height:50px;width:200px;}
+    .tmk-qitem-q .h4 {font-family:NanumMyeongjo!important;}
+
+#qitem-Carousel {
+    border-radius: 8px;
+}
+        .carousel-inner {
+        height: 500px;
+        overflow: hidden;
+        border-radius:8px;
+    }
+    .item {
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    .carousel-control {
+        width: 50px;
+        height: 100px;
+        margin: 230px 15px;
+    }
+
+
+</style>
+<div class="tmk-qitem-wrapper container">
+    <div class="row">
+        <div class="tmk-qitem-header">
+            <span>길동님께서 만들고 싶은 것은 무엇인가요?</span>
+        </div>
+    </div>
+
+        <div class="tmk-qitem-img">
+
+                <div id="qitem-Carousel" class="carousel slide" data-ride="carousel">
+                    <!--Indicators -->
+                    <ol class="carousel-indicators">
+                        {%for photo in qitem_post.qpic_set.all %}
+                        {% if forloop.counter0 == 0 %}
+                        <li data-target="#class-post-Carousel" data-slide-to="{{forloop.counter0}}" class="active"></li>
+                        {% else %}
+                        <li data-target="#class-post-Carousel" data-slide-to="{{forloop.counter0}}"></li>
+                        {% endif %}
+                        {%endfor%}
+                    </ol>
+
+                    <div class="carousel-inner" role="listbox">
+                        {%for photo in qitem_post.qpic_set.all%}
+                        {% if forloop.counter0 == 0 %}
+                        <div class="item active">
+                            <img class="img-responsive{{forloop.counter0}}" src="{{MEDIA_URL}}{{photo.pic}}" alt="{{photo.photo_title}} image{{forloop.counter0}}">
+                        </div>
+                        {% else %}
+                        <div class="item">
+                            <img class="img-responsive{{forloop.counter0}}" src="{{MEDIA_URL}}{{photo.pic}}" alt="{{photo.photo_title}} image{{forloop.counter0}}">
+                        </div>
+                        {% endif %}
+                        {%endfor%}
+                    </div>
+
+
+                    <a class="left carousel-control"  href="#qitem-Carousel" role="button" style="background-image:url({%static 'media/image/slice/arrow-left.png'%}); background-repeat:no-repeat;" data-slide="prev">
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="right carousel-control" href="#qitem-Carousel" role="button" style="background-image:url({%static 'media/image/slice/arrow-right.png'%}); background-repeat:no-repeat;" data-slide="next">
+                        <!--<img src="{%static 'media/image/slice/arrow-right.png'%}">-->
+                        <span class="sr-only">Next</span>
+                    </a>
+</div>
+    </div>
+
+    <!--&#45;&#45;&#45;&#45;&#45;&#45;만들기 문의-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;-->
+    <aside class="tmk-aside-right">
+        <!--카테고리 : -->
+        <div class="h3">{{qitem_post.category.first.category}}</div>
+
         프로필 사진 :
-        <a href="http://{{HTTP_HOST}}/v2/user/profile/{{solution.djgouser.id}}">
-        <img src="{{MEDIA_URL}}{{solution.djgouser.userprofile_set.first.propic}}"></a><br>
+        <a href="http://{{HTTP_HOST}}/v2/user/profile/{{qitem_post.djgouser.id}}">
+            <img src="{{MEDIA_URL}}{{qitem_post.djgouser.userprofile_set.first.propic}}"></a>
         이름 :
-        <a href="http://{{HTTP_HOST}}/v2/user/profile/{{solution.djgouser.id}}">
-        {{solution.djgouser.last_name}}{{solution.djgouser.first_name}}</a><br>
-        클래스 정보 <br>
-        지역 {{solution.state.first.state}}/{{solution.mylocal}}<br>
-        수업횟수 {{solution.repeat}}회/총 {% widthratio solution.repeat 1 solution.perhour%}시간<br>
-        수업요일 {{solution.weekday_time}}<br>
-=================================<br>
-{% endfor %}
-=======
+        <a href="http://{{HTTP_HOST}}/v2/user/profile/{{qitem_post.djgouser.id}}">
+            {{qitem_post.djgouser.last_name}}{{qitem_post.djgouser.first_name}}</a><br>
+        자기 소개 :
+    </aside>
+
+    <div class="tmk-panel">
+        <div class="tmk-panel-header">문의 내용</div>
+        <hr>
+        <div class="tmk-qitem-q">
+            <div class="tmk-qitem-q-top"></div>
+            <div class="h4">무엇을 배우고 싶으세요?</div>
+        </div>
+        {{qitem_post.wantedu}}
+        <div class="tmk-qitem-q">
+            <div class="tmk-qitem-q-top"></div>
+            <div class="h4">수업인원은 몇명인가요?
+            </div>
+        </div>
+        {{qitem_post.memnum}}명입니다
+
+        <div class="tmk-qitem-q">
+            <div class="tmk-qitem-q-top"></div>
+            <div class="h4">수업 희망 지역
+            </div>
+        </div>
+        <div>{{qitem_post.mylocal}}</div>
+
+    </div>
+
+
+    <div class="picks-cards rows" style="width:73%px;float:left;">
+        <span class="picks-cards-hdr">
+            <div class="h4" style="text-align:left;">만들어진 클래스</div>
+            </span>
+        <ul>
+            {% for solution in qitem_post.solustionbox.all %}
+            <li>
+                답변 타이틀 :{{solution.title}}<br>
+                프로필 사진 :
+                <a href="http://{{HTTP_HOST}}/v2/user/profile/{{solution.djgouser.id}}">
+                    <img src="{{MEDIA_URL}}{{solution.djgouser.userprofile_set.first.propic}}"></a><br>
+                이름 :
+                <a href="http://{{HTTP_HOST}}/v2/user/profile/{{solution.djgouser.id}}">
+                    {{solution.djgouser.last_name}}{{solution.djgouser.first_name}}</a><br>
+                클래스 정보 <br>
+                지역 {{solution.state.first.state}}/{{solution.mylocal}}<br>
+                수업횟수 {{solution.repeat}}회/총 {% widthratio solution.repeat 1 solution.perhour%}시간<br>
+                수업요일 {{solution.weekday_time}}<br>
+            </li>
+
+            {% endfor %}
+    </div>
+
+</div>
 {%endblock%}
 </body>

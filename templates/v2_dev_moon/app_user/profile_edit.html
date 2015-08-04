@@ -1,11 +1,10 @@
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
+{% extends 'base.html' %}
+{%load static from staticfiles %}
     <title></title>
-</head>
+
 <body>
-    <form method="POST" action="{{request.path}}" enctype="multipart/form-data">
+{%block content%}
+<form method="POST" action="{{request.path}}" enctype="multipart/form-data">
         {% csrf_token %}
         프로필 사진 : <input name="pro_pic" type="file"><br>
         이름:<input name="first_name" value={{djgouser.first_name}}><br>
@@ -17,5 +16,5 @@
         소개 영상 :<input type="url" name ="inter_url"><br>
         <input type ='submit' value="인터뷰 업데이트">
     </form>
+{%endblock%}
 </body>
-</html>

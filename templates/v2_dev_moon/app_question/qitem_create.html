@@ -280,9 +280,9 @@
                         </div>
                         <div class="tmk-panel-contents">
                             무엇을 배우고 싶으세요?
-                            <input class="form-control" style="height:150px;" type="text" name="wantedu">
+                            <textarea class="form-control" style="height:150px;" rows="5" type="text" name="wantedu"></textarea>
                             수업 인원은 몇명인가요?<br>
-                            <div class="col-md-6" style="padding-left:0;">
+                            <div class="col-md-3" style="margin-left:-15px;">
                                 <div class="stepper ">
                                     <input class="form-control stepper-input" type="number" name="memnum" min="1" max="50">
                                     <span class="stepper-arrow up">Up</span>
@@ -352,8 +352,8 @@
                     <div class="tmk-phupload-contents tmk-panel">
                         <div class="tmk-panel-header">수업희망일</div>
                         <div class="tmk-panel-contents">
-                            "날짜 선택"
-                            <input type="text" name="weekday">
+                            날짜 선택
+                            <input class="form-control" placeholder="ex) 2015-08-20, 150820, 월수금, 화목 등" type="text" name="weekday">
 
                         </div>
                         <div class="tmk-panel-footer"></div>
@@ -380,4 +380,3 @@
 </form>
 {%endblock%}
 </body>
-

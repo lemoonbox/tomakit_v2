@@ -36,7 +36,7 @@ $g-btn-h-color:#e86460;
   margin-top:0px;
   text-align: center;
   display: inline-block;
-  width: 1250px;
+  width: 900px;
 }
 
 ul{
@@ -276,6 +276,7 @@ ul{
   margin-top: 25px;
   margin-bottom:50px;
 
+
   .picks-title{
     font-size: 14px;
     height: 18px;
@@ -293,7 +294,8 @@ ul{
 
 .picks-cards {
   margin-top: 26px;
-
+  //max-width: 900px;
+  margin:auto;
   ul {
     position: relative;
     width: 100%;
@@ -304,64 +306,74 @@ ul{
   .tmk-picks-main {
     width: 570px;
     height: 470px;
-    //float:left;
+    float:left;
     background-image: url("http://blog.freepeople.com/wp-content/uploads/2013/03/diy-painted-feathers-3.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: 0px 0px;
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);
   }
-  .tmk-picks-sub {
-    width: 270px;
-    height: 470px;
-    background-image: url("https://s-media-cache-ak0.pinimg.com/736x/c3/59/32/c359324722c8e1e3fee69a1d9fa512e4.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
-    box-shadow:0 1px 2px 0 rgba(0,0,0,0.22);
-  }
+  //.tmk-picks-sub {
+  //  width: 270px;
+  //  height: 470px;
+  //  background-image: url("https://s-media-cache-ak0.pinimg.com/736x/c3/59/32/c359324722c8e1e3fee69a1d9fa512e4.jpg");
+  //  background-repeat: no-repeat;
+  //  background-size: cover;
+  //  box-shadow:0 1px 2px 0 rgba(0,0,0,0.22);
+  //}
 
   li {
+    float:left;
     overflow: hidden;
     display: inline-block;
     width: 270px;
     height: 470px;
     border-radius: 8px;
     border: 1px solid #e1e1e1;
-    margin: 0px 15px;
-    //background-image: url("https://s-media-cache-ak0.pinimg.com/736x/19/48/c0/1948c0fc6aabce73963164f0f14798e8.jpg");
+    margin: 0px 15px 30px;
     background-repeat: no-repeat;
     background-size: cover;
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);
-
-    &:nth-child(2) {
-      //background-image: url("https://s-media-cache-ak0.pinimg.com/736x/7a/57/c9/7a57c9e5d62265e8db0e6df919f4b88a.jpg");
-    }
-    &:nth-child(3) {
-      //background-image: url("http://ak-hdl.buzzfed.com/static/2015-01/25/13/enhanced/webdr07/enhanced-buzz-16252-1422208840-10.jpg");
-      background-position: 0px -180px;
-    }
   }
 }
 
+.card-qitem {
 .card-contents {
-  min-height: 220px;
+  height: 240px;
+
+  img {
+    height: 240px;
+    position:inherit;
+    top: 0;
+    left: 0;
+  }
+}
+}
+.card-contents-skill {
+  height:240px;
 }
 
 .picks-cards-profile {
   height: 32px;
   width: 32px;
-  margin: 10px 10px;
-  background: rgb(255, 255, 255);
-  border: 1px solid #e1e1e1;
-  position: absolute;
+  margin: 10px 10px 0px;
+  //border: 1px solid #ddd;
+  //position: absolute;
   border-radius: 50%;
-  //text-align: center;
+  background: #ddd;
+  overflow:hidden;
+
+  img {
+    width:28px;
+    margin-top: 5px;
+  }
+
 }
 .profile-name {
     font-size: 14px;
-    line-height: 21px;
+    //z-index:1;
+    line-height: 32px;
     margin-left: 38px;
-    padding: 15px;
     text-align: left;
 }
 .skill {
@@ -457,9 +469,7 @@ ul{
       margin-right:40px;
     }
   }
-  .success
-  /*���� �ٸ� �̸����� ���� */
-  {
+  .success  {
     background-color: #F5515F;
     color: #ffffff;
   }
@@ -553,7 +563,7 @@ nav {
 
 
 #tmk-footer {
-  margin-top: 10px;
+  //margin-top: 10px;
   background-color: #f49e80;
   bottom: 0;
   //width: 100%;
@@ -802,3 +812,51 @@ $g-btn-h-color:#e86460;
   /*  .nav-tabs li, .nav-tabs li:hover {border:1px solid white;}*/
 }
 .change_link {display:inline;}
+
+
+
+.questionboard-category-wrapper {
+  width:1170px;
+  border-radius:8px;
+  height:200px;
+  margin:30px auto;
+  border: 1px solid #ddd;
+  background:#ffffff;
+}
+
+.category-title {
+  line-height:200px;
+  float:left;
+}
+.category-category {
+  float: left;
+}
+.category-states {
+  float: left;
+}
+
+
+.tmk-aside-right{
+  text-align:left;
+  width: 25%;
+  float: left;
+  display: inline-block;
+  min-height: 100px;
+  padding:10px;
+  margin-left: 10px;
+  background-color: rgba(255,255,255,0.7);
+}
+
+
+.carousel-inner {
+  > .item > a > img {
+    border-radius: 8px !important;
+  }
+  > .item > img {
+    border-radius: 8px !important;
+  }
+}
+
+.carousel-control {
+  border-radius: 8px !important;
+}
