@@ -40,7 +40,7 @@
 
     .card-contents {
         height: 270px;
-        margin-top: -30px;
+        /*margin-top: -30px;*/
     }
 
     .questionboard-q-img {
@@ -50,7 +50,7 @@
     }
     .questionboard-q-img img{
         max-height:300px;
-        margin-top:-30px;
+
     }
 
     .questionboard-picks-cards {
@@ -60,6 +60,17 @@
         position: relative;
         width: 100%;
         min-height: 470px;
+    }
+
+    .card-qitem {
+        margin-bottom:30px!important;
+    }
+
+    .profile-name {
+        float:left;
+    }
+    .profile-name a {
+        color:#ffffff;
     }
 
     /*.questionboard-picks-cards li {*/
@@ -131,7 +142,7 @@ category선택 :::
 
             <div class="picks-cards-credit">
                 <div class="h3">Q. </div><div class="category">{{que.category.first.category}}</div>
-                <div class="credit-title"> {{que.title}}</div>
+                <div class="credit-title"> {{que.title}}를 만들고 싶어요</div>
                 <div class="cards-date">희망 수업일&nbsp;&nbsp;
                     <div class="h4" style="display:inline;"> {{que.weekday}}</div>
                 </div>
