@@ -53,40 +53,47 @@
             {% if que.quebox.qtype == "I" %}
             <li class="card-qitem counter{{forloop.counter}}">
             <!--<li class="card-qitem" style="float:left;">-->
-            <span class="picks-cards-profile pull-left"><a href="http://{{HTTP_HOST}}/v2/user/profile/{{que.quebox.djgouser.id}}">
-                <img src="{{MEDIA_URL}}{{que.quebox.djgouser.userprofile_set.first.propic}}"></a></span>
-
+            <a class="picks-cards-profile" href="http://{{HTTP_HOST}}/v2/user/profile/{{que.quebox.djgouser.id}}"
+                    style="background-image:url({{MEDIA_URL}}{{que.quebox.djgouser.userprofile_set.first.propic}});">
+                <!--<img src="{{MEDIA_URL}}{{que.quebox.djgouser.userprofile_set.first.propic}}">-->
+            </a>
                 <!--<a class="picks-cards-profile" href="http://{{HTTP_HOST}}/v2/user/profile/{{que.quebox.djgouser.id}}"-->
                    <!--style="background:url({{MEDIA_URL}}{{que.quebox.djgouser.userprofile_set.first.propic}});">-->
                 <!--</a>-->
-
-
             <span class="profile-name"><a href="http://{{HTTP_HOST}}/v2/user/profile/{{que.quebox.djgouser.id}}">
                 {{que.quebox.djgouser.last_name}}{{que.quebox.djgouser.first_name}}</a></span>
-
-            <div class="card-contents">
-                <img src="{{MEDIA_URL}}{{que.quebox.item_pic}}">
+            <div class="card-contents" style="background-image:url({{MEDIA_URL}}{{que.quebox.item_pic}}">
+                <!--<img src="{{MEDIA_URL}}{{que.quebox.item_pic}}">-->
             </div>
 
             <div class="picks-cards-credit">
                 <div class="h3">Q. </div><div class="category">{{que.quebox.category.first.category}}</div>
                 <div class="credit-title"> {{que.quebox.title}}</div>
+
+
+
+                {% if "{{que.quebox.solutionbox_set.count}}" == 0 %}
                 <div class="cards-date">희망 수업일&nbsp;&nbsp;
                     <div class="h4" style="display:inline;"> {{que.quebox.weekday}}</div>
                 </div>
+                {%elif "{{%que.quebox.solutionbox_set.count}}" >= 1 %}
                 <div class="cards-date success" style="text-align:center;"><span>A.</span> {{que.quebox.solutionbox_set.count}}개의 클래스가 만들어졌어요
                 </div>
+                {%endif%}
+
+
                 <div class="cards-credit-label">
                     <span class="label-address"><img src="{%static 'media/icon/map-icon.png'%}"> {{que.quebox.state.first.state}}/{{que.quebox.mylocal}}</span>
                     <!--<i style="margin-left:20px;" class="fa fa-tag"></i>-->
-                    <span class="label-tag">만들기 문의</span>
+                    <span class="label-tag pull-right">만들기 문의</span>
                 </div>
             </div>
+
             {% elif que.quebox.qtype == "S" %}
             <li class="card-qskill counter{{forloop.counter}}">
             <!--<li class="card-qskill" style="float:left;">-->
-            <span class="picks-cards-profile"><a href="http://{{HTTP_HOST}}/v2/user/profile/{{que.quebox.djgouser.id}}">
-                <img src="{{MEDIA_URL}}{{que.quebox.djgouser.userprofile_set.first.propic}}"></a></span>
+            <a class="picks-cards-profile" href="http://{{HTTP_HOST}}/v2/user/profile/{{que.quebox.djgouser.id}}"
+               style="background-image:url({{MEDIA_URL}}{{que.quebox.djgouser.userprofile_set.first.propic}});"></a>
             <span class="profile-name">
                 <a href="http://{{HTTP_HOST}}/v2/user/profile/{{que.quebox.djgouser.id}}">
                 {{que.quebox.djgouser.last_name}}{{que.quebox.djgouser.first_name}}</a></span>
@@ -95,19 +102,26 @@
             <div class="picks-cards-credit">
                 <div class="h3">Q. </div><div class="category">{{que.quebox.category.first.category}}</div>
                 <div class="credit-title">  {{que.quebox.title}}</div>
-                <div class="card-contents">
+                <div class="card-contents-skill">
                     {{que.quebox.skill_class}}
                     {{que.quebox.skill_goal}}
                 </div>
+
+
+                {% if "{{que.quebox.solutionbox_set.count}}" == 0 %}
                 <div class="cards-date">희망 수업일&nbsp;&nbsp;
                     <div class="h4" style="display:inline;"> {{que.quebox.weekday}}</div>
                 </div>
+                {%elif "{{que.quebox.solutionbox_set.count}}" >= 1 %}
                 <div class="cards-date success" style="text-align:center;"><span>A.</span> {{que.quebox.solutionbox_set.count}}개의 클래스가 만들어졌어요
                 </div>
+                {%endif%}
+
+
                 <div class="cards-credit-label">
                     <span class="label-address"><img src="{%static 'media/icon/map-icon.png'%}"> {{que.quebox.state.first.state}}/{{que.quebox.mylocal}}</span>
                     <!--<i style="margin-left:20px;" class="fa fa-tag"></i>-->
-                    <span class="label-tag">전문수업 문의</span>
+                    <span class="label-tag pull-right">전문수업 문의</span>
                 </div>
             </div>
             {% endif %}
