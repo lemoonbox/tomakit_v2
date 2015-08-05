@@ -6,8 +6,167 @@
 {%block content %}
 {{qskill_post.title}}를 만들고 싶어요.<br><br>
 
+{%extends 'base.html'%}
+{%load static from staticfiles %}
+<title>{%block title%}{{qskill_post.title}}{%endblock%}</title>
+
+<body>
+
+{%block content%}
+
+<style>
+
+    .tmk-qskill-detail-wrapper{
+        max-width: 900px;
+    }
+    .tmk-qskill-header{
+        padding: 40px 10px;
+        border-bottom: 1px solid rgba(0,0,0,0.22);
+        margin:auto auto 30px;
+        width: 900px;
+    }
+    .tmk-qskill-header > span{
+        font-size: 28px;
+        font-weight: bold;
+    }
 
 
+    .tmk-qskill-img {width:73%;float:left;border-radius:8px;}
+    /*.tmk-qskill-img img {width:100%}*/
+
+    .tmk-panel {
+        float: left;
+        width: 73%;
+        text-align: center;
+        padding: 30px auto;
+
+        display: inline-block;
+
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+
+    }
+    .tmk-panel div {margin:30px auto;}
+
+    .tmk-qskill-q-top {width:30px;height:5px;background:#e85460;}
+    .tmk-qskill-q {line-height:50px;width:200px;}
+    .tmk-qskill-q .h4 {font-family:NanumMyeongjo!important;}
+
+    #qskill-Carousel {
+        border-radius: 8px;
+    }
+    .carousel-inner {
+        height: 500px;
+        overflow: hidden;
+        border-radius:8px;
+    }
+    .item {
+        padding: 0 !important;
+        margin: 0 !important;
+        border-radius:8px !important;
+    }
+
+    .carousel-control {
+        width: 50px;
+        height: 100px;
+        margin: 230px 15px;
+    }
+
+
+</style>
+<div class="tmk-sub-body">
+    <div class="tmk-qskill-wrapper">
+        <div class="row">
+            <div class="tmk-qskill-header">
+                <span>길동님께서 만들고 싶은 것은 무엇인가요?</span>
+            </div>
+        </div>
+
+
+        <!--&#45;&#45;&#45;&#45;&#45;&#45;만들기 문의-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;-->
+        <aside class="tmk-aside-right">
+            <!--카테고리 : -->
+            <div class="h3">{{qskill_post.category.first.category}}</div>
+
+            프로필 사진 :
+            <a href="http://{{HTTP_HOST}}/v2/user/profile/{{qskill_post.djgouser.id}}">
+                <img src="{{MEDIA_URL}}{{qskill_post.djgouser.userprofile_set.first.propic}}"></a>
+            이름 :
+            <a href="http://{{HTTP_HOST}}/v2/user/profile/{{qskill_post.djgouser.id}}">
+                {{qskill_post.djgouser.last_name}}{{qskill_post.djgouser.first_name}}</a><br>
+            자기 소개 :
+        </aside>
+
+        <div class="tmk-panel">
+            <div class="tmk-panel-header">문의 내용</div>
+            <hr>
+            <div class="tmk-qskill-q">
+                <div class="tmk-qskill-q-top"></div>
+                <div class="h4">어떤 수업을 찾고 계세요?</div>
+            </div>
+            {{qskill_post.wantclass}}
+            <div class="tmk-qskill-q">
+                <div class="tmk-qskill-q-top"></div>
+                <div class="h4">어떤 목적으로 찾고 계신건가요?
+                </div>
+            </div>
+            {{qskill_post.memnum}}명입니다
+
+            <div class="tmk-qskill-q">
+                <div class="tmk-qskill-q-top"></div>
+                <div class="h4">무엇을 배우고 싶으신가요?
+                </div>
+            </div>
+            <div>{{qskill_post.wantedu}}</div>
+
+
+            <div class="tmk-qskill-q">
+                <div class="tmk-qskill-q-top"></div>
+                <div class="h4">수업 인원은 몇 명인가요?
+                </div>
+            </div>
+            <div>{{qskill_post.memnum}}명입니다 </div>
+
+
+            <div class="tmk-qskill-q">
+                <div class="tmk-qskill-q-top"></div>
+                <div class="h4">수업 희망 지역
+                </div>
+            </div>
+            <div>{{qskill_post.mylocal}}</div>
+
+        </div>
+
+
+        <div class="picks-cards rows" style="width:73%px;float:left;">
+        <span class="picks-cards-hdr">
+            <div class="h4" style="text-align:left;">만들어진 클래스</div>
+            </span>
+            <ul>
+                {% for solution in qskill_post.solustionbox.all %}
+                <li>
+
+                    답변 타이틀 :{{solution.title}}<br>
+                    프로필 사진 :
+                    <a href="http://{{HTTP_HOST}}/v2/user/profile/{{solution.djgouser.id}}">
+                        <img src="{{MEDIA_URL}}{{solution.djgouser.userprofile_set.first.propic}}"></a><br>
+                    이름 :
+                    <a href="http://{{HTTP_HOST}}/v2/user/profile/{{solution.djgouser.id}}">
+                        {{solution.djgouser.last_name}}{{solution.djgouser.first_name}}</a><br>
+                    클래스 정보 <br>
+                    지역 {{solution.state.first.state}}/{{solution.mylocal}}<br>
+                    수업횟수 {{solution.repeat}}회/총 {% widthratio solution.repeat 1 solution.perhour%}시간<br>
+                    수업요일 {{solution.weekday_time}}<br>
+                </li>
+
+                {% endfor %}
+        </div>
+
+    </div>
+</div>
+
+{%comment%}
 ------만들기 문의---------<br>
 카테고리 : {{qskill_post.category.first.category}}<br>
 이름 :
@@ -49,7 +208,7 @@
         수업요일 {{solution.weekday_time}}<br>
 =================================<br>
 {% endfor %}
-
+{%endcomment%}
 
 {%endblock%}
 </body>

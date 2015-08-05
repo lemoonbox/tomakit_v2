@@ -346,8 +346,10 @@ ul{
   height: 240px;
 
   img {
+
+    width:100%;
     height: 240px;
-    position: inherit;
+    //position: inherit;
     top: 0;
     left: 0;
   }
@@ -362,24 +364,24 @@ ul{
   height: 32px;
   width: 32px;
   margin: 10px 10px 0px;
+  float:left;
   //border: 1px solid #ddd;
   //position: absolute;
   border-radius: 50%;
   background: #ddd;
   overflow:hidden;
-
-  img {
-    width:28px;
-    margin-top: 5px;
-  }
-
+  background-size:cover;
+  background-image:url(/static/media/image/slice/profile-2.png);
 }
+
 .profile-name {
     font-size: 14px;
     //z-index:1;
-    line-height: 32px;
-    margin-left: 38px;
+    margin-left: 5px;
     text-align: left;
+  a {
+    line-height:50px;
+  }
 }
 .skill {
   height: auto;
@@ -417,10 +419,13 @@ ul{
 
 .picks-cards-credit {
   text-align: left;
-  margin: 0px;
+  margin: 10px 0px;
   padding: 5px 0 0 0;
-  position: relative;
+  height:100%;
+  //position: relative;
   bottom: 0px;
+  float:left;
+  width:100%;
   //min-height: 384px;
   background: rgba(255, 255, 255, 1);
   //border-radius: 0px 0px 8px 8px;
@@ -885,6 +890,11 @@ $g-btn-h-color:#e86460;
 
 
 .carousel-inner {
+> .item {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
   > .item > a > img {
     border-radius: 8px !important;
   }
@@ -892,6 +902,11 @@ $g-btn-h-color:#e86460;
     border-radius: 8px !important;
   }
 }
+
+.img-responsive {
+  -webkit-border-radius: 8px !important;
+  -moz-border-radius: 8px !important;
+  border-radius: 8px !important;}
 
 .carousel-control {
   border-radius: 8px !important;

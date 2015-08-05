@@ -134,8 +134,11 @@
 {% if que.qtype == "I" %}
 
         <li class="card-qitem">
-            <span class="picks-cards-profile"><a href="http://{{HTTP_HOST}}/v2/user/profile/{{que.djgouser.id}}">
-                <img src="{{MEDIA_URL}}{{que.djgouser.userprofile_set.first.propic}}"></a></span>
+            <!--<span class="picks-cards-profile">-->
+                <a class="picks-cards-profile" href="http://{{HTTP_HOST}}/v2/user/profile/{{que.djgouser.id}}" style="background-image:url({{MEDIA_URL}}{{que.djgouser.userprofile_set.first.propic}});">
+                <!--<img src="{{MEDIA_URL}}{{que.djgouser.userprofile_set.first.propic}}"></a></span>-->
+                    </a>
+            <!--</span>-->
             <span class="profile-name"><a href="http://{{HTTP_HOST}}/v2/user/profile/{{que.djgouser.id}}">
                 {{que.djgouser.last_name}}{{que.djgouser.first_name}}</a></span>
 
@@ -162,8 +165,12 @@
 
             {% elif que.qtype == "S" %}
             <li class="card-qskill">
-                <span class="picks-cards-profile"><a href="http://{{HTTP_HOST}}/v2/user/profile/{{que.djgouser.id}}">
-                    <img src="{{MEDIA_URL}}{{que.djgouser.userprofile_set.first.propic}}"></a></span>
+
+                <a class="picks-cards-profile" href="http://{{HTTP_HOST}}/v2/user/profile/{{que.djgouser.id}}"
+                   style="background:url({{MEDIA_URL}}{{que.djgouser.userprofile_set.first.propic}});">
+                </a>
+
+
                 <span class="profile-name"><a href="http://{{HTTP_HOST}}/v2/user/profile/{{que.djgouser.id}}">
                     {{que.djgouser.last_name}}{{que.djgouser.first_name}}</a></span><br>
 
