@@ -22,9 +22,11 @@
         font-weight: bold;
     }
 
-
+    .tmk-qitem-aside-right {text-align:left;width:27%;padding-left:30px;float:left;}
+    .tmk-qitem-aside-right div {float:left; width:100%;}
     .tmk-qitem-img {width:73%;float:left;border-radius:8px;}
     /*.tmk-qitem-img img {width:100%}*/
+    .aside-username {line-height:50px; width:100px;}
 
     .tmk-panel {
         float: left;
@@ -42,8 +44,9 @@
     .tmk-panel div {margin:30px auto;}
 
     .tmk-qitem-q-top {width:30px;height:5px;background:#e85460;}
-    .tmk-qitem-q {line-height:50px;width:200px;}
+    .tmk-qitem-q {line-height:50px;width:400px;}
     .tmk-qitem-q .h4 {font-family:NanumMyeongjo!important;}
+
 
     #qitem-Carousel {
         border-radius: 8px;
@@ -66,12 +69,14 @@
     }
 
 .item {height:400px;width:100%;}
+
+
 </style>
 <div class="tmk-sub-body">
     <div class="tmk-qitem-wrapper">
         <div class="row">
             <div class="tmk-qitem-header">
-                <span>길동님께서 만들고 싶은 것은 무엇인가요?</span>
+                <span>{{qitem_post.title}}를 만들고 싶어요</span>
             </div>
         </div>
 
@@ -120,18 +125,18 @@
         </div>
 
         <!--&#45;&#45;&#45;&#45;&#45;&#45;만들기 문의-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;-->
-        <aside class="tmk-aside-right">
-            <!--카테고리 : -->
+        <aside class="tmk-qitem-aside-right">
+                <div class="aside-category">만들기 문의</div>
             <div class="h3">{{qitem_post.category.first.category}}</div>
 
 
             <a class="profile-photo-mini" href="http://{{HTTP_HOST}}/v2/user/profile/{{qitem_post.djgouser.id}}" style="background-image:url({{MEDIA_URL}}{{qitem_post.djgouser.userprofile_set.first.propic}});">
                 <!--<img src="{{MEDIA_URL}}{{qitem_post.djgouser.userprofile_set.first.propic}}">-->
             </a>
-            이름 :
-            <a href="http://{{HTTP_HOST}}/v2/user/profile/{{qitem_post.djgouser.id}}">
-                {{qitem_post.djgouser.last_name}}{{qitem_post.djgouser.first_name}}</a><br>
-            자기 소개 :
+
+            <a class="aside-username" href="http://{{HTTP_HOST}}/v2/user/profile/{{qitem_post.djgouser.id}}">
+                by {{qitem_post.djgouser.last_name}} {{qitem_post.djgouser.first_name}}</a><br>
+            <div style="width:100%;">자기 소개 : </div>
         </aside>
 
         <div class="tmk-panel">
@@ -161,7 +166,7 @@
 
         <div class="solution-box" style="width:73%;float:left;">
         <span class="picks-cards-hdr">
-            <div class="h4" style="text-align:left;"><img src="{%static 'media/image/slice/headicon-7.png'%}">만들어진 클래스</div>
+            <div class="h4" style="text-align:left;"><img src="{%static 'media/image/slice/headicon-7.png'%}"> 만들어진 클래스</div>
             </span>
 {%if qitem_post.solutionbox.count == 0 %}
 <div class="no-solutions" style="width:100%;">
@@ -174,19 +179,39 @@
 <div class="picks-cards rows">
             <ul>
                 {% for solution in qitem_post.solutionbox.all %}
-                <li>
-                    답변 타이틀 :{{solution.title}}<br>
-                    프로필 사진 :
-                    <a href="http://{{HTTP_HOST}}/v2/user/profile/{{solution.djgouser.id}}">
-                        <img src="{{MEDIA_URL}}{{solution.djgouser.userprofile_set.first.propic}}"></a><br>
-                    이름 :
-                    <a href="http://{{HTTP_HOST}}/v2/user/profile/{{solution.djgouser.id}}">
-                        {{solution.djgouser.last_name}}{{solution.djgouser.first_name}}</a><br>
-                    클래스 정보 <br>
-                    지역 {{solution.state.first.state}}/{{solution.mylocal}}<br>
-                    수업횟수 {{solution.repeat}}회/총 {% widthratio solution.repeat 1 solution.perhour%}시간<br>
-                    수업요일 {{solution.weekday_time}}<br>
+
+                <li class="solution-cards">
+
+                    <div class="solution-credit">
+
+                        <a class="credit-title h4" href="http://{{HTTP_HOST}}/v2/question/item/{{que.qitempost.id}}">
+                            {{solution.title}}</a>
+                    </div>
+                    <div class="solution-host">
+                        <a class="profile-photo-mini" href="http://{{HTTP_HOST}}/v2/user/profile/{{qitem_post.djgouser.id}}"
+                           style="background-image:url({{MEDIA_URL}}{{qitem_post.djgouser.userprofile_set.first.propic}});"></a>
+
+                        <a class="aside-username" href="http://{{HTTP_HOST}}/v2/user/profile/{{solution.djgouser.id}}">
+                            {{solution.djgouser.last_name}} {{solution.djgouser.first_name}}</a>
+
+                    </div>
+                    <div class="solution-contents">
+
+                        <div class="cards-date">클래스 정보 <br>
+                            <img src="{%static 'media/icon/map-icon.png'%}"> {{solution.state.first.state}}/{{solution.mylocal}}<br>
+                            <img src="{%static 'media/icon/calendar-icon.png'%}"> {{solution.repeat}}회/총 {% widthratio solution.repeat 1 solution.perhour%}시간<br>
+                            <img src="{%static 'media/icon/time-icon.png'%}"> {{solution.weekday_time}}<br>
+                        </div>
+                    </div>
+                    <div class="solution-payment">
+                        수강료<br>
+                        <div>재료비 포함<span class="pull-right">1000000원</span></div>
+
+                    </div>
+                    <button class="btn btn-primary btn-block">나도 문의하기 </button>
                 </li>
+
+
                 {% endfor %}
                 </ul>
 </div>
@@ -197,3 +222,17 @@
 </div>
 {%endblock%}
 </body>
+
+{%comment%}
+    답변 타이틀 :{{solution.title}}<br>
+    프로필 사진 :
+    <a class="profile-photo-mini" href="http://{{HTTP_HOST}}/v2/user/profile/{{solution.djgouser.id}}">
+        <img src="{{MEDIA_URL}}{{solution.djgouser.userprofile_set.first.propic}}"></a><br>
+
+    <a href="http://{{HTTP_HOST}}/v2/user/profile/{{solution.djgouser.id}}">
+        {{solution.djgouser.last_name}} {{solution.djgouser.first_name}}</a><br>
+    클래스 정보 <br>
+    지역 {{solution.state.first.state}}/{{solution.mylocal}}<br>
+    수업횟수 {{solution.repeat}}회/총 {% widthratio solution.repeat 1 solution.perhour%}시간<br>
+    수업요일 {{solution.weekday_time}}
+{%endcomment%}
