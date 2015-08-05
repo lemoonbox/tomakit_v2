@@ -36,7 +36,7 @@
                         <li class="dropdown">
                             <a href="#" class="btn-default user dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                 <!--<i style="color:gray;" class="xi-user-circle"></i>-->
-                                <img class="profile-photo-mini" style="background-image:url({{MEDIA_URL}}{{user.userprofile_set.propic}});background-size:cover;margin:0px; border:1px solid #cccccc;width:26px;height:26px;">
+                                <img class="profile-photo-mini" style="background-image:url({{MEDIA_URL}}{{user.userprofile_set.first.propic}});background-size:cover;margin:0px; border:1px solid #cccccc;width:26px;height:26px;">
                                 {{user.last_name}} {{user.first_name}}<span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="/v2/user/profile/{{request.user.id}}">프로필</a></li>
