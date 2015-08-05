@@ -52,7 +52,7 @@
 
 <div class="tmk-sub-body">
 
-    <div class="caseboard-category-wrapper">
+    <div class="caseboard-category-wrapper pull-left">
 
         <div class="category-title col-md-2"> 카테고리 </div>
         <div class="category-category col-md-6">
@@ -84,7 +84,7 @@
 
 
     <div class="caseboard-card-wrapper">
-
+<ul class="picks-cards rows">
         {%for case in questions %}
         {% if case.qtype == "I" %}
 
@@ -95,7 +95,7 @@
             </a>
             <!--</span>-->
             <span class="profile-name"><a href="http://{{HTTP_HOST}}/v2/user/profile/{{case.quebox.djgouser.id}}">
-                {{case.quebox.djgouser.last_name}}{{case.quebox.djgouser.first_name}}</a></span>
+                {{case.quebox.djgouser.last_name}} {{case.quebox.djgouser.first_name}}</a></span>
 
             <div class="card-contents" style="background:url({{MEDIA_URL}}{{case.quebox.item_pic}}); background-size:cover;">
                 <!--<div class="questionboard-q-img"><img src="{{MEDIA_URL}}{{case.quebox.item_pic}}"></div>-->
@@ -103,37 +103,22 @@
 
             <div class="picks-cards-credit">
                 <div class="h3">Q. </div><div class="category">{{case.quebox.category.first.category}}</div>
-                <div class="credit-title"> {{case.quebox.title}}를 만들고 싶어요</div>
-                <div class="cards-date">희망 수업일&nbsp;&nbsp;
-                    <div class="h4" style="display:inline;"> {{case.quebox.weekday}}</div>
+                <a href="http://{{HTTP_HOST}}/v2/question/item/{{case.quebox.qitempost.id}}">
+                    <div class="credit-title"> {{case.quebox.title}}를 만들고 싶어요</div>
+                </a>
+                <div class="cards-date success" style="text-align:center;">
+                    <span>A.</span> {{case.quebox.qitempost.solutionbox.count}}개의 클래스가 만들어졌어요
                 </div>
                 <div class="cards-credit-label">
-                    <span class="label-address"><img src="{%static 'media/icon/map-icon.png'%}"> {{case.quebox.state.first.state}} / {{case.quebox.mylocal}}</span>
+                    <span class="label-address"><img src="{%static 'media/icon/map-icon.png'%}">
+                        {{case.quebox.state.first.state}} / {{case.quebox.mylocal}}</span>
                     <!--<i style="margin-left:20px;" class="fa fa-tag"></i>-->
                     <span class="label-tag pull-right">만들기 문의</span>
                 </div>
             </div>
-        </li>
 
-
-
-
-        프로필 사진:
-        <a href="http://{{HTTP_HOST}}/v2/user/profile/{{case.quebox.djgouser.id}}">
-            <img src="{{MEDIA_URL}}{{case.quebox.djgouser.userprofile_set.first.propic}}"></a><br>
-        이름 : <a href="http://{{HTTP_HOST}}/v2/user/profile/{{case.quebox.djgouser.id}}">
-        {{case.quebox.djgouser.last_name}}{{case.quebox.djgouser.first_name}}</a><br>
-        <a href="http://{{HTTP_HOST}}/v2/question/item/{{case.quebox.qitempost.id}}">
-            질문사진 : <img src="{{MEDIA_URL}}{{case.quebox.item_pic}}"><br>
-            카테고리 : {{case.quebox.category.first.category}}<br>
-            제목 : {{case.quebox.title}}<br>
-            희망 수업일 :{{case.quebox.weekday}}<br>
-            지역 : {{case.quebox.state.first.state}}/{{case.quebox.mylocal}}<br>
-            총 {{case.quebox.qitempost.solutionbox.count}}개의 수업이 개설되었습니다.</a><br>
-
-        ====================================================================================
-        <br><br>
         {% elif case.qtype == "S" %}
+            <li class="card-qskill">
         프로필 사진:
         <a href="http://{{HTTP_HOST}}/v2/user/profile/{{case.quebox.djgouser.id}}">
             <img src="{{MEDIA_URL}}{{case.quebox.djgouser.userprofile_set.first.propic}}"></a><br>
@@ -149,10 +134,11 @@
             희망 수업일 :{{case.quebox.weekday}}<br>
             지역 : {{case.quebox.state.first.state}}/{{case.quebox.mylocal}}<br>
             총 {{case.quebox.qskillpost.solutionbox.count}}개의 수업이 개설되었습니다.</a><br>
-        <br>
-        ====================================================================================
-        <br><br>
+
         {% endif %}
+    </li>
+    </ul>
+        
         >>>>>>>>>>>>>답변 사례>>>>>>>>>>>>>><br>
         답변 타이틀 :{{case.solubox.title}}<br>
         프로필 사진 :<img src="{{MEDIA_URL}}{{case.solubox.djgouser.userprofile_set.first.propic}}"><br>

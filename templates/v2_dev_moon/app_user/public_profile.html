@@ -1,5 +1,5 @@
 {%extends "base.html" %}
-{% load static from staticfiles%}
+{% load static from staticfiles %}
 
 <title>{%block title%}{{djgouser.last_name}}{{djgouser.first_name}}님의 프로필{%endblock%}</title>
 
@@ -7,11 +7,27 @@
 <style>
    .tmk-profile-body {width:1100px;margin:auto;}
     .tmk-profile-banner{text-align:left;background: #F5515F;color:#ffffff; width:900px;height:280px;margin:auto;display:inline-block;margin-bottom:20px;}
-    .profile-photo{margin: 40px 40px; width:120px;height:120px;border-radius:50%;background-size:cover;overflow:hidden;
-        background-image:url({%static 'media/image/slice/profile-2.png'%});}
-   .profile-photo-mini{margin: 10px 0px; width:32px;height:32px;border-radius:50%;background-size:cover;overflow:hidden;
-       background-image:url({%static 'media/image/slice/profile-2.png'%});}
-    .profile-photo img {width:100%;}
+
+
+   .profile-photo {
+       margin: 40px 40px;
+       width: 120px;
+       height: 120px;
+       border-radius: 50%;
+       background-size: cover;
+       overflow: hidden;
+       background-image: url({%static 'media/image/slice/profile-2.png'%});
+   }
+   .profile-photo-mini {
+       margin: 10px 0px;
+       width: 32px;
+       height: 32px;
+       border-radius: 50%;
+       background-size: cover;
+       overflow: hidden;
+       background-image: url({%static 'media/image/slice/profile-2.png'%});
+   }
+    /*.profile-photo img {width:100%;}*/
     .profile-button {height:45px;border:1px solid white;background:transparent;color:white;margin-top:210px;margin-left:100px;}
     .profile-video {
         border: 2px dashed #AAA;

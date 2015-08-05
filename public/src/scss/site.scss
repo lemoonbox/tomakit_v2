@@ -899,6 +899,7 @@ $g-btn-h-color:#e86460;
   background-color: rgba(255,255,255,0.7);
 }
 
+.carousel {height:340px!important;}
 
 .carousel-inner {
 > .item {
@@ -981,3 +982,24 @@ text-height: 50px;
   width: 100%;
   float: left;
 }
+
+  .profile-photo {
+    margin: 40px 40px;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background-size: cover;
+    overflow: hidden;
+    background-image: url(static/media/image/slice/profile-2.png);
+  }
+  .profile-photo-mini {
+    margin: 10px 0px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-size: cover;
+    overflow: hidden;
+    background-image: url(static/media/image/slice/profile-2.png);
+  }
+
+
