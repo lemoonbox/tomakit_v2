@@ -166,3 +166,9 @@ def next_guid(request):
     return render(request, TEMP.V2_NEXT_GUIDE,{
         'HTTP_HOST':HTTP_HOST,
     })
+
+def T2W_que_bridge(request):
+    HTTP_HOST = request.META['HTTP_HOST']
+    return render(request, TEMP.V2_QUE_BRIDGE,{
+        'HTTP_HOST':HTTP_HOST,
+    })
