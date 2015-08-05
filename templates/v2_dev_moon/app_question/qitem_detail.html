@@ -136,7 +136,7 @@
 
             <a class="aside-username" href="http://{{HTTP_HOST}}/v2/user/profile/{{qitem_post.djgouser.id}}">
                 by {{qitem_post.djgouser.last_name}} {{qitem_post.djgouser.first_name}}</a><br>
-            <div style="width:100%;">자기 소개 : </div>
+            <div style="width:100%;">자기 소개 : {{user.userprofile_set.first.inter_oneline}}</div>
         </aside>
 
         <div class="tmk-panel">
@@ -205,7 +205,7 @@
                     </div>
                     <div class="solution-payment">
                         수강료<br>
-                        <div>재료비 포함<span class="pull-right">1000000원</span></div>
+                        <div>재료비 포함<span class="pull-right">{{solution.price}}원</span></div>
 
                     </div>
                     <button class="btn btn-primary btn-block">나도 문의하기 </button>
