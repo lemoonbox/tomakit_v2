@@ -32,12 +32,19 @@
                         <!--<li><a href="/">HOME</a></li>-->
 
                         {% if user.is_authenticated %}
-                        <li><button class="btn btn-default user"><img src="{%static 'media/image/slice/buttonicon-6.png'%}"> 작가신청</button></li>
+                        <li><a class="btn btn-default user"><img src="{%static 'media/image/slice/buttonicon-6.png'%}"> 작가신청</a></li>
                         <li class="dropdown">
                             <a href="#" class="btn-default user dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                 <!--<i style="color:gray;" class="xi-user-circle"></i>-->
-                                <img class="profile-photo-mini" style="background-image:url({{MEDIA_URL}}{{user.userprofile_set.first.propic}});background-size:cover;margin:0px; border:1px solid #cccccc;width:26px;height:26px;">
-                                {{user.last_name}} {{user.first_name}}<span class="caret"></span></a>
+                                {% if user.userprofile_set.first.propic == null %}
+                                <span class="profile-photo-mini"></span>
+                                {%else%}
+                                <span class="profile-photo-mini"
+                                      style="background-image:url({{MEDIA_URL}}{{user.userprofile_set.first.propic}});
+                                      margin:2px 5px 0px 0px;background-size:cover;border:1px solid #cccccc;">
+                                    </span>
+                                {%endif%}
+                                 {{user.last_name}} {{user.first_name}}<span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="/v2/user/profile/{{request.user.id}}">프로필</a></li>
                                 <li><a href="/v2/user/logout">로그아웃</a></li>
@@ -47,7 +54,7 @@
                             </ul>
                         </li>
                         {% else %}
-                        <li><button class="btn-default user"><img src="{%static 'media/image/slice/buttonicon-6.png'%}"> 작가신청</button></li>
+                        <li><button type="button" class="btn-default user"><img src="{%static 'media/image/slice/buttonicon-6.png'%}"> 작가신청</button></li>
                         <li>{% include 'component/user_login/_loginmodal.html'%}</li>
                         <!--<li><a href="{% url 'login_url' %}?next={{request.path}}">로그인/가입</a></li>-->
                         <!--            <span class="sr-only">(current)</span>-->

@@ -28,7 +28,22 @@
        background-image: url({%static 'media/image/slice/profile-2.png'%});
    }
     /*.profile-photo img {width:100%;}*/
-    .profile-button {height:45px;border:1px solid white;background:transparent;color:white;margin-top:210px;margin-left:100px;}
+    .profile-button {
+        height: 50px;
+        border: 1px solid white;
+        background: transparent;
+        color: white;
+        margin-top: 210px;
+        margin-left: 100px;
+        font-family: NanumGothic!important;
+    }
+   .profile-button img {
+       vertical-align:top;
+   }
+   .profile-button:hover {
+        color: #ffffff;
+    }
+
     .profile-video {
         border: 2px dashed #AAA;
         border-radius: 7px;
@@ -39,6 +54,7 @@
 
     .profile-main-contents {width:65%;float:left;}
     .profile-aside-right {width:35%;float:left;padding:20px;text-align:left;}
+
 
 
    .tmk-profile-q-top {width:30px;height:5px;background:#e85460;}
@@ -52,8 +68,12 @@
     <!--<div class="container">-->
     <div class="tmk-profile-banner">
 
+        {% if user.userprofile_set.first.propic == none %}
+        <div class="profile-photo" col-md-offset-1 col-md-4">
+        {%else%}
         <div class="profile-photo col-md-offset-1 col-md-4" style="background-image:url({{MEDIA_URL}}{{profile.propic}});">
             <!--<img src="{{MEDIA_URL}}{{profile.propic}}">-->
+        {%endif%}
         </div>
         <div class="user-profile-name">
             <div class="col-md-6 h1">{{djgouser.last_name}}{{djgouser.first_name}}</div>
@@ -62,7 +82,10 @@
 
         {% if request.user.is_authenticated %}
         {% if page_user == req_user %}
-        <a class="btn profile-button" style="" href="http://{{HTTP_HOST}}/v2/user/edit_prof/{{page_user.id}}"><img src="{%static 'media/image/slice/buttonicon-8.png'%}" style="vertical-align:bottom;"> 프로필 수정</a>
+        <a href="http://{{HTTP_HOST}}/v2/user/edit_prof/{{page_user.id}}">
+        <button class="btn profile-button">
+            <img src="{%static 'media/image/slice/buttonicon-8.png'%}"> 프로필 수정</button>
+        </a>
         {% endif %}
         {% endif %}
     </div>
@@ -83,8 +106,11 @@
                 {{profile.inter_start}}
 
             </div>
-
-            <div class="profile-photo-mini" style="background-image:url({{MEDIA_URL}}{{profile.propic}});">
+            {% if user.userprofile_set.first.propic == none %}
+            <div class="profile-photo-mini">
+                {% else %}
+                    <div class="profile-photo-mini" style="background-image:url({{MEDIA_URL}}{{profile.propic}});">
+                    {%endif%}
                 <!--<img src="{{MEDIA_URL}}{{profile.propic}}">-->
             </div>
             <div class="user-profile-name">

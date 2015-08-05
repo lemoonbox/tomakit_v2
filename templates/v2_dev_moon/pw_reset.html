@@ -9,7 +9,7 @@
   .pwd-reset-form {
       width: 330px;
       margin: 150px auto;
-      background-color: rgba(0,0,0,0.1);
+      background-color: rgba(255,255,255,0.3);
       padding: 30px;
       border-radius: 8px;
       border: 1px solid #ddd;
@@ -21,11 +21,14 @@
   }
   .reset-pwd {
       width: 45%;
+      height:50px;
   }
   #id_email {
       width: 100%;
       height: 50px;
   }
+
+    .cancel {height:50px;}
 
 </style>
 
@@ -35,13 +38,13 @@
     <div class="pwd-reset-form">
         <form class="form-inline" role="form" method="POST" action="{{request.path}}">
           {% csrf_token%}
-          <!--<div class="h1">토마킷</div>-->
+          <div class="form-heading h2">비밀번호 변경하기</div>
 
           <label for="id_email" class="sr-only">Email</label>
-          <input id="id_email" class="form-control" placeholder="Email" name="email" type="email">
-          <div class="help-block">입력하신 이메일로 비밀번호 변경 링크가 전송됩니다.
-            Facebook이나 Kakao아이디로 생성하신 분은 비밀번호를 변경할 수 없습니다.</div>
-          <a href="javascript:history.back()" class="btn btn-primary cancel">뒤로 가기</a>
+          <input id="id_email" class="form-control" placeholder="Email" name="email" type="email"><br>
+          <div class="help-block"><br>입력하신 이메일로 비밀번호 변경 링크가 전송됩니다.
+            Facebook이나 Kakao아이디로 생성하신 분은 비밀번호를 변경할 수 없습니다.</div><br>
+          <a href="javascript:history.back()"> <button class="btn btn-primary cancel">뒤로 가기</button></a>
           <input class="btn btn-primary reset-pwd" type = "submit" value="이메일 전송하기">
 
         </form>
