@@ -38,6 +38,8 @@
             <span class="title-main col-md-8" style="font-family:AppleSDGothicNeo-Regular;">직접 창조한다는 것은 얼마나 가슴 뛰는 일인가요?</span>
         </div>
     </div>
+
+    <div class="tmk-sub-body">
     <div class="picks-cards rows">
         <ul>
             <li class="tmk-picks-main">
@@ -45,144 +47,86 @@
                     <div class="tmk-picks-subtitle">나만의 핸드메이드를 시작하기 위해,<br> 질문해보세요!</div>
                 </div>
             </li>
-            <li class="tmk-picks-sub" style="background-image:url(https://s-media-cache-ak0.pinimg.com/736x/c3/59/32/c359324722c8e1e3fee69a1d9fa512e4.jpg)">
 
-                <div class="picks-cards-profile"><img src="{%static 'media/image/slice/buttonicon-2.png'%}"></div>
-                <div class="profile-name">by 홍길동</div>
+        {%for que in qouboxs %}
 
-                <div class="card-contents"></div>
+            {% if que.quebox.qtype == "I" %}
+            <li class="card-qitem counter{{forloop.counter}}">
+            <!--<li class="card-qitem" style="float:left;">-->
+            <span class="picks-cards-profile pull-left"><a href="http://{{HTTP_HOST}}/v2/user/profile/{{que.quebox.djgouser.id}}">
+                <img src="{{MEDIA_URL}}{{que.quebox.djgouser.userprofile_set.first.propic}}"></a></span>
 
-                <div class="picks-cards-credit">
-                    <div class="h3">Q. <span class="category">카테고리</span></div>
-                    <div class="credit-title">인테리어 소품과 아이한테 해롭지 않은 디퓨저 만들고 싶어요.</div>
-                    <div class="cards-date success" style="text-align:center;"><span>A.</span> 3개의 클래스가 만들어졌어요
-                        <!--<h4 style="display:inline;"> 화/수/목</h4>-->
-                    </div>
-                    <div class="cards-credit-label">
-                        <span class="label-address"><img src="{%static 'media/icon/map-icon.png'%}"> 서울시 마포구 상암동</span>
-                        <!--<i style="margin-left:20px;" class="fa fa-tag"></i>-->
-                        <span class="label-tag">만들기 문의</span>
-                    </div>
-                </div>
-            </li>
-
-        </ul>
-        <!--</div>-->
-        <!--<div class="tmk-main-border">-->
-        <!--<div></div>-->
-        <!--</div>-->
-    </div>
+                <!--<a class="picks-cards-profile" href="http://{{HTTP_HOST}}/v2/user/profile/{{que.quebox.djgouser.id}}"-->
+                   <!--style="background:url({{MEDIA_URL}}{{que.quebox.djgouser.userprofile_set.first.propic}});">-->
+                <!--</a>-->
 
 
+            <span class="profile-name"><a href="http://{{HTTP_HOST}}/v2/user/profile/{{que.quebox.djgouser.id}}">
+                {{que.quebox.djgouser.last_name}}{{que.quebox.djgouser.first_name}}</a></span>
 
-<div class="picks-cards rows">
-    <ul>
-        <li class="card-qskill">
-            <div class="picks-cards-profile"><img src="{%static 'media/image/slice/buttonicon-2.png'%}"></div>
-            <div class="profile-name skill">by 홍길동</div>
-
+            <div class="card-contents">
+                <img src="{{MEDIA_URL}}{{que.quebox.item_pic}}">
+            </div>
 
             <div class="picks-cards-credit">
-                <div class="h3">Q. <span>카테고리</span></div>
-                <div class="credit-title">월화수목금토일월화수목금토일</div>
-
-                <div class="card-contents">
-                    이다. 곳이 이것이야말로 이성은 사막이다.
-
-                    원질이 되는 찾아다녀도, 할지라도 영락과 생생하며,
-                    아름다우나? 그들에게 품에 맺어, 곳이 대중을 어디 인생을 힘차게 위하여서.
-                    없으면, 피부가 보내는 가슴이 그들은 이상은 싸인 영원히 부패뿐이다.
-
-                    그들에게 풍부하게 돋고, 찬미를 꽃 것이다. 보라, 대한 있다.
-                    따뜻한 것이 심장은 우리의 생명을 뼈 넣는 같으며, 있다. 작고 없으면.</div>
-
+                <div class="h3">Q. </div><div class="category">{{que.quebox.category.first.category}}</div>
+                <div class="credit-title"> {{que.quebox.title}}</div>
                 <div class="cards-date">희망 수업일&nbsp;&nbsp;
-                    <div class="h4" style="display:inline;"> 화/수/목</div>
+                    <div class="h4" style="display:inline;"> {{que.quebox.weekday}}</div>
+                </div>
+                <div class="cards-date success" style="text-align:center;"><span>A.</span> {{que.quebox.solutionbox_set.count}}개의 클래스가 만들어졌어요
                 </div>
                 <div class="cards-credit-label">
-                    <span class="label-address"><img src="{%static 'media/icon/map-icon.png'%}"> 서울시 마포구 상암동</span>
+                    <span class="label-address"><img src="{%static 'media/icon/map-icon.png'%}"> {{que.quebox.state.first.state}}/{{que.quebox.mylocal}}</span>
                     <!--<i style="margin-left:20px;" class="fa fa-tag"></i>-->
                     <span class="label-tag">만들기 문의</span>
                 </div>
             </div>
+            {% elif que.quebox.qtype == "S" %}
+            <li class="card-qskill counter{{forloop.counter}}">
+            <!--<li class="card-qskill" style="float:left;">-->
+            <span class="picks-cards-profile"><a href="http://{{HTTP_HOST}}/v2/user/profile/{{que.quebox.djgouser.id}}">
+                <img src="{{MEDIA_URL}}{{que.quebox.djgouser.userprofile_set.first.propic}}"></a></span>
+            <span class="profile-name">
+                <a href="http://{{HTTP_HOST}}/v2/user/profile/{{que.quebox.djgouser.id}}">
+                {{que.quebox.djgouser.last_name}}{{que.quebox.djgouser.first_name}}</a></span>
 
-        </li>
-        <li class="card-qitem">
-            <div class="picks-cards-profile"><img src="{%static 'media/image/slice/buttonicon-2.png'%}"></div>
-            <div class="profile-name">by 홍길동</div>
-
-            <div class="card-contents"></div>
 
             <div class="picks-cards-credit">
-                <div class="h3">Q. <span>카테고리</span></div>
-                <div class="credit-title">이런 나무 수저는 어디서 만들 수 있어요?</div>
+                <div class="h3">Q. </div><div class="category">{{que.quebox.category.first.category}}</div>
+                <div class="credit-title">  {{que.quebox.title}}</div>
+                <div class="card-contents">
+                    {{que.quebox.skill_class}}
+                    {{que.quebox.skill_goal}}
+                </div>
                 <div class="cards-date">희망 수업일&nbsp;&nbsp;
-                    <div class="h4" style="display:inline;"> 화/수/목</div>
+                    <div class="h4" style="display:inline;"> {{que.quebox.weekday}}</div>
+                </div>
+                <div class="cards-date success" style="text-align:center;"><span>A.</span> {{que.quebox.solutionbox_set.count}}개의 클래스가 만들어졌어요
                 </div>
                 <div class="cards-credit-label">
-                    <span class="label-address"><img src="{%static 'media/icon/map-icon.png'%}"> 서울시 마포구 상암동</span>
+                    <span class="label-address"><img src="{%static 'media/icon/map-icon.png'%}"> {{que.quebox.state.first.state}}/{{que.quebox.mylocal}}</span>
                     <!--<i style="margin-left:20px;" class="fa fa-tag"></i>-->
-                    <span class="label-tag">만들기 문의</span>
+                    <span class="label-tag">전문수업 문의</span>
                 </div>
             </div>
+            {% endif %}
         </li>
-        <li>
-        </li>
-    </ul>
-</div>
 
-<div class="picks-cards row">
-    <ul>
-        <li class="card-qskill">
+        {% endfor %}
 
-            <div class="picks-cards-profile"><img src="{%static 'media/image/slice/buttonicon-2.png'%}"></div>
-            <div class="profile-name skill">by 홍길동</div>
-            <div class="picks-cards-credit">
-                <div class="h3">Q. <span>카테고리</span></div>
-                <div class="credit-title">일이삼사오육칠팔구십일이삼사오 만들고싶어요</div>
-
-
-                <div class="card-contents">
-                    이다. 곳이 이것이야말로 이성은 사막이다.
-
-                    원질이 되는 찾아다녀도, 할지라도 영락과 생생하며,
-                    아름다우나? 그들에게 품에 맺어, 곳이 대중을 어디 인생을 힘차게 위하여서.
-                    없으면, 피부가 보내는 가슴이 그들은 이상은 싸인 영원히 부패뿐이다.
-
-                    그들에게 풍부하게 돋고, 찬미를 꽃 것이다. 보라, 대한 있다.
-                    따뜻한 것이 심장은 우리의 생명을 뼈 넣는 같으며, 있다. 작고 없으면.
-                </div>
-
-                <div class="cards-date success" style="text-align:center;"><span>A.</span> 3개의 클래스가 만들어졌어요
-                </div>
-
-                <!--<div class="cards-date">희망 수업일&nbsp;&nbsp;-->
-                <!--<div class="h4" style="display:inline;"> 화/수/목</div>-->
-                <!--</div>-->
-
-
-            </div>
-            <div class="cards-credit-label">
-                <span class="label-address"><img src="{%static 'media/icon/map-icon.png'%}"> 서울시 마포구 상암동</span>
-                <!--<i style="margin-left:20px;" class="fa fa-tag"></i>-->
-                <span class="label-tag">만들기 문의</span>
-            </div>
-        </li>
         <li class="tmk-picks-main" style="background:url(https://s-media-cache-ak0.pinimg.com/736x/1f/7e/c1/1f7ec10c3588de792ee8696236f0490d.jpg);">
             <div class="tmk-picks-title"> 지금까지 4,065개의<br> 클래스가 만들어졌어요<br><br>
                 <div class="tmk-picks-subtitle">만들거나 배우고 싶은 것을 문의하면<br> 클래스가 이루어져요</div>
             </div>
         </li>
     </ul>
-    <!--</div>-->
 
-    <!--<div class="tmk-main-border">-->
-    <!--<div></div>-->
-    <!--</div>-->
 </div>
 </div>
 
 <a href="/v2/board/caseboard/"><button class="btn btn-primary" style="margin:35px auto;;display:block;">클래스 개설사례 보러가기</button></a>
+</div>
 
 <div class="tmk-footer-banner" style="background:url({%static 'img/img-1.png'%})">
 
@@ -209,63 +153,42 @@
         <li></li>
     </ul>
 
-    <a class="btn" target="_blank" href="http://goto.kakao.com/@토마킷" style="box-shadow:-3px 6px 10px 0px #666666;position:absolute;width:40px;height:40px;left:8px;padding:8px;background: url(http://img2.kakao.co.kr/assets/icon/facebook-3dc359d9233fe406dfba651563a70c03.png);border-radius: 5px;background-size:cover;"></a>
+
 
 </div>
-<div>
-    ==================<br>
-{%for que in qouboxs %}
-    <div class="counter{{forloop.counter}}">
-    {% if que.quebox.qtype == "I" %}
-        프로필 사진:
-        <a href="http://{{HTTP_HOST}}/v2/user/profile/{{que.quebox.djgouser.id}}">
-        <img src="{{MEDIA_URL}}{{que.quebox.djgouser.userprofile_set.first.propic}}"></a><br>
-        이름 :
-        <a href="http://{{HTTP_HOST}}/v2/user/profile/{{que.quebox.djgouser.id}}">
-        {{que.quebox.djgouser.last_name}}{{que.quebox.djgouser.first_name}}</a><br>
-        질문사진 :<div class="questionboard-q-img"> <img src="{{MEDIA_URL}}{{que.quebox.item_pic}}"></div>
-        카테고리 : {{que.quebox.category.first.category}}<br>
-        제목 : {{que.quebox.title}}<br>
-        희망 수업일 :{{que.quebox.weekday}}<br>
-        지역 : {{que.quebox.state.first.state}}/{{que.quebox.mylocal}}<br>
-        총 {{que.quebox.solutionbox_set.count}}개의 수업이 개설되었습니다.<br>
-====================================================================================
-    <br><br>
-    {% elif que.qoubox.qtype == "S" %}
-        프로필 사진:
-        <a href="http://{{HTTP_HOST}}/v2/user/profile/{{que.quebox.djgouser.id}}">
-        <img src="{{MEDIA_URL}}{{que.quebox.djgouser.userprofile_set.first.propic}}"></a><br>
-        이름 :
-        <a href="http://{{HTTP_HOST}}/v2/user/profile/{{que.quebox.djgouser.id}}">
-        {{que.quebox.djgouser.last_name}}{{que.quebox.djgouser.first_name}}</a><br>
-        카테고리 : {{que.quebox.category.first.category}}<br>
-        제목 : {{que.quebox.title}}<br>
-        원하는 클래스 :{{que.quebox.skill_class}}<br>
-        배우는 목표 :{{que.quebox.skill_goal}}<br>
-        배우고 싶은 내용 :{{que.quebox.skill_edu}}<br>
-        희망 수업일 :{{que.quebox.weekday}}<br>
-        지역 : {{que.quebox.state.first.state}}/{{que.quebox.mylocal}}<br>
-        총 {{que.quebox.solutionbox_set.count}}개의 수업이 개설되었습니다.<br>
-        <br>
-====================================================================================
-    <br><br>
-    {% endif %}
-    </div>
-{% endfor %}
-==================<br>
-</div>
-
-<!--<div class="tmk-main-border">-->
-<!--<div>개설된 핸드메이드 문의</div>-->
-<!--</div>-->
-
-<!--<div class="tmk-main-picks">-->
-<!--<div class="picks-title rows">-->
-<!--<span class="col-md-2"></span>-->
-<!--<span class="title-main col-md-8">수업이 만들어진 핸드메이드 수업을 만나보세요</span>-->
-<!--<span class="title-seeAll col-md-2">모두보기</span>-->
-<!--</div>-->
-<!--
---> <!-- </div-->
 
 {%endblock %}
+
+    <!--</li>-->
+
+    {%comment%}
+
+    프로필 사진:
+    <a href="http://{{HTTP_HOST}}/v2/user/profile/{{que.quebox.djgouser.id}}">
+        <img src="{{MEDIA_URL}}{{que.quebox.djgouser.userprofile_set.first.propic}}"></a><br>
+    이름 :
+    <a href="http://{{HTTP_HOST}}/v2/user/profile/{{que.quebox.djgouser.id}}">
+        {{que.quebox.djgouser.last_name}}{{que.quebox.djgouser.first_name}}</a><br>
+    질문사진 :<div class="questionboard-q-img"> <img src="{{MEDIA_URL}}{{que.quebox.item_pic}}"></div>
+    카테고리 : {{que.quebox.category.first.category}}<br>
+    제목 : {{que.quebox.title}}<br>
+    희망 수업일 :{{que.quebox.weekday}}<br>
+    지역 : {{que.quebox.state.first.state}}/{{que.quebox.mylocal}}<br>
+    총 {{que.quebox.solutionbox_set.count}}개의 수업이 개설되었습니다.<br>
+    {%endcomment%}
+    {%comment%}
+    프로필 사진:
+    <a href="http://{{HTTP_HOST}}/v2/user/profile/{{que.quebox.djgouser.id}}">
+        <img src="{{MEDIA_URL}}{{que.quebox.djgouser.userprofile_set.first.propic}}"></a><br>
+    이름 :
+    <a href="http://{{HTTP_HOST}}/v2/user/profile/{{que.quebox.djgouser.id}}">
+        {{que.quebox.djgouser.last_name}}{{que.quebox.djgouser.first_name}}</a><br>
+    카테고리 : {{que.quebox.category.first.category}}<br>
+    제목 : {{que.quebox.title}}<br>
+    원하는 클래스 :{{que.quebox.skill_class}}<br>
+    배우는 목표 :{{que.quebox.skill_goal}}<br>
+    배우고 싶은 내용 :{{que.quebox.skill_edu}}<br>
+    희망 수업일 :{{que.quebox.weekday}}<br>
+    지역 : {{que.quebox.state.first.state}}/{{que.quebox.mylocal}}<br>
+    총 {{que.quebox.solutionbox_set.count}}개의 수업이 개설되었습니다.<br>
+    {%endcomment%}

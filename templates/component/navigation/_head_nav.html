@@ -31,9 +31,9 @@
                         <li class="dropdown">
                             <a href="#" class="btn-default user dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                 <!--<i style="color:gray;" class="xi-user-circle"></i>-->
-                                <img class="nav-profile-pic" style="background:url(https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRyFsODskAwD5TCmTB-8NdzejNWAeii-0U-kyciW5k1h9aa0enOCV2CjGo4);background-size:cover;border:1px solid #cccccc;width:26px;height:26px;border-radius:50%;"> {{user.profile_set.first.nick_name}}<span class="caret"></span></a>
+                                <img class="nav-profile-pic" style="background:url(https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRyFsODskAwD5TCmTB-8NdzejNWAeii-0U-kyciW5k1h9aa0enOCV2CjGo4);background-size:cover;border:1px solid #cccccc;width:26px;height:26px;border-radius:50%;"> {{user.last_name}} {{user.first_name}}<span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="/user/profile">프로필</a></li>
+                                <li><a href="/v2/user/profile">프로필</a></li>
                                 <li><a href="/user/logout">로그아웃</a></li>
                                 <!--<li><a href="#">기능 없음</a></li>-->
                                 <!--<li role="separator" class="divider"></li>-->
