@@ -11,6 +11,6 @@ urlpatterns = patterns('app_question.views',
     url(r'^skill/(?P<qskill_num>[0-9]+)/$', 'qskill_detail', name="v2_qskill_detail"),
 
     url(r'^next_guid/$', 'next_guid', name='v2_next_guid'),
-
+    url(r'^que_bridge/$', 'T2W_que_bridge', name='v2_que_bridge'),
 
     )
