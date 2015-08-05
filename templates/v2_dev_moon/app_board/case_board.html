@@ -52,18 +52,18 @@
 category선택 :::
 {% for cate in categoryies %}
     {% if cate.category_current %}
-        <a class="active" href="http://{{HTTP_HOST}}/v2/board/questionboard/1/{{cate.category}}/{{cate.state}}">{{cate.category}}</a>//
+        <a class="active" href="http://{{HTTP_HOST}}/v2/board/caseboard/1/{{cate.category}}/{{cate.state}}">{{cate.category}}</a>//
     {% else %}
-        <a href="http://{{HTTP_HOST}}/v2/board/questionboard/1/{{cate.category}}/{{cate.state}}">{{cate.category}}</a>//
+        <a href="http://{{HTTP_HOST}}/v2/board/caseboard/1/{{cate.category}}/{{cate.state}}">{{cate.category}}</a>//
     {% endif %}
 {% endfor %}<br><br><br>ddddd
 
 지역 선택 :::
 {% for state in states %}
     {% if state.state_current %}
-            <a class="active" href="http://{{HTTP_HOST}}/v2/board/questionboard/1/{{state.category}}/{{state.state}}">{{state.state}}</a>//
+            <a class="active" href="http://{{HTTP_HOST}}/v2/board/caseboard/1/{{state.category}}/{{state.state}}">{{state.state}}</a>//
     {% else %}
-            <a href="http://{{HTTP_HOST}}/v2/board/questionboard/1/{{state.category}}/{{state.state}}">{{state.state}}</a>//
+            <a href="http://{{HTTP_HOST}}/v2/board/caseboard/1/{{state.category}}/{{state.state}}">{{state.state}}</a>//
     {% endif %}
 
 {% endfor%}<br><br>
@@ -78,13 +78,13 @@ category선택 :::
         <img src="{{MEDIA_URL}}{{case.quebox.djgouser.userprofile_set.first.propic}}"></a><br>
         이름 : <a href="http://{{HTTP_HOST}}/v2/user/profile/{{case.quebox.djgouser.id}}">
                 {{case.quebox.djgouser.last_name}}{{case.quebox.djgouser.first_name}}</a><br>
+        <a href="http://{{HTTP_HOST}}/v2/question/item/{{case.quebox.qitempost.id}}">
         질문사진 : <img src="{{MEDIA_URL}}{{case.quebox.item_pic}}"><br>
         카테고리 : {{case.quebox.category.first.category}}<br>
         제목 : {{case.quebox.title}}<br>
         희망 수업일 :{{case.quebox.weekday}}<br>
         지역 : {{case.quebox.state.first.state}}/{{case.quebox.mylocal}}<br>
-        총 {{case.quebox.solutionbox_set.count}}개의 수업이 개설되었습니다.<br>
-
+        총 {{case.quebox.qitempost.solutionbox.count}}개의 수업이 개설되었습니다.</a><br>
 
 ====================================================================================
     <br><br>
@@ -95,6 +95,7 @@ category선택 :::
         이름 :
         <a href="http://{{HTTP_HOST}}/v2/user/profile/{{case.quebox.djgouser.id}}">
         {{case.quebox.djgouser.last_name}}{{case.quebox.djgouser.first_name}}</a><br>
+        <a href="http://{{HTTP_HOST}}/v2/question/skill/{{case.quebox.qskillpost.id}}">
         카테고리 : {{case.quebox.category.first.category}}<br>
         제목 : {{case.quebox.title}}<br>
         원하는 클래스 :{{case.quebox.skill_class}}<br>
@@ -102,7 +103,7 @@ category선택 :::
         배우고 싶은 내용 :{{case.quebox.skill_edu}}<br>
         희망 수업일 :{{case.quebox.weekday}}<br>
         지역 : {{case.quebox.state.first.state}}/{{case.quebox.mylocal}}<br>
-        총 {{case.quebox.solutionbox_set.count}}개의 수업이 개설되었습니다.<br>
+        총 {{case.quebox.qskillpost.solutionbox.count}}개의 수업이 개설되었습니다.</a><br>
         <br>
 ====================================================================================
     <br><br>

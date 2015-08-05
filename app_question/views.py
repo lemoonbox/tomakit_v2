@@ -160,7 +160,6 @@ def qskill_detail(request, qskill_num):
             'HTTP_HOST':HTTP_HOST,
 
         })
-
 def next_guid(request):
 
     HTTP_HOST = request.META['HTTP_HOST']

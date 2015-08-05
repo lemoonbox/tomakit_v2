@@ -52,8 +52,8 @@ class SolutionBox(models.Model):
     qtype = models.CharField(max_length=1,
                              choices=Q_TYPE_CHOICES,)
     qoubox = models.ForeignKey(Questionbox, null=True)
-    qitempost = models.ForeignKey(QItem, null=True, blank=True, related_name='solustionbox')
-    qskillpost = models.ForeignKey(QSkill, null=True, blank=True, related_name='solustionbox')
+    qitempost = models.ForeignKey(QItem, null=True, blank=True, related_name='solutionbox')
+    qskillpost = models.ForeignKey(QSkill, null=True, blank=True, related_name='solutionbox')
     state = models.ManyToManyField(State)
     mylocal = models.CharField(max_length=150, null=False)
     repeat = models.IntegerField(default=1, null=True, blank=True)
