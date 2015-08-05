@@ -1,211 +1,214 @@
 {%extends 'base.html'%}
 {% load static from staticfiles%}
-    <title></title>
+<title></title>
 
-<div>
-{%block content%}
-<style>
-    .questionboard-banner-top {
-        width:100%;
-        height:200px;
-        background:#48CFAD;
-        overflow: hidden;
-    }
-
-    .questionboard-banner-wrapper {
-        max-width:900px;
-        margin:auto;
-    }
-    .banner-title{
-        padding:40px 0px;
-        float:left;
-        width:100%;
-    }
-    .banner-title .h2 {
-        font-weight: bold;
-    }
-    .banner-title .h4 {
-        font-weight: normal;
-    }
-
-    .banner-image {
-        z-index: 10;
-        margin-left: -20%;
-        float: left;
-    }
-.questionboard-cards-wrapper {
-    width: 1200px;
-    margin: auto;
-}
-
-    .questionboard-q-img {
-        /*overflow: hidden;*/
-        max-height: 240px;
-
-    }
-    .questionboard-q-img img{
-        max-height:300px;
-
-    }
-
-    .questionboard-picks-cards {
-        margin-top: 26px;}
-
-    .questionboard-picks-cards ul {
-        position: relative;
-        width: 100%;
-        min-height: 470px;
-    }
+<body>
+    {%block content%}
+    <style>
+        .questionboard-body {
+            height:1600px;
+        }
 
 
+        .questionboard-banner-top {
+            width:100%;
+            height:200px;
+            background:#48CFAD;
+            overflow: hidden;
+        }
 
+        .questionboard-banner-wrapper {
+            max-width:900px;
+            margin:auto;
+        }
+        .banner-title{
+            padding:40px 0px;
+            float:left;
+            width:100%;
+        }
+        .banner-title .h2 {
+            font-weight: bold;
+        }
+        .banner-title .h4 {
+            font-weight: normal;
+        }
 
+        .banner-image {
+            z-index: 10;
+            margin-left: -20%;
+            float: left;
+        }
+        .questionboard-cards-wrapper {
+            width: 1200px;
+            margin: auto;
+        }
 
-</style>
+        .questionboard-q-img {
+            /*overflow: hidden;*/
+            max-height: 240px;
 
-<div class="questionboard-banner-top">
-<div class="questionboard-banner-wrapper">
-    <div class="banner-title">
-        <div class="h2">문의중인 클래스</div>
-        <div class="h4">다른 사람들은 지금 어떤 클래스를 만나고 싶어할까요?</div>
+        }
+        .questionboard-q-img img{
+            max-height:300px;
+
+        }
+
+        .questionboard-picks-cards {
+            margin-top: 26px;}
+
+        .questionboard-picks-cards ul {
+            position: relative;
+            width: 100%;
+            min-height: 470px;
+        }
+
+    </style>
+
+<div class="questionboard-body">
+    <div class="questionboard-banner-top">
+        <div class="questionboard-banner-wrapper">
+            <div class="banner-title">
+                <div class="h2">문의중인 클래스</div>
+                <div class="h4">다른 사람들은 지금 어떤 클래스를 만나고 싶어할까요?</div>
+            </div>
+            <div class="banner-image">
+                <img src="{%static 'media/image/slice/img-4.png'%}">
+            </div>
+        </div>
     </div>
-    <div class="banner-image">
-        <img src="{%static 'media/image/slice/img-4.png'%}">
+
+
+    <div class="questionboard-category-wrapper">
+
+        <div class="category-title col-md-2"> 카테고리 </div>
+        <div class="category-category col-md-6">
+
+            <!--category선택 :::-->
+            {% for cate in categoryies %}
+            {% if cate.category_current %}
+            <a class="active" href="http://{{HTTP_HOST}}/v2/board/questionboard/1/{{cate.category}}/{{cate.state}}">{{cate.category}}</a>//
+            {% else %}
+            <a href="http://{{HTTP_HOST}}/v2/board/questionboard/1/{{cate.category}}/{{cate.state}}">{{cate.category}}</a> |
+            {% endif %}
+            {% endfor %}
+
+        </div>
+        <div class="category-states col-md-4">
+
+            <!--지역 선택 :::-->
+            {% for state in states %}
+            {% if state.state_current %}
+            <a class="active" href="http://{{HTTP_HOST}}/v2/board/questionboard/1/{{state.category}}/{{state.state}}">{{state.state}}</a>//
+            {% else %}
+            <a href="http://{{HTTP_HOST}}/v2/board/questionboard/1/{{state.category}}/{{state.state}}">{{state.state}}</a> |
+            {% endif %}
+
+            {% endfor%}
+
+        </div>
     </div>
-</div>
-</div>
 
 
-<div class="questionboard-category-wrapper">
-
-    <div class="category-title col-md-2"> 카테고리 </div>
-    <div class="category-category col-md-6">
-
-        <!--category선택 :::-->
-        {% for cate in categoryies %}
-        {% if cate.category_current %}
-        <a class="active" href="http://{{HTTP_HOST}}/v2/board/questionboard/1/{{cate.category}}/{{cate.state}}">{{cate.category}}</a>//
-        {% else %}
-        <a href="http://{{HTTP_HOST}}/v2/board/questionboard/1/{{cate.category}}/{{cate.state}}">{{cate.category}}</a> |
-        {% endif %}
-        {% endfor %}
-
-    </div>
-    <div class="category-states col-md-4">
-
-        <!--지역 선택 :::-->
-        {% for state in states %}
-        {% if state.state_current %}
-        <a class="active" href="http://{{HTTP_HOST}}/v2/board/questionboard/1/{{state.category}}/{{state.state}}">{{state.state}}</a>//
-        {% else %}
-        <a href="http://{{HTTP_HOST}}/v2/board/questionboard/1/{{state.category}}/{{state.state}}">{{state.state}}</a> |
-        {% endif %}
-
-        {% endfor%}
-
-    </div>
-</div>
-
-
-<div class="questionboard-cards-wrapper">
+    <div class="questionboard-cards-wrapper">
         <div class="picks-cards rows">
-        <ul style="height:auto!important;min-height:1500px;">
-{%for que in questions %}
-{% if que.qtype == "I" %}
+            <ul style="height:auto!important;min-height:1500px;">
+                {%for que in questions %}
+                {% if que.qtype == "I" %}
 
-        <li class="card-qitem">
-            <!--<span class="picks-cards-profile">-->
-                <a class="picks-cards-profile" href="http://{{HTTP_HOST}}/v2/user/profile/{{que.djgouser.id}}" style="background-image:url({{MEDIA_URL}}{{que.djgouser.userprofile_set.first.propic}});">
-                <!--<img src="{{MEDIA_URL}}{{que.djgouser.userprofile_set.first.propic}}"></a></span>-->
+                <li class="card-qitem">
+                    <!--<span class="picks-cards-profile">-->
+                    <a class="picks-cards-profile" href="http://{{HTTP_HOST}}/v2/user/profile/{{que.djgouser.id}}" style="background-image:url({{MEDIA_URL}}{{que.djgouser.userprofile_set.first.propic}});">
+                        <!--<img src="{{MEDIA_URL}}{{que.djgouser.userprofile_set.first.propic}}"></a></span>-->
                     </a>
-            <!--</span>-->
+                    <!--</span>-->
             <span class="profile-name"><a href="http://{{HTTP_HOST}}/v2/user/profile/{{que.djgouser.id}}">
                 {{que.djgouser.last_name}}{{que.djgouser.first_name}}</a></span>
 
-            <div class="card-contents" style="background:url({{MEDIA_URL}}{{que.item_pic}}); background-size:cover;">
-                <!--<div class="questionboard-q-img"><img src="{{MEDIA_URL}}{{que.item_pic}}"></div>-->
-            </div>
+                    <div class="card-contents" style="background:url({{MEDIA_URL}}{{que.item_pic}}); background-size:cover;">
+                        <!--<div class="questionboard-q-img"><img src="{{MEDIA_URL}}{{que.item_pic}}"></div>-->
+                    </div>
 
-            <div class="picks-cards-credit">
-                <div class="h3">Q. </div><div class="category">{{que.category.first.category}}</div>
-                <div class="credit-title"> {{que.title}}를 만들고 싶어요</div>
-                <div class="cards-date">희망 수업일&nbsp;&nbsp;
-                    <div class="h4" style="display:inline;"> {{que.weekday}}</div>
-                </div>
-                <div class="cards-credit-label">
-                    <span class="label-address"><img src="{%static 'media/icon/map-icon.png'%}"> {{que.state.first.state}} / {{que.mylocal}}</span>
-                    <!--<i style="margin-left:20px;" class="fa fa-tag"></i>-->
-                    <span class="label-tag pull-right">만들기 문의</span>
-                </div>
-            </div>
-        </li>
-
-
+                    <div class="picks-cards-credit">
+                        <div class="h3">Q. </div><div class="category">{{que.category.first.category}}</div>
+                        <div class="credit-title"> {{que.title}}를 만들고 싶어요</div>
+                        <div class="cards-date">희망 수업일&nbsp;&nbsp;
+                            <div class="h4" style="display:inline;"> {{que.weekday}}</div>
+                        </div>
+                        <div class="cards-credit-label">
+                            <span class="label-address"><img src="{%static 'media/icon/map-icon.png'%}"> {{que.state.first.state}} / {{que.mylocal}}</span>
+                            <!--<i style="margin-left:20px;" class="fa fa-tag"></i>-->
+                            <span class="label-tag pull-right">만들기 문의</span>
+                        </div>
+                    </div>
+                </li>
 
 
-            {% elif que.qtype == "S" %}
-            <li class="card-qskill">
+                {% elif que.qtype == "S" %}
+                <li class="card-qskill">
 
-                <a class="picks-cards-profile" href="http://{{HTTP_HOST}}/v2/user/profile/{{que.djgouser.id}}"
-                   style="background:url({{MEDIA_URL}}{{que.djgouser.userprofile_set.first.propic}});">
-                </a>
+                    <a class="picks-cards-profile" href="http://{{HTTP_HOST}}/v2/user/profile/{{que.djgouser.id}}"
+                       style="background:url({{MEDIA_URL}}{{que.djgouser.userprofile_set.first.propic}});">
+                    </a>
 
 
                 <span class="profile-name"><a href="http://{{HTTP_HOST}}/v2/user/profile/{{que.djgouser.id}}">
                     {{que.djgouser.last_name}}{{que.djgouser.first_name}}</a></span><br>
 
-                <div class="picks-cards-credit">
-                    <div class="h3">Q. </div><div class="category">{{que.category.first.category}}</div>
-                    <div class="credit-title"> {{que.title}}를 만들고 싶어요</div>
-                    <div class="card-contents-skill">
-                        {{que.skill_class}}
-                        {{que.skill_goal}}
+                    <div class="picks-cards-credit">
+                        <div class="h3">Q. </div><div class="category">{{que.category.first.category}}</div>
+                        <div class="credit-title"> {{que.title}}를 만들고 싶어요</div>
+                        <div class="card-contents-skill">
+                            {{que.skill_class}}
+                            {{que.skill_goal}}
+                        </div>
+                        <div class="cards-date">희망 수업일&nbsp;&nbsp;
+                            <div class="h4" style="display:inline;"> {{que.weekday}}</div>
+                        </div>
+                        <div class="cards-credit-label">
+                            <span class="label-address"><img src="{%static 'media/icon/map-icon.png'%}"> {{que.state.first.state}} / {{que.mylocal}}</span>
+                            <!--<i style="margin-left:20px;" class="fa fa-tag"></i>-->
+                            <span class="label-tag pull-right">만들기 문의</span>
+                        </div>
                     </div>
-                    <div class="cards-date">희망 수업일&nbsp;&nbsp;
-                        <div class="h4" style="display:inline;"> {{que.weekday}}</div>
-                    </div>
-                    <div class="cards-credit-label">
-                        <span class="label-address"><img src="{%static 'media/icon/map-icon.png'%}"> {{que.state.first.state}} / {{que.mylocal}}</span>
-                        <!--<i style="margin-left:20px;" class="fa fa-tag"></i>-->
-                        <span class="label-tag pull-right">만들기 문의</span>
-                    </div>
-                </div>
-            </li>
+                </li>
 
-    {% endif %}
-{% endfor %}
+                {% endif %}
+                {% endfor %}
 
-    </ul>
-</div>
-</div>
-
-<div></div>
-    <div>
-
-        <!--&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;paging&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;-->
-        <br>
-{% for arrow in arrows %}
-    {% if arrow.nav_before %}
-        <a href="http://{{HTTP_HOST}}/v2/board/questionboard/{{arrow.befor_page}}/{{cate_current}}/{{state_current}}">◀ </a>
-    {% endif %}
-{% endfor %}
-{% for page in pages %}
-    {% if page.page_current %}
-        <b>{{page.page}}</b> |
-    {% else %}
-        <a href="http://{{HTTP_HOST}}/v2/board/questionboard/{{page.page}}/{{cate_current}}/{{state_current}}">{{page.page}}</a> |
-    {% endif %}
-{% endfor %}
-{% for arrow in arrows %}
-    {% if arrow.nav_next %}
-        <a href="http://{{HTTP_HOST}}/v2/board/questionboard/{{arrow.next_page}}/{{cate_current}}/{{state_current}}"> ▶</a>
-    {% endif %}
-{% endfor %}
-
-
-</div>
+            </ul>
+        </div>
     </div>
+
+
+    <div class="pagination-wrapper">
+
+<ul class="pagination">
+
+        {% for arrow in arrows %}
+        {% if arrow.nav_before %}
+        <li><a href="http://{{HTTP_HOST}}/v2/board/questionboard/{{arrow.befor_page}}/{{cate_current}}/{{state_current}}">《</a></li>
+        {% endif %}
+        {% endfor %}
+        {% for page in pages %}
+        {% if page.page_current %}
+        <li class="active"><a>{{page.page}}</a></li>
+        {% else %}
+        <li><a href="http://{{HTTP_HOST}}/v2/board/questionboard/{{page.page}}/{{cate_current}}/{{state_current}}">{{page.page}}</a></li>
+        {% endif %}
+        {% endfor %}
+        {% for arrow in arrows %}
+        {% if arrow.nav_next %}
+        <li><a href="http://{{HTTP_HOST}}/v2/board/questionboard/{{arrow.next_page}}/{{cate_current}}/{{state_current}}">》</a></li>
+        {% endif %}
+        {% endfor %}
+</ul>
+
+    </div>
+</div>
 {%endblock%}
+
+
+</body>
 
 {%comment%}
 프로필 사진:

@@ -593,6 +593,7 @@ nav {
   min-width:1250px;
 //position:absolute;
   left:0;
+  float:left;
   width:100%;
 }
 
@@ -925,13 +926,14 @@ $g-btn-h-color:#e86460;
 
 
 #kakao {
-  position: absolute;
+
   box-shadow: -3px 6px 10px 0px #666666;
   width: 40px;
   height: 40px;
-  left: 20px;
-  bottom: 200px;
+  margin-left: 20px;
+  margin-top: -60px;
   border-radius: 5px;
+  float:left;
 }
 
 .facebook-login {
@@ -954,4 +956,28 @@ text-height: 50px;
   min-height: 300px;
   margin: auto;
   padding: 10px;
+}
+
+.pagination {
+  border: 1px solid #e0e0e0;
+}
+.pagination>li>a, .pagination>li>span {
+  color:#000 !important;
+}
+.pagination>.active>a, .pagination>.active>a:hover{
+  border-color:#e86460 !important;;
+  background-color: #e86460 !important;
+  color: #ffffff !important;
+}
+    //a:hover {background: #e86460;}
+.pagination>.active>a:hover, .pagination>li>a:hover,.pagination>li>span:hover, .pagination>.active>span:hover {
+  border: 1px solid #dddddd !important;
+  background-color: #dddddd !important;
+  color: #ffffff !important;
+}
+
+
+.pagination-wrapper {
+  width: 100%;
+  float: left;
 }
