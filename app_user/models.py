@@ -34,7 +34,7 @@ class HostProfile(models.Model):
     )
     djgouser = models.ForeignKey(settings.AUTH_USER_MODEL)
     mobile = models.CharField(max_length=50, null=False, unique=True)
-    hosttype= models.CharField(max_length=50, null=False, unique=True,
+    hosttype= models.CharField(max_length=50, null=False, unique=False,
                                choices=TYPE_CHOICES)
 
     created_at = models.DateTimeField(auto_now_add=True, auto_now=False)
