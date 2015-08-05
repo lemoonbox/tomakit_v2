@@ -38,15 +38,6 @@
     margin: auto;
 }
 
-    .card-contents {
-        height: 270px;
-        /*margin-top: -30px;*/
-    }
-    .card-contents-skill {
-        height:auto;
-        max-height:220px;
-    }
-
     .questionboard-q-img {
         /*overflow: hidden;*/
         max-height: 240px;
@@ -66,17 +57,6 @@
         min-height: 470px;
     }
 
-    .card-qitem {
-        margin-bottom:30px!important;
-        box-shadow: 0 1px 2px 0 rgba(0,0,0,0.22);
-    }
-
-    .profile-name {
-        float:left;
-    }
-    .profile-name a {
-        color:#ffffff;
-    }
 
 
 
@@ -155,7 +135,7 @@
                 <div class="cards-credit-label">
                     <span class="label-address"><img src="{%static 'media/icon/map-icon.png'%}"> {{que.state.first.state}} / {{que.mylocal}}</span>
                     <!--<i style="margin-left:20px;" class="fa fa-tag"></i>-->
-                    <span class="label-tag">만들기 문의</span>
+                    <span class="label-tag pull-right">만들기 문의</span>
                 </div>
             </div>
         </li>
@@ -187,7 +167,7 @@
                     <div class="cards-credit-label">
                         <span class="label-address"><img src="{%static 'media/icon/map-icon.png'%}"> {{que.state.first.state}} / {{que.mylocal}}</span>
                         <!--<i style="margin-left:20px;" class="fa fa-tag"></i>-->
-                        <span class="label-tag">만들기 문의</span>
+                        <span class="label-tag pull-right">만들기 문의</span>
                     </div>
                 </div>
             </li>
