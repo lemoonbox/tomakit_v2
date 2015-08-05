@@ -1,13 +1,80 @@
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title></title>
-</head>
+{%extends 'base.html'%}
+{%load static from staticfiles%}
+
+<title>{%block title%}{%endblock%}</title>
+
 <body>
-<a href="http://{{HTTP_HOST}}/v2/question/item/create">
-만들고 싶은 것이 있어요</a><br>
-<a href="http://{{HTTP_HOST}}/v2/question/skill/create">
-배우고 싶은 기술이 있어요.</a><br>
+{%block content%}
+<style>
+    .question-bridge-wrapper {
+        max-width:720px;
+        min-height: 500px;
+        padding-top:100px;
+        margin:auto;
+    }
+
+
+    .question-bridge-wrapper div {
+        padding: 10px 0px;
+    }
+
+    .bridge-card {
+        color: #666;
+        float:left;
+        margin: 40px;
+        width: 250px;
+        height: 340px;
+        border-radius: 8px;
+        background-color: #ffffff;
+        box-shadow: -3px 6px 30px 0 #666;
+        text-align:center;
+    }
+
+    .bridge-card-qitem {
+        background-image: url({%static 'media/image/slice/metaicon-7.png' %});
+        background-position: center;
+        background-repeat: no-repeat;
+        height: 50%;
+        margin-top:40px;
+    }
+    .bridge-card-qskill {
+        background-image: url({%static 'media/image/slice/metaicon-8.png' %});
+        background-position: center;
+        background-repeat: no-repeat;
+        height: 50%;
+        margin-top:40px;
+    }
+
+    .bridge-card-h4 {float:left;height:340px;line-height:340px;margin:40px 10px;}
+
+</style>
+<div class="tmk-sub-body">
+<div class="question-bridge-wrapper">
+    <div class="h3">클래스 문의하기</div>
+    <div class="h2" style="font-weight:bold;"> {{user.last_name}} {{user.first_name}}님! 문의해주실 내용은 무엇인가요?</div>
+    <div class="h4" style="font-weight:normal;">손으로 만드는 것이라면 모두 가능합니다!<br>아래 두 개의 카드 중 자신에게 가까운 하나를 선택해주세요</div>
+    <div class="card">
+        <a href="http://{{HTTP_HOST}}/v2/question/item/create" class="bridge-card">
+        <div class="bridge-card-qitem">
+            <!--<img src="{%static 'media/image/slice/metaicon-7.png'%}">-->
+        </div>
+            <div class="h3"><small>간단하게 취미처럼</small><br>만들고 싶은게 있어요</div>
+        </a>
+<div class="bridge-card-h4 h4">또는</div>
+        <a href="http://{{HTTP_HOST}}/v2/question/skill/create" class="bridge-card">
+            <div class="bridge-card-qskill">
+                <!--<img src="{%static 'media/image/slice/metaicon-8.png'%}">-->
+            </div>
+            <div class="h3"><small>전문가로 거듭날</small><br>정규수업이 필요해요</div>
+        </a>
+        <!--<img src="{%static 'media/image/slice/metaicon-1.png' %}"></div>-->
+
+        <div class="category-icon">
+           <img src="{%static 'media/image/slice/icon-g-3.png'%}">
+        </div>
+</div>
+</div>
+
+</div>
+{%endblock%}
 </body>
-</html>

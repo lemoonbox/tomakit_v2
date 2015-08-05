@@ -19,6 +19,10 @@
                 border-radius: 8px;
                 padding:20px;
         }
+
+       .form-control {height:50px;margin-bottom:10px;}
+        /*input {height:50px;}*/
+
 </style>
 <div class="tmk-sub-body">
         <div class="tmk-sub-body-wrapper">
@@ -29,15 +33,15 @@
                 <div class="profile-content-panel">
                 <form class="profile-edit" method="POST" action="{{request.path}}" enctype="multipart/form-data">
                         {% csrf_token %}
-                        프로필 사진 : <input class="form-control" name="pro_pic" type="file">
+                        프로필 사진 : <input name="pro_pic" type="file">
                         이름:<input class="form-control" name="first_name" value={{djgouser.first_name}}>
                         성:<input class="form-control" name ="last_name" value={{djgouser.last_name}}>
                         한줄 소개: <input class="form-control" name ='inter_oneline' value={{djgouser.userprofile_set.first.inter_oneline}}>
                         핸드메이드를 시작한 계기:
                         <input class="form-control" name ="inter_start" value={{djgouser.userprofile_set.first.inter_start}}>
-                        작품 사진: <input class="form-control" type="file" name ="inter_pic">
+                        작품 사진: <input type="file" name ="inter_pic">
                         소개 영상 :<input class="form-control" type="url" name ="inter_url">
-                        <input class="form-control" type ='submit' value="인터뷰 업데이트">
+                        <input class="btn btn-primary btn-block" type ='submit' value="인터뷰 업데이트">
                 </form>
                 </div>
         </div>

@@ -130,8 +130,11 @@
 
                     <div class="picks-cards-credit">
                         <div class="h3">Q. </div><div class="category">{{que.category.first.category}}</div>
-                        <a href="http://{{HTTP_HOST}}/v2/question/item/{{que.qitempost.id}}">
-                        <div class="credit-title"> {{que.title}}를 만들고 싶어요</div></a>
+
+                        <div class="credit-title">
+                            <a href="http://{{HTTP_HOST}}/v2/question/item/{{que.qitempost.id}}">
+                                {{que.title}}를 만들고 싶어요</a>
+                        </div>
                         <div class="cards-date">희망 수업일&nbsp;&nbsp;
                             <div class="h4" style="display:inline;"> {{que.weekday}}</div>
                         </div>
@@ -157,8 +160,13 @@
 
                     <div class="picks-cards-credit">
                         <div class="h3">Q. </div><div class="category">{{que.category.first.category}}</div>
-                       <a href="http://{{HTTP_HOST}}/v2/question/skill/{{que.qskillpost.id}}">
-                        <div class="credit-title"> {{que.title}}를 만들고 싶어요</div></a>
+
+                        <div class="credit-title">
+                            <a href="http://{{HTTP_HOST}}/v2/question/skill/{{que.qskillpost.id}}">
+                                {{que.title}}를 만들고 싶어요</a>
+                        </div>
+
+
                         <div class="card-contents-skill">
                             {{que.skill_class}}
                             {{que.skill_goal}}

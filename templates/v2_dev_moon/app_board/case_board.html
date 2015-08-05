@@ -97,7 +97,7 @@
             <span class="profile-name"><a href="http://{{HTTP_HOST}}/v2/user/profile/{{case.quebox.djgouser.id}}">
                 {{case.quebox.djgouser.last_name}} {{case.quebox.djgouser.first_name}}</a></span>
 
-            <div class="card-contents" style="background:url({{MEDIA_URL}}{{case.quebox.item_pic}}); background-size:cover;">
+            <div class="card-contents" style="background-image:url({{MEDIA_URL}}{{case.quebox.item_pic}}); background-size:cover;">
                 <!--<div class="questionboard-q-img"><img src="{{MEDIA_URL}}{{case.quebox.item_pic}}"></div>-->
             </div>
 
@@ -138,7 +138,7 @@
         {% endif %}
     </li>
     </ul>
-        
+
         >>>>>>>>>>>>>답변 사례>>>>>>>>>>>>>><br>
         답변 타이틀 :{{case.solubox.title}}<br>
         프로필 사진 :<img src="{{MEDIA_URL}}{{case.solubox.djgouser.userprofile_set.first.propic}}"><br>

@@ -49,7 +49,7 @@
         border-radius: 8px;
     }
     .carousel-inner {
-        height: 500px;
+        /*height: 500px;*/
         overflow: hidden;
         border-radius:8px;
     }
@@ -61,11 +61,11 @@
 
     .carousel-control {
         width: 50px;
-        height: 100px;
-        margin: 230px 15px;
+        height: 100px!important;
+        margin: 180px 15px;
     }
 
-
+.item {height:400px;width:100%;}
 </style>
 <div class="tmk-sub-body">
     <div class="tmk-qitem-wrapper">
@@ -95,12 +95,12 @@
                 <div class="carousel-inner" role="listbox">
                     {%for photo in qitem_post.qpic_set.all%}
                     {% if forloop.counter0 == 0 %}
-                    <div class="item active">
-                        <img class="img-responsive{{forloop.counter0}}" src="{{MEDIA_URL}}{{photo.pic}}" alt="{{photo.photo_title}} image{{forloop.counter0}}">
+                    <div class="item image{{forloop.counter0}} active" style="background-image:url({{MEDIA_URL}}{{photo.pic}});background-size:cover;background-position:center;">
+                        <!--<img class="img-responsive{{forloop.counter0}}" src="{{MEDIA_URL}}{{photo.pic}}" alt="{{photo.photo_title}} image{{forloop.counter0}}">-->
                     </div>
                     {% else %}
-                    <div class="item">
-                        <img class="img-responsive{{forloop.counter0}}" src="{{MEDIA_URL}}{{photo.pic}}" alt="{{photo.photo_title}} image{{forloop.counter0}}">
+                    <div class="item image{{forloop.counter0}}" style="background-image:url({{MEDIA_URL}}{{photo.pic}});background-size:cover;background-position:center;">
+                        <!--<img class="img-responsive{{forloop.counter0}}" src="{{MEDIA_URL}}{{photo.pic}}" alt="{{photo.photo_title}} image{{forloop.counter0}}">-->
                     </div>
                     {% endif %}
                     {%endfor%}
@@ -135,7 +135,7 @@
         </aside>
 
         <div class="tmk-panel">
-            <div class="tmk-panel-header">문의 내용</div>
+            <div class="tmk-panel-header"><img src="{%static 'media/image/slice/headicon-6.png'%}"> 문의 내용</div>
             <hr>
             <div class="tmk-qitem-q">
                 <div class="tmk-qitem-q-top"></div>
@@ -159,12 +159,21 @@
         </div>
 
 
-        <div class="picks-cards rows" style="width:73%px;float:left;">
+        <div class="solution-box" style="width:73%;float:left;">
         <span class="picks-cards-hdr">
-            <div class="h4" style="text-align:left;">만들어진 클래스</div>
+            <div class="h4" style="text-align:left;"><img src="{%static 'media/image/slice/headicon-7.png'%}">만들어진 클래스</div>
             </span>
+{%if qitem_post.solutionbox.count == 0 %}
+<div class="no-solutions" style="width:100%;">
+    <img src="{%static 'media/image/slice/metaicon-5.png'%}">
+    <div class="h4">으악! 죄송합니다 <br> 아직 만들어진 클래스가 없네요...</div>
+    <div>빠른 시간내에 클래스가 만들어질 수 있도록 노력하겠습니다</div>
+</div>
+
+        {%else%}
+<div class="picks-cards rows">
             <ul>
-                {% for solution in qitem_post.solustionbox.all %}
+                {% for solution in qitem_post.solutionbox.all %}
                 <li>
                     답변 타이틀 :{{solution.title}}<br>
                     프로필 사진 :
@@ -178,11 +187,13 @@
                     수업횟수 {{solution.repeat}}회/총 {% widthratio solution.repeat 1 solution.perhour%}시간<br>
                     수업요일 {{solution.weekday_time}}<br>
                 </li>
-
                 {% endfor %}
+                </ul>
+</div>
+        {%endif%}
         </div>
-
     </div>
+
 </div>
 {%endblock%}
 </body>

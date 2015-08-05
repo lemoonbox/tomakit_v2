@@ -38,6 +38,7 @@ $g-btn-h-color:#e86460;
   display: inline-block;
   width: 900px;
   min-height:600px;
+  margin-bottom:50px;
 }
 .tmk-sub-body-wrapper {
   margin: 50px auto;
@@ -128,7 +129,7 @@ ul{
     background-image: url("http://blog.freepeople.com/wp-content/uploads/2013/03/diy-painted-feathers-3.jpg");
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: 0px 0px;
+    background-position: center;
     box-shadow:0 1px 2px 0 rgba(0,0,0,0.22);
   }
 
@@ -238,7 +239,7 @@ ul{
     background-size: cover;
     opacity: 0.3;
     z-index:-100;
-    background-position: 0px -200px;
+    background-position: center;
   }
   .footer-banner-ul {
     //margin-top: -120px;
@@ -345,11 +346,19 @@ ul{
 .card-qitem {
   margin-bottom:30px!important;
   box-shadow: 0 1px 2px 0 rgba(0,0,0,0.22);
+  background-color:#fff;
+}
+
+.card-qskill {
+  background-color:#fff !important;
+  .profile-name > a {color:#000;}
 }
 /**/
 
 .card-contents {
   height: 268px;
+  background-size: cover !important;
+  background-position:center !important;
 
   img {
     height:100%;
@@ -381,7 +390,6 @@ ul{
     float:left;
     margin-left: 5px;
     text-align: left;
-    color:#ffffff;
   a {
     line-height:50px;
     color:#ffffff;
@@ -435,7 +443,7 @@ ul{
     font-size: 14px;
     color: #F5515F;
     line-height: 17px;
-    width: 35%;
+    width: 40%;
     display:inline-block;
     text-align:right;
   }
@@ -451,7 +459,11 @@ ul{
     //width:80%;
     font-size:16px;
     padding: 5px auto auto 0px;
-    font-weight:bolder;
+    font-weight:bold;
+
+    a {color:#000;}
+    a:hover {color:#F5515F;}
+
   }
   .cards-date {
     text-align: right;
@@ -899,7 +911,7 @@ $g-btn-h-color:#e86460;
   background-color: rgba(255,255,255,0.7);
 }
 
-.carousel {height:340px!important;}
+.carousel {height:400px!important;overflow:hidden;margin-bottom:20px;}
 
 .carousel-inner {
 > .item {

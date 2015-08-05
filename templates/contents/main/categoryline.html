@@ -62,14 +62,15 @@
                 <!--</a>-->
             <span class="profile-name"><a href="http://{{HTTP_HOST}}/v2/user/profile/{{que.quebox.djgouser.id}}">
                 {{que.quebox.djgouser.last_name}}{{que.quebox.djgouser.first_name}}</a></span>
-            <div class="card-contents" style="background-image:url({{MEDIA_URL}}{{que.quebox.item_pic}}">
+            <div class="card-contents" style="background-image:url({{MEDIA_URL}}{{que.quebox.item_pic}});background-size:cover;">
                 <!--<img src="{{MEDIA_URL}}{{que.quebox.item_pic}}">-->
             </div>
 
             <div class="picks-cards-credit">
                 <div class="h3">Q. </div><div class="category">{{que.quebox.category.first.category}}</div>
-                <a href="http://{{HTTP_HOST}}/v2/question/item/{{que.quebox.qitempost.id}}">
-                <div class="credit-title"> {{que.quebox.title}}</div></a>
+
+                <div class="credit-title"><a href="http://{{HTTP_HOST}}/v2/question/item/{{que.quebox.qitempost.id}}">
+                    {{que.quebox.title}}을/를 만들고 싶어요</a></div>
 
                 {% if que.quebox.qitempost.solutionbox.count == 0 %}
                 <div class="cards-date">희망 수업일&nbsp;&nbsp;
@@ -100,8 +101,11 @@
 
             <div class="picks-cards-credit">
                 <div class="h3">Q. </div><div class="category">{{que.quebox.category.first.category}}</div>
+
+                <div class="credit-title">
                     <a href="http://{{HTTP_HOST}}/v2/question/skill/{{que.quebox.qskillpost.id}}">
-                <div class="credit-title">  {{que.quebox.title}}</div></a>
+                        {{que.quebox.title}}을/를 배우고 싶어요</a>
+                </div>
                 <div class="card-contents-skill">
                     {{que.quebox.skill_class}}
                     {{que.quebox.skill_goal}}
