@@ -54,12 +54,12 @@
     <div class="tmk-sub-body">
         <div class="picks-cards rows">
             <ul>
-                <li class="tmk-picks-main">
+                <a href="http://{{HTTP_HOST}}/v2/question/que_bridge" style="color:black;"><li class="tmk-picks-main">
                     <div class="tmk-picks-title"> 만들고, 배우고 싶은<br> 핸드메이드가 있나요?<br><br>
                         <div class="tmk-picks-subtitle">나만의 핸드메이드를 시작하기 위해,<br> 질문해보세요!</div>
                     </div>
                 </li>
-
+</a>
                 {%for que in qouboxs %}
 
                 {% if que.quebox.qtype == "I" %}
@@ -71,9 +71,11 @@
 
             <span class="profile-name"><a href="http://{{HTTP_HOST}}/v2/user/profile/{{que.quebox.djgouser.id}}">
                 {{que.quebox.djgouser.last_name}} {{que.quebox.djgouser.first_name}}</a></span>
-                    <div class="card-contents" style="background-image:url({{MEDIA_URL}}{{que.quebox.item_pic}});background-size:cover;">
+                   <a href="http://{{HTTP_HOST}}/v2/question/item/{{que.quebox.qitempost.id}}">
+                       <div class="card-contents" style="background-image:url({{MEDIA_URL}}{{que.quebox.item_pic}});background-size:cover;">
 
                     </div>
+                   </a>
 
                     <div class="picks-cards-credit">
                         <div class="h3">Q. </div><div class="category">{{que.quebox.category.first.category}}</div>
@@ -141,11 +143,13 @@
 
                 {% endfor %}
 
-                <li class="tmk-picks-main" style="background:url(https://s-media-cache-ak0.pinimg.com/736x/1f/7e/c1/1f7ec10c3588de792ee8696236f0490d.jpg);">
+                <a href="http://{{HTTP_HOST}}/v2/board/caseboard/" style="color:black;">
+                    <li class="tmk-picks-main" style="background:url(https://s-media-cache-ak0.pinimg.com/736x/1f/7e/c1/1f7ec10c3588de792ee8696236f0490d.jpg);">
                     <div class="tmk-picks-title"> 지금까지 4,065개의<br> 클래스가 만들어졌어요<br><br>
                         <div class="tmk-picks-subtitle">만들거나 배우고 싶은 것을 문의하면<br> 클래스가 이루어져요</div>
                     </div>
                 </li>
+                </a>
             </ul>
 
         </div>

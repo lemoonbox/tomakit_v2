@@ -325,7 +325,7 @@ ul{
     background-repeat: no-repeat;
     background-size: cover;
     background-position: 0px 0px;
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);
+    //box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);
   }
   //.tmk-picks-sub {
   //  width: 270px;
@@ -343,22 +343,24 @@ ul{
     width: 270px;
     height: 470px;
     border-radius: 8px;
-    border: 1px solid #e1e1e1;
+    border: 1px solid #ddd;
     margin: 0px 15px 30px;
     background-repeat: no-repeat;
     background-size: cover;
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);
+    //box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);
   }
 }
 
 /*maybe don't need*/
 .card-qitem {
+  border: 1px solid #ddd;
   margin-bottom:30px!important;
-  box-shadow: 0 1px 2px 0 rgba(0,0,0,0.22);
+  //box-shadow: 0 1px 2px 0 rgba(0,0,0,0.22);
   background-color:#fff;
 }
 
 .card-qskill {
+  border: 1px solid #ddd;
   background-color:#fff !important;
   .profile-name > a {color:#000;}
 }
@@ -366,9 +368,11 @@ ul{
 
 .card-contents {
   height: 268px;
+  opacity:1;
   background-size: cover !important;
   background-position:center !important;
 
+  &:hover {opacity:0.5;}
   img {
     height:100%;
     top: 0;
@@ -494,14 +498,14 @@ ul{
     width: 100%;
     text-align: left;
     //position: absolute;
-    background: #e1e1e1;
+    background: rgba(0,0,0,0.05);
     height: 40px;
     //margin: auto -10px;
     padding: 12px;
     bottom: 0;
     float: left;
     vertical-align: text-bottom;
-    border-top: 1px solid #e1e1e1;
+    border-top: 1px solid #ddd;
     border-radius: 0px 0px 4px 4px;
 
     font-family: AppleSDGothicNeo-Regular;
@@ -1053,3 +1057,4 @@ margin:auto 10px;}
  .guide-title {font-size:24px; line-height:50px; font-weight:600;}
   .guide-title-sub {font-size:14px;}
 }
+

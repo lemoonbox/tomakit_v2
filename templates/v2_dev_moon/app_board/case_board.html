@@ -117,9 +117,11 @@
                     <!--</span>-->
             <span class="profile-name"><a href="http://{{HTTP_HOST}}/v2/user/profile/{{case.quebox.djgouser.id}}">
                 {{case.quebox.djgouser.last_name}} {{case.quebox.djgouser.first_name}}</a></span>
-                    <div class="card-contents" style="background-image:url({{MEDIA_URL}}{{case.quebox.item_pic}}); background-size:cover;">
+                    <a href="http://{{HTTP_HOST}}/v2/question/item/{{case.quebox.qitempost.id}}">
+                        <div class="card-contents" style="background-image:url({{MEDIA_URL}}{{case.quebox.item_pic}}); background-size:cover;">
                         <!--<div class="questionboard-q-img"><img src="{{MEDIA_URL}}{{case.quebox.item_pic}}"></div>-->
                     </div>
+                        </a>
                     <div class="picks-cards-credit">
                         <div class="h3">Q. </div><div class="category">{{case.quebox.category.first.category}}</div>
                         <div class="credit-title">

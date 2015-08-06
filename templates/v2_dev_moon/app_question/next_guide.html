@@ -8,7 +8,7 @@
 <style>
     .next-guide-wrapper {
         max-width:720px;
-        min-height: 500px;
+        min-height: 700px;
         padding-top:100px;
         margin:auto;
     }
@@ -26,8 +26,8 @@
     <div><img src="{%static 'media/image/slice/metaicon-1.png' %}"></div>
     <div>답변 소요 시간은 약 하루이며, 문자로 안내해드리겠습니다</div>
 
-    <div><a class="btn btn-primary" data-target="{{HTTP_HOST}}/v2/board/caseboard/">문의중인 클래스 보러가기 </a>
-                                            <p>내가 올린 질문 보기</p>
+    <div><button class="btn btn-primary" style="height:50px;" data-target="{{HTTP_HOST}}/v2/board/caseboard/">문의중인 클래스 보러가기 </button>
+                                            <!--<p>내가 올린 질문 보기</p>-->
         </div>
 </div>
 {%endblock%}
