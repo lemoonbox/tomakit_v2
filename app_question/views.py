@@ -81,9 +81,11 @@ def create_q_item(request):
 
             return HttpResponseRedirect("/v2/question/next_guid")
 
-
+    HTTP_HOST = request.META["HTTP_HOST"]
     return render(request, TEMP.V2_CREATE_QITEM,{
         'create_qform':create_qform,
+        'HTTP_HOST':HTTP_HOST,
+
     })
 
 
@@ -136,13 +138,14 @@ def create_q_skill(request):
             _qbox.state=_state
             _qbox.save()
 
-            HTTP_HOST = request.META['HTTP_HOST']
 
             return HttpResponseRedirect("/v2/question/next_guid")
 
-
+    HTTP_HOST = request.META['HTTP_HOST']
     return render(request, TEMP.V2_CREATE_QSKILL,{
         'create_qform':create_qform,
+        'HTTP_HOST':HTTP_HOST,
+
     })
 
 def qskill_detail(request, qskill_num):
