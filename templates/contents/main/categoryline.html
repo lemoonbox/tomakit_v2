@@ -14,19 +14,31 @@
         color: white !important;
     }
     .tmk-main-banner {background-image:url("{%static 'media/image/main-banner.jpg' %}");
+        float:left;
+        position:relative;
+        margin-top:-60px;
         background-size: cover;
         background-repeat:no-repeat;}
+    .how-to-tomakit {margin-top:60px;width:200px;height:50px;font-size:16px;}
+    #how-to-tmk {width:100%!important; float:left;}
+
+
+
 </style>
 
+<!--<div class="how-to-tmk"> </div>-->
 <div class="tmk-main-banner">
     <div class="main-banner-title">직접 즐기는 리얼 핸드메이드</div>
     <div class="main-banner-subtitle">내손으로 직접 즐기는 DIY 핸드메이드, 무엇을 만들어 볼까요?</div>
-
+<button type="button" class="btn btn-primary how-to-tomakit" id="tomatoma" >토마킷 이용방법</button>
     <!--<video autoplay loop muted poster="https://d3ce7jb7ih53ua.cloudfront.net/verloca_new_design/main_page/first-page-1.png" id="bgvid">-->
     <!--<source src="https://d3ce7jb7ih53ua.cloudfront.net/verloca_new_design/main_page/verlocal+header_3.mp4"></source>-->
     <!--</video>-->
     <!--<div></div>-->
+
 </div>
+
+
 
 <div class="tmk-main-body">
     <div class="tmk-main-border">
@@ -138,12 +150,14 @@
 
         </div>
 
-        <a href="/v2/board/caseboard/" style="float:left;width:100%;"><button class="btn btn-primary" style="margin:32px auto 0px;height:50px;display:block;">클래스 개설사례 보러가기</button></a>
+        <div style="float:left;width:100%;">
+            <a href="http://{{HTTP_HOST}}/v2/board/caseboard"><button class="btn btn-primary" style="margin:32px auto 0px;height:50px;display:block;">클래스 개설사례 보러가기</button></a>
+        </div>
     </div>
 
 
 </div>
-
+{%comment%}
 <div class="tmk-footer-banner" style="background:url({%static 'img/img-1.png'%})">
 
     <div class="footer-frame" style="left:0px!important;"></div>
@@ -168,11 +182,9 @@
         <li></li>
         <li></li>
     </ul>
-
-
-
 </div>
 
+{%endcomment%}
 {%endblock %}
 
 {%comment%}

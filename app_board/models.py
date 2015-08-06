@@ -94,7 +94,7 @@ class Casebox(models.Model):
 
 class MainQoubox(models.Model):
 
-    quebox= models.ForeignKey(Questionbox, null=False, related_name='Mainbox')
+    quebox= models.ForeignKey(Questionbox, null=True, blank=True,related_name='Mainbox')
     updated_at = models.DateTimeField(auto_now_add=True, auto_now=True)
     created_at = models.DateTimeField(auto_now_add=True, auto_now=False)
 

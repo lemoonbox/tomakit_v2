@@ -193,8 +193,8 @@ EMAIL_HOST_PASSWORD = 'maketeee15'
 
 ####------------------default login path----------------------####
 LOGIN_REDIRECT_URL = '/user/profile'
-LOGIN_URL = 'v2/user/login/'
-LOGOUT_URL = 'v2/user/logout/'
+LOGIN_URL = '/v2/user/login/'
+LOGOUT_URL = '/v2/user/logout/'
 
 ####------------------serve static/media file----------------------####
 #S3serve settings
