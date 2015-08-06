@@ -1,4 +1,10 @@
 {%load static from staticfiles%}
+
+<style>
+
+    /*.facebook-login {line-height:40px;}*/
+
+</style>
 <div class="tab-content">
   <div role="tabpanel" class="tab-pane active" id="signup">
     <div class="pop">
@@ -8,11 +14,21 @@
               <input type="hidden" name="next" value="{{next}}"/>
               {% csrf_token%}
 
-              <h2 class="form-signin-heading">회원가입</h2>
+              <div class="form-signin-heading h2">회원가입</div>
               <div class="about">
-                  <p class="text-muted"><span class="glyphicon glyphicon-send"></span>
-                      모두를 위한 DIY 놀이터 <b>토마킷</b>에서는 다양한 공예 분야의 <b> 전문 공방/작업실</b>, <b>예술인</b>, <b>공예가</b>들의 <b>강좌 정보</b>를 한 눈에 모아서 볼 수 있는 서비스를 제공하고 있습니다. 토마킷 가입은 완전히 <b>무료</b>입니다! 간편하게 가입하고 오늘 신청 가능한 강좌 정보를 찾아보세요.</p>
+                  <p class="text-muted">
+                      모두를 위한 수공예 놀이터 <b>토마킷</b>
+                      <!--에서는 다양한 공예 분야의 <b> 전문 공방/작업실</b>, <b>예술인</b>, <b>공예가</b>들의-->
+                      <!--<b>강좌 정보</b>를 한 눈에 모아서 볼 수 있는 서비스를 제공하고 있습니다. -->
+                      <!--토마킷 -->
+                      가입은 완전히 <b>무료</b>입니다! 간편하게 가입하고 꼭 필요한 수업을 신청해보세요.
+                  </p>
               </div>
+
+
+              <a href="/login/facebook?next={{next}}"><div class="facebook-login"><img src="{%static 'media/image/slice/buttonicon-4.png'%}"> 페이스북으로 회원가입</div></a>
+              <div class="or h4" style="text-align:center;">또는</div>
+
               <label for="username" class="sr-only">이메일 주소</label>
               <input id="username" name="username" type="email"
                      class="form-control" placeholder="이메일" required autofocus/>
@@ -47,7 +63,7 @@
                   </div>
               </div>
               {% endif %}
-              <input type="submit" class="btn btn-lg btn-primary" value="회원가입">
+              <input type="submit" class="btn btn-primary btn-block" value="회원가입">
           </form>
       </div> <!--/register-->
       <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
@@ -65,27 +81,34 @@
         <form method="POST" action="{% url 'v2_login' %}" class="form-signin" autocomplete="off">
             <input type="hidden" name="next" value="{{next}}"/>
             {% csrf_token %}
-            <h2 class="form-signin-heading">로그인</h2><br />
-            <label for="username" name="username"> 이메일 </label><br />
-            <input type="text" name="username" class="form-control" required
-                   placeholder="ex) tomakit@gmail.com" autocomplete="off" value="{{is_authenticated}}" autofocus><br />
-            <label for="password" name="password"> 비밀번호 </label>
-            <a href="{% url 'v2_reset_request' %}" class="fg-pwd pull-right">비밀번호 찾기</a>
+            <div class="form-signin-heading h2">로그인</div>
 
-            <input type="password" name="password" placeholder="Password" class="form-control" required
+
+
+            <a href="/login/facebook"><div class="facebook-login"><img src="{%static 'media/image/slice/buttonicon-4.png'%}"> 페이스북으로 로그인</div></a>
+
+            <div class="or h4" style="text-align:center;">또는</div>
+
+            <!--<label for="username" class="sr-only">이메일 주소</label>-->
+            <input id="username" name="username" type="text"
+                   class="form-control" placeholder="이메일" value="{{is_authenticated}}" required autofocus/>
+
+            <!--<label for="password" class="sr-only">Password</label>-->
+            <input id="password" type="password" name="password" placeholder="비밀번호" class="form-control" required
                    autocomplete="off" value="{{valid_password}}">
-            <br>
+
+            <a href="{% url 'v2_reset_request' %}" class="fg-pwd">비밀번호가 기억나지 않아요</a>
 
             {% if login_form.errors %}
             <div id="form-error">
                 <div class="alert alert-warning">
                     <a href="#" class="close" data-dismiss="alert">&times;</a>
                     <p>정보를 정확히 입력해주세요:</p>
-                    <table>
+                    <!--<table>-->
                         {% for field in login_form %}
                         {{ field.errors|striptags }}
                         {% endfor %}
-                    </table>
+                    <!--</table>-->
                 </div>
             </div>
             {% endif %}
@@ -97,11 +120,7 @@
             -->
 
             <div class="signin-btn-p">
-                <!--<p class="change_link">-->
-                    <!--아직 회원이 아니신가요?-->
-                    <!--<a href="{% url 'v2_signup' %}?next=/" class="to_register">함께해요!</a>-->
-                <!--</p>-->
-                <button class="btn btn-primary btn-block" type="submit">Log In</button>
+                <input class="btn btn-primary btn-block" type="submit" value="로그인">
             </div>
         </form>
 
@@ -113,11 +132,11 @@
 <!--      <a href="{% url 'login_url'%}?next={{request.path}}" class="#to_register">로그인하기!</a>-->
       <ul class="nav nav-tabs" role="tablist" id="loginmodal">
         <li role="presentation" class="active">
-          <span class="change-link">아직 토마킷 계정이 없으신가요?</span>
+          <span class="change-link">처음이신가요?</span>
           <a href="#signup" aria-controls="signup" role="tab" data-toggle="tab">회원가입</a></li>
         <li role="presentation">    
-          <span class="change-link">이미 토마킷의 회원이신가요? </span>
-          <a href="#login" aria-controls="login" role="tab" data-toggle="tab">로그인 하기</a>
+          <span class="change-link">이미 가입하셨나요? </span>
+          <a href="#login"  aria-controls="login" role="tab" data-toggle="tab">로그인 하기</a>
         </li>
       </ul>
     

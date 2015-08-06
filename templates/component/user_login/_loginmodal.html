@@ -1,7 +1,7 @@
-
+{%load static from staticfiles%}
 <!-- Button trigger modal -->
 <button type="button" class="btn-default user" id="cont-btn" data-toggle="modal" data-target="#contactModal">
-  <i class="fa fa-sign-in"></i> 로그인/가입
+  <img src="{%static 'media/image/slice/buttonicon-3.png'%}"> 로그인/가입
 </button>
 <!-- Modal -->
 <div class="modal fade" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="contactModalLabel" aria-hidden="true">
@@ -9,7 +9,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="contactModalLabel"></h4>
+        <!--<h4 class="modal-title" id="contactModalLabel"></h4>-->
       </div>
       <div class="modal-body">
 
@@ -21,4 +21,6 @@
       </div>
     </div>
   </div>
+
+
 </div>

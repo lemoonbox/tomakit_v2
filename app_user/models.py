@@ -1,3 +1,4 @@
+#coding: utf-8
 from django.db import models
 from django.conf import settings
 import uuid
@@ -12,7 +13,7 @@ class UserProfile(models.Model):
     djgouser = models.ForeignKey(settings.AUTH_USER_MODEL)
 
     propic= models.ImageField(upload_to=upload_to, null=True, blank=True)
-    inter_oneline=models.CharField(max_length=150, null=True, blank=True)
+    inter_oneline=models.CharField(max_length=150, null=True, blank=True, default="안녕하세요.")
     inter_start = models.TextField(null=True, blank=True)
     inter_pic =models.ImageField(upload_to=upload_to, null=True, blank=True)
     inter_url=models.CharField(max_length=150, null=True, blank=True)
@@ -34,7 +35,7 @@ class HostProfile(models.Model):
     )
     djgouser = models.ForeignKey(settings.AUTH_USER_MODEL)
     mobile = models.CharField(max_length=50, null=False, unique=True)
-    hosttype= models.CharField(max_length=50, null=False, unique=True,
+    hosttype= models.CharField(max_length=50, null=False, unique=False,
                                choices=TYPE_CHOICES)
 
     created_at = models.DateTimeField(auto_now_add=True, auto_now=False)

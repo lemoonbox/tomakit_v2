@@ -9,32 +9,32 @@
   .about .glyphicon {margin-right:1%;}
   .about .glyphicon:hover {color:coral;}
 </style>
+
+<div class="tmk-sub-body">
+    <div id="login">
           <form method="POST" action="{% url 'v2_host_signup' %}" enctype="multipart/form-data" class="form-signin">
               <input type="hidden" name="next" value="{{next}}"/>
             {% csrf_token%}
 <!--            <p class="ok">&nbsp;</p>-->
+
+              <div class="form-heading h2">작가 회원 가입</div>
             <label for="mobile" class="sr-only">전화번호</label>
             <input id="mobile" name="mobile" type="text"
                    class="form-control" required placeholder="전화번호" />
-              <input type="checkbox" name="hosttype" value="out"> 출강
-              <input type="checkbox" name="hosttype" value="shop"> 공방강의
+              <input type="checkbox" name="hosttype" value="out" > <span>출강</span>
+              <input type="checkbox" name="hosttype" value="shop"> <span>공방강의</span>
 
             {% for field in hostform %}
               {{ field.errors|striptags }}
               {% endfor %}
 
-            <input type="submit" class="btn btn-lg btn-primary" value="회원가입">
+            <input type="submit" class="btn btn-block btn-primary" value="회원가입">
           </form>  
- 
-        </div> <!--/register-->
-      </div> <!--/wrapper-->
-    </div> <!-- /container -->
-
+ </div>
+</div>
 
 <!--    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>-->
-    <script type="text/javascript" src="{% static 'media/js/userform-validation.js' %}"></script>
-    
-    
-  </div> <!-- wrap -->
+    <!--<script type="text/javascript" src="{% static 'media/js/userform-validation.js' %}"></script>-->
+
 
 {% endblock %}

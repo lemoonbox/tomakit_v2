@@ -1,3 +1,4 @@
+#coding:utf-8
 from django.shortcuts import render
 
 from app_board.models import Questionbox, SolutionBox, Casebox, MainQoubox
@@ -28,7 +29,7 @@ def questionboard(request, page=1, category = 'all', state='all'):
             state_condt.append(state)
 
 
-        paging_date = pagination(navline_num=2, onepage_post_num=11,
+        paging_date = pagination(navline_num=5, onepage_post_num=15,
                                  target_model=Questionbox, cate_condt=cate_condt, state_condt =state_condt, page=page)
 
         HTTP_HOST = request.META['HTTP_HOST']
@@ -39,7 +40,7 @@ def questionboard(request, page=1, category = 'all', state='all'):
         states = paging_date['states']
     else:
         pass
-
+    next ="/v2/board/questionboard/"
     return render(request, TEMP.V2_BOARD_QUESTION,{
         'questions':_questions,
 
@@ -53,6 +54,7 @@ def questionboard(request, page=1, category = 'all', state='all'):
         'arrows' : arrows,
         'pages':pages,
         'HTTP_HOST':HTTP_HOST,
+        'next':next,
     })
 
 
@@ -77,7 +79,7 @@ def caseboard(request,page=1, category = 'all', state='all'):
             state_condt.append(state)
 
 
-        paging_date = pagination(navline_num=2, onepage_post_num=2,
+        paging_date = pagination(navline_num=5, onepage_post_num=8,
                                  target_model=Casebox, cate_condt=cate_condt, state_condt =state_condt, page=page)
 
         HTTP_HOST = request.META['HTTP_HOST']
@@ -103,6 +105,7 @@ def caseboard(request,page=1, category = 'all', state='all'):
         'arrows' : arrows,
         'pages':pages,
         'HTTP_HOST':HTTP_HOST,
+        'next':"/v2/board/caseboard/",
     })
 
 

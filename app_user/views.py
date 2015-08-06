@@ -1,7 +1,8 @@
 #coding:utf-8
 from django.shortcuts import render
 from django.template import \
-    Context
+    Context,\
+    RequestContext
 from django.contrib.auth.models import \
     User
 from django.contrib.auth.decorators import \
@@ -92,12 +93,13 @@ def signup(request):
                     tasks.send_key_email.delay(request, title, sender,
                     _user.email, TEMP.V2_PW_RESET_EMAIL, key)
 
-                print next
                 return HttpResponseRedirect("/v2/user/login/?next="+next)
-
+    HTTP_HOST = request.META["HTTP_HOST"]
     return render(request, TEMP.V2_SIGNUP_TEM,{
         'accountform':userForm,
-        'next':next,})
+        'next':next,
+        'HTTP_HOST':HTTP_HOST,
+        })
 
 @login_required
 def host_signup(request):
@@ -128,16 +130,21 @@ def host_signup(request):
             _hostprofile.save()
 
         return HttpResponseRedirect(next)
-
+    HTTP_HOST = request.META["HTTP_HOST"]
     return render(request, TEMP.V2_HOST_SIGNUP,{
         'hostform':hostform,
+        'HTTP_HOST':HTTP_HOST,
+
     })
 
 
 def signup_confirm(request, *args, **kwargs):
 
+    HTTP_HOST = request.META["HTTP_HOST"]
     ctx = Context({
-        'error':None
+        'error':None,
+        'HTTP_HOST':HTTP_HOST,
+
     })
     ctx["host"] = request.META['HTTP_HOST']
 
@@ -186,9 +193,11 @@ def send_confirm(request):
                     tasks.send_key_email.delay(request, title, sender,
                         _user[0].email, TEMP.V2_CONFIRM_MAIL, key)
 
-
+    HTTP_HOST = request.META["HTTP_HOST"]
     return render(request, TEMP.V2_SEND_CONFIRM, {
         "send_conf_for":send_confirm_form,
+        'HTTP_HOST':HTTP_HOST,
+
     })
 
 def pw_reset_request(request):
@@ -215,8 +224,11 @@ def pw_reset_request(request):
                     tasks.send_key_email.delay(request, title, sender,
                         _user[0].email, TEMP.V2_PW_RESET_EMAIL, key)
 
+    HTTP_HOST = request.META["HTTP_HOST"]
     return render(request, TEMP.V2_PW_RESET, {
-        'pwrsetform':pwresetform
+        'pwrsetform':pwresetform,
+        'HTTP_HOST':HTTP_HOST,
+
     })
 
 def pw_reset_process(request, key):
@@ -241,8 +253,12 @@ def pw_reset_process(request, key):
         pwresetform = PwReset_ProcessForm(request.POST)
 
         if(not pwresetform.is_valid()):
+            HTTP_HOST = request.META["HTTP_HOST"]
+
             return render(request, TEMP.V2_PW_RESET_PROCESS, {
-                'pwresetform':pwresetform})
+                'pwresetform':pwresetform,
+                'HTTP_HOST':HTTP_HOST,
+                })
 
         _user = _reset_obj.user
         _user.set_password(pwresetform.cleaned_data['password'])
@@ -250,8 +266,10 @@ def pw_reset_process(request, key):
         return HttpResponseRedirect('/v2/user/login')
 
     pwreset_process_form = PwReset_ProcessForm()
+    HTTP_HOST = request.META["HTTP_HOST"]
     return render(request, TEMP.V2_PW_RESET_PROCESS, {
-        'pwrset_process_form':pwreset_process_form
+        'pwrset_process_form':pwreset_process_form,
+        'HTTP_HOST':HTTP_HOST,
     })
 
 def login(request, *args, **kwargs):
@@ -264,7 +282,7 @@ def login(request, *args, **kwargs):
 
     elif request.method=="POST":
         login_form = LoginForm(request.POST)
-        next=request.POST.get("next","/")
+        next=request.POST.get("next", "/")
         print next
         if login_form.is_valid():
             user = login_form.authenticate(request)
@@ -272,9 +290,11 @@ def login(request, *args, **kwargs):
                 auth_login(request, user)
                 return HttpResponseRedirect(next)
 
+    HTTP_HOST = request.META["HTTP_HOST"]
     return render(request, TEMP.V2_LOGIN,
                   {'login_form':login_form,
-                   'next':next
+                   'next':next,
+                    'HTTP_HOST':HTTP_HOST,
                    })
 
 def logout(request, *args, **kwargs):
@@ -287,12 +307,16 @@ def T2W_edit_prof(request, user_num):
     if request.method=="GET":
         _req_user = request.user
         _page_user = User.objects.get(id=user_num)
+        HTTP_HOST = request.META["HTTP_HOST"]
         if _req_user == _page_user :
             context={
                 "djgouser":_page_user,
+                'HTTP_HOST':HTTP_HOST,
             }
             context.update(csrf(request))
-            return render_to_response(TEMP.V2_RPO_EDIT,context)
+
+            return render_to_response(TEMP.V2_RPO_EDIT,context,
+                                      context_instance=RequestContext(request))
 
     elif request.method=="POST":
 
@@ -322,7 +346,7 @@ def T2W_edit_prof(request, user_num):
         _profile.inter_pic=inter_pic
         _profile.save()
 
-        return HttpResponseRedirect("/")
+        return HttpResponseRedirect("/v2/user/profile/{0}".format(_profile.id))
 
 def T2W_public_prof(request, user_num):
 

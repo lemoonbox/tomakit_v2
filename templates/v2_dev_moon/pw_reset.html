@@ -6,35 +6,49 @@
 
 {% block content %}
 <style>
-  .reset-form {width: 330px; margin:auto;margin-top:150px; padding-top: 50px; text-align: center;}
-  .reset-form input[type=email] {width:330px;margin:auto;border-radius: 0px;}
-  .reset-form h1 {font-family:hanna;color:white;}
-  .reset-form .btn {border-radius:0px;}
-  .cancel {width:100px;border:2px solid cornsilk;}
-  .cancel .glyphicon {font-size:18px;color:black;vertical-align: text-top;}
-  .cancel .glyphicon:hover {color:red;}
-  .cancel:hover {border:2px solid cornsilk; color:red;background:white;}
-  .reset-pwd {background:#66cc99;border:2px solid #66cc99; color:white;width:210px;}
-  .reset-pwd:hover {border:2px solid #66cc99; background:white;color:#66cc99;}
-  #wrap {border-top:10px solid #47c9af;padding:100px auto 160px auto;margin:auto auto 300px auto;height:100%;background:#cdbfe3;}
+  .pwd-reset-form {
+      width: 330px;
+      margin: 150px auto;
+      background-color: rgba(255,255,255,0.3);
+      padding: 30px;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+  }
+  .cancel {
+      width: 45%;
+      float: left;
+      margin: 0px 10px 0px 0px;
+  }
+  .reset-pwd {
+      width: 45%;
+      height:50px;
+  }
+  #id_email {
+      width: 100%;
+      height: 50px;
+  }
+
+    .cancel {height:50px;}
+
 </style>
 
-  <div id="wrap">
+  <div class="tmk-sub-body">
 
-<div class="container">
-    <div class="reset-form">      
+<!--<div class="container">-->
+    <div class="pwd-reset-form">
         <form class="form-inline" role="form" method="POST" action="{{request.path}}">
           {% csrf_token%}
-          <h1>토마킷 <small>beta</small></h1>
+          <div class="form-heading h2">비밀번호 변경하기</div>
+
           <label for="id_email" class="sr-only">Email</label>
-          <input id="id_email" class="form-control input-lg" placeholder="Email" maxlength="100" name="email" type="email">
-          <span class="help-block">입력하신 이메일로 비밀번호 변경 링크가 전송됩니다.</span>
-            <span class="help-block">Facebook이나 Kakao아이디로 생성하신 분은 비밀번호를 변경할 수 없습니다.</span>
-          <a href="javascript:history.back()"><button type="button" class="btn btn-lg btn-default cancel pull-left"><span class="glyphicon glyphicon-arrow-left"></span> </a>
-          <button class="btn btn-lg btn-default reset-pwd pull-right" type = "submit" value="이메일 전송하기">비밀번호 변경</button>
+          <input id="id_email" class="form-control" placeholder="Email" name="email" type="email"><br>
+          <div class="help-block"><br>입력하신 이메일로 비밀번호 변경 링크가 전송됩니다.
+            Facebook이나 Kakao아이디로 생성하신 분은 비밀번호를 변경할 수 없습니다.</div><br>
+          <a href="javascript:history.back()"> <button class="btn btn-primary cancel">뒤로 가기</button></a>
+          <input class="btn btn-primary reset-pwd" type = "submit" value="이메일 전송하기">
 
         </form>
     </div>
+  <!--</div>-->
   </div>
-  </div> <!--wrap-->
 {%endblock%}

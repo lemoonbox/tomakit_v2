@@ -30,6 +30,7 @@ V2_DETAIL_QITEM = 'v2_dev_moon/app_question/qitem_detail.html'
 V2_CREATE_QSKILL = 'v2_dev_moon/app_question/qskill_create.html'
 V2_DETAIL_QSKILL = 'v2_dev_moon/app_question/qskill_detail.html'
 V2_NEXT_GUIDE = 'v2_dev_moon/app_question/next_guide.html'
+V2_QUE_BRIDGE='v2_dev_moon/app_question/que_bridge.html'
 
 #board
 V2_BOARD_QUESTION = 'v2_dev_moon/app_board/question_board.html'
