@@ -183,10 +183,10 @@
             <div class="solution-credit">
 
                 {% if case.qtype == "I" %}
-                <a class="credit-title h4" href="http://{{HTTP_HOST}}/v2/question/item/{{que.qitempost.id}}">
+                <a class="credit-title h4" href="http://{{HTTP_HOST}}/v2/question/item/{{case.quebox.qitempost.id}}">
                     {{case.solubox.title}}</a>
                 {% elif case.qtype == "S" %}
-                <a class="credit-title h4" href="http://{{HTTP_HOST}}/v2/question/skill/{{que.qskillpost.id}}">
+                <a class="credit-title h4" href="http://{{HTTP_HOST}}/v2/question/skill/{{case.quebox.qskillpost.id}}">
                     {{case.solubox.title}}</a>
                 {%endif%}
 
