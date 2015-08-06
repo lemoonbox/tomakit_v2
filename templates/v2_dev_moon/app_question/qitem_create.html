@@ -166,6 +166,33 @@
     }
 
 
+    .wgt-stepper{
+        height: 34px;
+        width: 70px;
+        display: inline-block;
+        vertical-align: top;
+    }
+    .wgt-stepper .stepper-arrow {
+        position: relative;
+        right: -49px;
+        top: -33px;
+        display: block;
+        width: 20px;
+        height: 16px;
+        cursor: pointer;
+        text-indent: -9999px;
+        background-color: #3bafda;
+    }
+    .wgt-stepper .up {
+        background: url("static/image/icon/icon-arrow-up-small.png") no-repeat center;
+        background-size: 22px;
+    }
+    .wgt-stepper .down {
+        background: url("static/image/icon/icon-arrow-down-small.png") no-repeat center;
+        background-size: 22px;
+    }
+
+
 </style>
 <form class="" method="POSt" action="{{request.path}}" enctype="multipart/form-data">
     {% csrf_token %}
@@ -294,10 +321,12 @@
                             <textarea class="form-control" style="height:150px;" rows="5" type="text" name="wantedu"></textarea>
                             <p>수업 인원은 몇명인가요?</p>
                             <div class="col-md-3" style="margin-left:-15px;">
-                                <div class="stepper ">
-                                    <input class="form-control stepper-input" type="number" name="memnum" min="1" max="50">
-                                    <span class="stepper-arrow up">Up</span>
-                                    <span class="stepper-arrow down">Down</span>
+                                <div class="wgt-stepper">
+                                    <div>
+                                        <input name="" type="text" min="1" max="20" class="form-control stepper-input" value="1"/>
+                                        <span class="stepper-arrow up" onclick="stepper(this);">up</span>
+                                        <span class="stepper-arrow down" onclick="stepper(this);">down</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>

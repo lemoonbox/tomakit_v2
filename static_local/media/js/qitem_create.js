@@ -102,3 +102,20 @@ function deleteImg(span){
     $imgsWrap.append($deleteImgWrap.detach());
 
 }
+
+function stepper(stepper) {
+    var $stepper = $(stepper);
+    var $input = $stepper.siblings('input');
+    var value = parseInt($input.val());
+    if ($stepper.text() == 'up') {
+        if (value < parseInt($input.attr('max'))) {
+            value = value + 1;
+            $input.val(value);
+        }
+    } else {
+        if (value > parseInt($input.attr('min'))) {
+            value = value - 1;
+            $input.val(value);
+        }
+    }
+}
