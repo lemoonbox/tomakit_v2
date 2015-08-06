@@ -38,7 +38,14 @@ $g-btn-h-color:#e86460;
   display: inline-block;
   width: 900px;
   min-height:600px;
-  margin-bottom:50px;
+  margin-bottom:80px;
+}
+
+.tmk-sub-body-case {
+  width:1170px;
+  text-align:center;
+  display:inline-block;
+  margin-bottom:80px;
 }
 .tmk-sub-body-wrapper {
   margin: 50px auto;
@@ -962,7 +969,6 @@ text-height: 50px;
 
   }
   .credit-title {
-    color: #e86460;
     line-break: auto;
 
   }
@@ -988,7 +994,7 @@ text-height: 50px;
 
 .aside-username {
   line-height:40px;
-  width:100px;
+  //width:100px;
 margin:auto 10px;}
 
 .tmk-qitem-aside-right > .h3 {color:#e86460;}
