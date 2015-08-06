@@ -1,7 +1,8 @@
 #coding:utf-8
 from django.shortcuts import render
 from django.template import \
-    Context
+    Context,\
+    RequestContext
 from django.contrib.auth.models import \
     User
 from django.contrib.auth.decorators import \
@@ -292,7 +293,9 @@ def T2W_edit_prof(request, user_num):
                 "djgouser":_page_user,
             }
             context.update(csrf(request))
-            return render_to_response(TEMP.V2_RPO_EDIT,context)
+
+            return render_to_response(TEMP.V2_RPO_EDIT,context,
+                                      context_instance=RequestContext(request))
 
     elif request.method=="POST":
 
