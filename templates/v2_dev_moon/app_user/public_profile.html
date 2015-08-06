@@ -93,23 +93,20 @@
 
     <div class="tmk-profile-sub-body">
         <div class="profile-main-contents">
+            {{profile.inter_user}}
+            {{profile.inter_pic}}
 
-            <!--if profile_url or inter_pic is available-->
-
-            <div class="profile-video-none">
-
-                <h4 style="line-height:400px;">사진 또는 동영상이 없습니다</h4>
-
-           </div>
-
-            <!--else-->
-
+            {% if profile.inter_url or profile.inter_pic %}
             <div class="profile-video">
                 <iframe width="100%" height="400" src="https://www.youtube.com/embed/{{profile.inter_url}}" frameborder="0" allowfullscreen></iframe>
                 <div class="phto-pro"><img src="{{MEDIA_URL}}{{profile.inter_pic}}" style="width:100%;"></div>
             </div>
 
-            <!--endif-->
+            {% else %}
+            <div class="profile-video-none">
+                <h4 style="line-height:400px;">사진 또는 동영상이 없습니다</h4>
+           </div>
+            {% endif %}
 
         </div>
         <aside class="profile-aside-right">

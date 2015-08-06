@@ -29,7 +29,7 @@ def questionboard(request, page=1, category = 'all', state='all'):
             state_condt.append(state)
 
 
-        paging_date = pagination(navline_num=2, onepage_post_num=15,
+        paging_date = pagination(navline_num=5, onepage_post_num=15,
                                  target_model=Questionbox, cate_condt=cate_condt, state_condt =state_condt, page=page)
 
         HTTP_HOST = request.META['HTTP_HOST']
@@ -78,7 +78,7 @@ def caseboard(request,page=1, category = 'all', state='all'):
             state_condt.append(state)
 
 
-        paging_date = pagination(navline_num=2, onepage_post_num=8,
+        paging_date = pagination(navline_num=5, onepage_post_num=8,
                                  target_model=Casebox, cate_condt=cate_condt, state_condt =state_condt, page=page)
 
         HTTP_HOST = request.META['HTTP_HOST']
