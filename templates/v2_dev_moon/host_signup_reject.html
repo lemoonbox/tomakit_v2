@@ -3,18 +3,21 @@
 
 {%block content%}
 <style>
-  .about {padding:10px;border-radius:0px;margin-bottom:20px;background-color:#eee;}
-  .text-muted {margin-top:10px;}
-  .text-muted b:hover {color:coral;}
-  .about .glyphicon {margin-right:1%;}
-  .about .glyphicon:hover {color:coral;}
+.host-reject-error {height:450px;margin-top:200px;}
+  .host-reject-error img {width:100px;height:100px;margin:15px auto;}
 </style>
 
-이미 작가 등록한 경우에는 다시 등록할 수 없습니다.
+<div class="tmk-sub-body">
+<div class="host-reject-error">
+  <img src="{%static 'media/image/slice/metaicon-5.png'%}">
+  <div class="h2" style="font-weight:normal;">
 
+    이미 작가로 등록한 경우에는<br> 다시 등록할 수 없습니다</div>
+
+</div>
 
 <!--    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>-->
-    <script type="text/javascript" src="{% static 'media/js/userform-validation.js' %}"></script>
+    <!--<script type="text/javascript" src="{% static 'media/js/userform-validation.js' %}"></script>-->
     
     
   </div> <!-- wrap -->

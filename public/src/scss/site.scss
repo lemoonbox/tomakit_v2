@@ -438,6 +438,7 @@ ul{
   .h3 {
     margin: 0px 0px 5px 0px !important;
     font-family: NanumMyeongjo;
+    font-weight:normal;
     font-size: 24px;
     color: #CCCCCC;
     width: 60%;
@@ -463,9 +464,9 @@ ul{
   .credit-title {
     height: 72px;
     //width:80%;
-    font-size:16px;
+    font-size:18px;
     padding: 5px auto auto 0px;
-    font-weight:bold;
+    font-weight:600;
 
     a {color:#000;}
     a:hover {color:#F5515F;}
@@ -514,6 +515,7 @@ ul{
 }
 
 nav {
+width:100%!important;
   //a {line-height:60px;}
   li {
     line-height: 58px;
@@ -563,6 +565,9 @@ nav {
   //}
 }
 
+//.container-fluid>.navbar-collapse, .container-fluid>.navbar-header, .container>.navbar-collapse, .container>.navbar-header {
+//  margin:auto -15px!important;
+//}
 
 .nav {
   .open > a {
@@ -814,12 +819,22 @@ $g-btn-h-color:#e86460;
 
 
 .board-category-wrapper {
-  width:1170px;
+  width:900px;
   border-radius:8px;
   height:200px;
   margin:30px auto;
   border: 1px solid #ddd;
   background:#ffffff;
+}
+
+.board-category-wrapper-mini {
+  width:750px;
+  min-height:100px;
+  margin:30px auto;
+  //float:left;
+  .breadcrumb {margin:5px;
+  li:first-child {width:200px;float:left;line-height:100%;background-color:rgba(0,0,0,0.3);color:white;padding:8px;margin-top:-5px;margin-left:-10px;}
+  }
 }
 
 .category-title {
@@ -959,6 +974,8 @@ text-height: 50px;
   text-align: left;
   padding: 15px;
 
+  button {height:50px;}
+
   span {
     color: #e86460;
   }
@@ -966,7 +983,7 @@ text-height: 50px;
     overflow:hidden;
     white-space: normal;
     height:40px;
-
+    margin-top:5px;
   }
   .credit-title {
     line-break: auto;
