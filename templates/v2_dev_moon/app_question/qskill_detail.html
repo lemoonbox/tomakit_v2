@@ -15,27 +15,27 @@
         padding: 40px 10px;
         border-bottom: 1px solid rgba(0,0,0,0.22);
         margin:auto auto 30px;
-        width: 900px;
+        width: 1170px;
     }
     .tmk-qskill-header > span{
-        font-size: 28px;
+        font-size: 34px;
         font-weight: bold;
     }
-    .tmk-qskill-aside-right  {text-align:left;width:27%;padding-left:30px;float:left;}
+    .tmk-qskill-aside-right  {text-align:left;width:20%;padding-left:30px;float:left;}
     .tmk-qskill-aside-right div {float:left; width:100%;}
     .tmk-qskill-aside-right .h3 {color:#e86460;}
 
-    .tmk-qskill-img {width:73%;float:left;border-radius:8px;}
+    .tmk-qskill-img {width:78%;float:left;border-radius:8px;}
     /*.tmk-qskill-img img {width:100%}*/
 
     .tmk-panel {
         float: left;
-        width: 73%;
+        width: 78%;
         text-align: center;
         padding: 30px auto;
 
         display: inline-block;
-
+margin-bottom:20px;
         background-color: #fff;
         border: 1px solid #ddd;
         border-radius: 4px;
@@ -47,13 +47,15 @@
     .tmk-qskill-q {line-height:50px;width:400px;}
     .tmk-qskill-q .h4 {font-family:NanumMyeongjo!important;}
 
+    .tmk-qskill-on-date {height:80px;}
 
+.tmk-panel-header {text-align:left;padding-left:30px;font-size:20px;}
 .picks-cards > ul > li:first-child {margin-left:0;}
 
 </style>
 
 
-<div class="tmk-sub-body">
+<div class="tmk-sub-body-case">
     <div class="tmk-qskill-wrapper">
         <!--<div class="row">-->
         <div class="tmk-qskill-header">
@@ -64,7 +66,7 @@
 
 
         <div class="tmk-panel">
-            <div class="tmk-panel-header">문의 내용</div>
+            <div class="tmk-panel-header"><img src="{%static 'media/image/slice/headicon-6.png'%}"> 문의 내용</div>
             <hr>
             <div class="tmk-qskill-q">
                 <div class="tmk-qskill-q-top"></div>
@@ -100,6 +102,7 @@
                 </div>
             </div>
             <div>{{qskill_post.mylocal}}</div>
+            <div class="tmk-qskill-on-date"></div>
 
         </div>
         <aside class="tmk-qskill-aside-right">
@@ -114,17 +117,19 @@
 
             <a class="aside-username" href="http://{{HTTP_HOST}}/v2/user/profile/{{qskill_post.djgouser.id}}">
                 by   {{qskill_post.djgouser.last_name}} {{qskill_post.djgouser.first_name}}</a><br>
-            <div style="width:100%;margin-top:15px;">자기 소개 : {{user.userprofile_set.first.inter_oneline}}</div>
+            <div style="width:100%;margin-top:15px;">
+                <!--자기 소개 : -->
+                {{user.userprofile_set.first.inter_oneline}}</div>
         </aside>
 
-        <div class="solution-box" style="width:73%;float:left;">
+        <div class="solution-box" style="width:78%;float:left;">
         <span class="picks-cards-hdr">
             <div class="h4" style="text-align:left;"><img src="{%static 'media/image/slice/headicon-7.png'%}"> 만들어진 클래스</div>
             </span>
             {%if qitem_post.solutionbox.count == 0 %}
-            <div class="no-solutions" style="width:100%;">
+            <div class="no-solutions" style="width:100%;font-weight:normal;">
                 <img src="{%static 'media/image/slice/metaicon-5.png'%}">
-                <div class="h4">으악! 죄송합니다 <br> 아직 만들어진 클래스가 없네요...</div>
+                <div class="h3">으악! 죄송합니다 <br> 아직 만들어진 클래스가 없네요...</div>
                 <div>빠른 시간내에 클래스가 만들어질 수 있도록 노력하겠습니다</div>
             </div>
 

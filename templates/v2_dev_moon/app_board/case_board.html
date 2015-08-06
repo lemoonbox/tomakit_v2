@@ -1,19 +1,19 @@
 {%extends 'base.html'%}
 {% load static from staticfiles%}
 
-    <title></title>
+<title></title>
 
 <body>
 {%block content%}
 
 
 <style>
-.caseboard-banner-top {
-    width: 100%;
-    height: 200px;
-    background: #ffdd87;
-    overflow: hidden;
-}
+    .caseboard-banner-top {
+        width: 100%;
+        height: 200px;
+        background: #ffdd87;
+        overflow: hidden;
+    }
     .caseboard-banner-wrapper {
         max-width:900px;
         margin:auto;
@@ -24,23 +24,23 @@
         width:100%;
     }
 
-.banner-title .h2 {
-    font-weight: bold;
-}
-.banner-title .h4 {
-    font-weight: normal;
-}
-.banner-image {
-    z-index: 10;
-    margin-left: -20%;
-    float: left;
-}
+    .banner-title .h2 {
+        font-weight: bold;
+    }
+    .banner-title .h4 {
+        font-weight: normal;
+    }
+    .banner-image {
+        z-index: 10;
+        margin-left: -20%;
+        float: left;
+    }
 
     .caseboard-card-wrapper {width:700px; margin:auto;}
 
     .case-wrapper {width:700px; margin:15px auto;float:left;border-bottom: 1px solid rgba(0,0,0,0.22);padding-bottom:30px;}
     .case-wrapper-heading {font-family:NanumMyeongjo!important;
-    font-size:18px;margin:15px auto 30px;}
+        font-size:18px;margin:15px auto 30px;}
 
 
 
@@ -58,164 +58,166 @@
     </div>
 </div>
 
-<div class="board-category-wrapper">
+<!--<div class="board-category-wrapper">-->
+<div class="board-category-wrapper-mini">
+    <!--<div class="category-title col-md-2"> 카테고리 </div>-->
+    <!--<div class="category-category col-md-6">-->
 
-    <div class="category-title col-md-2"> 카테고리 </div>
-    <div class="category-category col-md-6">
-
-        <!--category선택 :::-->
+    <!--category선택 :::-->
+    <ol class="breadcrumb">
+        <li class="active">카테고리 </li>
         {% for cate in categoryies %}
+
         {% if cate.category_current %}
-        <a class="active" href="http://{{HTTP_HOST}}/v2/board/caseboard/1/{{cate.category}}/{{cate.state}}">{{cate.category}}</a>//
+        <li><a class="active" href="http://{{HTTP_HOST}}/v2/board/caseboard/1/{{cate.category}}/{{cate.state}}">{{cate.category}}</a></li>
         {% else %}
-        <a href="http://{{HTTP_HOST}}/v2/board/caseboard/1/{{cate.category}}/{{cate.state}}">{{cate.category}}</a> |
+        <li><a href="http://{{HTTP_HOST}}/v2/board/caseboard/1/{{cate.category}}/{{cate.state}}">{{cate.category}}</a></li>
         {% endif %}
         {% endfor %}
+    </ol>
+    <!--</div>-->
+    <!--<div class="category-states col-md-4">-->
 
-    </div>
-    <div class="category-states col-md-4">
-
-        <!--지역 선택 :::-->
+    <!--지역 선택 :::-->
+    <ol class="breadcrumb">
+        <li class="active">지역 선택 </li>
         {% for state in states %}
         {% if state.state_current %}
-        <a class="active" href="http://{{HTTP_HOST}}/v2/board/caseboard/1/{{state.category}}/{{state.state}}">{{state.state}}</a>//
+        <li><a class="active" href="http://{{HTTP_HOST}}/v2/board/caseboard/1/{{state.category}}/{{state.state}}">{{state.state}}</a></li>
         {% else %}
-        <a href="http://{{HTTP_HOST}}/v2/board/caseboard/1/{{state.category}}/{{state.state}}">{{state.state}}</a> |
+        <li><a href="http://{{HTTP_HOST}}/v2/board/caseboard/1/{{state.category}}/{{state.state}}">{{state.state}}</a></li>
         {% endif %}
 
         {% endfor%}
-
-    </div>
+    </ol>
+    <!--</div>-->
 </div>
 
 
 
 <div class="tmk-sub-body">
-
-
-
     <div class="caseboard-card-wrapper">
 
 
         {%for case in questions %}
 
-       <div class="case-wrapper">
-           <div class="case-wrapper-heading">{{case.quebox.djgouser.last_name}} {{case.quebox.djgouser.first_name}}님의 문의로<br>
-               {{case.solubox.title}} 클래스가 개설되었습니다</div>
+        <div class="case-wrapper">
+            <div class="case-wrapper-heading">{{case.quebox.djgouser.last_name}} {{case.quebox.djgouser.first_name}}님의 문의로<br>
+                {{case.solubox.title}} 클래스가 개설되었습니다</div>
 
-        <ul class="picks-cards rows">
-        {% if case.qtype == "I" %}
+            <ul class="picks-cards rows">
+                {% if case.qtype == "I" %}
 
-        <li class="card-qitem">
-            <!--<span class="picks-cards-profile">-->
-            <a class="picks-cards-profile" href="http://{{HTTP_HOST}}/v2/user/profile/{{case.quebox.djgouser.id}}"
-               style="background-image:url({{MEDIA_URL}}{{case.quebox.djgouser.userprofile_set.first.propic}});">
-                <!--<img src="{{MEDIA_URL}}{{case.quebox.djgouser.userprofile_set.first.propic}}"></a></span>-->
-            </a>
-            <!--</span>-->
+                <li class="card-qitem">
+                    <!--<span class="picks-cards-profile">-->
+                    <a class="picks-cards-profile" href="http://{{HTTP_HOST}}/v2/user/profile/{{case.quebox.djgouser.id}}"
+                       style="background-image:url({{MEDIA_URL}}{{case.quebox.djgouser.userprofile_set.first.propic}});">
+                        <!--<img src="{{MEDIA_URL}}{{case.quebox.djgouser.userprofile_set.first.propic}}"></a></span>-->
+                    </a>
+                    <!--</span>-->
             <span class="profile-name"><a href="http://{{HTTP_HOST}}/v2/user/profile/{{case.quebox.djgouser.id}}">
                 {{case.quebox.djgouser.last_name}} {{case.quebox.djgouser.first_name}}</a></span>
-            <div class="card-contents" style="background-image:url({{MEDIA_URL}}{{case.quebox.item_pic}}); background-size:cover;">
-                <!--<div class="questionboard-q-img"><img src="{{MEDIA_URL}}{{case.quebox.item_pic}}"></div>-->
-            </div>
-            <div class="picks-cards-credit">
-                <div class="h3">Q. </div><div class="category">{{case.quebox.category.first.category}}</div>
-                    <div class="credit-title">
-                        <a href="http://{{HTTP_HOST}}/v2/question/item/{{case.quebox.qitempost.id}}">
-                            {{case.quebox.title}}를 배우고 싶어요
-                    </a>
+                    <div class="card-contents" style="background-image:url({{MEDIA_URL}}{{case.quebox.item_pic}}); background-size:cover;">
+                        <!--<div class="questionboard-q-img"><img src="{{MEDIA_URL}}{{case.quebox.item_pic}}"></div>-->
                     </div>
-                <div class="cards-date success" style="text-align:center;">
-                    <span>A.</span> {{case.quebox.qitempost.solutionbox.count}}개의 클래스가 만들어졌어요
-                </div>
-                <div class="cards-credit-label">
+                    <div class="picks-cards-credit">
+                        <div class="h3">Q. </div><div class="category">{{case.quebox.category.first.category}}</div>
+                        <div class="credit-title">
+                            <a href="http://{{HTTP_HOST}}/v2/question/item/{{case.quebox.qitempost.id}}">
+                                {{case.quebox.title}} 만들고 싶어요
+                            </a>
+                        </div>
+                        <div class="cards-date success" style="text-align:center;">
+                            <span>A.</span> {{case.quebox.qitempost.solutionbox.count}}개의 클래스가 만들어졌어요
+                        </div>
+                        <div class="cards-credit-label">
                     <span class="label-address"><img src="{%static 'media/icon/map-icon.png'%}">
                         {{case.quebox.state.first.state}} / {{case.quebox.mylocal}}</span>
-                    <!--<i style="margin-left:20px;" class="fa fa-tag"></i>-->
-                    <span class="label-tag pull-right">만들기 문의</span>
-                </div>
-            </div>
+                            <!--<i style="margin-left:20px;" class="fa fa-tag"></i>-->
+                            <span class="label-tag pull-right">만들기 문의</span>
+                        </div>
+                    </div>
 
-        {% elif case.qtype == "S" %}
-            <li class="card-qskill">
-            <a class="picks-cards-profile" href="http://{{HTTP_HOST}}/v2/user/profile/{{case.quebox.djgouser.id}}"
-               style="background-image:url({{MEDIA_URL}}{{case.quebox.djgouser.userprofile_set.first.propic}});"></a>
+                    {% elif case.qtype == "S" %}
+                <li class="card-qskill">
+                    <a class="picks-cards-profile" href="http://{{HTTP_HOST}}/v2/user/profile/{{case.quebox.djgouser.id}}"
+                       style="background-image:url({{MEDIA_URL}}{{case.quebox.djgouser.userprofile_set.first.propic}});"></a>
             <span class="profile-name">
                 <a href="http://{{HTTP_HOST}}/v2/user/profile/{{case.quebox.djgouser.id}}">
                     {{case.quebox.djgouser.last_name}} {{case.quebox.djgouser.first_name}}</a></span>
-            <div class="picks-cards-credit">
-                <div class="h3">Q. </div><div class="category">{{case.quebox.category.first.category}}</div>
-                <div class="credit-title">
-                    <a href="http://{{HTTP_HOST}}/v2/question/skill/{{case.quebox.qskillpost.id}}">
-                        {{case.quebox.title}} 을/를 배우고 싶어요</a>
-                </div>
-                <div class="card-contents-skill">
-                    <!--원하는 클래스 :-->
-                    {{case.quebox.skill_class}}<br>
-                    <!--배우는 목표 :-->
-                    {{case.quebox.skill_goal}}<br>
-                    <!--배우고 싶은 내용 :-->
-                    {{case.quebox.skill_edu}}<br>
-                </div>
-                {% if case.quebox.qskillpost.solutionbox.count == 0 %}
-                <div class="cards-date">희망 수업일&nbsp;&nbsp;
-                    <div class="h4" style="display:inline;"> {{case.quebox.weekday}}</div>
-                </div>
-                {%elif case.quebox.qskillpost.solutionbox.count >= 1 %}
-                <div class="cards-date success" style="text-align:center;"><span>A.</span> {{case.quebox.qskillpost.solutionbox.count}}개의 클래스가 만들어졌어요
-                </div>
+                    <div class="picks-cards-credit">
+                        <div class="h3">Q. </div><div class="category">{{case.quebox.category.first.category}}</div>
+                        <div class="credit-title">
+                            <a href="http://{{HTTP_HOST}}/v2/question/skill/{{case.quebox.qskillpost.id}}">
+                                {{case.quebox.title}} 배우고 싶어요</a>
+                        </div>
+                        <div class="card-contents-skill">
+                            <!--원하는 클래스 :-->
+                            {{case.quebox.skill_class}}<br>
+                            <!--배우는 목표 :-->
+                            {{case.quebox.skill_goal}}<br>
+                            <!--배우고 싶은 내용 :-->
+                            {{case.quebox.skill_edu}}<br>
+                        </div>
+                        {% if case.quebox.qskillpost.solutionbox.count == 0 %}
+                        <div class="cards-date">희망 수업일&nbsp;&nbsp;
+                            <div class="h4" style="display:inline;"> {{case.quebox.weekday}}</div>
+                        </div>
+                        {%elif case.quebox.qskillpost.solutionbox.count >= 1 %}
+                        <div class="cards-date success" style="text-align:center;"><span>A.</span> {{case.quebox.qskillpost.solutionbox.count}}개의 클래스가 만들어졌어요
+                        </div>
 
-                {%endif%}
-                <div class="cards-credit-label">
-                    <span class="label-address"><img src="{%static 'media/icon/map-icon.png'%}"> {{case.quebox.state.first.state}} / {{case.quebox.mylocal}}</span>
-                    <!--<i style="margin-left:20px;" class="fa fa-tag"></i>-->
-                    <span class="label-tag pull-right">전문수업 문의</span>
-                </div>
-            </div>
-
-
-        {% endif %}
+                        {%endif%}
+                        <div class="cards-credit-label">
+                            <span class="label-address"><img src="{%static 'media/icon/map-icon.png'%}"> {{case.quebox.state.first.state}} / {{case.quebox.mylocal}}</span>
+                            <!--<i style="margin-left:20px;" class="fa fa-tag"></i>-->
+                            <span class="label-tag pull-right">전문수업 문의</span>
+                        </div>
+                    </div>
 
 
-    </li>
-<li style="width:100px;border:none;box-shadow:none;background-image:url({%static 'media/image/slice/metaicon-3.png'%});background-size:60%;background-position:center;margin:auto 0px;"></li>
-        <li class="solution-cards" style="height:470px!important;">
-            <div class="solution-credit">
-
-                {% if case.qtype == "I" %}
-                <a class="credit-title h4" href="http://{{HTTP_HOST}}/v2/question/item/{{case.quebox.qitempost.id}}">
-                    {{case.solubox.title}}</a>
-                {% elif case.qtype == "S" %}
-                <a class="credit-title h4" href="http://{{HTTP_HOST}}/v2/question/skill/{{case.quebox.qskillpost.id}}">
-                    {{case.solubox.title}}</a>
-                {%endif%}
-
-            </div>
-            <span>클래스 지기</span>
-            <div class="solution-host">
-                <a class="profile-photo-mini" href="http://{{HTTP_HOST}}/v2/user/profile/{{qitem_post.djgouser.id}}"
-                   style="background-image:url({{MEDIA_URL}}{{case.solubox.djgouser.userprofile_set.first.propic}});"></a>
-                <a class="aside-username" href="http://{{HTTP_HOST}}/v2/user/profile/{{solution.djgouser.id}}">
-                    {{case.solubox.djgouser.last_name}} {{case.solubox.djgouser.first_name}}
-                </a>
-            </div>
-            <div class="solution-contents">
-                <div class="cards-date"><span>클래스 정보</span> <br>
-                    <img src="{%static 'media/icon/map-icon.png'%}"> {{case.solubox.state.first.state}}/{{case.solubox.mylocal}}<br>
-                    <img src="{%static 'media/icon/calendar-icon.png'%}"> {{case.solubox.repeat}}회/총 {% widthratio case.solubox.repeat 1 case.solubox.perhour%}시간<br>
-                    <img src="{%static 'media/icon/time-icon.png'%}"> {{case.solubox.weekday_time}}<br>
-                </div>
-            </div>
-            <div class="solution-payment">
-                <span>수강료</span><br>
-                <div>재료비 포함<p class="solution-price pull-right">1000000원</p></div>
-            </div>
-            <button class="btn btn-primary btn-block">나도 문의하기 </button>
-        </li>
-</ul>
+                    {% endif %}
 
 
-       </div>
+                </li>
+                <li style="width:100px;border:none;box-shadow:none;background-image:url({%static 'media/image/slice/metaicon-3.png'%});background-size:60%;background-position:center;margin:auto 0px;"></li>
+                <li class="solution-cards" style="height:470px!important;">
+                    <div class="solution-credit">
+
+                        {% if case.qtype == "I" %}
+                        <a class="credit-title h4" href="http://{{HTTP_HOST}}/v2/question/item/{{case.quebox.qitempost.id}}">
+                            {{case.solubox.title}}</a>
+                        {% elif case.qtype == "S" %}
+                        <a class="credit-title h4" href="http://{{HTTP_HOST}}/v2/question/skill/{{case.quebox.qskillpost.id}}">
+                            {{case.solubox.title}}</a>
+                        {%endif%}
+
+                    </div>
+                    <span>클래스 지기</span>
+                    <div class="solution-host">
+                        <a class="profile-photo-mini" href="http://{{HTTP_HOST}}/v2/user/profile/{{qitem_post.djgouser.id}}"
+                           style="background-image:url({{MEDIA_URL}}{{case.solubox.djgouser.userprofile_set.first.propic}});"></a>
+                        <a class="aside-username" href="http://{{HTTP_HOST}}/v2/user/profile/{{solution.djgouser.id}}">
+                            {{case.solubox.djgouser.last_name}} {{case.solubox.djgouser.first_name}}
+                        </a>
+                    </div>
+                    <div class="solution-contents">
+                        <div class="cards-date"><span>클래스 정보</span> <br>
+                            <img src="{%static 'media/icon/map-icon.png'%}"> {{case.solubox.state.first.state}}/{{case.solubox.mylocal}}<br>
+                            <img src="{%static 'media/icon/calendar-icon.png'%}"> {{case.solubox.repeat}}회/총 {% widthratio case.solubox.repeat 1 case.solubox.perhour%}시간<br>
+                            <img src="{%static 'media/icon/time-icon.png'%}"> {{case.solubox.weekday_time}}<br>
+                        </div>
+                    </div>
+                    <div class="solution-payment">
+                        <span>수강료</span><br>
+                        <div>재료비 포함<p class="solution-price pull-right">1000000원</p></div>
+                    </div>
+                    <button class="btn btn-primary btn-block">나도 문의하기 </button>
+                </li>
+            </ul>
+
+
+        </div>
         {% endfor %}
 
     </div>

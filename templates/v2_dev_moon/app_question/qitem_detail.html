@@ -15,21 +15,21 @@
         padding: 40px 10px;
         border-bottom: 1px solid rgba(0,0,0,0.22);
         margin:auto auto 30px;
-        width: 900px;
+        width: 1170px;
     }
     .tmk-qitem-header > span{
-        font-size: 28px;
+        font-size: 34px;
         font-weight: bold;
     }
 
-    .tmk-qitem-aside-right {text-align:left;width:27%;padding-left:30px;float:left;}
+    .tmk-qitem-aside-right {text-align:left;width:20%;padding-left:30px;float:left;}
     .tmk-qitem-aside-right div {float:left; width:100%;}
-    .tmk-qitem-img {width:73%;float:left;border-radius:8px;}
+    .tmk-qitem-img {width:78%;float:left;border-radius:8px;}
 
 
     .tmk-panel {
         float: left;
-        width: 73%;
+        width: 78%;
         text-align: center;
         padding: 30px auto;
 
@@ -38,6 +38,7 @@
         background-color: #fff;
         border: 1px solid #ddd;
         border-radius: 4px;
+        margin-bottom:20px;
 
     }
     .tmk-panel div {margin:30px auto;}
@@ -45,6 +46,9 @@
     .tmk-qitem-q-top {width:30px;height:5px;background:#e85460;}
     .tmk-qitem-q {line-height:50px;width:400px;}
     .tmk-qitem-q .h4 {font-family:NanumMyeongjo!important;}
+    .tmk-qitem-on-date {height:80px;}
+
+    .tmk-panel-header {text-align:left;padding-left: 30px;font-size:20px;}
 
 
     #qitem-Carousel {
@@ -64,15 +68,15 @@
     .carousel-control {
         width: 50px;
         height: 100px!important;
-        margin: 180px 15px;
+        margin: 240px 15px;
     }
 
-.item {height:400px;width:100%;}
+.item {height:500px;width:100%;}
     .picks-cards > ul > li:first-child {margin-left:0;}
 
 
 </style>
-<div class="tmk-sub-body">
+<div class="tmk-sub-body-case">
     <div class="tmk-qitem-wrapper">
         <div class="row">
             <div class="tmk-qitem-header">
@@ -136,7 +140,9 @@
 
             <a class="aside-username" href="http://{{HTTP_HOST}}/v2/user/profile/{{qitem_post.djgouser.id}}">
                 by {{qitem_post.djgouser.last_name}} {{qitem_post.djgouser.first_name}}</a><br>
-            <div style="width:100%;">자기 소개 : {{user.userprofile_set.first.inter_oneline}}</div>
+            <div style="width:100%;margin-top:15px;">
+                <!--자기 소개 : -->
+                {{user.userprofile_set.first.inter_oneline}}</div>
         </aside>
 
         <div class="tmk-panel">
@@ -160,18 +166,18 @@
                 </div>
             </div>
             <div>{{qitem_post.mylocal}}</div>
-
+<div class="tmk-qitem-on-date"></div>
         </div>
 
 
-        <div class="solution-box" style="width:73%;float:left;">
+        <div class="solution-box" style="width:78%;float:left;">
         <span class="picks-cards-hdr">
             <div class="h4" style="text-align:left;"><img src="{%static 'media/image/slice/headicon-7.png'%}"> 만들어진 클래스</div>
             </span>
 {%if qitem_post.solutionbox.count == 0 %}
-<div class="no-solutions" style="width:100%;">
+<div class="no-solutions" style="width:100%;font-weight:normal;">
     <img src="{%static 'media/image/slice/metaicon-5.png'%}">
-    <div class="h4">으악! 죄송합니다 <br> 아직 만들어진 클래스가 없네요...</div>
+    <div class="h3">으악! 죄송합니다 <br> 아직 만들어진 클래스가 없네요...</div>
     <div>빠른 시간내에 클래스가 만들어질 수 있도록 노력하겠습니다</div>
 </div>
 

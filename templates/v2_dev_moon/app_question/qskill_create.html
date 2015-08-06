@@ -1,4 +1,5 @@
 {%extends 'base.html'%}
+{%load static from staticfiles %}
 <title></title>
 <body>
 {%block content%}
@@ -21,7 +22,7 @@
 
     }
     .tmk-qitem-hdr-contents  span.tmk-ctns-text{
-        font-size: 20px;
+        font-size: 20px; margin-left:10px; margin-right:10px;
     }
     .tmk-qitem-hdr-contents > div{
         display: inline-block;
@@ -35,6 +36,11 @@
     }
 
 
+    .tmk-contact-p-text {
+        font-size: 20px;
+        font-weight: 600;
+    }
+
     .tmk-panel{
         display: inline-block;
         float: left;
@@ -42,14 +48,21 @@
         text-align:left;
         background-color: #fff;
         border: 1px solid #ddd;
-        border-radius: 4px;
+        border-radius: 8px;
         width: 73%;
+        margin-bottom:10px;
     }
+
 
     .tmk-panel-header {
         font-size:18px;
         height: 50px;
+        font-weight:600;
+        line-height:28px;
+
     }
+
+    .tmk-panel-header img {width:28px;height:28px;margin-right:5px;}
 
     .tmk-panel-contents{
         text-align:left;
@@ -189,17 +202,17 @@
             <div class="tmk-qitem-contents">
                 <div class="tmk-qitem-learnWhat">
                     <div class="tmk-learnWhat-contents tmk-panel">
-                        <div class="tmk-panel-header"> 내용
+                        <div class="tmk-panel-header"><img src="{%static 'media/image/slice/headicon-1.png'%}">내용
                         </div>
                         <div class="tmk-panel-contents">
 
-                            어떤 수업을 찾고 계세요?
+                            <p>어떤 수업을 찾고 계세요?</p>
                             <textarea class="form-control" type="text" COLS=70 ROWS=4 name="wantclass"></textarea>
-                            어떤 목적으로 배우시는 건가요?
+                            <p>어떤 목적으로 배우시는 건가요?</p>
                             <textarea class="form-control" type="text" COLS=70 ROWS=4 name="wantgoal"></textarea>
-                            무엇을 배우고 싶으세요?
+                            <p>무엇을 배우고 싶으세요?</p>
                             <textarea class="form-control" type="text" COLS=70 ROWS=4 name="wantedu"></textarea>
-                            수업 인원은 몇명인가요?<br>
+                            <p>수업 인원은 몇명인가요?<p<br>
                             <div class="col-md-3" style="margin-left:-15px;">
                                 <div class="stepper ">
                                     <input class="form-control stepper-input" type="number" name="memnum" min="1" max="50">
@@ -214,9 +227,9 @@
                 </div>
                 <div class="tmk-qitem-region">
                     <div class="tmk-contents tmk-panel">
-                        <div class="tmk-panel-header">희망지역</div>
+                        <div class="tmk-panel-header"><img src="{%static 'media/image/slice/headicon-3.png'%}">희망지역</div>
                         <div class="tmk-panel-contents">
-                            편하신 지역을 자유롭게 입력해주세요<br>
+                            <p>편하신 지역을 자유롭게 입력해주세요</p>
                             <div class="tmk-qitem-selecter-wrapper">
                                 <div class="selecter cover" style="width:100px;" tabindex="0">
                                     <select name="state" class="selecter_3 selecter-element" data-selecter-options="{&quot;cover&quot;:&quot;true&quot;}" tabindex="-1">
@@ -268,9 +281,9 @@
                 </div>
                 <div class="tmk-qitem-calenda">
                     <div class="tmk-phupload-contents tmk-panel">
-                        <div class="tmk-panel-header">수업희망일</div>
+                        <div class="tmk-panel-header"><img src="{%static 'media/image/slice/headicon-2.png'%}"> 수업희망일</div>
                         <div class="tmk-panel-contents">
-                            날짜 선택
+                            <p>날짜 선택</p>
                             <input class="form-control" placeholder="ex) 2015-08-20, 150820, 월수금, 화목 등" type="text" name="weekday">
 
                         </div>
@@ -281,9 +294,9 @@
             </div>
             <div class="tmk-qitem-footer">
                 <div class="tmk-panel" style="background:none;border-color:transparent;padding-left:0px;">
-                    <div><span class="tmk-ctns-text">저희가 어디로 연락드리면 될까요?</span></div>
-                    <input class="form-control" style="width:360px;vertical-align:middle;" placeholder="전화번호를 입력해주세요" name="mobile">
-                    <input type="submit" class="btn btn-primary" value="다했어요">
+                    <div><span class="tmk-contact-p-text">저희가 어디로 연락드리면 될까요?</span></div><br>
+                    <input class="form-control" style="width:70%;height:40px;vertical-align:middle;" placeholder="전화번호를 입력해주세요" name="mobile">
+                    <input type="submit" class="btn btn-primary" style="width:25%;margin-left:10px;"value="다했어요">
                     {% for field in create_qform %}
                     {{ field.errors|striptags }}
                     {% if field.errors %}

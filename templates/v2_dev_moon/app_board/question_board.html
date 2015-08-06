@@ -62,6 +62,19 @@
             min-height: 470px;
         }
 
+    /*a {*/
+            /*/!*opacity: 1;*!/*/
+            /*-o-transition:opacity .2s linear!important;*/
+            /*-ms-transition:opacity .2s linear!important;*/
+            /*-moz-transition:opacity .2s linear;*/
+            /*-webkit-transition:opacity .2s linear;*/
+            /*transition: opacity .2s linear;*/
+        /*}*/
+     /*a:hover {*/
+            /*opacity: 0.8!important;*/
+        /*}*/
+
+
     </style>
 
 <div class="questionboard-body">
@@ -78,34 +91,37 @@
     </div>
 
 
-    <div class="board-category-wrapper">
+    <div class="board-category-wrapper-mini">
+        <!--<div class="category-title col-md-2"> 카테고리 </div>-->
+        <!--<div class="category-category col-md-6">-->
 
-        <div class="category-title col-md-2"> 카테고리 </div>
-        <div class="category-category col-md-6">
-
-            <!--category선택 :::-->
+        <!--category선택 :::-->
+        <ol class="breadcrumb">
+            <li class="active">카테고리 선택 </li>
             {% for cate in categoryies %}
+
             {% if cate.category_current %}
-            <a class="active" href="http://{{HTTP_HOST}}/v2/board/questionboard/1/{{cate.category}}/{{cate.state}}">{{cate.category}}</a>//
+            <li><a class="active" href="http://{{HTTP_HOST}}/v2/board/questionboard/1/{{cate.category}}/{{cate.state}}">{{cate.category}}</a></li>
             {% else %}
-            <a href="http://{{HTTP_HOST}}/v2/board/questionboard/1/{{cate.category}}/{{cate.state}}">{{cate.category}}</a> |
+            <li><a href="http://{{HTTP_HOST}}/v2/board/questionboard/1/{{cate.category}}/{{cate.state}}">{{cate.category}}</a></li>
             {% endif %}
             {% endfor %}
+        </ol>
+        <!--</div>-->
+        <!--<div class="category-states col-md-4">-->
 
-        </div>
-        <div class="category-states col-md-4">
-
-            <!--지역 선택 :::-->
+        <!--지역 선택 :::-->
+        <ol class="breadcrumb">
+            <li class="active">지역 선택 </li>
             {% for state in states %}
             {% if state.state_current %}
-            <a class="active" href="http://{{HTTP_HOST}}/v2/board/questionboard/1/{{state.category}}/{{state.state}}">{{state.state}}</a>//
+            <li><a class="active" href="http://{{HTTP_HOST}}/v2/board/questionboard/1/{{state.category}}/{{state.state}}">{{state.state}}</a></li>
             {% else %}
-            <a href="http://{{HTTP_HOST}}/v2/board/questionboard/1/{{state.category}}/{{state.state}}">{{state.state}}</a> |
+            <li><a href="http://{{HTTP_HOST}}/v2/board/questionboard/1/{{state.category}}/{{state.state}}">{{state.state}}</a></li>
             {% endif %}
 
             {% endfor%}
-
-        </div>
+        </ol>
     </div>
 
 
@@ -121,8 +137,8 @@
                         <!--<img src="{{MEDIA_URL}}{{que.djgouser.userprofile_set.first.propic}}"></a></span>-->
                     </a>
                     <!--</span>-->
-            <span class="profile-name"><a href="http://{{HTTP_HOST}}/v2/user/profile/{{que.djgouser.id}}">
-                {{que.djgouser.last_name}} {{que.djgouser.first_name}} </a></span>
+            <div class="profile-name"><a href="http://{{HTTP_HOST}}/v2/user/profile/{{que.djgouser.id}}">
+                {{que.djgouser.last_name}} {{que.djgouser.first_name}} </a></div>
                     <a href="http://{{HTTP_HOST}}/v2/question/item/{{que.qitempost.id}}">
                     <div class="card-contents" style="background:url({{MEDIA_URL}}{{que.item_pic}}); background-size:cover;">
                         <!--<div class="questionboard-q-img"><img src="{{MEDIA_URL}}{{que.item_pic}}"></div>-->
@@ -133,7 +149,7 @@
 
                         <div class="credit-title">
                             <a href="http://{{HTTP_HOST}}/v2/question/item/{{que.qitempost.id}}">
-                                {{que.title}}를 만들고 싶어요</a>
+                                {{que.title}} 만들고 싶어요</a>
                         </div>
                         <div class="cards-date">희망 수업일&nbsp;&nbsp;
                             <div class="h4" style="display:inline;"> {{que.weekday}}</div>
@@ -163,13 +179,14 @@
 
                         <div class="credit-title">
                             <a href="http://{{HTTP_HOST}}/v2/question/skill/{{que.qskillpost.id}}">
-                                {{que.title}}를 만들고 싶어요</a>
+                                {{que.title}} 만들고 싶어요</a>
                         </div>
 
 
                         <div class="card-contents-skill">
-                            {{que.skill_class}}
-                            {{que.skill_goal}}
+                            <p>{{que.skill_class}}</p>
+                            <p>{{que.skill_goal}}</p>
+                            <p>{{que.skill_edu}}</p>
                         </div>
                         <div class="cards-date">희망 수업일&nbsp;&nbsp;
                             <div class="h4" style="display:inline;"> {{que.weekday}}</div>
@@ -216,10 +233,41 @@
     </div>
 </div>
 {%endblock%}
-
-
 </body>
 
+
+
+
+{%comment%}
+<div class="board-category-wrapper">
+
+    <div class="category-title col-md-2"> 카테고리 </div>
+    <div class="category-category col-md-6">
+
+        <!--category선택 :::-->
+        {% for cate in categoryies %}
+        {% if cate.category_current %}
+        <a class="active" href="http://{{HTTP_HOST}}/v2/board/questionboard/1/{{cate.category}}/{{cate.state}}">{{cate.category}}</a>//
+        {% else %}
+        <a href="http://{{HTTP_HOST}}/v2/board/questionboard/1/{{cate.category}}/{{cate.state}}">{{cate.category}}</a> |
+        {% endif %}
+        {% endfor %}
+
+    </div>
+    <div class="category-states col-md-4">
+
+        <!--지역 선택 :::-->
+        {% for state in states %}
+        {% if state.state_current %}
+        <a class="active" href="http://{{HTTP_HOST}}/v2/board/questionboard/1/{{state.category}}/{{state.state}}">{{state.state}}</a>//
+        {% else %}
+        <a href="http://{{HTTP_HOST}}/v2/board/questionboard/1/{{state.category}}/{{state.state}}">{{state.state}}</a> |
+        {% endif %}
+
+        {% endfor%}
+
+    </div>
+    {%endcomment%}
 {%comment%}
 프로필 사진:
 <a href="http://{{HTTP_HOST}}/v2/user/profile/{{que.djgouser.id}}">
