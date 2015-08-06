@@ -38,7 +38,7 @@
                                 <!--<i style="color:gray;" class="xi-user-circle"></i>-->
                                 <span class="profile-photo-mini" style="background-image:url({{MEDIA_URL}}{{user.userprofile_set.first.propic}});margin:2px 5px 0px 0px;background-size:cover;border:1px solid #cccccc;">
                                     </span>
-                                 {{user.last_name}} {{user.first_name}}<span class="caret"></span></a>
+                                 {{user.last_name}}{{user.first_name}}<span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="/v2/user/profile/{{request.user.id}}">프로필</a></li>
                                 <li><a href="/v2/user/logout">로그아웃</a></li>
