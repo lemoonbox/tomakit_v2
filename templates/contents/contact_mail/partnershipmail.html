@@ -3,15 +3,15 @@
 <title>{%block title%}제휴하기{%endblock%}</title>
 {%block content%}
 <style>
-  .well {margin:auto;margin-top:150px; max-width:800px;}
-  #wrap {margin-bottom:0px;}
-  textarea {resize:none;}
-  button [type="submit"] {right:0;}
+  .tmk-panel-heading {text-align:center;margin:50px auto;}
+  .tmk-panel-contact {margin-top:50px; background:rgba(255,255,255,0.3);padding:50px;}
+  .bt-form {margin:30px auto;text-align:center;}
 </style>
 
-<div id="wrap">    
-  <div class="container">
-    <div id="class-form" class="well">
+<div class="tmk-sub-body">
+
+    <div class="tmk-panel-contact well" style="text-align:left;">
+      <div class="tmk-panel-heading h1">제휴 / Q&A</div>
       <form method="POST" action="">
         {% csrf_token%}
         {% for field in emailform %}
@@ -23,10 +23,10 @@
         <input id="id_modile" name="modile"  type="tel" class="form-control" placeholder="하이픈(-) 없이 숫자만 입력해주세요"><br>
         <label for="content">토마킷과 어떤 아이템을 제휴하고 싶으신가요? 최대한 자세히 설명해주세요.</label>
         <textarea cols="40" class="form-control" id="id_content" name="content" rows="10"></textarea><br>
-        <button id="submit" type = "submit" value="이메일 전송하기" class="btn btn-primary">이메일 보내기</button>
+        <div class="bt-form"><button id="submit" type = "submit" value="이메일 전송하기" class="btn btn-primary">이메일 보내기</button>
+        </div>
       </form>
     </div>
   </div>
 
-</div>
 {%endblock%}

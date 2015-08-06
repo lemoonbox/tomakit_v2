@@ -681,7 +681,7 @@ nav {
   width:40px;
   background:rgba(0,0,0,0.6);
   color: #ffffff;
-  line-height:45px;
+  line-height:40px;
   animation: ani 1s linear 1 normal;
   //transition: all 0.3s ease 0s;
   &:hover {
@@ -990,3 +990,5 @@ text-height: 50px;
   line-height:40px;
   width:100px;
 margin:auto 10px;}
+
+.tmk-qitem-aside-right > .h3 {color:#e86460;}
