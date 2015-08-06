@@ -40,7 +40,7 @@ def questionboard(request, page=1, category = 'all', state='all'):
         states = paging_date['states']
     else:
         pass
-
+    next ="/v2/board/questionboard/"
     return render(request, TEMP.V2_BOARD_QUESTION,{
         'questions':_questions,
 
@@ -54,6 +54,7 @@ def questionboard(request, page=1, category = 'all', state='all'):
         'arrows' : arrows,
         'pages':pages,
         'HTTP_HOST':HTTP_HOST,
+        'next':next,
     })
 
 
@@ -104,6 +105,7 @@ def caseboard(request,page=1, category = 'all', state='all'):
         'arrows' : arrows,
         'pages':pages,
         'HTTP_HOST':HTTP_HOST,
+        'next':"/v2/board/caseboard/",
     })
 
 

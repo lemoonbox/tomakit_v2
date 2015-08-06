@@ -282,13 +282,14 @@ def login(request, *args, **kwargs):
 
     elif request.method=="POST":
         login_form = LoginForm(request.POST)
-        next=request.POST.get("next","/")
+        next=request.POST.get("next", "/")
         print next
         if login_form.is_valid():
             user = login_form.authenticate(request)
             if user:
                 auth_login(request, user)
                 return HttpResponseRedirect(next)
+
     HTTP_HOST = request.META["HTTP_HOST"]
     return render(request, TEMP.V2_LOGIN,
                   {'login_form':login_form,
