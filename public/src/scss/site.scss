@@ -369,27 +369,25 @@ ul{
 }
 
 .card-contents-skill {
-  height:218px;
+  height:212px;
 }
 
 .picks-cards-profile {
   height: 32px;
   width: 32px;
-  margin: 10px 10px 0px;
+  margin: 15px 10px 0px;
   float:left;
   //border: 1px solid #ffffff;
   //position: absolute;
   border-radius: 50%;
-  background: #ddd;
   overflow:hidden;
   background-size:cover;
-  background-image:url(/static/media/image/slice/profile-2.png);
 }
 
 .profile-name {
     font-size: 14px;
     float:left;
-    margin-left: 5px;
+    margin: 5px 0px 0px 0px;
     text-align: left;
   a {
     line-height:50px;
@@ -808,7 +806,7 @@ $g-btn-h-color:#e86460;
 
 
 
-.questionboard-category-wrapper {
+.board-category-wrapper {
   width:1170px;
   border-radius:8px;
   height:200px;
@@ -926,13 +924,13 @@ text-height: 50px;
 
   .profile-photo {
     margin: 40px 40px;
-    width: 120px;
+    float:left !important;
+    width: 120px !important;
     height: 120px;
     border-radius: 50%;
     background-size: cover;
     overflow: hidden;
     background-position:center;
-    background-image: url(static/media/image/slice/profile-2.png);
   }
   .profile-photo-mini {
     margin: 5px 5px 5px 0px;
@@ -941,7 +939,6 @@ text-height: 50px;
     border-radius: 50%;
     background-size: cover;
     overflow: hidden;
-    background-image: url(static/media/image/slice/profile-2.png);
     background-position:center;
     float:left;
     vertical-align:middle;
@@ -950,26 +947,37 @@ text-height: 50px;
 
 
 .solution-cards {
-  height: 400px !important;
+  height: 430px !important;
   background-color: #ffffff;
   text-align: left;
-  padding: 20px;
+  padding: 15px;
+
+  span {
+    color: #e86460;
+  }
   .solution-credit {
     overflow:hidden;
     white-space: normal;
     height:40px;
+
   }
   .credit-title {
     color: #e86460;
     line-break: auto;
 
   }
-  .solution-host {margin:0px;
+  .solution-host {margin:15px 0px;
+    .profile-photo-mini {
+    width:34px;height:34px;}
     > .aside-username {
+      margin: auto 5px;
       color: #000;
     }
   }
-  .cards-date {line-height:22px;}
+  .cards-date {
+    line-height: 26px;
+  }
+
   div {
     margin: 10px auto;
     width: 100%;
@@ -977,3 +985,8 @@ text-height: 50px;
 
   }
 }
+
+.aside-username {
+  line-height:40px;
+  width:100px;
+margin:auto 10px;}

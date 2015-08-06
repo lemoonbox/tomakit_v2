@@ -25,8 +25,7 @@
     .tmk-qitem-aside-right {text-align:left;width:27%;padding-left:30px;float:left;}
     .tmk-qitem-aside-right div {float:left; width:100%;}
     .tmk-qitem-img {width:73%;float:left;border-radius:8px;}
-    /*.tmk-qitem-img img {width:100%}*/
-    .aside-username {line-height:50px; width:100px;}
+
 
     .tmk-panel {
         float: left;
@@ -69,6 +68,7 @@
     }
 
 .item {height:400px;width:100%;}
+    .picks-cards > ul > li:first-child {margin-left:0;}
 
 
 </style>
@@ -187,6 +187,7 @@
                         <a class="credit-title h4" href="http://{{HTTP_HOST}}/v2/question/item/{{que.qitempost.id}}">
                             {{solution.title}}</a>
                     </div>
+                    <span>클래스 지기</span>
                     <div class="solution-host">
                         <a class="profile-photo-mini" href="http://{{HTTP_HOST}}/v2/user/profile/{{qitem_post.djgouser.id}}"
                            style="background-image:url({{MEDIA_URL}}{{qitem_post.djgouser.userprofile_set.first.propic}});"></a>
@@ -197,15 +198,15 @@
                     </div>
                     <div class="solution-contents">
 
-                        <div class="cards-date">클래스 정보 <br>
+                        <div class="cards-date"><span>클래스 정보</span> <br>
                             <img src="{%static 'media/icon/map-icon.png'%}"> {{solution.state.first.state}}/{{solution.mylocal}}<br>
                             <img src="{%static 'media/icon/calendar-icon.png'%}"> {{solution.repeat}}회/총 {% widthratio solution.repeat 1 solution.perhour%}시간<br>
                             <img src="{%static 'media/icon/time-icon.png'%}"> {{solution.weekday_time}}<br>
                         </div>
                     </div>
                     <div class="solution-payment">
-                        수강료<br>
-                        <div>재료비 포함<span class="pull-right">{{solution.price}}원</span></div>
+                        <span>수강료</span><br>
+                        <div>재료비 포함<p class="pull-right">{{solution.price}}원</p></div>
 
                     </div>
                     <button class="btn btn-primary btn-block">나도 문의하기 </button>

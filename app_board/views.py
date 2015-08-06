@@ -1,3 +1,4 @@
+#coding:utf-8
 from django.shortcuts import render
 
 from app_board.models import Questionbox, SolutionBox, Casebox, MainQoubox

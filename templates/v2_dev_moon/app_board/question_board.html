@@ -78,7 +78,7 @@
     </div>
 
 
-    <div class="questionboard-category-wrapper">
+    <div class="board-category-wrapper">
 
         <div class="category-title col-md-2"> 카테고리 </div>
         <div class="category-category col-md-6">
@@ -122,7 +122,7 @@
                     </a>
                     <!--</span>-->
             <span class="profile-name"><a href="http://{{HTTP_HOST}}/v2/user/profile/{{que.djgouser.id}}">
-                {{que.djgouser.last_name}}{{que.djgouser.first_name}}</a></span>
+                {{que.djgouser.last_name}} {{que.djgouser.first_name}} </a></span>
                     <a href="http://{{HTTP_HOST}}/v2/question/item/{{que.qitempost.id}}">
                     <div class="card-contents" style="background:url({{MEDIA_URL}}{{que.item_pic}}); background-size:cover;">
                         <!--<div class="questionboard-q-img"><img src="{{MEDIA_URL}}{{que.item_pic}}"></div>-->
@@ -156,7 +156,7 @@
 
 
                 <span class="profile-name"><a href="http://{{HTTP_HOST}}/v2/user/profile/{{que.djgouser.id}}">
-                    {{que.djgouser.last_name}}{{que.djgouser.first_name}}</a></span><br>
+                    {{que.djgouser.last_name}} {{que.djgouser.first_name}} </a></span><br>
 
                     <div class="picks-cards-credit">
                         <div class="h3">Q. </div><div class="category">{{que.category.first.category}}</div>
@@ -226,7 +226,7 @@
     <img src="{{MEDIA_URL}}{{que.djgouser.userprofile_set.first.propic}}"></a><br>
 이름 :
 <a href="http://{{HTTP_HOST}}/v2/user/profile/{{que.djgouser.id}}">
-    {{que.djgouser.last_name}}{{que.djgouser.first_name}}</a><br>
+    {{que.djgouser.last_name}} {{que.djgouser.first_name}} </a><br>
 질문사진 :<div class="questionboard-q-img"> <img src="{{MEDIA_URL}}{{que.item_pic}}"></div>
 카테고리 : {{que.category.first.category}}<br>
 제목 : {{que.title}}<br>
@@ -239,7 +239,7 @@
     <img src="{{MEDIA_URL}}{{que.djgouser.userprofile_set.first.propic}}"></a><br>
 이름 :
 <a href="http://{{HTTP_HOST}}/v2/user/profile/{{que.djgouser.id}}">
-    {{que.djgouser.last_name}}{{que.djgouser.first_name}}</a><br>
+    {{que.djgouser.last_name}} {{que.djgouser.first_name}} </a><br>
 카테고리 : {{que.category.first.category}}<br>
 제목 : {{que.title}}<br>
 원하는 클래스 :{{que.skill_class}}<br>

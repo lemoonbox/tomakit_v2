@@ -104,11 +104,11 @@
                 <div class="alert alert-warning">
                     <a href="#" class="close" data-dismiss="alert">&times;</a>
                     <p>정보를 정확히 입력해주세요:</p>
-                    <table>
+                    <!--<table>-->
                         {% for field in login_form %}
                         {{ field.errors|striptags }}
                         {% endfor %}
-                    </table>
+                    <!--</table>-->
                 </div>
             </div>
             {% endif %}

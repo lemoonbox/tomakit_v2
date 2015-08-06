@@ -1,32 +1,16 @@
 {%extends "base.html" %}
 {% load static from staticfiles %}
 
-<title>{%block title%}{{djgouser.last_name}}{{djgouser.first_name}}님의 프로필{%endblock%}</title>
+<title>{%block title%}{{djgouser.last_name}} {{djgouser.first_name}}님의 프로필{%endblock%}</title>
 
 {%block content%}
 <style>
-   .tmk-profile-body {width:1100px;margin:auto;}
+    .tmk-profile-body {width:1100px;margin:auto;}
     .tmk-profile-banner{text-align:left;background: #F5515F;color:#ffffff; width:900px;height:280px;margin:auto;display:inline-block;margin-bottom:20px;}
 
 
-   .profile-photo {
-       margin: 40px 40px;
-       width: 120px;
-       height: 120px;
-       border-radius: 50%;
-       background-size: cover;
-       overflow: hidden;
-       background-image: url({%static 'media/image/slice/profile-2.png'%});
-   }
-   .profile-photo-mini {
-       margin: 10px 0px;
-       width: 32px;
-       height: 32px;
-       border-radius: 50%;
-       background-size: cover;
-       overflow: hidden;
-       background-image: url({%static 'media/image/slice/profile-2.png'%});
-   }
+
+
     /*.profile-photo img {width:100%;}*/
     .profile-button {
         height: 50px;
@@ -37,10 +21,10 @@
         margin-left: 100px;
         font-family: NanumGothic!important;
     }
-   .profile-button img {
-       vertical-align:top;
-   }
-   .profile-button:hover {
+    .profile-button img {
+        vertical-align:top;
+    }
+    .profile-button:hover {
         color: #ffffff;
     }
 
@@ -57,9 +41,9 @@
 
 
 
-   .tmk-profile-q-top {width:30px;height:5px;background:#e85460;}
-   .tmk-profile-q {margin-bottom: 20px;}
-   .tmk-profile-q .h4 {font-family:NanumMyeongjo!important;line-height:40px;}
+    .tmk-profile-q-top {width:30px;height:5px;background:#e85460;}
+    .tmk-profile-q {margin-bottom: 20px;}
+    .tmk-profile-q .h4 {font-family:NanumMyeongjo!important;line-height:40px;}
 
 </style>
 
@@ -68,35 +52,134 @@
     <!--<div class="container">-->
     <div class="tmk-profile-banner">
 
-        {% if user.userprofile_set.first.propic == none %}
-        <div class="profile-photo" col-md-offset-1 col-md-4">
-        {%else%}
-        <div class="profile-photo col-md-offset-1 col-md-4" style="background-image:url({{MEDIA_URL}}{{profile.propic}});">
-            <!--<img src="{{MEDIA_URL}}{{profile.propic}}">-->
-        {%endif%}
-        </div>
+
+        <div class="profile-photo col-md-4" style="background-image:url({{MEDIA_URL}}{{profile.propic}});">
+            <!--<img src="{{MEDIA_URL}}{{profile.propic}}">--></div>
         <div class="user-profile-name">
-            <div class="col-md-6 h1">{{djgouser.last_name}}{{djgouser.first_name}}</div>
-            <div class="col-md-6 h3" style="font-weight:normal;">안녕하세요, {{djgouser.last_name}}{{djgouser.first_name}}입니다.</div>
+
+            <div class="col-md-6 h1">{{djgouser.last_name}} {{djgouser.first_name}}</div>
+            <div class="col-md-6 h3" style="font-weight:normal;margin-top:0px;">안녕하세요, {{djgouser.last_name}} {{djgouser.first_name}}입니다.</div>
         </div>
 
         {% if request.user.is_authenticated %}
         {% if page_user == req_user %}
         <a href="http://{{HTTP_HOST}}/v2/user/edit_prof/{{page_user.id}}">
-        <button class="btn profile-button">
-            <img src="{%static 'media/image/slice/buttonicon-8.png'%}"> 프로필 수정</button>
+            <button class="btn profile-button">
+                <img src="{%static 'media/image/slice/buttonicon-8.png'%}"> 프로필 수정</button>
         </a>
         {% endif %}
         {% endif %}
     </div>
 
     <div class="tmk-sub-body" style="height:500px;">
-<div class="profile-main-contents">
-<div class="profile-video">
-        <iframe width="100%" height="315" src="https://www.youtube.com/embed/{{profile.inter_url}}" frameborder="0" allowfullscreen></iframe>
-        <div class="phto-pro"><img src="{{MEDIA_URL}}{{profile.inter_pic}}" style="width:100%;"></div>
+        <div class="profile-main-contents">
+            <div class="profile-video">
+                <iframe width="100%" height="315" src="https://www.youtube.com/embed/{{profile.inter_url}}" frameborder="0" allowfullscreen></iframe>
+                <div class="phto-pro"><img src="{{MEDIA_URL}}{{profile.inter_pic}}" style="width:100%;"></div>
+            </div>
+        </div>
+        <aside class="profile-aside-right">
+
+            <div class="tmk-profile-q">
+                <div class="tmk-profile-q-top"></div>
+                <div class="h4">왜 핸드메이드를 시작하셨나요?</div>
+
+                {{profile.inter_start}}
+
+            </div>
+
+                <div class="profile-photo-mini" style="background-image:url({{MEDIA_URL}}{{profile.propic}});">
+
+                    <!--<img src="{{MEDIA_URL}}{{profile.propic}}">-->
+                </div>
+                <div class="user-profile-name">
+                    <div class="col-md-6 h1">{{djgouser.last_name}} {{djgouser.first_name}}</div>
+                </div>
+        </aside>
+    </div>
 </div>
-</div>
+{%endblock%}
+
+
+
+{%comment%}
+<div class="tmk-profile-body">
+    {% if page_user == req_user %}
+    <div class="tmk-profile-banner">
+        {% if user.userprofile_set.object.get.first.propic == none %}
+        <div class="profile-photo col-md-offset-1 col-md-4"></div>
+        {%else%}
+        <div class="profile-photo col-md-offset-1 col-md-4" style="background-image:url({{MEDIA_URL}}{{profile.propic}});">
+            <!--<img src="{{MEDIA_URL}}{{profile.propic}}">--></div>
+        {%endif%}
+
+        <div class="user-profile-name">
+
+            <div class="col-md-6 h1">{{user.last_name}} {{user.first_name}}</div>
+            <div class="col-md-6 h3" style="font-weight:normal;">안녕하세요, {{user.last_name}} {{user.first_name}}입니다.</div>
+        </div>
+
+        <a href="http://{{HTTP_HOST}}/v2/user/edit_prof/{{page_user.id}}">
+            <button class="btn profile-button">
+                <img src="{%static 'media/image/slice/buttonicon-8.png'%}"> 프로필 수정</button>
+        </a>
+    </div>
+
+    <div class="tmk-sub-body" style="height:500px;">
+        <div class="profile-main-contents">
+            <div class="profile-video">
+                <iframe width="100%" height="315" src="https://www.youtube.com/embed/{{profile.inter_url}}" frameborder="0" allowfullscreen></iframe>
+                <div class="phto-pro"><img src="{{MEDIA_URL}}{{profile.inter_pic}}" style="width:100%;"></div>
+            </div>
+        </div>
+        <aside class="profile-aside-right">
+
+            <div class="tmk-profile-q">
+                <div class="tmk-profile-q-top"></div>
+                <div class="h4">왜 핸드메이드를 시작하셨나요?</div>
+
+                {{profile.inter_start}}
+
+            </div>
+            {% if user.is_authenticated %}
+            {% if user.userprofile_set.first.propic == none %}
+            <div class="profile-photo-mini"></div>
+            {% else %}
+            <div class="profile-photo-mini" style="background-image:url({{MEDIA_URL}}{{profile.propic}});"></div>
+            {%endif%}
+            {%endif%}
+            <!--<img src="{{MEDIA_URL}}{{profile.propic}}">-->
+
+            <div class="user-profile-name">
+                <div class="col-md-6 h1">{{djgouser.user.last_name}} {{djgouser.user.first_name}}</div>
+            </div>
+        </aside>
+    </div>
+
+
+    {%else%}
+
+
+    <div class="tmk-profile-banner">
+        <div class="profile-photo col-md-offset-1 col-md-4" style="background-image:url({{MEDIA_URL}}{{profile.propic}});">
+            <!--<img src="{{MEDIA_URL}}{{profile.propic}}">-->
+        </div>
+
+
+        <div class="user-profile-name">
+
+            <div class="col-md-6 h1">{{djgouser.set.last_name}} {{djgouser.set.first_name}}</div>
+            <div class="col-md-6 h3" style="font-weight:normal;">안녕하세요, {{djgouser.last_name}} {{djgouser.first_name}}입니다.</div>
+        </div>
+    </div>
+
+    <div class="tmk-sub-body" style="height:500px;">
+        <div class="profile-main-contents">
+            <div class="profile-video">
+                <iframe width="100%" height="315" src="https://www.youtube.com/embed/{{profile.inter_url}}" frameborder="0" allowfullscreen></iframe>
+                <div class="phto-pro"><img src="{{MEDIA_URL}}{{profile.inter_pic}}" style="width:100%;"></div>
+            </div>
+        </div>
         <aside class="profile-aside-right">
 
             <div class="tmk-profile-q">
@@ -107,17 +190,25 @@
 
             </div>
             {% if user.userprofile_set.first.propic == none %}
-            <div class="profile-photo-mini">
-                {% else %}
-                    <div class="profile-photo-mini" style="background-image:url({{MEDIA_URL}}{{profile.propic}});">
-                    {%endif%}
-                <!--<img src="{{MEDIA_URL}}{{profile.propic}}">-->
-            </div>
+            <div class="profile-photo-mini"></div>
+            {% else %}
+            <div class="profile-photo-mini" style="background-image:url({{MEDIA_URL}}{{profile.propic}});"></div>
+            {%endif%}
+            <!--<img src="{{MEDIA_URL}}{{profile.propic}}">-->
+
             <div class="user-profile-name">
-                <div class="col-md-6 h1">{{djgouser.last_name}}{{djgouser.first_name}}</div>
-</div>
+                <div class="col-md-6 h1">{{djgouser.last_name}} {{djgouser.first_name}}</div>
+            </div>
         </aside>
     </div>
-    </div>
-{%endblock%}
 
+    {%endif%}
+</div>
+
+{% if user.userprofile_set.object.get.first.propic == none %}
+<div class="profile-photo col-md-offset-1 col-md-4"></div>
+{%else%}
+<div class="profile-photo col-md-offset-1 col-md-4" style="background-image:url({{MEDIA_URL}}{{profile.propic}});">
+    <!--<img src="{{MEDIA_URL}}{{profile.propic}}">--></div>
+{%endif%}
+{%endcomment%}
