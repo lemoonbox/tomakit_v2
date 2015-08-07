@@ -312,14 +312,14 @@
                         </div>
                         <div class="tmk-panel-footer"></div>
                     </div>
-                    <aside class="tmk-aside-right">만들고 싶은 제품 사진을 업로드 해주세요. JPG, PNG 파일만 업로드가 가능합니다. 썸네일에서는 570*570 픽셀(1:1 비율)로 자동변환 됩니다. 현재 보고 있는 이미지가 썸네일로 지정됩니다.</aside>
+                    <aside class="tmk-aside-right">만들고 싶은 것의 사진을 업로드 해주세요. JPG, PNG 파일만 업로드가 가능합니다.</aside>
                 </div>
                 <div class="tmk-qitem-learnWhat">
                     <div class="tmk-learnWhat-contents tmk-panel">
-                        <div class="tmk-panel-header"><img src="{%static 'media/image/slice/headicon-1.png'%}"> 내용
+                        <div class="tmk-panel-header"><img src="{%static 'media/image/slice/headicon-1.png'%}"> 의뢰 내용
                         </div>
                         <div class="tmk-panel-contents">
-                            <p>무엇을 배우고 싶으세요?</p>
+                            <p>어떤 목적으로 만드시나요?</p>
                             <textarea class="form-control" style="height:150px;" rows="5" type="text" name="wantedu"></textarea>
                             <p>수업 인원은 몇명인가요?</p>
                             <div class="col-md-3" style="margin-left:-15px;">
@@ -334,11 +334,11 @@
                         </div>
                         <div class="tmk-panel-footer"></div>
                     </div>
-                    <aside class="tmk-aside-right">나에게 꼭 맞는 작가를 찾기위해, 배우고 싶은 것을 자세히 적어주세요. 수업에 함께 함여하려는 친구가 있다면 더 입력해주세요.</aside>
+                    <aside class="tmk-aside-right">자세히 작성해주시 더 좋은 수업을 찾아드릴 수 있어요.<br><br> 여러명이서 들으시면 가격이 저렴해져요.</aside>
                 </div>
                 <div class="tmk-qitem-region">
                     <div class="tmk-contents tmk-panel">
-                        <div class="tmk-panel-header"><img src="{%static 'media/image/slice/headicon-2.png'%}"> 희망지역</div>
+                        <div class="tmk-panel-header"><img src="{%static 'media/image/slice/headicon-2.png'%}"> 희망지역(다수 입력)</div>
                         <div class="tmk-panel-contents">
                             <p>편하신 지역을 자유롭게 입력해주세요</p>
                             <div class="tmk-qitem-selecter-wrapper">
@@ -384,30 +384,32 @@
                                 </div>
                             </div>
 
-                            <input class="form-control" style="width:380px;margin-left:-101px;vertical-align:middle;" placeholder="ex) 홍대 근처" name = "mylocal"><br>
+                            <input class="form-control" style="width:380px;margin-left:-101px;vertical-align:middle;" placeholder="ex) 홍대 근처, 성북구, 이태원 일대" name = "mylocal"><br>
                         </div>
                         <div class="tmk-panel-footer"></div>
                     </div>
-                    <aside class="tmk-aside-right">20자 이내에서 복수로 입력해주셔도 괜찮습니다.</aside>
+                    <aside class="tmk-aside-right">편한 지역을 여러 곳 입력해 주세요.</aside>
                 </div>
                 <div class="tmk-qitem-calenda">
                     <div class="tmk-phupload-contents tmk-panel">
                         <div class="tmk-panel-header"><img src="{%static 'media/image/slice/headicon-3.png'%}">수업희망일</div>
                         <div class="tmk-panel-contents">
-                            <p>날짜 선택</p>
-                            <input class="form-control" placeholder="ex) 2015-08-20, 150820, 월수금, 화목 등" type="text" name="weekday">
+                            <p>요일,시간 입력</p>
+                            <input class="form-control" placeholder="ex)평일 저녁, 수/목 7:00시 이후" type="text" name="weekday">
 
                         </div>
                         <div class="tmk-panel-footer"></div>
                     </div>
-                    <aside class="tmk-aside-right">작가들이 수업일정을 제안할 수 있도록 수업을 희망하는 날과 시간을 지정해주세요.</aside>
+                    <aside class="tmk-aside-right">편한 요일과 시간을 알려주세요.</aside>
                 </div>
             </div>
             <div class="tmk-qitem-footer">
                 <div class="tmk-panel" style="background:none;border-color:transparent;padding-left:0px;">
                     <div>
                         <p class="tmk-contact-p-text">저희가 어디로 연락드리면 될까요?</p>
+
                     </div>
+                    <p>수업 개설 알림에만 사용됩니다.</p>
                     <input class="form-control" style="width:70%;height:40px;vertical-align:middle;" placeholder="전화번호를 입력해주세요" name="mobile">
                     <input type="submit" class="btn btn-primary" style="width:25%;margin-left:20px;"value="다했어요">
 

@@ -54,4 +54,4 @@ class CreateQSkill(forms.ModelForm):
     class Meta:
         model = QSkill
         exclude = ('djgouser','category', 'state')
-        field = ('title', 'mylocal', 'wanclass', 'wantgoal', 'wantedu', 'memnum', 'mobile')
+        field = ('title', 'mylocal', 'wantclass', 'wantgoal', 'wantedu', 'memnum', 'mobile')

@@ -50,22 +50,22 @@
 </style>
 <div class="tmk-sub-body">
 <div class="question-bridge-wrapper">
-    <div class="h3">클래스 문의하기</div>
-    <div class="h2" style="font-weight:bold;"> {{user.last_name}} {{user.first_name}}님! 문의해주실 내용은 무엇인가요?</div>
-    <div class="h4" style="font-weight:normal;">손으로 만드는 것이라면 모두 가능합니다!<br>아래 두 개의 카드 중 자신에게 가까운 하나를 선택해주세요</div>
+    <div class="h3">클래스 의뢰하기</div>
+    <div class="h2" style="font-weight:bold;"> {{user.last_name}}{{user.first_name}}님! 환영합니다.</div>
+    <div class="h4" style="font-weight:normal;">만들어 보고 싶은 것이 있으신가요?<br>전문가로 거듭나려 하시나요?<br><br>원하시는 것을 적어주세요.</div>
     <div class="card">
         <a href="http://{{HTTP_HOST}}/v2/question/item/create" class="bridge-card">
         <div class="bridge-card-qitem">
             <!--<img src="{%static 'media/image/slice/metaicon-7.png'%}">-->
         </div>
-            <div class="h3"><small>간단하게 취미처럼</small><br>만들고 싶은게 있어요</div>
+            <div class="h3"><small>만들어 보고 싶은게 있어요.</small><br>사진으로 질문쓰기</div>
         </a>
 <div class="bridge-card-h4 h4">또는</div>
         <a href="http://{{HTTP_HOST}}/v2/question/skill/create" class="bridge-card">
             <div class="bridge-card-qskill">
                 <!--<img src="{%static 'media/image/slice/metaicon-8.png'%}">-->
             </div>
-            <div class="h3"><small>전문가로 거듭날</small><br>정규수업이 필요해요</div>
+            <div class="h3"><small>정규 수업을 듣고 싶어요.</small><br>글로만 질문쓰기</div>
         </a>
         <!--<img src="{%static 'media/image/slice/metaicon-1.png' %}"></div>-->
 
