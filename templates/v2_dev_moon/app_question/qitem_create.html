@@ -184,12 +184,14 @@
         background-color: #3bafda;
     }
     .wgt-stepper .up {
-        background: url("static/image/icon/icon-arrow-up-small.png") no-repeat center;
-        background-size: 22px;
+        background: url("{%static 'media/image/icon/icon-arrow-up-small.png'%}") no-repeat center;
+        background-size: 12px;
+        background-color:  #E6E9ED;
     }
     .wgt-stepper .down {
-        background: url("static/image/icon/icon-arrow-down-small.png") no-repeat center;
-        background-size: 22px;
+        background: url("{%static 'media/image/icon/icon-arrow-down-small.png'%}") no-repeat center;
+        background-size: 12px;
+        background-color:  #E6E9ED;
     }
 
 
@@ -205,7 +207,7 @@
                     <div><span class="tmk-ctns-text">나는</span></div>
                     <div class="tmk-qitem-selecter-wrapper">
                         <div class="selecter cover" tabindex="0">
-                            <select name="category" class="selecter_3 selecter-element" data-selecter-options="{&quot;cover&quot;:&quot;true&quot;}" tabindex="-1">
+                            <select name="category" required class="selecter_3 selecter-element" data-selecter-options="{&quot;cover&quot;:&quot;true&quot;}" tabindex="-1">
                                 <option value="leather">가죽공예</option>
                                 <option value="woodword">목공예</option>
                                 <option value="flowerart">꽃꽂이</option>
@@ -410,14 +412,28 @@
                     <p>수업 개설 알림에만 사용됩니다.</p>
                     <input class="form-control" style="width:70%;height:40px;vertical-align:middle;" placeholder="전화번호를 입력해주세요" name="mobile">
                     <input type="submit" class="btn btn-primary" style="width:25%;margin-left:20px;"value="다했어요">
-                    {% for field in create_qform %}
-                    {{ field.errors|striptags }}
-                    {% if field.errors %}
-                    {{field.html_name}}
-                    {% endif %}
-                    {% endfor %}
+
                 </div>
+
+                <div id="form-error">
+                    <div class="alert alert-warning" style="float:left;">
+                        <a href="#" class="close" data-dismiss="alert">&times;</a>
+                        <p>정보를 정확히 입력해주세요:
+                        <table>
+                            {% for field in create_qform %}
+                            {{ field.errors|striptags }}<br>
+                            {% if filed.errors %}
+                            {{field.html_name}}
+                            {%endif %}
+                            {% endfor %}</p>
+                        </table>
+                    </div>
+                </div>
+
+
             </div>
+
+
         </div>
     </div>
 

@@ -1057,3 +1057,32 @@ margin:auto 10px;}
   .guide-title-sub {font-size:14px;}
 }
 
+
+
+.wgt-stepper{
+  height: 34px;
+  width: 70px;
+  display: inline-block;
+  vertical-align: top;
+}
+.wgt-stepper .stepper-arrow {
+  position: relative;
+  right: -49px;
+  top: -33px;
+  display: block;
+  width: 20px;
+  height: 16px;
+  cursor: pointer;
+  text-indent: -9999px;
+  background-color: #3bafda;
+}
+.wgt-stepper .up {
+  background: url("{%static 'media/image/icon/icon-arrow-up-small.png'%}") no-repeat center;
+  background-size: 12px;
+  background-color:  #E6E9ED;
+}
+.wgt-stepper .down {
+  background: url("{%static 'media/image/icon/icon-arrow-down-small.png'%}") no-repeat center;
+  background-size: 12px;
+  background-color:  #E6E9ED;
+}
