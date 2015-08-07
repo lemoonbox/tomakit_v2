@@ -161,15 +161,10 @@
                             <!--배우고 싶은 내용 :-->
                             {{case.quebox.skill_edu}}<br>
                         </div>
-                        {% if case.quebox.qskillpost.solutionbox.count == 0 %}
-                        <div class="cards-date">희망 수업일&nbsp;&nbsp;
-                            <div class="h4" style="display:inline;"> {{case.quebox.weekday}}</div>
-                        </div>
-                        {%elif case.quebox.qskillpost.solutionbox.count >= 1 %}
+
                         <div class="cards-date success" style="text-align:center;"><span>A.</span> {{case.quebox.qskillpost.solutionbox.count}}개의 클래스가 만들어졌어요
                         </div>
 
-                        {%endif%}
                         <div class="cards-credit-label">
                             <span class="label-address"><img src="{%static 'media/icon/map-icon.png'%}"> {{case.quebox.state.first.state}} / {{case.quebox.mylocal}}</span>
                             <!--<i style="margin-left:20px;" class="fa fa-tag"></i>-->
