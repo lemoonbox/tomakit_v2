@@ -50,7 +50,6 @@ def create_q_item(request):
             if photo.content_type not in allow_type :
                 error = True
 
-
         if create_qform.is_valid() and not error:
             _qitempost = create_qform.save(commit=False)
             _qitempost.djgouser=request.user
@@ -66,7 +65,6 @@ def create_q_item(request):
                 _qpic.save()
                 _qpic.category = _category
                 _qpic.save()
-
             picpic=_qitempost.qpic_set.first().pic
             _qbox = Questionbox(djgouser=user, title =_qitempost.title,
                                 mylocal=_qitempost.mylocal, qtype="I",
@@ -121,6 +119,7 @@ def create_q_skill(request):
         category= request.POST['category']
         state = request.POST['state']
 
+        print create_qform.is_valid()
         if create_qform.is_valid():
             _qskillpost = create_qform.save(commit=False)
             _qskillpost.djgouser=request.user
