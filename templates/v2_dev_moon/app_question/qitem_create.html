@@ -412,23 +412,30 @@
                     <p>수업 개설 알림에만 사용됩니다.</p>
                     <input class="form-control" style="width:70%;height:40px;vertical-align:middle;" placeholder="전화번호를 입력해주세요" name="mobile">
                     <input type="submit" class="btn btn-primary" style="width:25%;margin-left:20px;"value="다했어요">
+                    {% for field in create_qform %}
+                    {{ field.errors|striptags }}
+                    {% if field.errors %}
+                    {{field.html_name}}
+                    {% endif %}
+                    {% endfor %}
 
-                </div>
-
-                <div id="form-error">
-                    <div class="alert alert-warning" style="float:left;">
-                        <a href="#" class="close" data-dismiss="alert">&times;</a>
-                        <p>정보를 정확히 입력해주세요:
-                        <table>
-                            {% for field in create_qform %}
-                            {{ field.errors|striptags }}<br>
-                            {% if filed.errors %}
-                            {{field.html_name}}
-                            {%endif %}
-                            {% endfor %}</p>
-                        </table>
+                    {%comment%}
+                    <div id="form-error" class="hidden">
+                        <div class="alert alert-warning">
+                            <a href="#" class="close" data-dismiss="alert">&times;</a>
+                            <table>
+                                {% for field in create_qform %}
+                                {{ field.errors|striptags }}<br>
+                                {% if fieled.errors %}
+                                {{field.html_name}}
+                                {%endif %}
+                                {% endfor %}
+                            </table>
+                        </div>
                     </div>
+                    {%endcomment%}
                 </div>
+
 
 
             </div>
