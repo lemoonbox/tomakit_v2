@@ -126,7 +126,33 @@
     }
 
 
-
+    .wgt-stepper{
+        height: 34px;
+        width: 70px;
+        display: inline-block;
+        vertical-align: top;
+    }
+    .wgt-stepper .stepper-arrow {
+        position: relative;
+        right: -49px;
+        top: -33px;
+        display: block;
+        width: 20px;
+        height: 16px;
+        cursor: pointer;
+        text-indent: -9999px;
+        background-color: #3bafda;
+    }
+    .wgt-stepper .up {
+        background: url("{%static 'media/image/icon/icon-arrow-up-small.png'%}") no-repeat center;
+        background-size: 12px;
+        background-color:  #E6E9ED;
+    }
+    .wgt-stepper .down {
+        background: url("{%static 'media/image/icon/icon-arrow-down-small.png'%}") no-repeat center;
+        background-size: 12px;
+        background-color:  #E6E9ED;
+    }
 
     .tmk-qitem-footer {
         width: 700px;
@@ -214,10 +240,12 @@
                             <textarea class="form-control" type="text" COLS=70 ROWS=4 name="wantedu"></textarea>
                             <p>수업 인원은 몇명인가요?<p<br>
                             <div class="col-md-3" style="margin-left:-15px;">
-                                <div class="stepper ">
-                                    <input class="form-control stepper-input" type="number" name="memnum" min="1" max="50">
-                                    <span class="stepper-arrow up">Up</span>
-                                    <span class="stepper-arrow down">Down</span>
+                                <div class="wgt-stepper">
+                                    <div>
+                                        <input name="memnum" type="text" min="1" max="20" class="form-control stepper-input" value="1"/>
+                                        <span class="stepper-arrow up" onclick="stepper(this);">up</span>
+                                        <span class="stepper-arrow down" onclick="stepper(this);">down</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -297,13 +325,25 @@
                     <div><span class="tmk-contact-p-text">저희가 어디로 연락드리면 될까요?</span></div><br>
                     <input class="form-control" style="width:70%;height:40px;vertical-align:middle;" placeholder="전화번호를 입력해주세요" name="mobile">
                     <input type="submit" class="btn btn-primary" style="width:25%;margin-left:10px;"value="다했어요">
-                    {% for field in create_qform %}
-                    {{ field.errors|striptags }}
-                    {% if field.errors %}
-                    {{field.html_name}}
-                    {% endif %}
-                    {% endfor %}
+
                 </div>
+
+                <div id="form-error">
+                    <div class="alert alert-warning" style="float:left;">
+                        <a href="#" class="close" data-dismiss="alert">&times;</a>
+                        <p>정보를 정확히 입력해주세요:
+                        <table>
+                            {% for field in create_qform %}
+                            {{ field.errors|striptags }}<br>
+                            {% if filed.errors %}
+                            {{field.html_name}}
+                            {%endif %}
+                            {% endfor %}</p>
+                        </table>
+                    </div>
+                </div>
+
+
             </div>
         </div>
     </div>
