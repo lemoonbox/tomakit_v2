@@ -113,8 +113,13 @@ SOCIAL_AUTH_DISCONNECT_REDIRECT_URL='/'
 #add error page later
 SOCIAL_AUTH_URL_NAMESPACE = 'social'
 
-SOCIAL_AUTH_FACEBOOK_KEY = '1035953116420715'
-SOCIAL_AUTH_FACEBOOK_SECRET = '84ef6ed0e0815ffea885ea022cdc6768'
+if LOCAL:
+    SOCIAL_AUTH_FACEBOOK_KEY = '1035953116420715'
+    SOCIAL_AUTH_FACEBOOK_SECRET = '84ef6ed0e0815ffea885ea022cdc6768'
+else :
+    SOCIAL_AUTH_FACEBOOK_KEY = '1467529036876522'
+    SOCIAL_AUTH_FACEBOOK_SECRET = 'd52d663ee372465b48aea8239e1c31b0'
+
 SESSION_SERIALIZER='django.contrib.sessions.serializers.PickleSerializer'
 
 SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
@@ -158,7 +163,7 @@ else :
             'NAME': 'proddb',
             'USER': 'root',
             'PASSWORD':'20tencity15',
-            'HOST':'diy-tec-prod.cfxqbzsbzi3i.ap-northeast-1.rds.amazonaws.com',
+            'HOST':'tomakit-v2-prod-db2.cfxqbzsbzi3i.ap-northeast-1.rds.amazonaws.com',
             'PORT':'3306',
         }
     }
