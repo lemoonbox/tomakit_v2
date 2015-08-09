@@ -1,9 +1,12 @@
 #coding:utf-8
 from django.shortcuts import render
+from DIY_tool.settings import BASE_DIR
 
 from app_board.models import Questionbox, SolutionBox, Casebox, MainQoubox
 from app_comminfo.models import State, Category
 from DIY_tool import template_match as TEMP
+import logging
+logger = logging.getLogger(__name__)
 # Create your views here.
 
 
@@ -230,7 +233,7 @@ def mainboard(request):
     if request.method=="GET":
         _mainqouboxs=MainQoubox.objects.all()[0:5]
         HTTP_HOST= request.META['HTTP_HOST']
-
+        logging.debug(HTTP_HOST)
 
 
     return render(request, 'contents/main/categoryline.html',

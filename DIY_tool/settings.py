@@ -25,7 +25,7 @@ SECRET_KEY = 'sj)7m^^1u$9=s40&8de&z#$alfgx(k6fztu3gj(w2^pdsnne6n'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-LOCAL = False
+LOCAL = True
 
 TEMPLATE_DEBUG = True
 
@@ -101,8 +101,12 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 
 ####facebook auth####
 
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
+SOCIAL_AUTH_USERNAME_IS_FULL_EMAIL = True
+
 AUTHENTICATION_BACKENDS = (
     'social.backends.facebook.FacebookOAuth2',
+    'social.backends.email.EmailAuth',
     'django.contrib.auth.backends.ModelBackend',
 )
 
@@ -122,8 +126,6 @@ else :
 
 SESSION_SERIALIZER='django.contrib.sessions.serializers.PickleSerializer'
 
-SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
-SOCIAL_AUTH_USERNAME_IS_FULL_EMAIL = True
 
 SOCIAL_AUTH_PIPELINE = (
         'social.pipeline.social_auth.social_details',
@@ -245,3 +247,40 @@ else :
     SUMMERNOTE_CONFIG = {
         'lang': 'ko-KR',
          }
+
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format' : "[%(asctime)s] %(levelname)s [%(name)s:%(lineno)s] %(message)s",
+            'datefmt' : "%d/%b/%Y %H:%M:%S"
+        },
+        'simple': {
+            'format': '%(levelname)s %(message)s'
+        },
+    },
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': BASE_DIR+'/mysite.log',
+            'formatter': 'verbose'
+        },
+    },
+    'loggers': {
+        'app_board': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+        },
+        'app_question': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+        },
+        'app_user': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+        },
+    }
+}

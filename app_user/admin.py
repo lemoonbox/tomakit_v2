@@ -1,3 +1,4 @@
+#coding: utf-8
 from django.contrib import admin
 from app_user.models import UserProfile, HostProfile
 # Register your models here.

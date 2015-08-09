@@ -23,6 +23,8 @@ from app_board.models import Questionbox
 
 
 from DIY_tool import template_match as TEMP
+import logging
+logger = logging.getLogger(__name__)
 
 # Create your views here.
 
@@ -56,14 +58,15 @@ def create_q_item(request):
             _qitempost.save()
             _category=Category.objects.get_or_create(category=category)
             _state = State.objects.get_or_create(state=state)
-            _qitempost.category =_category
-            _qitempost.state = _state
+
+            _qitempost.category.add(_category[0])
+            _qitempost.state.add(_state[0])
             _qitempost.save()
 
             for photo in photos:
                 _qpic = QPic(user=user,qitem=_qitempost,pic=photo)
                 _qpic.save()
-                _qpic.category = _category
+                _qpic.category.add(_category[0])
                 _qpic.save()
             picpic=_qitempost.qpic_set.first().pic
             _qbox = Questionbox(djgouser=user, title =_qitempost.title,
@@ -71,8 +74,8 @@ def create_q_item(request):
                                 qitempost = _qitempost, weekday=_qitempost.weekday,
                                 item_pic=picpic)
             _qbox.save()
-            _qbox.category=_category
-            _qbox.state=_state
+            _qbox.category.add(_category[0])
+            _qbox.state.add(_state[0])
             _qbox.save()
 
             HTTP_HOST = request.META['HTTP_HOST']
@@ -126,8 +129,8 @@ def create_q_skill(request):
             _qskillpost.save()
             _category=Category.objects.get_or_create(category=category)
             _state = State.objects.get_or_create(state=state)
-            _qskillpost.category =_category
-            _qskillpost.state = _state
+            _qskillpost.category.add(_category[0])
+            _qskillpost.state.add(_state[0])
             _qskillpost.save()
 
             _qbox = Questionbox(djgouser=user, title =_qskillpost.title,
@@ -135,8 +138,8 @@ def create_q_skill(request):
                                 qskillpost = _qskillpost,skill_class=_qskillpost.wantclass,
                                 skill_goal=_qskillpost.wantgoal, skill_edu=_qskillpost.wantedu)
             _qbox.save()
-            _qbox.category=_category
-            _qbox.state=_state
+            _qbox.category.add(_category[0])
+            _qbox.state.add(_state[0])
             _qbox.save()
 
 
