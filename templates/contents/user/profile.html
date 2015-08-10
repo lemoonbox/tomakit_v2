@@ -7,7 +7,7 @@
 <style>
     .tmk-profile-banner{text-align:left;background: #F5515F;color:#ffffff; width:1000px;height:280px;margin:auto;display:inline-block;}
     .profile-photo{margin: 40px 40px; width:130px;height:130px;border-radius:50%;background-size:cover;overflow:hidden;background-image:url(https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRyFsODskAwD5TCmTB-8NdzejNWAeii-0U-kyciW5k1h9aa0enOCV2CjGo4);}
-
+.user-profile-name > .col-md-6 {font-size:48px;}
 </style>
 
   <!--<div id="wrap">-->
@@ -19,7 +19,7 @@
               <img src="{%static '{{MEDIA_URL}}{{profile.pro_photo}}'%}" class="img-responsive"/>
           </div>
           <div class="user-profile-name">
-              <div class="col-md-6 h1">{{profile.nick_name}}</div>
+              <div class="col-md-6">{{profile.nick_name}}</div>
           <div class="col-md-6">안녕하세요, {{profile.nick_name}}입니다.</div>
 </div>
       </div>

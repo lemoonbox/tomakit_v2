@@ -43,7 +43,7 @@ margin-bottom:20px;
     }
     .tmk-panel div {margin:30px auto;}
 
-    .tmk-qskill-q-top {width:30px;height:5px;background:#e85460;}
+    .tmk-qskill-q-top {width:30px;height:5px;margin-top:60px!important;background:#e85460;}
     .tmk-qskill-q {line-height:50px;width:400px;}
     .tmk-qskill-q .h4 {font-family:NanumMyeongjo!important;}
 
@@ -95,13 +95,6 @@ margin-bottom:20px;
             </div>
             <div>{{qskill_post.memnum}}명입니다 </div>
 
-            <div class="tmk-qskill-q">
-                <div class="tmk-qskill-q-top"></div>
-                <div class="h4">언제가 편하세요?
-                </div>
-            </div>
-            <div>{{qskill_post.weekday}}이(가) 편해요 </div>
-
 
             <div class="tmk-qskill-q">
                 <div class="tmk-qskill-q-top"></div>
@@ -109,6 +102,13 @@ margin-bottom:20px;
                 </div>
             </div>
             <div>{{qskill_post.mylocal}}</div>
+
+            <div class="tmk-qskill-q">
+                <div class="tmk-qskill-q-top"></div>
+                <div class="h4">수업 희망날
+                </div>
+            </div>
+            <div>{{qskill_post.weekday}}이(가) 편해요 </div>
             <div class="tmk-qskill-on-date"></div>
 
         </div>

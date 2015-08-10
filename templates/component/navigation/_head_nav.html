@@ -3,19 +3,20 @@
 <nav class="navbar navbar-default navbar-static-top">
 
         <div class="navbar-inner">
-            <div class="container">
-            <div class="navbar-header">
-                <!--<button type="button" class="navbar-toggle collapsed" style="background-color:white;" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">-->
+            <!--<div class="container">-->
+
+            <!--<div class="container">-->
+                <div class="navbar-header">
+                    <!--<button type="button" class="navbar-toggle collapsed" style="background-color:white;" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">-->
                     <!--<span class="sr-only">Navigation</span>-->
                     <!--<span class="icon-bar"></span>-->
                     <!--<span class="icon-bar"></span>-->
                     <!--<span class="icon-bar"></span>-->
-                <!--</button>-->
-                <a class="navbar-brand" href="/">
-                    <img src="{%static 'img/Tomakit-r.png'%}">
-                </a>
-            </div>
-            <div class="container">
+                    <!--</button>-->
+                    <a class="navbar-brand" href="/">
+                        <img src="{%static 'img/Tomakit-r.png'%}">
+                    </a>
+                </div>
                 <div id="navbar" class="collapse navbar-collapse" aria-expanded="false">
                     <ul class="nav navbar-nav">
                         <li><a href="http://{{HTTP_HOST}}/v2/board/caseboard">클래스 개설사례</a></li>
@@ -49,7 +50,10 @@
                         </li>
                         {% else %}
                         <li><a href="http://{{HTTP_HOST}}/v2/user/signup/host" class="btn-default user"><img src="{%static 'media/image/slice/buttonicon-6.png'%}"> 작가신청</a></li>
-                        <li>{% include 'component/user_login/_loginmodal.html'%}</li>
+                        <li><!-- Button trigger modal -->
+                            <button type="button" class="btn-default user" id="cont-btn" data-toggle="modal" data-target="#contactModal" style="font-size:16px;">
+                                <img src="{%static 'media/image/slice/buttonicon-3.png'%}"> 로그인/가입
+                            </button>{% include 'component/user_login/_loginmodal.html'%}</li>
                         <!--<li><a href="{% url 'login_url' %}?next={{request.path}}">로그인/가입</a></li>-->
                         <!--            <span class="sr-only">(current)</span>-->
                         {% endif %}

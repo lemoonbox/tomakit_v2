@@ -31,7 +31,7 @@
         float: left;
         width: 78%;
         text-align: center;
-        padding: 30px auto;
+        padding: 30px 50px;
 
         display: inline-block;
 
@@ -44,11 +44,11 @@
     .tmk-panel div {margin:30px auto;}
 
     .tmk-qitem-q-top {width:30px;height:5px;background:#e85460;}
-    .tmk-qitem-q {line-height:50px;width:400px;}
+    .tmk-qitem-q {line-height:50px;width:400px;margin-top:60px!important;}
     .tmk-qitem-q .h4 {font-family:NanumMyeongjo!important;}
     .tmk-qitem-on-date {height:80px;}
 
-    .tmk-panel-header {text-align:left;padding-left: 30px;font-size:20px;}
+    .tmk-panel-header {text-align:left;margin:10px -20px!important;padding-left: 30px;font-size:20px;}
 
 
     #qitem-Carousel {
@@ -159,12 +159,6 @@
                 </div>
             </div>
             {{qitem_post.memnum}}명입니다
-            <div class="tmk-qitem-q">
-                <div class="tmk-qitem-q-top"></div>
-                <div class="h4">언제가 편하세요?
-                </div>
-            </div>
-            {{qitem_post.weekday}}이(가) 편해요
 
             <div class="tmk-qitem-q">
                 <div class="tmk-qitem-q-top"></div>
@@ -172,7 +166,15 @@
                 </div>
             </div>
             <div>{{qitem_post.mylocal}}</div>
-<div class="tmk-qitem-on-date"></div>
+            <div class="tmk-qitem-q">
+                <div class="tmk-qitem-q-top"></div>
+                <div class="h4">수업 희망날
+                </div>
+            </div>
+            {{qitem_post.weekday}}이(가) 편해요
+
+
+            <div class="tmk-qitem-on-date"></div>
         </div>
 
 
