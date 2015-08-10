@@ -44,7 +44,7 @@ class QusetionBoxAdmin(admin.ModelAdmin):
                                      'weekday', 'state','mylocal',
                                      'qtype','qitempost','qskillpost',
                                       'skill_class', 'skill_goal', 'skill_edu',
-                                     'item_pic',]}),]
+                                     'item_pic','is_solved']}),]
 admin.site.register(Questionbox, QusetionBoxAdmin)
 
 class SolutionBoxAdmin(admin.ModelAdmin):

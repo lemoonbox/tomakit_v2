@@ -15,12 +15,12 @@ def sendmail(cont, recipient):
             'makerecipe@gmail.com', recipient, fail_silently=False,
             html_message=cont)
 
-@celery.task(name = 'tasks.send_pwchang_mail')
-def send_key_email(request, title, sender, recipient,template, key, *args, **kargs):
+@celery.task(name = 'tasks.send_key_email')
+def send_key_email(HTTT_HOST, title, sender, recipient,template, key, *args, **kargs):
 
     mail_tpl = loader.get_template(template)
     mail_ctx = Context({
-        'host':request.META['HTTP_HOST'],
+        'host':HTTT_HOST,
         'key':key,
     })
     cont = mail_tpl.render(mail_ctx)

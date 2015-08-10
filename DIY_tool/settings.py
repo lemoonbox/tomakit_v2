@@ -47,7 +47,7 @@ else:
     import djcelery
     djcelery.setup_loader()
     BROKER_URL='amqp://moon:1234@localhost:5672//'
-    CELERY_IMPORTS =('userapp.tasks')
+    CELERY_IMPORTS =('utils.tasks')
 
 
 # Application definition
@@ -101,8 +101,12 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 
 ####facebook auth####
 
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
+SOCIAL_AUTH_USERNAME_IS_FULL_EMAIL = True
+
 AUTHENTICATION_BACKENDS = (
     'social.backends.facebook.FacebookOAuth2',
+    'social.backends.email.EmailAuth',
     'django.contrib.auth.backends.ModelBackend',
 )
 
@@ -113,12 +117,15 @@ SOCIAL_AUTH_DISCONNECT_REDIRECT_URL='/'
 #add error page later
 SOCIAL_AUTH_URL_NAMESPACE = 'social'
 
-SOCIAL_AUTH_FACEBOOK_KEY = '1035953116420715'
-SOCIAL_AUTH_FACEBOOK_SECRET = '84ef6ed0e0815ffea885ea022cdc6768'
+if LOCAL:
+    SOCIAL_AUTH_FACEBOOK_KEY = '1035953116420715'
+    SOCIAL_AUTH_FACEBOOK_SECRET = '84ef6ed0e0815ffea885ea022cdc6768'
+else :
+    SOCIAL_AUTH_FACEBOOK_KEY = '1467529036876522'
+    SOCIAL_AUTH_FACEBOOK_SECRET = 'd52d663ee372465b48aea8239e1c31b0'
+
 SESSION_SERIALIZER='django.contrib.sessions.serializers.PickleSerializer'
 
-SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
-SOCIAL_AUTH_USERNAME_IS_FULL_EMAIL = True
 
 SOCIAL_AUTH_PIPELINE = (
         'social.pipeline.social_auth.social_details',
@@ -158,7 +165,7 @@ else :
             'NAME': 'proddb',
             'USER': 'root',
             'PASSWORD':'20tencity15',
-            'HOST':'diy-tec-prod.cfxqbzsbzi3i.ap-northeast-1.rds.amazonaws.com',
+            'HOST':'tomakit-v2-prod-db2.cfxqbzsbzi3i.ap-northeast-1.rds.amazonaws.com',
             'PORT':'3306',
         }
     }
@@ -226,7 +233,7 @@ else :
     MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
 
 
-    STATICFILES_DIRS=(os.path.join(BASE_DIR, 'static_local'), 'public/dist',)
+    STATICFILES_DIRS=(os.path.join(BASE_DIR, 'static_local'), 'public/dist/',)
     AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
     STATICFILES_LOCATION = 'static'
     STATICFILES_STORAGE = 'DIY_tool.custom_storages.StaticStorage'
@@ -240,3 +247,40 @@ else :
     SUMMERNOTE_CONFIG = {
         'lang': 'ko-KR',
          }
+
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format' : "[%(asctime)s] %(levelname)s [%(name)s:%(lineno)s] %(message)s",
+            'datefmt' : "%d/%b/%Y %H:%M:%S"
+        },
+        'simple': {
+            'format': '%(levelname)s %(message)s'
+        },
+    },
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': BASE_DIR+'/mysite.log',
+            'formatter': 'verbose'
+        },
+    },
+    'loggers': {
+        'app_board': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+        },
+        'app_question': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+        },
+        'app_user': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+        },
+    }
+}

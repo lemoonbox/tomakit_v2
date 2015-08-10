@@ -90,7 +90,7 @@ def signup(request):
                         _user.email, TEMP.V2_CONFIRM_MAIL, key)
 
                 else:
-                    tasks.send_key_email.delay(request, title, sender,
+                    tasks.send_key_email.delay(host, title, sender,
                     _user.email, TEMP.V2_PW_RESET_EMAIL, key)
 
                 return HttpResponseRedirect("/v2/user/login/?next="+next)
@@ -190,7 +190,7 @@ def send_confirm(request):
                     utils.send_key_email(request, title, sender,
                         _user[0].email, TEMP.V2_CONFIRM_MAIL, key)
                 else:
-                    tasks.send_key_email.delay(request, title, sender,
+                    tasks.send_key_email.delay(host, title, sender,
                         _user[0].email, TEMP.V2_CONFIRM_MAIL, key)
 
     HTTP_HOST = request.META["HTTP_HOST"]
@@ -221,7 +221,7 @@ def pw_reset_request(request):
                     utils.send_key_email(request, title, sender,
                         _user[0].email, TEMP.V2_PW_RESET_EMAIL, key)
                 else:
-                    tasks.send_key_email.delay(request, title, sender,
+                    tasks.send_key_email.delay(host, title, sender,
                         _user[0].email, TEMP.V2_PW_RESET_EMAIL, key)
 
     HTTP_HOST = request.META["HTTP_HOST"]
