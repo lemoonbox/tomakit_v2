@@ -204,7 +204,7 @@ def pagination(navline_num=5, onepage_post_num=20,target_model=None,
     cate_item["category"]="all"
     cate_item["category_current"]=(True if len(cate_condt)>=2 else False)
     cate_item["state"]=("all" if len(state_condt)>=2 else str(state_condt[0]))
-    categoris.append(cate_item)
+    categoris.insert(0,cate_item)
 
     #state list and now active
     states = []
@@ -220,7 +220,7 @@ def pagination(navline_num=5, onepage_post_num=20,target_model=None,
     state_item["state"]="all"
     state_item["state_current"]=(True if len(state_condt)>=2 else False)
     state_item["category"]=("all" if len(cate_condt)>=2 else str(cate_condt[0]))
-    states.append(state_item)
+    states.insert(0,state_item)
 
 
     return {'pageitme':_line_post, 'pages':pages, 'arrows':arrows,
