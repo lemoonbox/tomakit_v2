@@ -77,8 +77,8 @@
         <div class="profile-photo col-md-4" style="background-image:url({{MEDIA_URL}}{{profile.propic}});">
             <!--<img src="{{MEDIA_URL}}{{profile.propic}}">--></div>
         <div class="user-profile-name-wrapper">
-            <div class="col-md-6 h1">{{user.last_name}} {{user.first_name}}</div>
-            <div class="col-md-12 h3" style="font-weight:normal;margin-top:0px;">안녕하세요, {{user.last_name}} {{user.first_name}}입니다.</div>
+            <div class="col-md-6 h1">{{page_user.last_name}} {{page_user.first_name}}</div>
+            <div class="col-md-12 h3" style="font-weight:normal;margin-top:0px;">안녕하세요, {{page_user.last_name}} {{page_user.first_name}}입니다.</div>
         </div>
 
         {% if request.user.is_authenticated %}
@@ -124,7 +124,7 @@
                     <!--<img src="{{MEDIA_URL}}{{profile.propic}}">-->
                 </div>
                 <div class="user-profile-name">
-                    <div class="aside-username">{{user.last_name}} {{user.first_name}}</div>
+                    <div class="aside-username">{{page_user.last_name}} {{page_user.first_name}}</div>
                 </div>
         </aside>
     </div>
