@@ -29,3 +29,8 @@
 [09/Aug/2015 11:29:17] DEBUG [app_question.views:60] get state::seoul
 [09/Aug/2015 11:29:17] DEBUG [app_question.views:62] (<Category: leather>, False)
 [09/Aug/2015 11:29:17] DEBUG [app_question.views:64] (<State: seoul>, False)
+[11/Aug/2015 01:04:20] DEBUG [app_user.social_auth:14] rainbowcloud86@gmail.com
+[11/Aug/2015 01:04:33] DEBUG [app_user.social_auth:14] rainbowcloud86@gmail.com
+[11/Aug/2015 01:25:55] DEBUG [app_user.social_auth:14] rainbowcloud86@gmail.com
+[11/Aug/2015 01:26:26] DEBUG [app_user.social_auth:14] rainbowcloud86@gmail.com
+[11/Aug/2015 01:26:54] DEBUG [app_user.social_auth:14] rainbowcloud86@gmail.com
