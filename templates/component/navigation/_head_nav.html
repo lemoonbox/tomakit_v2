@@ -30,35 +30,26 @@
                     </ul>
 
                     <ul class="nav navbar-nav navbar-right">
-                        <!--<li><a href="/">HOME</a></li>-->
-
+                        <li><a href="http://{{HTTP_HOST}}/v2/user/signup/host" class="btn btn-default user">
+                            <img src="{%static 'media/image/slice/buttonicon-6.png'%}"> 작가신청</a></li>
                         {% if user.is_authenticated %}
-                        <li><a href="http://{{HTTP_HOST}}/v2/user/signup/host" class="btn btn-default user"><img src="{%static 'media/image/slice/buttonicon-6.png'%}"> 작가신청</a></li>
                         <li class="dropdown">
                             <a href="#" class="btn-default user dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                <!--<i style="color:gray;" class="xi-user-circle"></i>-->
                                 <span class="profile-photo-mini" style="background-image:url({{MEDIA_URL}}{{user.userprofile_set.first.propic}});margin:2px 5px 0px 0px;background-size:cover;border:1px solid #cccccc;">
                                     </span>
                                  {{user.last_name}} {{user.first_name}}<span class="caret"></span></a>
-                            <ul class="dropdown-menu">
+                            <ul class="dropdown-menu" style="width:100%;">
                                 <li><a href="http://{{HTTP_HOST}}/v2/user/profile/{{request.user.id}}">프로필</a></li>
                                 <li><a href="http://{{HTTP_HOST}}/v2/user/logout">로그아웃</a></li>
-                                <!--<li><a href="#">기능 없음</a></li>-->
-                                <!--<li role="separator" class="divider"></li>-->
-                                <!--<li><a href="/user/logout">로그아웃</a></li>-->
                             </ul>
                         </li>
                         {% else %}
-                        <li><a href="http://{{HTTP_HOST}}/v2/user/signup/host" class="btn-default user"><img src="{%static 'media/image/slice/buttonicon-6.png'%}"> 작가신청</a></li>
-                        <li><!-- Button trigger modal -->
+                        <li>
                             <button type="button" class="btn-default user" id="cont-btn" data-toggle="modal" data-target="#contactModal" style="font-size:16px;">
                                 <img src="{%static 'media/image/slice/buttonicon-3.png'%}"> 로그인/가입
-                            </button>{% include 'component/user_login/_loginmodal.html'%}</li>
-                        <!--<li><a href="{% url 'login_url' %}?next={{request.path}}">로그인/가입</a></li>-->
-                        <!--            <span class="sr-only">(current)</span>-->
+                            </button> {% include 'component/user_login/_loginmodal.html'%}
+                        </li>
                         {% endif %}
-                        <!--<li><a href="#">수업개설</a></li>-->
-                        <!--<li><a href="#">수업문의</a></li>-->
                     </ul>
 
                 </div> <!--/.nav-collapse -->

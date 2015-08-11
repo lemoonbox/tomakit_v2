@@ -7,10 +7,11 @@
   box-sizing: border-box;
   font-family: 'NanumGothic', 'Hanna', 'AppleSDGothicNeo-Bold', 'Dotum', 'NanumMyeongjo', 'Gulim', 'Helvetica', sans-serif !important;
 }
-
+html {height:100vh!important;}
 a:hover {text-decoration: none !important;}
 
 body {
+  min-height:100vh!important;
   text-align: center;
   //overflow-x:hidden !important;
   background-color: #EBEAE5 !important;

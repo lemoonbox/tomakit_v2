@@ -109,9 +109,9 @@ def host_signup(request):
 
     _hostprofile = HostProfile.objects.filter(djgouser=request.user)
 
-    if(_hostprofile.exists()):
-        tpl = loader.get_template(TEMP.V2_HOST_SIGNUP_REJECT)
-        return HttpResponse(tpl.render(ctx))
+    #if(_hostprofile.exists()):
+    #    tpl = loader.get_template(TEMP.V2_HOST_SIGNUP_REJECT)
+    #    return HttpResponse(tpl.render(ctx))
 
     if request.method == "GET":
         hostform = Host_Signup()
