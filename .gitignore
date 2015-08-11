@@ -11,3 +11,6 @@ uploads/
 
 # Node Modules #
 /node_modules
+
+#logging
+*.log
