@@ -61,7 +61,7 @@
             <ul>
                 <a href="http://{{HTTP_HOST}}/v2/question/que_bridge" style="color:black;"><li class="tmk-picks-main">
                     <div class="tmk-picks-title">가까운 곳에서 편한 시간에<br><br>
-                        <div class="tmk-picks-subtitle">복잡한 검색 없이 간단하게 찾아드려요.<br>의뢰하고 받아보세.</div>
+                        <div class="tmk-picks-subtitle">복잡한 검색 없이 간단하게 찾아드려요.<br>의뢰하고 받아보세요.</div>
                     </div>
                 </li>
 </a>
@@ -71,8 +71,7 @@
                 <li class="card-qitem counter{{forloop.counter}}">
 
                     <a class="picks-cards-profile" href="http://{{HTTP_HOST}}/v2/user/profile/{{que.quebox.djgouser.id}}"
-                       style="background-image:url({{MEDIA_URL}}{{que.djgouser.userprofile_set.first.propic}});">
-                    </a>
+                       style="background-image:url({{MEDIA_URL}}{{que.quebox.djgouser.userprofile_set.first.propic}});"></a>
 
             <span class="profile-name"><a href="http://{{HTTP_HOST}}/v2/user/profile/{{que.quebox.djgouser.id}}">
                 {{que.quebox.djgouser.last_name}} {{que.quebox.djgouser.first_name}}</a></span>
@@ -110,6 +109,7 @@
 
                     <a class="picks-cards-profile" href="http://{{HTTP_HOST}}/v2/user/profile/{{que.quebox.djgouser.id}}"
                        style="background-image:url({{MEDIA_URL}}{{que.quebox.djgouser.userprofile_set.first.propic}});"></a>
+
             <span class="profile-name">
                 <a href="http://{{HTTP_HOST}}/v2/user/profile/{{que.quebox.djgouser.id}}">
                     {{que.quebox.djgouser.last_name}} {{que.quebox.djgouser.first_name}}</a></span>

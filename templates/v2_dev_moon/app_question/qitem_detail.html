@@ -203,10 +203,11 @@
                     </div>
                     <span>클래스 지기</span>
                     <div class="solution-host">
-                        <a class="profile-photo-mini" href="http://{{HTTP_HOST}}/v2/user/profile/{{qitem_post.djgouser.id}}"
+
+                        <a class="profile-photo-mini" href="http://{{HTTP_HOST}}/v2/user/profile/{{solubox.djgouser.id}}"
                            style="background-image:url({{MEDIA_URL}}{{qitem_post.djgouser.userprofile_set.first.propic}});"></a>
 
-                        <a class="aside-username" href="http://{{HTTP_HOST}}/v2/user/profile/{{solution.djgouser.id}}">
+                        <a class="aside-username" href="http://{{HTTP_HOST}}/v2/user/profile/{{solubox.djgouser.id}}">
                             {{solution.djgouser.last_name}} {{solution.djgouser.first_name}}</a>
 
                     </div>
