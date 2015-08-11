@@ -24,7 +24,6 @@ def save_propic(strategy,  response, details, user=None ,*args, **kwargs):
     if user:
         url = 'http://graph.facebook.com/{0}/picture'.format(response['id'])
         _profile = UserProfile.objects.get(djgouser=user)
-        print kwargs
         if kwargs['is_new'] or kwargs['new_association']:
             try :
                 responsepic = request('GET', url, params={'type':'large'})
@@ -32,24 +31,23 @@ def save_propic(strategy,  response, details, user=None ,*args, **kwargs):
             except HTTPError:
                 pass
             else:
-                _profile.propic.save('{0}_facebook.jpg'.format("facebook_public_propic:"),
+                _profile.propic.save('{0}_facebook.jpg'.format(user.username),
                                          ContentFile(responsepic.content))
 
-        # FB_unitime= response[u'updated_time']
-        # FB_unitime= response.get(u'updated_time')
-        # FB_uptime=datetime.strptime(FB_unitime, "%Y-%m-%dT%H:%M:%S+%f")
-        #
-        # utc=pytz.UTC
-        # FB_uptime = utc.localize(FB_uptime)
-        #
-        # #repeat part need try modulation
-        # #profile pic sync
-        # if _profile and _profile.updated_at < FB_uptime:
-        #     try :
-        #         responsepic = request('GET', url, params={'type':'large'})
-        #         responsepic.raise_for_status()
-        #     except HTTPError:
-        #         pass
-        #     else:
-        #         _profile.propic.save('{0}_facebook.jpg'.format(user.username),
-        #                                  ContentFile(responsepic.content))
+        FB_unitime= response.get(u'updated_time')
+        FB_uptime=datetime.strptime(FB_unitime, "%Y-%m-%dT%H:%M:%S+%f")
+
+        utc=pytz.UTC
+        FB_uptime = utc.localize(FB_uptime)
+
+        #repeat part need try modulation
+        #profile pic sync
+        if _profile and _profile.updated_at < FB_uptime:
+            try :
+                responsepic = request('GET', url, params={'type':'large'})
+                responsepic.raise_for_status()
+            except HTTPError:
+                pass
+            else:
+                _profile.propic.save('{0}_facebook.jpg'.format(user.username),
+                                         ContentFile(responsepic.content))
