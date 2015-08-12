@@ -117,9 +117,7 @@ SOCIAL_AUTH_DISCONNECT_REDIRECT_URL='/'
 #add error page later
 SOCIAL_AUTH_URL_NAMESPACE = 'social'
 
-SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
-    'fields': 'id,name,email',
-}
+
 
 if LOCAL:
     SOCIAL_AUTH_FACEBOOK_KEY = '1035953116420715'
@@ -127,6 +125,8 @@ if LOCAL:
 else :
     SOCIAL_AUTH_FACEBOOK_KEY = '1467529036876522'
     SOCIAL_AUTH_FACEBOOK_SECRET = 'd52d663ee372465b48aea8239e1c31b0'
+    SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
+    'fields': 'id,name,email,updated_time',}
 
 SESSION_SERIALIZER='django.contrib.sessions.serializers.PickleSerializer'
 

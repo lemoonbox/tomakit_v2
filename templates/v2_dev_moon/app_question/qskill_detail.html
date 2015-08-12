@@ -126,7 +126,7 @@ margin-bottom:20px;
                 by   {{qskill_post.djgouser.last_name}} {{qskill_post.djgouser.first_name}}</a><br>
             <div style="width:100%;margin-top:15px;">
                 <!--자기 소개 : -->
-                {{user.userprofile_set.first.inter_oneline}}</div>
+                {{qskill_post.djgouser.userprofile_set.first.inter_oneline}}</div>
         </aside>
 
         <div class="solution-box" style="width:78%;float:left;">
@@ -156,8 +156,8 @@ margin-bottom:20px;
                         </div>
                         <span>클래스 지기</span>
                         <div class="solution-host">
-                            <a class="profile-photo-mini" href="http://{{HTTP_HOST}}/v2/user/profile/{{qskill_post.djgouser.id}}"
-                               style="background-image:url({{MEDIA_URL}}{{qskill_post.djgouser.userprofile_set.first.propic}});"></a>
+                            <a class="profile-photo-mini" href="http://{{HTTP_HOST}}/v2/user/profile/{{solution.djgouser.id}}"
+                               style="background-image:url({{MEDIA_URL}}{{solution.djgouser.userprofile_set.first.propic}});"></a>
 
                             <a class="aside-username" href="http://{{HTTP_HOST}}/v2/user/profile/{{solution.djgouser.id}}">
                                 {{solution.djgouser.last_name}} {{solution.djgouser.first_name}}</a>

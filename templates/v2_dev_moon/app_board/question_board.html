@@ -1,5 +1,6 @@
 {%extends 'base.html'%}
 {% load static from staticfiles%}
+{% load xtr_board_tags %}
 <title></title>
 
 <body>
@@ -101,9 +102,9 @@
             {% for cate in categoryies %}
 
             {% if cate.category_current %}
-            <li><a class="active" href="http://{{HTTP_HOST}}/v2/board/questionboard/1/{{cate.category}}/{{cate.state}}">{{cate.category}}</a></li>
+            <li><a class="active" href="http://{{HTTP_HOST}}/v2/board/questionboard/1/{{cate.category}}/{{cate.state}}">{{cate.category|cate2han}}</a></li>
             {% else %}
-            <li><a href="http://{{HTTP_HOST}}/v2/board/questionboard/1/{{cate.category}}/{{cate.state}}">{{cate.category}}</a></li>
+            <li><a href="http://{{HTTP_HOST}}/v2/board/questionboard/1/{{cate.category}}/{{cate.state}}">{{cate.category|cate2han}}</a></li>
             {% endif %}
             {% endfor %}
         </ol>
@@ -115,9 +116,9 @@
             <li class="active">지역 선택 </li>
             {% for state in states %}
             {% if state.state_current %}
-            <li><a class="active" href="http://{{HTTP_HOST}}/v2/board/questionboard/1/{{state.category}}/{{state.state}}">{{state.state}}</a></li>
+            <li><a class="active" href="http://{{HTTP_HOST}}/v2/board/questionboard/1/{{state.category}}/{{state.state}}">{{state.state|state2han}}</a></li>
             {% else %}
-            <li><a href="http://{{HTTP_HOST}}/v2/board/questionboard/1/{{state.category}}/{{state.state}}">{{state.state}}</a></li>
+            <li><a href="http://{{HTTP_HOST}}/v2/board/questionboard/1/{{state.category}}/{{state.state}}">{{state.state|state2han}}</a></li>
             {% endif %}
 
             {% endfor%}
