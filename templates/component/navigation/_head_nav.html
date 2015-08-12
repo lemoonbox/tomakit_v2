@@ -7,12 +7,12 @@
 
             <!--<div class="container">-->
                 <div class="navbar-header">
-                    <!--<button type="button" class="navbar-toggle collapsed" style="background-color:white;" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">-->
-                    <!--<span class="sr-only">Navigation</span>-->
-                    <!--<span class="icon-bar"></span>-->
-                    <!--<span class="icon-bar"></span>-->
-                    <!--<span class="icon-bar"></span>-->
-                    <!--</button>-->
+                    <button type="button" class="navbar-toggle collapsed" style="background-color:white;" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    </button>
                     <a class="navbar-brand" href="/">
                         <img src="{%static 'img/Tomakit-r.png'%}">
                     </a>
@@ -22,7 +22,7 @@
                         <li><a href="http://{{HTTP_HOST}}/v2/board/caseboard">클래스 개설사례</a></li>
                         <li><a href="http://{{HTTP_HOST}}/v2/board/questionboard">문의중인 클래스</a></li>
                         {%if user.is_authenticated %}
-                        <li><a href="http://{{HTTP_HOST}}/v2/question/que_bridge">의뢰하기</a></li>
+                        <li><a href="http://{{HTTP_HOST}}/v2/question/que_bridge" style="color:#F5515F;">의뢰하기</a></li>
                         {%else%}
                         <li><a style="cursor:pointer;" data-toggle="modal" data-target="#contactModal">의뢰하기</a></li>
                         {%endif%}
