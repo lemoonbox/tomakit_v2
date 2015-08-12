@@ -422,9 +422,6 @@ ul{
 
 
 
-
-
-
 .picks-cards-credit {
   text-align: left;
   margin: 0px;
@@ -566,7 +563,7 @@ min-width:1240px;
 .navbar-collapse .in {
   background: rgba(0, 0, 0, 0.5);
   height:auto;}
-#navbar {height:70px;min-width:1240px;}
+#navbar {height:70px;max-width:1240px;}
 .collapse {
 min-width:900px!important;
   background-color:#fff;
