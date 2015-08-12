@@ -45,9 +45,9 @@
                         </li>
                         {% else %}
                         <li>
-                            <button type="button" class="btn-default user" id="cont-btn" data-toggle="modal" data-target="#contactModal" style="font-size:16px;">
+                            <a type="button" class="btn-default user" id="cont-btn" data-toggle="modal" data-target="#contactModal" style="cursor:pointer; font-size:16px; ">
                                 <img src="{%static 'media/image/slice/buttonicon-3.png'%}"> 로그인/가입
-                            </button> {% include 'component/user_login/_loginmodal.html'%}
+                            </a> {% include 'component/user_login/_loginmodal.html'%}
                         </li>
                         {% endif %}
                     </ul>
