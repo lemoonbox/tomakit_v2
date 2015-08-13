@@ -21,12 +21,7 @@
                     <ul class="nav navbar-nav">
                         <li><a href="http://{{HTTP_HOST}}/v2/board/caseboard">클래스 개설사례</a></li>
                         <li><a href="http://{{HTTP_HOST}}/v2/board/questionboard">문의중인 클래스</a></li>
-                        {%if user.is_authenticated %}
                         <li><a href="http://{{HTTP_HOST}}/v2/question/que_bridge" style="color:#F5515F;">의뢰하기</a></li>
-                        {%else%}
-                        <li><a style="cursor:pointer;" data-toggle="modal" data-target="#contactModal">의뢰하기</a></li>
-                        {%endif%}
-
                     </ul>
 
                     <ul class="nav navbar-nav navbar-right">
@@ -54,5 +49,4 @@
 
                 </div> <!--/.nav-collapse -->
             </div> <!--/.container -->
-        </div>
     </nav>

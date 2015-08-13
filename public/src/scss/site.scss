@@ -799,9 +799,8 @@ $g-btn-h-color:#F5515F;
   padding:0 !important;
   text-align: center;
   .nav-tabs {
-    //width: 85%;
-    //margin: auto;
-    //border: none;
+    height:67px;
+    line-height:67px;
     background-color: transparent;
   }
   .nav-tabs li a, .nav-tabs li a:hover {
@@ -810,6 +809,7 @@ $g-btn-h-color:#F5515F;
     display: inline;
     padding: 0px;
     color:#F5515F;
+    line-height:67px;
   }
   .nav-tabs > li {
     border-left: none;
