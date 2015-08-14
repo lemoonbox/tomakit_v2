@@ -337,9 +337,9 @@
                         <div class="tmk-panel-header"><img src="{%static 'media/image/slice/headicon-1.png'%}"> 의뢰 내용
                         </div>
                         <div class="tmk-panel-contents">
-                            <p>어떤 목적으로 만드시나요?</p>
+                            <p>무엇을 만들고 싶으신가요?</p>
                             <textarea class="form-control" style="height:150px;" rows="5" type="text" name="wantedu"></textarea>
-                            <p>수업 인원은 몇명인가요?</p>
+                            <p>수업을 의뢰하는 인원은 몇명인가요?</p>
                             <div class="col-md-3" style="margin-left:-15px;">
                                 <div class="wgt-stepper">
                                     <div>
@@ -427,8 +427,8 @@
                         <p class="tmk-contact-p-text">저희가 어디로 연락드리면 될까요?</p>
 
                     </div>
-                    <p>수업 개설 알림에만 사용됩니다.</p>
-                    <input class="form-control" style="width:70%;height:50px;vertical-align:middle;" placeholder="전화번호를 입력해주세요" name="mobile">
+                    <p>입력해주신 전화번호는 수업 개설 알림에만 사용됩니다.</p>
+                    <input class="form-control" style="width:70%;height:50px;vertical-align:middle;" placeholder="ex) 010-3379-0000" name="mobile">
                     <input type="submit" class="btn btn-primary" style="width:25%;margin-left:20px;height:50px;"value="다했어요">
                     {% for field in create_qform %}
                     {{ field.errors|striptags }}

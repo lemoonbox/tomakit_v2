@@ -61,9 +61,8 @@ function handleImage(e) {
     var reader = new FileReader();
     reader.onload = function (event) {
         $('#tmk-imgs img').eq(indexOfImg).attr('src',event.target.result);
-    }
+    };
     reader.readAsDataURL(e.target.files[0]);
-
 }
 
 var dropbox;
