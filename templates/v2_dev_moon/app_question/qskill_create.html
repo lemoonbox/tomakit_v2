@@ -217,7 +217,8 @@
                     <div class="tmk-qitem-search-wrapper">
                         <input type="text" name="title" class="form-control" placeholder="ex) 인테리어 소품">
                     </div>
-                    <div><span class="tmk-ctns-text">배우 싶어요</span></div>
+
+                    <div><span class="tmk-ctns-text">배우고 싶어요</span></div>
                 </div>
             </div>
             <div class="tmk-qitem-contents">
@@ -317,10 +318,13 @@
             </div>
             <div class="tmk-qitem-footer">
                 <div class="tmk-panel" style="background:none;border-color:transparent;padding-left:0px;">
-                    <div><span class="tmk-contact-p-text">저희가 어디로 연락드리면 될까요?</span></div><br>
-                    <p>입력해주신 전화번호는 수업개설 알림에만 사용됩니다.</p>
-                    <input class="form-control" style="width:70%;height:50px;vertical-align:middle;" placeholder="ex)010-3379-4189" name="mobile">
-                    <input type="submit" class="btn btn-primary" style="width:25%;margin-left:10px;height:50px;"value="다했어요">
+                    <div>
+                        <p class="tmk-contact-p-text">저희가 어디로 연락드리면 될까요?</p>
+
+                    </div>
+                    <p>입력해주신 전화번호는 수업 개설 알림에만 사용됩니다.</p>
+                    <input class="form-control" style="width:70%;height:50px;vertical-align:middle;" placeholder="ex) 010-3379-0000" name="mobile">
+                    <input type="submit" class="btn btn-primary" style="width:25%;margin-left:20px;height:50px;"value="다했어요">
                     {% for field in create_qform %}
                     {{ field.errors|striptags }}
                     {% if field.errors %}

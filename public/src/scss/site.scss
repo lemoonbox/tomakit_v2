@@ -1027,11 +1027,11 @@ margin:auto 10px;}
 
 #how-tmk {
   background-color: #ffffff;
-  min-width:1000px;
+  min-width:1250px;
   min-height: 360px;
   display: none;
   text-align: justify;
-  z-index: 2000;
+  //z-index: 2000;
   //padding:40px;
   .how-tmk-set {
     width:1000px;
@@ -1056,12 +1056,17 @@ margin:auto 10px;}
     }
   }
 }
+//
+//.next-guide {z-index:10;}
+//.prev-guide {display:none;}
+//#how-tmk-set {position:absolute; top:0;left:0;z-index:2;}
+//#how-tmk-set-2 {position:absolute; top:0;left:0;z-index:1;}
+//#how-tmk-set-3 {position:absolute; top:0;left:0;z-index:0}
 
 .tmk-guide-text {
  .guide-title {font-size:24px; line-height:50px; font-weight:600;}
   .guide-title-sub {font-size:14px;}
 }
-
 
 
 .wgt-stepper{
