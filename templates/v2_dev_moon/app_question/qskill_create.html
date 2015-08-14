@@ -258,13 +258,14 @@
                                 <div class="selecter cover" tabindex="0">
                                     <select name="state" class="selecter_3 selecter-element" data-selecter-options="{&quot;cover&quot;:&quot;true&quot;}" tabindex="-1">
                                         <option value="seoul">서울</option>
-                                        <option value="gyeoggi">경기도</option>
-                                        <option value="gwangju">광주</option>
-                                        <option value="daegu">대구</option>
-                                        <option value="daejeon">대전</option>
-                                        <option value="busan">부산</option>
-                                        <option value="ulsan">울산</option>
-                                        <option value="incheon">인천</option>
+                                        <option value="incheon_gyeonggi">경기도&인천</option>
+                                        <option value="busan_ulsan_gyeongnam">부산&울산&경남</option>
+                                        <option value="daegu_gyeongbuk">대구&경북</option>
+                                        <option value="daejeon_chungcheong">대전&충청</option>
+                                        <option value="gwangju_jeonla">광주&전라</option>
+                                        <option value="gangwon">강원</option>
+                                        <option value="jeju">제주</option>
+                                        <option value="etc">기타</option>
                                     </select>
                                     <span class="selecter-selected" style="width:100px;" onclick="btnClick(this)">지역 선택</span>
                                     <div class="selecter-options"  style="width:100px;" data-value="">
@@ -274,25 +275,28 @@
                                              onclick="selecting(this, 'seoul')">서울</div>
                                         <div class="selecter-item"
                                              data-value="id"
-                                             onclick="selecting(this, 'gyeoggi')">경기</div>
+                                             onclick="selecting(this, 'incheon_gyeonggi')">경기도&인천</div>
                                         <div class="selecter-item"
                                              data-value="id"
-                                             onclick="selecting(this, 'gwangju')">광주</div>
+                                             onclick="selecting(this, 'busan_ulsan_gyeongnam')">부산&울산&경남</div>
                                         <div class="selecter-item"
                                              data-value="id"
-                                             onclick="selecting(this, 'daegu')">대구</div>
+                                             onclick="selecting(this, 'daegu_gyeongbuk')">대구&경북</div>
                                         <div class="selecter-item"
                                              data-value="id"
-                                             onclick="selecting(this, 'daejeon')">대전</div>
+                                             onclick="selecting(this, 'daejeon_chungcheong')">대전&충청</div>
                                         <div class="selecter-item"
                                              data-value="id"
-                                             onclick="selecting(this, 'busan')">부산</div>
+                                             onclick="selecting(this, 'gwangju_jeonla')">광주&전라</div>
                                         <div class="selecter-item"
                                              data-value="id"
-                                             onclick="selecting(this, 'ulsan')">울산</div>
+                                             onclick="selecting(this, 'gangwon')">강원</div>
                                         <div class="selecter-item"
                                              data-value="id"
-                                             onclick="selecting(this, 'incheon')">인천</div>
+                                             onclick="selecting(this, 'jeju')">제주</div>
+                                        <div class="selecter-item"
+                                             data-value="id"
+                                             onclick="selecting(this, 'etc')">기타</div>
                                     </div>
                                 </div>
                             </div>
