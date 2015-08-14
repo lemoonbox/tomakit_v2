@@ -126,7 +126,7 @@
                     </div>
                         </a>
                     <div class="picks-cards-credit">
-                        <div class="h3">Q. </div><div class="category">{{case.quebox.category.first.category}}</div>
+                        <div class="h3">Q. </div><div class="category">{{case.quebox.category.first.category|cate2han}}</div>
                         <div class="credit-title">
                             <a href="http://{{HTTP_HOST}}/v2/question/item/{{case.quebox.qitempost.id}}">
                                 {{case.quebox.title}} 만들고 싶어요
@@ -137,7 +137,7 @@
                         </div>
                         <div class="cards-credit-label">
                     <span class="label-address"><img src="{%static 'media/icon/map-icon.png'%}">
-                        {{case.quebox.state.first.state}} / {{case.quebox.mylocal}}</span>
+                        {{case.quebox.state.first.state|state2han}} / {{case.quebox.mylocal}}</span>
                             <!--<i style="margin-left:20px;" class="fa fa-tag"></i>-->
                             <span class="label-tag pull-right">만들기 문의</span>
                         </div>
@@ -151,7 +151,7 @@
                 <a href="http://{{HTTP_HOST}}/v2/user/profile/{{case.quebox.djgouser.id}}">
                     {{case.quebox.djgouser.last_name}} {{case.quebox.djgouser.first_name}}</a></span>
                     <div class="picks-cards-credit">
-                        <div class="h3">Q. </div><div class="category">{{case.quebox.category.first.category}}</div>
+                        <div class="h3">Q. </div><div class="category">{{case.quebox.category.first.category|cate2han}}</div>
                         <div class="credit-title">
                             <a href="http://{{HTTP_HOST}}/v2/question/skill/{{case.quebox.qskillpost.id}}">
                                 {{case.quebox.title}} 배우고 싶어요</a>
@@ -169,7 +169,7 @@
                         </div>
 
                         <div class="cards-credit-label">
-                            <span class="label-address"><img src="{%static 'media/icon/map-icon.png'%}"> {{case.quebox.state.first.state}} / {{case.quebox.mylocal}}</span>
+                            <span class="label-address"><img src="{%static 'media/icon/map-icon.png'%}"> {{case.quebox.state.first.state|state2han}} / {{case.quebox.mylocal}}</span>
                             <!--<i style="margin-left:20px;" class="fa fa-tag"></i>-->
                             <span class="label-tag pull-right">전문수업 문의</span>
                         </div>
@@ -204,7 +204,7 @@
                     </div>
                     <div class="solution-contents">
                         <div class="cards-date"><span>클래스 정보</span> <br>
-                            <img src="{%static 'media/icon/map-icon.png'%}"> {{case.solubox.state.first.state}}/{{case.solubox.mylocal}}<br>
+                            <img src="{%static 'media/icon/map-icon.png'%}"> {{case.solubox.state.first.state|state2han}}/{{case.solubox.mylocal}}<br>
                             <img src="{%static 'media/icon/calendar-icon.png'%}"> {{case.solubox.repeat}}회/총 {% widthratio case.solubox.repeat 1 case.solubox.perhour%}시간<br>
                             <img src="{%static 'media/icon/time-icon.png'%}"> {{case.solubox.weekday_time}}<br>
                         </div>

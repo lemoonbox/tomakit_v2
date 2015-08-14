@@ -18,7 +18,7 @@ def cate2han(valu, argu=None):
         return u"천연염색"
     elif valu =="pottery":
         return u"도자기공예"
-    elif valu =="home-living":
+    elif valu =="home_living":
         return u"Home&Living"
     elif valu =="sewing":
         return u"미싱/옷만들기"
@@ -45,15 +45,15 @@ def cate2han(valu, argu=None):
 def state2han(valu, argu=None):
     if valu == "seoul":
         return  u"서울"
-    elif valu =="incheon-gyeonggi":
+    elif valu =="incheon_gyeonggi":
         return u"인천/경기"
-    elif valu =="busan-ulsan-gyeongnam":
+    elif valu =="busan_ulsan_gyeongnam":
         return u"부산/울산/경남"
-    elif valu =="daegu-gyeongbuk":
+    elif valu =="daegu_gyeongbuk":
         return u"대구/경북"
-    elif valu =="daejeon-chungcheong":
+    elif valu =="daejeon_chungcheong":
         return u"대전/충청"
-    elif valu =="gwangju-jeonla":
+    elif valu =="gwangju_jeonla":
         return u"광주/전라"
     elif valu =="gangwon":
         return u"강원"
