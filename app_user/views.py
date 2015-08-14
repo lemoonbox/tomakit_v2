@@ -91,7 +91,7 @@ def signup(request):
 
                 else:
                     tasks.send_key_email.delay(host, title, sender,
-                    _user.email, TEMP.V2_PW_RESET_EMAIL, key)
+                    _user.email, TEMP.V2_CONFIRM_MAIL, key)
 
                 return HttpResponseRedirect("/v2/user/login/?next="+next)
     HTTP_HOST = request.META["HTTP_HOST"]
