@@ -5,10 +5,15 @@
   -o-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
-  font-family: 'NanumGothic', 'Hanna', 'AppleSDGothicNeo-Bold', 'Dotum', 'NanumMyeongjo', 'Gulim', 'Helvetica', sans-serif !important;
+  font-family: 'NanumGothic', 'AppleSDGothicNeo-Bold', 'Dotum', 'NanumMyeongjo', 'Gulim', 'Helvetica', sans-serif !important;
 }
 html {height:100vh!important;}
 a:hover {text-decoration: none !important;}
+
+//@viewport {
+//  width : device-width!important;
+//}
+
 
 body {
   min-height:100vh!important;
@@ -72,7 +77,7 @@ ul{
   //position: absolute;
   top:0;
   overflow: hidden;
-
+  margin-top:-80px;
   //overflow-x:hidden !important;
 
   video {
@@ -136,7 +141,6 @@ ul{
     width: 570px;
     height: 470px;
     //float:left;
-    background-image: url("http://blog.freepeople.com/wp-content/uploads/2013/03/diy-painted-feathers-3.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -155,20 +159,19 @@ ul{
 
 
 .tmk-picks-main {
-  text-align:left;
+  text-align:center;
 
   .tmk-picks-title {
+    padding-top:170px;
     width:100%;
     height:100%;
+    //background: rgba(255, 255, 255, 0.8);
 
-    background: rgba(255, 255, 255, 0.8);
-
-    padding: 60px;
+    //padding: 60px;
     font-size: 24px;
-    font-weight: bolder;
-    //line-height:28px;
   }
   .tmk-picks-subtitle {
+    margin-top:10px;
     font-size: 14px;
     font-weight: 400;
   }
@@ -418,13 +421,6 @@ ul{
 }
 
 
-
-
-
-
-
-
-
 .picks-cards-credit {
   text-align: left;
   margin: 0px;
@@ -521,16 +517,17 @@ ul{
 }
 
 nav {
-  //background-color:white!important;
-min-width:1240px;
-  //a {line-height:60px;}
+height:70px;
+min-width:1250px;
+
   li {
     line-height: 58px;
     margin: 0px 5px;
     > a, > a:focus, >a:hover {
-      height: 60px;
+      line-height:67px;height: 67px;
       outline:none!important;
       font-size:16px;
+      padding:auto!important;
     }
     &:hover, &:focus {
     }
@@ -541,11 +538,11 @@ min-width:1240px;
 
 .navbar {
   //box-shadow: 0.5px 0.5px #4f4f4f;
-  //height: 62px;
+  height:70px;
   z-index:997;
   margin-bottom: 0px !important;
   .navbar-brand {
-    padding:13px;
+    padding:15px;
   }
   button > img {
     width: 24px;
@@ -554,7 +551,11 @@ min-width:1240px;
   }
 }
 
-.navbar-inner {max-width:1200px;margin:auto;}
+.navbar-inner {
+  width: 1200px;
+  margin: auto;
+  height: 70px;
+}
 .navbar-default {
   background:#ffffff !important;
   > a, >a:hover, >a:focus {
@@ -564,22 +565,18 @@ min-width:1240px;
 }
 
 .navbar-collapse .in {
-  background: rgba(0, 0, 0, 0.5);
+  //background: rgba(0, 0, 0, 0.5);
   height:auto;}
-#navbar {height:70px;min-width:1240px;}
+#navbar {min-height:60px;}
 .collapse {
-min-width:900px!important;
   background-color:#fff;
 }
-
-//.container-fluid>.navbar-collapse, .container-fluid>.navbar-header, .container>.navbar-collapse, .container>.navbar-header {
-//  margin:auto -15px!important;
-//}
 
 .nav {
   .open > a {
     &, &:hover, &:focus {
       border-bottom: 4px solid #F5515F !important;
+      //color: #9d9d9d!important;
     }
   }
 }
@@ -591,21 +588,24 @@ min-width:900px!important;
     background-color: transparent !important;
   }
 
+.navbar-nav > a:hover {color: #9d9d9d!important;}
 .navbar-nav {
   > li {
+    height:70px;
     > a {
-      line-height:30px !important;
+      height:70px;
+      line-height:35px !important;
     }
     > a:hover {
       border-radius: 0;
-      border-bottom: 4px solid #F5515F;
+      border-bottom: 4px solid #F5515F!important;
     }
   }
 }
 
 .dropdown-menu {
   position:relative;
-  min-width:!important;
+  //min-width:!important;
 
   > li {
     padding: 2px;
@@ -630,7 +630,7 @@ min-width:900px!important;
   height: 180px;
   text-align: left;
   color: white;
-  min-width:1240px;
+  min-width:1250px;
 //position:absolute;
   left:0;
   float:left;
@@ -653,7 +653,7 @@ min-width:900px!important;
       font-weight: 600;
     }
     a:hover {
-      color: orangered;
+      color: #F5515F;
       text-decoration-line: none !important;
     }
   }
@@ -743,7 +743,7 @@ $g-btn-h-color:#F5515F;
   font-size:16px!important;
 }
 .btn-default:hover {
-  color: #F5515F !important;
+  //color: !important;
 }
 
 
@@ -797,9 +797,8 @@ $g-btn-h-color:#F5515F;
   padding:0 !important;
   text-align: center;
   .nav-tabs {
-    //width: 85%;
-    //margin: auto;
-    //border: none;
+    height:67px;
+    line-height:67px;
     background-color: transparent;
   }
   .nav-tabs li a, .nav-tabs li a:hover {
@@ -808,6 +807,7 @@ $g-btn-h-color:#F5515F;
     display: inline;
     padding: 0px;
     color:#F5515F;
+    line-height:67px;
   }
   .nav-tabs > li {
     border-left: none;

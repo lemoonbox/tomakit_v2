@@ -1,16 +1,27 @@
 {%load static from staticfiles%}
 
-    <link rel="stylesheet" type="text/css" href="{%static 'media/css/loader.css'%}">
-<!--
-    <div class="loader5"></div>
-    <div class="loader10"></div>
--->
-  <div class="loader">
-    <div class="loader7" style="text-align:center;font-size:16px;font-family:hanna;">토마킷</div>
-  </div>
+<link rel="stylesheet" type="text/css" href="{%static 'media/css/loader.css'%}">
+<style>
+    .loader div{
+        background:url({%static 'media/image/loading2.gif' %});
+        background-position: center;
+        background-repeat: no-repeat;
+        margin:auto;
+        height:100%;
+    }
+</style>
+<div class="loader">
+    <!--<div class="loader7" style="text-align:center;font-size:10px">-->
+    <!--<img src="{%static 'media/image/loading.gif' %}">-->
+    <!--</div>-->
+
+    <div></div>
+</div>
 <script type="text/javascript">
-  $(document).ready(function() {
-    $(".loader7,.loader").fadeOut("slow");
-    $(".loader").fadeOut("slow");
-  })
+    $(document).ready(function() {
+//    $(".loader7,.loader").fadeOut("slow");
+//    $(".loader").fadeOut("slow");
+        $(".loader").fadeOut("slow");
+//    $(".loader").fadeOut("slow");
+    })
 </script>
