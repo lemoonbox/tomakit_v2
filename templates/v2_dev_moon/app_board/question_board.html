@@ -146,7 +146,7 @@
                     </div></a>
 
                     <div class="picks-cards-credit">
-                        <div class="h3">Q. </div><div class="category">{{que.category.first.category}}</div>
+                        <div class="h3">Q. </div><div class="category">{{que.category.first.category|cate2han}}</div>
 
                         <div class="credit-title">
                             <a href="http://{{HTTP_HOST}}/v2/question/item/{{que.qitempost.id}}">
@@ -156,7 +156,7 @@
                             <div class="h4" style="display:inline;"> {{que.weekday}}</div>
                         </div>
                         <div class="cards-credit-label">
-                            <span class="label-address"><img src="{%static 'media/icon/map-icon.png'%}"> {{que.state.first.state}} / {{que.mylocal}}</span>
+                            <span class="label-address"><img src="{%static 'media/icon/map-icon.png'%}"> {{que.state.first.state|state2han}}/ {{que.mylocal}}</span>
                             <!--<i style="margin-left:20px;" class="fa fa-tag"></i>-->
                             <span class="label-tag pull-right">만들기 문의</span>
                         </div>
@@ -176,7 +176,7 @@
                     {{que.djgouser.last_name}} {{que.djgouser.first_name}} </a></span><br>
 
                     <div class="picks-cards-credit">
-                        <div class="h3">Q. </div><div class="category">{{que.category.first.category}}</div>
+                        <div class="h3">Q. </div><div class="category">{{que.category.first.category|cate2han}}</div>
 
                         <div class="credit-title">
                             <a href="http://{{HTTP_HOST}}/v2/question/skill/{{que.qskillpost.id}}">
@@ -193,7 +193,7 @@
                             <div class="h4" style="display:inline;"> {{que.weekday}}</div>
                         </div>
                         <div class="cards-credit-label">
-                            <span class="label-address"><img src="{%static 'media/icon/map-icon.png'%}"> {{que.state.first.state}} / {{que.mylocal}}</span>
+                            <span class="label-address"><img src="{%static 'media/icon/map-icon.png'%}"> {{que.state.first.state|state2han}} / {{que.mylocal}}</span>
                             <!--<i style="margin-left:20px;" class="fa fa-tag"></i>-->
                             <span class="label-tag pull-right">전문수업 문의</span>
                         </div>

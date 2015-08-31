@@ -1,10 +1,16 @@
 from django.db import models
+import uuid
 
 # Create your models here.
-
+def upload_to(instance, filenmae):
+    #folder_name = instance.qitem.title + instance.qitem.id
+    nmparts=filenmae.split(".")
+    print nmparts
+    return 'comminfo/catepic/%s' %(str(uuid.uuid4())+"."+nmparts[-1])
 
 class Category(models.Model):
     category = models.CharField(max_length=100, null=False)
+    cate_pic = models.ImageField(null=True, upload_to=upload_to)
 
     updated_at = models.DateTimeField(auto_now_add=True, auto_now=True)
     created_at = models.DateTimeField(auto_now_add=True, auto_now=False)
