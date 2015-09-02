@@ -419,16 +419,21 @@ def lineup_test(request):
         data={}
         print "POST"
         print request.POST
-        state = request.POST.get('state', 'error')
+        state = request.POST.get('L_state', 'error')
 
         if state == 'inline':
-            data['state']="unline"
+            print "inline"
+            data['state']="success"
+            data['L_state']="unline"
             return HttpResponse(json.dumps(data), 'application/json')
 
         elif state == 'unline':
-            data['state']="inline"
+            print "unline"
+            data['state']="success"
+            data['L_state']="inline"
             return HttpResponse(json.dumps(data), 'application/json')
 
         else:
             data['state']='error'
+            data['L_state']="error"
             return HttpResponse(json.dumps(data), 'application/json')

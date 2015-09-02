@@ -8,25 +8,25 @@
 
         $(document).ready(function(){
             $('#login_button').click(function(){
-            var linestate= #htmltage.var()
                 $.ajax({
                     url:'/v2/user/ajax/line_state/',
-                    type:'POST',
-                    data:{"state":linestate}
+                    type:'post',
+                    data:{L_state:'unline'},
                     dataType : 'json',
                     success:function(data){
                         if(data['state'] =='success'){
-                            alert(data['state']);
+                            alert(data['L_state']);
+                            $("#username_error").html(data['L_state']);
                         }
                         else{
-                            $("#username_error").html(data['error_message']);
+                            alert(data['L_state']);
+                            $("#username_error").html(data['L_state']);
                         }
                     }
                 });
                 return false;
             });
         });
-
 
 </script>
     <meta charset="UTF-8">
