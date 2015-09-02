@@ -364,3 +364,62 @@ def T2W_public_prof(request, user_num):
 
         'HTTP_HOST':HTTP_HOST,
     })
+from app_user.form import TestUserForm as TESTFORM
+
+def testlogin(request):
+    if request.method == 'GET':
+        form = TESTFORM(request.POST)
+        print form.is_valid()
+        if form.is_valid():
+            return HttpResponseRedirect('/')
+    else:
+        form = LoginForm()
+
+    return render_to_response('v2_dev_moon/ajax_test.html',
+                            {'form':form},
+                            context_instance=RequestContext(request))
+
+import json
+from django.views.decorators.csrf import csrf_exempt
+@csrf_exempt
+def ajax_signup_view(request):
+    if request.method == 'GET':
+        return render_to_response('v2_dev_moon/ajax_test.html',{},
+                            context_instance=RequestContext(request))
+
+    elif request.method =='POST':
+        form = TESTFORM(request.POST)
+        print "POST"
+        if form.is_valid():
+            data = {}
+            data['state'] = 'success'
+            print json.dumps(data)
+            return HttpResponse(json.dumps(data), 'application/json')
+        else:
+            data = {}
+            data['state'] = 'fail'
+            data['error_message']='이미 존재하는 아이디 입니다.'
+            print json.dumps(data)
+            return HttpResponse(json.dumps(data), 'application/json')
+@csrf_exempt
+def lineup_test(request):
+    if request.method == 'GET':
+        return render_to_response('v2_dev_moon/lineup_test.html',{},
+                            context_instance=RequestContext(request))
+    elif request.method =='POST':
+        data={}
+        print "POST"
+        print request.POST
+        state = request.POST.get('state', 'error')
+
+        if state == 'inline':
+            data['state']="unline"
+            return HttpResponse(json.dumps(data), 'application/json')
+
+        elif state == 'unline':
+            data['state']="inline"
+            return HttpResponse(json.dumps(data), 'application/json')
+
+        else:
+            data['state']='error'
+            return HttpResponse(json.dumps(data), 'application/json')

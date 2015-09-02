@@ -1,0 +1,47 @@
+{% load static from staticfiles %}
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <script src="https://d10ajoocuyu32n.cloudfront.net/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="{% static 'ajax_csrf.js'%}"></script>
+    <script type="text/javascript">
+
+        $(document).ready(function(){
+            $('#login_button').click(function(){
+                $.ajax({
+                    url:'/v2/user/ajax/test_sg/',
+                    type:'post',
+                    data:$('form').serialize(),
+                    dataType : 'json',
+                    success:function(data){
+                        if(data['state'] =='success'){
+                            alert(data['state']);
+                        }
+                        else{
+                            $("#username_error").html(data['error_message']);
+                        }
+                    }
+                });
+                return false;
+            });
+        });
+
+
+</script>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <form method="POST" action="{% url 'testlogin' %}" enctype="multipart/form-data" id="login_form">
+        <label for="username" class="sr-only">이메일 주소</label>
+            <input id="username" name="username" type="email"
+                   class="form-control" placeholder="이메일" required autofocus/><br>
+
+        <label for="pw" class="sr-only">비밀번호</label>
+            <input id="pw" name="password" type="password"
+                   class="form-control" placeholder="비밀번호"/>
+        <p id="username_error"></p>
+        <button class="btn btn-primary btn-block" value="회원가입" id="login_button">회원가입</button>
+    </form>
+</body>
+</html>

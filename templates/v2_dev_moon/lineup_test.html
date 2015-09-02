@@ -1,0 +1,40 @@
+{% load static from staticfiles %}
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <script src="https://d10ajoocuyu32n.cloudfront.net/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="{% static 'ajax_csrf.js'%}"></script>
+    <script type="text/javascript">
+
+        $(document).ready(function(){
+            $('#login_button').click(function(){
+            var linestate= #htmltage.var()
+                $.ajax({
+                    url:'/v2/user/ajax/line_state/',
+                    type:'POST',
+                    data:{"state":linestate}
+                    dataType : 'json',
+                    success:function(data){
+                        if(data['state'] =='success'){
+                            alert(data['state']);
+                        }
+                        else{
+                            $("#username_error").html(data['error_message']);
+                        }
+                    }
+                });
+                return false;
+            });
+        });
+
+
+</script>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+        <p id="username_error"></p>
+        <button class="btn btn-primary btn-block" value="회원가입" id="login_button">회원가입</button>
+</body>
+</html>
