@@ -388,19 +388,28 @@ def ajax_signup_view(request):
                             context_instance=RequestContext(request))
 
     elif request.method =='POST':
-        form = TESTFORM(request.POST)
+        data={}
         print "POST"
-        if form.is_valid():
-            data = {}
-            data['state'] = 'success'
-            print json.dumps(data)
+        print request.POST
+        state = request.POST.get('L_state', 'error')
+
+        if state == 'inline':
+            print "inline"
+            data['state']="success"
+            data['L_state']="unline"
             return HttpResponse(json.dumps(data), 'application/json')
+
+        elif state == 'unline':
+            print "unline"
+            data['state']="success"
+            data['L_state']="inline"
+            return HttpResponse(json.dumps(data), 'application/json')
+
         else:
-            data = {}
-            data['state'] = 'fail'
-            data['error_message']='이미 존재하는 아이디 입니다.'
-            print json.dumps(data)
+            data['state']='error'
+            data['L_state']="error"
             return HttpResponse(json.dumps(data), 'application/json')
+
 @csrf_exempt
 def lineup_test(request):
     if request.method == 'GET':
