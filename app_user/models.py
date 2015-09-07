@@ -62,7 +62,6 @@ class PWResetKeys(models.Model):
 
 
     @staticmethod
-
     def find(key):
         ret = PWResetKeys.objects.filter(key=key)
         if not ret.exists(): return None
@@ -70,10 +69,6 @@ class PWResetKeys(models.Model):
         import datetime
         from django.utils.timezone import utc
         now = datetime.datetime.utcnow().replace(tzinfo=utc)
-        print type(now)
-        print now
-        print type(ret[0].created_at)
-        print ret[0].created_at
         timeoff = now - ret[0].created_at
 
         if timeoff.total_seconds()>60*5:

@@ -390,6 +390,7 @@ def ajax_signup_view(request):
     elif request.method =='POST':
         data={}
         print "POST"
+        user = request.user
         print request.POST
         state = request.POST.get('L_state', 'error')
 
