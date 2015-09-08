@@ -83,7 +83,7 @@ def signup(request):
 
                 host =request.META['HTTP_HOST']
                 title = u"안녕하세요! 토마킷입니다. 정식 사용을 승인해주세요."
-                sender = "makerecipe@gmail.com"
+                sender = "tomakit.info@gmail.com"
 
                 if SET_LOCAL:
                    utils.send_key_email(request, title, sender,
@@ -172,7 +172,6 @@ def send_confirm(request):
     if request.method == "GET":
         send_confirm_form = Send_ConfirmForm()
     elif request.method == "POST":
-        print "POST"
         send_confirm_form = Send_ConfirmForm(request.POST)
 
         if send_confirm_form.is_valid():

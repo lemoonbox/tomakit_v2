@@ -1,13 +1,13 @@
 #coding: utf-8
 from django.db import models
 from django.conf import settings
+from django.contrib.auth.models import \
+    User
 import uuid
 
 def upload_to(instance, filename):
     path_arr = filename.split('.')
     return 'profile/%s/%s' %(instance.djgouser.username, str(uuid.uuid4())+"."+path_arr[-1])
-
-
 
 class UserProfile(models.Model):
     djgouser = models.ForeignKey(settings.AUTH_USER_MODEL)

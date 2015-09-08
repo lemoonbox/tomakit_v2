@@ -1,0 +1,70 @@
+{%extends "base.html"%}
+{% load static from staticfiles %}
+<title> {%block title%}로그인{%endblock%}</title>
+{%block content%}
+<style>
+
+    #login {float:left;}
+
+</style>
+<div class="tmk-sub-body">
+    <div class="tmk-sub-body-wrapper">
+        <div id="login" class="well">
+          <form method="POST" action="{% url 'login_v2d1' %}" class="form-signin" autocomplete="off">
+            <input type="hidden" name="next" value="{{next}}"/>
+              {% csrf_token %}
+              <div class="form-signin-heading h2">로그인</div>
+
+
+
+              <a href="/login/facebook"><div class="facebook-login"><img src="{%static 'media/image/slice/buttonicon-4.png'%}"> 페이스북으로 로그인</div></a>
+
+              <div class="or h4" style="text-align:center;">또는</div>
+
+              <!--<label for="username" class="sr-only">이메일 주소</label>-->
+              <input id="username" name="username" type="text"
+                     class="form-control" placeholder="이메일" value="{{is_authenticated}}" required autofocus/>
+
+              <!--<label for="password" class="sr-only">Password</label>-->
+              <input id="password" type="password" name="password" placeholder="비밀번호" class="form-control" required
+                     autocomplete="off" value="{{valid_password}}">
+
+              <a href="{% url 'v2_reset_request' %}" class="fg-pwd">
+                  <p style="margin:10px auto;padding-left:10px;">비밀번호가 기억나지 않아요</p></a>
+
+              {% if login_form.errors %}
+              <div id="form-error">
+                  <div class="alert alert-warning">
+                      <a href="#" class="close" data-dismiss="alert">&times;</a>
+                      <p>정보를 정확히 입력해주세요:
+                      <table>
+                          {% for field in login_form %}
+                          {{ field.errors|striptags }}
+                          {% endfor %}</p>
+                </table>
+              </div>
+            </div>
+            {% endif %}
+<!--
+            <p class="kepplogin">
+              <input type="checkbox" name="loginkeeping" id="loginkeeping" value="loginkeeping" />
+              <label for="loginkeeping">Keep me logged in</label>
+            </p>
+-->
+              <div class="signin-btn-p">
+                  <input class="btn btn-primary btn-block" type="submit" value="로그인">
+              </div>
+          </form>
+
+        </div>
+
+    <aside class="tmk-aside-help">
+        <div class="aside-help-text">
+            <div class="change_link">처음이신가요? <br>
+                <a href="/v2/user/signup/?next=/" class="to_register h4" style="color:#e86460;">회원가입 하러가기</a>
+            </div>
+        </div>
+    </aside>
+    </div>
+</div>
+{%endblock%}

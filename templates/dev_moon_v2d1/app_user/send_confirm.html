@@ -1,0 +1,41 @@
+{% extends 'base.html'%}
+{% load static from staticfiles %}
+
+
+<title>{%block title%}비밀번호 변경{% endblock %}</title>
+
+{% block content %}
+<style>
+  .reset-form {width: 330px; margin:auto;margin-top:150px; padding-top: 50px; text-align: center;}
+  .reset-form input[type=email] {width:330px;margin:auto;border-radius: 0px;}
+  .reset-form h1 {font-family:hanna;color:white;}
+  .reset-form .btn {border-radius:0px;}
+  .cancel {width:100px;border:2px solid cornsilk;}
+  .cancel .glyphicon {font-size:18px;color:black;vertical-align: text-top;}
+  .cancel .glyphicon:hover {color:red;}
+  .cancel:hover {border:2px solid cornsilk; color:red;background:white;}
+  .reset-pwd {background:#66cc99;border:2px solid #66cc99; color:white;width:210px;}
+  .reset-pwd:hover {border:2px solid #66cc99; background:white;color:#66cc99;}
+  #wrap {border-top:10px solid #47c9af;padding:100px auto 160px auto;margin:auto auto 300px auto;height:100%;background:#cdbfe3;}
+</style>
+
+  <div id="wrap">
+
+<div class="container">
+    <div class="reset-form">      
+        <form class="form-inline" action="{% url 'send_conf_v2d1' %}" role="form" method="POST">
+          {% csrf_token%}
+          <h1>토마킷 <small>beta 인증하기</small></h1>
+          <label for="id_email" class="sr-only">Email</label>
+          <input id="id_email" class="form-control input-lg" placeholder="Email" maxlength="100" name="username" type="email">
+          <span class="help-block">입력하신 이메일로 이메일 인증이 보내집니다.</span>
+          <a href="javascript:history.back()"><button type="button" class="btn btn-lg btn-default cancel pull-left"><span class="glyphicon glyphicon-arrow-left"></span> </a>
+          <button class="btn btn-lg btn-default reset-pwd pull-right" type = "submit" value="이메일 전송하기">비밀번호 변경</button>
+        </form>
+        {% for field in email_form %}
+        {{ field.errors|striptags }}
+        {% endfor %}</p>
+    </div>
+  </div>
+  </div> <!--wrap-->
+{%endblock%}
