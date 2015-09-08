@@ -1,0 +1,17 @@
+{% autoescape on %}
+{% load static from staticfiles %}
+
+    <title>{%block title%}Tomakit confirm mail{%endblock%}</title>
+</head>
+<body>
+  <div id="wrap">
+  <div class="container">
+    <h4>다음 링크를 클릭하시면 계정이 활성화됩니다.</h4>
+  <br/>
+        <a href="http://{{host}}/v2.1/user/signup/confirm/{{key}}">http://{{host}}/v2.1/user/signup/confirm/{{key}}</a>
+    </div>
+      <br/>
+  </div>
+</body>
+</html>
+{% endautoescape %}

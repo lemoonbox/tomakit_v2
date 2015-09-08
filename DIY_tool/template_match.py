@@ -35,3 +35,19 @@ V2_QUE_BRIDGE='v2_dev_moon/app_question/que_bridge.html'
 #board
 V2_BOARD_QUESTION = 'v2_dev_moon/app_board/question_board.html'
 V2_BOARD_CASE = 'v2_dev_moon/app_board/case_board.html'
+
+
+#####v2.1#####
+#signup
+SIGNUP_TEM_V2D1="dev_moon_v2d1/app_user/signup.html"
+LOGIN_TEM_V2D1="dev_moon_v2d1/app_user/login.html"
+SEND_CONFRI_TEM_V2D1='dev_moon_v2d1/app_user/send_confirm.html'
+CONFRI_RESULT_TEM_V2D1="dev_moon_v2d1/app_user/confirm_result.html"
+PW_RESET_V2D1='dev_moon_v2d1/app_user/pw_reset.html'
+PW_RESET_PROCESS_V2D1='dev_moon_v2d1/app_user/pw_reset_process.html'
+PW_RESET_FAIL_V2D1='dev_moon_v2d1/app_user/pw_reset_fail.html'
+
+
+#mail
+CONFRI_TEM_V2D1="dev_moon_v2d1/mail_form/mail_confirm.html"
+PWRESET_MAIL_TEM_V2D1='dev_moon_v2d1/mail_form/mail_pw_reset.html'

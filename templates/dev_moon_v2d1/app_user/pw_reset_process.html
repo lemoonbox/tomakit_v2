@@ -1,0 +1,39 @@
+{%extends 'base.html' %}
+{% load static from staticfiles%}
+
+<title>{%block title%}비밀번호 변경{%endblock%}</title>
+
+{% block content %}
+<style>
+  .reset-form {width: 340px; margin:auto; padding-top: 100px; text-align: center;}
+  .reset-form input[type=email] {width:340px;margin:auto;}
+  /*    .form-inline {width:350px;}*/
+  .cancel {width:100px;}
+  .reset-pwd {background-color: #FFCC00; width:220px;}
+  #wrap {margin-bottom:0px;}
+</style>
+
+  <div id="wrap">
+    <div class="container">
+      <div class="reset-form">      
+        <form class="form-inline" role="form" method="POST" action="{{request.path}}">
+          {% csrf_token%}
+          <span class="help-block">비밀 번호를 변경합니다. 원하시는 비밀 번호를 입력해주세요.</span>
+            <p>
+            <label for="id_password" class="sr-only">Password</label>
+            <input id="id_password" name="password" type="password"
+                   class="form-control" placeholder="비밀번호" required />
+            <label for="id_password_confirm" class="sr-only">Confirm Password</label>
+            <input id="id_password_confirm" name="password_confirm" type="password"
+                   class="form-control" required placeholder="비밀번호 확인"/>
+            </p>
+
+          <a href="/user/login"><button type="button" class="btn btn-lg btn-default cancel pull-left">취소</button></a>
+          <button class="btn btn-lg btn-default reset-pwd pull-right" type = "submit" value="이메일 전송하기">비밀번호 변경</button>
+
+        </form>
+      </div>
+    </div>
+    <div id="push"></div>
+  </div> <!--wrap-->
+{% endblock %}

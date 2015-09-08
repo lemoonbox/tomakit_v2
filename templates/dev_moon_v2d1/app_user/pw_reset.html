@@ -1,0 +1,54 @@
+{% extends 'base.html'%}
+{% load static from staticfiles %}
+
+
+<title>{%block title%}비밀번호 변경{% endblock %}</title>
+
+{% block content %}
+<style>
+  .pwd-reset-form {
+      width: 330px;
+      margin: 150px auto;
+      background-color: rgba(255,255,255,0.3);
+      padding: 30px;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+  }
+  .cancel {
+      width: 45%;
+      float: left;
+      margin: 0px 10px 0px 0px;
+  }
+  .reset-pwd {
+      width: 45%;
+      height:50px;
+  }
+  #id_email {
+      width: 100%;
+      height: 50px;
+  }
+
+    .cancel {height:50px;}
+
+</style>
+
+  <div class="tmk-sub-body">
+
+<!--<div class="container">-->
+    <div class="pwd-reset-form">
+        <form class="form-inline" role="form" method="POST" action="{{request.path}}">
+          {% csrf_token%}
+          <div class="form-heading h2">비밀번호 변경하기</div>
+
+          <label for="id_email" class="sr-only">Email</label>
+          <input id="id_email" class="form-control" placeholder="Email" name="username" type="email"><br>
+          <div class="help-block"><br>입력하신 이메일로 비밀번호 변경 링크가 전송됩니다.
+            Facebook이나 Kakao아이디로 생성하신 분은 비밀번호를 변경할 수 없습니다.</div><br>
+          <a href="javascript:history.back()"> <button class="btn btn-primary cancel">뒤로 가기</button></a>
+          <input class="btn btn-primary reset-pwd" type = "submit" value="이메일 전송">
+
+        </form>
+    </div>
+  <!--</div>-->
+  </div>
+{%endblock%}

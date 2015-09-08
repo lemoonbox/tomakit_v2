@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{%load static from staticfiles %}
+
+    <title></title>
+
+<body>
+{%block content%}
+ <h1>{{message}}</h1>
+ {% if error %}
+     <a href = "http://{{host}}/v2/user/login">로그인하기</a>
+ {% else %}
+     <a href = "http://{{host}}/v2/user/login">로그인하기</a>
+     <a href="http://{{host}}/v2/user/send_confirm">인증메일 다시 보내기</a>
+ {% endif %}
+{%endblock%}
+</body>
