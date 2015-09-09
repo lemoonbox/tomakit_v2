@@ -15,7 +15,9 @@ from app_user import urls as v2_user_urls
 from app_question import urls as v2_question_urls
 from app_board import urls as v2_board_urls
 
+#v2.1
 from app_user_v2d1 import urls as user_urls_v2d1
+from app_demand_v2d1 import urls as demand_urls_v2d1
 
 handler404='app_post.views.handler404'
 handler500='app_post.views.handler500'
@@ -31,11 +33,12 @@ urlpatterns = patterns('',
     url(r'^v2/user/', include(v2_user_urls)),
     url(r'^v2/question/', include(v2_question_urls)),
     url(r'^v2/board/', include(v2_board_urls)),
+
     url(r'', include('social.apps.django_app.urls', namespace='social')),
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 
     url(r'^v2.1/user/', include(user_urls_v2d1)),
-
-
+    url(r'^v2.1/demand/', include(demand_urls_v2d1)),
 )
 
 urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

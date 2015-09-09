@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <form method="POST" action="{% url 'demand_create_v2d1' %}" enctype="multipart/form-data">
+        {%csrf_token%}
+       <select name="category">
+            <option value="leather">가죽공예</option>
+            <option value="calligraphy">캘리그라피</option>
+            <option value="flower">플라워&디퓨저</option>
+            <option value="dyeing">천연염색</option>
+            <option value="pottery">도자기공예</option>
+            <option value="home_living">Home&Living</option>
+            <option value="sewing">미싱&옷만들기</option>
+            <option value="woodwork">목공예</option>
+            <option value="art">미술</option>
+            <option value="toreutics">금속공예&악세사리</option>
+            <option value="knot">매듭공예</option>
+            <option value="knit">뜨개질</option>
+            <option value="bake">베이킹&쿠킹</option>
+            <option value="cosmetics">천연화장품&비누</option>
+            <option value="etc">기타</option>
+        </select>
+        {{ demandform }}
+          {% for field in demandform %}
+          {{ field.errors|striptags }}
+          {% endfor %}
+
+        <input type="text" name="title" placeholder="ex)캘라그라피로 엽서를 만들고 싶어요"><br><br>
+        <textarea name="descript" rows="4" cols="50" placeholder="ex)가죽공방을 창업하고 싶어서요. 기초부터 차근 차근
+         가르쳐주는 공방 없을까요?"></textarea><br><br>
+
+        <input type="checkbox" name="goal" value="easy&chip">부담없고 재미있는 수업
+        <input type="checkbox" name="goal" value="quality">가격보다는 수업 퀄리티
+        <input type="checkbox" name="goal" value="professional">창업을 위한 전문 수업<br><br>
+
+        <input type="text" name="weekday" placeholder="ex)주말 아무때나, 평일7시이후"><br><br>
+        <select name="state">
+            <option value="seoul">서울</option>
+            <option value="incheon_gyeonggi">경기도&인천</option>
+            <option value="busan_ulsan_gyeongnam">부산&울산&경남</option>
+            <option value="daegu_gyeongbuk">대구&경북</option>
+            <option value="daejeon_chungcheong">대전&충청</option>
+            <option value="gwangju_jeonla">광주&전라</option>
+            <option value="gangwon">강원</option>
+            <option value="jeju">제주</option>
+            <option value="etc">기타</option>
+        </select>
+        <input type="text" name="local"><br><br>
+        010-
+        <input type="text" name="mobile2">-
+        <input type="text" name="mobile3"><br><br>
+
+
+        <input type="file" name="image"><br>
+        <input type="file" name="image"><br>
+        <input type="file" name="image"><br>
+        <input type="file" name="image"><br>
+        <input type="file" name="image"><br>
+
+        <input type="text" name="min_price" placeholder="최저값"><br>
+        <input type="text" name="max_price" placeholder="최고"><br>
+        <input type="submit">
+    </form>
+</body>
+</html>

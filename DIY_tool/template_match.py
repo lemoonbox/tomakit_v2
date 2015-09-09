@@ -51,3 +51,6 @@ PW_RESET_FAIL_V2D1='dev_moon_v2d1/app_user/pw_reset_fail.html'
 #mail
 CONFRI_TEM_V2D1="dev_moon_v2d1/mail_form/mail_confirm.html"
 PWRESET_MAIL_TEM_V2D1='dev_moon_v2d1/mail_form/mail_pw_reset.html'
+
+#app_demand
+DEMAND_CREATE_V2D1='dev_moon_v2d1/app_demand/demand_create.html'
