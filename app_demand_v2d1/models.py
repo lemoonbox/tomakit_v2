@@ -22,9 +22,10 @@ class T2ClassDemand(models.Model):
     goal=models.CharField(max_length=100, null=True, blank=True)
     inline_cnt=models.IntegerField(null=True, blank=True)
     inline_users=models.ManyToManyField(settings.AUTH_USER_MODEL,
-                                        related_name="myinline_demand_set")
-    min_price=models.IntegerField()
-    max_price=models.IntegerField()
+                                        related_name="myinline_demand_set",
+                                        null=True, blank=True)
+    min_price=models.IntegerField(null=True, blank=True)
+    max_price=models.IntegerField(null=True, blank=True)
 
     is_active=models.BooleanField(default=True)
     created_at=models.DateTimeField(auto_now_add=True, auto_now=False)
