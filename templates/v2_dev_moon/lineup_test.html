@@ -66,7 +66,7 @@
 <div id="locationField">
     <input id="autocomplete" class="form-control" placeholder="주소를 입력해주세요" onFocus="geolocate()" type="text"></input>
 </div>
-<form>
+<form action="{% url 'lineup_test' %}" method="POST">
 <table id="address">
     <!--<tr>-->
     <!--<td class="label">국가명</td>-->
@@ -76,7 +76,7 @@
     <tr class="form-group">
         <td class="label">시/도</td>
         <td class="widefield" colspan="2">
-            <input class="field" id="locality" disabled="true"></input>
+            <input class="field" id="locality" name="city" disabled="true"></input>
         </td>
         <!--<td class="wideField" colspan="2">-->
             <!--<input class="field" id="administrative_area_level_1" disabled="true"></input>-->
@@ -85,10 +85,10 @@
     <tr>
         <td class="label">구</td>
         <td class="wideField">
-            <input class="field" id="sublocality_level_1" disabled="true"></input></td>
+            <input class="field" id="sublocality_level_1" name="subcity_level_1" namedisabled="true"></input></td>
         <!--<td class="label">동</td>-->
         <td class="wideField">
-            <input class="field" id="sublocality_level_2" disabled="true"></input></td>
+            <input class="field" id="sublocality_level_2" name="subcity_levle_2" namedisabled="true"></input></td>
         <td class="label">우편번호</td>
         <td class="wideField">
             <input class="field" id="postal_code" disabled="true"></input></td>
