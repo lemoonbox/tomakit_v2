@@ -7,14 +7,16 @@
 var placeSearch, autocomplete;
 var componentForm = {
     //street_number: 'short_name',
-    street_address: [{street_address:''} + {sublocality_level_4: ''} + {premise: ''} + {street_number: ''}] && 'short_name',
+    street_address: 'short_name',
     //route: 'long_name',
-    locality: [{locality:''}, {administrative_area_level_1:''}] && 'long_name',
-    //administrative_area_level_1: 'short_name',
+    locality:'long_name',
+    administrative_area_level_1: 'short_name',
     //country: 'long_name',
     sublocality_level_1: 'short_name',
     sublocality_level_2: 'short_name',
-    postal_code: 'short_name'
+    sublocality_level_4: 'short_name',
+    postal_code: 'short_name',
+    premise: 'short_name'
 };
 
 function initAutocomplete() {
