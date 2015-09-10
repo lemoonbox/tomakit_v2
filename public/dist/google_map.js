@@ -24,7 +24,7 @@ function initAutocomplete() {
     // location types.
     autocomplete = new google.maps.places.Autocomplete(
         /** @type {!HTMLInputElement} */(document.getElementById('autocomplete')),
-        {types: ['establishment', 'geocode']});
+        {types: ['geocode', 'establishment']});
 
     // When the user selects an address from the dropdown, populate the address
     // fields in the form.
@@ -50,18 +50,12 @@ function fillInAddress() {
         if (componentForm[addressType]) {
             var val = place.address_components[i][componentForm[addressType]];
             document.getElementById(addressType).value = val;
-            //if (val[i].length > 0) {
-            //    document.getElementById(component).hidden = false;
+
+            //if (val.length = 0) {
+            //    document.getElementById(addressType).hidden = true;
             //}
-            //else if (val[i].length =0) {
-            //    document.getElementById(component).hidden = true;
-            //}
-            ////document.getElementById(component).hidden = document.getElementById(component).length == 0;
-            //!(document.getElementById(component).length <= 0); {
-            //    document.getElementById(component).Class("hidden");}
-            //}
-            //if (val !== 0) {
-            //    document.getElementById(component).hidden = true;
+            //else if (val.length > 0) {
+            //    document.getElementById(addressType).hidden = false;
             //}
         }
     }

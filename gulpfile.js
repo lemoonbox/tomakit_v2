@@ -1,6 +1,6 @@
 var gulp = require('gulp');
 
-var server = require('gulp-webserver'); //this is not needed in this project
+//var server = require('gulp-webserver'); //this is not needed in this project
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var minifyhtml = require('gulp-minify-html');
@@ -26,10 +26,10 @@ gulp.task('clean', function(cb){
 });
 
 //localhost:8000
-gulp.task('server', function() {
-    return gulp.src(dist + '/')
-        .pipe(server());
-});
+//gulp.task('server', function() {
+//    return gulp.src(dist + '/')
+//        .pipe(server());
+//});
 
 //combine javascript files
 gulp.task('combine-js', function () {
