@@ -7,14 +7,16 @@
 var placeSearch, autocomplete;
 var componentForm = {
     //street_number: 'short_name',
-    street_address: [{street_address:''} + {sublocality_level_4: ''} + {premise: ''} + {street_number: ''}] && 'short_name',
+    street_address: 'short_name',
     //route: 'long_name',
-    locality: [{locality:''}, {administrative_area_level_1:''}] && 'long_name',
-    //administrative_area_level_1: 'short_name',
+    locality:'long_name',
+    administrative_area_level_1: 'short_name',
     //country: 'long_name',
     sublocality_level_1: 'short_name',
     sublocality_level_2: 'short_name',
-    postal_code: 'short_name'
+    sublocality_level_4: 'short_name',
+    postal_code: 'short_name',
+    premise: 'short_name'
 };
 
 function initAutocomplete() {
@@ -22,7 +24,7 @@ function initAutocomplete() {
     // location types.
     autocomplete = new google.maps.places.Autocomplete(
         /** @type {!HTMLInputElement} */(document.getElementById('autocomplete')),
-        {types: ['establishment', 'geocode']});
+        {types: ['geocode', 'establishment']});
 
     // When the user selects an address from the dropdown, populate the address
     // fields in the form.
@@ -48,18 +50,12 @@ function fillInAddress() {
         if (componentForm[addressType]) {
             var val = place.address_components[i][componentForm[addressType]];
             document.getElementById(addressType).value = val;
-            //if (val[i].length > 0) {
-            //    document.getElementById(component).hidden = false;
+
+            //if (val.length = 0) {
+            //    document.getElementById(addressType).hidden = true;
             //}
-            //else if (val[i].length =0) {
-            //    document.getElementById(component).hidden = true;
-            //}
-            ////document.getElementById(component).hidden = document.getElementById(component).length == 0;
-            //!(document.getElementById(component).length <= 0); {
-            //    document.getElementById(component).Class("hidden");}
-            //}
-            //if (val !== 0) {
-            //    document.getElementById(component).hidden = true;
+            //else if (val.length > 0) {
+            //    document.getElementById(addressType).hidden = false;
             //}
         }
     }

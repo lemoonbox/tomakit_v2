@@ -39,6 +39,8 @@
     <!--<link type="text/css" rel="stylesheet" href="{% static 'media/css/userform.css'%}">-->
     <!--<link type="text/css" rel="stylesheet" href="{% static 'media/css/post.css'%}">-->
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    {%block head%}
+    {%endblock%}
     {%block style%}
 
     {%endblock%}
@@ -95,6 +97,8 @@
 <noscript><img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?id=1608594259382857&amp;ev=PixelInitialized" /></noscript>
 <!-- facebook each item targeter-->
 {{ class_post.fb_item_code.read_C | safe}}
+{% block script %}
+{% endblock %}
 <script src='{%static "media/js/qitem_create.js" %}'></script>
 
 <script>

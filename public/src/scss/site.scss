@@ -29,6 +29,33 @@ body {
 $g-btn-color:#F5515F;
 $g-btn-h-color:#F5515F;
 
+button {
+  height: 50px;
+}
+
+.btn-primary {
+  //border: 3px solid #F5515F !important;
+  background-color: transparent !important;
+  //color:#F5515F !important;
+  font-size:16px!important;
+}
+.btn-primary:hover {
+  //border: 3px solid #F5515F !important;
+  //background-color: #F5515F !important;
+  color: #ffffff !important;
+}
+.btn-default {
+  border: transparent !important;
+  background-color: transparent !important;
+  color: #a3a3a3 !important;
+  font-size:16px!important;
+}
+.btn-default:hover {
+  //color: !important;
+}
+
+
+
 .tmk-main-body{
   //float:left;
   //background-color:transparent;
@@ -518,7 +545,7 @@ ul{
 
 nav {
 height:70px;
-min-width:1250px;
+max-width:1250px;
 
   li {
     line-height: 58px;
@@ -719,31 +746,6 @@ min-width:1250px;
 .modal-content {
   max-width: 400px;
   margin: auto;
-}
-
-$g-btn-color:#F5515F;
-$g-btn-h-color:#F5515F;
-
-.btn-primary {
-  border: 3px solid #F5515F !important;
-  background-color: transparent !important;
-  color:#F5515F !important;
-  font-size:16px!important;
-}
-.btn-primary:hover {
-  border: 3px solid #F5515F !important;
-  background-color: #F5515F !important;
-  color: #ffffff !important;
-}
-
-.btn-default {
-  border: #CCCCCC !important;
-  background-color: transparent !important;
-  color: #CCCCCC !important;
-  font-size:16px!important;
-}
-.btn-default:hover {
-  //color: !important;
 }
 
 
@@ -983,7 +985,7 @@ text-height: 50px;
   text-align: left;
   padding: 15px;
 
-  button {height:50px;}
+
 
   span {
     color: #F5515F;

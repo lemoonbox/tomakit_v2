@@ -1,12 +1,17 @@
-{% load static from staticfiles %}
+{% extends 'base.html' %}{% load static from staticfiles %}
 
-<!DOCTYPE html>
-<html>
-<head>
+{%block head%}
     <title>Place Autocomplete Address Form</title>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
     <script type="text/javascript" src="{% static 'google_map.js'%}"></script>
+    <!--<script type="text/javascript" src="{% static 'media/js/bootstrap-slider.js' %}"></script>-->
+    <!--<link rel="stylesheet" type="text/css" href="{% static 'media/css/bootstrap-slider.css'%}">-->
+
+<script type="text/javascript" src="{% static 'media/js/nouislider.js' %}"></script>
+<link rel="stylesheet" type="text/css" href="{% static 'media/css/nouislider.min.css'%}">
+
+
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <style>
         html, body {
@@ -38,7 +43,7 @@
         }
         #address {
             /*border: 1px solid #000000;*/
-            background-color: #f0f0ff;
+            /*background-color: #f0f0ff;*/
             width: 480px;
             padding-right: 2px;
         }
@@ -60,13 +65,15 @@
         }
         form {width:480px;}
     </style>
-</head>
+{%endblock%}
 
 <body>
+{%block content%}
+<div class="tmk-sub-body">
 <div id="locationField">
     <input id="autocomplete" class="form-control" placeholder="주소를 입력해주세요" onFocus="geolocate()" type="text"></input>
 </div>
-<form action="{% url 'lineup_test' %}" method="POST">
+<form>
 <table id="address">
     <!--<tr>-->
     <!--<td class="label">국가명</td>-->
@@ -76,19 +83,19 @@
     <tr class="form-group">
         <td class="label">시/도</td>
         <td class="widefield" colspan="2">
-            <input class="field" id="locality" name="city" disabled="true"></input>
+            <input class="field" id="locality" disabled="true"></input>
         </td>
-        <!--<td class="wideField" colspan="2">-->
-            <!--<input class="field" id="administrative_area_level_1" disabled="true"></input>-->
-        <!--</td>-->
+        <td class="wideField" colspan="2">
+            <input class="field" id="administrative_area_level_1" disabled="true"></input>
+        </td>
     </tr>
     <tr>
         <td class="label">구</td>
         <td class="wideField">
-            <input class="field" id="sublocality_level_1" name="subcity_level_1" namedisabled="true"></input></td>
+            <input class="field" id="sublocality_level_1" disabled="true"></input></td>
         <!--<td class="label">동</td>-->
         <td class="wideField">
-            <input class="field" id="sublocality_level_2" name="subcity_levle_2" namedisabled="true"></input></td>
+            <input class="field" id="sublocality_level_2" disabled="true"></input></td>
         <td class="label">우편번호</td>
         <td class="wideField">
             <input class="field" id="postal_code" disabled="true"></input></td>
@@ -97,17 +104,68 @@
         <td class="label">상세주소</td>
         <td class="slimField">
             <input class="field" id="street_address" disabled="true"></input>
-            <!--<input class="field" id="sublocality_level_4" disabled="true"></input>-->
-            <!--<input class="field" id="premise" disabled="true"></input></td>-->
+            <input class="field" id="sublocality_level_4" disabled="true"></input>
+            <input class="field" id="premise" disabled="true"></input></td>
         <!--<td class="wideField" colspan="2">-->
             <!--<input class="field" id="name" disabled="true"></input></td>-->
     </tr>
 </table>
     <br>
-    <input class="btn btn-default btn-primary btn-block" type="submit">
+    <input class="btn btn-primary btn-block" type="submit">
 </form>
 <script src="https://maps.googleapis.com/maps/api/js?language=ko&libraries=places&callback=initAutocomplete"
         async defer></script>
+
+    <!--<aside>-->
+        <!--<form>-->
+<!--<b>최저가</b> <input id="ex2" type="text" class="span2" value="" data-slider-min="5000" data-slider-max="500000" data-slider-step="50000" data-slider-value="[50000,450000]"/> <b>최대가</b>-->
+        <!--</form>-->
+    <!--</aside>-->
+<!--<script>-->
+<!--$("#ex2").slider({});-->
+
+<!--</script>-->
+
+    <div id="html5">
+<div id="slide"></div>
+        <!--<span id="value-span"></span>-->
+        <input id="value-input-min"></input>
+        <input id="value-input-max"></input>
+    </div>
+<script>
+    var slider = document.getElementById('slide');
+
+    noUiSlider.create(slider, {
+        start: [50000, 450000],
+        step: 10000,
+        margin: 10000,
+        connect: true,
+        range: {
+            'min': 10000,
+            'max': 500000
+        }
+    });
+    var valueInputmin = document.getElementById('value-input-min'),
+            valueInputmax = document.getElementById('value-input-max'),
+            valueSpan = document.getElementById('value-span');
+
+    // When the slider value changes, update the input and span
+    slider.noUiSlider.on('update', function( values, handle ) {
+        if ( 'handle-lower' ) {
+            valueInputmin.value = values[handle];
+        } else if ( 'handle-upper' ) {
+            valueInputmax.value = values[handle];
+        } else {
+            valueSpan.innerHTML = values[handle];
+        }
+    });
+
+    // When the input changes, set the slider value
+    valueInput.addEventListener('change', function(){
+        slider.noUiSlider.set([null, this.value]);
+    });
+
+</script>
 
 <!--<script src="https://d10ajoocuyu32n.cloudfront.net/jquery-1.9.1.min.js"></script>-->
 <!--<script type="text/javascript" src="{% static 'ajax_csrf.js'%}"></script>-->
@@ -162,5 +220,5 @@
 <!--<p class="success"></p>-->
 <!--<p class="error"></p>-->
 <!--</div>-->
-</body>
-</html>
+</div>
+{%endblock%}
