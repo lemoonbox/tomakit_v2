@@ -122,9 +122,11 @@ def demand_modify(request, demand_num=0):
             'local':_post.local,
             'mobile1':_user.t2profile_set.first().mobli1,
             'mobile2':_user.t2profile_set.first().mobli2,
-            'min_price':_post.min_price,
-            'max_price':_post.max_price
+            'min_price':str(_post.min_price),
+            'max_price':str(_post.max_price)
         }
+        print _post.min_price
+        print _post.max_price
     elif request.method == "POST":
         imageform=""
         demand_data={
@@ -172,6 +174,10 @@ def demand_modify(request, demand_num=0):
             if imageform.is_valid():
                 for file in images:
                     _imagelist=imageform.savefiles()
+            return render(request,TEMP.MODIFY_FINISH_V2D1,{
+                "HTTP_HOST":HTTP_HOST,
+                'demand_data':demand_data,
+            })
 
     return render(request, TEMP.DEMAND_MODIFY_V2D1,{
         'demandform':demandform,
