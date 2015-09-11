@@ -8,7 +8,7 @@ from app_comminfo.models import State, Category
 
 def upload_to(instance, filename):
     nmparts=filename.split(".")
-    return "DeamndImage/%s" %(instance.demand_post.title, str(uuid.uuid4())+"."+nmparts[-1])
+    return "DeamndImage/post%s/%s" %(instance.demand_post.id, str(uuid.uuid4())+"."+nmparts[-1])
 
 class T2ClassDemand(models.Model):
 
@@ -68,7 +68,7 @@ class T2DemandPic(models.Model):
     def __unicode__(self):
         return  u'%s %s' % (self.id, self.image)
 
-class T2DemandCnt(models.Model):
+class T2DemandCmt(models.Model):
     user=models.ForeignKey(settings.AUTH_USER_MODEL)
     demand_post=models.ForeignKey(T2ClassDemand)
     coment=models.CharField(max_length=250, null=False, blank=False)

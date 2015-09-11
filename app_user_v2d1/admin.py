@@ -8,7 +8,8 @@ class T2ProfileAdmin(admin.ModelAdmin):
     list_display = ('user', 'mail_conf','mobli','created_at','updated_at')
 
     fieldsets = [("AccountInfo",{'fields':['user', 'mail_conf','pro_pic',
-                                            'intro_line', 'mobli','mobli_able',
+                                            'intro_line', 'mobli1','mobli2',
+                                            'mobli','mobli_able',
                                             'mobli_conf', 'is_activate']})]
 
-admin.site.register(T2Profile, T2ProfileAdmin)
+admin.site.register(T2Profile, T2ProfileAdmin),

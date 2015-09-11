@@ -54,3 +54,5 @@ PWRESET_MAIL_TEM_V2D1='dev_moon_v2d1/mail_form/mail_pw_reset.html'
 
 #app_demand
 DEMAND_CREATE_V2D1='dev_moon_v2d1/app_demand/demand_create.html'
+DEMAND_MODIFY_V2D1='dev_moon_v2d1/app_demand/demand_modify.html'
+DEMAND_FINISH_V2D1='dev_moon_v2d1/app_demand/demand_finish.html'

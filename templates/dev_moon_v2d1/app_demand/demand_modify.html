@@ -5,7 +5,7 @@
     <title></title>
 </head>
 <body>
-    <form method="POST" action="{% url 'demand_create_v2d1' %}" enctype="multipart/form-data">
+    <form method="POST" action="{% url 'demand_modify_v2d1' demand_num %}" enctype="multipart/form-data">
         {%csrf_token%}
        <select name="category">
             <option value="leather"
