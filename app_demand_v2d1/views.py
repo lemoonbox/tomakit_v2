@@ -125,8 +125,6 @@ def demand_modify(request, demand_num=0):
             'min_price':str(_post.min_price),
             'max_price':str(_post.max_price)
         }
-        print _post.min_price
-        print _post.max_price
     elif request.method == "POST":
         imageform=""
         demand_data={

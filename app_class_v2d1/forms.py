@@ -28,13 +28,15 @@ class T2TeachClassForm(forms.ModelForm):
     intro_line_error={'required':u"필수 항목 입니다.",}
     classtype_error={'required':u"필수 항목 입니다.",}
     required_error={'required':u"필수 항목 입니다.",}
+    url_error={"invalid":u"url주소를 적어주세요."}
     num_error={'required':u"필수 항목 입니다.",
         'invalid':u"숫자만 입력해주세요",}
 
-    category=forms.CharField(error_messages=category_error)
-    title=forms.CharField(error_messages=title_error)
-    intro_line=forms.CharField(error_messages=intro_line_error)
-    classtype=forms.CharField(error_messages=classtype_error)
+    category=forms.CharField(error_messages=category_error,required=False)
+    title=forms.CharField(error_messages=title_error, required=False)
+    intro_line=forms.CharField(error_messages=intro_line_error, required=False)
+    classtype=forms.CharField(error_messages=classtype_error, required=False)
+
     repeat=forms.IntegerField(error_messages=num_error,)
     perhour=forms.IntegerField(error_messages=num_error,)
     weekday=forms.CharField(error_messages=required_error,)
@@ -44,7 +46,7 @@ class T2TeachClassForm(forms.ModelForm):
     deadline=forms.DateField(error_messages=required_error)
     price=forms.IntegerField(error_messages=num_error)
     extra_price=forms.IntegerField(error_messages=num_error)
-    video=forms.CharField(required=False)
+    video=forms.URLField(required=False, error_messages=url_error)
     descript=forms.CharField(error_messages=required_error)
     curri=forms.CharField(error_messages=required_error)
     notic=forms.CharField(error_messages=required_error)
@@ -53,23 +55,18 @@ class T2TeachClassForm(forms.ModelForm):
 
     class Meta:
         model=T2TeachClass
-        fields=('title','intro_line','repeat','perhour','weekday',
-                'min_num','max_num', 'startday', 'deadline','price',
-                'extra_price','video','descript','curri','notic','addr', 'addr_detail',)
+        fields=('repeat','perhour','weekday','min_num','max_num', 'startday',
+                'deadline','price','extra_price','video','descript','curri',
+                'notic','addr', 'addr_detail',)
 
     def save(self, commit=True):
-        _user=self.data['user']
-        _category=self.data.get('category', "")
         _sate=self.data.get('state', "")
 
         _teachpost=super(T2TeachClassForm, self).save(commit=False)
-        _teachpost.user=_user
-        _teachpost.category=_category
-        if _sate:
-            print "state nok"
+        _teachpost.state=_sate
+        _teachpost.save()
 
-
-
+        return _teachpost
 
 
 class T2TutClassForm(forms.ModelForm):
@@ -81,10 +78,6 @@ class T2TutClassForm(forms.ModelForm):
     num_error={'required':u"필수 항목 입니다.",
         'invalid':u"숫자만 입력해주세요",}
 
-    category=forms.CharField(error_messages=category_error)
-    title=forms.CharField(error_messages=title_error)
-    intro_line=forms.CharField(error_messages=intro_line_error)
-    classtype=forms.CharField(error_messages=classtype_error)
     repeat=forms.IntegerField(error_messages=num_error)
     perhour=forms.IntegerField(error_messages=num_error)
     weekday=forms.CharField(error_messages=required_error)
@@ -99,7 +92,6 @@ class T2TutClassForm(forms.ModelForm):
 
     class Meta:
         model=T2TutClass
-        fields=('classtype','title','intro_line','repeat','perhour','weekday',
-                'price','extra_price','video','descript','curri','notic',
-                'addr', 'addr_detail',)
+        fields=('repeat','perhour','weekday','price','extra_price',
+                'video','descript','curri','notic','addr', 'addr_detail',)
 

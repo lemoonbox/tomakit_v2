@@ -1,3 +1,4 @@
+#coding: utf-8
 from django.shortcuts import \
     render, \
     HttpResponseRedirect
@@ -5,7 +6,6 @@ from django.contrib.auth.decorators import \
     login_required
 from django.contrib.auth.models import \
     User
-
 
 from DIY_tool import template_match as TEMP
 from app_comminfo.models import \
@@ -82,16 +82,103 @@ def create_tut(request, class_num):
 
     })
 
-
+@login_required
 def create_teach(request, class_num):
     title=""
+    prefill_intro=""
+    prefill_addr=""
+    teach_data={}
     if request.method == "GET":
+        _user=User.objects.get(username=request.user)
         teachform=T2TeachClassForm()
         title=request.GET.get("title")
+        prefill_intro=_user.t2hostprofile_set.first().intro_self
+        #prefill_addr=_user.t2hostprofile_set.first().shop_addr
     elif request.method == "POST":
-        pass
+        #need non type erro catch
+        locality=request.POST.get("locality", "").encode("utf-8")
+        area_1=request.POST.get("area_1", "").encode("utf-8")
+        sublocal_1=request.POST.get("sublocal_1", "").encode("utf-8")
+        sublocal_2=request.POST.get("sublocal_2", "").encode("utf-8")
+        sublocal_3=request.POST.get("sublocal_4", "").encode("utf-8")
+        _state, create=check_state(request)
+        addr=area_1+locality+sublocal_1+sublocal_2+sublocal_3
+        addr_detail=request.POST.get("addr_deatail", "").encode("utf-8")
+        _user=User.objects.get(username=request.user)
+        _pre_fillpost=T2TeachClass.objects.get(pk=class_num)
+        teach_data={
+            "user":_user,
+            'repeat':request.POST.get("repeat"),
+            'perhour':request.POST.get("perhour"),
+            'weekday':request.POST.get("weekday"),
+            'max_num':request.POST.get("max_num"),
+            "min_num":request.POST.get('min_num'),
+            'startday':request.POST.get('startday'),
+            'deadline':request.POST.get('deadline'),
+            'price':request.POST.get('price'),
+            'extra_price':request.POST.get('extra_price'),
+            'video':request.POST.get("video"),
+            'descript':request.POST.get("descript"),
+            'curri':request.POST.get("curri"),
+            'notic':request.POST.get("notic"),
+            'state':_state,
+            'addr':addr,
+            'addr_detail':addr_detail,
+        }
+        teachform=T2TeachClassForm(teach_data, instance=_pre_fillpost)
+
+        if teachform.is_valid() and _pre_fillpost.user == request.user:
+            teach_data["addr"]=addr
+            _teachpost=teachform.save()
+            prefill_intro=request.POST.get("intro_self").encode("utf-8")
+            _user.intro_self=prefill_intro
+            _user.save()
+
+            return HttpResponseRedirect("/")
+
     return render(request, TEMP.CLASS_CREATE_TEACH_V2D1,{
         "teachform":teachform,
         "title":title,
         "class_num":class_num,
+        "prefill_intro":prefill_intro,
+        "teach_data":teach_data,
+        #"prefill_addr":prefill_addr
     })
+
+def check_state(request):
+
+    if request:
+        locality=request.POST.get("locality", "")
+        area_1=request.POST.get("area_1", "")
+
+        local_list=[locality.encode("utf-8"), area_1.encode("utf-8")]
+
+        for local in local_list:
+            if local in ["서울특별시"]:
+                _state=State.objects.get_or_create(state="seoul")
+                return _state
+            elif local in ["인천광역시", "경기도"]:
+                _state=State.objects.get_or_create(state="incheon_gyeonggi")
+                return _state
+            elif local in ['부산광역시','울산광역시','경상남도']:
+                _state=State.objects.get_or_create(state="busan_ulsan_gyeongnam")
+                return _state
+            elif local in ['대구광역시', '경상북도']:
+                _state=State.objects.get_or_create(state="daegu_gyeongbuk")
+                return _state
+            elif local in ['대전광역시','세종특별자치시', '충청북도', '충청남도']:
+                _state=State.objects.get_or_create(state="daejeon_chungcheong")
+                return _state
+            elif local in ['광주광역시', '전라북도', '전라남도']:
+                _state=State.objects.get_or_create(state="gwangju_jeonla")
+                return _state
+            elif local in ['강원도']:
+                _state=State.objects.get_or_create(state="gangwon")
+                return _state
+            elif local in ['제주특별자치도']:
+                _state=State.objects.get_or_create(state="jeju")
+                return _state
+        _state=State.objects.get_or_create(state="etc")
+        return _state
+    else :
+        return False
