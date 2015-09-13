@@ -1,0 +1,193 @@
+{% extends 'base.html' %}{% load static from staticfiles %}
+
+{%block head%}
+    <title>Place Autocomplete Address Form</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <script type="text/javascript" src="{% static 'google_map.js'%}"></script>
+    <!--<script type="text/javascript" src="{% static 'media/js/bootstrap-slider.js' %}"></script>-->
+    <!--<link rel="stylesheet" type="text/css" href="{% static 'media/css/bootstrap-slider.css'%}">-->
+
+<script type="text/javascript" src="{% static 'media/js/nouislider.js' %}"></script>
+<link rel="stylesheet" type="text/css" href="{% static 'media/css/nouislider.min.css'%}">
+
+
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        #map {
+            height: 100%;
+        }
+    </style>
+    <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
+    <style>
+        #locationField, #controls {
+            position: relative;
+            width: 480px;
+        }
+        #autocomplete {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            width: 99%;
+        }
+        .label {
+            text-align: right;
+            font-weight: bold;
+            width: 100px;
+            color: #303030;
+        }
+        #address {
+            /*border: 1px solid #000000;*/
+            /*background-color: #f0f0ff;*/
+            width: 480px;
+            padding-right: 2px;
+        }
+        #address td {
+            font-size: 10pt;
+        }
+        .field {
+            width: 99%;
+        }
+        .slimField {
+            width: 80px;
+        }
+        .wideField {
+            width: 180px; margin:5px;
+        }
+        #locationField {
+            height: 50px;
+            margin-bottom: 2px;
+        }
+        form {width:480px;}
+    </style>
+{%endblock%}
+
+<body>
+{%block content%}
+날짜 지정 수업 생성
+<h1>{{title}}</h1>
+<form method="POST" action="{%url 'class_create_teach_v2d1' class_num%}">
+    {% csrf_token%}
+    수업 횟수:
+    <select name="repeat">
+        <option value="1">1회</option>
+        <option value="2">2회</option>
+        <option value="3">3회</option>
+        <option value="4">4회</option>
+        <option value="5">5회</option>
+        <option value="6">6회</option>
+        <option value="7">7회</option>
+        <option value="8">8회</option>
+        <option value="9">9회</option>
+        <option value="10">10회</option>
+        <option value="11">11회</option>
+        <option value="12">12회</option>
+    </select>
+    회당 수업시간:
+    <select name="perhour">
+        <option value="1">1시간</option>
+        <option value="1.5">1시간30분</option>
+        <option value="2">2시간</option>
+        <option value="2.5">2시간30분</option>
+        <option value="3">3시간</option>
+        <option value="3.5">3시간30분</option>
+        <option value="4">4시간</option>
+        <option value="4.5">4시간30분</option>
+        <option value="5">5시간</option>
+        <option value="5.5">5시간30분</option>
+        <option value="6">6시</option>
+    </select><br><br>
+    수업일정
+    <input type="text" name="weekday" placeholder="ex)매주 화요일 7:00, 매주 토요일 2시"><br><br>
+    최소인원
+    <input type="number" name="min_num">
+    최대인원
+    <input type="number" name="max_num"><br><br>
+
+    수업시작일
+    <input type="date" name="startday">
+    등록마감일
+    <input type="date" name="deadline"><br><br>
+
+    수강료
+    <input type="text" name="price">
+    재료비
+    <input type="text" name="extra_price"><br>
+    ---------------------------2단계---------------------<br>
+    수업 이미지
+    <input type="file" name="image"><br>
+    <input type="file" name="image"><br>
+    <input type="file" name="image"><br>
+    <input type="file" name="image"><br>
+    <input type="file" name="image"><br>
+    {{imageform.image.errors|striptags}}<br><br>
+    영상 등록(선택)
+    <input type="text" name="video"><br><br>
+
+    수업 소개
+    <textarea name="descript"></textarea><br><br>
+    커리큘럼
+    <textarea name="curri"></textarea><br><br>
+    안내사항
+    <textarea name="notic"></textarea><br><br>
+
+    ---------------------------3단계---------------------<br>
+    작가소개
+    <input type="text" name="intro_self"><br><br>
+    주소 입
+
+    <div class="tmk-sub-body">
+    <div id="locationField">
+        도로명 또는 동 입력
+     <input id="autocomplete" class="form-control" placeholder="동이나 도로명을 입력해주세요" onFocus="geolocate()" type="text"></input>
+    </div>
+    <table id="address">
+        <!--<tr>-->
+        <!--<td class="label">국가명</td>-->
+        <!--<td class="wideField" colspan="3">-->
+        <!--<input class="field" id="country" disabled="true"></input></td>-->
+        <!--</tr>-->
+        <tr class="form-group">
+            <td class="label">시/도</td>
+            <td class="widefield" colspan="2">
+                <input class="field" id="locality" disabled="true"></input>
+            </td>
+            <td class="wideField" colspan="2">
+                <input class="field" id="administrative_area_level_1" disabled="true"></input>
+            </td>
+        </tr>
+        <tr>
+            <td class="label">구</td>
+            <td class="wideField">
+                <input class="field" id="sublocality_level_1" disabled="true"></input></td>
+            <!--<td class="label">동</td>-->
+            <td class="wideField">
+                <input class="field" id="sublocality_level_2" disabled="true"></input></td>
+            <td class="label">우편번호</td>
+            <td class="wideField">
+                <input class="field" id="postal_code" disabled="true"></input></td>
+        </tr>
+        <tr>
+            <td class="label">상세주소</td>
+            <td class="slimField">
+                <input class="field" id="street_address" disabled="true"></input>
+                <input class="field" id="sublocality_level_4" disabled="true"></input>
+                <input class="field" id="premise" disabled="true"></input></td>
+            <!--<td class="wideField" colspan="2">-->
+                <!--<input class="field" id="name" disabled="true"></input></td>-->
+        </tr>
+    </table>
+        <br>
+        <input class="btn btn-primary btn-block" type="submit">
+    <script src="https://maps.googleapis.com/maps/api/js?language=ko&libraries=places&callback=initAutocomplete"
+            async defer></script>
+
+</form>
+    {%endblock%}
+</body>
+</html>

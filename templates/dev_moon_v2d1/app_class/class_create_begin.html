@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+클래스 개설 시작 하기
+<form method="POST" action="{% url 'class_create_begin_v2d1'%}">
+    {%csrf_token%}
+       <select name="category">
+            <option value="leather"
+                    {% if begin_data.category == 'leather' %}selected{% endif %}>가죽공예</option>
+            <option value="calligraphy"
+                    {% if begin_data.category == 'calligraphy'%}selected{% endif %}>캘리그라피</option>
+            <option value="flower"
+                    {% if begin_data.category == 'flower'%}selected{% endif %}>플라워&디퓨저</option>
+            <option value="dyeing"
+                    {% if begin_data.category == 'dyeing'%}selected{% endif %}>천연염색</option>
+            <option value="pottery"
+                    {% if begin_data.category == 'pottery'%}selected{% endif %}>도자기공예</option>
+            <option value="home_living"
+                    {% if begin_data.category == 'home_living'%}selected{% endif %}>Home&Living</option>
+            <option value="sewing"
+                    {% if begin_data.category == 'sewing'%}selected{% endif %}>미싱&옷만들기</option>
+            <option value="woodwork"
+                    {% if begin_data.category == 'woodwork'%}selected{% endif %}>목공예</option>
+            <option value="art"
+                    {% if begin_data.category == 'art'%}selected{% endif %}>미술</option>
+            <option value="toreutics"
+                    {% if begin_data.category == 'toreutics'%}selected{% endif %}>금속공예&악세사리</option>
+            <option value="knot"
+                    {% if begin_data.category == 'knot'%}selected{% endif %}>매듭공예</option>
+            <option value="knit"
+                    {% if begin_data.category == 'knit'%}selected{% endif %}>뜨개질</option>
+            <option value="bake"
+                    {% if begin_data.category == 'bake'%}selected{% endif %}>베이킹&쿠킹</option>
+            <option value="cosmetics"
+                    {% if begin_data.category == 'cosmetics'%}selected{% endif %}>천연화장품&비누</option>
+            <option value="etc"
+                    {% if begin_data.category == 'etc'%}selected{% endif %}>기타</option>
+        </select>
+        {{beginform.category.errors|striptags}}<br><br>
+        제목:<input type="text" name="title" value="{{begin_data.title}}" placeholder="ex)뜨개 테디베어만들기 4주 수업"><br>
+        {{beginform.title.errors|striptags}}<br><br>
+        한줄 소개 :<input type="text" name="intro_line" value="{{begin_data.intro_line}}" placeholder="ex)누구나 배울 수 있게 기초부터 탄탄하게 가르쳐요."><br>
+        {{beginform.intro_line.errors|striptags}}<br><br>
+
+        <input type="radio" name="classtype" value="tutclass"
+            {% if begin_data.classtype == "tutclass" %}checked {% endif %}>수업시간협의(소수맞춤수업)
+        <input type="radio" name="classtype" value="teachclass"
+            {% if begin_data.classtype == "teachclass" %}checked {% endif %}>수업시간고정(단체워크샵)<br>
+        {{beginform.classtype.errors|striptags}}<br><br>
+    <input type="submit" value="시작하기">
+</form>
+</body>
+</html>

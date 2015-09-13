@@ -167,7 +167,6 @@ def demand_modify(request, demand_num=0):
             demand_data["demand_card"]=_newcard
 
             _oldpics=T2DemandPic.objects.filter(demand_post=_oldpost)
-            print _oldpics
             _oldpics.delete()
             imageform=T2DemandPicForm(demand_data, request.FILES)
             imagelist=[]

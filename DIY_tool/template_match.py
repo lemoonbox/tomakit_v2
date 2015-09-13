@@ -57,3 +57,8 @@ DEMAND_CREATE_V2D1='dev_moon_v2d1/app_demand/demand_create.html'
 DEMAND_MODIFY_V2D1='dev_moon_v2d1/app_demand/demand_modify.html'
 DEMAND_FINISH_V2D1='dev_moon_v2d1/app_demand/demand_finish.html'
 MODIFY_FINISH_V2D1='dev_moon_v2d1/app_demand/modify_finish.html'
+
+#app_class
+CLASS_CREATE_BEGIN_V2D1='dev_moon_v2d1/app_class/class_create_begin.html'
+CLASS_CREATE_TUT_V2D1='dev_moon_v2d1/app_class/create_tut.html'
+CLASS_CREATE_TEACH_V2D1='dev_moon_v2d1/app_class/create_teach.html'
