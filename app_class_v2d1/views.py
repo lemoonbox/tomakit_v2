@@ -19,7 +19,9 @@ from app_class_v2d1.models import \
 from app_class_v2d1.forms import \
     T2Class_BeginForm, \
     T2TeachClassForm, \
-    T2TutClassForm
+    T2TutClassForm, \
+    T2ClassPicForm, \
+    T2ClassCardForm
 
 # Create your views here.
 
@@ -106,8 +108,13 @@ def create_teach(request, class_num):
         addr_detail=request.POST.get("addr_deatail", "").encode("utf-8")
         _user=User.objects.get(username=request.user)
         _pre_fillpost=T2TeachClass.objects.get(pk=class_num)
+
+        images=request.FILES.getlist("image", "")
         teach_data={
             "user":_user,
+            "category":_pre_fillpost.category,
+            "title":_pre_fillpost.title,
+            "intro_line":_pre_fillpost.intro_line,
             'repeat':request.POST.get("repeat"),
             'perhour':request.POST.get("perhour"),
             'weekday':request.POST.get("weekday"),
@@ -126,13 +133,31 @@ def create_teach(request, class_num):
             'addr_detail':addr_detail,
         }
         teachform=T2TeachClassForm(teach_data, instance=_pre_fillpost)
+        prefill_intro=request.POST.get("intro_self").encode("utf-8")
 
         if teachform.is_valid() and _pre_fillpost.user == request.user:
-            teach_data["addr"]=addr
             _teachpost=teachform.save()
-            prefill_intro=request.POST.get("intro_self").encode("utf-8")
+            teach_data['teach_post']=_teachpost
+            teach_data['classtype']="teachclass"
+            teach_data['class_id']=_teachpost.id
+
             _user.intro_self=prefill_intro
             _user.save()
+
+
+            classcardform=T2ClassCardForm(teach_data)
+            print classcardform.is_valid()
+            _classcard=classcardform.save()
+
+            teach_data['class_card']=_classcard
+
+            imageform=T2ClassPicForm(teach_data, request.FILES)
+            imagelist=[]
+
+            print images
+
+            if imageform.is_valid():
+                _imagelist=imageform.savefiles()
 
             return HttpResponseRedirect("/")
 
