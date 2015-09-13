@@ -12,4 +12,5 @@ urlpatterns = patterns('app_user_v2d1.views',
     url(r'reset_process/$', 'pw_reset_process', name='reset_process_v2d1'),
 
     url(r'login/$', 'login', name='login_v2d1'),
+    url(r'logout/$', 'logout', name='login_v2d1'),
     )

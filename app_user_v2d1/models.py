@@ -12,6 +12,8 @@ class T2Profile(models.Model):
     mail_conf=models.BooleanField(default=False)
     pro_pic=models.ImageField(upload_to=upload_to, null=True, blank=True)
     intro_line=models.CharField(max_length=250, null=True, blank=True)
+    mobli1=models.CharField(max_length=50, null=True, blank=True)
+    mobli2=models.CharField(max_length=50, null=True, blank=True)
     mobli=models.CharField(max_length=50, null=True, blank=True)
     mobli_able=models.BooleanField(default=False)
     mobli_conf=models.BooleanField(default=False)
@@ -20,6 +22,16 @@ class T2Profile(models.Model):
     is_activate=models.BooleanField(default=True)
     created_at=models.DateTimeField(auto_now_add=True, auto_now=False)
     updated_at=models.DateTimeField(auto_now_add=True, auto_now=True)
+
+    @staticmethod
+    def mobli_on(user, mobile1, mobile2):
+        _profile=T2Profile.objects.get(user=user)
+        _profile.mobli1=mobile1
+        _profile.mobli2=mobile2
+        _profile.mobli=mobile1+mobile2
+        _profile.mobli_able=True
+        _profile.save()
+
 
 
 class T2SignupConfirmKey(models.Model):

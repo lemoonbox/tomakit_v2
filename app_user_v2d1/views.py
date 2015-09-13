@@ -18,6 +18,8 @@ from django.template import \
     Context
 from django.core.context_processors import \
     csrf
+from django.contrib.auth.views import \
+    logout as django_logout
 
 from DIY_tool import \
     template_match as TEMP, \
@@ -116,7 +118,9 @@ def login(request, *args, **kwargs):
                    'next':next,
                     'HTTP_HOST':HTTP_HOST,
                    })
-
+def logout(request, *args, **kwargs):
+    res = django_logout(request, *args, **kwargs)
+    return res
 
 def send_confirm(request):
 

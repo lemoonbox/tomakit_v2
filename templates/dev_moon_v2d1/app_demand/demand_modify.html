@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <form method="POST" action="{% url 'demand_modify_v2d1' demand_num %}" enctype="multipart/form-data">
+        {%csrf_token%}
+       <select name="category">
+            <option value="leather"
+                    {% if demand_data.category == 'leather' %}selected{% endif %}>가죽공예</option>
+            <option value="calligraphy"
+                    {% if demand_data.category == 'calligraphy'%}selected{% endif %}>캘리그라피</option>
+            <option value="flower"
+                    {% if demand_data.category == 'flower'%}selected{% endif %}>플라워&디퓨저</option>
+            <option value="dyeing"
+                    {% if demand_data.category == 'dyeing'%}selected{% endif %}>천연염색</option>
+            <option value="pottery"
+                    {% if demand_data.category == 'pottery'%}selected{% endif %}>도자기공예</option>
+            <option value="home_living"
+                    {% if demand_data.category == 'home_living'%}selected{% endif %}>Home&Living</option>
+            <option value="sewing"
+                    {% if demand_data.category == 'sewing'%}selected{% endif %}>미싱&옷만들기</option>
+            <option value="woodwork"
+                    {% if demand_data.category == 'woodwork'%}selected{% endif %}>목공예</option>
+            <option value="art"
+                    {% if demand_data.category == 'art'%}selected{% endif %}>미술</option>
+            <option value="toreutics"
+                    {% if demand_data.category == 'toreutics'%}selected{% endif %}>금속공예&악세사리</option>
+            <option value="knot"
+                    {% if demand_data.category == 'knot'%}selected{% endif %}>매듭공예</option>
+            <option value="knit"
+                    {% if demand_data.category == 'knit'%}selected{% endif %}>뜨개질</option>
+            <option value="bake"
+                    {% if demand_data.category == 'bake'%}selected{% endif %}>베이킹&쿠킹</option>
+            <option value="cosmetics"
+                    {% if demand_data.category == 'cosmetics'%}selected{% endif %}>천연화장품&비누</option>
+            <option value="etc"
+                    {% if demand_data.category == 'etc'%}selected{% endif %}>기타</option>
+        </select>
+
+        <input type="text" name="title" value="{{demand_data.title}}" placeholder="ex)캘라그라피로 엽서를 만들고 싶어요"><br>
+        {{demandform.category.errors|striptags}}
+        {{demandform.title.errors|striptags}}<br><br>
+        <textarea name="descript" rows="4" cols="50" placeholder="ex)가죽공방을 창업하고 싶어서요. 기초부터 차근 차근
+         가르쳐주는 공방 없을까요?">{{demand_data.descript}}</textarea><br>
+        {{demandform.descript.errors|striptags}}<br><br>
+
+        <input type="checkbox" name="goal" value="easy&chip"
+            {% for goal in demand_data.goal %} {% if goal == "easy&chip" %}
+            checked {% endif %}{% endfor %}>부담없고 재미있는 수업
+        <input type="checkbox" name="goal" value="quality"
+            {% for goal in demand_data.goal %} {% if goal == "quality" %}
+            checked {% endif %}{% endfor %}>가격보다는 수업 퀄리티
+        <input type="checkbox" name="goal" value="professional"
+           {% for goal in demand_data.goal %} {% if goal == "professional" %}
+            checked {% endif %}{% endfor %}>창업을 위한 전문 수업<br>
+        {{demandform.goal.errors|striptags}}<br><br>
+
+        <input type="text" name="weekday" value="{{demand_data.weekday}}" placeholder="ex)주말 아무때나, 평일7시이후"><br>
+        {{demandform.weekday.errors|striptags}}<br><br>
+        <select name="state">
+            <option value="seoul"
+                    {% if demand_data.state == 'seoul'%}selected{% endif %}>서울</option>
+            <option value="incheon_gyeonggi"
+                    {% if demand_data.state == 'incheon_gyeonggi'%}selected{% endif %}>경기도&인천</option>
+            <option value="busan_ulsan_gyeongnam"
+                    {% if demand_data.state == 'busan_ulsan_gyeongnam'%}selected{% endif %}>부산&울산&경남</option>
+            <option value="daegu_gyeongbuk"
+                    {% if demand_data.state == 'daegu_gyeongbuk'%}selected{% endif %}>대구&경북</option>
+            <option value="daejeon_chungcheong"
+                    {% if demand_data.state == 'daejeon_chungcheong'%}selected{% endif %}>대전&충청</option>
+            <option value="gwangju_jeonla"
+                    {% if demand_data.state == 'gwangju_jeonla'%}selected{% endif %}>광주&전라</option>
+            <option value="gangwon"
+                    {% if demand_data.state == 'gangwon'%}selected{% endif %}>강원</option>
+            <option value="jeju"
+                    {% if demand_data.state == 'jeju'%}selected{% endif %}>제주</option>
+            <option value="etc"
+                    {% if demand_data.state == 'etc'%}selected{% endif %}>기타</option>
+        </select>
+        <input type="text" value="{{demand_data.local}}" name="local"><br>
+        {{demandform.state.errors|striptags}}
+        {{demandform.local.errors|striptags}}<br><br>
+        010-
+        <input type="text" value="{{demand_data.mobile1}}" name="mobile1">-
+        <input type="text" value="{{demand_data.mobile2}}" name="mobile2"><br>
+        {{demandform.mobile.errors|striptags}}<br><br>
+
+        <input type="file" name="image"><br>
+        <input type="file" name="image"><br>
+        <input type="file" name="image"><br>
+        <input type="file" name="image"><br>
+        <input type="file" name="image"><br>
+        {{imageform.image.errors|striptags}}
+
+        <input type="text" value="{{demand_data.min_price}}" name="min_price" placeholder="최저값"><br>
+        {{demandform.min_price.errors|striptags}}<br>
+        <input type="text" value="{{demand_data.max_price}}" name="max_price" placeholder="최고"><br>
+        {{demandform.max_price.errors|striptags}}<br>
+        <input type="submit">
+    </form>
+</body>
+</html>
