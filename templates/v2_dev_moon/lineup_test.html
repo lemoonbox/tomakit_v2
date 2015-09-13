@@ -146,22 +146,26 @@
         }
     });
     var valueInputmin = document.getElementById('value-input-min'),
-            valueInputmax = document.getElementById('value-input-max'),
-            valueSpan = document.getElementById('value-span');
+            valueInputmax = document.getElementById('value-input-max');
+//            valueSpan = document.getElementById('value-span');
 
     // When the slider value changes, update the input and span
     slider.noUiSlider.on('update', function( values, handle ) {
-        if ( 'handle-lower' ) {
+        if ( handle ) {
             valueInputmin.value = values[handle];
-        } else if ( 'handle-upper' ) {
+        } else if ( handle ) {
             valueInputmax.value = values[handle];
-        } else {
-            valueSpan.innerHTML = values[handle];
         }
+//        else {
+//            valueSpan.innerHTML = values[handle];
+//        }
     });
 
     // When the input changes, set the slider value
-    valueInput.addEventListener('change', function(){
+    valueInputmin.addEventListener('change', function(){
+        slider.noUiSlider.set([null, this.value]);
+    });
+    valueInputmax.addEventListener('change', function(){
         slider.noUiSlider.set([null, this.value]);
     });
 
