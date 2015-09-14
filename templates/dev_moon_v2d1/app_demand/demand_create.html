@@ -321,8 +321,13 @@
 <div class="col-md-8">
         <input type="text" class="form-control" name="title" value="{{demand_data.title}}" style="max-width:500px;"placeholder="ex)캘라그라피로 엽서를 만들고 싶어요">
 </div>
-        {{demandform.category.errors|striptags}}
+
+
+       <div class="alert alert-warning alert-dismissable hidden">
+           <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
+       {{demandform.category.errors|striptags}}
         {{demandform.title.errors|striptags}}<br>
+        </div>
 
 <div class="col-md-12">
         <textarea name="descript" class="form-control" rows="4" cols="50"
@@ -533,4 +538,3 @@
     </form>
 </div>
 {%endblock%}
-</body>

@@ -208,6 +208,11 @@ nav {
     font-weight: bold;
   }
 }
+
+.navbar-default .navbar-collapse, .navbar-default .navbar-form {
+  background-color: #fff;
+}
+
 .navbar-default .navbar-toggle:focus, .navbar-default .navbar-toggle:hover {
   border-color: #eee;
 }
