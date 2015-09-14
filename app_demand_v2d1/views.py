@@ -57,8 +57,8 @@ def demand_create(request):
         T2Profile.mobli_on(_user, demand_data['mobile1'],demand_data['mobile2'])
 
         images=request.FILES.getlist("image", "")
-        _category=Category.objects.get(category=demand_data['category'])
-        _state=State.objects.get(state=demand_data['state'])
+        _category, create=Category.objects.get_or_create(category=demand_data['category'])
+        _state=State.objects.get_or_create(state=demand_data['state'])
         demand_data['user']=_user
         demand_data['category']=_category
         demand_data['state']=_state
@@ -146,8 +146,8 @@ def demand_modify(request, demand_num=0):
         T2Profile.mobli_on(_user, demand_data['mobile1'],demand_data['mobile2'])
 
         images=request.FILES.getlist("image", "")
-        _category=Category.objects.get(category=demand_data['category'])
-        _state=State.objects.get(state=demand_data['state'])
+        _category, create=Category.objects.get_or_create(category=demand_data['category'])
+        _state, create =State.objects.get_or_create(state=demand_data['state'])
         demand_data['user']=_user
         demand_data['category']=_category
         demand_data['state']=_state
