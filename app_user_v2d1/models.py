@@ -82,6 +82,7 @@ class T2HostProfile(models.Model):
     intro_pic=models.ImageField(upload_to=upload_to, null=True, blank=True)
     intro_self=models.TextField(null=True, blank=True)
     shop_addr=models.CharField(max_length=250, null=True, blank=True)
+    shop_addr_detail=models.CharField(max_length=250, null=True, blank=True)
     hosttype= models.CharField(max_length=50, null=False, unique=False,
                                choices=TYPE_CHOICES)
 

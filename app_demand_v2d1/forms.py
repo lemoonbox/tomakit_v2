@@ -122,15 +122,17 @@ class T2DemandPicForm(forms.ModelForm):
         images=[]
         if self.files:
             images=self.files.getlist('image', "")
+        else:
+            return False
         if images:
             for file in images:
                 if file.content_type == "image/png" or \
                                 file.content_type == "image/jpeg":
-                    return True
+                    valid=True
                 else :
                     self.add_error("image", "png/jpeg형태의 파일만 업로드 가능합니다.")
                     return False
-        return False
+        return valid
 
 
     def savefiles(self, commit=True):
