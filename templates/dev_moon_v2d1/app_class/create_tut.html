@@ -71,7 +71,7 @@
 {%block content%}
 맞춤 수업 생성
 <h1>{{title}}</h1>
-<form method="POST" action="{%url 'class_create_teach_v2d1' class_num%}">
+<form method="POST" action="{%url 'class_craete_tut_v2d1' class_num%}" enctype="multipart/form-data">
     {% csrf_token%}
     수업 횟수:
     <select name="repeat">

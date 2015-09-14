@@ -97,7 +97,16 @@ class T2TutClassForm(forms.ModelForm):
     class Meta:
         model=T2TutClass
         fields=('repeat','perhour','weekday','price','extra_price',
-                'video','descript','curri','notic','addr', 'addr_detail',)
+                'video','descript','curri','notic', 'addr', 'addr_detail',)
+
+    def save(self, commit=True):
+        _sate=self.data.get('state', "")
+
+        _tutpost=super(T2TutClassForm, self).save(commit=False)
+        _tutpost.state=_sate
+        _tutpost.save()
+
+        return _tutpost
 
 
 class T2ClassCardForm(forms.ModelForm):
@@ -118,10 +127,11 @@ class T2ClassCardForm(forms.ModelForm):
         _card.user=_user
         _card.category=_category
         _card.state=_state
+
         if _teach_post:
             _card.teach_post=_teach_post
         else:
-            _card.tut.tut_post=_tut_post
+            _card.tut_post=_tut_post
         _card.save()
         if _card:
             return _card

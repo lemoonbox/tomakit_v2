@@ -73,15 +73,87 @@ def class_begin(request):
     })
 
 def create_tut(request, class_num):
+    title=""
+    prefill_intro=""
+    prefill_addr=""
+    tut_data={}
 
     if request.method == "GET":
-        pass
+        _user=User.objects.get(username=request.user)
+        tutform=T2TutClassForm()
+        title=request.GET.get("title")
+        prefill_intro=_user.t2hostprofile_set.first().intro_self
 
     elif request.method == "POST":
-        pass
+        locality=request.POST.get("locality", "").encode("utf-8")
+        area_1=request.POST.get("area_1", "").encode("utf-8")
+        sublocal_1=request.POST.get("sublocal_1", "").encode("utf-8")
+        sublocal_2=request.POST.get("sublocal_2", "").encode("utf-8")
+        sublocal_3=request.POST.get("sublocal_4", "").encode("utf-8")
+        _state, create=check_state(request)
+        addr=area_1+locality+sublocal_1+sublocal_2+sublocal_3
+        addr_detail=request.POST.get("addr_deatail", "").encode("utf-8")
+        _user=User.objects.get(username=request.user)
+        _pre_fillpost=T2TutClass.objects.get(pk=class_num)
+
+        images=request.FILES.getlist("image", "")
+        tut_data={
+            "user":_user,
+            "category":_pre_fillpost.category,
+            "title":_pre_fillpost.title,
+            "intro_line":_pre_fillpost.intro_line,
+            'repeat':request.POST.get("repeat"),
+            'perhour':request.POST.get("perhour"),
+            'weekday':request.POST.get("weekday"),
+            'price':request.POST.get('price'),
+            'extra_price':request.POST.get('extra_price'),
+            'video':request.POST.get("video"),
+            'descript':request.POST.get("descript"),
+            'curri':request.POST.get("curri"),
+            'notic':request.POST.get("notic"),
+            'state':_state,
+            'addr':addr,
+            'addr_detail':addr_detail,
+        }
+        tutform=T2TutClassForm(tut_data, instance=_pre_fillpost)
+        prefill_intro=request.POST.get("intro_self").encode("utf-8")
+
+        if tutform.is_valid() and _pre_fillpost.user == request.user:
+            _tutpost=tutform.save()
+            tut_data['tut_post']=_tutpost
+            tut_data['classtype']="tutclass"
+            tut_data['class_id']=_tutpost.id
+
+            _user.intro_self=prefill_intro
+            _user.save()
+
+            cardexist=T2ClassCard.objects.filter(tut_post=_tutpost).exists()
+            if cardexist:
+                _pre_fillcard=T2ClassCard.objects.get(tut_post=_tutpost)
+                classcardform=T2ClassCardForm(tut_data, instance=_pre_fillcard)
+            else:
+                classcardform=T2ClassCardForm(tut_data)
+            _classcard=classcardform.save()
+            tut_data['class_card']=_classcard
+
+            image_exist=T2ClassPic.objects.filter(tut_post=_tutpost).exists()
+            if image_exist:
+                _old_images=T2ClassPic.objects.filter(tut_post=_tutpost)
+                _old_images.delete()
+            imageform=T2ClassPicForm(tut_data, request.FILES)
+            imagelist=[]
+            if imageform.is_valid():
+                _imagelist=imageform.savefiles()
+
+            return HttpResponseRedirect("/")
 
     return render(request, TEMP.CLASS_CREATE_TUT_V2D1,{
-
+        "teachform":tutform,
+        "title":title,
+        "class_num":class_num,
+        "prefill_intro":prefill_intro,
+        "tut_data":tut_data,
+        #"prefill_addr":prefill_addr
     })
 
 @login_required
@@ -97,7 +169,6 @@ def create_teach(request, class_num):
         prefill_intro=_user.t2hostprofile_set.first().intro_self
         #prefill_addr=_user.t2hostprofile_set.first().shop_addr
     elif request.method == "POST":
-        #need non type erro catch
         locality=request.POST.get("locality", "").encode("utf-8")
         area_1=request.POST.get("area_1", "").encode("utf-8")
         sublocal_1=request.POST.get("sublocal_1", "").encode("utf-8")
@@ -108,6 +179,9 @@ def create_teach(request, class_num):
         addr_detail=request.POST.get("addr_deatail", "").encode("utf-8")
         _user=User.objects.get(username=request.user)
         _pre_fillpost=T2TeachClass.objects.get(pk=class_num)
+        video_url=request.POST.get("video").encode("utf-8")
+        if "?" in video_url:
+            video_url
 
         images=request.FILES.getlist("image", "")
         teach_data={
@@ -144,18 +218,21 @@ def create_teach(request, class_num):
             _user.intro_self=prefill_intro
             _user.save()
 
-
-            classcardform=T2ClassCardForm(teach_data)
-            print classcardform.is_valid()
+            cardexist=T2ClassCard.objects.filter(teach_post=_teachpost).exists()
+            if cardexist:
+                _pre_fillcard=T2ClassCard.objects.get(teach_post=_teachpost)
+                classcardform=T2ClassCardForm(teach_data, instance=_pre_fillcard)
+            else:
+                classcardform=T2ClassCardForm(teach_data)
             _classcard=classcardform.save()
-
             teach_data['class_card']=_classcard
 
+            image_exist=T2ClassPic.objects.filter(teach_post=_teachpost).exists()
+            if image_exist:
+                _old_images=T2ClassPic.objects.filter(teach_post=_teachpost)
+                _old_images.delete()
             imageform=T2ClassPicForm(teach_data, request.FILES)
             imagelist=[]
-
-            print images
-
             if imageform.is_valid():
                 _imagelist=imageform.savefiles()
 
@@ -169,6 +246,7 @@ def create_teach(request, class_num):
         "teach_data":teach_data,
         #"prefill_addr":prefill_addr
     })
+
 
 def check_state(request):
 
