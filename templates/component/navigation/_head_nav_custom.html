@@ -1,21 +1,4 @@
-{% load static from staticfiles%}
-{%block nav%}
-<style>
-    #navbar {background:transparent;}
-    .navbar-default {
-        background-color: transparent !important;
-        border-color:transparent !important;
-        color: white !important;
-    }
-    .navbar-nav>li>a {
-        color: white !important;
-    }
-    .navbar-nav>li>button {
-        color:white !important;
-    }
-
-    #navbar {background:transparent;}
-</style>
+{%load static from staticfiles%}
 <!-- Static navbar -->
 <nav class="navbar navbar-default navbar-static-top">
 
@@ -29,24 +12,29 @@
                 <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="/">
-                <img src="{%static 'media/image/slice/Tomakit-w.png'%}">
+                <img src="{%static 'img/Tomakit-r.png'%}"
+                     data-src-main="{%static 'img/Tomakit-w.png'%}"
+                     alt="">
             </a>
         </div>
         <div id="navbar" class="collapse navbar-collapse" aria-expanded="false">
             <ul class="nav navbar-nav">
-                <li><a href="http://{{HTTP_HOST}}/v2/board/caseboard">클래스 개설사례</a></li>
-                <li><a href="http://{{HTTP_HOST}}/v2/board/questionboard">문의중인 클래스</a></li>
-                <li><a href="http://{{HTTP_HOST}}/v2/question/que_bridge" style="color:#F5515F;">의뢰하기</a></li>
+                <li><a href="http://{{HTTP_HOST}}/v2/board/caseboard">클래스 살펴보기</a></li>
+                <li><a href="http://{{HTTP_HOST}}/v2/board/questionboard">클래스 제안하기</a></li>
+                <!--<li><a href="http://{{HTTP_HOST}}/v2/question/que_bridge" style="color:#F5515F;">의뢰하기</a></li>-->
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="http://{{HTTP_HOST}}/v2/user/signup/host" class="btn btn-default user">
-                    <img src="{%static 'media/image/slice/buttonicon-6.png'%}"> 작가신청</a></li>
+                <li><a href="http://{{HTTP_HOST}}/v2/user/signup/host" class="user">
+                    <img src="{%static 'media/image/slice/icon-header_teacher-wh.png'%}"> 선생님 등록</a>
+                </li>
                 {% if user.is_authenticated %}
+                <li><a href="http://{{HTTP_HOST}}/v2.1/demand/create" class="user">
+                    <img src="{%static 'media/image/slice/icon-header_open-wh.png'%}"> 클래스 개설 </a>
+                </li>
                 <li class="dropdown">
                     <a href="#" class="btn-default user dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                <span class="profile-photo-mini" style="background-image:url({{MEDIA_URL}}{{user.userprofile_set.first.propic}});margin:2px 5px 0px 0px;width:35px;height:35px;background-size:cover;border:1px solid #ffffff;">
-                                    </span>
+                        <img class="profile-photo-mini" src="{{MEDIA_URL}}{{user.userprofile_set.first.pro_pic}}">
                         {{user.last_name}} {{user.first_name}}<span class="caret"></span></a>
                     <ul class="dropdown-menu" style="width:100%;">
                         <li><a href="http://{{HTTP_HOST}}/v2/user/profile/{{request.user.id}}">프로필</a></li>
@@ -64,4 +52,3 @@
         </div> <!--/.nav-collapse -->
     </div> <!--/.container -->
 </nav>
-{%endblock%}

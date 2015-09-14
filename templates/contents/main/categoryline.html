@@ -4,26 +4,52 @@
 <title>{%block title%}토마킷 :: 기초부터 공방 창업까지. 현업 작가들의 공예 수업을 만나보세요.{%endblock%}</title>
 {%block style%}
 <style>
-    .tmk-main-banner {background-image:url({%static 'media/image/slice/img-5.png' %});
+    .tmk-main-banner {background-image:url({%static 'media/image/slice/bg-1.png'%});
         float:left;
         position:relative;
         background-size: cover;
         background-repeat:no-repeat;}
     .how-to-tomakit {margin-top:60px;height:50px;font-size:16px;}
     #how-to-tmk {width:100%!important; float:left;}
+
+
+    /*.profile-photo-mini {*/
+    /*content:url('{{MEDIA_URL}}{{user.userprofile_set.first.pro_pic}}');*/
+    /*}*/
+    @media screen and (min-width: 768px) {
+
+        .navbar-brand > img[data-src-desktop] {
+            content: attr(data-src-desktop, url);
+        }
+        #navbar {
+            background: transparent;
+        }
+        .navbar-default {
+            background-color: transparent;
+            border-color: transparent;
+            color: white!important;
+        }
+        .navbar-nav > li > a {
+            color: white!important;
+        }
+        .navbar-nav > li > button {
+            color: white!important;
+        }
+    }
 </style>
 {%endblock%}
 
 {%block nav%}
-{%include 'component/navigation/_head_nav_main.html'%}
+{%include 'component/navigation/_head_nav_custom.html'%}
 {%endblock%}
 {% block content %}
 <!--<div class="how-to-tmk"> </div>-->
 <div class="tmk-main-banner">
     <div class="main-banner-title">특별한 일상을 만들다<br>
 핸드메이드 클래스 찾을 땐, 토마킷</div>
-    <div class="main-banner-subtitle">찾기 힘들었던 핸드메이드 클래스, 이제 토마킷이 편한 시간, 가까운 공방의 클래스를 찾아드려요!</div>
-<button type="button" class="btn btn-primary how-to-tomakit" id="tomatoma" style="border:3px solid #fff!important;color:#fff!important;">토마킷 이용방법</button>
+    <div class="main-banner-subtitle">토마킷이 편한 시간, 가까운 공방의 클래스를 찾아드려요!</div>
+
+<button type="button" class="btn btn-primary how-to-tomakit" id="tomatoma">토마킷 이용방법</button>
     <!--<video autoplay loop muted poster="https://d3ce7jb7ih53ua.cloudfront.net/verloc_new_design/main_page/first-page-1.png" id="bgvid">-->
     <!--<source src="https://d3ce7jb7ih53ua.cloudfront.net/verloca_new_design/main_page/verlocal+header_3.mp4"></source>-->
     <!--</video>-->
@@ -35,14 +61,14 @@
 
 <div class="tmk-main-body">
     <div class="tmk-main-border">
-        <div>일상 속, 작은 휴식들</div>
+        <div class="tmk-h3">반짝 반짝, 새로운 클래스</div>
     </div>
-    <div class="tmk-main-picks">
-        <div class="picks-title rows">
-            <span class="col-md-2"></span>
-            <span class="title-main col-md-8" style="font-family:AppleSDGothicNeo-Regular;">매일 반복되는 일상 속에서 직접 창조한다는 것은 얼마나 가슴뛰는 일인가요?</span>
-       </div>
-    </div>
+    <!--<div class="tmk-main-picks">-->
+        <!--<div class="picks-title rows">-->
+            <!--<span class="col-md-2"></span>-->
+            <!--<span class="title-main col-md-8" style="font-family:AppleSDGothicNeo-Regular;">매일 반복되는 일상 속에서 직접 창조한다는 것은 얼마나 가슴뛰는 일인가요?</span>-->
+       <!--</div>-->
+    <!--</div>-->
 
     <div class="tmk-sub-body">
         <div class="picks-cards rows">
