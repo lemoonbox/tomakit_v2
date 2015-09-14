@@ -7,7 +7,7 @@ from app_class_v2d1.models import \
     T2TeachClass,\
     T2ClassPic,\
     T2ClassCard
-
+from utils.utils import shard_url_picker
 
 
 class T2Class_BeginForm(forms.Form):
@@ -63,9 +63,11 @@ class T2TeachClassForm(forms.ModelForm):
 
     def save(self, commit=True):
         _sate=self.data.get('state', "")
+        video_url=self.data.get('video', "").encode("utf-8")
 
         _teachpost=super(T2TeachClassForm, self).save(commit=False)
         _teachpost.state=_sate
+        _teachpost.video=shard_url_picker(video_url)
         _teachpost.save()
 
         return _teachpost
@@ -101,9 +103,12 @@ class T2TutClassForm(forms.ModelForm):
 
     def save(self, commit=True):
         _sate=self.data.get('state', "")
+        video_url=self.data.get('video', "").encode("utf-8")
+
 
         _tutpost=super(T2TutClassForm, self).save(commit=False)
         _tutpost.state=_sate
+        _tutpost.video=shard_url_picker(video_url)
         _tutpost.save()
 
         return _tutpost

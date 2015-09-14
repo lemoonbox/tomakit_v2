@@ -179,9 +179,6 @@ def create_teach(request, class_num):
         addr_detail=request.POST.get("addr_deatail", "").encode("utf-8")
         _user=User.objects.get(username=request.user)
         _pre_fillpost=T2TeachClass.objects.get(pk=class_num)
-        video_url=request.POST.get("video").encode("utf-8")
-        if "?" in video_url:
-            video_url
 
         images=request.FILES.getlist("image", "")
         teach_data={
