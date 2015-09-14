@@ -224,11 +224,16 @@ def generate_key(keyleng, model, user):
     _conkey.save()
 
     return key
-#
-# def shard_url_picker(origin_url):
-#
-#     origin_url=origin_url.encode("utf-8")
-#
-#     if "?" in origin_url:
-#
-#         urlpart=origin_url.split()
+
+def shard_url_picker(origin_url):
+
+    origin_url=origin_url.encode('utf-8')
+    share_url=''
+    if "?" in origin_url:
+        url_parts=origin_url.split("=")
+        share_url=url_parts[-1]
+    else:
+        url_parts=origin_url.split("/")
+        share_url=url_parts[-1]
+
+    return share_url
