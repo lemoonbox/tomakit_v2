@@ -159,6 +159,29 @@ nav {
   }
 }
 
+/* no-ui slider */
+.noUi-horizontal .noUi-handle {
+  width:28px!important;
+  font-size:16px;
+  text-align:center;
+  line-height:28px;
+  color:#84CDC2;
+  vertical-align:middle;
+}
+.noUi-handle {
+  border-radius: 50%!important;
+  border: 1px solid #84CDC2!important;
+  cursor: pointer!important;
+  background:url('');
+}
+.noUi-handle:after, .noUi-handle:before {
+  display:none!important;
+}
+.noUi-connect {
+  background: #84CDC2!important;
+}
+
+
 #tmk-footer {
   background-color: #f49e80;
   bottom: 0;
