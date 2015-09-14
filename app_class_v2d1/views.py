@@ -97,6 +97,7 @@ def create_tut(request, class_num):
         _pre_fillpost=T2TutClass.objects.get(pk=class_num)
 
         images=request.FILES.getlist("image", "")
+        imageform=""
         tut_data={
             "user":_user,
             "category":_pre_fillpost.category,
@@ -145,14 +146,17 @@ def create_tut(request, class_num):
             if imageform.is_valid():
                 _imagelist=imageform.savefiles()
 
-            return HttpResponseRedirect("/")
+            return render(request, TEMP.CLASS_CREATE_FINISH_V2D1,{
+                    })
 
     return render(request, TEMP.CLASS_CREATE_TUT_V2D1,{
-        "teachform":tutform,
+        "tutform":tutform,
         "title":title,
+        ''
         "class_num":class_num,
         "prefill_intro":prefill_intro,
         "tut_data":tut_data,
+        "imageform":imageform,
         #"prefill_addr":prefill_addr
     })
 
@@ -181,6 +185,7 @@ def create_teach(request, class_num):
         _pre_fillpost=T2TeachClass.objects.get(pk=class_num)
 
         images=request.FILES.getlist("image", "")
+        imageform=""
         teach_data={
             "user":_user,
             "category":_pre_fillpost.category,
@@ -233,7 +238,8 @@ def create_teach(request, class_num):
             if imageform.is_valid():
                 _imagelist=imageform.savefiles()
 
-            return HttpResponseRedirect("/")
+            return render(request, TEMP.CLASS_CREATE_FINISH_V2D1,{
+            })
 
     return render(request, TEMP.CLASS_CREATE_TEACH_V2D1,{
         "teachform":teachform,
@@ -241,6 +247,7 @@ def create_teach(request, class_num):
         "class_num":class_num,
         "prefill_intro":prefill_intro,
         "teach_data":teach_data,
+        "imageform":imageform,
         #"prefill_addr":prefill_addr
     })
 
