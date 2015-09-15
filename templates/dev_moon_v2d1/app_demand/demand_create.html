@@ -64,14 +64,13 @@
 
     .tmk-panel{
         display: inline-block;
-        float: left;
         padding: 20px;
         text-align:left;
         background-color: #fff;
-        border: 1px solid #ddd;
+        /*border: 1px solid #ddd;*/
         border-radius: 8px;
-        width: 73%;
         margin-bottom:10px;
+        width:100%;
     }
 
     .tmk-panel-header {
@@ -82,11 +81,15 @@
 
     }
 
-    .tmk-panel-header img {width:28px;height:28px;margin-right:5px;}
+    .tmk-panel-header img {
+        width: 28px;
+        height: 28px;
+        margin-right: 5px;
+    }
 
     .tmk-aside-right{
         text-align:left;
-        width: 25%;
+        /*width: 25%;*/
         float: left;
         display: inline-block;
         min-height: 100px;
@@ -115,6 +118,7 @@
         color: #AAA;
         margin-top: 10px;
         margin-bottom: -10px;
+        width:70%;
     }
 
     .filedrag.hover {
@@ -155,11 +159,12 @@
     }
     .tmk-imgs input{
         display: none;
+        border:none;
     }
     .tmk-imgs div{
         position: relative;
         display: inline-block;
-        background:url("http://www.jpnn.com/blog/assets/img/news/thumb/no_image.jpg");
+        /*background:url("http://www.jpnn.com/blog/assets/img/news/thumb/no_image.jpg");*/
         background-size:cover;
     }
 
@@ -168,9 +173,9 @@
     .tmk-imgs div span{
         background-image: url("/static/media/image/icon/icon-close.png");
         position: absolute;
-        top: 6px;
+        top: 26px;
         width: 23px;
-        right: 2px;
+        right: 20px;
         height: 20px;
         cursor: pointer;
         z-index: 1000;
@@ -342,21 +347,40 @@
             <!--<label for="flat-checkbox-1">부담없고 재미있는 수업</label>-->
             <!--</div>-->
 
-
-            <input type="checkbox" name="goal" value="easy&chip"
+        <div class="btn-group" data-toggle="buttons" class="col-md-12">
+            <!--<label class="icheckbox_flat checked">-->
+                <input type="checkbox" style="background-color:#fff;" class="icheckbox_flat checked" style=""autocomplete="off" checked name="goal" value="easy&chip"
+                       {% for goal in demand_data.goal %} {% if goal == "easy&chip" %}
+            checked {% endif %}{% endfor %}>부담없고 재미있는 수업 (pre-checked)
+            <!--</label>-->
+            <!--<label class="btn btn-normal">-->
+                <input type="checkbox" class="icheckbox_flat" autocomplete="off" name="goal" value="quality"
+                       {% for goal in demand_data.goal %} {% if goal == "quality" %}
+            checked {% endif %}{% endfor %}>가격보다는 수업 퀄리티
+            <!--</label>-->
+            <!--<label class="btn btn-danger">-->
+                <input type="checkbox" class="icheckbox_flat checked" autocomplete="off" name="goal" value="professional"
+                       {% for goal in demand_data.goal %} {% if goal == "professional" %}
+            checked {% endif %}{% endfor %}>창업을 위한 전문 수업
+            <!--</label>-->
+        </div>
+            {%comment%}
+        <input type="checkbox" name="goal" value="easy&chip"
             {% for goal in demand_data.goal %} {% if goal == "easy&chip" %}
             checked {% endif %}{% endfor %}>부담없고 재미있는 수업
-        <input type="checkbox" class="flat-checkbox-1" name="goal" value="quality"
+        <input type="checkbox" name="goal" value="quality"
             {% for goal in demand_data.goal %} {% if goal == "quality" %}
             checked {% endif %}{% endfor %}>가격보다는 수업 퀄리티
         <input type="checkbox" name="goal" value="professional"
            {% for goal in demand_data.goal %} {% if goal == "professional" %}
             checked {% endif %}{% endfor %}>창업을 위한 전문 수업
+        {%endcomment%}
 <!--</div>-->
         {{demandform.goal.errors|striptags}}
-
+<div class="col-md-12">
         <input type="text" name="weekday" class="form-control" value="{{demand_data.weekday}}" placeholder="ex)주말 아무때나, 평일7시이후"><br>
-        {{demandform.weekday.errors|striptags}}<br><br>
+        {{demandform.weekday.errors|striptags}}<br>
+</div>
 
         <div class="tmk-qitem-selecter-wrapper col-md-4">
             <div class="selecter cover" tabindex="0">
@@ -432,56 +456,56 @@
 
             <div class="tmk-qitem-phupload">
                 <div class="tmk-phupload-contents tmk-panel">
-                    <div class="tmk-panel-header"><img src="">사진 올리기</div>
+                    <div class="tmk-panel-header">사진 올리기</div>
                     <div class="tmk-panel-contents">
                         <div class="well filedrag" id="filedrag">
                             <div class="form-group row">
-                                <div class="col-md-7">
+                                <div class="col-md-8">
                                     <div>
-                                        <label class="drag-label">사진을 이곳에 끌어다 놓아주세요 JPG,PNG 파일만 업로드가 가능합니다. <br>
-                                            사이즈는 가로 770픽셀 이상에 최적화 되어 있습니다.</label>
+                                        <label class="drag-label">참조할 작품 사진을 이곳에 끌어다 놓아주세요 <br>
+                                            JPG, PNG 파일만 업로드가 가능합니다.</label>
                                     </div>
 
                                 </div>
-                                <div class="col-md-5" style="top:27px;">
+                                <div class="col-md-4" style="top: 10px;">
                                         <span id="uploader" onclick="findLastInput(true);" class="custom-file-input-button btn btn-default">
-                                            <span class="custom-file-input-button-text">PC에서 가져오기</span>
+                                            <span class="custom-file-input-button-text btn btn-info">PC에서 사진 가져오기</span>
                                         </span>
                                 </div>
                             </div>
                         </div>
-                        <!--<div class="tmk-imgs" id="tmk-imgs">-->
-                            <!--<div>-->
-                                <!--<img src="">-->
-                                <!--<span onclick="deleteImg(this);"></span>-->
-                            <!--</div>-->
-                            <!--<div>-->
-                                <!--<img src="">-->
-                                <!--<span onclick="deleteImg(this);"></span>-->
-                            <!--</div>-->
-                            <!--<div>-->
-                                <!--<img src="">-->
-                                <!--<span onclick="deleteImg(this);"></span>-->
-                            <!--</div>-->
-                            <!--<div>-->
-                                <!--<img src="">-->
-                                <!--<span onclick="deleteImg(this);"></span>-->
-                            <!--</div>-->
-                            <!--<div>-->
-                                <!--<img src="">-->
-                                <!--<span onclick="deleteImg(this);"></span>-->
-                            <!--</div>-->
-                            <!--<input type="file" name="Qphoto"  id="filePhoto1" />-->
-                            <!--<input type="file" name="Qphoto"  id="filePhoto2" />-->
-                            <!--<input type="file" name="Qphoto"  id="filePhoto3" />-->
-                            <!--<input type="file" name="Qphoto"  id="filePhoto4" />-->
-                            <!--<input type="file" name="Qphoto"  id="filePhoto5" />-->
+                        <div class="tmk-imgs" id="tmk-imgs">
+                            <div>
+                                <img src="">
+                                <span onclick="deleteImg(this);"></span>
+                            </div>
+                            <div>
+                                <img src="">
+                                <span onclick="deleteImg(this);"></span>
+                            </div>
+                            <div>
+                                <img src="">
+                                <span onclick="deleteImg(this);"></span>
+                            </div>
+                            <div>
+                                <img src="">
+                                <span onclick="deleteImg(this);"></span>
+                            </div>
+                            <div>
+                                <img src="">
+                                <span onclick="deleteImg(this);"></span>
+                            </div>
+                            <input type="file" name="Qphoto"  id="filePhoto1" />
+                            <input type="file" name="Qphoto"  id="filePhoto2" />
+                            <input type="file" name="Qphoto"  id="filePhoto3" />
+                            <input type="file" name="Qphoto"  id="filePhoto4" />
+                            <input type="file" name="Qphoto"  id="filePhoto5" />
 
-                        <!--</div>-->
+                        </div>
                     </div>
                     <div class="tmk-panel-footer"></div>
                 </div>
-                <aside class="tmk-aside-right">만들고 싶은 것의 사진을 업로드 해주세요. JPG, PNG 파일만 업로드가 가능합니다.</aside>
+                <!--<aside class="tmk-aside-right">만들고 싶은 것의 사진을 업로드 해주세요. JPG, PNG 파일만 업로드가 가능합니다.</aside>-->
             </div>
         <!--<input type="file" name="image"><br>-->
         <!--<input type="file" name="image"><br>-->
@@ -494,14 +518,18 @@
         <div id="html5">
             <div id="slide"></div>
             <!--<span id="value-span"></span>-->
-            <input value="{{demand_data.min_price}}" id='min-price' name="min_price"></input>
-            {{demandform.min_price.errors|striptags}}
-            <input value="{{demand_data.max_price}}" id='max-price' name="max_price"></input>
+            <input style="text-align:center;" type="text" value="{{demand_data.max_price}}" id="max-price" name="max_price"></input>
             {{demandform.max_price.errors|striptags}}
+            <input style="text-align:center;" type="text" value="{{demand_data.min_price}}" id="min-price" name="min_price" class="pull-right"></input>
+            {{demandform.min_price.errors|striptags}}
         </div>
     </div>
+        <script type="text/javascript" src="{%static 'media/js/wNumb.js'%}"></script>
         <script>
             var slider = document.getElementById('slide');
+            var format = wNumb({
+                decimals: 0
+            });
 
             noUiSlider.create(slider, {
                 start: [50000, 450000],
@@ -513,25 +541,25 @@
                     'max': 500000
                 }
             });
+
+
             var valueInputmin = document.getElementById('min-price'),
                     valueInputmax = document.getElementById('max-price');
-            //            valueSpan = document.getElementById('value-span');
 
             // When the slider value changes, update the input and span
             slider.noUiSlider.on('update', function( values, handle ) {
                 if ( handle ) {
-                    valueInputmin.value = values[handle];
-                } else valueInputmax.innerHTML = values[handle];
+                    valueInputmin.value = format.from(values[handle]);
+                } else valueInputmax.value = format.from(values[handle]);
             });
 
             // When the input changes, set the slider value
             valueInputmin.addEventListener('change', function(){
                 slider.noUiSlider.set([null, this.value]);
             });
-//            valueInputmax.addEventListener('change', function(){
-//                slider.noUiSlider.set([null, this.value]);
-//            });
-
+            valueInputmax.addEventListener('change', function(){
+                slider.noUiSlider.set([null, this.value]);
+            });
         </script>
 
         <input class="btn btn-primary" type="submit">
