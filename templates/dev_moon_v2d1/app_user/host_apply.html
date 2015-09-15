@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+선생님 등록
+
+<form method="POST" action="{% url 'host_apply_v2d1' %}" enctype="multipart/form-data">
+    {% csrf_token %}
+    자기소개<textarea name="introduce">{{apply_data.introduce}}</textarea>
+    {{hostform.introduce.errors|striptags}}<br><br>
+    전화번호<input type="number" name="mobli1" value="{{apply_data.mobli1}}">-
+    <input type="number" name="mobli2" value="{{apply_data.mobli2}}">-
+    <input type="number" name="mobli3" value="{{apply_data.mobli3}}">
+    {{hostform.mobli1.errors|striptags}}
+    {{hostform.mobli2.errors|striptags}}
+    {{hostform.mobli3.errors|striptags}}<br><br>
+
+    공방유무
+    <input type="radio" name="hosttype" value="shop"
+            {%if apply_data.hosttype == "shop" %} checked="checked" {% endif %}>공방있음
+    <input type="radio" name="hosttype" value="lectured"
+            {%if apply_data.hosttype == "lectured" %} checked="checked" {% endif %}>공방없음(출강)
+    {{hostform.hosttype.errors|striptags}}<br><br>
+    공방주소or 활동지역
+    <input type="text" name="local" value="{{apply_data.local}}">
+    {{hostform.local.errors|striptags}}<br>
+    홈페이지/블로그 주소
+    <input type="text" name="site" value="{{apply_data.site}}">
+    {{hostform.site.errors|striptags}}<br>
+
+    개인포트폴리오
+    <input type="file" name="potpolio"><br>
+    <input type="submit" value="등륵신청">
+</form>
+</body>
+</html>

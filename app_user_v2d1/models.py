@@ -7,6 +7,10 @@ def upload_to(instance, filename):
     path_arr = filename.split('.')
     return 'profile/%s/%s' %(instance.user.username, str(uuid.uuid4())+"."+path_arr[-1])
 
+def potpolio_upload_to(instance, filename):
+    path_arr = filename.split('.')
+    return 'potpolio/%s/%s' %(instance.user.username, str(uuid.uuid4())+"."+path_arr[-1])
+
 class T2Profile(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
     mail_conf=models.BooleanField(default=False)
@@ -85,6 +89,20 @@ class T2HostProfile(models.Model):
     shop_addr_detail=models.CharField(max_length=250, null=True, blank=True)
     hosttype= models.CharField(max_length=50, null=False, unique=False,
                                choices=TYPE_CHOICES)
+
+    is_active=models.BooleanField(default=True)
+    created_at=models.DateTimeField(auto_now_add=True, auto_now=False)
+    updated_at=models.DateTimeField(auto_now_add=True, auto_now=True)
+
+class T2HostApply(models.Model):
+
+    user=models.ForeignKey(settings.AUTH_USER_MODEL)
+    introduce=models.TextField()
+    mobli=models.CharField(max_length=100)
+    hosttype=models.CharField(max_length=100)
+    local=models.CharField(max_length=150)
+    site=models.CharField(max_length=250, null=True, blank=True,)
+    potpolio=models.FileField(null=True, blank=True,upload_to=potpolio_upload_to)
 
     is_active=models.BooleanField(default=True)
     created_at=models.DateTimeField(auto_now_add=True, auto_now=False)

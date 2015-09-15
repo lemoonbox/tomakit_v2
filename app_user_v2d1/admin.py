@@ -1,7 +1,8 @@
 from django.contrib import admin
 from app_user_v2d1.models import \
     T2Profile, \
-    T2HostProfile
+    T2HostProfile, \
+    T2HostApply
 # Register your models here.
 
 
@@ -24,3 +25,12 @@ class T2HostProfileAdmin(admin.ModelAdmin):
                                             'shop_addr_detail','hosttype','is_active']})]
 
 admin.site.register(T2HostProfile, T2HostProfileAdmin),
+
+class T2HostApplyAmin(admin.ModelAdmin):
+    list_display=('user', 'introduce', 'created_at','updated_at')
+
+    fieldsets = [("ApplyInfo",{'fields':['user', 'introduce','mobli',
+                                        'hosttype', 'local',
+                                        'site','potpolio','is_active']})]
+
+admin.site.register(T2HostApply, T2HostApplyAmin),

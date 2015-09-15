@@ -128,12 +128,12 @@ class C_CostInfoAdmin(admin.ModelAdmin):
 # class TestAdmin(admin.ModelAdmin):
 #     pass
 
-admin.site.register(PriceTag, PriceTagAdmin)
-admin.site.register(ClassCategory, CategoryAdmin)
-admin.site.register(ClassInteract, C_InteractAdmin)
-admin.site.register(ClassPost, C_PostAdmin)
-admin.site.register(ClassPic, C_PicAdmin)
-admin.site.register(ClassDetail, C_DetailAdmin)
-admin.site.register(Review,C_ReviewAdmin)
-admin.site.register(ClassCurri,C_CurriAdmin)
-admin.site.register(CostInfo, C_CostInfoAdmin)
+# admin.site.register(PriceTag, PriceTagAdmin)
+# admin.site.register(ClassCategory, CategoryAdmin)
+# admin.site.register(ClassInteract, C_InteractAdmin)
+# admin.site.register(ClassPost, C_PostAdmin)
+# admin.site.register(ClassPic, C_PicAdmin)
+# admin.site.register(ClassDetail, C_DetailAdmin)
+# admin.site.register(Review,C_ReviewAdmin)
+# admin.site.register(ClassCurri,C_CurriAdmin)
+# admin.site.register(CostInfo, C_CostInfoAdmin)

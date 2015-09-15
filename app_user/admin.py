@@ -13,7 +13,6 @@ class ProfileAdmin(admin.ModelAdmin):
                                             'inter_url', 'mailcnfirm', 'is_activate',]})]
 
 
-admin.site.register(UserProfile, ProfileAdmin)
 
 class HostProfileAdmin(admin.ModelAdmin):
 
@@ -22,4 +21,5 @@ class HostProfileAdmin(admin.ModelAdmin):
     fieldsets = [('HostInfo', {'fields':['djgouser', 'hosttype','mobile']})]
 
 
-admin.site.register(HostProfile, HostProfileAdmin)
+# admin.site.register(UserProfile, ProfileAdmin)
+# admin.site.register(HostProfile, HostProfileAdmin)

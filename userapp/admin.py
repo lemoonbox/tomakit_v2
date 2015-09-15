@@ -10,7 +10,6 @@ class ProfileAdmin(admin.ModelAdmin):
     fieldsets = [('Identity',{'fields':['user', 'email', 'nick_name', 'pro_photo']}),
         ('Datainfo',{'fields':['email_confirm']})]
 
-admin.site.register(Profile, ProfileAdmin)
 
 
 class SellerInfoAdmin(admin.ModelAdmin):
@@ -18,5 +17,6 @@ class SellerInfoAdmin(admin.ModelAdmin):
     list_display=('user', 'special','intro', )
     fieldsets = [('SellerInfo', {'fields':['user', 'intro', 'special',]}),
                  ]
-
-admin.site.register(SellerInfo, SellerInfoAdmin)
+# admin.site.register(Profile, ProfileAdmin)
+#
+# admin.site.register(SellerInfo, SellerInfoAdmin)

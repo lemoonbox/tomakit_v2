@@ -38,7 +38,7 @@ V2_BOARD_CASE = 'v2_dev_moon/app_board/case_board.html'
 
 
 #####v2.1#####
-#signup
+#app_user//signup
 SIGNUP_TEM_V2D1="dev_moon_v2d1/app_user/signup.html"
 LOGIN_TEM_V2D1="dev_moon_v2d1/app_user/login.html"
 SEND_CONFRI_TEM_V2D1='dev_moon_v2d1/app_user/send_confirm.html'
@@ -47,8 +47,11 @@ PW_RESET_V2D1='dev_moon_v2d1/app_user/pw_reset.html'
 PW_RESET_PROCESS_V2D1='dev_moon_v2d1/app_user/pw_reset_process.html'
 PW_RESET_FAIL_V2D1='dev_moon_v2d1/app_user/pw_reset_fail.html'
 
+#app_user//host
+HOST_APLLY_V2D1='dev_moon_v2d1/app_user/host_apply.html'
+HOST_APPLY_FINISH='dev_moon_v2d1/app_user/host_apply_finish.html'
 
-#mail
+#app_user//mail
 CONFRI_TEM_V2D1="dev_moon_v2d1/mail_form/mail_confirm.html"
 PWRESET_MAIL_TEM_V2D1='dev_moon_v2d1/mail_form/mail_pw_reset.html'
 
@@ -63,3 +66,8 @@ CLASS_CREATE_BEGIN_V2D1='dev_moon_v2d1/app_class/class_create_begin.html'
 CLASS_CREATE_TUT_V2D1='dev_moon_v2d1/app_class/create_tut.html'
 CLASS_CREATE_TEACH_V2D1='dev_moon_v2d1/app_class/create_teach.html'
 CLASS_CREATE_FINISH_V2D1='dev_moon_v2d1/app_class/class_create_finish.html'
+CLASS_MODIFY_TEACH_V2D1='dev_moon_v2d1/app_class/teach_modify.html'
+CLASS_MODIFY_TUT_V2D1='dev_moon_v2d1/app_class/tut_modify.html'
+CLASS_MODIFY_FINISH_V2D1='dev_moon_v2d1/app_class/modify_finish.html'
+
+COMMENT_V2D1='dev_moon_v2d1/app_class/review.html'
