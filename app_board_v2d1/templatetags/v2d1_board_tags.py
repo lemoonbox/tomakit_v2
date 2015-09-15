@@ -3,7 +3,7 @@ __author__ = 'moon'
 
 
 from django import template
-
+import datetime
 register = template.Library()
 
 @register.filter(name="cate2han")
@@ -64,3 +64,8 @@ def state2han(valu, argu=None):
     else :
         return u"ALL"
 
+@register.filter(name="d_day_count")
+def d_day_count(valu, argu=None):
+    today=datetime.date.today()
+    timeoff=today-valu
+    return timeoff.days
