@@ -11,6 +11,10 @@ def upload_to(instance, filename):
     path_arr = filename.split('.')
     return 'lessonimage/%s' %( str(uuid.uuid4())+"."+path_arr[-1])
 
+def review_upload_to(instance, filename):
+    path_arr = filename.split('.')
+    return 'lessonimage/review/%s' %( str(uuid.uuid4())+"."+path_arr[-1])
+
 class T2TeachClass(models.Model):
     user=models.ForeignKey(settings.AUTH_USER_MODEL)
     category=models.ForeignKey(Category)
@@ -42,6 +46,9 @@ class T2TeachClass(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, auto_now=False)
     updated_at = models.DateTimeField(auto_now_add=True, auto_now=True)
 
+    def __unicode__(self):
+        return  u'%s %s' % (self.id, self.title)
+
 class T2TutClass(models.Model):
     user=models.ForeignKey(settings.AUTH_USER_MODEL)
     category=models.ForeignKey(Category)
@@ -69,6 +76,9 @@ class T2TutClass(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, auto_now=False)
     updated_at = models.DateTimeField(auto_now_add=True, auto_now=True)
 
+    def __unicode__(self):
+        return  u'%s %s' % (self.id, self.title)
+
 class T2ClassCard(models.Model):
     user=models.ForeignKey(settings.AUTH_USER_MODEL)
     category=models.ForeignKey(Category)
@@ -91,6 +101,8 @@ class T2ClassCard(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True, auto_now=False)
     updated_at = models.DateTimeField(auto_now_add=True, auto_now=True)
+    def __unicode__(self):
+        return  u'%s %s' % (self.id, self.title)
 
 
 class T2ClassPic(models.Model):
@@ -106,3 +118,20 @@ class T2ClassPic(models.Model):
 
     def __unicode__(self):
         return  u'%s %s' % (self.id, self.image)
+
+class T2ClassReview(models.Model):
+    user=models.ForeignKey(settings.AUTH_USER_MODEL, related_name="my_review")
+    host_user=models.ForeignKey(settings.AUTH_USER_MODEL, related_name="host_review")
+    teach_post=models.ForeignKey(T2TeachClass, null=True, blank=True)
+    tut_post=models.ForeignKey(T2TutClass, null=True, blank=True)
+    grade=models.IntegerField()
+    review=models.TextField()
+    image = models.ImageField(null=True, upload_to=review_upload_to)
+
+    created_at = models.DateTimeField(auto_now_add=True, auto_now=False)
+    updated_at = models.DateTimeField(auto_now_add=True, auto_now=True)
+    is_active = models.BooleanField(default=True)
+
+    def __unicode__(self):
+        return  u'%s %s' % (self.id, self.review)
+

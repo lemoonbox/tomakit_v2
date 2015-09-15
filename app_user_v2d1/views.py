@@ -30,7 +30,8 @@ from app_user_v2d1.forms import\
     UserForm,\
     LoginForm, \
     EmailCheck,\
-    PW_CrossCheckForm
+    PW_CrossCheckForm, \
+    HostApplyForm
 from app_user_v2d1.models import \
     T2Profile, \
     T2SignupConfirmKey,\
@@ -118,9 +119,12 @@ def login(request, *args, **kwargs):
                    'next':next,
                     'HTTP_HOST':HTTP_HOST,
                    })
+
+
 def logout(request, *args, **kwargs):
     res = django_logout(request, *args, **kwargs)
     return res
+
 
 def send_confirm(request):
 
@@ -185,6 +189,7 @@ def signup_confirm(request, *args, **kwargs):
     tpl = loader.get_template(TEMP.CONFRI_RESULT_TEM_V2D1)
     ctx.update(csrf(request))
     return HttpResponse(tpl.render(ctx))
+
 
 def pw_reset_request(request):
 
@@ -255,4 +260,34 @@ def pw_reset_process(request, key):
     return render(request, TEMP.V2_PW_RESET_PROCESS, {
         'pwrset_process_form':pwreset_process_form,
         'HTTP_HOST':HTTP_HOST,
+    })
+
+def host_apply(request):
+    apply_data={}
+    if request.method == "GET":
+        hostform=HostApplyForm()
+    elif request.method == "POST":
+        mobli=request.POST.get("mobli1","")+request.POST.get("mobli2","")+\
+            request.POST.get("mobli3","")
+        apply_data={
+            "introduce":request.POST.get("introduce", ""),
+            "mobli1":request.POST.get("mobli1",""),
+            "mobli2":request.POST.get("mobli2",""),
+            "mobli3":request.POST.get("mobli3",""),
+            "mobli":mobli,
+            "hosttype":request.POST.get("hosttype",""),
+            "local":request.POST.get("local",""),
+            "site":request.POST.get("site",""),
+            "potpolio":request.POST.get("potpolio",""),
+        }
+        hostform=HostApplyForm(apply_data, request.FILES)
+        if hostform.is_valid():
+            _hostapply=hostform.save(commit=False)
+            _hostapply.user=User.objects.get(username=request.user)
+            _hostapply.save()
+            return render(request, TEMP.HOST_APPLY_FINISH,{})
+
+    return render(request, TEMP.HOST_APLLY_V2D1,{
+        "hostform":hostform,
+        "apply_data":apply_data,
     })

@@ -71,7 +71,7 @@
 {%block content%}
 날짜 지정 수업 생성
 <h1>{{title}}</h1>
-<form method="POST" action="{%url 'class_create_teach_v2d1' class_num%}" enctype="multipart/form-data">
+<form method="POST" action="{%url 'modify_teach_v2d1' class_num%}" enctype="multipart/form-data">
     {% csrf_token%}
     수업 횟수:
     <select name="repeat">
@@ -122,25 +122,25 @@
     <input type="text" name="weekday" value="{{teach_data.weekday}}" placeholder="ex)매주 화요일 7:00, 매주 토요일 2시">
     {{teachform.weekday.errors|striptags}}<br><br>
     최소인원
-    <input type="number" name="min_num" value="{{teach_data.min_num}}">
+    <input type="number" name="min_num" value="{{teach_data.min_num |striptags}}">
     최대인원
-    <input type="number" name="max_num" value="{{teach_data.max_num}}">
+    <input type="number" name="max_num" value="{{teach_data.max_num |striptags}}">
     {{teachform.min_num.errors|striptags}}
     {{teachform.max_num.errors|striptags}}
     <br><br>
 
     수업시작일
-    <input type="date" name="startday" value="{{teach_data.startday}}">
+    <input type="date" name="startday" value="{{teach_data.startday|striptags}}">
     등록마감일
-    <input type="date" name="deadline" value="{{teach_data.deadline}}">
+    <input type="date" name="deadline" value="{{teach_data.deadline|striptags}}">
     {{teachform.startday.errors|striptags}}
     {{teachform.deadline.errors|striptags}}
     <br><br>
 
-    수강료
-    <input type="text" name="price" value="{{teach_data.price}}">
+    수강료{{teach_data.price}}
+    <input type="text" name="price" value="{{teach_data.price }}">
     재료비
-    <input type="text" name="extra_price" value="{{teach_data.extra_price}}">
+    <input type="text" name="extra_price" value="{{teach_data.extra_price }}">
     {{teachform.price.errors|striptags}}
     {{teachform.extra_price.errors|striptags}}<br>
     ---------------------------2단계---------------------<br>
@@ -167,7 +167,7 @@
 
     ---------------------------3단계---------------------<br>
     작가소개
-    <input type="text" name="intro_self" value="{{prefill_intro}}">
+    <input type="text" name="intro_self" value="{{teach_data.user.t2hostprofile_set.first.intro_self}}">
     {{teachform.intro_self.errors|striptags}}<br><br>
     주소 입
 

@@ -10,7 +10,6 @@ class QItemAdmin(admin.ModelAdmin):
 
     fieldsets = [("QItem", {'fields':['djgouser', 'category','title', 'state','mylocal', 'wantedu',
                                       'memnum', 'mobile','weekday',]}),]
-admin.site.register(QItem, QItemAdmin)
 
 class QPicAdmin(admin.ModelAdmin):
     list_filter = ['user', 'qitem',]
@@ -19,7 +18,6 @@ class QPicAdmin(admin.ModelAdmin):
 
     fieldsets = [("QPic", {'fields':['user', 'qitem', 'category','pic',]}),]
 
-admin.site.register(QPic, QPicAdmin)
 
 class QSkillAdmin(admin.ModelAdmin):
     list_filter = ['title', 'djgouser', 'mylocal',]
@@ -29,4 +27,6 @@ class QSkillAdmin(admin.ModelAdmin):
     fieldsets = [("QItem", {'fields':['djgouser', 'category','title', 'state','mylocal',
                                       'wantgoal','wantclass','wantedu',
                                       'memnum', 'mobile','weekday',]}),]
-admin.site.register(QSkill, QSkillAdmin)
+# admin.site.register(QItem, QItemAdmin)
+# admin.site.register(QPic, QPicAdmin)
+# admin.site.register(QSkill, QSkillAdmin)

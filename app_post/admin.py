@@ -37,9 +37,9 @@ class DetailAdmin(admin.ModelAdmin):
 
 class TestAdmin(admin.ModelAdmin):
     pass
-
-admin.site.register(PostType, TypeAdmin)
-admin.site.register(PostCategory, CategoryAdmin)
-admin.site.register(Post, PostAdmin)
-admin.site.register(PostPic, PicAdmin)
-admin.site.register(PostDetail, DetailAdmin)
+#
+# admin.site.register(PostType, TypeAdmin)
+# admin.site.register(PostCategory, CategoryAdmin)
+# admin.site.register(Post, PostAdmin)
+# admin.site.register(PostPic, PicAdmin)
+# admin.site.register(PostDetail, DetailAdmin)

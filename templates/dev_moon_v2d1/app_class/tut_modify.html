@@ -69,80 +69,65 @@
 
 <body>
 {%block content%}
-날짜 지정 수업 생성
+맞춤 수업 생성
 <h1>{{title}}</h1>
-<form method="POST" action="{%url 'class_create_teach_v2d1' class_num%}" enctype="multipart/form-data">
+<form method="POST" action="{%url 'modify_tut_v2d1' class_num%}" enctype="multipart/form-data">
     {% csrf_token%}
     수업 횟수:
     <select name="repeat">
         <option value="1"
-                {% if teach_data.repeat == '1' %}selected {% endif %}>1회</option>
+                {% if tut_data.repeat == '1' %}selected {% endif %}>1회</option>
         <option value="2"
-                {% if teach_data.repeat == '2' %}selected {% endif %}>2회</option>
+                {% if tut_data.repeat == '2' %}selected {% endif %}>2회</option>
         <option value="3"
-                {% if teach_data.repeat == '3' %}selected {% endif %}>3회</option>
+                {% if tut_data.repeat == '3' %}selected {% endif %}>3회</option>
         <option value="4"
-                {% if teach_data.repeat == '4' %}selected {% endif %}>4회</option>
+                {% if tut_data.repeat == '4' %}selected {% endif %}>4회</option>
         <option value="5"
-                {% if teach_data.repeat == '5' %}selected {% endif %}>5회</option>
+                {% if tut_data.repeat == '5' %}selected {% endif %}>5회</option>
         <option value="6"
-                {% if teach_data.repeat == '6' %}selected {% endif %}>6회</option>
+                {% if tut_data.repeat == '6' %}selected {% endif %}>6회</option>
         <option value="7"
-                {% if teach_data.repeat == '7' %}selected {% endif %}>7회</option>
+                {% if tut_data.repeat == '7' %}selected {% endif %}>7회</option>
         <option value="8"
-                {% if teach_data.repeat == '8' %}selected {% endif %}>8회</option>
+                {% if tut_data.repeat == '8' %}selected {% endif %}>8회</option>
         <option value="9"
-                {% if teach_data.repeat == '9' %}selected {% endif %}>9회</option>
+                {% if tut_data.repeat == '9' %}selected {% endif %}>9회</option>
         <option value="10"
-                {% if teach_data.repeat == '10' %}selected {% endif %}>10회</option>
+                {% if tut_data.repeat == '10' %}selected {% endif %}>10회</option>
         <option value="11"
-                {% if teach_data.repeat == '11' %}selected {% endif %}>11회</option>
+                {% if tut_data.repeat == '11' %}selected {% endif %}>11회</option>
         <option value="12"
-                {% if teach_data.repeat == '12' %}selected {% endif %}>12회</option>
+                {% if tut_data.repeat == '12' %}selected {% endif %}>12회</option>
     </select>
     회당 수업시간:
     <select name="perhour">
         <option value="1"
-                {% if teach_data.perhour == '1'%}selected {% endif %} >1시간</option>
+                {% if tut_data.perhour == '1'%}selected {% endif %} >1시간</option>
         <option value="2"
-                {% if teach_data.perhour == '2' %}selected {% endif %} >2시간</option>
+                {% if tut_data.perhour == '2' %}selected {% endif %} >2시간</option>
         <option value="3"
-                {% if teach_data.perhour == '3' %}selected {% endif %} >3시간</option>
+                {% if tut_data.perhour == '3' %}selected {% endif %} >3시간</option>
         <option value="4"
-                {% if teach_data.perhour == '4' %}selected {% endif %} >4시간</option>
+                {% if tut_data.perhour == '4' %}selected {% endif %} >4시간</option>
         <option value="5"
-                {% if teach_data.perhour == '5' %}selected {% endif %}>5시간</option>
+                {% if tut_data.perhour == '5' %}selected {% endif %}>5시간</option>
         <option value="6"
-                {% if teach_data.perhour == '6' %}selected {% endif %}>6시</option>
+                {% if tut_data.perhour == '6' %}selected {% endif %}>6시</option>
     </select>
-    {{teachform.repeat.errors|striptags}}
-    {{teachform.perhour.errors|striptags}}
+    {{tutform.repeat.errors|striptags}}
+    {{tutform.perhour.errors|striptags}}
     <br><br>
     수업일정
-    <input type="text" name="weekday" value="{{teach_data.weekday}}" placeholder="ex)매주 화요일 7:00, 매주 토요일 2시">
-    {{teachform.weekday.errors|striptags}}<br><br>
-    최소인원
-    <input type="number" name="min_num" value="{{teach_data.min_num}}">
-    최대인원
-    <input type="number" name="max_num" value="{{teach_data.max_num}}">
-    {{teachform.min_num.errors|striptags}}
-    {{teachform.max_num.errors|striptags}}
-    <br><br>
-
-    수업시작일
-    <input type="date" name="startday" value="{{teach_data.startday}}">
-    등록마감일
-    <input type="date" name="deadline" value="{{teach_data.deadline}}">
-    {{teachform.startday.errors|striptags}}
-    {{teachform.deadline.errors|striptags}}
-    <br><br>
+    <input type="text" name="weekday" value="{{tut_data.weekday}}" placeholder="ex)매주 화요일 7:00, 매주 토요일 2시">
+    {{tutform.weekday.errors|striptags}}<br><br>
 
     수강료
-    <input type="text" name="price" value="{{teach_data.price}}">
+    <input type="text" name="price" value="{{tut_data.price}}">
     재료비
-    <input type="text" name="extra_price" value="{{teach_data.extra_price}}">
-    {{teachform.price.errors|striptags}}
-    {{teachform.extra_price.errors|striptags}}<br>
+    <input type="text" name="extra_price" value="{{tut_data.extra_price}}">
+    {{tutform.price.errors|striptags}}
+    {{tutform.extra_price.errors|striptags}}<br>
     ---------------------------2단계---------------------<br>
     수업 이미지
     <input type="file" name="image"><br>
@@ -152,23 +137,23 @@
     <input type="file" name="image"><br>
     {{imageform.image.errors|striptags}}<br><br>
     영상 등록(선택)
-    <input type="text" name="video" value="{{teach_data.video}}">
-    {{teachform.video.errors|striptags}}<br><br>
+    <input type="text" name="video" value="{{tut_data.video}}">
+    {{tutform.video.errors|striptags}}<br><br>
 
     수업 소개
-    <textarea name="descript" >{{teach_data.descript}}</textarea>
-    {{teachform.descript.errors|striptags}}<br><br>
+    <textarea name="descript" >{{tut_data.descript}}</textarea>
+    {{tutform.descript.errors|striptags}}<br><br>
     커리큘럼
-    <textarea name="curri">{{teach_data.curri}}</textarea>
-    {{teachform.curri.errors|striptags}}<br><br>
+    <textarea name="curri">{{tut_data.curri}}</textarea>
+    {{tutform.curri.errors|striptags}}<br><br>
     안내사항
-    <textarea name="notic">{{teach_data.notic}}</textarea>
-    {{teachform.notic.errors|striptags}}<br><br>
+    <textarea name="notic">{{tut_data.notic}}</textarea>
+    {{tutform.notic.errors|striptags}}<br><br>
 
     ---------------------------3단계---------------------<br>
     작가소개
-    <input type="text" name="intro_self" value="{{prefill_intro}}">
-    {{teachform.intro_self.errors|striptags}}<br><br>
+    <input type="text" name="intro_self" value="{{tut_data.user.t2hostprofile_set.first.intro_self}}">
+    {{tutform.intro_self.errors|striptags}}<br><br>
     주소 입
 
     <div class="tmk-sub-body">
@@ -178,7 +163,7 @@
     </div>
     <div>
         상세 주소 입력
-        <input type="text" name="addr_deatail" value="{{teach_data.addr_detail}}" placeholder="상세주소를 입력해주세요">
+        <input type="text" name="addr_deatail" value="{{tut_data.addr_detail}}" placeholder="상세주소를 입력해주세요">
     </div>
     <table id="address">
         <!--<tr>-->

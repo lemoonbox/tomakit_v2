@@ -60,7 +60,6 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.humanize',
-    'rest_framework',
     'userapp',
     'app_idealine',
     'social.apps.django_app.default',
@@ -78,6 +77,7 @@ INSTALLED_APPS = (
     'app_user_v2d1',
     'app_demand_v2d1',
     'app_class_v2d1',
+    'app_board_v2d1',
 )
 
 MIDDLEWARE_CLASSES = (

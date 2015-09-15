@@ -4,6 +4,9 @@ from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 
+from app_user_v2d1.models import \
+    T2HostApply
+
 
 class UserForm(forms.ModelForm):
 
@@ -72,3 +75,28 @@ class PW_CrossCheckForm(forms.Form):
             return False
 
         return True
+
+class HostApplyForm(forms.ModelForm):
+
+    required_error={'required':u"필수 항목 입니다."}
+    num_error={"invalid":u"숫자만 입력해주세요"}
+    url_error={"invlaid":u"url주소를 입력해주세요."}
+    mobli_error={}
+    mobli_error.update(required_error)
+    mobli_error.update(num_error)
+    site_error={}
+    site_error.update(required_error)
+    site_error.update(url_error)
+
+    introduce=forms.CharField(max_length=100, error_messages=required_error)
+    mobli1=forms.IntegerField(error_messages=mobli_error)
+    mobli2=forms.IntegerField(error_messages=mobli_error)
+    mobli3=forms.IntegerField(error_messages=mobli_error)
+    hosttype=forms.CharField(error_messages=required_error)
+    local=forms.CharField(error_messages=required_error)
+    site=forms.URLField(error_messages=site_error)
+    potpolio=forms.FileField(required=False)
+
+    class Meta:
+        model=T2HostApply
+        fields = ('introduce', 'mobli', 'hosttype', 'local', 'site', "potpolio")
