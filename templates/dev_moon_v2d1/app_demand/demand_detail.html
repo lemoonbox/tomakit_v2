@@ -1,0 +1,28 @@
+{% load static from staticfiles%}
+{% load humanize %}
+{% load v2d1_board_tags %}
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<h2>수업 요청 상세 정보</h2><br>
+
+카테고리::{{post.category.category|cate2han}}<br>
+제목 :: {{post.title}}<br>
+한줄소개 :: {{post.descript}}<br>
+목표::{{post.goal}}<br><br>
+
+희망시간 :: {{post.weekday}}<br>
+희망지역 :: {{post.state.state|state2han}} {{post.local}}<br>
+희망수강료 :: {{post.min_price}}~{{post.max_price}}<br>
+
+참조 사진
+{% for image in post.t2demandpic_set.all%}
+    {{image}}
+    <img src="{{MEDIA_URL}}{{image.image}}"><br>
+{% endfor %}
+</body>
+</html>
