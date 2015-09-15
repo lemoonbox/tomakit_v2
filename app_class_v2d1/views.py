@@ -10,6 +10,7 @@ from django.core.exceptions import \
     ObjectDoesNotExist
 from django.http import \
     Http404
+import  datetime
 
 
 from DIY_tool import template_match as TEMP
@@ -28,6 +29,7 @@ from app_class_v2d1.forms import \
     T2TutClassForm, \
     T2ClassPicForm, \
     T2ClassCardForm
+
 
 # Create your views here.
 
@@ -494,6 +496,28 @@ def create_review(request, class_num):
     return render(request, TEMP.COMMENT_V2D1,{
         "class_num":class_num,
     })
+
+def class_post_detail(request, class_num):
+
+    if request.method == "GET":
+        _postcard=T2ClassCard.objects.filter(pk=class_num)[0]
+        _post=""
+        if _postcard.classtype == "tutclass":
+            _post=_postcard.tut_post
+            return render(request, TEMP.TUT_POST_DETAIL_V2D1,{
+                "post":_post,
+            })
+
+        else:
+            _post=_postcard.teach_post
+            now = datetime.datetime.now()
+            print now
+            print _post.deadline-now
+            return render(request, TEMP.TEACH_POST_DETAIL_V2D1,{
+                "post":_post,
+            })
+    else :
+        raise Http404("잘못된 요청 입니다.")
 
 def check_state(request):
 

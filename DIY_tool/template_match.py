@@ -69,5 +69,13 @@ CLASS_CREATE_FINISH_V2D1='dev_moon_v2d1/app_class/class_create_finish.html'
 CLASS_MODIFY_TEACH_V2D1='dev_moon_v2d1/app_class/teach_modify.html'
 CLASS_MODIFY_TUT_V2D1='dev_moon_v2d1/app_class/tut_modify.html'
 CLASS_MODIFY_FINISH_V2D1='dev_moon_v2d1/app_class/modify_finish.html'
+TUT_POST_DETAIL_V2D1='dev_moon_v2d1/app_class/tut_post_detail.html'
+TEACH_POST_DETAIL_V2D1='dev_moon_v2d1/app_class/teach_post_detail.html'
 
+#app_class/commnet
 COMMENT_V2D1='dev_moon_v2d1/app_class/review.html'
+
+#app_board
+INDEX_PAGE_V2D1='dev_moon_v2d1/app_board/index.html'
+REGUL_CLASS_LIST_V2D1='dev_moon_v2d1/app_board/regul_classlist.html'
+DEMAND_LIST_V2D1='dev_moon_v2d1/app_board/demand_list.html'

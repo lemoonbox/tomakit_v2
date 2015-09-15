@@ -16,6 +16,7 @@ from app_question import urls as v2_question_urls
 from app_board import urls as v2_board_urls
 
 #v2.1
+from app_board_v2d1 import urls as index_urls_v2d1
 from app_user_v2d1 import urls as user_urls_v2d1
 from app_demand_v2d1 import urls as demand_urls_v2d1
 from app_class_v2d1 import urls as class_urls_v2d1
@@ -37,7 +38,9 @@ urlpatterns = patterns('',
 
     url(r'', include('social.apps.django_app.urls', namespace='social')),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-
+    #v2.1
+    url(r"^v2.1/$", 'app_board_v2d1.views.mainpage', name='main'),
+    url(r'^v2.1/board/', include(index_urls_v2d1)),
     url(r'^v2.1/user/', include(user_urls_v2d1)),
     url(r'^v2.1/demand/', include(demand_urls_v2d1)),
     url(r'^v2.1/class/', include(class_urls_v2d1)),

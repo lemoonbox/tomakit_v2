@@ -58,7 +58,7 @@ def demand_create(request):
 
         images=request.FILES.getlist("image", "")
         _category, create=Category.objects.get_or_create(category=demand_data['category'])
-        _state=State.objects.get_or_create(state=demand_data['state'])
+        _state, create=State.objects.get_or_create(state=demand_data['state'])
         demand_data['user']=_user
         demand_data['category']=_category
         demand_data['state']=_state

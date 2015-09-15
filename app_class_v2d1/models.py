@@ -99,6 +99,7 @@ class T2ClassCard(models.Model):
     is_open=models.BooleanField(default=False)
     is_active=models.BooleanField(default=True)
 
+    pop_point=models.IntegerField(default=10000000)
     created_at = models.DateTimeField(auto_now_add=True, auto_now=False)
     updated_at = models.DateTimeField(auto_now_add=True, auto_now=True)
     def __unicode__(self):
