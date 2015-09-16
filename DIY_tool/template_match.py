@@ -86,3 +86,5 @@ DEMAND_LIST_V2D1='dev_moon_v2d1/app_board/demand_list.html'
 #app_payment
 PRE_PAYMENT_V2D1='dev_moon_v2d1/app_payment/pre_payment.html'
 PAYMENT_CONF_V2D1='dev_moon_v2d1/app_payment/pay_conf.html'
+PAYMENT_FINSIH_V2D1='dev_moon_v2d1/app_payment/payment_finish.html'
+PAYMENT_FAIL_V2D1='dev_moon_v2d1/app_payment/payment_fail.html'

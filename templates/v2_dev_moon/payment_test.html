@@ -11,7 +11,7 @@
         $(document).ready(function(){
             $('#button_buy').on("click",function(){
             IMP.request_pay({
-                pay_method : '{{pay_method}}',
+                pay_method : 'card',
                 merchant_uid : 'merchant_',
                 name : '주문명:결제테스트',
                 amount : 14000,
@@ -39,15 +39,16 @@
                     consol.log(msg)
                 }
             });
+            });
         });
     </script>
 </head>
 <body>
-<form method="POST" action="{% url 'pay_test'%}">
-        {%csrf_token%}
-        <p id="username_error"></p>
-        <input type="submit" class="btn btn-primary btn-block" value="결제" id="buy">결제하기
-</form>
+<!--<form method="POST" action="{% url 'pay_test'%}">-->
+        <!--{%csrf_token%}-->
+        <!--<p id="username_error"></p>-->
+        <!--<input type="submit" class="btn btn-primary btn-block" value="결제" id="buy">결제하기-->
+<!--</form>-->
         <button type="submit" class="btn btn-primary btn-block" value="결제" id="button_buy">결제하기</button>
 </body>
 </html>
