@@ -202,3 +202,13 @@ class T2ClassPicForm(forms.ModelForm):
 
         return imagelist
 
+class ReviewForm(forms.Form):
+
+    require_error={"required":u"필수 입력사항입니다."}
+    invalid_error={"invalid":u'숫자만 가능 합니다.'}
+    both_error={}
+    both_error.update(require_error)
+    both_error.update(invalid_error)
+
+    review=forms.CharField(error_messages=require_error),
+    grade=forms.IntegerField(error_messages=both_error),

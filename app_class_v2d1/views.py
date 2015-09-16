@@ -10,6 +10,7 @@ from django.core.exceptions import \
     ObjectDoesNotExist
 from django.http import \
     Http404
+import  datetime
 
 
 from DIY_tool import template_match as TEMP
@@ -27,7 +28,9 @@ from app_class_v2d1.forms import \
     T2TeachClassForm, \
     T2TutClassForm, \
     T2ClassPicForm, \
-    T2ClassCardForm
+    T2ClassCardForm,\
+    ReviewForm
+
 
 # Create your views here.
 
@@ -78,6 +81,7 @@ def class_begin(request):
         "begin_data":begin_data
     })
 
+@login_required
 def create_tut(request, class_num):
     title=""
     prefill_intro=""
@@ -484,16 +488,124 @@ def modify_tut(request, class_num):
 @login_required
 def create_review(request, class_num):
 
-    if request.method == "GET":
-        pass
-    elif request.method == "POST":
+    if request.method == "POST":
         review=request.POST.get("review", "")
-        grade=request.POST.get("greade", "")
+        grade=request.POST.get("grade", "")
         _user=User.objects.get(username=request.user)
+        classtype=request.POST.get("classtype", "")
+        reviewform=ReviewForm(request.POST)
 
-    return render(request, TEMP.COMMENT_V2D1,{
-        "class_num":class_num,
-    })
+        if classtype == "teach_class":
+            _post=T2TeachClass.objects.get(pk=class_num)
+            if reviewform.is_valid():
+                _review=T2ClassReview(user=_user, host_user=_post.user,
+                                  teach_post=_post, grade=grade,
+                                  review=review)
+                print _review
+                _review.save()
+            return render(request, TEMP.TEACH_POST_DETAIL_V2D1,{
+                "post":_post,
+                "review":reviewform,
+            })
+
+        elif classtype == "tut_class":
+            _post=T2TutClass.objects.get(pk=class_num)
+            if reviewform.is_valid():
+                _review=T2ClassReview(user=_user, host_user=_post.user,
+                        tut_post=_post, grade=grade,
+                        review=review)
+                _review.save()
+            return render(request, TEMP.TUT_POST_DETAIL_V2D1,{
+                "post":_post,
+                "review":reviewform,
+            })
+
+    return HttpResponseRedirect("/")
+
+def modify_review(request, class_num):
+
+    if request.method == "POST":
+        review_num=request.POST.get("review_num","")
+        review=request.POST.get("review", "")
+        grade=request.POST.get("grade", "")
+        _user=User.objects.get(username=request.user)
+        classtype=request.POST.get("classtype", "")
+        reviewform=ReviewForm(request.POST)
+
+        if classtype == "teach_class":
+            _review=T2ClassReview.objects.get(pk=review_num)
+            if reviewform.is_valid():
+                _post=T2TeachClass.objects.get(pk=class_num)
+                _review.review=review
+                _review.grade=grade
+                _review.save()
+            return render(request, TEMP.TEACH_POST_DETAIL_V2D1,{
+                "post":_post,
+                "review":reviewform,
+            })
+
+        elif classtype == "tut_class":
+            _review=T2ClassReview.objects.get(pk=review_num)
+            if reviewform.is_valid():
+                _post=T2TutClass.objects.get(pk=1)
+                _review.review=review
+                _review.grade=grade
+                _review.save()
+            return render(request, TEMP.TUT_POST_DETAIL_V2D1,{
+                "post":_post,
+                "review":reviewform,
+            })
+
+    return HttpResponseRedirect("/")
+
+def delete_review(request, review_num):
+    if request.method == "POST":
+        _user=User.objects.get(username=request.user)
+        classtype=request.POST.get("classtype", "")
+
+
+        if classtype == "teach_class":
+            _review=T2ClassReview.objects.get(pk=review_num)
+            _post=_review.teach_post
+            if _review.user == request.user:
+                _review.is_active=False
+                _review.save()
+            return render(request, TEMP.TEACH_POST_DETAIL_V2D1,{
+                "post":_post,
+            })
+
+        elif classtype == "tut_class":
+            _review=T2ClassReview.objects.get(pk=review_num)
+            _post=_review.tut_post
+            if _review.user == request.user:
+                _review.is_active=False
+                _review.save()
+            return render(request, TEMP.TUT_POST_DETAIL_V2D1,{
+                "post":_post,
+            })
+
+    return HttpResponseRedirect("/")
+
+
+def class_post_detail(request, class_num):
+
+    if request.method == "GET":
+        _postcard=T2ClassCard.objects.filter(pk=class_num)[0]
+        _post=""
+        if _postcard.classtype == "tutclass":
+            _post=_postcard.tut_post
+            return render(request, TEMP.TUT_POST_DETAIL_V2D1,{
+                "post":_post,
+            })
+
+        else:
+            _post=_postcard.teach_post
+
+            return render(request, TEMP.TEACH_POST_DETAIL_V2D1,{
+                "post":_post,
+            })
+    else :
+        raise Http404("잘못된 요청 입니다.")
 
 def check_state(request):
 

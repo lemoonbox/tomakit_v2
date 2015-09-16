@@ -58,7 +58,7 @@ def demand_create(request):
 
         images=request.FILES.getlist("image", "")
         _category, create=Category.objects.get_or_create(category=demand_data['category'])
-        _state=State.objects.get_or_create(state=demand_data['state'])
+        _state, create=State.objects.get_or_create(state=demand_data['state'])
         demand_data['user']=_user
         demand_data['category']=_category
         demand_data['state']=_state
@@ -185,3 +185,20 @@ def demand_modify(request, demand_num=0):
     })
 
 
+def demand_detail(request, demand_num):
+
+    if request.method == "GET":
+        exist=T2ClassDemand.objects.filter(pk=demand_num).exists()
+
+        if exist:
+            _post=T2ClassDemand.objects.filter(pk=demand_num)[0]
+
+            return render(request, TEMP.DEMAND_DETAIL_V2D1,{
+                "post":_post,
+            })
+
+        else:
+
+            raise Http404("개시물이 존재 하지 않습니다.")
+    else :
+        raise Http404("잘못된 요청 입니다.")

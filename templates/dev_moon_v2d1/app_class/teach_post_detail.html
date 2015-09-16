@@ -1,0 +1,95 @@
+{% load static from staticfiles%}
+{% load humanize %}
+{% load v2d1_board_tags %}
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<br>
+워크샵 수업 상세 페이지<br><br>
+
+카테고리::{{post.category.category|cate2han}}<br>
+제목 :: {{post.title}}<br>
+한줄소개 :: {{post.intro_line}}<br>
+마감일 :: D-{{post.deadline|d_day_count}}<br>
+
+사진
+{% for image in post.t2classpic_set.all%}
+<img src="{{MEDIA_URL}}{{image.image}}"><br>
+{% endfor %}
+
+<br><br>
+<h3>수업정보</h3>
+{{post.repeat}}회 과정/{% widthratio post.repeat 1 post.perhour%}시간<br>
+모집 마감일::{{post.deadline|date:"Y년 n월 d"}}<br>
+수업 시작일::{{post.startday|date:"Y년 n월 d"}}<br>
+수업 일정 :: {{post.weekday}}<br>
+수업 인원 :: 최소{{post.min_num}}명~최대{{post.max_num}}명<br>
+장소 :: {{post.addr}}<br>
+
+재료비 :: {{post.extra_price|intcomma}}<br>
+수강료 :: {{post.price|intcomma}}<br>
+
+총합 :: {{ post.extra_price|add:post.price |intcomma}}원<br>
+클래스 선생님 :: <img src="{{MEDIA_URL}}{{post.user.t2profile_set.first.pro_pic}}"><br><br>
+{{post.user.last_name}}{{post.user.first_name}}<br>
+
+신청하기<br>
+
+<h3>클래스 소개</h3>
+동영상<br>
+
+{% if post.video%}
+    <iframe width="420" height="315" src="https://www.youtube.com/embed/{{post.video}}" frameborder="0" allowfullscreen></iframe>
+{% endif %}
+소개<br>
+{{post.descript}}<br>
+커맄큘럼<br>
+{{post.curri}}<br>
+안내사항<br>
+{{post.notic}}<br>
+
+공방위치<br>
+{{post.addr}}<br><br>
+
+<h3>선생님 소개</h3>
+<img src="{{MEDIA_URL}}{{post.user.t2profile_set.first.pro_pic}}"><br>
+{{post.user.last_name}}{{post.user.first_name}}<br>
+{{post.user.t2hostprofile_set.first.intro_self}}<br>
+<br>
+<h2>후기 쓰기</h2>
+
+<form method="POST" action="{% url 'create_review_v2d1' post.id %}">
+    {%csrf_token%}
+    <input type="hidden" name="class_num" value="{{post.id}}">
+    <input type="hidden" name="classtype" value="teach_class">
+    <textarea name="review"></textarea><br>
+    <input type="number" name="grade"><br>
+    <input type="submit" value="후기입력">
+</form>
+{% for review in post.t2classreview_set.all%}
+{% if review.is_active %}
+    후기::{{review.review}}
+    //등급::{{review.grade}}<br>
+수정 form 나중에  hidden
+<form method="POST" action="{% url 'modify_review_v2d1' post.id %}">
+    {%csrf_token%}
+    <input type="hidden" name="review_num" value="{{review.id}}">
+    <input type="hidden" name="class_num" value="{{post.id}}">
+    <input type="hidden" name="classtype" value="teach_class">
+    <textarea name="review">{{review.review}}</textarea><br>
+    <input type="number" name="grade" value="{{review.grade}}"><br>
+    <input type="submit" value="후기수정">
+</form>
+<form method="POST" action="{% url 'delete_review_v2d1' review.id%}">
+    {%csrf_token%}
+    <input type="hidden" name="classtype" value="teach_class">
+    <input type="submit" value="삭제하기">
+</form>
+{% endif %}
+{% endfor %}
+</body>
+</html>

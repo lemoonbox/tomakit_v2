@@ -1,0 +1,24 @@
+{% load static from staticfiles%}
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+인덱스 페이지
+{%for bestclass in bestlist%}
+    <br>
+    수업 타입 ::{{bestclass.best_classcard.classtype}}<br><br>
+    사진::<img src="{{MEDIA_URL}}{{bestclass.best_classcard.t2classpic_set.first.image}}"><br><br>
+    수업호스트::{{bestclass.best_classcard.user}}<br><br>
+    수업제목::{{bestclass.best_classcard.title}}<br><br>
+    수업소개::{{bestclass.best_classcard.intro_line}}<br><br>
+    횟수::{{bestclass.best_classcard.repeat}}회/수업당시간::{{bestclass.best_classcard.perhour}}시간<br><br>
+    {{bestcalss.best_classcard.price}}
+---------------------------------------------------------
+{% endfor %}
+<!--<a href="http://{{HTTP_HOST}}/v2/user/profile/{{case.quebox.djgouser.id}}">
+    <img src="{{MEDIA_URL}}{{case.quebox.djgouser.userprofile_set.first.propic}}"></a>-->
+</body>
+</html>

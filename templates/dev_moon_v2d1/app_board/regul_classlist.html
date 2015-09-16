@@ -1,0 +1,78 @@
+{% load static from staticfiles%}
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<form method="GET" action="{% url 'class_filter_redirct_v2d1' %}">
+    {%csrf_token%}
+    <select name="category" required class="selecter_3 selecter-element" data-selecter-options="{&quot;cover&quot;:&quot;true&quot;}" tabindex="-1">
+        <option value="all">모든 카테고리</option>
+        <option value="leather">가죽공예</option>
+        <option value="calligraphy">캘리그라피</option>
+        <option value="flower">플라워&디퓨저</option>
+        <option value="dyeing">천연염색</option>
+        <option value="pottery">도자기공예</option>
+        <option value="home_living">Home&Living</option>
+        <option value="sewing">미싱&옷만들기</option>
+        <option value="woodwork">목공예</option>
+        <option value="art">미술</option>
+        <option value="toreutics">금속공예&악세사리</option>
+        <option value="knot">매듭공예</option>
+        <option value="knit">뜨개질</option>
+        <option value="bake">베이킹&쿠킹</option>
+        <option value="cosmetics">천연화장품&비누</option>
+        <option value="etc">기타</option>
+    </select>
+    <select name="state" required class="selecter_3 selecter-element" data-selecter-options="{&quot;cover&quot;:&quot;true&quot;}" tabindex="-1">
+        <option value="all">모든 지역</option>
+        <option value="seoul">서울</option>
+        <option value="incheon_gyeonggi">경기도&인천</option>
+        <option value="busan_ulsan_gyeongnam">부산&울산&경남</option>
+        <option value="daegu_gyeongbuk">대구&경북</option>
+        <option value="daejeon_chungcheong">대전&충청</option>
+        <option value="gwangju_jeonla">광주&전라</option>
+        <option value="gangwon">강원</option>
+        <option value="jeju">제주</option>
+        <option value="etc">기타</option>
+    </select>
+    <input type="submit" value="검색">
+</form>
+---------------------------------------------------------
+<br><br><br><br>
+수업 list
+
+{% for class in classlist %}
+    {{class}}
+    <br>
+    수업 타입 ::{{class.classtype}}<br><br>
+    사진::<img src="{{MEDIA_URL}}{{class.t2classpic_set.first.image}}"><br><br>
+    수업호스트::{{class.user}}<br><br>
+    수업제목::{{class.title}}<br><br>
+    수업소개::{{class.intro_line}}<br><br>
+    횟수::{{class.repeat}}회/수업당시간::{{bestclass.best_classcard.perhour}}시간<br><br>
+    {{class.price}}
+---------------------------------------------------------<br>
+{% endfor %}
+
+{% for arrow in arrows %}
+{% if arrow.nav_before %}
+<a href="http://{{HTTP_HOST}}/v2.1/board/class_list/{{arrow.befor_page}}/{{cate_current}}/{{state_current}}"><|</a>
+{% endif %}
+{% endfor %}
+{% for page in pages %}
+{% if page.page_current %}
+<b>{{page.page}}</b>|
+{% else %}
+<a href="http://{{HTTP_HOST}}/v2.1/board/class_list/{{page.page}}/{{cate_current}}/{{state_current}}">{{page.page}}</a>|
+{% endif %}
+{% endfor %}
+{% for arrow in arrows %}
+{% if arrow.nav_next %}
+<a href="http://{{HTTP_HOST}}/v2.1/board/class_list/{{arrow.next_page}}/{{cate_current}}/{{state_current}}">|></a>
+{% endif %}
+{% endfor %}
+</body>
+</html>

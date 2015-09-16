@@ -45,7 +45,6 @@ class QusetionBoxAdmin(admin.ModelAdmin):
                                      'qtype','qitempost','qskillpost',
                                       'skill_class', 'skill_goal', 'skill_edu',
                                      'item_pic','is_solved']}),]
-admin.site.register(Questionbox, QusetionBoxAdmin)
 
 class SolutionBoxAdmin(admin.ModelAdmin):
     list_filter = ['title', 'djgouser', 'mylocal',]
@@ -58,7 +57,6 @@ class SolutionBoxAdmin(admin.ModelAdmin):
                                       'perhour', 'weekday_time', 'price']}),]
     inlines = (CaseBoxInline,)
 
-admin.site.register(SolutionBox, SolutionBoxAdmin)
 
 
 class CaseBoxAdmin(admin.ModelAdmin):
@@ -69,7 +67,6 @@ class CaseBoxAdmin(admin.ModelAdmin):
     fieldsets = [("Casebox", {'fields':['qtype','category', 'state',
                                       'quebox','solubox','is_active',]}),]
 
-admin.site.register(Casebox, CaseBoxAdmin)
 
 class MainboxAdmin(admin.ModelAdmin):
 
@@ -77,4 +74,7 @@ class MainboxAdmin(admin.ModelAdmin):
 
     fieldsets = [("MainQoubox", {'fields':['quebox','is_active',]}),]
 
-admin.site.register(MainQoubox, MainboxAdmin)
+# admin.site.register(Casebox, CaseBoxAdmin)
+# admin.site.register(SolutionBox, SolutionBoxAdmin)
+# admin.site.register(Questionbox, QusetionBoxAdmin)
+# admin.site.register(MainQoubox, MainboxAdmin)
