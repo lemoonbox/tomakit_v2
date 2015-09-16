@@ -1,39 +1,283 @@
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
-선생님 등록
+{% extends 'base.html'%}
+{% load static from staticfiles %}
 
+<title>{%block title%}Tomakit-선생님 등록{%endblock%}</title>
+{%block style%}
+<style>
+    @import "compass/css3";
+    @import url("http://fonts.googleapis.com/css?family=Lato");
+
+    .file-upload-wrapper {
+        position: relative;
+        margin-bottom: 5px;
+    //border: 1px solid #ccc;
+    }
+    .custom-file-upload-hidden {
+        display: none;
+        visibility: hidden;
+        position: absolute;
+        left: -9999px;
+    }
+    .file-upload-input {
+        width: 50%;
+        color: #000;
+        font-size: 16px;
+        padding: 11px 17px;
+        border: 1px solid #ddd;
+        border-radius: 4px 0px 0px 4px;
+        background-color: #fff;
+    @include transition(all 0.2 s ease-in);
+        float: left; /* IE 9 Fix */
+    }
+    /*&:hover, &:focus {*/
+                  /*background-color: darken($file-upload-color, 5);*/
+                  /*outline: none;*/
+              /*}*/
+    /*}*/
+    .file-upload-button {
+        cursor: pointer;
+        display: inline-block;
+        color: #82888A;
+        font-size: 16px;
+        text-transform: uppercase;
+        padding: 11px 20px;
+        border: 1px solid #ccc;
+        margin-left: -1px;
+        height:46px;
+        border-radius:0px 4px 4px 0px;
+        background-color: #fff;
+        float: left; /* IE 9 Fix */
+        font-size:14px;
+
+    }
+    .file-upload-button:hover {
+        transition: all 0.2s ease-in;
+        background-color: #eee;
+        /*color:#82888A;*/
+    }
+
+</style>
+{%endblock%}
+<body>
+{%block content%}
+
+<div class="tmk-main-body col-md-12">
+    <div class="tmk-page-header col-md-10 col-md-offset-1">
+        <div class="tmk-h2 tmk-title">선생님 등록</div>
+        <div class="tmk-h4">반갑습니다! 경험과 재능, 그리고 열정을 나누세요<br>아래 신청서를 작성해주세요. 관리자의 검토 후 24시간 이내에 연락드리겠습니다</div>
+    </div>
+    <div class="col-md-8 col-md-offset-1 well" id="tmk-form" style="text-align:left;float:left;">
+        <div class="tmk-h3">등록 신청서</div>
 <form method="POST" action="{% url 'host_apply_v2d1' %}" enctype="multipart/form-data">
     {% csrf_token %}
-    자기소개<textarea name="introduce">{{apply_data.introduce}}</textarea>
-    {{hostform.introduce.errors|striptags}}<br><br>
-    전화번호<input type="number" name="mobli1" value="{{apply_data.mobli1}}">-
-    <input type="number" name="mobli2" value="{{apply_data.mobli2}}">-
-    <input type="number" name="mobli3" value="{{apply_data.mobli3}}">
+    <div class="tmk-panel">
+        <label class="col-md-2">자기소개</label>
+        <div class="col-md-10">
+            <textarea name="introduce" style="min-"class="form-control">{{apply_data.introduce}}</textarea>
+            {{hostform.introduce.errors|striptags}}</div>
+</div>
+    <div class="tmk-panel">
+    <label class="col-md-2">전화번호</label>
+        <div class="form-group">
+            <div class="col-xs-4 col-md-3">
+                <input type="number" class="form-control" name="mobli1" value="{{apply_data.mobli1}}">
+            </div>
+            <div class="col-xs-4 col-md-3">
+                <input type="number" class="form-control" name="mobli2" value="{{apply_data.mobli2}}">
+            </div>
+            <div class="col-xs-4 col-md-3">
+                <input type="number" class="form-control" name="mobli3" value="{{apply_data.mobli3}}">
+            </div>
+        </div>
     {{hostform.mobli1.errors|striptags}}
     {{hostform.mobli2.errors|striptags}}
     {{hostform.mobli3.errors|striptags}}<br><br>
+    </div>
 
-    공방유무
-    <input type="radio" name="hosttype" value="shop"
-            {%if apply_data.hosttype == "shop" %} checked="checked" {% endif %}>공방있음
-    <input type="radio" name="hosttype" value="lectured"
-            {%if apply_data.hosttype == "lectured" %} checked="checked" {% endif %}>공방없음(출강)
-    {{hostform.hosttype.errors|striptags}}<br><br>
-    공방주소or 활동지역
-    <input type="text" name="local" value="{{apply_data.local}}">
+
+    <div class="tmk-panel">
+    <label class="col-md-2">공방유무</label>
+        <div class="col-md-10 tmk-radio" style="margin-left:-15px;">
+            <div class="col-xs-5 col-md-5" style="width:253px;">
+                <input type="radio" class="iradio_flat" name="hosttype" value="shop"
+                       {%if apply_data.hosttype == "shop" %} checked="checked" {% endif %}>
+                <span style="font-size:16px;vertical-align:text-top">&nbsp;공방있음</span><br>
+            </div>
+            <div class="col-xs-5 col-md-5" style="width:253px;">
+                <input type="radio" class="iradio_flat" name="hosttype" value="lectured"
+                       {%if apply_data.hosttype == "lectured" %} checked="checked" {% endif %}>
+                <span style="font-size:16px;vertical-align:text-top">&nbsp;공방없음(출강)</span><br>
+            </div>
+
+    {{hostform.hosttype.errors|striptags}}<br>
+        </div>
+        </div>
+
+    <div class="tmk-panel">
+    <label class="col-md-2">공방주소or 활동지역</label>
+    <div class="col-md-10">
+        <input type="text" class="form-control" name="local" value="{{apply_data.local}}" placeholder="ex) 서울 동서문로 24길 or 서울 전지역">
     {{hostform.local.errors|striptags}}<br>
-    홈페이지/블로그 주소
-    <input type="text" name="site" value="{{apply_data.site}}">
-    {{hostform.site.errors|striptags}}<br>
+        </div>
+        </div>
 
-    개인포트폴리오
-    <input type="file" name="potpolio"><br>
-    <input type="submit" value="등륵신청">
+    <div class="tmk-panel">
+        <label class="col-md-2">홈페이지/블로그 주소</label>
+        <div class="col-md-10">
+            <input type="text" class="form-control" name="site" value="{{apply_data.site}}" placeholder="ex) http://blog.naver.com/tomakit">
+            {{hostform.site.errors|striptags}}
+        </div>
+    </div>
+
+
+    <div class="tmk-panel">
+        <label class="col-md-2">개인포트폴리오</label>
+        <div class="col-md-10">
+            <div class="custom-file-upload">
+                <!--<label for="file">File: </label>-->
+                <input type="file" id="file" name="potpolio" placeholder="Zip 파일만 업로드 가능합니다" multiple />
+            </div>
+
+            <!--<input type="file" hidden class="form-control" name="potpolio"><div class="input-group-btn"><button type="button" class="btn btn-default" tabindex="-1">PC에서 파일찾기</button></div><br>-->
+        </div>
+    </div>
+
+    <input type="submit" class="btn btn-primary pull-right" value="등륵신청">
 </form>
+        </div>
+    </div>
+{%endblock%}
 </body>
+{%block script%}
+<script>
+    ;(function($) {
+
+        // Browser supports HTML5 multiple file?
+        var multipleSupport = typeof $('<input/>')[0].multiple !== 'undefined',
+                isIE = /msie/i.test( navigator.userAgent );
+
+        $.fn.customFile = function() {
+
+            return this.each(function() {
+
+                var $file = $(this).addClass('custom-file-upload-hidden'), // the original file input
+                        $wrap = $('<div class="file-upload-wrapper">'),
+                        $input = $('<input type="text" class="file-upload-input" />'),
+                // Button that will be used in non-IE browsers
+                        $button = $('<button type="button" class="file-upload-button">PC에서 파일가져오기</button>'),
+                // Hack for IE
+                        $label = $('<label class="file-upload-button" for="'+ $file[0].id +'">PC에서 파일가져오기</label>');
+
+                // Hide by shifting to the left so we
+                // can still trigger events
+                $file.css({
+                    position: 'absolute',
+                    left: '-9999px'
+                });
+
+                $wrap.insertAfter( $file )
+                        .append( $file, $input, ( isIE ? $label : $button ) );
+
+                // Prevent focus
+                $file.attr('tabIndex', -1);
+                $button.attr('tabIndex', -1);
+
+                $button.click(function () {
+                    $file.focus().click(); // Open dialog
+                });
+
+                $file.change(function() {
+
+                    var files = [], fileArr, filename;
+
+                    // If multiple is supported then extract
+                    // all filenames from the file array
+                    if ( multipleSupport ) {
+                        fileArr = $file[0].files;
+                        for ( var i = 0, len = fileArr.length; i < len; i++ ) {
+                            files.push( fileArr[i].name );
+                        }
+                        filename = files.join(', ');
+
+                        // If not supported then just take the value
+                        // and remove the path to just show the filename
+                    } else {
+                        filename = $file.val().split('\\').pop();
+                    }
+
+                    $input.val( filename ) // Set the value
+                            .attr('title', filename) // Show filename in title tootlip
+                            .focus(); // Regain focus
+
+                });
+
+                $input.on({
+                    blur: function() { $file.trigger('blur'); },
+                    keydown: function( e ) {
+                        if ( e.which === 13 ) { // Enter
+                            if ( !isIE ) { $file.trigger('click'); }
+                        } else if ( e.which === 8 || e.which === 46 ) { // Backspace & Del
+                            // On some browsers the value is read-only
+                            // with this trick we remove the old input and add
+                            // a clean clone with all the original events attached
+                            $file.replaceWith( $file = $file.clone( true ) );
+                            $file.trigger('change');
+                            $input.val('');
+                        } else if ( e.which === 9 ){ // TAB
+                            return;
+                        } else { // All other keys
+                            return false;
+                        }
+                    }
+                });
+
+            });
+
+        };
+
+        // Old browser fallback
+        if ( !multipleSupport ) {
+            $( document ).on('change', 'input.customfile', function() {
+
+                var $this = $(this),
+                // Create a unique ID so we
+                // can attach the label to the input
+                        uniqId = 'customfile_'+ (new Date()).getTime(),
+                        $wrap = $this.parent(),
+
+                // Filter empty input
+                        $inputs = $wrap.siblings().find('.file-upload-input')
+                                .filter(function(){ return !this.value }),
+
+                        $file = $('<input type="file" id="'+ uniqId +'" name="'+ $this.attr('name') +'"/>');
+
+                // 1ms timeout so it runs after all other events
+                // that modify the value have triggered
+                setTimeout(function() {
+                    // Add a new input
+                    if ( $this.val() ) {
+                        // Check for empty fields to prevent
+                        // creating new inputs when changing files
+                        if ( !$inputs.length ) {
+                            $wrap.after( $file );
+                            $file.customFile();
+                        }
+                        // Remove and reorganize inputs
+                    } else {
+                        $inputs.parent().remove();
+                        // Move the input so it's always last on the list
+                        $wrap.appendTo( $wrap.parent() );
+                        $wrap.find('input').focus();
+                    }
+                }, 1);
+
+            });
+        }
+
+    }(jQuery));
+
+    $('input[type=file]').customFile();
+</script>
+
+{%endblock%}
 </html>

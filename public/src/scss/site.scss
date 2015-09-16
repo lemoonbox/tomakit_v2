@@ -23,6 +23,33 @@ body {
   color: #82888A;
 }
 
+
+/* Let's get this party started */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.4);
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  background: #eee;
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+}
+::-webkit-scrollbar-thumb:window-inactive {
+  background: #eee;
+
+}
+
+
+
 .h1, .h2, .h3, .h4, .h5, .h6 {
   font-family: 'NanumGothic', 'AppleSDGothicNeo-Bold', 'NotoSansCJKKR', sans-serif!important;
 }
@@ -40,6 +67,10 @@ body {
 .tmk-error {
   font-size: 12px;
 }
+
+.tmk-page-header .tmk-h4 {
+  font-size:18px;
+}
 //form {float:left;}
 .tmk-title {color:#565A5C;}
 //global btn
@@ -48,6 +79,7 @@ $g-btn-h-color:#F5515F;
 
 button {
   height: 50px;
+  min-width: 120px;
 }
 
 .btn-primary {
@@ -170,6 +202,21 @@ nav {
     }
   }
 }
+/* radio custom style */
+.tmk-radio {
+  .classtype {
+    text-align: center;
+  }
+  .iradio_flat {
+    width: 20px;
+    height: 20px;
+  }
+  img {
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+}
+
 
 /* forms custom style */
 
@@ -182,6 +229,11 @@ nav {
   border-radius: 8px;
   margin-bottom:30px;
   width:100%;
+  input[type=number]::-webkit-inner-spin-button,
+  input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
 }
 
 .tmk-panel-header {
@@ -200,8 +252,12 @@ nav {
 .tmk-page-header {
   padding-top: 50px;
   padding-bottom: 20px;
+}
+
+.tmk-page-pick {
+  width:100%;
   border-bottom: 1px solid #ddd;
-  margin-bottom:30px;
+  margin:30px auto;
 }
 
 /* no-ui slider */
@@ -224,11 +280,14 @@ nav {
 .noUi-connect {
   background: #84CDC2!important;
 }
-#demand-form {
+#tmk-form {
   background-color: #fff;
 }
 @media screen and (min-width:768px) {
-  #demand-form {
+  #tmk-form {
+    min-width: 850px;
+  }
+  .tmk-page-header {
     min-width: 850px;
   }
 }
@@ -602,7 +661,7 @@ ul{
     font-size: 14px;
     height: 18px;
     .title-main {
-//font-family:AppleSDGothicNeo-Regular;
+      //font-family:AppleSDGothicNeo-Regular;
       font-size: 14px;
       color: #000000;
       line-height: 17px;
@@ -623,7 +682,7 @@ ul{
     height: 470px;
   }
 
-//should be removed
+  //should be removed
   .tmk-picks-main {
     width: 570px;
     height: 470px;
@@ -704,10 +763,10 @@ ul{
 }
 
 .profile-name {
-    font-size: 14px;
-    float:left;
-    margin: 5px 0px 0px 0px;
-    text-align: left;
+  font-size: 14px;
+  float:left;
+  margin: 5px 0px 0px 0px;
+  text-align: left;
   a {
     line-height:50px;
     color:#ffffff;
@@ -964,7 +1023,7 @@ ul{
   margin:30px auto;
   //float:left;
   .breadcrumb {margin:5px;
-  li:first-child {width:200px;float:left;line-height:100%;background-color:rgba(0,0,0,0.3);color:white;padding:8px;margin-top:-5px;margin-left:-10px;}
+    li:first-child {width:200px;float:left;line-height:100%;background-color:rgba(0,0,0,0.3);color:white;padding:8px;margin-top:-5px;margin-left:-10px;}
   }
 }
 
@@ -1012,12 +1071,31 @@ ul{
   min-height: 30px;
   padding: 0px;
   color:#82888A!important;
+  //height: 42px !important;
 }
+.selecter-options{overflow:hidden;}
+.tmk-qitem-selecter-wrapper{
+  display: inline-block;
+  vertical-align: middle;
+  min-width: 200px!important;
+  height:50px;
+}
+
+.selecter .selecter-selected:after {
+  top: 20px !important;
+}
+
+.tmk-qitem-hdr-contents .selecter .selecter-selected {
+  font-size: 16px;
+  line-height: 30px;
+  padding-left: 0px;
+}
+
 .carousel-inner {
-> .item {
-  border-radius: 8px;
-  overflow: hidden;
-}
+  > .item {
+    border-radius: 8px;
+    overflow: hidden;
+  }
 
   > .item > a > img {
     border-radius: 8px !important;
@@ -1058,7 +1136,7 @@ ul{
   border-radius: 4px;
   border: 1px solid #ccc;
   color: white;
-text-height: 50px;
+  text-height: 50px;
   line-height:50px;
   vertical-align: text-bottom;
   font-size: 16px;
@@ -1082,7 +1160,7 @@ text-height: 50px;
   background-color: #F5515F !important;
   color: #ffffff !important;
 }
-    //a:hover {background: #F5515F;}
+//a:hover {background: #F5515F;}
 .pagination>.active>a:hover, .pagination>li>a:hover,.pagination>li>span:hover, .pagination>.active>span:hover {
   border: 1px solid #dddddd !important;
   background-color: #dddddd !important;
@@ -1095,27 +1173,27 @@ text-height: 50px;
   float: left;
 }
 
-  .profile-photo {
-    margin: 40px 40px;
-    float:left !important;
-    width: 120px !important;
-    height: 120px;
-    border-radius: 50%;
-    background-size: cover;
-    overflow: hidden;
-    background-position:center;
-  }
-  .profile-photo-mini {
-    margin: 5px 5px 5px 0px;
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    background-size: cover;
-    overflow: hidden;
-    //background-position:center;
-    //float:left;
-    vertical-align:middle;
-  }
+.profile-photo {
+  margin: 40px 40px;
+  float:left !important;
+  width: 120px !important;
+  height: 120px;
+  border-radius: 50%;
+  background-size: cover;
+  overflow: hidden;
+  background-position:center;
+}
+.profile-photo-mini {
+  margin: 5px 5px 5px 0px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-size: cover;
+  overflow: hidden;
+  //background-position:center;
+  //float:left;
+  vertical-align:middle;
+}
 
 
 
@@ -1142,7 +1220,7 @@ text-height: 50px;
   }
   .solution-host {margin:15px 0px;
     .profile-photo-mini {
-    width:34px;height:34px;}
+      width:34px;height:34px;}
     > .aside-username {
       margin: auto 5px;
       color: #000;
@@ -1163,7 +1241,7 @@ text-height: 50px;
 .aside-username {
   line-height:40px;
   //width:100px;
-margin:auto 10px;}
+  margin:auto 10px;}
 
 .tmk-qitem-aside-right > .h3 {color:#F5515F;}
 
@@ -1206,7 +1284,7 @@ margin:auto 10px;}
 //#how-tmk-set-3 {position:absolute; top:0;left:0;z-index:0}
 
 .tmk-guide-text {
- .guide-title {font-size:24px; line-height:50px; font-weight:600;}
+  .guide-title {font-size:24px; line-height:50px; font-weight:600;}
   .guide-title-sub {font-size:14px;}
 }
 
@@ -1236,5 +1314,5 @@ margin:auto 10px;}
 .wgt-stepper .down {
   background: url("{%static 'media/image/icon/icon-arrow-down-small.png'%}") no-repeat center;
   background-size: 12px;
-  background-color:  #E6E9ED;
+  background-color: #E6E9ED;
 }
