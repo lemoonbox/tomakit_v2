@@ -30,6 +30,12 @@
     /*min-width: 200px;*/
     /*height:50px;*/
     /*}*/
+    .tmk-qitem-selecter-wrapper{
+        display: inline-block;
+        vertical-align: middle;
+        min-width: 200px!important;
+        height:50px;
+    }
 
     .selecter .selecter-selected:after {
         top: 20px !important;
@@ -223,9 +229,10 @@
 <div class="tmk-main-body col-md-12">
     <div class="tmk-page-header col-md-10 col-md-offset-1">
     <div class="tmk-h2 tmk-title">원하는 클래스를 개설해드립니다</div>
-    <div class="tmk-h4" style="font-size:20px">제안서를 작성해주시면<br>가까운 장소, 편한 시간의 수업을 개설하여 드립니다</div>
+    <div class="tmk-h4">제안서를 작성해주시면<br>가까운 장소, 편한 시간의 수업을 개설하여 드립니다</div>
+        <div class="tmk-page-pick"></div>
     </div>
-    <div class="col-md-8 col-md-offset-1 well" id="demand-form" style="text-align:left;float:left;">
+    <div class="col-md-8 col-md-offset-1 well" id="tmk-form" style="text-align:left;float:left;">
         <div class="tmk-h3">클래스 제안 등록</div>
 
         <form method="POST" action="{% url 'demand_create_v2d1' %}" enctype="multipart/form-data">
@@ -267,7 +274,7 @@
                         <option value="etc"
                                 {% if demand_data.category == 'etc'%}selected{% endif %}>기타</option>
                     </select>
-                    <span class="selecter-selected" onclick="btnClick(this)">카테고리 선택</span>
+                    <span class="selecter-selected" onclick="btnClick(this)">지역 선택</span>
                     <div class="selecter-options" data-value="">
                         <!--<span class="selecter-item selected" data-value="" onclick="selecting(this, '')">카테고리</span>-->
                         <div class="selecter-item"
@@ -440,7 +447,6 @@
             <div class="col-md-7">
                 <input type="text" value="{{demand_data.local}}" name="local" class="form-control" style="display:inline;" placeholder="ex)강남역 근처, 홍대 주변"><br>
             </div>
-
 
 </div>
 

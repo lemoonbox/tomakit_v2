@@ -1,10 +1,19 @@
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title></title>
-</head>
+{% extends 'base.html'%}
+{% load static from staticfiles %}
+
+<title>{%block title%}Tomakit-수업 개설{%endblock%}</title>
+{%block style%}
+{%endblock%}
 <body>
-작가 등록 신청이 완료되었습니다.
+{%block content%}
+
+<div class="tmk-main-body col-md-12">
+    <div class="tmk-page-header col-md-10 col-md-offset-1">
+        <div class="tmk-h2 tmk-title">선생님 등록 신청완료</div>
+        <div class="tmk-h4">선생님 등록 신청이 완료되었습니다<br>관리자의 확인 후, 운영일 기준 24시간 이내에 연락드리도록 하겠습니다<br>승인 과정 중 인터뷰 또는 추가적인 자료 요청이 있을 수 있습니다 :)</div>
+    <a href="/"><button class="btn btn-primary">확인</button></a>
+    </div>
+
+</div>
+{%endblock%}
 </body>
-</html>

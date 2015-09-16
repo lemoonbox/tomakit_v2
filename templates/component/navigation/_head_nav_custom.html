@@ -19,17 +19,17 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse" aria-expanded="false">
             <ul class="nav navbar-nav">
-                <li><a href="http://{{HTTP_HOST}}/v2/board/caseboard">클래스 살펴보기</a></li>
-                <li><a href="http://{{HTTP_HOST}}/v2/board/questionboard">클래스 제안하기</a></li>
+                <li><a href="http://{{HTTP_HOST}}/v2.1/board/class_list">클래스 살펴보기</a></li>
+                <li><a href="http://{{HTTP_HOST}}/v2.1/demand/create">클래스 제안하기</a></li>
                 <!--<li><a href="http://{{HTTP_HOST}}/v2/question/que_bridge" style="color:#F5515F;">의뢰하기</a></li>-->
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="http://{{HTTP_HOST}}/v2/user/signup/host" class="user">
+                <li><a href="http://{{HTTP_HOST}}/v2.1/user/host/apply" class="user">
                     <img src="{%static 'media/image/slice/icon-header_teacher-wh.png'%}"> 선생님 등록</a>
                 </li>
                 {% if user.is_authenticated %}
-                <li><a href="http://{{HTTP_HOST}}/v2.1/demand/create" class="user">
+                <li><a href="http://{{HTTP_HOST}}/v2.1/class/create/begin" class="user">
                     <img src="{%static 'media/image/slice/icon-header_open-wh.png'%}"> 클래스 개설 </a>
                 </li>
                 <li class="dropdown">
@@ -37,8 +37,8 @@
                         <img class="profile-photo-mini" src="{{MEDIA_URL}}{{user.userprofile_set.first.pro_pic}}">
                         {{user.last_name}} {{user.first_name}}<span class="caret"></span></a>
                     <ul class="dropdown-menu" style="width:100%;">
-                        <li><a href="http://{{HTTP_HOST}}/v2/user/profile/{{request.user.id}}">프로필</a></li>
-                        <li><a href="http://{{HTTP_HOST}}/v2/user/logout">로그아웃</a></li>
+                        <li><a href="http://{{HTTP_HOST}}/v2.1/user/profile/{{request.user.id}}">프로필</a></li>
+                        <li><a href="http://{{HTTP_HOST}}/v2.1/user/logout">로그아웃</a></li>
                     </ul>
                 </li>
                 {% else %}
