@@ -35,7 +35,7 @@
 
 <form method="GET" action="{% url 'pay_prefill_v2d1' %}">
     <input type="hidden" value="{{post.id}}" name="post_id">
-    <input type="hidden" value="teachclass" name="class_type">
+    <input type="hidden" value="teachclass" name="classtype">
     <input type="submit" value="{{ post.extra_price|add:post.price |intcomma}}원">
 </form><br><br><br>
 총합 :: {{ post.extra_price|add:post.price |intcomma}}원<br>
