@@ -1,3 +1,4 @@
+{% load static from staticfiles%}
 <!DOCTYPE html>
 <html>
 <head lang="en">
@@ -41,14 +42,29 @@
     <input type="submit" value="검색">
 </form>
 {% for class in classlist %}
-
     <br>
     카테고리 ::{{class.category}}<br><br>
     수업제목::{{class.title}}<br><br>
     설명::{{class.descript}}<br><br>
     목표::{{class.demand_post.goal}}<br><br>
-    줄서기(미구현)<br>
-    주선사람들(미구현)<br>
+    <a href="{% url 'lineup_pageing_v2d1' class.id page_currunt cate_current state_current%}">
+        {% if request.user in class.inline_users.all %}
+            줄서기 취소
+        {% else %}
+            줄서기
+        {% endif %}
+        <!--줄선 사람 숫자-->
+        {% if class.inline_users.count %}
+            ({{class.inline_users.count}})
+        {% else %}
+            (0)
+        {% endif %}
+        {% if class.inline_users.count %}
+            {% for user in class.inline_users.all %}
+                <img src="{{MEDIA_URL}}{{user.t2profile_set.first.pro_pic}}">
+            {% endfor %}
+        {% endif %}
+    </a><br>
 ---------------------------------------------------------<br>
 {% endfor %}
 

@@ -13,4 +13,7 @@ urlpatterns = patterns('app_demand_v2d1.views',
     url(r"comment/modify/(?P<demand_num>[0-9]+)$", 'modify_comment', name="modify_comment_v2d1"),
     url(r"comment/delete/(?P<comment_num>[0-9]+)$", 'delete_comment', name="delete_comment_v2d1"),
 
+    url(r"lineup/(?P<demand_num>[0-9]+)$", 'lineup_demand', name='lineup_demand_v2d1'),
+    url("lineup/(?P<demand_num>[0-9]+)/(?P<page>[0-9]+)/(?P<category>[a-z,_]+)/(?P<state>[a-z,_]+)/$",
+        'lineup_demand', name="lineup_pageing_v2d1"),
     )
