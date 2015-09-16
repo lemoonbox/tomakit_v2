@@ -33,17 +33,17 @@
                     <img src="{%static 'media/image/slice/icon-header_open-gr.png'%}"> 클래스 개설 </a>
                 </li>
                 <li class="dropdown">
-                    <a href="#" class="btn-default user dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    <a href="#" class="user dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                         <img class="profile-photo-mini" src="{{MEDIA_URL}}{{user.userprofile_set.first.pro_pic}}">
                         {{user.last_name}} {{user.first_name}}<span class="caret"></span></a>
                     <ul class="dropdown-menu" style="width:100%;">
-                        <li><a href="http://{{HTTP_HOST}}/v2/user/profile/{{request.user.id}}">프로필</a></li>
-                        <li><a href="http://{{HTTP_HOST}}/v2/user/logout">로그아웃</a></li>
+                        <li><a href="http://{{HTTP_HOST}}/v2.1/user/profile/{{request.user.id}}">프로필</a></li>
+                        <li><a href="http://{{HTTP_HOST}}/v2.1/user/logout">로그아웃</a></li>
                     </ul>
                 </li>
                 {% else %}
                 <li>
-                    <a type="button" class="btn-default user" id="cont-btn" data-toggle="modal" data-target="#contactModal" style="cursor:pointer; font-size:16px; ">
+                    <a type="button" class="user" id="cont-btn" data-toggle="modal" data-target="#contactModal" style="cursor:pointer; font-size:16px; ">
                         <img src="{%static 'media/image/slice/buttonicon-3.png'%}"> 로그인/가입
                     </a> {% include 'component/user_login/_loginmodal.html'%}
                 </li>

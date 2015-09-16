@@ -1,9 +1,20 @@
 {%load static from staticfiles%}
 
-<link rel="stylesheet" type="text/css" href="{%static 'media/css/loader.css'%}">
 <style>
+    .loader {
+        position: fixed;
+        margin: auto;
+        left: 0px;
+        top: 0px;
+        right: 0px;
+        bottom: 0px;
+        width: 100%;
+        height: 100%;
+        z-index: 9999;
+        background-color:rgba(255,255,255,0.7);
+    }
     .loader div{
-        background:url({%static 'media/image/loading2.gif' %});
+        background:url({%static 'media/image/loading2.gif'%});
         background-position: center;
         background-repeat: no-repeat;
         margin:auto;
@@ -19,9 +30,6 @@
 </div>
 <script type="text/javascript">
     $(document).ready(function() {
-//    $(".loader7,.loader").fadeOut("slow");
-//    $(".loader").fadeOut("slow");
         $(".loader").fadeOut("slow");
-//    $(".loader").fadeOut("slow");
     })
 </script>
