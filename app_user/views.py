@@ -440,4 +440,8 @@ def lineup_test(request):
 
 def pay_test(request):
     if request.method == "GET":
-        return render(request, 'v2_dev_moon/payment_test.html', {})
+        return render(request, 'v2_dev_moon/payment_test.html', {
+            "pay_method":"card",
+        })
+    elif request.method == "POST":
+        return HttpResponseRedirect("/")

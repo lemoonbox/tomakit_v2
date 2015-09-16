@@ -20,7 +20,7 @@ from app_board_v2d1 import urls as index_urls_v2d1
 from app_user_v2d1 import urls as user_urls_v2d1
 from app_demand_v2d1 import urls as demand_urls_v2d1
 from app_class_v2d1 import urls as class_urls_v2d1
-
+from app_payment_v2d1 import urls as payment_urls_v2d1
 handler404='app_post.views.handler404'
 handler500='app_post.views.handler500'
 
@@ -44,6 +44,7 @@ urlpatterns = patterns('',
     url(r'^v2.1/user/', include(user_urls_v2d1)),
     url(r'^v2.1/demand/', include(demand_urls_v2d1)),
     url(r'^v2.1/class/', include(class_urls_v2d1)),
+    url(r'^v2.1/payment/', include(payment_urls_v2d1)),
 )
 
 urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

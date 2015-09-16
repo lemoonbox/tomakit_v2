@@ -1,0 +1,14 @@
+from django.db import models
+from django.conf import settings
+
+# Create your models here.
+
+
+class PrePayment(models.Model):
+
+    user= models.ForeignKey(settings.AUTH_USER_MODEL)
+    classtype=models.CharField(max_length=50)
+    merchant_uid=models.CharField(max_length=100)
+    pay_method=models.CharField(max_length=50)
+    amount=models.IntegerField()
+    
