@@ -154,5 +154,12 @@ class T2DemandPicForm(forms.ModelForm):
         return imagelist
 
 
+class CommentForm(forms.Form):
+
+    require_error={"required":u"필수 입력사항입니다."}
+
+    comment=forms.CharField(error_messages=require_error),
+    class_ad=forms.CharField(required=False),
+
 
 

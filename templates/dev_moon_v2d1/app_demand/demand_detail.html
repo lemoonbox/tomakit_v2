@@ -21,8 +21,41 @@
 
 참조 사진
 {% for image in post.t2demandpic_set.all%}
-    {{image}}
     <img src="{{MEDIA_URL}}{{image.image}}"><br>
+{% endfor %}
+
+
+<form method="POST" action="{% url 'create_comment_v2d1' post.id %}">
+    {%csrf_token%}
+    <input type="hidden" name="demand_num" value="{{post.id}}">
+    <textarea name="comment"></textarea><br>
+    <input type="checkbox" name="class_ad" value="host_ad">수업 소개 댓<br>
+    <input type="submit" value="댓글달기">
+</form>
+---------------------<br>
+{% for  comment in post.t2demandcmt_set.all%}
+    {% if comment.is_active %}
+        댓글::{{comment.comment}}
+        {% if comment.class_ad%}
+            수업 개설 덧글
+        {% endif %}<br>
+
+        수정 form 나중에  hidden
+        <form method="POST" action="{% url 'modify_comment_v2d1' post.id %}">
+            {%csrf_token%}
+            <input type="hidden" name="comment_num" value="{{comment.id}}">
+            <input type="hidden" name="demand_num" value="{{post.id}}">
+            <textarea name="comment">{{comment.comment}}</textarea><br>
+            <input type="checkbox" name="class_ad" value="host_ad"
+                    {% if comment.class_ad%}checked="checked"{% endif %}>수업 개설 댓글<br>
+            <input type="submit" value="댓글수정">
+        </form><br>
+        <form method="POST" action="{% url 'delete_comment_v2d1' comment.id%}">
+            {%csrf_token%}
+            <input type="hidden" name="demand_num" value="{{post.id}}">
+            <input type="submit" value="댓글삭제">
+        </form><br><br>
+    {% endif %}
 {% endfor %}
 </body>
 </html>

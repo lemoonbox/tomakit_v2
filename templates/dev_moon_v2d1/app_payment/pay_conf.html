@@ -1,3 +1,6 @@
+{% load static from staticfiles%}
+{% load humanize %}
+{% load v2d1_board_tags %}
 <!DOCTYPE html>
 <html>
 <head lang="en">
@@ -43,11 +46,19 @@
     </script>
 </head>
 <body>
-<form method="POST" action="{% url 'pay_test'%}">
-        {%csrf_token%}
-        <p id="username_error"></p>
-        <input type="submit" class="btn btn-primary btn-block" value="결제" id="buy">결제하기
-</form>
-        <button type="submit" class="btn btn-primary btn-block" value="결제" id="button_buy">결제하기</button>
+결제를 확인해주세요
+
+<h3>신청 정보 확인</h3>
+아래의 신청 정보가 맞는지 확인해 주세요.<br>
+----------------------------
+클래스명 {{post.title}}<br>
+결제 금액 {{ post.extra_price|add:post.price |intcomma}}<br>
+
+신청자 성함
+이메일
+전화번호
+희망 수업 시작일
+결제 방식
+<button type="submit" class="btn btn-primary btn-block" value="결제" id="button_buy">결제하기</button>
 </body>
 </html>

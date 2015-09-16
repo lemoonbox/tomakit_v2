@@ -78,6 +78,7 @@ INSTALLED_APPS = (
     'app_demand_v2d1',
     'app_class_v2d1',
     'app_board_v2d1',
+    'app_payment_v2d1',
 )
 
 MIDDLEWARE_CLASSES = (

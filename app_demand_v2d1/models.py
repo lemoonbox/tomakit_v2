@@ -71,7 +71,7 @@ class T2DemandPic(models.Model):
 class T2DemandCmt(models.Model):
     user=models.ForeignKey(settings.AUTH_USER_MODEL)
     demand_post=models.ForeignKey(T2ClassDemand)
-    coment=models.CharField(max_length=250, null=False, blank=False)
+    comment=models.CharField(max_length=250, null=False, blank=False)
     class_ad=models.BooleanField(default=False)
 
     created_at = models.DateTimeField(auto_now_add=True, auto_now=False)

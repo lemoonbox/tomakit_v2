@@ -33,6 +33,11 @@
 재료비 :: {{post.extra_price|intcomma}}<br>
 수강료 :: {{post.price|intcomma}}<br>
 
+<form method="GET" action="{% url 'pay_prefill_v2d1' %}">
+    <input type="hidden" value="{{post.id}}" name="post_id">
+    <input type="hidden" value="teachclass" name="class_type">
+    <input type="submit" value="{{ post.extra_price|add:post.price |intcomma}}원">
+</form><br><br><br>
 총합 :: {{ post.extra_price|add:post.price |intcomma}}원<br>
 클래스 선생님 :: <img src="{{MEDIA_URL}}{{post.user.t2profile_set.first.pro_pic}}"><br><br>
 {{post.user.last_name}}{{post.user.first_name}}<br>

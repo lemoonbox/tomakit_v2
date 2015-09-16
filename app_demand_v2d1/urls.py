@@ -8,4 +8,9 @@ urlpatterns = patterns('app_demand_v2d1.views',
 
     url(r'(?P<demand_num>[0-9]+)/$', 'demand_detail', name="demand_detial_v2d1"),
 
+
+    url(r"comment/create/(?P<demand_num>[0-9]+)$", 'create_comment', name="create_comment_v2d1"),
+    url(r"comment/modify/(?P<demand_num>[0-9]+)$", 'modify_comment', name="modify_comment_v2d1"),
+    url(r"comment/delete/(?P<comment_num>[0-9]+)$", 'delete_comment', name="delete_comment_v2d1"),
+
     )

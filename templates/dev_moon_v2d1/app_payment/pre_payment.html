@@ -1,0 +1,43 @@
+{% load static from staticfiles%}
+{% load humanize %}
+{% load v2d1_board_tags %}
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<form method="GET" action="{% url 'pay_conf_v2d1'%}">
+        {%csrf_token%}
+    주문 번호 : {{merchant_id}}<br>
+
+    수업 일정 : {{post.weekday}}<br>
+
+    결제 금액 : {{ post.extra_price|add:post.price |intcomma}}<br>
+    <input type="hidden" name="merchant_id" value="{{merchant_id}}"><br>
+    <input type="hidden" name="post_id" value="{{post.id}}"><br>
+    <input type="hidden" name="classtype" value="{{classtype}}"><br><br>
+
+
+    신청자 이름:<input type="text" name="buyer_name" value="{{request.user.last_name}}{{request.user.first_name}}">
+     {{prefillform.buyer_name.errors|striptags}}<br>
+    이메일 :<input type="text" name="buyer_email" value="{{request.user.username}}">
+    {{prefillform.buyer_email.errors|striptags}}<br>
+    전화 번호 : <input type="text" name="mobli1" value="010">-
+        <input type="text" name="mobli2" value="{{request.user.t2profile_set.first.mobli1}}">-
+        <input type="text" name="mobli3" value="{{request.user.t2profile_set.first.mobli2}}">
+    {{prefillform.mobli2.errors|striptags}}{{prefillform.mobli3.errors|striptags}}<br><br>
+
+    결제 방식을 선택해 주세요<br>
+    <input type="radio" name="pay_method" value="card">신용카드
+    <input type="radio" name="pay_method" value="trans">실시간 계좌 이체
+    <input type="radio" name="pay_method" value="vbank">가상계좌이체
+    {{prefillform.pay_method.errors|striptags}}
+
+    <input type="submit" class="btn btn-primary btn-block" value="결제" id="buy">결제하기
+</form>
+
+</body>
+</html>

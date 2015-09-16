@@ -5,7 +5,8 @@ from django.contrib.auth.models import \
     User
 from django.http import\
     HttpResponse,\
-    Http404
+    Http404,\
+    HttpResponseRedirect
 from django.core.exceptions import ObjectDoesNotExist
 
 from rest_framework.decorators import\
@@ -21,11 +22,13 @@ from app_comminfo.models import \
 from app_demand_v2d1.forms import\
     DemandForm, \
     T2DemandCardForm,\
-    T2DemandPicForm
+    T2DemandPicForm,\
+    CommentForm
 from app_demand_v2d1.models import \
     T2ClassDemand, \
     T2DemandPic, \
-    T2DemandCard
+    T2DemandCard, \
+    T2DemandCmt
 # Create your views here.
 
 @login_required
@@ -202,3 +205,63 @@ def demand_detail(request, demand_num):
             raise Http404("개시물이 존재 하지 않습니다.")
     else :
         raise Http404("잘못된 요청 입니다.")
+
+
+def create_comment(request, demand_num):
+
+    if request.method == "POST":
+        _post=T2ClassDemand.objects.get(pk=demand_num)
+        class_ad=request.POST.get("class_ad", "")
+        if class_ad:
+            class_ad=True
+        else:
+            class_ad=False
+        _user=User.objects.get(username=request.user)
+        commnet=request.POST.get("comment")
+        commentform=CommentForm(request.POST)
+
+        if commentform.is_valid():
+            _comment=T2DemandCmt(user=_user, demand_post=_post,
+                                 comment=commnet, class_ad=class_ad)
+            _comment.save()
+        return HttpResponseRedirect("/v2.1/demand/%d" %(_post.id))
+    else:
+        return Http404("잘못된 요청입니다.")
+
+def modify_comment(request, demand_num):
+
+    if request.method == "POST":
+        class_ad=False
+        _post=T2ClassDemand.objects.get(pk=demand_num)
+        class_ad=request.POST.get("class_ad", "")
+        comment_id=request.POST.get('comment_num', "")
+        if class_ad:
+            class_ad=True
+        _user=User.objects.get(username=request.user)
+        comment=request.POST.get("comment", "")
+        commentform=CommentForm(request.POST)
+        _comment=T2DemandCmt.objects.get(pk=comment_id)
+        if commentform.is_valid() and _user == _comment.user:
+            _comment.comment=comment
+            _comment.class_ad=class_ad
+            _comment.save()
+        return HttpResponseRedirect("/v2.1/demand/%d" %(_post.id))
+    else:
+        return Http404("잘못된 요청입니다.")
+
+
+def delete_comment(request, comment_num):
+
+    if request.method == "POST":
+        _comment=T2DemandCmt.objects.get(pk=comment_num)
+        post_id=request.POST.get("demand_num", "")
+        _post=T2ClassDemand.objects.get(pk=post_id)
+
+        if _comment.user == request.user:
+            _comment.is_active=False
+            _comment.save()
+
+        return HttpResponseRedirect("/v2.1/demand/%d" %(_post.id))
+
+    else:
+        return  Http404("잘못된 요청입니다.")

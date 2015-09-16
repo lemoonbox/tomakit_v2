@@ -81,3 +81,8 @@ COMMENT_V2D1='dev_moon_v2d1/app_class/review.html'
 INDEX_PAGE_V2D1='dev_moon_v2d1/app_board/index.html'
 REGUL_CLASS_LIST_V2D1='dev_moon_v2d1/app_board/regul_classlist.html'
 DEMAND_LIST_V2D1='dev_moon_v2d1/app_board/demand_list.html'
+
+
+#app_payment
+PRE_PAYMENT_V2D1='dev_moon_v2d1/app_payment/pre_payment.html'
+PAYMENT_CONF_V2D1='dev_moon_v2d1/app_payment/pay_conf.html'
