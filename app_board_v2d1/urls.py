@@ -21,4 +21,5 @@ urlpatterns = patterns('app_board_v2d1.views',
 
     url("demand_filter/$", "demand_filter_redirect", name="demnad_filter_redirct_v2d1")
 
+
     )

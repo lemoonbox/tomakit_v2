@@ -1,5 +1,6 @@
 #coding: utf-8
-from django.shortcuts import render
+from django.shortcuts import render, \
+    get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import \
     User
@@ -8,6 +9,7 @@ from django.http import\
     Http404,\
     HttpResponseRedirect
 from django.core.exceptions import ObjectDoesNotExist
+
 
 from rest_framework.decorators import\
     api_view
@@ -265,3 +267,24 @@ def delete_comment(request, comment_num):
 
     else:
         return  Http404("잘못된 요청입니다.")
+
+@login_required
+def lineup_demand(request, demand_num, page,category, state):
+    print category
+    print state
+    _demand_post= get_object_or_404(T2ClassDemand, pk=demand_num)
+    _demand_card=get_object_or_404(T2DemandCard, pk=demand_num)
+
+    if T2ClassDemand.objects.filter(
+        id=_demand_post.id, inline_users__in=[request.user,]).exists():
+        _demand_post.inline_users.remove(request.user)
+        _demand_card.inline_users.remove(request.user)
+
+    else:
+        _demand_post.inline_users.add(request.user)
+        _demand_card.inline_users.add(request.user)
+
+    return HttpResponseRedirect("/v2.1/board/demand_list/"+page+"/"+category+"/"+state)
+
+
+
