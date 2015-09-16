@@ -171,6 +171,32 @@ nav {
   }
 }
 
+/* forms custom style */
+
+.tmk-panel{
+  display: inline-block;
+  /*padding: 20px;*/
+  text-align:left;
+  background-color: #fff;
+  /*border: 1px solid #ddd;*/
+  border-radius: 8px;
+  margin-bottom:30px;
+  width:100%;
+}
+
+.tmk-panel-header {
+  font-size:18px;
+  height: 50px;
+  font-weight:600;
+  line-height:28px;
+}
+
+.tmk-panel-header img {
+  width: 28px;
+  height: 28px;
+  margin-right: 5px;
+}
+
 .tmk-page-header {
   padding-top: 50px;
   padding-bottom: 20px;
@@ -198,16 +224,20 @@ nav {
 .noUi-connect {
   background: #84CDC2!important;
 }
-#demand-form {background-color:#fff;}
+#demand-form {
+  background-color: #fff;
+}
 @media screen and (min-width:768px) {
-#demand-form {min-width:850px;}
+  #demand-form {
+    min-width: 850px;
+  }
 }
 #tmk-footer {
-  background-color: #f49e80;
+  background-color:  #FEF2D8;
   bottom: 0;
   height: 180px;
   text-align: left;
-  color: white;
+  color: #82888A;
   //min-width:1250px;
   left:0;
   float:left;
@@ -216,7 +246,7 @@ nav {
 }
 
 .tmk-footer-nav {
-  color: white;
+  color: #82888A;
   ul {
     width:720px;
     list-style: none;
@@ -225,12 +255,15 @@ nav {
   li {
     display: inline-block;
     padding: 10px;
+    font-size:12px;
+
     a {
-      color: white;
-      font-weight: 600;
+      color: #82888A;
+      font-size:14px;
+      //font-weight: 600;
     }
     a:hover {
-      color: #F5515F;
+      color:  #FF565A;
       text-decoration-line: none !important;
     }
   }
@@ -239,17 +272,18 @@ nav {
 
 .tmk-footer-copyright {
   padding:5px 10px 0px 10px;
+  font-size:12px;
   ul {
-    border-top: 1px solid #ffffff;
+    border-top: 1px solid #CACCCD;
   }
   li {
     display: inline-block;
     padding: 5px 0px;
   }
   .tmk-footer-logo {
-    font-family: Titillium web;
-    font-size:18px;
-    font-weight: bold;
+    //font-family: Titillium web;
+    //font-size:18px;
+    //font-weight: bold;
   }
 }
 

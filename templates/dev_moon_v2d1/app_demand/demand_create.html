@@ -69,30 +69,7 @@
         font-weight: 600;
     }
 
-    .tmk-panel{
-        display: inline-block;
-        /*padding: 20px;*/
-        text-align:left;
-        background-color: #fff;
-        /*border: 1px solid #ddd;*/
-        border-radius: 8px;
-        margin-bottom:30px;
-        width:100%;
-    }
 
-    .tmk-panel-header {
-        font-size:18px;
-        height: 50px;
-        font-weight:600;
-        line-height:28px;
-
-    }
-
-    .tmk-panel-header img {
-        width: 28px;
-        height: 28px;
-        margin-right: 5px;
-    }
 
     .tmk-aside-right{
         text-align:left;
@@ -371,7 +348,7 @@
             <div class="col-md-10">
                 <div class="btn-group" data-toggle="buttons">
                     <!--<label class="icheckbox_flat checked">-->
-                    <input type="checkbox" style="background-color:#fff;" class="icheckbox_flat checked" style="" autocomplete="off" checked name="goal" value="easy&chip"
+                    <input type="checkbox" class="icheckbox_flat checked" autocomplete="off" checked name="goal" value="easy&chip"
                            {% for goal in demand_data.goal %} {% if goal == "easy&chip" %}
                     checked {% endif %}{% endfor %}>&nbsp;부담없고 재미있는 수업&nbsp;</input>
                     <!--</label>-->
