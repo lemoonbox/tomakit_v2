@@ -66,7 +66,7 @@ def class_list_board(request, page=1, category = 'all', state='all'):
 
 
         paging_date = pagination(navline_num=2, onepage_post_num=1,
-                                 target_model=T2DemandCard, cate_condt=cate_condt,
+                                 target_model=T2ClassCard, cate_condt=cate_condt,
                                  state_condt =state_condt, page=page)
 
         HTTP_HOST = request.META['HTTP_HOST']
