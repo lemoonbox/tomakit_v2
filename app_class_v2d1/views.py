@@ -158,13 +158,16 @@ def create_tut(request, class_num):
             if imageform.is_valid():
                 _imagelist=imageform.savefiles()
 
+            _tutpost.wr_done=True
+            _classcard.wr_done=True
+            _tutpost.save()
+            _classcard.save()
             return render(request, TEMP.CLASS_CREATE_FINISH_V2D1,{
                     })
 
     return render(request, TEMP.CLASS_CREATE_TUT_V2D1,{
         "tutform":tutform,
         "title":title,
-        ''
         "class_num":class_num,
         "prefill_intro":prefill_intro,
         "tut_data":tut_data,
@@ -251,6 +254,10 @@ def create_teach(request, class_num):
             if imageform.is_valid():
                 _imagelist=imageform.savefiles()
 
+            _teachpost.wr_done=True
+            _classcard.wr_done=True
+            _teachpost.save()
+            _classcard.save()
             return render(request, TEMP.CLASS_CREATE_FINISH_V2D1,{
             })
 
@@ -501,7 +508,6 @@ def create_review(request, class_num):
                 _review=T2ClassReview(user=_user, host_user=_post.user,
                                   teach_post=_post, grade=grade,
                                   review=review)
-                print _review
                 _review.save()
             return render(request, TEMP.TEACH_POST_DETAIL_V2D1,{
                 "post":_post,

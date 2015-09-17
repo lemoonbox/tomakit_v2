@@ -1,0 +1,48 @@
+{% load static from staticfiles %}
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<h3>프로필 화면</h3>
+
+프로필 사진<img src="{{MEDIA_URL}}{{profile_user.t2profile_set.first.pro_pic}}"><br>
+이름 : {{profile_user.last_name}}{{profile_user.first_name}}<br>
+한줄소개 : {{profile_user.t2profile_set.first.intro_line}}<br><br><br>
+<h3>-----------------------------</h3>
+{% if request.user.is_authenticated%}
+    <a href="{{HTTP_HOST}}/v2.1/user/profile/{{profile_user.id}}/edit"><button>프로필 편집</button></a>
+{% endif %}
+<h3>-----------------------------</h3>
+<h3>소개</h3>
+{% if host_profile%}
+소개 동영상 or 사진<br>
+    {% if host_profile.intro_video%}
+        소개 상동영:<iframe width="560" height="315" src="https://www.youtube.com/embed/{{host_profile.intro_video}}" frameborder="0" allowfullscreen></iframe><br>
+    {% else %}
+        소개 사진:: <img src="{{MEDIA_URL}}{{host_profile.intro_pic}}"><br>
+    {% endif %}
+    자기 소개::{{host_profile.intro_self}}<br>
+    가게 주소{{host_profile.shop_addr}}<br>
+<h3>후기</h3>
+    {% for review in profile_user.host_review.all%}
+        리뷰어 사진:<img src="{{MEDIA_URL}}{{review.user.t2profile_set.first.pro_pic}}"><br>
+        리뷰어 이름:{{review.user.last_name}}{{review.user.first_name}}<br>
+        별점 : {{review.grade}}<br>
+        리뷰 : {{review.review}}
+    {% endfor %}
+    <h3>모집중인 수업</h3>
+    {% for class in open_classes%}
+        수업 사진 ::<img src="{{MEDIA_URL}}{{class.t2classpic_set.first.image}}"<br>
+        수업 제목 ::{{class.title}}<br>
+        수업 소개 ::{{class.intro_line}}<br>
+    {% endfor %}
+
+
+{% endif%}
+
+
+</body>
+</html>

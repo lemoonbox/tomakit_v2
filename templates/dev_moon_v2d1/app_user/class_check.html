@@ -1,0 +1,36 @@
+{% load v2d1_board_tags %}
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>\
+프로필 사진 :: {{profile_user.t2profile_set.first.pro_pic}}<br>
+이름 :: {{profile_user.last_name}}{{profile_user.first_name}}<br>
+한줄 소개 :: {{profile_user.t2profile_set.first.intro_line}}<br>
+
+
+<h3>개설한 클래스</h3>
+{% for class in host_classes %}
+    수업 타입 ::{{class.classtype}}<br><br>
+    사진::<img src="{{MEDIA_URL}}{{class.t2classpic_set.first.image}}"><br><br>
+    수업호스트::{{class.user}}<br><br>
+    수업제목::{{class.title}}<br><br>
+    수업소개::{{class.intro_line}}<br><br>
+    횟수::{{class.repeat}}회/총::{% widthratio class.repeat 1 class.perhour%}시간<br><br>
+    {{class.price}}
+
+{% endfor %}
+
+<h3>요청한 수업</h3>
+{% for class in demand_classes %}
+    <br>
+    카테고리 ::{{class.category}}<br><br>
+    수업제목::{{class.title}}<br><br>
+    설명::{{class.descript}}<br><br>
+    목표::{{class.demand_post.goal}}<br><br>
+---------------------------------------------------------<br>
+{% endfor %}
+</body>
+</html>

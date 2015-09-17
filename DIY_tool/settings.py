@@ -146,8 +146,8 @@ SOCIAL_AUTH_PIPELINE = (
         'social.pipeline.social_auth.associate_user',
         'social.pipeline.social_auth.load_extra_data',
         'social.pipeline.user.user_details',
-        'app_user.social_auth.user_account',
-        'app_user.social_auth.save_propic'
+        'app_user_v2d1.social_auth.user_account',
+        'app_user_v2d1.social_auth.save_propic'
     )
 
 ###facebook auth end ###

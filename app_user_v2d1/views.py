@@ -4,7 +4,9 @@ from django.core.files.images import \
     ImageFile
 from django.shortcuts import \
     render, \
-    loader
+    loader, \
+    Http404, \
+    get_object_or_404
 from django.contrib.auth.models import \
     User
 from django.http import \
@@ -20,26 +22,34 @@ from django.core.context_processors import \
     csrf
 from django.contrib.auth.views import \
     logout as django_logout
+from django.contrib.auth.decorators import \
+    login_required
 
 from DIY_tool import \
     template_match as TEMP, \
     settings
 from DIY_tool.settings import LOCAL as SET_LOCAL
-
+from app_class_v2d1.models import \
+    T2ClassCard
 from app_user_v2d1.forms import\
     UserForm,\
     LoginForm, \
     EmailCheck,\
     PW_CrossCheckForm, \
-    HostApplyForm
+    HostApplyForm, \
+    ProfileForm
 from app_user_v2d1.models import \
     T2Profile, \
     T2SignupConfirmKey,\
-    T2PWResetKeys
+    T2PWResetKeys, \
+    T2HostProfile
+from app_demand_v2d1.models import \
+    T2DemandCard
 
 from utils import \
     utils, \
     tasks
+
 # Create your views here.
 
 
@@ -261,7 +271,7 @@ def pw_reset_process(request, key):
         'pwrset_process_form':pwreset_process_form,
         'HTTP_HOST':HTTP_HOST,
     })
-
+@login_required
 def host_apply(request):
     apply_data={}
     if request.method == "GET":
@@ -291,3 +301,101 @@ def host_apply(request):
         "hostform":hostform,
         "apply_data":apply_data,
     })
+
+def public_profile(request, user_num):
+
+    if request.method == "GET":
+        _profile_user=get_object_or_404(User, id=user_num)
+        print _profile_user
+        _profile=get_object_or_404(T2Profile, user=_profile_user)
+        _hostprofile=""
+        if T2HostProfile.objects.filter(user=_profile_user).exists():
+            _hostprofile=T2HostProfile.objects.filter(user=_profile_user)[0]
+            _open_class=T2ClassCard.objects.filter(
+                user=_profile_user, is_open=True)
+
+    else:
+        return Http404("잘못된 요청입니다.")
+    return render(request, TEMP.PUBLIC_PROFILE_V2D1,{
+        "profile_user":_profile_user,
+        "profile":_profile,
+        "host_profile":_hostprofile,
+        "open_classes":_open_class
+        })
+
+@login_required
+def edit_profile(request, user_num):
+    HTTP_HOST=request.META["HTTP_HOST"]
+    profileform=""
+    _hostprofile=""
+    _profile_user=get_object_or_404(User, id=user_num)
+    if request.method == "GET" and request.user==_profile_user:
+        _profile=get_object_or_404(T2Profile, user=_profile_user)
+        _hostprofile=""
+        if T2HostProfile.objects.filter(user=_profile_user).exists():
+            _hostprofile=T2HostProfile.objects.filter(user=_profile_user)[0]
+
+    elif request.method == "POST" and request.user==_profile_user:
+        _profile=get_object_or_404(T2Profile, user=_profile_user)
+        type=request.POST.get("edit_type", "")
+        profileform=ProfileForm(request.POST)
+        if type == "basic":
+            if profileform.is_valid():
+                image=request.FILES.get("pro_pic", "")
+                last_name=request.POST.get("last_name", "")
+                first_name=request.POST.get('first_name', "")
+                intro_line=request.POST.get('intro_line', "")
+                mobli=request.POST.get("mobli2", "")+request.POST.get("mobli3", "")
+                _profile.pro_pic=image
+                _profile_user.last_name=last_name
+                _profile_user.first_name=first_name
+                _profile.intro_line=intro_line
+                _profile.mobli1=request.POST.get("mobli2", "")
+                _profile.mobli2=request.POST.get("mobli3", "")
+                _profile.mobli=mobli
+                _profile.mobli_able=True
+                _profile.save()
+                _profile_user.save()
+                return HttpResponseRedirect("/v2.1/user/profile/%d" %(_profile_user.id))
+        elif type == "host":
+            video=utils.shard_url_picker(request.POST.get("video", ""))
+            image=request.FILES.get("intro_pic", "")
+            print image
+            intro_self=request.POST.get('intro_self', "")
+            shop_addr=request.POST.get('shop_addr', "")
+            shop_addr_detail=request.POST.get('shop_addr_detail', "")
+            if T2HostProfile.objects.filter(user=_profile_user).exists():
+                _hostprofile=T2HostProfile.objects.filter(user=_profile_user)[0]
+                _hostprofile.intro_video=video
+                _hostprofile.intro_pic=image
+                _hostprofile.intro_self=intro_self
+                _hostprofile.shop_addr=shop_addr
+                _hostprofile.shop_addr_detail=shop_addr_detail
+                _hostprofile.save()
+            return HttpResponseRedirect("/v2.1/user/profile/%d" %(_profile_user.id))
+
+    return render(request, TEMP.EDIT_PROFILE_V2D1,{
+        "user_num":_profile_user.id,
+        "profile_user":_profile_user,
+        "profile":_profile,
+        "host_profile":_hostprofile,
+        "profileform":profileform,
+        })
+
+@login_required
+def class_ckeck(request, user_num):
+    _profile_user=get_object_or_404(User, id=user_num)
+    if request.method == "GET" and request.user==_profile_user:
+        _host_classes=T2ClassCard.objects.filter(user=_profile_user)
+        _demand_classes=T2DemandCard.objects.filter(user=_profile_user)
+        print _host_classes
+    else:
+        return Http404("잘못된 요청입니다.")
+
+    return render(request, TEMP.CLASS_CKECK_V2D1,{
+        "profile_user":_profile_user,
+        "host_classes":_host_classes,
+        "demand_classes":_demand_classes,
+    })
+
+

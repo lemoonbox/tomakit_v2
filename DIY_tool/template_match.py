@@ -55,6 +55,11 @@ HOST_APPLY_FINISH='dev_moon_v2d1/app_user/host_apply_finish.html'
 CONFRI_TEM_V2D1="dev_moon_v2d1/mail_form/mail_confirm.html"
 PWRESET_MAIL_TEM_V2D1='dev_moon_v2d1/mail_form/mail_pw_reset.html'
 
+#app_user//profile
+PUBLIC_PROFILE_V2D1='dev_moon_v2d1/app_user/public_profile.html'
+EDIT_PROFILE_V2D1='dev_moon_v2d1/app_user/edit_profile.html'
+CLASS_CKECK_V2D1='dev_moon_v2d1/app_user/class_check.html'
+
 #app_demand
 DEMAND_CREATE_V2D1='dev_moon_v2d1/app_demand/demand_create.html'
 DEMAND_MODIFY_V2D1='dev_moon_v2d1/app_demand/demand_modify.html'
