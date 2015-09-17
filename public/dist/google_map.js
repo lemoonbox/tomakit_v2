@@ -38,10 +38,6 @@ function fillInAddress() {
     for (var component in componentForm) {
         document.getElementById(component).value = '';
         document.getElementById(component).disabled = false;
-
-        //else if (document.getElementById(component).value = 0) {
-        //    document.getElementById(component).addClass("hidden");
-        //}
     }
     // Get each component of the address from the place details
     // and fill the corresponding field on the form.
@@ -50,13 +46,6 @@ function fillInAddress() {
         if (componentForm[addressType]) {
             var val = place.address_components[i][componentForm[addressType]];
             document.getElementById(addressType).value = val;
-
-            //if (val.length = 0) {
-            //    document.getElementById(addressType).hidden = true;
-            //}
-            //else if (val.length > 0) {
-            //    document.getElementById(addressType).hidden = false;
-            //}
         }
     }
 }

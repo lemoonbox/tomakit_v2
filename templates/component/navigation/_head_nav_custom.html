@@ -1,4 +1,11 @@
 {%load static from staticfiles%}
+<style>
+    @media (min-width: 768px) {
+        .navbar-brand > img {
+            content: url({%static 'img/Tomakit-w.png'%});
+        }
+    }
+</style>
 <!-- Static navbar -->
 <nav class="navbar navbar-default navbar-static-top">
 
@@ -12,9 +19,12 @@
                 <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="/">
-                <img src="{%static 'img/Tomakit-r.png'%}"
-                     data-src-main="{%static 'img/Tomakit-w.png'%}"
-                     alt="">
+
+                <img src="{%static 'img/Tomakit-r.png'%}">
+
+                <!--<img src="{%static 'img/Tomakit-r.png'%}"-->
+                     <!--data-src-768px="{%static 'img/Tomakit-w.png'%}"-->
+                     <!--alt="">-->
             </a>
         </div>
         <div id="navbar" class="collapse navbar-collapse" aria-expanded="false">
@@ -35,9 +45,9 @@
                 <li class="dropdown">
                     <a href="#" class="user dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                         <img class="profile-photo-mini" src="{{MEDIA_URL}}{{user.userprofile_set.first.pro_pic}}">
-                        {{user.last_name}} {{user.first_name}}<span class="caret"></span></a>
+                        {{user.last_name}} {{user.first_name}}&nbsp;<span class="caret"></span></a>
                     <ul class="dropdown-menu" style="width:100%;">
-                        <li><a href="http://{{HTTP_HOST}}/v2.1/user/profile/{{request.user.id}}">프로필</a></li>
+                        <li><a href="http://{{HTTP_HOST}}/v2.1/user/profile/{{request.user.id}}">마이페이지</a></li>
                         <li><a href="http://{{HTTP_HOST}}/v2.1/user/logout">로그아웃</a></li>
                     </ul>
                 </li>
@@ -52,3 +62,13 @@
         </div> <!--/.nav-collapse -->
     </div> <!--/.container -->
 </nav>
+
+<script>
+    $(function() {
+        if($(window).width() <= 768) {
+            $("img").each(function() {
+                $(this).attr("src", $(this).attr("src").replace("data-src-768px, url"));
+            });
+        }
+    });
+</script>

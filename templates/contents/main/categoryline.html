@@ -9,25 +9,14 @@
         position:relative;
         background-size: cover;
         background-repeat:no-repeat;}
-    .how-to-tomakit {margin-top:60px;height:50px;font-size:16px;}
-    #how-to-tmk {width:100%!important; float:left;}
-
-
-    /*.profile-photo-mini {*/
-    /*content:url('{{MEDIA_URL}}{{user.userprofile_set.first.pro_pic}}');*/
-    /*}*/
-    @media screen and (min-width: 768px) {
-
-        .navbar-brand > img[data-src-desktop] {
-            content: attr(data-src-desktop, url);
-        }
+    @media screen and (min-width:768px) {
         #navbar {
             background: transparent;
         }
         .navbar-default {
             background-color: transparent;
             border-color: transparent;
-            color: white!important;
+            color: #fff;
         }
         .navbar-nav > li > a {
             color: white!important;
@@ -46,10 +35,10 @@
 <!--<div class="how-to-tmk"> </div>-->
 <div class="tmk-main-banner">
     <div class="main-banner-title">특별한 일상을 만들다<br>
-핸드메이드 클래스 찾을 땐, 토마킷</div>
+        핸드메이드 클래스 찾을 땐, 토마킷</div>
     <div class="main-banner-subtitle">토마킷이 편한 시간, 가까운 공방의 클래스를 찾아드려요!</div>
 
-<button type="button" class="btn btn-primary how-to-tomakit" id="tomatoma">토마킷 이용방법</button>
+    <button type="button" class="btn btn-primary how-to-tomakit" id="tomatoma">토마킷 이용방법</button>
     <!--<video autoplay loop muted poster="https://d3ce7jb7ih53ua.cloudfront.net/verloc_new_design/main_page/first-page-1.png" id="bgvid">-->
     <!--<source src="https://d3ce7jb7ih53ua.cloudfront.net/verloca_new_design/main_page/verlocal+header_3.mp4"></source>-->
     <!--</video>-->
@@ -57,17 +46,15 @@
 
 </div>
 
-
-
 <div class="tmk-main-body">
     <div class="tmk-main-border">
         <div class="tmk-h3">반짝 반짝, 새로운 클래스</div>
     </div>
     <!--<div class="tmk-main-picks">-->
-        <!--<div class="picks-title rows">-->
-            <!--<span class="col-md-2"></span>-->
-            <!--<span class="title-main col-md-8" style="font-family:AppleSDGothicNeo-Regular;">매일 반복되는 일상 속에서 직접 창조한다는 것은 얼마나 가슴뛰는 일인가요?</span>-->
-       <!--</div>-->
+    <!--<div class="picks-title rows">-->
+    <!--<span class="col-md-2"></span>-->
+    <!--<span class="title-main col-md-8" style="font-family:AppleSDGothicNeo-Regular;">매일 반복되는 일상 속에서 직접 창조한다는 것은 얼마나 가슴뛰는 일인가요?</span>-->
+    <!--</div>-->
     <!--</div>-->
 
     <div class="tmk-sub-body">
@@ -90,11 +77,11 @@
 
             <span class="profile-name"><a href="http://{{HTTP_HOST}}/v2/user/profile/{{que.quebox.djgouser.id}}">
                 {{que.quebox.djgouser.last_name}} {{que.quebox.djgouser.first_name}}</a></span>
-                   <a href="http://{{HTTP_HOST}}/v2/question/item/{{que.quebox.qitempost.id}}">
-                       <div class="card-contents" style="background-image:url({{MEDIA_URL}}{{que.quebox.item_pic}});background-size:cover;">
+                    <a href="http://{{HTTP_HOST}}/v2/question/item/{{que.quebox.qitempost.id}}">
+                        <div class="card-contents" style="background-image:url({{MEDIA_URL}}{{que.quebox.item_pic}});background-size:cover;">
 
-                    </div>
-                   </a>
+                        </div>
+                    </a>
 
                     <div class="picks-cards-credit">
                         <div class="h3">Q. </div><div class="category">{{que.quebox.category.first.category}}</div>
@@ -165,10 +152,10 @@
 
                 <a href="http://{{HTTP_HOST}}/v2/board/caseboard/" style="color:black;">
                     <li class="tmk-picks-main" style="background:url({%static 'media/image/slice/card2.png'%});">
-                    <div class="tmk-picks-title">지금까지 어떤 클래스가 만들어 졌을까요?<br>
-                        <div class="tmk-picks-subtitle">다른 사람들의 클래스를 살펴보며 영감을 나누고 창의력을 키워보세요!</div>
-                    </div>
-                </li>
+                        <div class="tmk-picks-title">지금까지 어떤 클래스가 만들어 졌을까요?<br>
+                            <div class="tmk-picks-subtitle">다른 사람들의 클래스를 살펴보며 영감을 나누고 창의력을 키워보세요!</div>
+                        </div>
+                    </li>
                 </a>
             </ul>
 
@@ -210,35 +197,3 @@
 
 {%endcomment%}
 {%endblock %}
-
-{%comment%}
-
-프로필 사진:
-<a href="http://{{HTTP_HOST}}/v2/user/profile/{{que.quebox.djgouser.id}}">
-    <img src="{{MEDIA_URL}}{{que.quebox.djgouser.userprofile_set.first.propic}}"></a><br>
-이름 :
-<a href="http://{{HTTP_HOST}}/v2/user/profile/{{que.quebox.djgouser.id}}">
-    {{que.quebox.djgouser.last_name}}{{que.quebox.djgouser.first_name}}</a><br>
-질문사진 :<div class="questionboard-q-img"> <img src="{{MEDIA_URL}}{{que.quebox.item_pic}}"></div>
-카테고리 : {{que.quebox.category.first.category}}<br>
-제목 : {{que.quebox.title}}<br>
-희망 수업일 :{{que.quebox.weekday}}<br>
-지역 : {{que.quebox.state.first.state}}/{{que.quebox.mylocal}}<br>
-총 {{que.quebox.solutionbox_set.count}}개의 수업이 개설되었습니다.<br>
-{%endcomment%}
-{%comment%}
-프로필 사진:
-<a href="http://{{HTTP_HOST}}/v2/user/profile/{{que.quebox.djgouser.id}}">
-    <img src="{{MEDIA_URL}}{{que.quebox.djgouser.userprofile_set.first.propic}}"></a><br>
-이름 :
-<a href="http://{{HTTP_HOST}}/v2/user/profile/{{que.quebox.djgouser.id}}">
-    {{que.quebox.djgouser.last_name}}{{que.quebox.djgouser.first_name}}</a><br>
-카테고리 : {{que.quebox.category.first.category}}<br>
-제목 : {{que.quebox.title}}<br>
-원하는 클래스 :{{que.quebox.skill_class}}<br>
-배우는 목표 :{{que.quebox.skill_goal}}<br>
-배우고 싶은 내용 :{{que.quebox.skill_edu}}<br>
-희망 수업일 :{{que.quebox.weekday}}<br>
-지역 : {{que.quebox.state.first.state}}/{{que.quebox.mylocal}}<br>
-총 {{que.quebox.solutionbox_set.count}}개의 수업이 개설되었습니다.<br>
-{%endcomment%}

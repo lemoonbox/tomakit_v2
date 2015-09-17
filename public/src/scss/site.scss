@@ -26,20 +26,20 @@ body {
 
 /* Let's get this party started */
 ::-webkit-scrollbar {
-  width: 12px;
+  width: 5px;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.4);
-  -webkit-border-radius: 10px;
-  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 3px rgba(0,0,0,0.4);
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  -webkit-border-radius: 10px;
-  border-radius: 10px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
   background: #eee;
   -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
 }
@@ -79,10 +79,10 @@ $g-btn-h-color:#F5515F;
 
 button {
   height: 50px;
-  min-width: 120px;
 }
 
 .btn-primary {
+  min-width: 120px;
   border: 3px solid #FF565A !important;
   background-color: #FF565A !important;
   //color:#F5515F !important;
@@ -120,7 +120,6 @@ nav {
     margin: 0px 5px;
     > a, > a:focus, >a:hover {
       outline:none!important;
-      font-size:16px;
       padding:auto!important;
     }
     &:hover, &:focus {
@@ -177,16 +176,26 @@ nav {
 .navbar-nav {
   > li {
     height:70px;
+
     > a {
-      //height:70px;
       line-height:40px !important;
-    }
-    > a:hover {
-      border-radius: 0;
-      //border-bottom: 4px solid #F5515F!important;
+      font-size:16px;
+      padding-left:10px!important;
+      padding-right:10px!important;
     }
   }
 }
+
+
+#tmk-post {background:#fff;}
+  .badge, .label {
+    padding: 5px!important;
+    min-width:100px!important;
+    background-color: #84CDC2!important;
+    border-radius:none!important;
+  }
+
+
 
 .dropdown-menu {
   position:relative;
@@ -197,11 +206,10 @@ nav {
       text-align:center;
       line-height:50px !important;
     }
-    a:hover {
-      border-bottom: 0px;
-    }
   }
 }
+
+.dropdown-toggle {margin-right:10px!important;}
 /* radio custom style */
 .tmk-radio {
   .classtype {
@@ -287,6 +295,9 @@ nav {
   #tmk-form {
     min-width: 850px;
   }
+  #tmk-post {
+    min-width: 750px;
+  }
   .tmk-page-header {
     min-width: 850px;
   }
@@ -354,14 +365,13 @@ nav {
   border-color: #eee;
 }
 @media screen and (min-width: 768px) {
-  .navbar-brand > img[data-src-768px] {
-    content: attr(data-src-768px, url);
-  }
+
 }
 
 @media screen and (max-width: 767px) {
   .navbar {
     background: #fff;
+    color: #ddd!important;
   }
   .navbar-default {
     background: #fff;
@@ -384,15 +394,37 @@ nav {
     border: 2px solid #d1293a;
   }
 }
+
+.navbar-right {
+  li > a {
+    font-size: 14px;
+  }
+  img {
+    width: 18px;
+    height: 18px;
+    vertical-align: text-bottom;
+  }
+}
 @media screen and (min-width: 768px) {
   .navbar-right {
     margin-right: 0px!important;
+    li > a {
+      padding-left: 2px !important;
+      padding-right: 2px !important;
+    }
   }
 }
-@media screen and (max-width: 1200px) {
-  //.tmk-main-body {
-  //  width: 1170px;
+
+
+@media screen and (max-width: 960px) {
+  //.navbar-right {
+  //  li > a {width:100px;}
   //}
+}
+
+
+.user {
+  color: gray;
 }
 
 .tmk-main-body{
@@ -471,6 +503,7 @@ ul{
     padding-top: 15px;
     font-size: 18px;
     line-height: 21px;
+    margin-bottom:30px;
   }
 }
 
@@ -924,14 +957,6 @@ ul{
 
 
 
-.user {
-  //background-color: transparent;
-  //height:40px!important;
-
-  color: gray;
-  //border: 1px solid #fff!important;
-  //border-radius: 30%;
-}
 
 /* error */
 
@@ -1184,14 +1209,12 @@ ul{
   background-position:center;
 }
 .profile-photo-mini {
-  margin: 5px 5px 5px 0px;
-  width: 30px;
-  height: 30px;
+  //margin: auto;
+  width: 25px;
+  height: 25px;
   border-radius: 50%;
   background-size: cover;
   overflow: hidden;
-  //background-position:center;
-  //float:left;
   vertical-align:middle;
 }
 

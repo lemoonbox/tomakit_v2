@@ -1,25 +1,31 @@
-{% load static from staticfiles%}
+{% extends 'base.html'%}
+{% load static from staticfiles %}
 {% load humanize %}
 {% load v2d1_board_tags %}
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title></title>
-</head>
+    <title>{%block title%}Tomakit {{post.title}}{%endblock%}</title>
+    {%block style%}
+    {%endblock%}
+
 <body>
+{%block content%}
 <br>
-워크샵 수업 상세 페이지<br><br>
+<!--워크샵 수업 상세 페이지-->
 
-카테고리::{{post.category.category|cate2han}}<br>
-제목 :: {{post.title}}<br>
-한줄소개 :: {{post.intro_line}}<br>
-마감일 :: D-{{post.deadline|d_day_count}}<br>
+<div class="tmk-main-body col-md-12">
+    <div class="tmk-page-header col-md-10 col-md-offset-1">
+        <div class="tmk-h4">{{post.category.category|cate2han}}</div>
+        <div class="tmk-h2 tmk-title">{{post.title}}</div>
+        <div class="tmk-h4">{{post.intro_line}}</div>
+        <span class="label tmk-label">D-{{post.deadline|d_day_count}}</span>
+        <div class="tmk-page-pick"></div>
+    </div>
+    <div class="tmk-post-body">
+        {% for image in post.t2classpic_set.all%}
+        <img src="{{MEDIA_URL}}{{image.image}}"><br>
+        {% endfor %}
 
-사진
-{% for image in post.t2classpic_set.all%}
-<img src="{{MEDIA_URL}}{{image.image}}"><br>
-{% endfor %}
+
+    <div class="col-md-7 col-md-offset-1 well" id="tmk-post" style="text-align:left;float:left;">
 
 <br><br>
 <h3>수업정보</h3>
@@ -96,5 +102,9 @@
 </form>
 {% endif %}
 {% endfor %}
+
+        </div>
+    </div>
+    </div>
+{%endblock%}
 </body>
-</html>

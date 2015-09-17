@@ -3,10 +3,9 @@
 
 <title>{%block title%}Tomakit-수업 개설{%endblock%}</title>
 {%block style%}
+<link rel="stylesheet" type="text/css" href="{%static 'media/css/tmk-form.css'%}">
 {%endblock%}
-<body>
 {%block content%}
-
 <div class="tmk-main-body col-md-12">
     <div class="tmk-page-header col-md-10 col-md-offset-1">
         <div class="tmk-h2 tmk-title">클래스 개설 시작하기</div>
@@ -111,23 +110,29 @@
 
 
                 <!--</div>-->
+                <div class="tmk-form-error">
                 {{beginform.category.errors|striptags}}
+                </div>
             </div>
 
             <div class="tmk-panel">
                 <label class="col-md-2">클래스 제목</label>
                 <div class="col-md-7">
-                    <input type="text" class="form-control" name="title" value="{{begin_data.title}}"placeholder="ex)뜨개 테디베어만들기 4주 수업">
-
+                    <input type="text" class="form-control" name="title" value="{{begin_data.title}}"placeholder="ex) 뜨개 테디베어만들기 4주 수업">
+                    <div class="tmk-form-error">
                     {{beginform.title.errors|striptags}}
+                        </div>
                 </div>
             </div>
 
             <div class="tmk-panel">
                 <label class="col-md-2">한줄 소개</label>
                 <div class="col-md-9">
-                    <input type="text" class="form-control" name="intro_line" value="{{begin_data.intro_line}}" placeholder="ex)누구나 배울 수 있게 기초부터 탄탄하게 가르쳐요.">
-                    {{beginform.intro_line.errors|striptags}}
+                    <input type="text" class="form-control" name="intro_line" value="{{begin_data.intro_line}}" placeholder="ex) 누구나 배울 수 있게 기초부터 탄탄하게 가르쳐요.">
+
+                    <div class="tmk-form-error">
+                        {{beginform.intro_line.errors|striptags}}
+                        </div>
                 </div>
 
             </div>
@@ -135,28 +140,8 @@
             <div class="tmk-panel">
                 <label class="col-md-2">수업방식</label>
 
-                {%comment%}
-                <!--<div class="btn-group" data-toggle="buttons">-->
-                <!--&lt;!&ndash;<label class="icheckbox_flat checked">&ndash;&gt;-->
-                <!--<input type="checkbox" style="background-color:#fff;" class="icheckbox_flat checked" autocomplete="off" checked name="goal" value="easy&chip"-->
-                <!--{% for goal in demand_data.goal %} {% if goal == "easy&chip" %}-->
-                <!--checked {% endif %}{% endfor %}>&nbsp;부담없고 재미있는 수업&nbsp;</input>-->
-                <!--&lt;!&ndash;</label>&ndash;&gt;-->
-                <!--&lt;!&ndash;<label class="btn btn-normal">&ndash;&gt;-->
-                <!--<input type="checkbox" class="icheckbox_flat" autocomplete="off" name="goal" value="quality"-->
-                <!--{% for goal in demand_data.goal %} {% if goal == "quality" %}-->
-                <!--checked {% endif %}{% endfor %}>&nbsp;가격보다는 수업 퀄리티&nbsp;-->
-                <!--&lt;!&ndash;</label>&ndash;&gt;-->
-                <!--&lt;!&ndash;<label class="btn btn-danger">&ndash;&gt;-->
-                <!--<input type="checkbox" class="icheckbox_flat checked" autocomplete="off" name="goal" value="professional"-->
-                <!--{% for goal in demand_data.goal %} {% if goal == "professional" %}-->
-                <!--checked {% endif %}{% endfor %}>&nbsp;창업을 위한 전문 수업&nbsp;-->
-                <!--&lt;!&ndash;</label>&ndash;&gt;-->
-                <!--</div>-->
-                {%endcomment%}
-
                 <div class="col-md-10 tmk-radio classtype" style="margin-left:-15px;">
-                    <div class="col-xs-5 col-md-5" style="width:253px;height:150px;">
+                    <div class="col-xs-5 col-md-5">
                     <input type="radio" class="iradio_flat" name="classtype" value="tutclass" id="tutclass"
                            {% if begin_data.classtype == "tutclass" %}checked {% endif %}>
                         <span style="font-size:16px;vertical-align:text-top">&nbsp;수업시간협의(소수맞춤수업)</span><br>
@@ -165,7 +150,7 @@
                         <p style="margin:auto;font-size:14px;text-align:left;color:#84CDC2;">수강생과 수업시간을 자유롭게 협의하여 진행됩니다</p>
                         <!--</div>-->
                     </div>
-                <div class="col-xs-5 col-md-5" style="width:253px;height:150px;">
+                <div class="col-xs-5 col-md-5">
                     <input type="radio" class="iradio_flat" name="classtype" value="teachclass" id="teachclass"
                            {% if begin_data.classtype == "teachclass" %}checked {% endif %}>
                         <span style="font-size:16px;vertical-align:text-top">&nbsp;수업시간고정(단체워크샵)</span><br>
