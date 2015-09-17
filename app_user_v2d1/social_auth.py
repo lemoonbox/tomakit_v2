@@ -1,7 +1,7 @@
 __author__ = 'moon'
 from datetime import datetime
 import pytz
-from models import UserProfile
+from models import T2Profile
 from social.backends.facebook import FacebookOAuth2
 from requests import request, HTTPError
 from django.core.files.base import ContentFile
@@ -12,9 +12,9 @@ def user_account(strategy, details, response, user=None, *args, **kwargs):
 
     if user:
         logger.debug(user)
-        attrs = {'djgouser': user}
+        attrs = {'user': user}
         if type(kwargs['backend']) is FacebookOAuth2:
-            _profile, is_new = UserProfile.objects.get_or_create(**attrs)
+            _profile, is_new = T2Profile.objects.get_or_create(**attrs)
             _profile.save()
         else:
             pass
@@ -23,7 +23,7 @@ def save_propic(strategy,  response, details, user=None ,*args, **kwargs):
 
     if user:
         url = 'http://graph.facebook.com/{0}/picture'.format(response['id'])
-        _profile = UserProfile.objects.get(djgouser=user)
+        _profile = T2Profile.objects.get(user=user)
         if kwargs['is_new'] or kwargs['new_association']:
             try :
                 responsepic = request('GET', url, params={'type':'large'})
@@ -31,7 +31,7 @@ def save_propic(strategy,  response, details, user=None ,*args, **kwargs):
             except HTTPError:
                 pass
             else:
-                _profile.propic.save('{0}_facebook.jpg'.format(user.username),
+                _profile.pro_pic.save('{0}_facebook.jpg'.format(user.username),
                                          ContentFile(responsepic.content))
 
         FB_unitime= response.get(u'updated_time')
@@ -49,5 +49,5 @@ def save_propic(strategy,  response, details, user=None ,*args, **kwargs):
             except HTTPError:
                 pass
             else:
-                _profile.propic.save('{0}_facebook.jpg'.format(user.username),
+                _profile.pro_pic.save('{0}_facebook.jpg'.format(user.username),
                                          ContentFile(responsepic.content))

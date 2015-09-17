@@ -15,5 +15,10 @@ urlpatterns = patterns('app_user_v2d1.views',
     url(r'logout/$', 'logout', name='login_v2d1'),
 
     #host
-    url(r'host/apply/$', 'host_apply', name='host_apply_v2d1')
+    url(r'host/apply/$', 'host_apply', name='host_apply_v2d1'),
+
+    #profile
+    url(r'profile/(?P<user_num>[0-9]+)/$', 'public_profile', name='public_profile_v2d1'),
+    url(r'profile/(?P<user_num>[0-9]+)/edit/$', 'edit_profile', name='edit_profile_v2d1'),
+    url(r'profile/(?P<user_num>[0-9]+)/class_check/$', 'class_ckeck', name='edit_profile_v2d1'),
     )

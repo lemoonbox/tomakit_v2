@@ -5,7 +5,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 
 from app_user_v2d1.models import \
-    T2HostApply
+    T2HostApply,\
+    T2Profile
 
 
 class UserForm(forms.ModelForm):
@@ -100,3 +101,14 @@ class HostApplyForm(forms.ModelForm):
     class Meta:
         model=T2HostApply
         fields = ('introduce', 'mobli', 'hosttype', 'local', 'site', "potpolio")
+
+
+class ProfileForm(forms.Form):
+
+    required_error={'required':u"필수 항목 입니다."}
+
+    last_name=forms.CharField(error_messages=required_error)
+    first_name=forms.CharField(error_messages=required_error)
+    pro_pic=forms.ImageField(required=False)
+    intro_line=forms.CharField(required=False)
+    mobli=forms.CharField(required=False)

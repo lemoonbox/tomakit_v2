@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+프로필 편집<br><br>
+<form method="POST" action="{% url 'edit_profile_v2d1' user_num %}" enctype="multipart/form-data">
+    {%csrf_token%}
+    <input type="hidden" name="edit_type" value="basic">
+    프로필 사진 : <input type="file" name="pro_pic" ><br>
+    이름<input type="text" name="last_name"  value="{{profile_user.last_name}}">
+    <input type="text" name="first_name" value="{{profile_user.first_name}}">
+    {{ profileform.last_name.errors|striptags }}{{ profileform.first_name.errors|striptags }}<br><br>
+    헌쥴소개<input type="text" name="intro_line" value="{{profile_user.t2profile_set.first.intro_line}}"><br><br>
+    전화번호<input type="number" name="mobli1" value="010">-
+    <input type="number" name="mobli2" value="{{profile_user.t2profile_set.first.mobli1}}">-
+    <input type="number" name="mobli3" value="{{profile_user.t2profile_set.first.mobli2}}">
+    <input type="submit" value="저장하기">
+</form>
+<h3>작가 프로필 편</h3>
+
+<form method="POST" action="{% url 'edit_profile_v2d1' user_num %}" enctype="multipart/form-data">
+    {%csrf_token%}
+    <input type="hidden" name="edit_type" value="host">
+    소개사진<input type="file" name="intro_pic" value=""><br>
+    비디오<input type="text" name="video" placeholder="url 주소를 입력해주세요"
+              value="https://www.youtube.com/watch?v={{profile_user.t2hostprofile_set.first.intro_video}}"><br>
+    소개글 <textarea  name="intro_self">{{profile_user.t2hostprofile_set.first.intro_self}}</textarea><br>
+    공방 위치
+    동까지 입력해주세요å
+    <input type="text" name="shop_addr" placeholder="서울시 성북구 돈암1동"
+           value="{{profile_user.t2hostprofile_set.first.shop_addr}}"><br>
+    상세 주소
+    <input type="text" name="shop_addr_detail" placeholder="삼성아파트 100동 100호"
+            value="{{profile_user.t2hostprofile_set.first.shop_addr_detail}}"><br>
+
+    <input type="submit" value="저장하기">
+</form>
+
+<h3>계정 관리</h3>
+계정 이메일 <input type="text" value="{{request.user.username}}"><br>
+비밀 번호  <a href="{{HTTP_HOST}}/v2.1/user/pw_reset"><button>비밀번호 변경</button></a>
+</body>
+</html>

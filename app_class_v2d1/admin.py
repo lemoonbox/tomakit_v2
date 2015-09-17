@@ -40,3 +40,10 @@ class T2ClassCardAdmin(admin.ModelAdmin):
                                      'wr_done', 'deadline_over', 'is_open', 'is_active'],})]
 
 admin.site.register(T2ClassCard, T2ClassCardAdmin)
+
+class T2ReviewAmdin(admin.ModelAdmin):
+    list_display=('review', 'id', 'user','grade','host_user','teach_post', 'tut_post')
+    fieldsets=[('Redcord',{'fields':['user', 'host_user','teach_post', 'tut_post', 'grade',
+                                     'review', 'image', 'is_active'],})]
+
+admin.site.register(T2ClassReview, T2ReviewAmdin)
