@@ -391,7 +391,6 @@ def class_check(request, user_num):
     if request.method == "GET" and request.user==_profile_user:
         _host_classes=T2ClassCard.objects.filter(user=_profile_user)
         _demand_classes=T2DemandCard.objects.filter(user=_profile_user)
-        print _host_classes
     else:
         return Http404("잘못된 요청입니다.")
 

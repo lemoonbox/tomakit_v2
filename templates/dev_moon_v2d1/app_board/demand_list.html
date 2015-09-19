@@ -1,4 +1,5 @@
 {% load static from staticfiles%}
+{% load v2d1_board_tags %}
 <!DOCTYPE html>
 <html>
 <head lang="en">
@@ -46,7 +47,7 @@
     카테고리 ::{{class.category}}<br><br>
     수업제목::{{class.title}}<br><br>
     설명::{{class.descript}}<br><br>
-    목표::{{class.demand_post.goal}}<br><br>
+    목표::{{class.demand_post.goal|goaltag2han}}<br><br>
     <a href="{% url 'lineup_pageing_v2d1' class.id page_currunt cate_current state_current%}">
         {% if request.user in class.inline_users.all %}
             줄서기 취소

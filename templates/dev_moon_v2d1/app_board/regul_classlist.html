@@ -1,5 +1,6 @@
 {% extends 'base.html'%}
 {% load static from staticfiles %}
+{% load v2d1_board_tags %}
 
 <title>{%block title%}Tomakit-클래스 살펴보기{%endblock%}</title>
 {%block style%}
@@ -188,7 +189,12 @@
 {% for class in classlist %}
     {{class}}
     <br>
-    수업 타입 ::{{class.classtype}}<br><br>
+    수업 타입 ::
+    {% if class.classtype == "tutclass"%}
+        {{class.classtype|classtype2han}}
+    {% else %}
+        D-{{class.teach_post.deadline|classtype2han}}
+    {% endif %}<br><br>
     사진::<img src="{{MEDIA_URL}}{{class.t2classpic_set.first.image}}"><br><br>
     수업호스트::{{class.user}}<br><br>
     수업제목::{{class.title}}<br><br>

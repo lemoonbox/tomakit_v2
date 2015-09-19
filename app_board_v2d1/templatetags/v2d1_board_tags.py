@@ -69,3 +69,24 @@ def d_day_count(valu, argu=None):
     today=datetime.date.today()
     timeoff=today-valu
     return timeoff.days
+
+@register.filter(name="classtype2han")
+def classtype2han(valu, argu=None):
+    if valu == "tutclass":
+        return u"바로 신청 가능"
+    else:
+        return d_day_count(valu)
+
+@register.filter(name="goaltag2han")
+def goaltag2han(valu, argu=None):
+    goallist=valu.split("#")
+    hantags=""
+    for goal in goallist:
+        if goal == "easy&chip":
+            hantags+=u" #부담없고 재미있는 수업"
+        elif goal == "quality":
+            hantags+=u" #가격보다는 수업 퀄리티"
+        elif goal == "professional":
+            hantags+=" #창업을 위한 전문 수업"
+
+    return hantags
