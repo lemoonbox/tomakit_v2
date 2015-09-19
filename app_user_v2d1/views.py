@@ -304,24 +304,26 @@ def host_apply(request):
 
 def public_profile(request, user_num):
 
+
     if request.method == "GET":
         _profile_user=get_object_or_404(User, id=user_num)
-        print _profile_user
         _profile=get_object_or_404(T2Profile, user=_profile_user)
-        _hostprofile=""
+        _hostprofile=get_object_or_404(T2HostProfile, user=_profile_user)
+
         if T2HostProfile.objects.filter(user=_profile_user).exists():
             _hostprofile=T2HostProfile.objects.filter(user=_profile_user)[0]
             _open_class=T2ClassCard.objects.filter(
                 user=_profile_user, is_open=True)
 
+            return render(request, TEMP.PUBLIC_PROFILE_V2D1,{
+                "profile_user":_profile_user,
+                "profile":_profile,
+                "host_profile":_hostprofile,
+                "open_classes":_open_class
+                })
     else:
         return Http404("잘못된 요청입니다.")
-    return render(request, TEMP.PUBLIC_PROFILE_V2D1,{
-        "profile_user":_profile_user,
-        "profile":_profile,
-        "host_profile":_hostprofile,
-        "open_classes":_open_class
-        })
+
 
 @login_required
 def edit_profile(request, user_num):
@@ -383,7 +385,8 @@ def edit_profile(request, user_num):
         })
 
 @login_required
-def class_ckeck(request, user_num):
+def class_check(request, user_num):
+    HTTP_HOST=request.META["HTTP_HOST"]
     _profile_user=get_object_or_404(User, id=user_num)
     if request.method == "GET" and request.user==_profile_user:
         _host_classes=T2ClassCard.objects.filter(user=_profile_user)
@@ -396,6 +399,7 @@ def class_ckeck(request, user_num):
         "profile_user":_profile_user,
         "host_classes":_host_classes,
         "demand_classes":_demand_classes,
+        "HTTP_HOST":HTTP_HOST,
     })
 
 

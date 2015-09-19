@@ -271,8 +271,8 @@ def delete_comment(request, comment_num):
 
 @login_required
 def lineup_demand(request, demand_num, page,category, state):
-    print category
-    print state
+
+
     _demand_post= get_object_or_404(T2ClassDemand, pk=demand_num)
     _demand_card=get_object_or_404(T2DemandCard, pk=demand_num)
 

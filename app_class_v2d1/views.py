@@ -10,6 +10,8 @@ from django.core.exceptions import \
     ObjectDoesNotExist
 from django.http import \
     Http404
+from django.shortcuts import render, \
+    get_object_or_404
 import  datetime
 
 
@@ -612,6 +614,26 @@ def class_post_detail(request, class_num):
             })
     else :
         raise Http404("잘못된 요청 입니다.")
+
+
+@login_required
+def class_onoff(request ,class_type, card_num):
+
+    _classcard=get_object_or_404(T2ClassCard, pk=card_num)
+
+    if class_type == "tutclass":
+        _classpost=_classcard.tut_post
+        print "tut"
+        print _classpost.wr_done
+        print _classpost.is_open
+        print _classpost.user
+    elif class_type == "tachclass":
+        _classpost=_classcard.teach_post
+        print "teach"
+        print _classpost
+
+
+
 
 def check_state(request):
 
