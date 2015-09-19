@@ -76,6 +76,7 @@ def class_list_board(request, page=1, category = 'all', state='all'):
         categories = paging_date['categories']
         states = paging_date['states']
 
+        print _regul_class
     else:
         pass
     next ="/v2.1/index/demandlist"

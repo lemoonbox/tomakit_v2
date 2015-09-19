@@ -62,6 +62,8 @@ def demand_create(request):
         T2Profile.mobli_on(_user, demand_data['mobile1'],demand_data['mobile2'])
 
         images=request.FILES.getlist("image", "")
+        print "images"
+        print images
         _category, create=Category.objects.get_or_create(category=demand_data['category'])
         _state, create=State.objects.get_or_create(state=demand_data['state'])
         demand_data['user']=_user
@@ -83,8 +85,7 @@ def demand_create(request):
             imageform=T2DemandPicForm(demand_data, request.FILES)
             imagelist=[]
             if imageform.is_valid():
-                for file in images:
-                    _imagelist=imageform.savefiles()
+                _imagelist=imageform.savefiles()
 
             return render(request,TEMP.DEMAND_FINISH_V2D1,{
                 "HTTP_HOST":HTTP_HOST,
