@@ -24,6 +24,8 @@
         <div class="tmk-qitem-selecter-wrapper col-md-4 col-xs-4">
             <div class="selecter cover" tabindex="0">
                 <select name="category" required class="selecter_3 selecter-element" data-selecter-options="{&quot;cover&quot;:&quot;true&quot;}" tabindex="-1">
+                    <option value="all"
+                            {% if begin_data.category == 'all' %}selected{% endif %}>모든 카테고리</option>
                     <option value="leather"
                             {% if begin_data.category == 'leather' %}selected{% endif %}>가죽공예</option>
                     <option value="calligraphy"
@@ -58,6 +60,9 @@
                 <span class="selecter-selected" onclick="btnClick(this)">카테고리 선택</span>
                 <div class="selecter-options" data-value="">
                     <!--<span class="selecter-item selected" data-value="" onclick="selecting(this, '')">카테고리</span>-->
+                    <div class="selecter-item"
+                    data-value="id"
+                    onclick="selecting(this, 'all')">모든 카테고리</div>
                     <div class="selecter-item"
                          data-value="id"
                          onclick="selecting(this, 'leather')">가죽공예</div>
@@ -112,6 +117,8 @@
     <div class="tmk-qitem-selecter-wrapper col-md-4 col-xs-4">
         <div class="selecter cover" tabindex="0">
             <select name="state" required class="selecter_3 selecter-element" data-selecter-options="{&quot;cover&quot;:&quot;true&quot;}" tabindex="-1">
+                <option value="all"
+                        {% if begin_data.category == 'all' %}selected{% endif %}>모든 지역</option>
                 <option value="seoul"
                         {% if demand_data.state == 'seoul'%}selected{% endif %}>서울</option>
                 <option value="incheon_gyeonggi"
@@ -134,6 +141,9 @@
             <span class="selecter-selected" onclick="btnClick(this)">지역 선택</span>
             <div class="selecter-options" data-value="">
                 <!--<span class="selecter-item selected" data-value="" onclick="selecting(this, '')">카테고리</span>-->
+                <div class="selecter-item"
+                     data-value="id"
+                     onclick="selecting(this, 'all')">모든 카테고리</div>
                 <div class="selecter-item"
                      data-value="id"
                      onclick="selecting(this, 'seoul')">서울</div>

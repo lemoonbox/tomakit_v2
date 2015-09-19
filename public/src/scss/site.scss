@@ -407,7 +407,7 @@ nav {
 }
 @media screen and (min-width: 768px) {
   .navbar-right {
-    margin-right: 0px!important;
+    margin-right: 5px!important;
     li > a {
       padding-left: 2px !important;
       padding-right: 2px !important;
@@ -580,7 +580,7 @@ ul{
     width: 55px;
     height: 37px;
     margin-right: 10px;
-    background-image:url('http://papers.co/wp-content/uploads/papers.co-ma39-lovely-moss-flower-nature-1-wallpaper-300x300.jpg');
+    //background-image:url('http://papers.co/wp-content/uploads/papers.co-ma39-lovely-moss-flower-nature-1-wallpaper-300x300.jpg');
     background-repeat:no-repeat;
     background-size:cover;
   }
@@ -720,7 +720,7 @@ ul{
     width: 570px;
     height: 470px;
     float:left;
-    background-image: url("http://blog.freepeople.com/wp-content/uploads/2013/03/diy-painted-feathers-3.jpg");
+    //background-image: url("http://blog.freepeople.com/wp-content/uploads/2013/03/diy-painted-feathers-3.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: 0px 0px;
@@ -993,7 +993,7 @@ ul{
   border-bottom: none !important;
 }
 .modal-body {
-  padding-top: 0px;
+  padding: 0px 15px!important;
 }
 
 .tab-content {

@@ -6,7 +6,13 @@
 
 <link rel="stylesheet" type="text/css" href="{% static 'media/css/nouislider.min.css'%}">
 <link rel="stylesheet" type="text/css" href="{%static 'media/css/tmk-form.css'%}">
-
+<style>
+    #previous {color:#FF575C;}
+    .tmk-tab-style {display:inline;}
+    .tmk-tab-style a {color:#82888A;}
+    .tmk-tab-style .current {color:#FF575C;}
+    .tmk-tab-style > a:focus, .tmk-tab-style > a:hover {outline:0;text-decoration:none;}
+</style>
 {%endblock%}
 
 <body>
@@ -24,8 +30,11 @@
 
 
     <div class="col-md-8 col-md-offset-1 well" id="tmk-form" style="text-align:left;float:left;">
-        <form method="POST"  onkeypress="return event.keyCode != 13;" action="{%url 'class_create_teach_v2d1' class_num%}" enctype="multipart/form-data">
+        <form method="POST" action="{%url 'class_create_teach_v2d1' class_num%}" id="class-create-teach" enctype="multipart/form-data">
             {% csrf_token%}
+
+            <h3 hidden>단계: 기본 정보 입력</h3>
+            <section>
 
             <div class="tmk-panel">
                 <label class="col-md-2">수업횟수 & 시간</label>
@@ -208,10 +217,13 @@
                 {{teachform.extra_price.errors|striptags}}
                     </div>
             </div>
+</section>
 
 
+            <!--2단계-->
 
-            ---------------------------2단계---------------------<br>
+            <h3 hidden>단계: 클래스 소개 입력</h3>
+            <section>
             <div class="tmk-panel">
                 <label class="col-md-2">참조할사진<br>(선택)</label>
                 <div class="tmk-qitem-phupload col-md-10">
@@ -219,14 +231,14 @@
                         <div class="tmk-panel-contents">
                             <div class="well filedrag" id="filedrag">
                                 <div class="form-group row">
-                                    <div class="col-md-8">
+                                    <div class="col-md-8 col-xs-7">
                                         <div>
                                             <label class="drag-label">참조할 작품 사진을 이곳에 끌어다 놓아주세요 <br>
                                                 JPG, PNG 파일만 업로드가 가능합니다.</label>
                                         </div>
 
                                     </div>
-                                    <div class="col-md-4" style="top: 10px;">
+                                    <div class="col-md-4 col-xs-5" style="top: 10px;">
                                         <span id="uploader" onclick="findLastInput(true);" class="custom-file-input-button btn btn-default" style="cursor:pointer;">
                                             <span class="custom-file-input-button-text">PC에서 사진 가져오기</span>
                                         </span>
@@ -315,9 +327,14 @@
                 {{teachform.notic.errors|striptags}}
                         </div>
             </div>
+            </div>
+            </section>
+           <!--3단계-->
 
-            ---------------------------3단계---------------------<br>
-            <div class="tmk-panel">
+            <h3 hidden>단계: 작가&공방 소개 입력</h3>
+            <section>
+
+                <div class="tmk-panel">
                 <label class="col-md-2">작가소개</label>
                 <div class="col-md-10">
                 <input class="form-control" type="text" name="intro_self" value="{{prefill_intro}}">
@@ -334,7 +351,7 @@
                     <div class="col-md-5 col-xs-12">
                         도로명 또는 동 입력
                     <div id="locationField">
-                        <input class="form-control" id="autocomplete" placeholder="동이나 도로명을 입력해주세요" onFocus="geolocate()" type="text" name="addr_input">
+                        <input class="form-control" onkeypress="return event.keyCode != 13;" id="autocomplete" placeholder="동이나 도로명을 입력해주세요" onFocus="geolocate()" type="text" name="addr_input">
                     </div>
                     </div>
                     <table id="address" hidden>
@@ -372,24 +389,35 @@
                         </tr>
                     </table>
                 </div>
-                <div class="col-md-4 col-xs-12">
+                <div class="col-md-5 col-xs-12">
                     상세 주소 입력
                     <input class="form-control" type="text" name="addr_deatail" value="{{teach_data.addr_detail}}" placeholder="상세주소를 입력해주세요">
                 </div>
             </div>
 
-                </div>
+
             <input class="btn btn-primary pull-right" type="submit" value="개설등록">
+    <!--</div>-->
+                </section>
         </form>
 
     </div>
 </div>
 {%endblock%}
 {%block script%}
-<script src="{%static 'google_maps.js"></script>
+<script src="{%static 'google_map.js'%}"></script>
 <script src="https://maps.googleapis.com/maps/api/js?language=ko&libraries=places&callback=initAutocomplete" async defer></script>
 <script src='{%static "media/js/qitem_create.js" %}'></script>
 <script type="text/javascript" src="{% static 'media/js/nouislider.js' %}"></script>
 <script src="http://thecodeplayer.com/uploads/js/jquery-1.9.1.min.js" type="text/javascript"></script>
-<script src="{%static 'google_map.js'%}"></script>
+
+<script src="{%static 'media/js/jquery.steps.js'%}" charset="euc-kr"></script>
+    <script>
+    $("#class-create-teach").steps({
+        headerTag:"h3",
+        bodyTag:"section",
+        transitionEffect: "slideLeft",
+        autoFocus:true
+    });
+</script>
 {%endblock%}
