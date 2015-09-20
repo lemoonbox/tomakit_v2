@@ -1,6 +1,6 @@
 from django.db import models
 from django.conf import settings
-
+import datetime
 # Create your models here.
 
 
@@ -15,4 +15,4 @@ class PrePayment(models.Model):
     buyer_name=models.CharField(max_length=50)
     buyer_email=models.CharField(max_length=100)
     buyer_mobli=models.CharField(max_length=100)
-    want_day=models.DateField(null=False)
+    want_day=models.DateField(null=False, default=datetime.date.today())
