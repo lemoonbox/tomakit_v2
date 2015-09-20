@@ -6,7 +6,8 @@ from app_class_v2d1.models import \
     T2TutClass, \
     T2TeachClass,\
     T2ClassPic,\
-    T2ClassCard
+    T2ClassCard, \
+    T2ClassReview
 from utils.utils import shard_url_picker
 
 
@@ -202,13 +203,58 @@ class T2ClassPicForm(forms.ModelForm):
 
         return imagelist
 
-class ReviewForm(forms.Form):
+# class ReviewForm(forms.Form):
+#
+#     review_error={"required":u"필수 입력사항입니다."}
+#     grage_error={"required":u"필수 입력사항입니다.",
+#                 "invalid":u'숫자만 가능 합니다.'}
+#
+#     review=forms.CharField(error_messages=review_error, required=True)
+#     grade=forms.IntegerField(error_messages=grage_error, required=True)
+#
+#     def is_valid(self):
+#         valid=super(ReviewForm, self).is_valid()
+#
+#         print valid
+#         if not valid:
+#             return False
+#
+#         _user=self.data.get("user", "")
+#
+#         if _user:
+#             _review_exist=T2ClassReview.objects.filter(user=_user, is_active=True).exists()
+#             if _review_exist:
+#                 self.errors["review"]=u"리뷰는 1인당 1개만 입력 가능합니다."
+#                 return False
+#
+#         return True
 
-    require_error={"required":u"필수 입력사항입니다."}
-    invalid_error={"invalid":u'숫자만 가능 합니다.'}
-    both_error={}
-    both_error.update(require_error)
-    both_error.update(invalid_error)
 
-    review=forms.CharField(error_messages=require_error),
-    grade=forms.IntegerField(error_messages=both_error),
+class T2ReviewForm(forms.ModelForm):
+
+    review_error={"required":u"필수 입력사항입니다.",}
+    grade_error={"required":u"필수 입력사항입니다.",
+                 "invalid":u'숫자만 가능 합니다.'}
+
+    review=forms.CharField(error_messages=review_error)
+    grade=forms.IntegerField(error_messages=grade_error)
+
+    class Meta:
+        model=T2ClassReview
+        fields=('review', 'grade')
+
+    def is_valid(self):
+
+        valid = super(T2ReviewForm, self).is_valid()
+        _user=self.data.get("user", "")
+
+        if valid and _user:
+            _review_exist=T2ClassReview.objects.filter(
+                user=_user, is_active=True).exists()
+            if _review_exist:
+                self.add_error("review",u"리뷰는 1인당 1개만 입력 가능합니다.")
+                return False
+            else :
+                return True
+
+        return False
