@@ -3,7 +3,9 @@ from django.shortcuts import \
     render, \
     HttpResponseRedirect
 from django.contrib.auth.decorators import \
-    login_required
+    login_required, \
+    permission_required,\
+    user_passes_test
 from django.contrib.auth.models import \
     User
 from django.core.exceptions import \
@@ -35,14 +37,23 @@ from app_class_v2d1.forms import \
 
 
 # Create your views here.
+def host_check(user):
+    print user.t2hostprofile_set.first()
+    if user.t2hostprofile_set.first():
+        return True
+    else :
+        return False
+
 
 @login_required
+@user_passes_test(host_check)
 def class_begin(request):
 
     HTTP_HOST=request.META["HTTP_HOST"]
     begin_data={}
     if request.method == "GET":
         beginform=T2Class_BeginForm()
+        _user=User.objects.get(username=request.user)
 
     elif request.method == "POST":
         beginform=T2Class_BeginForm(request.POST)
@@ -84,6 +95,7 @@ def class_begin(request):
     })
 
 @login_required
+@user_passes_test(host_check)
 def create_tut(request, class_num):
     title=""
     prefill_intro=""
@@ -179,6 +191,7 @@ def create_tut(request, class_num):
     })
 
 @login_required
+@user_passes_test(host_check)
 def create_teach(request, class_num):
     title=""
     prefill_intro=""
@@ -275,6 +288,7 @@ def create_teach(request, class_num):
     })
 
 @login_required
+@user_passes_test(host_check)
 def modify_teach(request, class_num):
 
     if request.method == "GET":
@@ -389,6 +403,7 @@ def modify_teach(request, class_num):
         })
 
 @login_required
+@user_passes_test(host_check)
 def modify_tut(request, class_num):
 
     if request.method == "GET":
@@ -621,6 +636,7 @@ def class_post_detail(request, class_num):
 
 
 @login_required
+@user_passes_test(host_check)
 def class_onoff(request ,class_type, card_num, pro_user_num):
 
     _classcard=get_object_or_404(T2ClassCard, pk=card_num)
