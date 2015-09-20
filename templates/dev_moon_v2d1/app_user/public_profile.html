@@ -1,15 +1,13 @@
+{%extends 'base.html'%}
 {% load static from staticfiles %}
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
+
+    <title>{%block title%}{{profile_user.last_name}}{{profile_user.first_name}}님의 프로필{%endblock%}</title>
+
+{%block content%}
 <h3>프로필 화면</h3>
 
 프로필 사진<img src="{{MEDIA_URL}}{{profile_user.t2profile_set.first.pro_pic}}"><br>
-이름 : {{profile_user.last_name}}{{profile_user.first_name}}<br>
+이름 : {{profile_user.last_name}} {{profile_user.first_name}}<br>
 한줄소개 : {{profile_user.t2profile_set.first.intro_line}}<br><br><br>
 <h3>-----------------------------</h3>
 {% if request.user.is_authenticated%}
@@ -42,7 +40,4 @@
 
 
 {% endif%}
-
-
-</body>
-</html>
+{%endblock%}

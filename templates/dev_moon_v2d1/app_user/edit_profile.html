@@ -1,46 +1,334 @@
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
-프로필 편집<br><br>
-<form method="POST" action="{% url 'edit_profile_v2d1' user_num %}" enctype="multipart/form-data">
-    {%csrf_token%}
-    <input type="hidden" name="edit_type" value="basic">
-    프로필 사진 : <input type="file" name="pro_pic" ><br>
-    이름<input type="text" name="last_name"  value="{{profile_user.last_name}}">
-    <input type="text" name="first_name" value="{{profile_user.first_name}}">
-    {{ profileform.last_name.errors|striptags }}{{ profileform.first_name.errors|striptags }}<br><br>
-    헌쥴소개<input type="text" name="intro_line" value="{{profile_user.t2profile_set.first.intro_line}}"><br><br>
-    전화번호<input type="number" name="mobli1" value="010">-
-    <input type="number" name="mobli2" value="{{profile_user.t2profile_set.first.mobli1}}">-
-    <input type="number" name="mobli3" value="{{profile_user.t2profile_set.first.mobli2}}">
-    <input type="submit" value="저장하기">
-</form>
-<h3>작가 프로필 편</h3>
+{%extends 'base.html'%}
+{% load static from staticfiles %}
 
-<form method="POST" action="{% url 'edit_profile_v2d1' user_num %}" enctype="multipart/form-data">
-    {%csrf_token%}
-    <input type="hidden" name="edit_type" value="host">
-    소개사진<input type="file" name="intro_pic" value=""><br>
-    비디오<input type="text" name="video" placeholder="url 주소를 입력해주세요"
-              value="https://www.youtube.com/watch?v={{profile_user.t2hostprofile_set.first.intro_video}}"><br>
-    소개글 <textarea  name="intro_self">{{profile_user.t2hostprofile_set.first.intro_self}}</textarea><br>
-    공방 위치
-    동까지 입력해주세요å
-    <input type="text" name="shop_addr" placeholder="서울시 성북구 돈암1동"
-           value="{{profile_user.t2hostprofile_set.first.shop_addr}}"><br>
-    상세 주소
-    <input type="text" name="shop_addr_detail" placeholder="삼성아파트 100동 100호"
-            value="{{profile_user.t2hostprofile_set.first.shop_addr_detail}}"><br>
+<title>{%block title%}{{profile_user.last_name}}{{profile_user.first_name}}님의 프로필 수정 페이지{%endblock%}</title>
 
-    <input type="submit" value="저장하기">
-</form>
+{%block style%}
 
-<h3>계정 관리</h3>
-계정 이메일 <input type="text" value="{{request.user.username}}"><br>
-비밀 번호  <a href="{{HTTP_HOST}}/v2.1/user/pw_reset"><button>비밀번호 변경</button></a>
-</body>
-</html>
+<link rel="stylesheet" type="text/css" href="{%static 'media/css/tmk-form.css'%}">
+<style>
+    .file-upload-wrapper {
+        position: relative;
+        margin-bottom: 5px;
+    //border: 1px solid #ccc;
+    }
+    .custom-file-upload-hidden {
+        display: none;
+        visibility: hidden;
+        position: absolute;
+        left: -9999px;
+    }
+    .file-upload-input {
+        width: 50%;
+        color: #000;
+        font-size: 16px;
+        padding: 11px 17px;
+        border: 1px solid #ddd;
+        border-radius: 4px 0px 0px 4px;
+        background-color: #fff;
+    @include transition(all 0.2 s ease-in);
+        float: left; /* IE 9 Fix */
+    }
+
+    .file-upload-button {
+        cursor: pointer;
+        display: inline-block;
+        color: #82888A;
+        text-transform: uppercase;
+        padding: 11px 20px;
+        border: 1px solid #ccc;
+        margin-left: -1px;
+        height:46px;
+        border-radius:0px 4px 4px 0px;
+        background-color: #fff;
+        float: left; /* IE 9 Fix */
+        font-size:14px;
+
+    }
+    .file-upload-button:hover {
+        transition: all 0.2s ease-in;
+        background-color: #eee;
+        /*color:#82888A;*/
+    }
+    .profile-title {color:#FF565A;font-weight:600;border-bottom: 4px solid #FF565A!important;margin-left:15px;}
+</style>
+{%endblock%}
+{%block content%}
+
+<!--작가 프로필 편집-->
+<div class="tmk-main-body col-md-12">
+    <div class="tmk-page-header col-md-10 col-md-offset-1">
+        <div class="tmk-h2 tmk-title"></div>
+        <div class="tmk-h4"></div>
+    </div>
+    <div class="col-md-2 col-xs-2">
+        여기에 프로필 이미지 <img>
+        <h3>여기에 이름</h3>
+        <a class="btn btn-primary">프로필 화면 보기</a>
+    </div>
+    <div class="col-md-10 col-xs-10">
+        <div class="col-md-9 col-md-offset-1 well" id="tmk-form">
+            <form method="POST" action="{% url 'edit_profile_v2d1' user_num %}" enctype="multipart/form-data">
+                <h3 class="tmk-h3 profile-title pull-left">프로필 수정</h3>
+                {%csrf_token%}
+                <input class="form-control" type="hidden" name="edit_type" value="basic">
+                <div class="tmk-panel">
+                    <label class="col-md-2">프로필 사진</label>
+
+                    <div class="col-md-9">
+                        <div class="custom-file-upload">
+                            <!--<label for="file">File: </label>-->
+                            <input type="file" name="pro_pic" placeholder="프로필 사진을 업로드해주세요"/>
+                        </div>
+
+                        <!--<input type="file" hidden class="form-control" name="potpolio"><div class="input-group-btn"><button type="button" class="btn btn-default" tabindex="-1">PC에서 파일찾기</button></div><br>-->
+                    </div>
+
+                </div>
+
+                <div class="tmk-panel">
+                    <label class="col-md-2">이름</label>
+                    <div class="col-md-3 col-xs-5">
+                        성
+                        <input class="form-control" type="text" name="last_name"  value="{{profile_user.last_name}}">
+                    </div>
+                    <div class="col-md-3 col-xs-5">
+                        이름
+                        <input class="form-control" type="text" name="first_name" value="{{profile_user.first_name}}">
+                        {{ profileform.last_name.errors|striptags }}{{ profileform.first_name.errors|striptags }}
+                    </div>
+                </div>
+
+                <div class="tmk-panel">
+                    <label class="col-md-2">한줄소개</label>
+                    <div class="col-md-9">
+                        <input class="form-control" type="text" name="intro_line" value="{{profile_user.t2profile_set.first.intro_line}}">
+                    </div>
+                </div>
+                <div class="tmk-panel">
+                    <label class="col-md-2">전화번호</label>
+                    <div class="form-group">
+                        <div class="col-xs-4 col-sm-3 col-md-3" style="min-width:80px;">
+                            <input class="form-control disabled" name="mobli1" value="010" disabled>
+                        </div>
+                        <!--<div class="col-md-1" style="margin-right:-15px;text-align:center;">-</div>-->
+                        <div class="col-xs-4 col-sm-3 col-md-3" style="min-width:80px;">
+                            <input type="text" class="form-control" value="{{profile_user.t2profile_set.first.mobli2}}" name="mobile2">
+                        </div>
+                        <!--<div class="col-md-1" style="margin-right:-15px;text-align:center;">-</div>-->
+                        <div class="col-xs-4 col-sm-3 col-md-3" style="min-width:80px;">
+                            <input type="text" class="form-control" value="{{profile_user.t2profile_set.first.mobli3}}" name="mobile3">
+                        </div>
+                    </div>
+                </div>
+                <input class="btn btn-primary pull-right" type="submit" value="저장하기">
+            </form>
+        </div>
+
+        <div class="col-md-9 col-md-offset-1 well tmk-form">
+            <h3 class="tmk-h3 profile-title pull-left">작가 프로필 편집</h3>
+            <form method="POST" action="{% url 'edit_profile_v2d1' user_num %}" enctype="multipart/form-data">
+                {%csrf_token%}
+                <input class="form-control" type="hidden" name="edit_type" value="host">
+
+                <div class="tmk-panel">
+                    <label class="col-md-2">소개사진</label>
+
+                    <div class="col-md-9">
+                        <div class="custom-file-upload">
+                            <!--<label for="file">File: </label>-->
+                            <input type="file" name="intro_pic" placeholder="작품 사진을 업로드해주세요" value="">
+                        </div>
+
+                        <!--<input type="file" hidden class="form-control" name="potpolio"><div class="input-group-btn"><button type="button" class="btn btn-default" tabindex="-1">PC에서 파일찾기</button></div><br>-->
+                    </div>
+                </div>
+
+                <div style="margin-bottom:30px;">OR</div>
+
+                <div class="tmk-panel">
+                    <label class="col-md-2">비디오</label>
+                    <div class="col-md-9">
+                        <input class="form-control" type="text" name="video" placeholder="url 주소를 입력해주세요"
+                               value="https://www.youtube.com/watch?v={{profile_user.t2hostprofile_set.first.intro_video}}">
+
+                    </div>
+                </div>
+                <div class="tmk-panel">
+                    <label class="col-md-2">소개글</label>
+                    <div class="col-md-9">
+                        <textarea class="form-control" name="intro_self">{{profile_user.t2hostprofile_set.first.intro_self}}</textarea>
+                    </div>
+                </div>
+
+                <div class="tmk-panel">
+                    <label class="col-md-2">공방 위치</label>
+                    <div class="col-md-5">
+                        도로명 또는 동 입력
+                        <input class="form-control" type="text" name="shop_addr" placeholder="서울시 성북구 돈암1동"
+                               value="{{profile_user.t2hostprofile_set.first.shop_addr}}">
+                    </div>
+                    <div class="col-md-4">
+                        상세 주소
+                        <input class="form-control" type="text" name="shop_addr_detail" placeholder="삼성아파트 100동 100호"
+                               value="{{profile_user.t2hostprofile_set.first.shop_addr_detail}}">
+                    </div>
+                </div>
+                <input class="btn btn-primary pull-right" type="submit" value="저장하기">
+            </form>
+        </div>
+
+        <div class="col-md-9 col-md-offset-1 well tmk-form">
+            <h3 class="tmk-h3 profile-title pull-left">계정 관리</h3>
+            <div class="tmk-panel">
+                <label class="col-md-2">계정 이메일</label>
+                <div class="col-md-9">
+                    <input class="form-control" type="text" value="{{request.user.username}}">
+                </div>
+            </div>
+            <div class="tmk-panel">
+                <label class="col-md-2">비밀 번호</label>
+                <div class="col-md-9">
+                    <a href="{{HTTP_HOST}}/v2.1/user/pw_reset" class="btn btn-default" style="width:150px;">비밀번호 변경</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{%endblock%}
+
+{%block script%}
+<script src="{%static 'google_map.js'%}"></script>
+<script src="https://maps.googleapis.com/maps/api/js?language=ko&libraries=places&callback=initAutocomplete" async defer></script>
+<script src="{%static 'media/js/jquery.steps.js'%}" charset="euc-kr"></script>
+<script src='{%static "media/js/qitem_create.js" %}'></script>
+<script>
+    ;(function($) {
+
+        // Browser supports HTML5 multiple file?
+        var multipleSupport = typeof $('<input/>')[0].multiple !== 'undefined',
+                isIE = /msie/i.test( navigator.userAgent );
+
+        $.fn.customFile = function() {
+
+            return this.each(function() {
+
+                var $file = $(this).addClass('custom-file-upload-hidden'), // the original file input
+                        $wrap = $('<div class="file-upload-wrapper">'),
+                        $input = $('<input type="text" class="file-upload-input" />'),
+                // Button that will be used in non-IE browsers
+                        $button = $('<button type="button" class="file-upload-button">PC에서 파일가져오기</button>'),
+                // Hack for IE
+                        $label = $('<label class="file-upload-button" for="'+ $file[0].id +'">PC에서 파일가져오기</label>');
+
+                // Hide by shifting to the left so we
+                // can still trigger events
+                $file.css({
+                    position: 'absolute',
+                    left: '-9999px'
+                });
+
+                $wrap.insertAfter( $file )
+                        .append( $file, $input, ( isIE ? $label : $button ) );
+
+                // Prevent focus
+                $file.attr('tabIndex', -1);
+                $button.attr('tabIndex', -1);
+
+                $button.click(function () {
+                    $file.focus().click(); // Open dialog
+                });
+
+                $file.change(function() {
+
+                    var files = [], fileArr, filename;
+
+                    // If multiple is supported then extract
+                    // all filenames from the file array
+                    if ( multipleSupport ) {
+                        fileArr = $file[0].files;
+                        for ( var i = 0, len = fileArr.length; i < len; i++ ) {
+                            files.push( fileArr[i].name );
+                        }
+                        filename = files.join(', ');
+
+                        // If not supported then just take the value
+                        // and remove the path to just show the filename
+                    } else {
+                        filename = $file.val().split('\\').pop();
+                    }
+
+                    $input.val( filename ) // Set the value
+                            .attr('title', filename) // Show filename in title tootlip
+                            .focus(); // Regain focus
+
+                });
+
+                $input.on({
+                    blur: function() { $file.trigger('blur'); },
+                    keydown: function( e ) {
+                        if ( e.which === 13 ) { // Enter
+                            if ( !isIE ) { $file.trigger('click'); }
+                        } else if ( e.which === 8 || e.which === 46 ) { // Backspace & Del
+                            // On some browsers the value is read-only
+                            // with this trick we remove the old input and add
+                            // a clean clone with all the original events attached
+                            $file.replaceWith( $file = $file.clone( true ) );
+                            $file.trigger('change');
+                            $input.val('');
+                        } else if ( e.which === 9 ){ // TAB
+                            return;
+                        } else { // All other keys
+                            return false;
+                        }
+                    }
+                });
+
+            });
+
+        };
+
+        // Old browser fallback
+        if ( !multipleSupport ) {
+            $( document ).on('change', 'input.customfile', function() {
+
+                var $this = $(this),
+                // Create a unique ID so we
+                // can attach the label to the input
+                        uniqId = 'customfile_'+ (new Date()).getTime(),
+                        $wrap = $this.parent(),
+
+                // Filter empty input
+                        $inputs = $wrap.siblings().find('.file-upload-input')
+                                .filter(function(){ return !this.value }),
+
+                        $file = $('<input type="file" id="'+ uniqId +'" name="'+ $this.attr('name') +'"/>');
+
+                // 1ms timeout so it runs after all other events
+                // that modify the value have triggered
+                setTimeout(function() {
+                    // Add a new input
+                    if ( $this.val() ) {
+                        // Check for empty fields to prevent
+                        // creating new inputs when changing files
+                        if ( !$inputs.length ) {
+                            $wrap.after( $file );
+                            $file.customFile();
+                        }
+                        // Remove and reorganize inputs
+                    } else {
+                        $inputs.parent().remove();
+                        // Move the input so it's always last on the list
+                        $wrap.appendTo( $wrap.parent() );
+                        $wrap.find('input').focus();
+                    }
+                }, 1);
+
+            });
+        }
+
+    }(jQuery));
+
+    $('input[type=file]').customFile();
+</script>
+{%endblock%}

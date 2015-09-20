@@ -291,9 +291,15 @@ nav {
 #tmk-form {
   background-color: #fff;
 }
+.tmk-form {
+  background-color: #fff!important;
+}
 @media screen and (min-width:768px) {
   #tmk-form {
     min-width: 850px;
+  }
+  .tmk-form {
+    min-width: 850px!important;
   }
   #tmk-post {
     min-width: 750px;

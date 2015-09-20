@@ -1,6 +1,9 @@
 #tmk-form textarea {
     min-height: 150px;
 }
+.tmk-form textarea {
+    min-height: 150px;
+}
 .tmk-qitem-wrapper{
     width: 720px;
     margin:30px auto;
