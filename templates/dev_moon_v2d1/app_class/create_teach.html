@@ -15,9 +15,9 @@
     .steps .current a {color:#FF575C;}
     .steps .done a, .steps .disabled a {color:#82888A;}
     .steps .current img {content:url({%static 'media/image/slice/icon-phase_check-rd.png'%});vertical-align:text-bottom;margin-right:5px;}
-    .steps.done img, .steps .disabled img {content:url({%static 'media/image/slice/icon-phase_check-gr.png'%});vertical-align:text-bottom;margin-right:5px;}
+    .steps .done img, .steps .disabled img{content:url({%static 'media/image/slice/icon-phase_check-gr.png'%});vertical-align:text-bottom;margin-right:5px;}
     .actions .disabled > a {color:#fff!important;}
-    .actions li:first-child a {color:#FF575C!important;}
+    .actions li:first-child a {color:#FF575C;}
     </style>
 {%endblock%}
 
@@ -419,6 +419,7 @@
         headerTag:"h3",
         bodyTag:"section",
         transitionEffect: "slideLeft",
+        effectspeed: 1,
         autoFocus:true
     });
 </script>
