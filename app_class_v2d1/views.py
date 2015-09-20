@@ -95,6 +95,7 @@ def create_tut(request, class_num):
         tutform=T2TutClassForm()
         title=request.GET.get("title")
         prefill_intro=_user.t2hostprofile_set.first().intro_self
+
         imageform=T2ClassPicForm()
 
 

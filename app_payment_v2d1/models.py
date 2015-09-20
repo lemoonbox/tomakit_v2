@@ -15,4 +15,4 @@ class PrePayment(models.Model):
     buyer_name=models.CharField(max_length=50)
     buyer_email=models.CharField(max_length=100)
     buyer_mobli=models.CharField(max_length=100)
-    want_day=models.DateField()
+    want_day=models.DateField(null=False)
