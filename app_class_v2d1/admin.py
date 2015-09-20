@@ -37,7 +37,7 @@ class T2ClassCardAdmin(admin.ModelAdmin):
     fieldsets=[('Redcord',{'fields':['user', 'category','state', 'teach_post', 'tut_post',
                                      'classtype', 'class_id', 'title', 'intro_line',
                                      'repeat', 'perhour', 'price', 'extra_price',
-                                     'wr_done', 'deadline_over', 'is_open', 'is_active'],})]
+                                     'pop_point','wr_done', 'deadline_over', 'is_open', 'is_active'],})]
 
 admin.site.register(T2ClassCard, T2ClassCardAdmin)
 
