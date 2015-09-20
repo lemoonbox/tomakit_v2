@@ -57,7 +57,6 @@
 </head>
 <body>
 {%include "component/loader.html"%}
-{%include "layout/header.html"%}
 {%block nav%}{%include 'component/navigation/_head_nav.html'%}{%endblock%}
 {% block content %}
 {% endblock %}
@@ -75,7 +74,7 @@
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="{% static 'media/js/userform-validation.js' %}"></script>
+<!--<script type="text/javascript" src="{% static 'media/js/userform-validation.js' %}"></script>-->
 
 {%include "layout/footer.html"%}
 <script>
@@ -100,21 +99,5 @@
 {% block script %}
 {% endblock %}
 
-<!--<script>-->
-    <!--$("#tomatoma").click(function () {-->
-        <!--// Set the effect type-->
-        <!--var effect = 'slide';-->
-        <!--// Set the options for the effect type chosen-->
-<!--//        var options = { direction: down };-->
-        <!--// Set the duration (default: 400 milliseconds)-->
-        <!--var duration = 500;-->
-        <!--$('#how-tmk').toggle();-->
-    <!--});-->
-
-    <!--$("#how-tmk").click(function () {-->
-        <!--$("#how-tmk").toggle();-->
-    <!--});-->
-
-<!--</script>-->
 </body>
 </html>
