@@ -1,17 +1,18 @@
+{%extends 'base.html'%}
 {% load static from staticfiles%}
 {% load humanize %}
 {% load v2d1_board_tags %}
 <!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
-<h2>수업 요청 상세 정보</h2><br>
+<title>{%block title%}수업 요청 상세 정보 {{post.title}}{%endblock%}</title>
+{%block content%}
 
-카테고리::{{post.category.category|cate2han}}<br>
-제목 :: {{post.title}}<br>
+<div class="tmk-main-body col-md-12" style="text-align:left;">
+    <div class="col-md-10 col-md-offset-1">
+    <div class="col-md-2">여기에 사용자 이름 넣어야됨</div>
+
+    <div class="col-md-8">
+<div class="">{{post.category.category|cate2han}}</div>
+<div class="tmk-h3"> {{post.title}}</div>
 한줄소개 :: {{post.descript}}<br>
 목표::{{post.goal}}<br><br>
 
@@ -23,16 +24,20 @@
 {% for image in post.t2demandpic_set.all%}
     <img src="{{MEDIA_URL}}{{image.image}}"><br>
 {% endfor %}
-
-
+</div>
+</div>
+</div>
+<!--댓글-->
+<div class="col-md-12" style="background:#fff;">
 <form method="POST" action="{% url 'create_comment_v2d1' post.id %}">
     {%csrf_token%}
     <input type="hidden" name="demand_num" value="{{post.id}}">
     <textarea name="comment"></textarea><br>
-    <input type="checkbox" name="class_ad" value="host_ad">수업 소개 댓<br>
+    <input type="checkbox" name="class_ad" value="host_ad">수업 소개 댓글<br>
     <input type="submit" value="댓글달기">
 </form>
----------------------<br>
+
+
 {% for  comment in post.t2demandcmt_set.all%}
     {% if comment.is_active %}
         댓글::{{comment.comment}}
@@ -57,5 +62,6 @@
         </form><br><br>
     {% endif %}
 {% endfor %}
+</div>
+{%endblock%}
 </body>
-</html>
