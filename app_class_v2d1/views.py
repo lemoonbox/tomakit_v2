@@ -617,20 +617,33 @@ def class_post_detail(request, class_num):
 
 
 @login_required
-def class_onoff(request ,class_type, card_num):
+def class_onoff(request ,class_type, card_num, pro_user_num):
 
     _classcard=get_object_or_404(T2ClassCard, pk=card_num)
+    if _classcard.user != request.user:
+        return Http404("잘못된 요청입니다.")
 
     if class_type == "tutclass":
-        _classpost=_classcard.tut_post
-        print "tut"
-        print _classpost.wr_done
-        print _classpost.is_open
-        print _classpost.user
-    elif class_type == "tachclass":
-        _classpost=_classcard.teach_post
-        print "teach"
-        print _classpost
+        _post=_classcard.tut_post
+    else:
+        _post=_classcard.teach_post
+
+    if _classcard.is_open == False\
+            and _classcard.deadline_over == False \
+            and _classcard.wr_done == True:
+        _classcard.is_open=True
+        _post.is_open=True
+        _classcard.save()
+        _post.save()
+    elif _classcard.is_open == True or _classcard.deadline_over == True:
+        _classcard.is_open=False
+        _classcard.save()
+        _post.is_open=False
+        _post.save()
+
+
+    return HttpResponseRedirect("/v2.1/user/profile/%s/class_check" %(pro_user_num))
+
 
 
 

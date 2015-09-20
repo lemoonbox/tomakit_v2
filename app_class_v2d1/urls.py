@@ -14,7 +14,8 @@ urlpatterns = patterns('app_class_v2d1.views',
     url(r"modify/teach/(?P<class_num>[0-9]+)/$", "modify_teach", name="modify_teach_v2d1"),
 
     #onoff
-    url(r"onoff/(?P<class_type>[a-z,_]+)/(?P<card_num>[0-9]+)", 'class_onoff', name="onoff_class_v2d1"),
+    url(r"onoff/(?P<pro_user_num>[0-9]+)/(?P<class_type>[a-z,_]+)/(?P<card_num>[0-9]+)/$",
+        'class_onoff', name="onoff_class_v2d1"),
 
     #detail
     url(r'(?P<class_num>[0-9]+)/$', 'class_post_detail', name='class_detail_v2d1'),

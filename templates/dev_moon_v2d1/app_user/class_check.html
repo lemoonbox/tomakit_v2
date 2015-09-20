@@ -20,7 +20,12 @@
     수업소개::{{class.intro_line}}<br><br>
     횟수::{{class.repeat}}회/총::{% widthratio class.repeat 1 class.perhour%}시간<br><br>
     {{class.price}}
-    <a href="{% url 'onoff_class_v2d1' class.classtype class.id %}">수업 올리기/내리기</a>
+    <a href="{% url 'onoff_class_v2d1' class.user.id class.classtype class.id  %}">
+        {%if class.is_open%}
+            수업 내리기
+        {% else %}
+            수업 열기
+        {% endif %}</a>
 {% endfor %}
 
 <h3>요청한 수업</h3>
