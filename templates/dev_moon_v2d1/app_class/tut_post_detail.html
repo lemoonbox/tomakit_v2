@@ -1,15 +1,13 @@
+{% extends 'base.html' %}
 {% load static from staticfiles%}
 {% load humanize %}
 {% load v2d1_board_tags %}
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title></title>
-</head>
+    <title>{%block title%}토마킷 {{post.title}}{%endblock%}</title>
+{%block style%}
+{%endblock%}
 <body>
-<br>
-맞춤 수업 상세 페이지<br><br>
+{%block content%}
+<!--맞춤 수업 상세 페이지-->
 
 카테고리::{{post.category.category|cate2han}}<br>
 제목 :: {{post.title}}<br>
@@ -101,5 +99,8 @@
 </form>
 {% endif %}
 {% endfor %}
+
+{%endblock%}
 </body>
-</html>
+{%block script%}
+{%endblock%}

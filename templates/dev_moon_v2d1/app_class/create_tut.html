@@ -8,18 +8,16 @@
 <link rel="stylesheet" type="text/css" href="{%static 'media/css/tmk-form.css'%}">
 <style>
     .steps {height:80px;}
-    .tmk-tab-style {display:inline;}
-    /*.tmk-tab-style a {color:#82888A;}*/
-    .tmk-tab-style { padding:15px;}
+    .tmk-tab-style {display:inline;padding:15px;}
     .tmk-tab-style > a:focus, .tmk-tab-style > a:hover {outline:0;text-decoration:none;}
     .steps .current a {color:#FF575C;}
     .steps .done a, .steps .disabled a {color:#82888A;}
-
-    .steps .current img {content:url({%static 'media/image/slice/icon-phase_check-rd.png'%});vertical-align:text-bottom;margin-right:5px;}
-    .steps.done img, .steps .disabled img {content:url({%static 'media/image/slice/icon-phase_check-gr.png'%});vertical-align:text-bottom;margin-right:5px;}
+    .steps .current img {content:url("{%static 'media/image/slice/icon-phase_check-rd.png'%}");vertical-align:text-bottom;margin-right:5px;}
+    .steps .done img, .steps .disabled img{content:url("{%static 'media/image/slice/icon-phase_check-gr.png'%}");vertical-align:text-bottom;margin-right:5px;}
     .actions .disabled > a {color:#fff!important;}
-    .actions li:first-child a {color:#FF575C!important;}
+    .actions li:first-child a {color:#FF575C;}
 </style>
+
 {%endblock%}
 
 <body>
@@ -372,10 +370,7 @@
 {%block script%}
 <script src="{%static 'google_map.js'%}"></script>
 <script src="https://maps.googleapis.com/maps/api/js?language=ko&libraries=places&callback=initAutocomplete" async defer></script>
-<script src='{%static "media/js/qitem_create.js" %}'></script>
 <script type="text/javascript" src="{% static 'media/js/nouislider.js' %}"></script>
-<script src="http://thecodeplayer.com/uploads/js/jquery-1.9.1.min.js" type="text/javascript"></script>
-
 <script src="{%static 'media/js/jquery.steps.js'%}" charset="euc-kr"></script>
 <script>
     $("#class-create").steps({
@@ -385,4 +380,5 @@
         autoFocus:true
     });
 </script>
+<script src='{%static "media/js/qitem_create.js" %}'></script>
 {%endblock%}

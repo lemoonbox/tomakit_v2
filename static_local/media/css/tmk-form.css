@@ -191,9 +191,5 @@
 
 @media screen and (max-width:991px) {
     .col-md-2 {display:block;}
-    .col-md-7 {
-        display: inline-block;
-        min-width: 340px;
-        /*margin-left: -15px;*/
-    }
+    .col-md-7 {display:inline-block;min-width:340px;margin-left:-15px;}
 }
