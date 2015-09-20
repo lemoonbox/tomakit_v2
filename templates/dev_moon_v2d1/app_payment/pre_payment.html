@@ -1,14 +1,12 @@
+{%extends 'base.html'%}
 {% load static from staticfiles%}
 {% load humanize %}
 {% load v2d1_board_tags %}
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
 
+    <title>{%block title%}{%endblock%}</title>
+{%block style%}{%endblock%}
+
+{%block content%}
 <form method="POST" action="{% url 'pay_conf_v2d1'%}">
         {%csrf_token%}
     주문 번호 : {{merchant_id}}<br>
@@ -40,8 +38,6 @@
     <input type="radio" name="pay_method" value="vbank">가상계좌이체
     {{prefillform.pay_method.errors|striptags}}
 
-    <input type="submit" class="btn btn-primary btn-block" value="결제" id="buy">결제하기
+    <input type="submit" class="btn btn-primary" value="결제하기" id="buy">
 </form>
-
-</body>
-</html>
+{%endblock%}

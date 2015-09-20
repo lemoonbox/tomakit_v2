@@ -67,21 +67,88 @@
                         </div>
                     </li>
                 </a>
+                {%for que in qouboxs %}
 
+                {% if que.quebox.qtype == "I" %}
                 <li class="card-qitem counter{{forloop.counter}}">
-                    {%for bestclass in bestlist%}
-                    <br>
-                    수업 타입 ::{{bestclass.best_classcard.classtype}}<br><br>
-                    사진::<img src="{{MEDIA_URL}}{{bestclass.best_classcard.t2classpic_set.first.image}}"><br><br>
-                    수업호스트::{{bestclass.best_classcard.user}}<br><br>
-                    수업제목::{{bestclass.best_classcard.title}}<br><br>
-                    수업소개::{{bestclass.best_classcard.intro_line}}<br><br>
-                    횟수::{{bestclass.best_classcard.repeat}}회/수업당시간::{{bestclass.best_classcard.perhour}}시간<br><br>
-                    {{bestcalss.best_classcard.price}}
-                    ---------------------------------------------------------
-                    {% endfor %}
+
+                    <a class="picks-cards-profile" href="http://{{HTTP_HOST}}/v2/user/profile/{{que.quebox.djgouser.id}}"
+                       style="background-image:url({{MEDIA_URL}}{{que.quebox.djgouser.userprofile_set.first.propic}});"></a>
+
+            <span class="profile-name"><a href="http://{{HTTP_HOST}}/v2/user/profile/{{que.quebox.djgouser.id}}">
+                {{que.quebox.djgouser.last_name}} {{que.quebox.djgouser.first_name}}</a></span>
+                    <a href="http://{{HTTP_HOST}}/v2/question/item/{{que.quebox.qitempost.id}}">
+                        <div class="card-contents" style="background-image:url({{MEDIA_URL}}{{que.quebox.item_pic}});background-size:cover;">
+
+                        </div>
+                    </a>
+
+                    <div class="picks-cards-credit">
+                        <div class="h3">Q. </div><div class="category">{{que.quebox.category.first.category}}</div>
+
+                        <div class="credit-title"><a href="http://{{HTTP_HOST}}/v2/question/item/{{que.quebox.qitempost.id}}">
+                            {{que.quebox.title}} 만들고 싶어요</a></div>
+
+                        {% if que.quebox.qitempost.solutionbox.count == 0 %}
+                        <div class="cards-date">희망 수업일&nbsp;&nbsp;
+                            <div class="h4" style="display:inline;"> {{que.quebox.weekday}}</div>
+                        </div>
+                        {%elif que.quebox.qitempost.solutionbox.count >= 1 %}
+                        <div class="cards-date success" style="text-align:center;"><span>A.</span> {{que.quebox.qitempost.solutionbox.count}}개의 클래스가 만들어졌어요
+                        </div>
+                        {%endif%}
+
+
+                        <div class="cards-credit-label">
+                            <span class="label-address"><img src="{%static 'media/icon/map-icon.png'%}"> {{que.quebox.state.first.state}}/{{que.quebox.mylocal}}</span>
+
+                            <span class="label-tag pull-right">만들기 문의</span>
+                        </div>
+                    </div>
+
+                    {% elif que.quebox.qtype == "S" %}
+                <li class="card-qskill counter{{forloop.counter}}">
+
+                    <a class="picks-cards-profile" href="http://{{HTTP_HOST}}/v2/user/profile/{{que.quebox.djgouser.id}}"
+                       style="background-image:url({{MEDIA_URL}}{{que.quebox.djgouser.userprofile_set.first.propic}});"></a>
+
+            <span class="profile-name">
+                <a href="http://{{HTTP_HOST}}/v2/user/profile/{{que.quebox.djgouser.id}}">
+                    {{que.quebox.djgouser.last_name}} {{que.quebox.djgouser.first_name}}</a></span>
+
+
+                    <div class="picks-cards-credit">
+                        <div class="h3">Q. </div><div class="category">{{que.quebox.category.first.category}}</div>
+
+                        <div class="credit-title">
+                            <a href="http://{{HTTP_HOST}}/v2/question/skill/{{que.quebox.qskillpost.id}}">
+                                {{que.quebox.title}} 배우고 싶어요</a>
+                        </div>
+                        <div class="card-contents-skill">
+                            {{que.quebox.skill_class}}<br>
+                            {{que.quebox.skill_goal}}<br>
+                            {{que.quebox.skill_edu}}<br>
+                        </div>
+                        {% if que.quebox.qskillpost.solutionbox.count == 0 %}
+                        <div class="cards-date">희망 수업일&nbsp;&nbsp;
+                            <div class="h4" style="display:inline;"> {{que.quebox.weekday}}</div>
+                        </div>
+                        {%elif que.quebox.qskillpost.solutionbox.count >= 1 %}
+                        <div class="cards-date success" style="text-align:center;"><span>A.</span> {{que.quebox.qskillpost.solutionbox.count}}개의 클래스가 만들어졌어요
+                        </div>
+                        {%endif%}
+
+
+                        <div class="cards-credit-label">
+                            <span class="label-address"><img src="{%static 'media/icon/map-icon.png'%}"> {{que.quebox.state.first.state}}/{{que.quebox.mylocal}}</span>
+                            <!--<i style="margin-left:20px;" class="fa fa-tag"></i>-->
+                            <span class="label-tag pull-right">전문수업 문의</span>
+                        </div>
+                    </div>
+                    {% endif %}
                 </li>
 
+                {% endfor %}
 
                 <a href="http://{{HTTP_HOST}}/v2/board/caseboard/" style="color:black;">
                     <li class="tmk-picks-main" style="background:url({%static 'media/image/slice/card2.png'%});">

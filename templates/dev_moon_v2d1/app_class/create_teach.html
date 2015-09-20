@@ -7,12 +7,18 @@
 <link rel="stylesheet" type="text/css" href="{% static 'media/css/nouislider.min.css'%}">
 <link rel="stylesheet" type="text/css" href="{%static 'media/css/tmk-form.css'%}">
 <style>
-    #previous {color:#FF575C;}
+   .steps {height:80px;}
     .tmk-tab-style {display:inline;}
-    .tmk-tab-style a {color:#82888A;}
-    .tmk-tab-style .current {color:#FF575C;}
+    /*.tmk-tab-style a {color:#82888A;}*/
+    .tmk-tab-style { padding:15px;}
     .tmk-tab-style > a:focus, .tmk-tab-style > a:hover {outline:0;text-decoration:none;}
-</style>
+    .steps .current a {color:#FF575C;}
+    .steps .done a, .steps .disabled a {color:#82888A;}
+    .steps .current img {content:url({%static 'media/image/slice/icon-phase_check-rd.png'%});vertical-align:text-bottom;margin-right:5px;}
+    .steps .done img, .steps .disabled img{content:url({%static 'media/image/slice/icon-phase_check-gr.png'%});vertical-align:text-bottom;margin-right:5px;}
+    .actions .disabled > a {color:#fff!important;}
+    .actions li:first-child a {color:#FF575C;}
+    </style>
 {%endblock%}
 
 <body>
@@ -25,12 +31,8 @@
         <div class="tmk-page-pick"></div>
     </div>
 
-
-
-
-
-    <div class="col-md-8 col-md-offset-1 well" id="tmk-form" style="text-align:left;float:left;">
-        <form method="POST" action="{%url 'class_create_teach_v2d1' class_num%}" id="class-create-teach" enctype="multipart/form-data">
+    <div class="col-md-8 col-md-offset-1 well" id="tmk-form" style="border:none;text-align:left;float:left;">
+        <form method="POST" action="{%url 'class_create_teach_v2d1' class_num%}" id="class-create" enctype="multipart/form-data">
             {% csrf_token%}
 
             <h3 hidden>단계: 기본 정보 입력</h3>
@@ -413,10 +415,11 @@
 
 <script src="{%static 'media/js/jquery.steps.js'%}" charset="euc-kr"></script>
     <script>
-    $("#class-create-teach").steps({
+    $("#class-create").steps({
         headerTag:"h3",
         bodyTag:"section",
         transitionEffect: "slideLeft",
+        effectspeed: 1,
         autoFocus:true
     });
 </script>

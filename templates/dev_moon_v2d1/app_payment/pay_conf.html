@@ -1,27 +1,45 @@
 {% load static from staticfiles%}
 {% load humanize %}
 {% load v2d1_board_tags %}
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title></title>
-    <script src="https://d10ajoocuyu32n.cloudfront.net/jquery-1.9.1.min.js"></script>
-    <script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment.js"></script>
-    <script type="text/javascript">
-        var IMP = window.IMP;
-        IMP.init('imp63695163');
-        $(document).ready(function(){
-            $('#button_buy').on("click",function(){
+
+<title>{%block title%}결제하기{%endblock%}</title>
+
+<body>
+{%block content%}
+결제를 확인해주세요
+
+<h3>신청 정보 확인</h3>
+아래의 신청 정보가 맞는지 확인해 주세요.<br>
+----------------------------
+클래스명 {{post.title}}<br>
+결제 금액 {{ post.extra_price|add:post.price |intcomma}}<br>
+
+신청자 성함{{buyer_name}}<br>
+이메일{{buyer_email}}<br>
+전화번호 :010{{mobli}}<br>
+{% if classtype == "tutclass"%}
+희망 수업 시작일{{want_day}}<br>
+{% endif%}
+결제 방식 :{{pay_method}}<br>
+<button type="submit" class="btn btn-primary btn-block" value="결제" id="button_buy">결제하기</button><br>
+{%endblock%}
+{%block script%}
+<script src="https://d10ajoocuyu32n.cloudfront.net/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment.js"></script>
+<script type="text/javascript">
+    var IMP = window.IMP;
+    IMP.init('imp63695163');
+    $(document).ready(function(){
+        $('#button_buy').on("click",function(){
             IMP.request_pay({
                 pay_method : '{{pay_method}}',
                 merchant_uid : '{{merchant_id}}',
                 name : '{{post.title}}',
-                amount : {{amount}},
+                amount : '{{amount}}',
                 buyer_email : '{{buyer_email}}',
                 buyer_name : '{{buyer_name}}',
                 buyer_tel : '010{{mobli}}',
-                vbank_due : '{{vbank_due|date:"Ymd"}}',
+                vbank_due : '{{vbank_due|date:"Ymd"}}'
             }, function(rsp) {
                 if ( rsp.success ) {
                     window.location.replace("http://{{HTTP_HOST}}/v2.1/payment/pay_finish?rsp=success");
@@ -38,26 +56,7 @@
                     consol.log(msg)
                 }
             });
-            });
         });
-    </script>
-</head>
-<body>
-결제를 확인해주세요
-
-<h3>신청 정보 확인</h3>
-아래의 신청 정보가 맞는지 확인해 주세요.<br>
-----------------------------
-클래스명 {{post.title}}<br>
-결제 금액 {{ post.extra_price|add:post.price |intcomma}}<br>
-
-신청자 성함{{buyer_name}}<br>
-이메일{{buyer_email}}<br>
-전화번호 :010{{mobli}}<br>
-{% if classtype == "tutclass"%}
-    희망 수업 시작일{{want_day}}<br>
-{% endif%}
-결제 방식 :{{pay_method}}<br>
-<button type="submit" class="btn btn-primary btn-block" value="결제" id="button_buy">결제하기</button><br>
-</body>
-</html>
+    });
+</script>
+{%endblock%}

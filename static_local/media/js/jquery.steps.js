@@ -1058,7 +1058,7 @@ function renderPagination(wizard, options, state)
     if (options.enablePagination)
     {
         var pagination = "<{0} class=\"actions {1}\"><ul role=\"menu\" aria-label=\"{2}\">{3}</ul></{0}>",
-            buttonTemplate = "<li><a href=\"#{0}\" role=\"menuitem\">{1}</a></li>",
+            buttonTemplate = "<li class=\"col-md-5\"><a href=\"#{0}\" role=\"menuitem\">{1}</a></li>",
             buttonNext = "<li><a class=\"btn btn-primary pull-right\" href=\"#{0}\" role=\"menuitem\">{1}</a></li>",
             //buttonSubmit = "<input class=\"btn btn-primary pull-right\" type=\"submit\">",
             buttons = "";
@@ -1142,7 +1142,7 @@ function renderTitle(wizard, options, state, header, index)
             title: header.html()
         }),
         stepItem = $("<li role=\"tab\" class=\"tmk-tab-style\"><a id=\"" + uniqueStepId + "\" href=\"#" + uniqueHeaderId +
-            "\" aria-controls=\"" + uniqueBodyId + "\">" + title + "</a></li>");
+            "\" aria-controls=\"" + uniqueBodyId + "\"><img>" + title + "</a></li>");
 
     stepItem._enableAria(options.enableAllSteps || state.currentIndex > index);
 
@@ -2011,7 +2011,7 @@ var defaults = $.fn.steps.defaults = {
          * @default "Finish"
          * @for defaults
          **/
-        finish: "등록하기",
+        //finish: "등록하기",
         finish: "",
 
         /**

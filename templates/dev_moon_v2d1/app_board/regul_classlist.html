@@ -16,9 +16,6 @@
 <div class="tmk-main-body col-md-12">
     <div class="tmk-page-header col-md-10 col-md-offset-1">
         <div class="tmk-h2 tmk-title">클래스 살펴보기</div>
-    </div>
-
-
 <form method="GET" action="{% url 'class_filter_redirct_v2d1' %}">
     {%csrf_token%}
     <div class="tmk-search cover">
@@ -182,10 +179,12 @@
     </div>
 </form>
 
+    <div class="tmk-page-pick"></div>
+    </div>
 <!-- -&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;-->
 
 <!--수업 list-->
-
+<div class="col-md-12 card-list">
 {% for class in classlist %}
     {{class}}
     <br>
@@ -223,6 +222,7 @@
 {% endfor %}
 
 </div>
+    </div>
 {% endblock %}
 {% block script %}
 <script src='{%static "media/js/qitem_create.js" %}'></script>

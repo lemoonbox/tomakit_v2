@@ -6,7 +6,20 @@
 
 <link rel="stylesheet" type="text/css" href="{% static 'media/css/nouislider.min.css'%}">
 <link rel="stylesheet" type="text/css" href="{%static 'media/css/tmk-form.css'%}">
+<style>
+    .steps {height:80px;}
+    .tmk-tab-style {display:inline;}
+    /*.tmk-tab-style a {color:#82888A;}*/
+    .tmk-tab-style { padding:15px;}
+    .tmk-tab-style > a:focus, .tmk-tab-style > a:hover {outline:0;text-decoration:none;}
+    .steps .current a {color:#FF575C;}
+    .steps .done a, .steps .disabled a {color:#82888A;}
 
+    .steps .current img {content:url({%static 'media/image/slice/icon-phase_check-rd.png'%});vertical-align:text-bottom;margin-right:5px;}
+    .steps.done img, .steps .disabled img {content:url({%static 'media/image/slice/icon-phase_check-gr.png'%});vertical-align:text-bottom;margin-right:5px;}
+    .actions .disabled > a {color:#fff!important;}
+    .actions li:first-child a {color:#FF575C!important;}
+</style>
 {%endblock%}
 
 <body>
@@ -20,8 +33,12 @@
     </div>
 
     <div class="col-md-8 col-md-offset-1 well" id="tmk-form" style="text-align:left;float:left;">
-        <form method="POST" onkeypress="return event.keyCode != 13;" action="{%url 'class_craete_tut_v2d1' class_num%}" enctype="multipart/form-data">
+        <form method="POST" action="{%url 'class_craete_tut_v2d1' class_num%}" id="class-create"enctype="multipart/form-data">
             {% csrf_token%}
+
+            <h3 hidden>단계: 기본 정보 입력</h3>
+            <section>
+
             <div class="tmk-panel">
                 <label class="col-md-2">수업횟수 & 시간</label>
                 <div class="tmk-qitem-selecter-wrapper col-md-3 col-xs-4">
@@ -169,8 +186,11 @@
                     {{tutform.extra_price.errors|striptags}}
                 </div>
             </div>
+            </section>
 
-            ---------------------------2단계---------------------<br>
+            <!--2단계-->
+            <h3 hidden>단계: 클래스 소개 입력</h3>
+            <section>
             <div class="tmk-panel">
                 <label class="col-md-2">참조할사진<br>(선택)</label>
                 <div class="tmk-qitem-phupload col-md-10">
@@ -275,7 +295,13 @@
                     </div>
                 </div>
 </div>
-            ---------------------------3단계---------------------<br>
+
+
+            </section>
+<!--3단계-->
+
+            <h3 hidden>단계: 작가&공방 소개 입력</h3>
+         <section>
                 <div class="tmk-panel">
                     <label class="col-md-2">작가소개</label>
                     <div class="col-md-10">
@@ -292,7 +318,7 @@
                         <div class="col-md-5 col-xs-12">
                             도로명 또는 동 입력
                             <div id="locationField">
-                                <input class="form-control" id="autocomplete" placeholder="동이나 도로명을 입력해주세요" onFocus="geolocate()" type="text" name="addr_input">
+                                <input onkeypress="return event.keyCode != 13;" class="form-control" id="autocomplete" placeholder="동이나 도로명을 입력해주세요" onFocus="geolocate()" type="text" name="addr_input">
                             </div>
                         </div>
                         <table id="address" hidden>
@@ -337,6 +363,7 @@
                 </div>
 
             <input class="btn btn-primary pull-right" type="submit" value="개설등록">
+         </section>
         </form>
     </div>
 </div>
@@ -348,9 +375,10 @@
 <script src='{%static "media/js/qitem_create.js" %}'></script>
 <script type="text/javascript" src="{% static 'media/js/nouislider.js' %}"></script>
 <script src="http://thecodeplayer.com/uploads/js/jquery-1.9.1.min.js" type="text/javascript"></script>
-<script src="{%static 'media/js/jquery.steps.js'%}"></script>
+
+<script src="{%static 'media/js/jquery.steps.js'%}" charset="euc-kr"></script>
 <script>
-    $("#class-create-teach").steps({
+    $("#class-create").steps({
         headerTag:"h3",
         bodyTag:"section",
         transitionEffect: "slideLeft",
