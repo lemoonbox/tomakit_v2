@@ -75,7 +75,9 @@
     <input type="hidden" name="class_num" value="{{post.id}}">
     <input type="hidden" name="classtype" value="tut_class">
     <textarea name="review"></textarea><br>
+    {{review.review.errors|striptags}}
     <input type="number" name="grade"><br>
+    {{review.grade.errors|striptags}}
     <input type="submit" value="후기입력">
 </form>
 {% for review in post.t2classreview_set.all%}

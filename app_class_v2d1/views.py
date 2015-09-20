@@ -31,7 +31,7 @@ from app_class_v2d1.forms import \
     T2TutClassForm, \
     T2ClassPicForm, \
     T2ClassCardForm,\
-    ReviewForm
+    T2ReviewForm
 
 
 # Create your views here.
@@ -499,12 +499,19 @@ def modify_tut(request, class_num):
 def create_review(request, class_num):
 
     if request.method == "POST":
+        _post=""
+        _review=""
         review=request.POST.get("review", "")
         grade=request.POST.get("grade", "")
         _user=User.objects.get(username=request.user)
         classtype=request.POST.get("classtype", "")
-        reviewform=ReviewForm(request.POST)
 
+        review_data={
+            "review":review,
+            "grade":grade,
+            "user":_user,
+        }
+        reviewform=T2ReviewForm(review_data)
         if classtype == "teach_class":
             _post=T2TeachClass.objects.get(pk=class_num)
             if reviewform.is_valid():
@@ -512,11 +519,6 @@ def create_review(request, class_num):
                                   teach_post=_post, grade=grade,
                                   review=review)
                 _review.save()
-            return render(request, TEMP.TEACH_POST_DETAIL_V2D1,{
-                "post":_post,
-                "review":reviewform,
-            })
-
         elif classtype == "tut_class":
             _post=T2TutClass.objects.get(pk=class_num)
             if reviewform.is_valid():
@@ -524,12 +526,13 @@ def create_review(request, class_num):
                         tut_post=_post, grade=grade,
                         review=review)
                 _review.save()
-            return render(request, TEMP.TUT_POST_DETAIL_V2D1,{
-                "post":_post,
-                "review":reviewform,
-            })
+        return render(request, TEMP.TUT_POST_DETAIL_V2D1,{
+            "post":_post,
+            "review":reviewform,
+        })
+    return Http404("잘못된 요청입니다.")
 
-    return HttpResponseRedirect("/")
+    # return HttpResponseRedirect("/")
 
 def modify_review(request, class_num):
 
@@ -539,7 +542,7 @@ def modify_review(request, class_num):
         grade=request.POST.get("grade", "")
         _user=User.objects.get(username=request.user)
         classtype=request.POST.get("classtype", "")
-        reviewform=ReviewForm(request.POST)
+        reviewform=T2ReviewForm(request.POST)
 
         if classtype == "teach_class":
             _review=T2ClassReview.objects.get(pk=review_num)
