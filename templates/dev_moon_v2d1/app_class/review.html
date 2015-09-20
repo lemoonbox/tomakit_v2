@@ -1,15 +1,9 @@
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
+{%load static from staticfiles%}
+<div class="col-md-10">
 리뷰쓰기
 <form method="POST" action="{% url 'create_review_v2d1' class_num %}">
-    <textarea name="review"></textarea><br>
-    <input type="number" name="grade"><br><br>
-    <input type="submit" value="후기쓰기">
+    <textarea class="form-control" name="review"></textarea><br>
+    <input class="form-control" type="number" name="grade"><br><br>
+    <input class="btn btn-primary "type="submit" value="후기쓰기">
 </form>
-</body>
-</html>
+</div>

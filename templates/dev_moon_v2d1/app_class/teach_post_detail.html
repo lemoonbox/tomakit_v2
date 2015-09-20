@@ -24,7 +24,6 @@
         <img src="{{MEDIA_URL}}{{image.image}}"><br>
         {% endfor %}
 
-
     <div class="col-md-7 col-md-offset-1 well" id="tmk-post" style="text-align:left;float:left;">
 
 <br><br>
@@ -71,37 +70,57 @@
 {{post.user.last_name}}{{post.user.first_name}}<br>
 {{post.user.t2hostprofile_set.first.intro_self}}<br>
 <br>
-<h2>후기 쓰기</h2>
 
-<form method="POST" action="{% url 'create_review_v2d1' post.id %}">
-    {%csrf_token%}
+
+        </div>
+
+    <div class="col-md-8 col-md-offset-1" style="padding:0px;">
+            <h2>후기 쓰기</h2>
+
+            <form method="POST" action="{% url 'create_review_v2d1' post.id %}">
+                {%csrf_token%}
+<div class="col-md-10">
     <input type="hidden" name="class_num" value="{{post.id}}">
-    <input type="hidden" name="classtype" value="teach_class">
-    <textarea name="review"></textarea><br>
-    <input type="number" name="grade"><br>
-    <input type="submit" value="후기입력">
-</form>
-{% for review in post.t2classreview_set.all%}
-{% if review.is_active %}
-    후기::{{review.review}}
-    //등급::{{review.grade}}<br>
-수정 form 나중에  hidden
-<form method="POST" action="{% url 'modify_review_v2d1' post.id %}">
-    {%csrf_token%}
-    <input type="hidden" name="review_num" value="{{review.id}}">
-    <input type="hidden" name="class_num" value="{{post.id}}">
-    <input type="hidden" name="classtype" value="teach_class">
-    <textarea name="review">{{review.review}}</textarea><br>
-    <input type="number" name="grade" value="{{review.grade}}"><br>
-    <input type="submit" value="후기수정">
-</form>
-<form method="POST" action="{% url 'delete_review_v2d1' review.id%}">
-    {%csrf_token%}
-    <input type="hidden" name="classtype" value="teach_class">
-    <input type="submit" value="삭제하기">
-</form>
-{% endif %}
-{% endfor %}
+                <input type="hidden" name="classtype" value="teach_class">
+                <textarea class="form-control" name="review"></textarea><br>
+                <input type="number" name="grade"><br>
+    </div>
+                <div class="col-md-2">
+                <input class="btn btn-primary" type="submit" value="후기입력"></div>
+            </form>
+        </div>
+
+        <div class="col-md-8 col-md-offset-1" style="padding:0px;">
+            {% for review in post.t2classreview_set.all%}
+            {% if review.is_active %}
+            후기::{{review.review}}
+            등급::{{review.grade}}<br>
+            수정 form 나중에  hidden
+        </div>
+
+        <div class="col-md-8 col-md-offset-1" style="padding:0px;">
+        <form method="POST" action="{% url 'modify_review_v2d1' post.id %}">
+                {%csrf_token%}
+                <div class="col-md-10">
+                <input type="hidden" name="review_num" value="{{review.id}}">
+                <input type="hidden" name="class_num" value="{{post.id}}">
+                <input type="hidden" name="classtype" value="teach_class">
+                <textarea class="form-control" name="review">{{review.review}}</textarea><br>
+                <input class="form-control" type="number" name="grade" value="{{review.grade}}"><br>
+                    </div>
+                <div class="col-md-2">
+                <input class="" type="submit" value="후기수정">
+                </div>
+            </form>
+            </div>
+        <div class="col-md-8 col-md-offset-1" style="padding:0px;">
+            <form method="POST" action="{% url 'delete_review_v2d1' review.id%}">
+                {%csrf_token%}
+                <input type="hidden" name="classtype" value="teach_class">
+                <input class="" type="submit" value="삭제하기">
+            </form>
+            {% endif %}
+            {% endfor %}
 
         </div>
     </div>
