@@ -65,7 +65,7 @@ def class_list_board(request, page=1, category = 'all', state='all'):
             state_condt.append(state)
 
 
-        paging_date = pagination(navline_num=2, onepage_post_num=1,
+        paging_date = pagination(navline_num=5, onepage_post_num=6,
                                  target_model=T2ClassCard, cate_condt=cate_condt,
                                  state_condt =state_condt, page=page)
 
