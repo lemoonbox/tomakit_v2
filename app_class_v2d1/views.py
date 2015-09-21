@@ -627,6 +627,9 @@ def class_post_detail(request, class_num):
 
         else:
             _post=_postcard.teach_post
+            print _post
+            print dir(_post)
+            print _post.t2classpic_set.all()
 
             return render(request, TEMP.TEACH_POST_DETAIL_V2D1,{
                 "post":_post,

@@ -208,9 +208,9 @@ EMAIL_HOST_PASSWORD = 'tomakit2015'
 
 
 ####------------------default login path----------------------####
-LOGIN_REDIRECT_URL = '/user/profile'
-LOGIN_URL = '/v2/user/login/'
-LOGOUT_URL = '/v2/user/logout/'
+LOGIN_REDIRECT_URL = 'v2.1/user/profile'
+LOGIN_URL = '/v2.1/user/login/'
+LOGOUT_URL = '/v2.1/user/logout/'
 
 ####------------------serve static/media file----------------------####
 #S3serve settings
