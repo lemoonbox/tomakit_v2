@@ -1,19 +1,48 @@
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
-전화번호를 입력해주세요.
+{% extends 'base.html'%}
+{% load static from staticfiles %}
+{% load humanize %}
+{% load v2d1_board_tags %}
+<title>{%block title%}Tomakit 함께 줄서기 인증{%endblock%}</title>
+{%block style%}
+<style>
+    .tmk-review .col-md-8 {padding:0px;}
+    .tmk-review .btn-primary {width:170px;height:80px;}
+    .tmk-review textarea {height:80px;}
+</style>
+{%endblock%}
 
-<form method="POST" action="{% url 'mobli_require_v2d1' post_num %}">
-    {%csrf_token%}
-    <input type="hidden" name="lineup_next" value="{{lineup_next}}">
-    <input type="text" value="010">-
-    <input type="text" name="mobli1">-
-    <input type="text" name="mobli2">
-    <input type="submit" value="입력하기고 줄서기">
-</form>
-</body>
-</html>
+<body>
+{%block content%}
+<br>
+<!--워크샵 수업 상세 페이지-->
+
+<div class="tmk-main-body col-md-12">
+    <div class="tmk-page-header col-md-10 col-md-offset-1">
+        <div class="tmk-h4"></div>
+        <div class="tmk-h2 tmk-title"></div>
+        <div class="tmk-h4"></div>
+    </div>
+
+    <div>
+        <div class=""
+       <div class="tmk-h2">함께 줄서기</div>
+        <div class="tmk-h4">등록 하시면 클래스가 개설될 때 함께 알려드립니다.<br>
+            <br>최초 1회 입력 후, 다음 줄서기엔 입력하실 필요 없습니다</div>
+        <div>
+            <label>연락받으실 전화번호</label>
+            <div class="form-group">
+                <form method="POST" action="{% url 'mobli_require_v2d1' post_num %}">
+                    {%csrf_token%}
+                    <input class="form-control" type="hidden" name="lineup_next" value="{{lineup_next}}">
+                    <input class="form-control" type="text" value="010">
+                    <input class="form-control" type="text" name="mobli1">
+                    <input class="form-control" type="text" name="mobli2">
+                    <input class="btn btn-primary" type="submit" value="입력하고 줄서기">
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{%endblock%}

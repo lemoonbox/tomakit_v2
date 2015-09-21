@@ -5,7 +5,7 @@
 
 {%block content%}
 <h3>프로필 화면</h3>
-
+<style>img {width:300px;}</style>
 <a href="http://{{HTTP_HOST}}/v2.1/user/profile/{{profile_user.id}}">
 프로필 사진<img src="{{MEDIA_URL}}{{profile_user.t2profile_set.first.pro_pic}}"><br>
 이름 : {{profile_user.last_name}} {{profile_user.first_name}}</a><br>
