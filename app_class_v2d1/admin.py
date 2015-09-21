@@ -7,6 +7,49 @@ from app_class_v2d1.models import \
     T2ClassPic
 # Register your models here.
 
+class T2TutClassPicLine(admin.TabularInline):
+
+    fieldsets =(("Images",
+                 {'fields':('user', 'tut_post', 'class_card',
+                            'image', 'is_active',)}
+                ),)
+    model = T2ClassPic
+
+    def get_max_num(self, request, obj=None, **kwargs):
+        max_num =5
+
+        return max_num
+    extra = 0
+
+class T2TeachClassPicLine(admin.TabularInline):
+
+    fieldsets =(("Images",
+                 {'fields':('user', 'teach_post', 'class_card',
+                            'image', 'is_active',)}
+                ),)
+    model = T2ClassPic
+
+    def get_max_num(self, request, obj=None, **kwargs):
+        max_num =5
+
+        return max_num
+    extra = 0
+
+class T2CardPicLine(admin.TabularInline):
+
+    fieldsets =(("Images",
+                 {'fields':('user', 'tut_post', 'teach_post', 'class_card',
+                            'image', 'is_active',)}
+                ),)
+    model = T2ClassPic
+
+    def get_max_num(self, request, obj=None, **kwargs):
+        max_num =5
+
+        return max_num
+    extra = 0
+
+
 class T2TeachClassAdmin(admin.ModelAdmin):
 
     list_display=('title', 'id', 'repeat','perhour', 'price', 'extra_price')
@@ -16,8 +59,8 @@ class T2TeachClassAdmin(admin.ModelAdmin):
                                      'extra_price', 'video', 'descript', 'curri',
                                      'notic', 'state', 'addr', 'addr_detail',
                                      'wr_done', 'deadline_over', 'is_open', 'is_active',],})]
+    inlines = (T2TeachClassPicLine,)
 
-admin.site.register(T2TeachClass, T2TeachClassAdmin)
 
 class T2TutClassAdmin(admin.ModelAdmin):
 
@@ -27,8 +70,8 @@ class T2TutClassAdmin(admin.ModelAdmin):
                                      'extra_price', 'video', 'descript', 'curri',
                                      'notic', 'state', 'addr', 'addr_detail',
                                      'wr_done', 'deadline_over', 'is_open', 'is_active',],})]
+    inlines = (T2TutClassPicLine,)
 
-admin.site.register(T2TutClass, T2TutClassAdmin)
 
 
 class T2ClassCardAdmin(admin.ModelAdmin):
@@ -39,11 +82,15 @@ class T2ClassCardAdmin(admin.ModelAdmin):
                                      'repeat', 'perhour', 'price', 'extra_price',
                                      'pop_point','wr_done', 'deadline_over', 'is_open', 'is_active'],})]
 
-admin.site.register(T2ClassCard, T2ClassCardAdmin)
+    inlines = (T2CardPicLine,)
 
 class T2ReviewAmdin(admin.ModelAdmin):
     list_display=('review', 'id', 'user','grade','host_user','teach_post', 'tut_post')
     fieldsets=[('Redcord',{'fields':['user', 'host_user','teach_post', 'tut_post', 'grade',
                                      'review', 'image', 'is_active'],})]
 
+
+admin.site.register(T2TeachClass, T2TeachClassAdmin)
+admin.site.register(T2TutClass, T2TutClassAdmin)
+admin.site.register(T2ClassCard, T2ClassCardAdmin)
 admin.site.register(T2ClassReview, T2ReviewAmdin)
