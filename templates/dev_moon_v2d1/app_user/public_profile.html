@@ -6,8 +6,9 @@
 {%block content%}
 <h3>프로필 화면</h3>
 
+<a href="http://{{HTTP_HOST}}/v2.1/user/profile/{{profile_user.id}}">
 프로필 사진<img src="{{MEDIA_URL}}{{profile_user.t2profile_set.first.pro_pic}}"><br>
-이름 : {{profile_user.last_name}} {{profile_user.first_name}}<br>
+이름 : {{profile_user.last_name}} {{profile_user.first_name}}</a><br>
 한줄소개 : {{profile_user.t2profile_set.first.intro_line}}<br><br><br>
 <h3>-----------------------------</h3>
 {% if request.user.is_authenticated%}
@@ -26,15 +27,17 @@
     가게 주소{{host_profile.shop_addr}}<br>
 <h3>후기</h3>
     {% for review in profile_user.host_review.all%}
+        <a href="http://{{HTTP_HOST}}/v2.1/user/profile/{{review.user.id}}">
         리뷰어 사진:<img src="{{MEDIA_URL}}{{review.user.t2profile_set.first.pro_pic}}"><br>
-        리뷰어 이름:{{review.user.last_name}}{{review.user.first_name}}<br>
+        리뷰어 이름:{{review.user.last_name}}{{review.user.first_name}}</a><br>
         별점 : {{review.grade}}<br>
         리뷰 : {{review.review}}
     {% endfor %}
     <h3>모집중인 수업</h3>
     {% for class in open_classes%}
-        수업 사진 ::<img src="{{MEDIA_URL}}{{class.t2classpic_set.first.image}}"<br>
-        수업 제목 ::{{class.title}}<br>
+        <a href="http://{{HTTP_HOST}}/v2.1/class/{{class.id}}">
+        수업 사진 ::<img src="{{MEDIA_URL}}{{class.t2classpic_set.first.image}}"><br>
+        수업 제목 ::{{class.title}}</a><br>
         수업 소개 ::{{class.intro_line}}<br>
     {% endfor %}
 

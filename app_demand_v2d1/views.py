@@ -25,7 +25,8 @@ from app_demand_v2d1.forms import\
     DemandForm, \
     T2DemandCardForm,\
     T2DemandPicForm,\
-    CommentForm
+    CommentForm, \
+    MobliForm
 from app_demand_v2d1.models import \
     T2ClassDemand, \
     T2DemandPic, \
@@ -271,9 +272,41 @@ def delete_comment(request, comment_num):
         return  Http404("잘못된 요청입니다.")
 
 @login_required
-def lineup_demand(request, demand_num, page,category, state):
+def mobli_required(request, post_num):
+    HTTP_HOST=request.META["HTTP_HOST"]
+    if request.method == "GET":
+        mobliform=MobliForm()
+        lineup_next=request.GET.get("lineup_next", "/")
+
+    elif request.method == "POST":
+        lineup_next=request.POST.get("lineup_next", "/")
+        mobli1=request.POST.get('mobli1', "")
+        mobli2=request.POST.get('mobli2', "")
+        mobli="010"+mobli1+mobli2
+
+        _user=User.objects.get(username=request.user)
+
+        _profile=_user.t2profile_set.first()
+        _profile.mobli=mobli
+        _profile.mobli_able=True
+        _profile.save()
+
+        return HttpResponseRedirect("/v2.1/demand/lineup/"+post_num+"?lineup_next="+lineup_next)
+
+    return render(request, TEMP.LINEUP_REQUIRE_V2D1,{
+        "HTTP_HOST":HTTP_HOST,
+        "mobliform":mobliform,
+        "lineup_next":lineup_next,
+        "post_num":post_num,
+
+    })
 
 
+
+@login_required
+def lineup_demand(request, demand_num, page=1,category=all, state=all):
+
+    lineup_next=request.GET.get("lineup_next", "/")
     _demand_post= get_object_or_404(T2ClassDemand, pk=demand_num)
     _demand_card=get_object_or_404(T2DemandCard, pk=demand_num)
 
@@ -286,7 +319,7 @@ def lineup_demand(request, demand_num, page,category, state):
         _demand_post.inline_users.add(request.user)
         _demand_card.inline_users.add(request.user)
 
-    return HttpResponseRedirect("/v2.1/board/demand_list/"+page+"/"+category+"/"+state)
+    return HttpResponseRedirect(lineup_next)
 
 
 

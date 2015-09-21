@@ -50,8 +50,9 @@
                 <input type="submit" value="{{ post.extra_price|add:post.price |intcomma}}원">
             </form><br><br><br>
             총합 :: {{ post.extra_price|add:post.price |intcomma}}원<br>
+            <a href="http://{{HTTP_HOST}}/v2.1/profile/{{post.user.id}}">
             클래스 선생님 :: <img src="{{MEDIA_URL}}{{post.user.t2profile_set.first.pro_pic}}"><br><br>
-            {{post.user.last_name}}{{post.user.first_name}}<br>
+            {{post.user.last_name}}{{post.user.first_name}}</a><br>
 
             신청하기<br>
 
@@ -72,8 +73,9 @@
             {{post.addr}}<br><br>
 
             <h3>선생님 소개</h3>
+            <a href="http://{{HTTP_HOST}}/v2.1/profile/{{post.user.id}}">
             <img src="{{MEDIA_URL}}{{post.user.t2profile_set.first.pro_pic}}"><br>
-            {{post.user.last_name}}{{post.user.first_name}}<br>
+            {{post.user.last_name}}{{post.user.first_name}}</a><br>
             {{post.user.t2hostprofile_set.first.intro_self}}<br>
             <br>
 
@@ -105,11 +107,11 @@
             <div class="col-md-8 col-md-offset-1">
                 {% for review in post.t2classreview_set.all%}
                 {% if review.is_active %}
-                <div class="col-md-2">사용자 프로필 사진 여기에 뜨게</div>
-                <div class="col-md-10">사용자 이름 / 등급::{{review.grade}}<br>
+                <a href="http://{{HTTP_HOST}}/v2.1/user/profile/{{review.user.id}}">
+                <div class="col-md-2"><img src="{{MEDIA_URL}}{{review.user.t2profile_set.first.pro_pic}}"></div>
+                <div class="col-md-10">{{review.user.last_name}}{{review.user.first_name}} / 등급::{{review.grade}}<br>
                     후기::{{review.review}}
-
-                    </div>
+                    </div></a>
                 <!--수정 form 나중에  hidden-->
             </div>
 

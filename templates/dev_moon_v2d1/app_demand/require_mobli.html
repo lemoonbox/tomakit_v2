@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+전화번호를 입력해주세요.
+
+<form method="POST" action="{% url 'mobli_require_v2d1' post_num %}">
+    {%csrf_token%}
+    <input type="hidden" name="lineup_next" value="{{lineup_next}}">
+    <input type="text" value="010">-
+    <input type="text" name="mobli1">-
+    <input type="text" name="mobli2">
+    <input type="submit" value="입력하기고 줄서기">
+</form>
+</body>
+</html>

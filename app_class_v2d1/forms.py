@@ -203,32 +203,6 @@ class T2ClassPicForm(forms.ModelForm):
 
         return imagelist
 
-# class ReviewForm(forms.Form):
-#
-#     review_error={"required":u"필수 입력사항입니다."}
-#     grage_error={"required":u"필수 입력사항입니다.",
-#                 "invalid":u'숫자만 가능 합니다.'}
-#
-#     review=forms.CharField(error_messages=review_error, required=True)
-#     grade=forms.IntegerField(error_messages=grage_error, required=True)
-#
-#     def is_valid(self):
-#         valid=super(ReviewForm, self).is_valid()
-#
-#         print valid
-#         if not valid:
-#             return False
-#
-#         _user=self.data.get("user", "")
-#
-#         if _user:
-#             _review_exist=T2ClassReview.objects.filter(user=_user, is_active=True).exists()
-#             if _review_exist:
-#                 self.errors["review"]=u"리뷰는 1인당 1개만 입력 가능합니다."
-#                 return False
-#
-#         return True
-
 
 class T2ReviewForm(forms.ModelForm):
 
@@ -247,10 +221,17 @@ class T2ReviewForm(forms.ModelForm):
 
         valid = super(T2ReviewForm, self).is_valid()
         _user=self.data.get("user", "")
+        _post=self.data.get("post", "")
+        classtype=self.data.get("classtype", "")
 
         if valid and _user:
-            _review_exist=T2ClassReview.objects.filter(
-                user=_user, is_active=True).exists()
+            _review_exist=""
+            if classtype =="tutclass":
+                T2ClassReview.objects.filter(
+                    tut_post=_post,user=_user, is_active=True).exists()
+            else:
+                T2ClassReview.objects.filter(
+                    teach_post=_post,user=_user, is_active=True).exists()
             if _review_exist:
                 self.add_error("review",u"리뷰는 1인당 1개만 입력 가능합니다.")
                 return False

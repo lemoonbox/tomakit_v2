@@ -127,7 +127,7 @@ class T2ClassReview(models.Model):
     tut_post=models.ForeignKey(T2TutClass, null=True, blank=True)
     grade=models.IntegerField()
     review=models.TextField()
-    image = models.ImageField(null=True, upload_to=review_upload_to)
+    image = models.ImageField(null=True, upload_to=review_upload_to, blank=True)
 
     created_at = models.DateTimeField(auto_now_add=True, auto_now=False)
     updated_at = models.DateTimeField(auto_now_add=True, auto_now=True)

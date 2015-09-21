@@ -67,6 +67,7 @@ DEMAND_FINISH_V2D1='dev_moon_v2d1/app_demand/demand_finish.html'
 MODIFY_FINISH_V2D1='dev_moon_v2d1/app_demand/modify_finish.html'
 
 DEMAND_DETAIL_V2D1='dev_moon_v2d1/app_demand/demand_detail.html'
+LINEUP_REQUIRE_V2D1='dev_moon_v2d1/app_demand/require_mobli.html'
 
 #app_class
 CLASS_CREATE_BEGIN_V2D1='dev_moon_v2d1/app_class/class_create_begin.html'
