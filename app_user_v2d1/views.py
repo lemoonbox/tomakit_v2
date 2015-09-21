@@ -133,7 +133,7 @@ def login(request, *args, **kwargs):
 
 def logout(request, *args, **kwargs):
     res = django_logout(request, *args, **kwargs)
-    return res
+    return HttpResponseRedirect("/")
 
 
 def send_confirm(request):
@@ -274,6 +274,7 @@ def pw_reset_process(request, key):
 @login_required
 def host_apply(request):
     apply_data={}
+    HTTP_HOST=request.META["HTTP_HOST"]
     if request.method == "GET":
         hostform=HostApplyForm()
     elif request.method == "POST":
@@ -300,11 +301,12 @@ def host_apply(request):
     return render(request, TEMP.HOST_APLLY_V2D1,{
         "hostform":hostform,
         "apply_data":apply_data,
+        "HTTP_HOST":HTTP_HOST,
     })
 
 def public_profile(request, user_num):
 
-
+    HTTP_HOST=request.META["HTTP_HOST"]
     if request.method == "GET":
         _profile_user=get_object_or_404(User, id=user_num)
         _profile=get_object_or_404(T2Profile, user=_profile_user)
@@ -319,7 +321,8 @@ def public_profile(request, user_num):
                 "profile_user":_profile_user,
                 "profile":_profile,
                 "host_profile":_hostprofile,
-                "open_classes":_open_class
+                "open_classes":_open_class,
+                "HTTP_HOST":HTTP_HOST,
                 })
     else:
         return Http404("잘못된 요청입니다.")
@@ -362,7 +365,6 @@ def edit_profile(request, user_num):
         elif type == "host":
             video=utils.shard_url_picker(request.POST.get("video", ""))
             image=request.FILES.get("intro_pic", "")
-            print image
             intro_self=request.POST.get('intro_self', "")
             shop_addr=request.POST.get('shop_addr', "")
             shop_addr_detail=request.POST.get('shop_addr_detail', "")
@@ -382,6 +384,7 @@ def edit_profile(request, user_num):
         "profile":_profile,
         "host_profile":_hostprofile,
         "profileform":profileform,
+        "HTTP_HOST":HTTP_HOST,
         })
 
 @login_required

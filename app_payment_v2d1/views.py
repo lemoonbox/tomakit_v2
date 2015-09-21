@@ -26,6 +26,7 @@ from app_payment_v2d1.models import \
 
 @login_required
 def pay_prefill(request):
+    HTTP_HOST=request.META["HTTP_HOST"]
     classtype=""
     if request.method == "GET":
         post_id=request.GET.get("post_id", "")
@@ -47,13 +48,14 @@ def pay_prefill(request):
     return render(request, TEMP.PRE_PAYMENT_V2D1,{
         "post":_post,
         "merchant_id":merchant_id,
-        "classtype":classtype
+        "classtype":classtype,
+        "HTTP_HOST":HTTP_HOST,
     })
 
 @login_required
 def pay_conf(request):
+    HTTP_HOST=request.META["HTTP_HOST"]
     if request.method == "POST":
-        HTTP_HOST=request.META["HTTP_HOST"]
         _post=""
         post_id=request.POST.get("post_id", "")
         classtype=request.POST.get('classtype', "")
@@ -114,13 +116,16 @@ def pay_conf(request):
 
 @login_required
 def payment_finish(request):
-
+    HTTP_HOST=request.META["HTTP_HOST"]
     if request.method == "GET":
         rsp=request.GET.get("rsp", "")
         if rsp=="success":
-            return render(request, TEMP.PAYMENT_FINSIH_V2D1, {})
+            return render(request, TEMP.PAYMENT_FINSIH_V2D1, {
+                "HTTP_HOST":HTTP_HOST,
+            })
         else:
             return render(request, TEMP.PAYMENT_FAIL_V2D1, {
+                 "HTTP_HOST":HTTP_HOST,
             })
     else:
         return Http404("잘못된 요청입니다.")

@@ -25,7 +25,6 @@ handler404='app_post.views.handler404'
 handler500='app_post.views.handler500'
 
 urlpatterns = patterns('',
-    url(r'^$', 'app_board.views.mainboard', name = "index"),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^user/', include(user_urls)),
     url(r'^class/', include(class_urls)),
@@ -39,6 +38,7 @@ urlpatterns = patterns('',
     url(r'', include('social.apps.django_app.urls', namespace='social')),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     #v2.1
+    url(r"^$", 'app_board_v2d1.views.mainpage', name='index'),
     url(r"^v2.1/$", 'app_board_v2d1.views.mainpage', name='main'),
     url(r'^v2.1/board/', include(index_urls_v2d1)),
     url(r'^v2.1/user/', include(user_urls_v2d1)),
