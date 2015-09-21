@@ -5,17 +5,36 @@
 <title>{%block title%}Tomakit-클래스 살펴보기{%endblock%}</title>
 {%block style%}
 <style>
-    .tmk-search {max-width:500px; margin:auto;}
+    .tmk-search {max-width:540px;margin:auto;}
     .tmk-search button {height:44px;}
-    .tmk-search .col-md-4 {margin-right:-10px;margin-left:-10px;}
-    /*.card-list .col-md-4 { padding: 0px; }*/
-    /*.card-list .col-md-4 > a { margin: 0px; display: block!important; width: 100%!important; height: 100%!important; cursor:pointer; }*/
     .tmk-card-link {color:#565A5C;}
-    .card-list ul {height:400px;}
-    .card-list li {height:400px;margin-bottom:50px;}
+    /*.card-list {text-align:center;}*/
+    /*.card-list ul {*/
+    /*position: relative;*/
+    /*margin: auto !important;*/
+    /*}*/
+    .card-list li {
+        height: 470px;
+        width: 370px;
+        margin: 15px;
+        padding: 10px;
+
+        /*padding:0px;*/
+        background:#fff;
+        display:inline-block;
+        vertical-align: top;
+        /*height: 470px;*/
+        border: 1px solid #eee;
+    }
+    /*.card-list {padding:0px;}*/
+
+    @media screen and (min-width:768px) {
+        .card-list {
+            min-width: 850px;
+        }
+    }
 </style>
 {%endblock%}
-<body>
 {%block content%}
 
 <div class="tmk-main-body col-md-12">
@@ -24,7 +43,7 @@
         <form method="GET" action="{% url 'class_filter_redirct_v2d1' %}">
             {%csrf_token%}
             <div class="tmk-search cover">
-                <div class="tmk-qitem-selecter-wrapper col-md-4 col-xs-4">
+                <div class="tmk-qitem-selecter-wrapper">
                     <div class="selecter cover" tabindex="0">
                         <select name="category" required class="selecter_3 selecter-element" data-selecter-options="{&quot;cover&quot;:&quot;true&quot;}" tabindex="-1">
                             <option value="all"
@@ -114,10 +133,7 @@
                         </div>
                     </div>
                 </div>
-
-
-
-                <div class="tmk-qitem-selecter-wrapper col-md-4 col-xs-4">
+                <div class="tmk-qitem-selecter-wrapper">
                     <div class="selecter cover" tabindex="0">
                         <select name="state" required class="selecter_3 selecter-element" data-selecter-options="{&quot;cover&quot;:&quot;true&quot;}" tabindex="-1">
                             <option value="all"
@@ -177,23 +193,22 @@
                         </div>
                     </div>
                 </div>
-
-                <div>
+                <div style="display:inline;vertical-align:super;">
                     <button class="btn btn-primary" type="submit" value="검색">검색</button>
                 </div>
             </div>
         </form>
-
-        <div class="tmk-page-pick"></div>
+        <div class="tmk-page-pick" style="margin-left:0px;margin-right:0px;padding:0px;"></div>
     </div>
 
     <!--수업 list-->
-    <div class="col-md-12 card-list">
+    <!--<div class="col-md-10 col-md-offset-1 col-xs-12">-->
+
+    <div class="card-list col-md-12">
         <ul>
             {% for class in classlist %}
-            <a class="tmk-card-link" href="http://{{HTTP_HOST}}/v2.1/class/{{class.id}}">
-            <li class="col-md-4">
-{%comment%}{{class}}{%endcomment%}
+            <li class="tmk-class-card">
+                {%comment%}{{class}}{%endcomment%}
 
                 <!--수업 타입-->
                 {% if class.classtype == "tutclass"%}
@@ -201,47 +216,51 @@
                 {% else %}
                 <span class="label tmk-label pull-right">D-{{class.teach_post.deadline|classtype2han}}</span>
                 {% endif %}
-                <img style="height:300px;width:100%;" src="{{MEDIA_URL}}{{class.t2classpic_set.first.image}}">
+                <a class="tmk-card-link" href="http://{{HTTP_HOST}}/v2.1/class/{{class.id}}">
+                    <img style="height:300px;width:100%;" src="{{MEDIA_URL}}{{class.t2classpic_set.first.image}}">
+                </a>
                 수업호스트::{{class.user}}
                 <div class="col-md-12">
                     <div class="h4">{{class.title}}</div>
-                <div>{{class.intro_line}}</div>
+                    <div>{{class.intro_line}}</div>
                 </div>
                 <div class="col-md-6">{{class.repeat}}회/수업당{{bestclass.best_classcard.perhour}}시간</div>
                 <div class="col-md-6">￦{{class.price}}</div>
             </li>
-            </a>
+
             {% endfor %}
         </ul>
-</div>
-    <div class="col-md-12">
-        <div class="pagination-wrapper">
+    </div>
 
-            <ul class="pagination">
+<div class="col-md-12">
+    <div class="pagination-wrapper">
 
-                {% for arrow in arrows %}
-                {% if arrow.nav_before %}
-                <li><a href="http://{{HTTP_HOST}}/v2.1/board/class_list/{{arrow.befor_page}}/{{cate_current}}/{{state_current}}">《</a></li>
-                {% endif %}
-                {% endfor %}
-                {% for page in pages %}
-                {% if page.page_current %}
-                <li class="active"><a>{{page.page}}</a></li>
-                {% else %}
-                <li><a href="http://{{HTTP_HOST}}/v2.1/board/class_list/{{page.page}}/{{cate_current}}/{{state_current}}">{{page.page}}</a></li>
-                {% endif %}
-                {% endfor %}
-                {% for arrow in arrows %}
-                {% if arrow.nav_next %}
-                <li><a href="http://{{HTTP_HOST}}/v2.1/board/class_list/{{arrow.next_page}}/{{cate_current}}/{{state_current}}">》</a></li>
-                {% endif %}
-                {% endfor %}
-            </ul>
+        <ul class="pagination">
 
-        </div>
+            {% for arrow in arrows %}
+            {% if arrow.nav_before %}
+            <li><a href="http://{{HTTP_HOST}}/v2.1/board/class_list/{{arrow.befor_page}}/{{cate_current}}/{{state_current}}">《</a></li>
+            {% endif %}
+            {% endfor %}
+            {% for page in pages %}
+            {% if page.page_current %}
+            <li class="active"><a>{{page.page}}</a></li>
+            {% else %}
+            <li><a href="http://{{HTTP_HOST}}/v2.1/board/class_list/{{page.page}}/{{cate_current}}/{{state_current}}">{{page.page}}</a></li>
+            {% endif %}
+            {% endfor %}
+            {% for arrow in arrows %}
+            {% if arrow.nav_next %}
+            <li><a href="http://{{HTTP_HOST}}/v2.1/board/class_list/{{arrow.next_page}}/{{cate_current}}/{{state_current}}">》</a></li>
+            {% endif %}
+            {% endfor %}
+        </ul>
 
     </div>
+
 </div>
+</div>
+
 {% endblock %}
 {% block script %}
 <script src='{%static "media/js/qitem_create.js" %}'></script>
