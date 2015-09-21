@@ -4,9 +4,39 @@
 <title>{%block title%}Tomakit-클래스 제안하기{%endblock%}</title>
 {%block style%}
 <style>
-    .tmk-search {max-width:500px; margin:auto;}
+    .tmk-search {max-width:540px;margin:30px auto;}
     .tmk-search button {height:44px;}
-    .tmk-search .col-md-4 {margin-right:-10px;margin-left:-10px;}
+    /*.tmk-card-link {color:#565A5C;}*/
+
+
+    .card-list li {
+        height: 450px;
+        width: 370px;
+        margin: 15px;
+        padding: 0px;
+        background:#fff;
+        display:inline-block;
+        vertical-align: top;
+        border: 1px solid #eee;
+        border-radius:4px;
+        float:left;
+        list-style-type: none;
+    }
+
+    @media screen and (max-width:767px) {
+        .card-list li {width:100%;margin:0px;left:0;right:0;margin-bottom:15px;}
+    }
+    @media screen and (min-width:768px) and (max-width:861px) {
+        html {min-width:870px!important;}
+    }
+    @media screen and (min-width:861px) and (max-width:1264px) {
+        /*html {min-width:1240px;}*/
+        #card-list {text-align:center!important;margin:0px auto!important;max-width:800px;}
+        #card-list-wrapper {margin:0px auto!important;}
+    }
+    @media screen and (min-width:1265px) {
+        #card-list {text-align:center!important;margin:0px auto!important;max-width:1200px;}
+    }
 </style>
 {%endblock%}
 <body>
@@ -15,17 +45,15 @@
 <div class="tmk-main-body col-md-12">
     <div class="tmk-page-header col-md-10 col-md-offset-1">
         <div class="tmk-h2 tmk-title">클래스 제안하기</div>
-        <div class="tmk-h4">찾으시는 클래스가 없다면, 지금 바로 제안해보세요!<br>여러분들의 줄서기 투표를 거쳐 인기있는 클래스가 개설됩니다</div>
+        <div class="tmk-h4">찾으시는 클래스가 없다면, 지금 바로 제안해보세요!<br>
+            여러분들의 줄서기 투표를 거쳐 인기있는 클래스가 개설됩니다</div>
 
         <a class="btn btn-primary" href="http://{{HTTP_HOST}}/v2.1/demand/create">클래스 제안</a>
-        <div class="tmk-page-pick"></div>
-    </div>
-
-    <div class="tmk-search">
-        <form method="GET" id="formform" action="{% url 'demnad_filter_redirct_v2d1' %}">
+        <div class="tmk-page-pick col-md-12"></div>
+        <form method="GET" action="{% url 'demnad_filter_redirct_v2d1' %}">
             {%csrf_token%}
             <div class="tmk-search cover">
-                <div class="tmk-qitem-selecter-wrapper col-md-4 col-xs-4">
+                <div class="tmk-qitem-selecter-wrapper">
                     <div class="selecter cover" tabindex="0">
                         <select name="category" required class="selecter_3 selecter-element" data-selecter-options="{&quot;cover&quot;:&quot;true&quot;}" tabindex="-1">
                             <!--onchange="this.form.submit()"-->
@@ -117,9 +145,7 @@
                     </div>
                 </div>
 
-
-
-                <div class="tmk-qitem-selecter-wrapper col-md-4 col-xs-4">
+                <div class="tmk-qitem-selecter-wrapper">
                     <div class="selecter cover" tabindex="0">
                         <!--onchange="this.form.submit()"-->
                         <select name="state" required class="selecter_3 selecter-element" data-selecter-options="{&quot;cover&quot;:&quot;true&quot;}" tabindex="-1">
@@ -181,77 +207,90 @@
                     </div>
                 </div>
 
-                <div>
-                    <button class="btn btn-info" type="submit" value="검색">검색</button>
+                <div style="display:inline;vertical-align:text-bottom;">
+                    <button class="btn btn-info" type="submit" style="outline:1px solid transparent!important;" value="검색">검색</button>
                 </div>
             </div>
         </form>
-        </div>
-    <div id="data-here">
-    {% for class in classlist %}
-    <br>
-    카테고리 ::{{class.category}}<br><br>
-    수업제목::{{class.title}}<br><br>
-    설명::{{class.descript}}<br><br>
-    목표::{{class.demand_post.goal|goaltag2han}}<br><br>
-    <a href="{% url 'lineup_pageing_v2d1' class.id page_currunt cate_current state_current%}">
-        {% if request.user in class.inline_users.all %}
-        줄서기 취소
-        {% else %}
-        줄서기
-        {% endif %}
-        <!--줄선 사람 숫자-->
-        {% if class.inline_users.count %}
-        ({{class.inline_users.count}})
-        {% else %}
-        (0)
-        {% endif %}
-        {% if class.inline_users.count %}
-        {% for user in class.inline_users.all %}
-        <img src="{{MEDIA_URL}}{{user.t2profile_set.first.pro_pic}}">
-        {% endfor %}
-        {% endif %}
-    </a><br>
-
-<!--pagination-->
-    {% endfor %}
-
-    {% for arrow in arrows %}
-    {% if arrow.nav_before %}
-    <a href="http://{{HTTP_HOST}}/v2.1/board/demand_list/{{arrow.befor_page}}/{{cate_current}}/{{state_current}}"><|</a>
-    {% endif %}
-    {% endfor %}
-    {% for page in pages %}
-    {% if page.page_current %}
-    <b>{{page.page}}</b>|
-    {% else %}
-    <a href="http://{{HTTP_HOST}}/v2.1/board/demand_list/{{page.page}}/{{cate_current}}/{{state_current}}">{{page.page}}</a>|
-    {% endif %}
-    {% endfor %}
-    {% for arrow in arrows %}
-    {% if arrow.nav_next %}
-    <a href="http://{{HTTP_HOST}}/v2.1/board/demand_list/{{arrow.next_page}}/{{cate_current}}/{{state_current}}">|></a>
-    {% endif %}
-    {% endfor %}
     </div>
-</div>
+
+    <!--<div class="tmk-search">-->
+
+
+
+        <div class="card-list" id="card-list">
+            <div id="card-list-wrapper">
+                <ul>
+                    {% for class in classlist %}
+                    <li>
+                       <a href="http://{{HTTP_HOST}}/v2.1/demand/{{class.id}}">
+                           <div>{{class.category}}</div>
+                        <div class="h4">{{class.title}}</div>
+                        <div>{{class.descript}}</div>
+                        <div class="">{{class.demand_post.goal|goaltag2han}}</div>
+                       </a>
+
+                        <a href="{% url 'lineup_pageing_v2d1' class.id page_currunt cate_current state_current%}">
+                            {% if request.user in class.inline_users.all %}
+                            <button class="btn btn-default"><img style="width:18px;vertical-align:text-bottom;" src="{%static 'media/image/slice/icon-line_gr.png'%}"> 줄서기 취소
+                            {% else %}
+                            <button class="btn btn-primary"><img style="width:18px;vertical-align:text-bottom;" src="{%static 'media/image/slice/icon-line_wh.png'%}"> 줄서기
+                            {% endif %}
+                            <!--줄선 사람 숫자-->
+                            {% if class.inline_users.count %}
+                            ({{class.inline_users.count}})</button>
+                            {% else %}
+                            (0)</button>
+                            {% endif %}
+                            {% if class.inline_users.count %}
+                            {% for user in class.inline_users.all %}
+                            <a href="http://{{HTTP_HOST}}/v2.1/user/profile/{{id}}" class="tmk-card-img-profile">
+                                <div class="card-link">
+                                    <img src="{{MEDIA_URL}}{{user.t2profile_set.first.pro_pic}}">
+                                </div>
+                            </a>
+                            {% endfor %}
+                            {% endif %}
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+
+        <!--pagination-->
+        <div class="col-md-12">
+            <div class="pagination-wrapper">
+
+                <ul class="pagination">
+
+                    {% for arrow in arrows %}
+                    {% if arrow.nav_before %}
+                    <li><a href="http://{{HTTP_HOST}}/v2.1/board/demand_list/{{arrow.befor_page}}/{{cate_current}}/{{state_current}}">《</a></li>
+                    {% endif %}
+                    {% endfor %}
+                    {% for page in pages %}
+                    {% if page.page_current %}
+                    <li class="active"><a>{{page.page}}</a></li>
+                    {% else %}
+                    <li><a href="http://{{HTTP_HOST}}/v2.1/board/demand_list/{{page.page}}/{{cate_current}}/{{state_current}}">{{page.page}}</a></li>
+                    {% endif %}
+                    {% endfor %}
+                    {% for arrow in arrows %}
+                    {% if arrow.nav_next %}
+                    <li><a href="http://{{HTTP_HOST}}/v2.1/board/demand_list/{{arrow.next_page}}/{{cate_current}}/{{state_current}}">》</a></li>
+                    {% endif %}
+                    {% endfor %}
+                </ul>
+
+            </div>
+
+        </div>
+    </div>
+<!--</div>-->
+
 
 {%endblock%}
 {%block script%}
 <script src='{%static "media/js/qitem_create.js" %}'></script>
-<!--<script type="text/javascript">-->
-    <!--var frm = $('#formform');-->
-    <!--frm.submit(function (ev) {-->
-        <!--$.ajax({-->
-            <!--type: frm.attr('method'),-->
-            <!--url: frm.attr('action'),-->
-            <!--data: frm.serialize(),-->
-            <!--success: function (data) {-->
-                <!--alert('ok');-->
-            <!--}-->
-        <!--});-->
-
-        <!--ev.preventDefault();-->
-    <!--});-->
-<!--</script>-->
 {%endblock%}

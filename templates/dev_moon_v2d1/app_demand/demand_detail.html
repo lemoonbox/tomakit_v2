@@ -2,66 +2,117 @@
 {% load static from staticfiles%}
 {% load humanize %}
 {% load v2d1_board_tags %}
-<!DOCTYPE html>
 <title>{%block title%}수업 요청 상세 정보 {{post.title}}{%endblock%}</title>
-{%block content%}
 
+{%block style%}
+<style>
+    .tmk-review .col-md-8 {padding:0px;}
+    .tmk-review .btn-primary {width:170px;height:80px;}
+    .tmk-review textarea {height:80px;}
+    .img-wrap img {width:100%;}
+</style>
+{%endblock%}
+
+{%block content%}
 <div class="tmk-main-body col-md-12" style="text-align:left;">
     <div class="col-md-10 col-md-offset-1">
-    <div class="col-md-2">여기에 사용자 이름 넣어야됨</div>
+        <div class="col-md-2">여기에 사용자 이름 넣어야됨</div>
 
-    <div class="col-md-8">
-<div class="">{{post.category.category|cate2han}}</div>
-<div class="tmk-h3"> {{post.title}}</div>
-한줄소개 :: {{post.descript}}<br>
-목표::{{post.goal}}<br><br>
+        <div class="col-md-8" style="background:#fff;">
+            <div class="">{{post.category.category|cate2han}}</div>
+            <div class="tmk-h3"> {{post.title}}</div>
+            한줄소개 :: {{post.descript}}<br>
+            목표::{{post.goal}}<br><br>
 
-희망시간 :: {{post.weekday}}<br>
-희망지역 :: {{post.state.state|state2han}} {{post.local}}<br>
-희망수강료 :: {{post.min_price}}~{{post.max_price}}<br>
+            희망시간 :: {{post.weekday}}<br>
+            희망지역 :: {{post.state.state|state2han}} {{post.local}}<br>
+            희망수강료 :: {{post.min_price}}~{{post.max_price}}<br>
 
-참조 사진
-{% for image in post.t2demandpic_set.all%}
-    <img src="{{MEDIA_URL}}{{image.image}}"><br>
-{% endfor %}
-</div>
-</div>
+            참조 사진
+            {% for image in post.t2demandpic_set.all%}
+            <div class="col-md-8 img-wrap">
+                <img src="{{MEDIA_URL}}{{image.image}}">
+            </div>
+            {% endfor %}
+        </div>
+    </div>
 </div>
 <!--댓글-->
+
+
+
+
 <div class="col-md-12" style="background:#fff;">
-<form method="POST" action="{% url 'create_comment_v2d1' post.id %}">
-    {%csrf_token%}
-    <input type="hidden" name="demand_num" value="{{post.id}}">
-    <textarea name="comment"></textarea><br>
-    <input type="checkbox" name="class_ad" value="host_ad">수업 소개 댓글<br>
-    <input type="submit" value="댓글달기">
-</form>
 
+    <div class="tmk-review">
+        <div class="col-md-8 col-md-offset-1">
+            <div class="h3">후기 쓰기</div>
+            <form method="POST" action="{% url 'create_comment_v2d1' post.id %}">
+                {%csrf_token%}
+                <div class="col-md-2 col-xs-2">
+                    <div class="tmk-card-img-profile" style="margin-top:15px;">
+                        <div class="card-link">
+                            <img src="{{MEDIA_URL}}{{user.t2profile_set.first.pro_pic}}">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8 col-xs-7">
+                    <input type="hidden" name="class_num" value="{{post.id}}">
+                    <textarea class="form-control" name="comment"></textarea>
+                    <input type="checkbox" name="class_ad" value="host_ad">수업 소개 댓글
+                </div>
+                <div class="col-md-2 col-xs-3">
+                    <input class="btn btn-primary" type="submit" value="댓글달기">
+                </div>
+            </form>
+        </div>
+        <div class="col-md-8 col-md-offset-1">
+            {% for comment in post.t2demandcmt_set.all%}
+            {% if comment.is_active %}
+            <div class="col-md-2">
+                <div class="tmk-card-img-profile" style="margin-top:15px;">
+                <div class="card-link">
+                    <img src="{{MEDIA_URL}}{{comment.user.t2profile_set.first.pro_pic}}">
+                </div>
+            </div></div>
+            <div class="col-md-10">사용자 이름<br>
+                <div>후기 : {{comment.comment}}</div>
+                {% if comment.class_ad%}
+                수업 개설 덧글
+                {% endif %}
+            </div>
+            <!--수정 form 나중에  hidden-->
+        </div>
 
-{% for  comment in post.t2demandcmt_set.all%}
-    {% if comment.is_active %}
-        댓글::{{comment.comment}}
-        {% if comment.class_ad%}
-            수업 개설 덧글
-        {% endif %}<br>
+        <div class="col-md-8 col-md-offset-1">
+            <form method="POST" action="{% url 'modify_comment_v2d1' post.id %}">
+                {%csrf_token%}
+                <div class="col-md-8">
+                    <input type="hidden" name="comment_num" value="{{comment.id}}">
+                    <input type="hidden"  name="demand_num" value="{{post.id}}">
+                    <textarea class="form-control" name="comment">{{comment.comment}}</textarea>
+                    <input class="form-control" type="checkbox" name="class_ad" value="host_ad"
+                           {% if comment.class_ad%}checked="checked"{% endif %}>수업 개설 댓글
+                </div>
+                <div class="col-md-2">
+                    <input class="btn btn-link" type="submit" value="후기수정">
+                </div>
+            </form>
 
-        수정 form 나중에  hidden
-        <form method="POST" action="{% url 'modify_comment_v2d1' post.id %}">
-            {%csrf_token%}
-            <input type="hidden" name="comment_num" value="{{comment.id}}">
-            <input type="hidden" name="demand_num" value="{{post.id}}">
-            <textarea name="comment">{{comment.comment}}</textarea><br>
-            <input type="checkbox" name="class_ad" value="host_ad"
-                    {% if comment.class_ad%}checked="checked"{% endif %}>수업 개설 댓글<br>
-            <input type="submit" value="댓글수정">
-        </form><br>
-        <form method="POST" action="{% url 'delete_comment_v2d1' comment.id%}">
-            {%csrf_token%}
-            <input type="hidden" name="demand_num" value="{{post.id}}">
-            <input type="submit" value="댓글삭제">
-        </form><br><br>
-    {% endif %}
-{% endfor %}
+            <form method="POST" action="{% url 'delete_comment_v2d1' comment.id%}">
+                {%csrf_token%}
+                <input type="hidden" name="demand_num" value="{{post.id}}">
+                <input class="btn btn-link" type="submit" value="댓글삭제">
+            </form>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+
 </div>
+
+
+
+
+
 {%endblock%}
-</body>

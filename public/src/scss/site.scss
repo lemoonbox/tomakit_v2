@@ -8,12 +8,8 @@
   font-family: 'NanumGothic', 'AppleSDGothicNeo-Bold', 'Dotum', 'NanumMyeongjo', 'Gulim', 'Helvetica', sans-serif !important;
 }
 //html {height:100vh!important;}
+html {min-width:490px!important;}
 a:hover {text-decoration: none !important;}
-
-//@viewport {
-//  width : device-width!important;
-//}
-
 
 body {
   text-align: center;
@@ -189,11 +185,12 @@ nav {
 
 #tmk-post {background:#fff;}
   .badge, .label {
-    font-size:14px;
-    padding: 5px 10px!important;
+    font-size:13px!important;
+    font-weight:400!important;
+    padding: 8px 10px!important;
     //min-width:100px!important;
     background-color: #84CDC2!important;
-    border-radius:none!important;
+    border-radius:0!important;
   }
 
 
@@ -312,10 +309,9 @@ nav {
 #tmk-footer {
   background-color:  #FEF2D8;
   bottom: 0;
-  height: 180px;
+  min-height: 180px;
   text-align: left;
   color: #82888A;
-  //min-width:1250px;
   left:0;
   float:left;
   margin-top:50px;
@@ -331,7 +327,6 @@ nav {
 .tmk-footer-nav {
   color: #82888A;
   ul {
-    //width:720px;
     list-style: none;
     margin: 15px auto 15px 0px;
   }
@@ -363,11 +358,6 @@ nav {
     display: inline-block;
     padding: 5px 0px;
   }
-  .tmk-footer-logo {
-    //font-family: Titillium web;
-    //font-size:18px;
-    //font-weight: bold;
-  }
 }
 
 .navbar-default .navbar-collapse, .navbar-default .navbar-form {
@@ -377,9 +367,6 @@ nav {
 .navbar-default .navbar-toggle:focus, .navbar-default .navbar-toggle:hover {
   border-color: #eee;
 }
-//@media screen and (min-width: 768px) {
-//
-//}
 
 @media screen and (max-width: 767px) {
   .navbar {
@@ -429,28 +416,14 @@ nav {
 }
 
 
-@media screen and (max-width: 960px) {
-  //.navbar-right {
-  //  li > a {width:100px;}
-  //}
-}
-
-
 .user {
   color: gray;
 }
 
 .tmk-main-body{
   text-align: center;
-  display: inline-block;
-  //width: 1250px;
+  //display: inline-block;
 }
-//@media screen and (min-width:768px) {
-//  .tmk-main-body {width:1170px;}
-//}
-//@media screen and (max-width:767px) {
-//  .tmk-main-body {min-width:400px;}
-//}
 
 
 .tmk-sub-body{
@@ -719,7 +692,7 @@ ul{
       color: #000000;
       line-height: 17px;
     }
-    .titele-seeAll{
+    .title-seeAll{
       color: #f0922e;
     }
   }
@@ -1335,4 +1308,48 @@ ul{
   background: url("{%static 'media/image/icon/icon-arrow-down-small.png'%}") no-repeat center;
   background-size: 12px;
   background-color: #E6E9ED;
+}
+
+.tmk-card-img {
+  background: #fff;
+  border: 1px solid transparent;
+  display: inline-block;
+  vertical-align: top;
+  /*padding: 10px;*/
+  width: 100%;
+  height: 280px;
+  margin-right: .5em;
+  margin-bottom: .3em;
+}
+.card-link {
+  border-radius: 4px 4px 0 0;
+  /*border: 1px solid transparent;*/
+  height: 100%;
+  overflow: hidden;
+  position: relative;}
+
+.card-link img {
+  display: block;
+  min-width: 100%;
+  min-height: 100%;
+  margin: auto;
+  position: absolute;
+  top: -100%;
+  right: -100%;
+  bottom: -100%;
+  left: -100%;
+}
+
+.tmk-card-img-profile {
+  @extend .tmk-card-img;
+  margin-top:-30px;
+  width:60px;
+  height:60px;
+  border-radius: 50%;
+  overflow: hidden;
+  .card-link {
+    border-radius: 50%;
+    border:3px solid #fff;
+  }
+  .card-link img {max-width:100px;max-height:100px;}
 }
