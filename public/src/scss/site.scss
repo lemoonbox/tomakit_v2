@@ -314,7 +314,7 @@ nav {
   color: #82888A;
   left:0;
   float:left;
-  margin-top:50px;
+  //margin-top:50px;
   width:100%;
 }
 
@@ -436,17 +436,17 @@ nav {
   margin-bottom:80px;
 }
 
-.tmk-sub-body-case {
-  width:1170px;
-  text-align:center;
-  display:inline-block;
-  margin-bottom:80px;
-  padding-left:20px;
-}
-.tmk-sub-body-wrapper {
-  margin: 50px auto;
-  min-height:600px;
-}
+//.tmk-sub-body-case {
+//  width:1170px;
+//  text-align:center;
+//  display:inline-block;
+//  margin-bottom:80px;
+//  padding-left:20px;
+//}
+//.tmk-sub-body-wrapper {
+//  margin: 50px auto;
+//  min-height:600px;
+//}
 ul{
   list-style-type: none;
 }
@@ -461,24 +461,23 @@ ul{
 .tmk-main-banner {
   //min-width:1250px;
   width: 100%;
-  height: 550px;
+  height: 570px;
   top:0;
   //overflow: visible;
   margin-top:-80px;
-
-  video {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    min-height:100%;
-    width:auto;
-    height:auto;
-    z-index: -100;
-    //-webkit-transform: translateX(-50%) translateY(-50%);
-    transform: translateX(-50%) translateY(-50%);
-    //background: url("main-background.png'") no-repeat;
-    //background-size: cover;
-  }
+  //video {
+  //  position: absolute;
+  //  top: 0;
+  //  left: 50%;
+  //  min-height:100%;
+  //  width:auto;
+  //  height:auto;
+  //  z-index: -100;
+  //  -webkit-transform: translateX(-50%) translateY(-50%);
+  //  transform: translateX(-50%) translateY(-50%);
+  //  background: url("main-background.png'") no-repeat;
+  //  background-size: cover;
+  //}
 
   .main-banner-title {
     color: #FFFFFf;
@@ -494,9 +493,9 @@ ul{
     font-family:AppleSDGothicNeo-Regular;
     text-align: center;
     padding-top: 15px;
-    font-size: 18px;
+    font-size: 20px;
     line-height: 21px;
-    margin-bottom:30px;
+    margin-bottom:50px;
   }
 }
 
@@ -659,44 +658,25 @@ ul{
       border: 2px solid #e1e1e1;
     }
   }
-
-  .footer-banner-ul2{
-    margin-top: 0px 0px 0px -15px;
-    text-align:center;
-
-    li {
-      margin: 0px 15px;
-      display:inline-block;
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      background-image: url("http://s3-us-west-1.amazonaws.com/witty-avatars/default-avatar-4-l.jpg");
-      background-size: cover;
-      background-repeat: no-repeat;
-      border: 2px solid #e1e1e1;
-    }
-  }
 }
 
-.tmk-main-picks{
-  margin-top: 25px;
-  margin-bottom:50px;
-
-
-  .picks-title{
-    font-size: 14px;
-    height: 18px;
-    .title-main {
-      //font-family:AppleSDGothicNeo-Regular;
-      font-size: 14px;
-      color: #000000;
-      line-height: 17px;
-    }
-    .title-seeAll{
-      color: #f0922e;
-    }
-  }
-}
+//.tmk-main-picks{
+//  margin-top: 25px;
+//  margin-bottom:50px;
+//  .picks-title{
+//    font-size: 14px;
+//    height: 18px;
+//    .title-main {
+//      //font-family:AppleSDGothicNeo-Regular;
+//      font-size: 14px;
+//      color: #000000;
+//      line-height: 17px;
+//    }
+//    .title-seeAll{
+//      color: #f0922e;
+//    }
+//  }
+//}
 
 .picks-cards {
   margin-top: 26px;
@@ -711,7 +691,7 @@ ul{
   //should be removed
   .tmk-picks-main {
     width: 570px;
-    height: 470px;
+    //height: 470px;
     float:left;
     //background-image: url("http://blog.freepeople.com/wp-content/uploads/2013/03/diy-painted-feathers-3.jpg");
     background-repeat: no-repeat;
@@ -1001,8 +981,6 @@ ul{
   display: inline;
 }
 
-
-
 .board-category-wrapper {
   width:900px;
   border-radius:8px;
@@ -1016,9 +994,18 @@ ul{
   width:750px;
   min-height:100px;
   margin:30px auto;
-  //float:left;
-  .breadcrumb {margin:5px;
-    li:first-child {width:200px;float:left;line-height:100%;background-color:rgba(0,0,0,0.3);color:white;padding:8px;margin-top:-5px;margin-left:-10px;}
+  .breadcrumb {
+    margin: 5px;
+    li:first-child {
+      width: 200px;
+      float: left;
+      line-height: 100%;
+      background-color: rgba(0, 0, 0, 0.3);
+      color: white;
+      padding: 8px;
+      margin-top: -5px;
+      margin-left: -10px;
+    }
   }
 }
 
@@ -1057,7 +1044,7 @@ ul{
 .selecter {
   //min-width: 200px !important;
   min-height: 40px;
-  //font-size: 16px;
+  font-size: 16px;
   color: #82888A;
   line-height: 30px;
   padding: 0px;
@@ -1347,8 +1334,8 @@ ul{
   .card-link img {max-width:100px;max-height:100px;}
 }
 
-.tmk-search {max-width:540px;margin:auto;z-index:999;}
-.tmk-search button {height:44px;}
+.tmk-search {max-width:540px;margin:auto;}
+.tmk-search button {height:44px;margin-left:5px;}
 /*.tmk-card-link {color:#565A5C;}*/
 
 .card-list li {
@@ -1427,7 +1414,8 @@ ul{
     max-width: 800px;
   }
   #card-list-wrapper {
-    margin: 0px auto !important;
+    margin: 30px auto !important;
+    height:auto;
   }
 }
 @media screen and (min-width:1265px) {
@@ -1437,3 +1425,6 @@ ul{
     max-width: 1200px;
   }
 }
+
+
+img {max-width:1000px;}

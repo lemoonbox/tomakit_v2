@@ -5,8 +5,6 @@
 {%block style%}
 <style>
     .tmk-main-banner {background-image:url({%static 'media/image/slice/bg-1.png'%});
-        float:left;
-        position:relative;
         background-size: cover;
         background-repeat:no-repeat;}
     @media screen and (min-width:768px) {
@@ -27,12 +25,10 @@
     }
 </style>
 {%endblock%}
-
 {%block nav%}
 {%include 'component/navigation/_head_nav_custom.html'%}
 {%endblock%}
 {% block content %}
-<!--<div class="how-to-tmk"> </div>-->
 <div class="tmk-main-banner">
     <div class="main-banner-title">특별한 일상을 만들다<br>
         핸드메이드 클래스 찾을 땐, 토마킷</div>
@@ -200,24 +196,21 @@
     </form>
 </div>
 
-
 <div class="tmk-main-body col-md-12">
-    <div class="tmk-body-wrapper">
-        <div class="tmk-page-header">
-            <div class="h3">반짝반짝, 새로운 클래스</div>
-        </div>
+    <div class="tmk-page-header">
+        <div class="h3">반짝반짝, 새로운 클래스</div>
+    </div>
 
+    <div class="tmk-body-wrapper">
         <div class="card-list" id="card-list">
             <div id="card-list-wrapper">
                 <ul>
                     {%for bestclass in bestlist%}
                     <li class="tmk-class-card col-md-4 counter{{forloop.counter}}">
-                        <a class="tmk-card-img" href="http://{{HTTP_HOST}}/v2.1/class/{{class.id}}">
+                        <a class="tmk-card-img" href="http://{{HTTP_HOST}}/v2.1/class/{{bestclass.id}}">
                             <div class="tmk-class-type-label">
                                 <!--수업 타입-->
-
                                 <span class="label tmk-label">{{bestclass.best_classcard.classtype}}</span>
-
                             </div>
                             <div class="card-link">
                                 <img src="{{MEDIA_URL}}{{bestclass.best_classcard.t2classpic_set.first.image}}">
@@ -226,7 +219,7 @@
                         {%comment%}수업호스트::{{bestclass.best_classcard.user}}{%endcomment%}
                         <a class="tmk-card-img-profile">
                             <div class="card-link">
-                                <img src="{{MEDIA_URL}}{{bestclass.user.t2profile_set.first.pro_pic}}">
+                                <img src="{{MEDIA_URL}}{{bestclass.best_classcard.user.t2profile_set.first.pro_pic}}">
                             </div>
                         </a>
                         <div class="tmk-card-info">
@@ -238,47 +231,52 @@
                             <div class="dp-label-right">￦{{bestclass.best_classcard.price}}</div>
                         </div>
                     </li>
-
                     {% endfor %}
                 </ul>
             </div>
         </div>
     </div>
-</div>
-
-
-{%comment%}
-<div class="tmk-footer-banner" style="background:url({%static 'img/img-1.png'%})">
-
-    <div class="footer-frame" style="left:0px!important;"></div>
-
-    <div class="footer-banner-title">토마킷은 32명의 핸드메이드 작가님과 함께하고 있습니다
-        <div class="footer-banner-subtitle">배우고 싶은 클래스가 있으세요? 친절한 작가님들을 만나보세요!</div>
+    <div style="float:left;margin:50px auto 100px auto;width:100%;">
+        <a href="http://{{HTTP_HOST}}/v2.1/board/class_list">
+            <button class="btn btn-primary">클래스 더보기</button></a>
     </div>
-    <ul class="footer-banner-ul">
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-    </ul>
-    <ul class="footer-banner-ul2">
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-    </ul>
 </div>
 
-{%endcomment%}
+
+
+<div class="tmk-main-body col-md-12" style="overflow:hidden;float:left;padding:50px;background:url('{%static 'media/image/slice/bg-2.png'%}');color:#fff;">
+    <div style="text-align:center;">
+        <div class="h2">다른 사람들은 어떤 클래스를 배우고 싶어할까요?</div>
+    <div class="tmk-h4">제안하기를 이용하면 원하시는 클래스를 개설해 드린답니다</div>
+    </div>
+    <div class="tmk-demand-comment">
+        <img src="{%static 'media/image/slice/img-1.png'%}">
+        <img src="{%static 'media/image/slice/img-2.png'%}">
+        <img src="{%static 'media/image/slice/img-3.png'%}">
+    </div>
+<a href="http://{{HTTP_HOST}}/v2.1/board/demand" style="color:#fff;" class="btn-link pull-right">클래스 제안 보러가기 ></a>
+</div>
+
+<div class="col-md-12" style="margin-top:50px;float:left;">
+<div style="max-width:1200px;border-radius:4px;overflow:hidden!important;margin:auto;background-color:#F9FBFB;padding:0;border:1px solid #ddd;">
+        <div class="col-md-3 hidden-xs" style="float:left;text-align:left;padding:50px;width:348px;">
+            <div class="h2">원하는 클래스를<br>제안해보세요</div>
+            <div class="tmk-h4">찾는 클래스가 없으시다면, 지금 바로 제안해보세요. 가까운 장소, 편한 시간의 수업을 개설하여 알려드립니다</div>
+        </div>
+        <div class="col-md-7" id="tmk-form" style="float:left;padding:40px;">
+            {%include 'dev_moon_v2d1/app_demand/demand_form_for_index.html'%}
+    </div>
+</div>
+</div>
+<div class="tmk-main-body col-md-12" style="height:360px;float:left;margin-top:50px;background:url('{%static 'media/image/slice/bg-3.png'%}');">
+    <div class="tmk-main-host" style="margin-top:80px;">
+        <div class="tmk-h3" style="font-weight:bold;">작가님! 토마킷을 통해 수강생을 만나보세요</div>
+        <div class="tmk-h4">작가님들께서 공방 운영과 작품 활동에 전념하실 수 있도록<br>
+        토마킷이 클래스 홍보와 수강생 모집을 도와드립니다</div>
+        <a href="http://{{HTTP_HOST}}/v2.1/user/host/apply/" class="btn btn-primary" style="padding:15px;">선생님 등록</a>
+    </div>
+</div>
 {%endblock %}
 {% block script %}
 <script src='{%static "media/js/qitem_create.js" %}'></script>
-<script>
-
-</script>
 {% endblock %}

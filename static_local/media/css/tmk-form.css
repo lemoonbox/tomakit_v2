@@ -28,6 +28,7 @@
     display: inline-block;
     vertical-align: middle;
     min-width: 200px!important;
+    margin-right:10px;
     height:50px;
 }
 
