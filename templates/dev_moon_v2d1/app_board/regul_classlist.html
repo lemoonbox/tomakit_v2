@@ -1,33 +1,23 @@
 {% extends 'base.html'%}
 {% load static from staticfiles %}
 {% load v2d1_board_tags %}
-
 <title>{%block title%}Tomakit-클래스 살펴보기{%endblock%}</title>
 {%block style%}
 <style>
     .tmk-search {max-width:540px;margin:auto;}
     .tmk-search button {height:44px;}
     .tmk-card-link {color:#565A5C;}
-    /*.card-list {text-align:center;}*/
-    /*.card-list ul {*/
-    /*position: relative;*/
-    /*margin: auto !important;*/
-    /*}*/
+    /*.tmk-body-wrapper {padding:8%;}*/
     .card-list li {
         height: 470px;
         width: 370px;
         margin: 15px;
         padding: 10px;
-
-        /*padding:0px;*/
         background:#fff;
         display:inline-block;
         vertical-align: top;
-        /*height: 470px;*/
         border: 1px solid #eee;
     }
-    /*.card-list {padding:0px;}*/
-
     @media screen and (min-width:768px) {
         .card-list {
             min-width: 850px;
@@ -38,7 +28,8 @@
 {%block content%}
 
 <div class="tmk-main-body col-md-12">
-    <div class="tmk-page-header col-md-10 col-md-offset-1">
+    <div class="tmk-body-wrapper col-md-12">
+    <div class="tmk-page-header">
         <div class="tmk-h2 tmk-title">클래스 살펴보기</div>
         <form method="GET" action="{% url 'class_filter_redirct_v2d1' %}">
             {%csrf_token%}
@@ -260,7 +251,7 @@
 
 </div>
 </div>
-
+</div>
 {% endblock %}
 {% block script %}
 <script src='{%static "media/js/qitem_create.js" %}'></script>
