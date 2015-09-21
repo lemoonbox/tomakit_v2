@@ -38,7 +38,6 @@ from app_class_v2d1.forms import \
 
 # Create your views here.
 def host_check(user):
-    print user.t2hostprofile_set.first()
     if user.t2hostprofile_set.first():
         return True
     else :
@@ -101,6 +100,7 @@ def create_tut(request, class_num):
     prefill_intro=""
     prefill_addr=""
     tut_data={}
+    HTTP_HOST=request.META["HTTP_HOST"]
 
     if request.method == "GET":
         _user=User.objects.get(username=request.user)
@@ -187,6 +187,7 @@ def create_tut(request, class_num):
         "prefill_intro":prefill_intro,
         "tut_data":tut_data,
         "imageform":imageform,
+        "HTTP_HOST":HTTP_HOST,
         #"prefill_addr":prefill_addr
     })
 
@@ -197,6 +198,7 @@ def create_teach(request, class_num):
     prefill_intro=""
     prefill_addr=""
     teach_data={}
+    HTTP_HOST=request.META["HTTP_HOST"]
     if request.method == "GET":
         _user=User.objects.get(username=request.user)
         teachform=T2TeachClassForm()
@@ -284,13 +286,14 @@ def create_teach(request, class_num):
         "prefill_intro":prefill_intro,
         "teach_data":teach_data,
         "imageform":imageform,
+        "HTTP_HOST":HTTP_HOST,
         #"prefill_addr":prefill_addr
     })
 
 @login_required
 @user_passes_test(host_check)
 def modify_teach(request, class_num):
-
+    HTTP_HOST=request.META["HTTP_HOST"]
     if request.method == "GET":
       teachform=T2TeachClassForm()
       imageform=T2ClassPicForm()
@@ -400,12 +403,13 @@ def modify_teach(request, class_num):
         "imageform":imageform,
         "teach_data":teach_data,
         "class_num":class_num,
+        "HTTP_HOST":HTTP_HOST,
         })
 
 @login_required
 @user_passes_test(host_check)
 def modify_tut(request, class_num):
-
+    HTTP_HOST=request.META["HTTP_HOST"]
     if request.method == "GET":
         tutform=T2TutClassForm()
         imageform=T2ClassPicForm()
@@ -508,11 +512,12 @@ def modify_tut(request, class_num):
         'imageform':imageform,
         "tut_data":tut_data,
         "class_num":class_num,
+        "HTTP_HOST":HTTP_HOST,
     })
 
 @login_required
 def create_review(request, class_num):
-
+    HTTP_HOST=request.META["HTTP_HOST"]
     if request.method == "POST":
         _post=""
         _review=""
@@ -544,13 +549,14 @@ def create_review(request, class_num):
         return render(request, TEMP.TUT_POST_DETAIL_V2D1,{
             "post":_post,
             "review":reviewform,
+            "HTTP_HOST":HTTP_HOST,
         })
     return Http404("잘못된 요청입니다.")
 
     # return HttpResponseRedirect("/")
 
 def modify_review(request, class_num):
-
+    HTTP_HOST=request.META["HTTP_HOST"]
     if request.method == "POST":
         review_num=request.POST.get("review_num","")
         review=request.POST.get("review", "")
@@ -569,6 +575,8 @@ def modify_review(request, class_num):
             return render(request, TEMP.TEACH_POST_DETAIL_V2D1,{
                 "post":_post,
                 "review":reviewform,
+                "HTTP_HOST":HTTP_HOST,
+
             })
 
         elif classtype == "tut_class":
@@ -581,11 +589,13 @@ def modify_review(request, class_num):
             return render(request, TEMP.TUT_POST_DETAIL_V2D1,{
                 "post":_post,
                 "review":reviewform,
+                "HTTP_HOST":HTTP_HOST,
             })
 
     return HttpResponseRedirect("/")
 
 def delete_review(request, review_num):
+    HTTP_HOST=request.META["HTTP_HOST"]
     if request.method == "POST":
         _user=User.objects.get(username=request.user)
         classtype=request.POST.get("classtype", "")
@@ -599,6 +609,8 @@ def delete_review(request, review_num):
                 _review.save()
             return render(request, TEMP.TEACH_POST_DETAIL_V2D1,{
                 "post":_post,
+                "HTTP_HOST":HTTP_HOST,
+
             })
 
         elif classtype == "tut_class":
@@ -609,6 +621,7 @@ def delete_review(request, review_num):
                 _review.save()
             return render(request, TEMP.TUT_POST_DETAIL_V2D1,{
                 "post":_post,
+                "HTTP_HOST":HTTP_HOST,
             })
 
     return HttpResponseRedirect("/")

@@ -14,7 +14,8 @@ from app_demand_v2d1.models import T2DemandCard
 
 
 def mainpage(request):
-
+    next="/"
+    HTTP_HOST = request.META['HTTP_HOST']
     if request.method == "GET":
         adkeyword=request.GET.get("keyword", "all")
         _bestlist=[]
@@ -26,7 +27,9 @@ def mainpage(request):
     elif request.method == "POST":
         pass
     return render(request, TEMP.INDEX_PAGE_V2D1,{
-        'bestlist':_bestlist
+        'bestlist':_bestlist,
+        "HTTP_HOST":HTTP_HOST,
+        "next":next,
     })
 
 def class_filter_redirect(request):

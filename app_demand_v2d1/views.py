@@ -192,7 +192,7 @@ def demand_modify(request, demand_num=0):
 
 
 def demand_detail(request, demand_num):
-
+    HTTP_HOST=request.META["HTTP_HOST"]
     if request.method == "GET":
         exist=T2ClassDemand.objects.filter(pk=demand_num).exists()
 
@@ -201,6 +201,7 @@ def demand_detail(request, demand_num):
 
             return render(request, TEMP.DEMAND_DETAIL_V2D1,{
                 "post":_post,
+                "HTTP_HOST":HTTP_HOST,
             })
 
         else:
