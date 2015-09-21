@@ -40,8 +40,10 @@
     <input type="submit" value="{{ post.extra_price|add:post.price |intcomma}}원">
 </form><br><br><br>
 
-클래스 선생님 :: <img src="{{MEDIA_URL}}{{post.user.t2profile_set.first.pro_pic}}"><br><br>
-{{post.user.last_name}}{{post.user.first_name}}<br>
+클래스 선생님 ::
+<a href="http://{{HTTP_HOST}}/v2.1/user/profile/{{post.user.id}}">
+<img src="{{MEDIA_URL}}{{post.user.t2profile_set.first.pro_pic}}"><br><br>
+{{post.user.last_name}}{{post.user.first_name}}</a><br>
 
 신청하기<br>
 
@@ -62,8 +64,9 @@
 {{post.addr}}<br><br>
 
 <h3>선생님 소개</h3>
+<a href="http://{{HTTP_HOST}}/v2.1/user/profile/{{post.user.id}}">
 <img src="{{MEDIA_URL}}{{post.user.t2profile_set.first.pro_pic}}"><br>
-{{post.user.last_name}}{{post.user.first_name}}<br>
+{{post.user.last_name}}{{post.user.first_name}}</a><br>
 {{post.user.t2hostprofile_set.first.intro_self}}<br>
 
 <h2>후기 쓰기</h2>
@@ -80,6 +83,9 @@
 </form>
 {% for review in post.t2classreview_set.all%}
 {% if review.is_active %}
+    <a href="http://{{HTTP_HOST}}/v2.1/user/profile/{{review.user.id}}">
+    <img src="{{MEDIA_URL}}{{review.user.t2profile_set.first.pro_pic}}">
+    {{review.user.last_name}}{{review.user.first_name}}</a>
     후기::{{review.review}}
     //등급::{{review.grade}}<br>
 수정 form 나중에  hidden

@@ -45,7 +45,7 @@ def host_check(user):
 
 
 @login_required
-@user_passes_test(host_check)
+@user_passes_test(host_check, login_url="/v2.1/user/host/apply/")
 def class_begin(request):
 
     HTTP_HOST=request.META["HTTP_HOST"]
@@ -94,7 +94,7 @@ def class_begin(request):
     })
 
 @login_required
-@user_passes_test(host_check)
+@user_passes_test(host_check, login_url="/v2.1/user/host/apply/")
 def create_tut(request, class_num):
     title=""
     prefill_intro=""
@@ -192,7 +192,7 @@ def create_tut(request, class_num):
     })
 
 @login_required
-@user_passes_test(host_check)
+@user_passes_test(host_check, login_url="/v2.1/user/host/apply/")
 def create_teach(request, class_num):
     title=""
     prefill_intro=""
@@ -291,7 +291,7 @@ def create_teach(request, class_num):
     })
 
 @login_required
-@user_passes_test(host_check)
+@user_passes_test(host_check, login_url="/v2.1/user/host/apply/")
 def modify_teach(request, class_num):
     HTTP_HOST=request.META["HTTP_HOST"]
     if request.method == "GET":
@@ -407,7 +407,7 @@ def modify_teach(request, class_num):
         })
 
 @login_required
-@user_passes_test(host_check)
+@user_passes_test(host_check, login_url="/v2.1/user/host/apply/")
 def modify_tut(request, class_num):
     HTTP_HOST=request.META["HTTP_HOST"]
     if request.method == "GET":
@@ -527,6 +527,7 @@ def create_review(request, class_num):
         classtype=request.POST.get("classtype", "")
 
         review_data={
+            'classtype':classtype,
             "review":review,
             "grade":grade,
             "user":_user,
@@ -534,6 +535,7 @@ def create_review(request, class_num):
         reviewform=T2ReviewForm(review_data)
         if classtype == "teach_class":
             _post=T2TeachClass.objects.get(pk=class_num)
+            review_data["post"]=_post
             if reviewform.is_valid():
                 _review=T2ClassReview(user=_user, host_user=_post.user,
                                   teach_post=_post, grade=grade,
@@ -541,6 +543,7 @@ def create_review(request, class_num):
                 _review.save()
         elif classtype == "tut_class":
             _post=T2TutClass.objects.get(pk=class_num)
+            review_data["post"]=_post
             if reviewform.is_valid():
                 _review=T2ClassReview(user=_user, host_user=_post.user,
                         tut_post=_post, grade=grade,
@@ -628,7 +631,7 @@ def delete_review(request, review_num):
 
 
 def class_post_detail(request, class_num):
-
+    HTTP_HOST=request.META["HTTP_HOST"]
     if request.method == "GET":
         _postcard=T2ClassCard.objects.filter(pk=class_num)[0]
         _post=""
@@ -646,13 +649,14 @@ def class_post_detail(request, class_num):
 
             return render(request, TEMP.TEACH_POST_DETAIL_V2D1,{
                 "post":_post,
+                "HTTP_HOST": HTTP_HOST,
             })
     else :
         raise Http404("잘못된 요청 입니다.")
 
 
 @login_required
-@user_passes_test(host_check)
+@user_passes_test(host_check, login_url="/v2.1/user/host/apply/")
 def class_onoff(request ,class_type, card_num, pro_user_num):
 
     _classcard=get_object_or_404(T2ClassCard, pk=card_num)

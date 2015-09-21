@@ -194,7 +194,11 @@
     수업제목::{{class.title}}<br><br>
     설명::{{class.descript}}<br><br>
     목표::{{class.demand_post.goal|goaltag2han}}<br><br>
-    <a href="{% url 'lineup_pageing_v2d1' class.id page_currunt cate_current state_current%}">
+    {% if request.user.t2profile_set.first.mobli_able %}
+        <a href="{% url 'lineup_pageing_v2d1' class.id page_currunt cate_current state_current%}?lineup_next=/v2.1/board/demand_list/{{page_currunt}}/{{cate_current}}/{{state_current}}">
+    {% else%}
+        <a href="{% url 'mobli_require_v2d1' class.id %}?lineup_next=/v2.1/board/demand_list/{{page_currunt}}/{{cate_current}}/{{state_current}}">
+    {% endif %}
         {% if request.user in class.inline_users.all %}
         줄서기 취소
         {% else %}

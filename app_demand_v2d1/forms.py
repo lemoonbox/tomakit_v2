@@ -158,8 +158,15 @@ class CommentForm(forms.Form):
 
     require_error={"required":u"필수 입력사항입니다."}
 
-    comment=forms.CharField(error_messages=require_error),
-    class_ad=forms.CharField(required=False),
+    comment=forms.CharField(error_messages=require_error)
+    class_ad=forms.CharField(required=False)
 
 
+class MobliForm(forms.Field):
+
+    mobli_error={"required":u"필수 입력사항입니다.",
+                 "invalid":u"숫자만 입력해주세요"}
+
+    mobli1=forms.IntegerField(error_messages=mobli_error)
+    mobli2=forms.IntegerField(error_messages=mobli_error)
 

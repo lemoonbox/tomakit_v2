@@ -27,6 +27,30 @@
 </div>
 </div>
 </div>
+
+<!--줄서기-->
+    {% if request.user.t2profile_set.first.mobli_able %}
+        <a href="{% url 'lineup_demand_v2d1' post.id %}?lineup_next=/v2.1/demand/{{post.id}}/">
+    {% else%}
+        <a href="{% url 'mobli_require_v2d1' post.id %}?lineup_next=/v2.1/demand/{{post.id}}/">
+    {% endif %}
+    {% if request.user in post.inline_users.all %}
+    줄서기 취소
+    {% else %}
+    줄서기
+    {% endif %}
+    <!--줄선 사람 숫자-->
+    {% if post.inline_users.count %}
+    ({{post.inline_users.count}})
+    {% else %}
+    (0)
+    {% endif %}
+    {% if post.inline_users.count %}
+    {% for user in post.inline_users.all %}
+    <img src="{{MEDIA_URL}}{{user.t2profile_set.first.pro_pic}}">
+    {% endfor %}
+    {% endif %}
+</a><br>
 <!--댓글-->
 <div class="col-md-12" style="background:#fff;">
 <form method="POST" action="{% url 'create_comment_v2d1' post.id %}">
