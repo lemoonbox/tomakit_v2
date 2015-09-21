@@ -5,8 +5,15 @@ function btnClick(selecterSelected) {
     var $select = $(selecterSelected).parent();
     var options = $select.find('.selecter-options').show();
     $('.selecter').css("z-index", "0");
+    /**
+     *     Mina added 4 lines below on 15.9.22
+     */
     $select.css("z-index", "150");
+    $('.selecter-options').mouseleave(function() {
+        $(this).hide();
+    });
 }
+
 
 function selecting(option, id) {
     var $selecterOptions = $(option).parent();

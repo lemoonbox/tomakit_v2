@@ -24,12 +24,6 @@
 .tmk-form-error {color:#FF565A;}
 .tmk-panel .col-md-4, .tmk-panel .col-xs-4 {min-width:150px;}
 
-/*.tmk-qitem-hdr-contents .tmk-qitem-selecter-wrapper{*/
-/*display: inline-block;*/
-/*vertical-align: middle;*/
-/*min-width: 200px;*/
-/*height:50px;*/
-/*}*/
 .tmk-qitem-selecter-wrapper{
     display: inline-block;
     vertical-align: middle;
@@ -54,7 +48,6 @@
     font-size: 18px;
     height: 50px;
 }
-
 .tmk-qitem-hdr-contents{
     margin: 30px 0px;
 }
