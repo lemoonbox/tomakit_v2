@@ -4,70 +4,77 @@
 {% load v2d1_board_tags %}
     <title>{%block title%}토마킷 {{post.title}}{%endblock%}</title>
 {%block style%}
+<style>
+    img {max-width:100%;}
+</style>
 {%endblock%}
 <body>
 {%block content%}
 <!--맞춤 수업 상세 페이지-->
 
-카테고리::{{post.category.category|cate2han}}<br>
-제목 :: {{post.title}}<br>
-한줄소개 :: {{post.intro_line}}<br>
-마감일 :: 즉시 등록 수업<br>
+<div class="tmk-main-body col-md-12">
+    <div class="tmk-page-header col-md-10 col-md-offset-1">
+        <div class="tmk-h4">{{post.category.category|cate2han}}</div>
+        <div class="tmk-h2 tmk-title">{{post.title}}</div>
+        <div class="tmk-h4">{{post.intro_line}}</div>
+        <span class="label tmk-label">즉시 등록 수업</span>
+    </div>
 
-사진
+
+<!--사진-->
 {% for image in post.t2classpic_set.all%}
-<img src="{{MEDIA_URL}}{{image.image}}"><br>
+<img src="{{MEDIA_URL}}{{image.image}}">
 {% endfor %}
 
-<br><br>
+
 <h3>수업정보</h3>
-{{post.repeat}}회 과정/{% widthratio post.repeat 1 post.perhour%}시간<br>
-모집 마감일::즉시 등록 수업 <br>
-수업 시작일::날짜 협의 <br>
-수업 일정 :: {{post.weekday}}<br>
-수업 인원 :: 최소{{post.min_num}}명~최대{{post.max_num}}명<br>
-장소 :: {{post.addr}}<br>
+{{post.repeat}}회 과정/{% widthratio post.repeat 1 post.perhour%}시간
+모집 마감일::즉시 등록 수업
+수업 시작일::날짜 협의
+수업 일정 :: {{post.weekday}}
+수업 인원 :: 최소{{post.min_num}}명~최대{{post.max_num}}명
+장소 :: {{post.addr}}
 
-재료비 :: {{post.extra_price|intcomma}}<br>
-수강료 :: {{post.price|intcomma}}<br>
+재료비 :: {{post.extra_price|intcomma}}
+수강료 :: {{post.price|intcomma}}
 
-총합 :: {{ post.extra_price|add:post.price |intcomma}}원<br>
+총합 :: {{ post.extra_price|add:post.price |intcomma}}원
 
 <!-- 결제 하기 -->
 <form method="GET" action="{% url 'pay_prefill_v2d1' %}">
     <input type="hidden" value="{{post.id}}" name="post_id">
     <input type="hidden" value="tutclass" name="classtype">
     <input type="submit" value="{{ post.extra_price|add:post.price |intcomma}}원">
-</form><br><br><br>
+</form>
 
 클래스 선생님 ::
 <a href="http://{{HTTP_HOST}}/v2.1/user/profile/{{post.user.id}}">
-<img src="{{MEDIA_URL}}{{post.user.t2profile_set.first.pro_pic}}"><br><br>
-{{post.user.last_name}}{{post.user.first_name}}</a><br>
+<img src="{{MEDIA_URL}}{{post.user.t2profile_set.first.pro_pic}}">
+{{post.user.last_name}}{{post.user.first_name}}</a>
 
-신청하기<br>
+신청하기
 
 <h3>클래스 소개</h3>
-동영상<br>
+동영상
 
 {% if post.video%}
     <iframe width="420" height="315" src="https://www.youtube.com/embed/{{post.video}}" frameborder="0" allowfullscreen></iframe>
 {% endif %}
-소개<br>
-{{post.descript}}<br>
-커맄큘럼<br>
-{{post.curri}}<br>
-안내사항<br>
-{{post.notic}}<br>
+소개
+{{post.descript}}
+커맄큘럼
+{{post.curri}}
+안내사항
+{{post.notic}}
 
-공방위치<br>
-{{post.addr}}<br><br>
+공방위치
+{{post.addr}}
 
 <h3>선생님 소개</h3>
 <a href="http://{{HTTP_HOST}}/v2.1/user/profile/{{post.user.id}}">
-<img src="{{MEDIA_URL}}{{post.user.t2profile_set.first.pro_pic}}"><br>
-{{post.user.last_name}}{{post.user.first_name}}</a><br>
-{{post.user.t2hostprofile_set.first.intro_self}}<br>
+<img src="{{MEDIA_URL}}{{post.user.t2profile_set.first.pro_pic}}">
+{{post.user.last_name}}{{post.user.first_name}}</a>
+{{post.user.t2hostprofile_set.first.intro_self}}
 
 <h2>후기 쓰기</h2>
 
@@ -75,9 +82,9 @@
     {%csrf_token%}
     <input type="hidden" name="class_num" value="{{post.id}}">
     <input type="hidden" name="classtype" value="tut_class">
-    <textarea name="review"></textarea><br>
+    <textarea name="review"></textarea>
     {{review.review.errors|striptags}}
-    <input type="number" name="grade"><br>
+    <input type="number" name="grade">
     {{review.grade.errors|striptags}}
     <input type="submit" value="후기입력">
 </form>
@@ -87,15 +94,15 @@
     <img src="{{MEDIA_URL}}{{review.user.t2profile_set.first.pro_pic}}">
     {{review.user.last_name}}{{review.user.first_name}}</a>
     후기::{{review.review}}
-    //등급::{{review.grade}}<br>
+    //등급::{{review.grade}}
 수정 form 나중에  hidden
 <form method="POST" action="{% url 'modify_review_v2d1' post.id %}">
     {%csrf_token%}
     <input type="hidden" name="review_num" value="{{review.id}}">
     <input type="hidden" name="class_num" value="{{post.id}}">
     <input type="hidden" name="classtype" value="tut_class">
-    <textarea name="review">{{review.review}}</textarea><br>
-    <input type="number" name="grade" value="{{review.grade}}"><br>
+    <textarea name="review">{{review.review}}</textarea>
+    <input type="number" name="grade" value="{{review.grade}}">
     <input type="submit" value="후기수정">
 </form>
 <form method="POST" action="{% url 'delete_review_v2d1' review.id%}">
@@ -106,7 +113,8 @@
 {% endif %}
 {% endfor %}
 
+</div>
+
 {%endblock%}
-</body>
 {%block script%}
 {%endblock%}
