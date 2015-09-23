@@ -10,6 +10,7 @@
     .tmk-review .btn-primary {width:170px;height:80px;}
     .tmk-review textarea {height:80px;}
     .img-wrap img {width:100%;}
+    .col-md-2 img {width:100px;}
 </style>
 {%endblock%}
 
@@ -57,7 +58,12 @@
     {% endif %}
     {% if post.inline_users.count %}
     {% for user in post.inline_users.all %}
-    <img src="{{MEDIA_URL}}{{user.t2profile_set.first.pro_pic}}">
+    <div class="card-img-profile">
+        <div class="card-link">
+        <img src="{{MEDIA_URL}}{{user.t2profile_set.first.pro_pic}}">
+        </div>
+
+    </div>
     {% endfor %}
     {% endif %}
 </a><br>
@@ -69,8 +75,7 @@
 <div class="col-md-12" style="background:#fff;">
 
     <div class="tmk-review">
-        <div class="col-md-8 col-md-offset-1">
-            <div class="h3">후기 쓰기</div>
+        <div class="col-md-7 col-md-offset-1">
             <form method="POST" action="{% url 'create_comment_v2d1' post.id %}">
                 {%csrf_token%}
                 <div class="col-md-2 col-xs-2">
@@ -90,7 +95,7 @@
                 </div>
             </form>
         </div>
-        <div class="col-md-8 col-md-offset-1">
+        <div class="col-md-7 col-md-offset-1">
             {% for comment in post.t2demandcmt_set.all%}
             {% if comment.is_active %}
             <div class="col-md-2">
@@ -108,14 +113,14 @@
             <!--수정 form 나중에  hidden-->
         </div>
 
-        <div class="col-md-8 col-md-offset-1">
+        <div class="col-md-7 col-md-offset-1">
             <form method="POST" action="{% url 'modify_comment_v2d1' post.id %}">
                 {%csrf_token%}
                 <div class="col-md-8">
                     <input type="hidden" name="comment_num" value="{{comment.id}}">
                     <input type="hidden"  name="demand_num" value="{{post.id}}">
                     <textarea class="form-control" name="comment">{{comment.comment}}</textarea>
-                    <input class="form-control" type="checkbox" name="class_ad" value="host_ad"
+                    <input type="checkbox" name="class_ad" value="host_ad"
                            {% if comment.class_ad%}checked="checked"{% endif %}>수업 개설 댓글
                 </div>
                 <div class="col-md-2">
@@ -134,9 +139,6 @@
     </div>
 
 </div>
-
-
-
 
 
 {%endblock%}

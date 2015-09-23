@@ -38,11 +38,11 @@
         #card-list {text-align:center!important;margin:0px auto!important;max-width:1200px;}
     }
     /*.li a > div {}*/
-    .tmk-card-info {height:220px;padding:10px;overflow:hidden;margin-bottom:25px;}
+    .tmk-card-info {height:220px;padding:10px;overflow:hidden;margin-bottom:15px;}
     .tmk-card-info div {margin:25px auto;}
 
     .tmk-class-card .col-md-12 {text-align:left;}
-    .tmk-class-card .col-md-12 div {margin:10px auto 20px auto;}
+    /*.tmk-class-card .col-md-12 div:first-child {}*/
     .tmk-card-img-profile {width:50px;height:50px;margin:auto!important;}
     .tmk-card-like {white-space: nowrap;overflow:hidden;}
 </style>
@@ -239,7 +239,7 @@
                     </a>
 
                     <div class="col-md-12">
-                        <div style="color:#84CDC2;">{{class.demand_post.goal|goaltag2han}}</div>
+                        <div style="margin:10px auto;height:40px;overflow:hidden;color:#84CDC2;">{{class.demand_post.goal|goaltag2han}}</div>
 <div class="tmk-card-like">
                     {% if request.user.t2profile_set.first.mobli_able %}
                     <a href="{% url 'lineup_pageing_v2d1' class.id page_currunt cate_current state_current%}?lineup_next=/v2.1/board/demand_list/{{page_currunt}}/{{cate_current}}/{{state_current}}">
