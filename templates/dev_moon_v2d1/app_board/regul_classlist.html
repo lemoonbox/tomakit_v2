@@ -8,19 +8,12 @@
     .tmk-search button {height:44px;}
     /*.tmk-card-link {color:#565A5C;}*/
 
-    /*.card-list li {*/
-        /*height: 450px;*/
-        /*width: 370px;*/
-        /*margin: 15px;*/
-        /*padding: 0px;*/
-        /*background:#fff;*/
-        /*display:inline-block;*/
-        /*vertical-align: top;*/
-        /*border: 1px solid #eee;*/
-        /*border-radius:4px;*/
-        /*float:left;*/
-        /*list-style-type: none;*/
-    /*}*/
+    .tmk-card-img-profile {
+        margin-top: -30px;
+    }
+    #tmk-card-img {transition:opacity 0.3s ease 0.1s;}
+    #tmk-card-img:hover { opacity:0.8;}
+    #tmk-img-pro {transition:none;}
     /*@media screen and (max-width:767px) {*/
         /*.card-list li {width:100%!important;margin:0px;left:0;right:0;margin-bottom:15px;}*/
     /*}*/
@@ -245,13 +238,13 @@
                                 {% endif %}
                             </div>
                             <div class="card-link">
-                                <img src="{{MEDIA_URL}}{{class.t2classpic_set.first.image}}">
+                                <img id="tmk-card-img" src="{{MEDIA_URL}}{{class.t2classpic_set.first.image}}">
                             </div>
                         </a>
                         {%comment%}수업호스트::{{class.user}}{%endcomment%}
                         <a class="tmk-card-img-profile">
                         <div class="card-link">
-                            <img src="{{MEDIA_URL}}{{class.user.t2profile_set.first.pro_pic}}">
+                            <img id="tmk-img-pro" src="{{MEDIA_URL}}{{class.user.t2profile_set.first.pro_pic}}">
                             </div>
                         </a>
                         <div class="tmk-card-info">

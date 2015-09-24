@@ -6,139 +6,172 @@
 
 {%block style%}
 <style>
-    .tmk-review .col-md-8 {padding:0px;}
+    .tmk-review {margin: 50px auto!important;}
+    /*.tmk-review .col-md-8 {padding:0px;}*/
     .tmk-review .btn-primary {width:170px;height:80px;}
     .tmk-review textarea {height:80px;}
     .img-wrap img {width:100%;}
     .col-md-2 img {width:100px;}
+    .review-wrapper {margin:20px auto;}
+    .review-wrapper .btn-link {display:inline!important;float:left!important;}
 </style>
 {%endblock%}
 
 {%block content%}
 <div class="tmk-main-body col-md-12" style="text-align:left;">
-    <div class="col-md-10 col-md-offset-1">
-        <div class="col-md-2">여기에 사용자 이름 넣어야됨</div>
-
-        <div class="col-md-8" style="background:#fff;">
-            <div class="">{{post.category.category|cate2han}}</div>
-            <div class="tmk-h3"> {{post.title}}</div>
-            한줄소개 :: {{post.descript}}<br>
-            목표::{{post.goal}}<br><br>
-
-            희망시간 :: {{post.weekday}}<br>
-            희망지역 :: {{post.state.state|state2han}} {{post.local}}<br>
-            희망수강료 :: {{post.min_price}}~{{post.max_price}}<br>
-
-            참조 사진
-            {% for image in post.t2demandpic_set.all%}
-            <div class="col-md-8 img-wrap">
-                <img src="{{MEDIA_URL}}{{image.image}}">
+    <!--<div class="col-md-12">-->
+    <div class="container">
+        <div class="col-md-12">
+            <div class="col-md-2">여기에 사용자 이름 넣어야됨</div>
+            <div class="col-md-9" style="background:#fff;">
+                <div class="">{{post.category.category|cate2han}}</div>
+                <div class="tmk-h3"> {{post.title}}</div>
+                한줄소개 :: {{post.descript}}<br>
+                목표::{{post.goal}}<br><br>
+                희망시간 :: {{post.weekday}}<br>
+                희망지역 :: {{post.state.state|state2han}} {{post.local}}<br>
+                희망수강료 :: {{post.min_price}}~{{post.max_price}}<br>
+                <!--참조 -->
+                {% for image in post.t2demandpic_set.all%}
+                <div class="img-wrap">
+                    <img src="{{MEDIA_URL}}{{image.image}}">
+                </div>
+                {% endfor %}
             </div>
-            {% endfor %}
         </div>
     </div>
 </div>
 
-<!--줄서기-->
-    {% if request.user.t2profile_set.first.mobli_able %}
-        <a href="{% url 'lineup_demand_v2d1' post.id %}?lineup_next=/v2.1/demand/{{post.id}}/">
-    {% else%}
-        <a href="{% url 'mobli_require_v2d1' post.id %}?lineup_next=/v2.1/demand/{{post.id}}/">
-    {% endif %}
-    {% if request.user in post.inline_users.all %}
-    줄서기 취소
-    {% else %}
-    줄서기
-    {% endif %}
-    <!--줄선 사람 숫자-->
-    {% if post.inline_users.count %}
-    ({{post.inline_users.count}})
-    {% else %}
-    (0)
-    {% endif %}
-    {% if post.inline_users.count %}
-    {% for user in post.inline_users.all %}
-    <div class="card-img-profile">
-        <div class="card-link">
-        <img src="{{MEDIA_URL}}{{user.t2profile_set.first.pro_pic}}">
+<div class="tmk-main-body col-md-12" style="margin:100px auto;">
+    <div class="container">
+        <!--줄서기-->
+        {% if request.user.t2profile_set.first.mobli_able %}
+        <div href="{% url 'lineup_demand_v2d1' post.id %}?lineup_next=/v2.1/demand/{{post.id}}/">
+            {% else%}
+            <a href="{% url 'mobli_require_v2d1' post.id %}?lineup_next=/v2.1/demand/{{post.id}}/">
+                {% endif %}
+                {% if request.user in post.inline_users.all %}
+                줄서기 취소
+                {% else %}
+                줄서기
+                {% endif %}
+                <!--줄선 사람 숫자-->
+                {% if post.inline_users.count %}
+                ({{post.inline_users.count}})
+                {% else %}
+                (0)
+                {% endif %}
+                {% if post.inline_users.count %}
+                {% for user in post.inline_users.all %}
+                <div class="card-img-profile">
+                    <div class="card-link">
+                        <img src="{{MEDIA_URL}}{{user.t2profile_set.first.pro_pic}}">
+                    </div>
+                </div>
+                {% endfor %}
+                {% endif %}
+            </a>
         </div>
-
     </div>
-    {% endfor %}
-    {% endif %}
-</a><br>
-<!--댓글-->
+</div>
 
 
 
-
-<div class="col-md-12" style="background:#fff;">
-
+<div class="tmk-main-body col-md-12" style="background:#fff;margin-bottom:-50px;">
     <div class="tmk-review">
-        <div class="col-md-7 col-md-offset-1">
-            <form method="POST" action="{% url 'create_comment_v2d1' post.id %}">
-                {%csrf_token%}
-                <div class="col-md-2 col-xs-2">
-                    <div class="tmk-card-img-profile" style="margin-top:15px;">
+        <div class="container">
+            <!--댓글-->
+            <div class="review-wrapper col-md-12">
+                <form method="POST" action="{% url 'create_comment_v2d1' post.id %}">
+                    {%csrf_token%}
+                    <div class="col-md-2">
+                        <div class="tmk-card-img-profile" style="margin-top:15px;">
+                            <div class="card-link">
+                                <img src="{{MEDIA_URL}}{{user.t2profile_set.first.pro_pic}}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-7" style="text-align:left;">
+                        <input type="hidden" name="class_num" value="{{post.id}}">
+                        <textarea class="form-control" name="comment"></textarea>
+                        <!--<img src="{%static 'media/image/slice/icon-star_empty.png'%}">-->
+                        <input type="checkbox" style="vertical-align:bottom;" class="icheckbox_flat" name="class_ad" value="host_ad"><span style="font-weight:bold;">&nbsp;해결 댓글&nbsp;</span>
+                        <span style="color:#82888A;">위 제안을 해결할 수 있는 댓글이라면 옆의 체크박스를 체크해주세요</span>
+                    </div>
+                    <div class="col-md-3">
+                        <input class="btn btn-primary" type="submit" value="댓글달기">
+                    </div>
+                </form>
+            </div>
+
+
+
+            <div class="review-wrapper col-md-12">
+                {% for comment in post.t2demandcmt_set.all%}
+                {% if comment.is_active %}
+                <div class="col-md-2"  style="margin-top:15px;">
+                    <div class="tmk-card-img-profile">
                         <div class="card-link">
-                            <img src="{{MEDIA_URL}}{{user.t2profile_set.first.pro_pic}}">
+                            <img src="{{MEDIA_URL}}{{comment.user.t2profile_set.first.pro_pic}}">
                         </div>
                     </div>
                 </div>
-                <div class="col-md-8 col-xs-7">
-                    <input type="hidden" name="class_num" value="{{post.id}}">
-                    <textarea class="form-control" name="comment"></textarea>
-                    <input type="checkbox" name="class_ad" value="host_ad">수업 소개 댓글
+                <div class="col-md-7" id="user-review">사용자 이름<br>
+                    <!--댓글-->
+                    <div>{{comment.comment}}</div>
+                    {% if comment.class_ad%}
+                    <span style="color:red;">★</span> 관련 수업을 개설하였습니다.
+                    {% endif %}
                 </div>
-                <div class="col-md-2 col-xs-3">
-                    <input class="btn btn-primary" type="submit" value="댓글달기">
+                <!--수정 form 나중에  hidden-->
+
+                <div id="review-modify" hidden>
+                    <form method="POST" action="{% url 'modify_comment_v2d1' post.id %}">
+                        {%csrf_token%}
+                        <div class="col-md-7">
+                            <input type="hidden" name="comment_num" value="{{comment.id}}">
+                            <input type="hidden"  name="demand_num" value="{{post.id}}">
+                            <textarea class="form-control" name="comment">{{comment.comment}}</textarea>
+                            <input type="checkbox" name="class_ad" value="host_ad"
+                                   {% if comment.class_ad%}checked="checked"{% endif %}>수업 개설 댓글
+                        </div>
+                        <div class="col-md-1">
+                            <input class="btn btn-link" id="modify-end" type="submit" value="수정 완료">
+                        </div>
+                    </form>
                 </div>
-            </form>
-        </div>
-        <div class="col-md-7 col-md-offset-1">
-            {% for comment in post.t2demandcmt_set.all%}
-            {% if comment.is_active %}
-            <div class="col-md-2">
-                <div class="tmk-card-img-profile" style="margin-top:15px;">
-                <div class="card-link">
-                    <img src="{{MEDIA_URL}}{{comment.user.t2profile_set.first.pro_pic}}">
+                <!--사용자가 단 댓글인 경우에만 visible되는-->
+
+                <!--<div class="col-md-3" style="text-align:center;">-->
+                <div class="col-md-1" id="modify-wrap">
+                    <span class="btn btn-link" id="modify-btn">댓글 수정</span>
                 </div>
-            </div></div>
-            <div class="col-md-10">사용자 이름<br>
-                <div>후기 : {{comment.comment}}</div>
-                {% if comment.class_ad%}
-                수업 개설 덧글
+                <form method="POST" action="{% url 'delete_comment_v2d1' comment.id%}">
+                    {%csrf_token%}
+                    <input type="hidden" name="demand_num" value="{{post.id}}">
+                    <div class="col-md-1">
+                        <input class="btn btn-link" type="submit" value="댓글 삭제">
+                    </div>
+                </form>
+                <!--</div>-->
+
+
                 {% endif %}
+                {% endfor %}
             </div>
-            <!--수정 form 나중에  hidden-->
-        </div>
-
-        <div class="col-md-7 col-md-offset-1">
-            <form method="POST" action="{% url 'modify_comment_v2d1' post.id %}">
-                {%csrf_token%}
-                <div class="col-md-8">
-                    <input type="hidden" name="comment_num" value="{{comment.id}}">
-                    <input type="hidden"  name="demand_num" value="{{post.id}}">
-                    <textarea class="form-control" name="comment">{{comment.comment}}</textarea>
-                    <input type="checkbox" name="class_ad" value="host_ad"
-                           {% if comment.class_ad%}checked="checked"{% endif %}>수업 개설 댓글
-                </div>
-                <div class="col-md-2">
-                    <input class="btn btn-link" type="submit" value="후기수정">
-                </div>
-            </form>
-
-            <form method="POST" action="{% url 'delete_comment_v2d1' comment.id%}">
-                {%csrf_token%}
-                <input type="hidden" name="demand_num" value="{{post.id}}">
-                <input class="btn btn-link" type="submit" value="댓글삭제">
-            </form>
-            {% endif %}
-            {% endfor %}
         </div>
     </div>
-
 </div>
 
-
+{%endblock%}
+{%block script%}
+<script>
+    $(document).ready(function(){
+        $("#modify-btn").click(function(){
+            $("#modify-wrap").hide();
+            $("#user-review").hide();
+            $("#review-modify").show();
+        });
+    });
+</script>
 {%endblock%}

@@ -1242,9 +1242,11 @@ ul{
   left: -100%;
 }
 
+
+
 .tmk-card-img-profile {
   @extend .tmk-card-img;
-  margin-top:-30px;
+  //margin-top:-30px;
   width:60px;
   height:60px;
   border-radius: 50%;
@@ -1254,6 +1256,11 @@ ul{
     border:3px solid #fff;
   }
   .card-link img {max-width:100px;max-height:100px;}
+}
+.tmk-class-card {
+  .tmk-card-img-profile {
+    margin-top: -30px;
+  }
 }
 
 .tmk-search {max-width:540px;margin:auto;}

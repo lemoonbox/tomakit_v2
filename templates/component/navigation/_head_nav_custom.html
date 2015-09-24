@@ -53,7 +53,7 @@
                 </li>
                 <li class="dropdown">
                     <a href="#" class="user dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                        <img class="profile-photo-mini" src="{{MEDIA_URL}}{{user.userprofile_set.first.pro_pic}}">
+                        <img class="profile-photo-mini" src="{{MEDIA_URL}}{{user.t2profile_set.first.pro_pic}}">
                         {{user.last_name}} {{user.first_name}}&nbsp;<span class="caret"></span></a>
                     <ul class="dropdown-menu" style="width:100%;">
                         <li><a href="http://{{HTTP_HOST}}/v2.1/user/profile/{{request.user.id}}">마이페이지</a></li>
