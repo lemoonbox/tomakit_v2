@@ -2,111 +2,198 @@
 {% load static from staticfiles%}
 {% load humanize %}
 {% load v2d1_board_tags %}
-    <title>{%block title%}토마킷 {{post.title}}{%endblock%}</title>
+<title>{%block title%}토마킷 {{post.title}}{%endblock%}</title>
 {%block style%}
+<style>
+    body {background-color:#fff!important;}
+    /*img {max-width:100%;}*/
+    /* Star Rating */
+    .starRating,
+    .starRating span {
+        display: inline-block;
+        /*height: 14px;*/
+        background: transparent url({%static 'media/image/slice/icon-star_fill.png'%}) no-repeat;
+        overflow: hidden;
+    }
+    .starRating {
+        width: 79px;
+        vertical-align: middle;
+    }
+    .starRating span {
+        font-size: 0;
+        line-height: 0;
+        vertical-align: top;
+        text-indent: -100px;
+        *text-indent: 0;
+        background-position: 0 -14px;
+    }
+    /*.tmk-class-pay img {max-width:100px;}*/
+    .col-md-12 img {max-width:100px;}
+</style>
 {%endblock%}
 <body>
 {%block content%}
 <!--맞춤 수업 상세 페이지-->
+<div class="tmk-main-body col-md-12">
+    <div class="tmk-page-header col-md-10 col-md-offset-1">
+        <div class="tmk-h4">{{post.category.category|cate2han}}</div>
+        <div class="tmk-h2 tmk-title">{{post.title}}</div>
+        <div class="tmk-h4">{{post.intro_line}}</div>
+        <span class="label tmk-label">즉시 등록 수업</span>
+    </div>
 
-카테고리::{{post.category.category|cate2han}}<br>
-제목 :: {{post.title}}<br>
-한줄소개 :: {{post.intro_line}}<br>
-마감일 :: 즉시 등록 수업<br>
+    <!--사진-->
+    <div class="col-md-10 col-md-offset-1">
+                <div id="class-post-Carousel" class="carousel slide" data-ride="carousel">
+                    <!--Indicators -->
+                    <ol class="carousel-indicators">
+                        {% for image in post.t2classpic_set.all%}{% if forloop.counter0 == 0 %}
+                        <li data-target="#class-post-Carousel" data-slide-to="{{forloop.counter0}}" class="active"></li>
+                        {% else %}
+                        <li data-target="#class-post-Carousel" data-slide-to="{{forloop.counter0}}"></li>
+                        {% endif %} {%endfor%}
+                    </ol>
+                    <!-- Wrapper for slides -->
+                    <div class="carousel-inner" role="listbox">
+                        {% for image in post.t2classpic_set.all%} {% if forloop.counter0 == 0 %}
+                        <div class="item active">
+                            <img src="{{MEDIA_URL}}{{image.image}}" alt="{{post.title}} image{{forloop.counter0}}">
+                        </div>
+                        {% else %}
+                        <div class="item">
+                            <img src="{{MEDIA_URL}}{{image.image}}" alt="{{post.title}} image{{forloop.counter0}}">
+                        </div>
+                        {% endif %}{%endfor%}
+                    </div>
+                    <!-- Left and right controls -->
+                    <a class="left carousel-control" href="#class-post-Carousel" role="button" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="right carousel-control" href="#class-post-Carousel" role="button" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </div>
 
-사진
-{% for image in post.t2classpic_set.all%}
-<img src="{{MEDIA_URL}}{{image.image}}"><br>
-{% endfor %}
 
-<br><br>
-<h3>수업정보</h3>
-{{post.repeat}}회 과정/{% widthratio post.repeat 1 post.perhour%}시간<br>
-모집 마감일::즉시 등록 수업 <br>
-수업 시작일::날짜 협의 <br>
-수업 일정 :: {{post.weekday}}<br>
-수업 인원 :: 최소{{post.min_num}}명~최대{{post.max_num}}명<br>
-장소 :: {{post.addr}}<br>
+   <div class="col-md-7 col-md-offset-1">
+       <div class="tmk-h3" style="font-weight:bold;">클래스 소개</div>>
+    <!--동영상-->
+    {% if post.video%}
+    <iframe width="100%" height="600px" src="https://www.youtube.com/embed/{{post.video}}" frameborder="0" allowfullscreen></iframe>
+    {% endif %}
+    소개
+    {{post.descript}}
+    커맄큘럼
+    {{post.curri}}
+    안내사항
+    {{post.notic}}
 
-재료비 :: {{post.extra_price|intcomma}}<br>
-수강료 :: {{post.price|intcomma}}<br>
+    공방위치
+    {{post.addr}}
 
-총합 :: {{ post.extra_price|add:post.price |intcomma}}원<br>
+    <div class="tmk-h3" style="font-weight:bold;">선생님 소개</div>>
+    <a href="http://{{HTTP_HOST}}/v2.1/user/profile/{{post.user.id}}">
+        <img src="{{MEDIA_URL}}{{post.user.t2profile_set.first.pro_pic}}">
+        {{post.user.last_name}}{{post.user.first_name}}</a>
+    {{post.user.t2hostprofile_set.first.intro_self}}
+</div>
+    <div class="col-md-3 tmk-class-pay">
+        <!--<div class=h3>수업정보</>-->
+        <div class="tmk-h3" style="font-weight:bold;">{{post.repeat}}회 과정/{% widthratio post.repeat 1 post.perhour%}시간</div>
+        <label>모집 마감일</label> 즉시 등록 수업
+        <label>수업 시작일 </label> 날짜 협의
+        <label>수업 일정</label> {{post.weekday}}
+        <label>수업 인원</label> 최소{{post.min_num}}명~최대{{post.max_num}}명
+        <label>장소</label> {{post.addr}}
+        <div class="">재료비 :: {{post.extra_price|intcomma}}
+            수강료 :: {{post.price|intcomma}}
+            총합 :: {{ post.extra_price|add:post.price |intcomma}}원
+        </div>
 
-<!-- 결제 하기 -->
-<form method="GET" action="{% url 'pay_prefill_v2d1' %}">
-    <input type="hidden" value="{{post.id}}" name="post_id">
-    <input type="hidden" value="tutclass" name="classtype">
-    <input type="submit" value="{{ post.extra_price|add:post.price |intcomma}}원">
-</form><br><br><br>
+        <a href="http://{{HTTP_HOST}}/v2.1/user/profile/{{post.user.id}}">
+            <img src="{{MEDIA_URL}}{{post.user.t2profile_set.first.pro_pic}}">
+            <span>클래스 선생님</span>
+            {{post.user.last_name}}{{post.user.first_name}}</a>
 
-클래스 선생님 ::
-<a href="http://{{HTTP_HOST}}/v2.1/user/profile/{{post.user.id}}">
-<img src="{{MEDIA_URL}}{{post.user.t2profile_set.first.pro_pic}}"><br><br>
-{{post.user.last_name}}{{post.user.first_name}}</a><br>
+        <!-- 결제 하기 -->
+        <form method="GET" action="{% url 'pay_prefill_v2d1' %}">
+            <input type="hidden" value="{{post.id}}" name="post_id">
+            <input type="hidden" value="tutclass" name="classtype">
+            <button class="btn btn-primary">
+                신청하기 <input type="submit" value="{{ post.extra_price|add:post.price |intcomma}}원" hidden>
+            </button>
+        </form>
+    </div>
 
-신청하기<br>
+</div>
 
-<h3>클래스 소개</h3>
-동영상<br>
+    <div class="tmk-main-body col-md-12" style="box-shadow:0 1px 4px rgba(0,0,0,0.25)!important">
 
-{% if post.video%}
-    <iframe width="420" height="315" src="https://www.youtube.com/embed/{{post.video}}" frameborder="0" allowfullscreen></iframe>
-{% endif %}
-소개<br>
-{{post.descript}}<br>
-커맄큘럼<br>
-{{post.curri}}<br>
-안내사항<br>
-{{post.notic}}<br>
+        <div class="col-md-7 col-md-offset-1">
+        <div class="tmk-h3" style="font-weight:bold;">후기 쓰기</div>
 
-공방위치<br>
-{{post.addr}}<br><br>
-
-<h3>선생님 소개</h3>
-<a href="http://{{HTTP_HOST}}/v2.1/user/profile/{{post.user.id}}">
-<img src="{{MEDIA_URL}}{{post.user.t2profile_set.first.pro_pic}}"><br>
-{{post.user.last_name}}{{post.user.first_name}}</a><br>
-{{post.user.t2hostprofile_set.first.intro_self}}<br>
-
-<h2>후기 쓰기</h2>
-
-<form method="POST" action="{% url 'create_review_v2d1' post.id %}">
-    {%csrf_token%}
-    <input type="hidden" name="class_num" value="{{post.id}}">
-    <input type="hidden" name="classtype" value="tut_class">
-    <textarea name="review"></textarea><br>
-    {{review.review.errors|striptags}}
-    <input type="number" name="grade"><br>
-    {{review.grade.errors|striptags}}
-    <input type="submit" value="후기입력">
-</form>
-{% for review in post.t2classreview_set.all%}
-{% if review.is_active %}
+    <form method="POST" action="{% url 'create_review_v2d1' post.id %}">
+        {%csrf_token%}
+        <input type="hidden" name="class_num" value="{{post.id}}">
+        <input type="hidden" name="classtype" value="tut_class">
+        <textarea name="review"></textarea>
+        {{review.review.errors|striptags}}
+        <input type="number" name="grade" min="1" max="5">
+        {{review.grade.errors|striptags}}
+        <input type="submit" value="후기입력">
+    </form>
+    {% for review in post.t2classreview_set.all%}
+    {% if review.is_active %}
     <a href="http://{{HTTP_HOST}}/v2.1/user/profile/{{review.user.id}}">
-    <img src="{{MEDIA_URL}}{{review.user.t2profile_set.first.pro_pic}}">
-    {{review.user.last_name}}{{review.user.first_name}}</a>
-    후기::{{review.review}}
-    //등급::{{review.grade}}<br>
-수정 form 나중에  hidden
-<form method="POST" action="{% url 'modify_review_v2d1' post.id %}">
-    {%csrf_token%}
-    <input type="hidden" name="review_num" value="{{review.id}}">
-    <input type="hidden" name="class_num" value="{{post.id}}">
-    <input type="hidden" name="classtype" value="tut_class">
-    <textarea name="review">{{review.review}}</textarea><br>
-    <input type="number" name="grade" value="{{review.grade}}"><br>
-    <input type="submit" value="후기수정">
-</form>
-<form method="POST" action="{% url 'delete_review_v2d1' review.id%}">
-    {%csrf_token%}
-    <input type="hidden" name="classtype" value="tut_class">
-    <input type="submit" value="삭제하기">
-</form>
-{% endif %}
-{% endfor %}
+        <img src="{{MEDIA_URL}}{{review.user.t2profile_set.first.pro_pic}}">
+        {{review.user.last_name}}{{review.user.first_name}}</a>
+    후기: {{review.review}}
+    <!--//등급::-->
+    <div>
+        {{review.grade}}
+        <p>
+            {%comment%}
+            {%for i in review.grade %}
+            <span class="starRating">
+        <span></span>
+                </span>
+        </p>
+        {% endfor %}
+        {%endcomment%}
+    </div>
 
+    <!--수정 form 나중에  hidden-->
+    <form method="POST" action="{% url 'modify_review_v2d1' post.id %}">
+        {%csrf_token%}
+        <input type="hidden" name="review_num" value="{{review.id}}">
+        <input type="hidden" name="class_num" value="{{post.id}}">
+        <input type="hidden" name="classtype" value="tut_class">
+        <textarea name="review">{{review.review}}</textarea>
+        <input type="number" name="grade" value="{{review.grade}}">
+        <input type="submit" value="후기수정">
+    </form>
+    <form method="POST" action="{% url 'delete_review_v2d1' review.id%}">
+        {%csrf_token%}
+        <input type="hidden" name="classtype" value="tut_class">
+        <input type="submit" value="삭제하기">
+    </form>
+    {% endif %}
+    {% endfor %}
+            </div>
+</div>
+
+<div class="tmk-main body col-md-12" style="background:#eee;height:260px;margin-top:3px;margin-bottom:-50px;">
+<div style="margin:50px auto;">
+        <div class="tmk-h3" style="font-weight:bold;">원하는 클래스를 찾지 못했나요?</div>
+    <div class="tmk-h4">클래스를 제안해보세요 원하시는 클래스를 개설해드린답니다</div>
+    <a href="http://{{HTTP_HOST}}/v2.1/demand/create" class="btn btn-link" style="color:red;">클래스 제안하기 ></a>
+
+</div>
+</div>
 {%endblock%}
-</body>
 {%block script%}
+<script src="http://code.jquery.com/jquery-latest.js"></script>
 {%endblock%}

@@ -5,8 +5,6 @@
 {%block style%}
 <style>
     .tmk-main-banner {background-image:url({%static 'media/image/slice/bg-1.png'%});
-        float:left;
-        position:relative;
         background-size: cover;
         background-repeat:no-repeat;}
     @media screen and (min-width:768px) {
@@ -27,133 +25,258 @@
     }
 </style>
 {%endblock%}
-
 {%block nav%}
 {%include 'component/navigation/_head_nav_custom.html'%}
 {%endblock%}
 {% block content %}
-<!--<div class="how-to-tmk"> </div>-->
 <div class="tmk-main-banner">
     <div class="main-banner-title">특별한 일상을 만들다<br>
         핸드메이드 클래스 찾을 땐, 토마킷</div>
     <div class="main-banner-subtitle">토마킷이 편한 시간, 가까운 공방의 클래스를 찾아드려요!</div>
-
-    <button type="button" class="btn btn-primary how-to-tomakit" id="tomatoma">토마킷 이용방법</button>
     <!--<video autoplay loop muted poster="https://d3ce7jb7ih53ua.cloudfront.net/verloc_new_design/main_page/first-page-1.png" id="bgvid">-->
     <!--<source src="https://d3ce7jb7ih53ua.cloudfront.net/verloca_new_design/main_page/verlocal+header_3.mp4"></source>-->
     <!--</video>-->
-    <!--<div></div>-->
-
-</div>
-
-<div class="tmk-main-body">
-    <div class="tmk-main-border">
-        <div class="tmk-h3">반짝 반짝, 새로운 클래스</div>
-    </div>
-    <!--<div class="tmk-main-picks">-->
-    <!--<div class="picks-title rows">-->
-    <!--<span class="col-md-2"></span>-->
-    <!--<span class="title-main col-md-8" style="font-family:AppleSDGothicNeo-Regular;">매일 반복되는 일상 속에서 직접 창조한다는 것은 얼마나 가슴뛰는 일인가요?</span>-->
-    <!--</div>-->
-    <!--</div>-->
-
-    <div class="tmk-sub-body">
-        <div class="picks-cards rows">
-            <ul>
-                <!--<a href="http://{{HTTP_HOST}}/v2/question/que_bridge" style="color:black;">-->
-                    <!--<li class="tmk-picks-main" style="background:url({%static 'media/image/slice/card1.png'%});">-->
-                        <!--<div class="tmk-picks-title">핸드메이드, 간편하게 의뢰하세요<br>-->
-                            <!--<div class="tmk-picks-subtitle">핸드메이드를 찾고 계신가요? 토마킷에 의뢰해보세요<br>가까운 곳, 편안한 시간의 클래스를 무료로 찾아드려요</div>-->
-                        <!--</div>-->
-                    <!--</li>-->
-                <!--</a>-->
-                {%for bestclass in bestlist%}
-                <li class="card-qitem counter{{forloop.counter}}">
-
-                    <br>
-                    수업 타입 ::{{bestclass.best_classcard.classtype}}<br><br>
-                    사진::<img src="{{MEDIA_URL}}{{bestclass.best_classcard.t2classpic_set.first.image}}"><br><br>
-                    수업호스트::{{bestclass.best_classcard.user}}<br><br>
-                    수업제목::{{bestclass.best_classcard.title}}<br><br>
-                    수업소개::{{bestclass.best_classcard.intro_line}}<br><br>
-                    횟수::{{bestclass.best_classcard.repeat}}회/수업당시간::{{bestclass.best_classcard.perhour}}시간<br><br>
-                    {{bestcalss.best_classcard.price}}
-                    ---------------------------------------------------------
-
-                </li>
-
-                {% endfor %}
-                <!--<a href="http://{{HTTP_HOST}}/v2/board/caseboard/" style="color:black;">-->
-                    <!--<li class="tmk-picks-main" style="background:url({%static 'media/image/slice/card2.png'%});">-->
-                        <!--<div class="tmk-picks-title">지금까지 어떤 클래스가 만들어 졌을까요?<br>-->
-                            <!--<div class="tmk-picks-subtitle">다른 사람들의 클래스를 살펴보며 영감을 나누고 창의력을 키워보세요!</div>-->
-                        <!--</div>-->
-                    <!--</li>-->
-                <!--</a>-->
-            </ul>
-
+    <form method="GET" action="{% url 'class_filter_redirct_v2d1' %}">
+        {%csrf_token%}
+        <div class="tmk-search cover">
+            <div class="tmk-qitem-selecter-wrapper">
+                <div class="selecter cover" tabindex="0">
+                    <select name="category" required class="selecter_3 selecter-element" data-selecter-options="{&quot;cover&quot;:&quot;true&quot;}" tabindex="-1">
+                        <option value="all"
+                                {% if begin_data.category == 'all' %}selected{% endif %}>모든 카테고리</option>
+                        <option value="leather"
+                                {% if begin_data.category == 'leather' %}selected{% endif %}>가죽공예</option>
+                        <option value="calligraphy"
+                                {% if begin_data.category == 'calligraphy'%}selected{% endif %}>캘리그라피</option>
+                        <option value="flower"
+                                {% if begin_data.category == 'flower'%}selected{% endif %}>플라워&디퓨저</option>
+                        <option value="dyeing"
+                                {% if begin_data.category == 'dyeing'%}selected{% endif %}>천연염색</option>
+                        <option value="pottery"
+                                {% if begin_data.category == 'pottery'%}selected{% endif %}>도자기공예</option>
+                        <option value="home_living"
+                                {% if begin_data.category == 'home_living'%}selected{% endif %}>Home&Living</option>
+                        <option value="sewing"
+                                {% if begin_data.category == 'sewing'%}selected{% endif %}>미싱&옷만들기</option>
+                        <option value="woodwork"
+                                {% if begin_data.category == 'woodwork'%}selected{% endif %}>목공예</option>
+                        <option value="art"
+                                {% if begin_data.category == 'art'%}selected{% endif %}>미술</option>
+                        <option value="toreutics"
+                                {% if begin_data.category == 'toreutics'%}selected{% endif %}>금속공예&악세사리</option>
+                        <option value="knot"
+                                {% if begin_data.category == 'knot'%}selected{% endif %}>매듭공예</option>
+                        <option value="knit"
+                                {% if begin_data.category == 'knit'%}selected{% endif %}>뜨개질</option>
+                        <option value="bake"
+                                {% if begin_data.category == 'bake'%}selected{% endif %}>베이킹&쿠킹</option>
+                        <option value="cosmetics"
+                                {% if begin_data.category == 'cosmetics'%}selected{% endif %}>천연화장품&비누</option>
+                        <option value="etc"
+                                {% if begin_data.category == 'etc'%}selected{% endif %}>기타</option>
+                    </select>
+                    <span class="selecter-selected" onclick="btnClick(this)">카테고리 선택</span>
+                    <div class="selecter-options" data-value="">
+                        <!--<span class="selecter-item selected" data-value="" onclick="selecting(this, '')">카테고리</span>-->
+                        <div class="selecter-item"
+                             data-value="id"
+                             onclick="selecting(this, 'all')">모든 카테고리</div>
+                        <div class="selecter-item"
+                             data-value="id"
+                             onclick="selecting(this, 'leather')">가죽공예</div>
+                        <div class="selecter-item"
+                             data-value="id"
+                             onclick="selecting(this, 'calligraphy')">캘리그라피</div>
+                        <div class="selecter-item"
+                             data-value="id"
+                             onclick="selecting(this, 'flower')">플라워&디퓨저</div>
+                        <div class="selecter-item"
+                             data-value="id"
+                             onclick="selecting(this, 'dyeing')">천연염색</div>
+                        <div class="selecter-item"
+                             data-value="id"
+                             onclick="selecting(this, 'pottery')">도자기공예</div>
+                        <div class="selecter-item"
+                             data-value="id"
+                             onclick="selecting(this, 'home_living')">Home&Living</div>
+                        <div class="selecter-item"
+                             data-value="id"
+                             onclick="selecting(this, 'sewing')">미싱&옷만들기</div>
+                        <div class="selecter-item"
+                             data-value="id"
+                             onclick="selecting(this, 'woodwork')">목공예</div>
+                        <div class="selecter-item"
+                             data-value="id"
+                             onclick="selecting(this, 'art')">미술</div>
+                        <div class="selecter-item"
+                             data-value="id"
+                             onclick="selecting(this, 'toreutics')">금속공예&악세사리</div>
+                        <div class="selecter-item"
+                             data-value="id"
+                             onclick="selecting(this, 'knot')">매듭공예</div>
+                        <div class="selecter-item"
+                             data-value="id"
+                             onclick="selecting(this, 'knit')">뜨개질</div>
+                        <div class="selecter-item"
+                             data-value="id"
+                             onclick="selecting(this, 'bake')">베이킹&쿠킹</div>
+                        <div class="selecter-item"
+                             data-value="id"
+                             onclick="selecting(this, 'cosmetics')">천연화장품&비누</div>
+                        <div class="selecter-item"
+                             data-value="id"
+                             onclick="selecting(this, 'etc')">기타</div>
+                    </div>
+                </div>
+            </div>
+            <div class="tmk-qitem-selecter-wrapper">
+                <div class="selecter cover" tabindex="0">
+                    <select name="state" required class="selecter_3 selecter-element" data-selecter-options="{&quot;cover&quot;:&quot;true&quot;}" tabindex="-1">
+                        <option value="all"
+                                {% if begin_data.category == 'all' %}selected{% endif %}>모든 지역</option>
+                        <option value="seoul"
+                                {% if demand_data.state == 'seoul'%}selected{% endif %}>서울</option>
+                        <option value="incheon_gyeonggi"
+                                {% if demand_data.state == 'incheon_gyeonggi'%}selected{% endif %}>경기도&인천</option>
+                        <option value="busan_ulsan_gyeongnam"
+                                {% if demand_data.state == 'busan_ulsan_gyeongnam'%}selected{% endif %}>부산&울산&경남</option>
+                        <option value="daegu_gyeongbuk"
+                                {% if demand_data.state == 'daegu_gyeongbuk'%}selected{% endif %}>대구&경북</option>
+                        <option value="daejeon_chungcheong"
+                                {% if demand_data.state == 'daejeon_chungcheong'%}selected{% endif %}>대전&충청</option>
+                        <option value="gwangju_jeonla"
+                                {% if demand_data.state == 'gwangju_jeonla'%}selected{% endif %}>광주&전라</option>
+                        <option value="gangwon"
+                                {% if demand_data.state == 'gangwon'%}selected{% endif %}>강원</option>
+                        <option value="jeju"
+                                {% if demand_data.state == 'jeju'%}selected{% endif %}>제주</option>
+                        <option value="etc"
+                                {% if demand_data.state == 'etc'%}selected{% endif %}>기타</option>
+                    </select>
+                    <span class="selecter-selected" onclick="btnClick(this)">지역 선택</span>
+                    <div class="selecter-options" data-value="">
+                        <!--<span class="selecter-item selected" data-value="" onclick="selecting(this, '')">카테고리</span>-->
+                        <div class="selecter-item"
+                             data-value="id"
+                             onclick="selecting(this, 'all')">모든 카테고리</div>
+                        <div class="selecter-item"
+                             data-value="id"
+                             onclick="selecting(this, 'seoul')">서울</div>
+                        <div class="selecter-item"
+                             data-value="id"
+                             onclick="selecting(this, 'incheon_gyeonggi')">경기도 & 인천</div>
+                        <div class="selecter-item"
+                             data-value="id"
+                             onclick="selecting(this, 'busan_ulsan_gyeongnam')">부산 & 울산 & 경남</div>
+                        <div class="selecter-item"
+                             data-value="id"
+                             onclick="selecting(this, 'daegu_gyeongbuk')">대구&경북</div>
+                        <div class="selecter-item"
+                             data-value="id"
+                             onclick="selecting(this, 'daejeon_chungcheong')">대전&충청</div>
+                        <div class="selecter-item"
+                             data-value="id"
+                             onclick="selecting(this, 'gwangju_jeonla')">광주&전라</div>
+                        <div class="selecter-item"
+                             data-value="id"
+                             onclick="selecting(this, 'gangwon')">강원</div>
+                        <div class="selecter-item"
+                             data-value="id"
+                             onclick="selecting(this, 'jeju')">제주</div>
+                        <div class="selecter-item"
+                             data-value="id"
+                             onclick="selecting(this, 'etc')">기타</div>
+                    </div>
+                </div>
+            </div>
+            <div style="display:inline;vertical-align:text-bottom;">
+                <button class="btn btn-primary" type="submit" style="margin-top:-1px;" value="검색">검색</button>
+            </div>
         </div>
+    </form>
+</div>
 
-        <div style="float:left;width:100%;">
-            <a href="http://{{HTTP_HOST}}/v2/board/caseboard"><button class="btn btn-primary" style="font-size:16px;margin:32px auto 0px;height:50px;display:block;">클래스 개설사례 보러가기</button></a>
+<div class="tmk-main-body col-md-12">
+    <div class="tmk-page-header">
+        <div class="h3">반짝반짝, 새로운 클래스</div>
+    </div>
+
+    <div class="tmk-body-wrapper">
+        <div class="card-list" id="card-list">
+            <div id="card-list-wrapper">
+                <ul>
+                    {%for bestclass in bestlist%}
+                    <li class="tmk-class-card col-md-4 counter{{forloop.counter}}">
+                        <a class="tmk-card-img" href="http://{{HTTP_HOST}}/v2.1/class/{{bestclass.id}}">
+                            <div class="tmk-class-type-label">
+                                <!--수업 타입-->
+                                <span class="label tmk-label">{{bestclass.best_classcard.classtype}}</span>
+                            </div>
+                            <div class="card-link">
+                                <img src="{{MEDIA_URL}}{{bestclass.best_classcard.t2classpic_set.first.image}}">
+                            </div>
+                        </a>
+                        {%comment%}수업호스트::{{bestclass.best_classcard.user}}{%endcomment%}
+                        <a class="tmk-card-img-profile">
+                            <div class="card-link">
+                                <img src="{{MEDIA_URL}}{{bestclass.best_classcard.user.t2profile_set.first.pro_pic}}">
+                            </div>
+                        </a>
+                        <div class="tmk-card-info">
+                            <div class="h4">{{bestclass.best_classcard.title}}</div>
+                            <div>{{bestclass.best_classcard.intro_line}}</div>
+                        </div>
+                        <div class="dp-label">
+                            <div class="dp-label-left">{{bestclass.best_classcard.repeat}}회 / 수업당 {{bestclass.best_classcard.perhour}}시간</div>
+                            <div class="dp-label-right">￦{{bestclass.best_classcard.price}}</div>
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
         </div>
     </div>
-
-
-</div>
-{%comment%}
-<div class="tmk-footer-banner" style="background:url({%static 'img/img-1.png'%})">
-
-    <div class="footer-frame" style="left:0px!important;"></div>
-
-    <div class="footer-banner-title">토마킷은 32명의 핸드메이드 작가님과 함께하고 있습니다
-        <div class="footer-banner-subtitle">배우고 싶은 클래스가 있으세요? 친절한 작가님들을 만나보세요!</div>
+    <div style="float:left;margin:50px auto 100px auto;width:100%;">
+        <a href="http://{{HTTP_HOST}}/v2.1/board/class_list">
+            <button class="btn btn-primary">클래스 더보기</button></a>
     </div>
-    <ul class="footer-banner-ul">
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-    </ul>
-    <ul class="footer-banner-ul2">
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-    </ul>
 </div>
 
-{%endcomment%}
+
+
+<div class="tmk-main-body col-md-12" style="overflow:hidden;float:left;padding:50px;background:url('{%static 'media/image/slice/bg-2.png'%}');color:#fff;">
+    <div style="text-align:center;">
+        <div class="h2">다른 사람들은 어떤 클래스를 배우고 싶어할까요?</div>
+    <div class="tmk-h4">제안하기를 이용하면 원하시는 클래스를 개설해 드린답니다</div>
+    </div>
+    <div class="tmk-demand-comment">
+        <img src="{%static 'media/image/slice/img-1.png'%}">
+        <img src="{%static 'media/image/slice/img-2.png'%}">
+        <img src="{%static 'media/image/slice/img-3.png'%}">
+    </div>
+<a href="http://{{HTTP_HOST}}/v2.1/board/demand" style="color:#fff;" class="btn-link pull-right">클래스 제안 보러가기 ></a>
+</div>
+
+<div class="col-md-12" style="margin-top:50px;float:left;">
+<div style="max-width:1200px;border-radius:4px;overflow:hidden!important;margin:auto;background-color:#F9FBFB;padding:0;border:1px solid #ddd;">
+        <div class="col-md-3 hidden-xs" style="float:left;text-align:left;padding:50px;width:348px;">
+            <div class="h2">원하는 클래스를<br>제안해보세요</div>
+            <div class="tmk-h4">찾는 클래스가 없으시다면, 지금 바로 제안해보세요. 가까운 장소, 편한 시간의 수업을 개설하여 알려드립니다</div>
+        </div>
+        <div class="col-md-7" id="tmk-form" style="float:left;padding:40px;">
+            {%include 'dev_moon_v2d1/app_demand/demand_form_for_index.html'%}
+    </div>
+</div>
+</div>
+<div class="tmk-main-body col-md-12" style="width:100%;height:360px;float:left;margin-top:50px;margin-bottom:-50px;background:url('{%static 'media/image/slice/bg-3.png'%}');">
+    <div class="tmk-main-host" style="margin-top:80px;">
+        <div class="tmk-h3" style="font-weight:bold;">작가님! 토마킷을 통해 수강생을 만나보세요</div>
+        <div class="tmk-h4">작가님들께서 공방 운영과 작품 활동에 전념하실 수 있도록<br>
+        토마킷이 클래스 홍보와 수강생 모집을 도와드립니다</div>
+        <a href="http://{{HTTP_HOST}}/v2.1/user/host/apply/" class="btn btn-primary" style="padding:15px;">선생님 등록</a>
+    </div>
+</div>
 {%endblock %}
-
-{%comment%}
-{% load static from staticfiles%}
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
-인덱스 페이지
-{%for bestclass in bestlist%}
-    <br>
-    수업 타입 ::{{bestclass.best_classcard.classtype}}<br><br>
-    사진::<img src="{{MEDIA_URL}}{{bestclass.best_classcard.t2classpic_set.first.image}}"><br><br>
-    수업호스트::{{bestclass.best_classcard.user}}<br><br>
-    수업제목::{{bestclass.best_classcard.title}}<br><br>
-    수업소개::{{bestclass.best_classcard.intro_line}}<br><br>
-    횟수::{{bestclass.best_classcard.repeat}}회/수업당시간::{{bestclass.best_classcard.perhour}}시간<br><br>
-    {{bestcalss.best_classcard.price}}
----------------------------------------------------------
-{% endfor %}
-<!--<a href="http://{{HTTP_HOST}}/v2/user/profile/{{case.quebox.djgouser.id}}">
-    <img src="{{MEDIA_URL}}{{case.quebox.djgouser.userprofile_set.first.propic}}"></a>-->
-</body>
-</html>
-{%endcomment%}
+{% block script %}
+<script src='{%static "media/js/qitem_create.js" %}'></script>
+{% endblock %}
