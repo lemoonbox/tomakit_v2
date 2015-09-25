@@ -35,7 +35,8 @@
 {%block content%}
 <!--맞춤 수업 상세 페이지-->
 <div class="tmk-main-body col-md-12">
-    <div class="tmk-page-header col-md-10 col-md-offset-1">
+    <div class="container">
+    <div class="tmk-page-header col-md-12">
         <div class="tmk-h4">{{post.category.category|cate2han}}</div>
         <div class="tmk-h2 tmk-title">{{post.title}}</div>
         <div class="tmk-h4">{{post.intro_line}}</div>
@@ -43,7 +44,7 @@
     </div>
 
     <!--사진-->
-    <div class="col-md-10 col-md-offset-1">
+    <div class="col-md-12">
                 <div id="class-post-Carousel" class="carousel slide" data-ride="carousel">
                     <!--Indicators -->
                     <ol class="carousel-indicators">
@@ -78,7 +79,7 @@
             </div>
 
 
-   <div class="col-md-7 col-md-offset-1">
+   <div class="col-md-8">
        <div class="tmk-h3" style="font-weight:bold;">클래스 소개</div>>
     <!--동영상-->
     {% if post.video%}
@@ -100,7 +101,7 @@
         {{post.user.last_name}}{{post.user.first_name}}</a>
     {{post.user.t2hostprofile_set.first.intro_self}}
 </div>
-    <div class="col-md-3 tmk-class-pay">
+    <div class="col-md-4 tmk-class-pay">
         <!--<div class=h3>수업정보</>-->
         <div class="tmk-h3" style="font-weight:bold;">{{post.repeat}}회 과정/{% widthratio post.repeat 1 post.perhour%}시간</div>
         <label>모집 마감일</label> 즉시 등록 수업
@@ -127,12 +128,12 @@
             </button>
         </form>
     </div>
-
+</div>
 </div>
 
     <div class="tmk-main-body col-md-12" style="box-shadow:0 1px 4px rgba(0,0,0,0.25)!important">
-
-        <div class="col-md-7 col-md-offset-1">
+        <div class="container">
+        <div class="col-md-8">
         <div class="tmk-h3" style="font-weight:bold;">후기 쓰기</div>
 
     <form method="POST" action="{% url 'create_review_v2d1' post.id %}">
@@ -155,14 +156,13 @@
     <div>
         {{review.grade}}
         <p>
-            {%comment%}
-            {%for i in review.grade %}
+
             <span class="starRating">
-        <span></span>
+        <span>{{review.grade}}</span>
                 </span>
         </p>
-        {% endfor %}
-        {%endcomment%}
+
+
     </div>
 
     <!--수정 form 나중에  hidden-->
@@ -183,9 +183,10 @@
     {% endif %}
     {% endfor %}
             </div>
+            </div>
 </div>
 
-<div class="tmk-main body col-md-12" style="background:#eee;height:260px;margin-top:3px;margin-bottom:-50px;">
+<div class="tmk-main-body col-md-12" style="background:#eee;height:260px;margin-top:3px;margin-bottom:-50px;">
 <div style="margin:50px auto;">
         <div class="tmk-h3" style="font-weight:bold;">원하는 클래스를 찾지 못했나요?</div>
     <div class="tmk-h4">클래스를 제안해보세요 원하시는 클래스를 개설해드린답니다</div>
