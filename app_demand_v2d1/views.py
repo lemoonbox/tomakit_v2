@@ -1,7 +1,9 @@
 #coding: utf-8
 from django.shortcuts import render, \
     get_object_or_404
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import \
+    login_required,\
+    user_passes_test
 from django.contrib.auth.models import \
     User
 from django.http import\
@@ -33,8 +35,14 @@ from app_demand_v2d1.models import \
     T2DemandCard, \
     T2DemandCmt
 # Create your views here.
+def profile_check(user):
+    if user.t2profile_set.first():
+        return True
+    else :
+        return False
 
 @login_required
+@user_passes_test(profile_check, login_url="/v2.1/user/host/apply/")
 def demand_create(request):
     demand_data={}
     HTTP_HOST=request.META["HTTP_HOST"]
@@ -103,6 +111,7 @@ def demand_create(request):
 
 
 @login_required
+@user_passes_test(profile_check, login_url="/v2.1/user/host/apply/")
 def demand_modify(request, demand_num=0):
     HTTP_HOST=request.META["HTTP_HOST"]
     if request.method == "GET":
@@ -191,7 +200,6 @@ def demand_modify(request, demand_num=0):
         'demand_num':demand_num,
     })
 
-
 def demand_detail(request, demand_num):
     HTTP_HOST=request.META["HTTP_HOST"]
     if request.method == "GET":
@@ -272,6 +280,7 @@ def delete_comment(request, comment_num):
         return  Http404("잘못된 요청입니다.")
 
 @login_required
+@user_passes_test(profile_check, login_url="/v2.1/user/host/apply/")
 def mobli_required(request, post_num):
     HTTP_HOST=request.META["HTTP_HOST"]
     if request.method == "GET":

@@ -218,7 +218,6 @@ class T2ReviewForm(forms.ModelForm):
         fields=('review', 'grade')
 
     def is_valid(self):
-
         valid = super(T2ReviewForm, self).is_valid()
         _user=self.data.get("user", "")
         _post=self.data.get("post", "")
@@ -226,12 +225,13 @@ class T2ReviewForm(forms.ModelForm):
 
         if valid and _user:
             _review_exist=""
-            if classtype =="tutclass":
-                T2ClassReview.objects.filter(
+            if classtype =="tut_class":
+                _review_exist=T2ClassReview.objects.filter(
                     tut_post=_post,user=_user, is_active=True).exists()
             else:
-                T2ClassReview.objects.filter(
+                _review_exist=T2ClassReview.objects.filter(
                     teach_post=_post,user=_user, is_active=True).exists()
+            print _review_exist
             if _review_exist:
                 self.add_error("review",u"리뷰는 1인당 1개만 입력 가능합니다.")
                 return False

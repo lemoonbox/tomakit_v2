@@ -549,6 +549,7 @@ def create_review(request, class_num):
                         tut_post=_post, grade=grade,
                         review=review)
                 _review.save()
+        print _post
         return render(request, TEMP.TUT_POST_DETAIL_V2D1,{
             "post":_post,
             "review":reviewform,
@@ -558,6 +559,7 @@ def create_review(request, class_num):
 
     # return HttpResponseRedirect("/")
 
+@login_required
 def modify_review(request, class_num):
     HTTP_HOST=request.META["HTTP_HOST"]
     if request.method == "POST":
@@ -597,6 +599,7 @@ def modify_review(request, class_num):
 
     return HttpResponseRedirect("/")
 
+@login_required
 def delete_review(request, review_num):
     HTTP_HOST=request.META["HTTP_HOST"]
     if request.method == "POST":
@@ -639,6 +642,7 @@ def class_post_detail(request, class_num):
             _post=_postcard.tut_post
             return render(request, TEMP.TUT_POST_DETAIL_V2D1,{
                 "post":_post,
+                "HTTP_HOST":HTTP_HOST,
             })
 
         else:

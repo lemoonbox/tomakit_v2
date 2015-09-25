@@ -310,20 +310,23 @@ def public_profile(request, user_num):
     if request.method == "GET":
         _profile_user=get_object_or_404(User, id=user_num)
         _profile=get_object_or_404(T2Profile, user=_profile_user)
-        _hostprofile=get_object_or_404(T2HostProfile, user=_profile_user)
+        # _hostprofile=get_object_or_404(T2HostProfile, user=_profile_user)
+        # _hostprofile=T2HostProfile.objects.get(user=_profile_user)
+        _hostprofile=""
+        _open_class=""
 
         if T2HostProfile.objects.filter(user=_profile_user).exists():
             _hostprofile=T2HostProfile.objects.filter(user=_profile_user)[0]
             _open_class=T2ClassCard.objects.filter(
                 user=_profile_user, is_open=True)
 
-            return render(request, TEMP.PUBLIC_PROFILE_V2D1,{
-                "profile_user":_profile_user,
-                "profile":_profile,
-                "host_profile":_hostprofile,
-                "open_classes":_open_class,
-                "HTTP_HOST":HTTP_HOST,
-                })
+        return render(request, TEMP.PUBLIC_PROFILE_V2D1,{
+            "profile_user":_profile_user,
+            "profile":_profile,
+            "host_profile":_hostprofile,
+            "open_classes":_open_class,
+            "HTTP_HOST":HTTP_HOST,
+            })
     else:
         return Http404("잘못된 요청입니다.")
 
