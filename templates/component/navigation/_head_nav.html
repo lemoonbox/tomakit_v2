@@ -1,30 +1,51 @@
 {%load static from staticfiles%}
+<style>
+    @media (max-width:767px) {
+        #navbar {width:260px;position:absolute;right:0; box-shadow: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.1)!important;}
+        .navbar-toggle {margin:0;padding:0;background-color:white!important;border:none;}
+        .navbar-toggle span:hover {color:#FF565A!important;}
+        .navbar-right li:hover {background:rgba(0,0,0,0.05);!important;}
+        .dropdown-menu {width:260px!important;margin-left:-5px; box-shadow: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.1)!important;}
+    }
+    .navbar-main-menu {line-height:70px;padding:18px;font-size:16px;color:#777;}
+    .navbar-main-menu:hover {color:#000;}
+    /*.navbar-toggle {margin-top:0;}*/
+    .navbar-header {text-align:left;}
+    .profile-photo-mini {
+        margin: auto;
+        border-radius: 50%;
+        background-size: cover;
+        overflow: hidden;
+        height:24px!important;
+        width:24px!important;
+        vertical-align:middle!important;
+        margin-right:5px!important;
+    }
+    .navbar {box-shadow:0 1px 2px 0 rgba(0,0,0,0.1)!important;}
+</style>
 <!-- Static navbar -->
-<nav class="navbar navbar-default navbar-static-top" style="box-shadow:0 1px 4px rgba(0,0,0,0.25)!important">
+<nav class="navbar navbar-default navbar-static-top">
 
     <div class="navbar-inner">
-        <!--<div class="container">-->
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" style="background-color:white;" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
             <a class="navbar-brand" href="/">
-                <img src="{%static 'img/Tomakit-r.png'%}"
-                     data-src-main="{%static 'img/Tomakit-w.png'%}"
-                     alt="">
+                <img src="{%static 'img/Tomakit-r.png'%}">
             </a>
+
+        </div>
+        <div class="navbar-header">
+            <a class="navbar-main-menu" href="http://{{HTTP_HOST}}/v2.1/board/class_list">클래스 살펴보기</a>
+            <a class="navbar-main-menu" href="http://{{HTTP_HOST}}/v2.1/board/demand_list">클래스 제안하기</a>
+            <button type="button pull-right" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Navigation</span>
+                <span style="font-weight:bold;line-height:70px;padding:23px;font-size:20px;color:#777;">∨</span>
+            </button>
         </div>
         <div id="navbar" class="collapse navbar-collapse" aria-expanded="false">
-            <ul class="nav navbar-nav">
-                <li><a href="http://{{HTTP_HOST}}/v2.1/board/class_list">클래스 살펴보기</a></li>
-                <li><a href="http://{{HTTP_HOST}}/v2.1/board/demand_list">클래스 제안하기</a></li>
-                <!--<li><a href="http://{{HTTP_HOST}}/v2/question/que_bridge" style="color:#F5515F;">의뢰하기</a></li>-->
-            </ul>
 
-            <ul class="nav navbar-nav navbar-right">
+
+
+        <ul class="nav navbar-nav navbar-right">
                 <li><a href="http://{{HTTP_HOST}}/v2.1/user/host/apply" class="user">
                     <img src="{%static 'media/image/slice/icon-header_teacher-gr.png'%}">&nbsp;선생님 등록</a>
                 </li>

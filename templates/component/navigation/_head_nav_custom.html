@@ -1,6 +1,7 @@
 {%load static from staticfiles%}
 <style>
     @media (min-width: 768px) {
+        .navbar-main-menu {color:#fff!important;;}
         .navbar-brand > img {
             content: url({%static 'img/Tomakit-w.png'%});
         }
@@ -13,6 +14,28 @@
         .navbar-right .header-open {
             content: url({%static 'media/image/slice/icon-header_open-wh.png'%});
         }
+    }
+    @media (max-width:767px) {
+        #navbar {width:260px;position:absolute;right:0; box-shadow: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.1)!important;}
+        .navbar-toggle {margin:0;padding:0;background-color:white!important;border:none;}
+        .navbar-toggle span:hover {color:#FF565A!important;}
+        .navbar-right li:hover {background:rgba(0,0,0,0.05);!important;}
+        .dropdown-menu {width:260px!important;margin-left:-5px; box-shadow: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.1)!important;}
+    }
+    .navbar-main-menu {line-height:70px;padding:18px;font-size:16px;color:#777;}
+    .navbar-main-menu:hover {color:#000;}
+    /*.navbar-toggle {margin-top:0;}*/
+    .navbar-header {text-align:left;}
+    .navbar {  box-shadow:0 1px 2px 0 rgba(0,0,0,0.1)!important;}
+    .profile-photo-mini {
+        margin: auto;
+        border-radius: 50%;
+        background-size: cover;
+        overflow: hidden;
+        height:24px!important;
+        width:24px!important;
+        vertical-align:middle!important;
+        margin-right:5px!important;
     }
 </style>
 <!-- Static navbar -->
@@ -35,12 +58,13 @@
 
         </div>
         <div class="navbar-header">
-        <a style="line-height:70px;font-size:16px;" href="http://{{HTTP_HOST}}/v2.1/board/class_list">클래스 살펴보기</a>
-        <a style="line-height:70px;font-size:16px;"  href="http://{{HTTP_HOST}}/v2.1/board/demand_list">클래스 제안하기</a>
-            <button type="button" class="navbar-toggle collapsed" style="background-color:white;border:none;" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <a class="navbar-main-menu" href="http://{{HTTP_HOST}}/v2.1/board/class_list">클래스 살펴보기</a>
+        <a class="navbar-main-menu" href="http://{{HTTP_HOST}}/v2.1/board/demand_list">클래스 제안하기</a>
+            <button type="button pull-right" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                 <span class="sr-only">Navigation</span>
                 <!--<img src="{%static 'media/image/slice/icon-phase_next.png'%}">-->
-                <span class="" style="padding:5px;;font-size:20px;color:#000;">∨</span>
+                <!--<span class="" style="width:70px;padding:23px;margin:0;border:1px solid #ddd;line-height:70px;font-size:20px;color:#777;">∨</span>-->
+                <span style="font-weight:bold;line-height:70px;padding:23px;font-size:20px;color:#777;">∨</span>
                 <!--<span class="icon-bar"></span>-->
                 <!--<span class="icon-bar"></span>-->
             </button>
