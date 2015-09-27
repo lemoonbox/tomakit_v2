@@ -22,7 +22,19 @@
         .navbar-nav > li > button {
             color: white!important;
         }
+        /*.container {min-width:850px;}*/
     }
+    @media screen and (max-width:767px) {
+        .tmk-search {
+            max-width: 405px;
+            margin: auto;
+        }
+        #main-comment-slide {margin:30px auto;text-align:center;}
+        .item img {width:100%;}
+        .tmk-demand-comment {text-align:left!important;padding:15px;}
+    }
+    .tmk-demand-comment {margin:50px auto;text-align:center;}
+
 </style>
 {%endblock%}
 {%block nav%}
@@ -189,14 +201,18 @@
                     </div>
                 </div>
             </div>
-            <div style="display:inline;vertical-align:text-bottom;">
-                <button class="btn btn-primary" type="submit" style="margin-top:-1px;" value="검색">검색</button>
+            <div class="hidden-xs" style="display:inline;vertical-align:text-bottom;">
+                <button class="btn btn-primary" type="submit" style="outline:1px solid transparent!important;" value="검색">검색</button>
+            </div>
+            <div class="visible-xs">
+                <button class="btn btn-primary btn-block" type="submit" value="검색">검색</button>
             </div>
         </div>
     </form>
 </div>
 
 <div class="tmk-main-body col-md-12">
+    <div class="container">
     <div class="tmk-page-header">
         <div class="h3">반짝반짝, 새로운 클래스</div>
     </div>
@@ -241,20 +257,37 @@
             <button class="btn btn-primary">클래스 더보기</button></a>
     </div>
 </div>
+</div>
 
 
-
-<div class="tmk-main-body col-md-12" style="overflow:hidden;float:left;padding:50px;background:url('{%static 'media/image/slice/bg-2.png'%}');color:#fff;">
-    <div style="text-align:center;">
+<div class="tmk-main-body col-md-12" style="overflow:hidden;background:url('{%static 'media/image/slice/bg-2.png'%}');color:#fff;">
+    <div class="container">
+        <div class="tmk-demand-comment">
         <div class="h2">다른 사람들은 어떤 클래스를 배우고 싶어할까요?</div>
     <div class="tmk-h4">제안하기를 이용하면 원하시는 클래스를 개설해 드린답니다</div>
-    </div>
-    <div class="tmk-demand-comment">
+
+    <div class="tmk-demand-comment-img hidden-xs">
         <img src="{%static 'media/image/slice/img-1.png'%}">
         <img src="{%static 'media/image/slice/img-2.png'%}">
         <img src="{%static 'media/image/slice/img-3.png'%}">
     </div>
+    <div id="main-comment-slide" class="carousel slide" data-ride="carousel">
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner visible-xs" role="listbox">
+            <div class="item active">
+                <img src="{%static 'media/image/slice/img-1.png'%}">
+            </div>
+            <div class="item">
+                <img src="{%static 'media/image/slice/img-2.png'%}">
+            </div>
+            <div class="item">
+                <img src="{%static 'media/image/slice/img-3.png'%}">
+            </div>
+        </div>
+    </div>
 <a href="http://{{HTTP_HOST}}/v2.1/board/demand" style="color:#fff;" class="btn-link pull-right">클래스 제안 보러가기 ></a>
+    </div>
+    </div>
 </div>
 
 <div class="col-md-12" style="margin-top:50px;float:left;">

@@ -8,7 +8,7 @@
   font-family: 'NanumGothic', 'AppleSDGothicNeo-Bold', 'Dotum', 'NanumMyeongjo', 'Gulim', 'Helvetica', sans-serif !important;
 }
 //html {height:100vh!important;}
-html {min-width:490px!important;}
+html {min-width:410px!important;}
 a:hover {text-decoration: none !important;}
 
 body {
@@ -54,7 +54,7 @@ body {
 /* Title */
 .tmk-h1 {font-size:48px;}
 /* Screen Name */
-.tmk-h2 {font-size:35px;font-weight:bold;color:#565A5C}
+.tmk-h2 {font-size:35px;}
 /* Small Title */
 .tmk-h3 {font-size:24px;}
 /* Accent */
@@ -63,6 +63,8 @@ body {
 .tmk-error {
   font-size: 12px;
 }
+
+.tmk-h2, .tmk-h3 {font-weight:bold;color:#565A5C;}
 
 .tmk-page-header .tmk-h4 {
   font-size:18px;
@@ -179,14 +181,14 @@ nav {
 
 
 #tmk-post {background:#fff;}
-  .badge, .label {
-    font-size:13px!important;
-    font-weight:400!important;
-    padding: 8px 10px!important;
-    //min-width:100px!important;
-    background-color: #84CDC2!important;
-    border-radius:0!important;
-  }
+.badge, .label {
+  font-size:13px!important;
+  font-weight:400!important;
+  padding: 8px 10px!important;
+  //min-width:100px!important;
+  background-color: #84CDC2!important;
+  border-radius:0!important;
+}
 
 
 
@@ -252,7 +254,8 @@ nav {
 
 .tmk-page-header {
   padding-top: 50px;
-  margin-bottom: 20px;
+  padding-bottom:50px;
+  margin-bottom: 30px;
 }
 
 .tmk-page-pick {
@@ -287,6 +290,25 @@ nav {
 .tmk-form {
   background-color: #fff!important;
 }
+@media screen and (max-width:991px) {
+  .container {padding-left:0!important;padding-right:0!important;}
+  .col-md-12, .col-md-8, .col-md-4 {padding-left:0!important;padding-right:0!important;}
+  .tmk-main-body {padding-left:0!important;padding-right:0!important;}
+  .tmk-page-header {padding-bottom:0!important;}
+  .filedrag .form-group {padding-left:15px;}
+}
+@media screen and (min-width:992px) {
+  //.container {width:1200px!important;padding-left:0;padding-right:0;}
+}
+@media screen and (min-width:1200px) {
+  .container {width:1200px!important;padding-left:0;padding-right:0;}
+  #card-list {
+    text-align: center !important;
+    margin: 0px auto !important;
+    min-width: 1200px;
+    margin-left:-15px;
+  }
+}
 @media screen and (min-width:768px) {
   #tmk-form {
     min-width: 850px;
@@ -297,9 +319,7 @@ nav {
   #tmk-post {
     min-width: 750px;
   }
-  .tmk-page-header {
-    min-width: 850px;
-  }
+  .container {min-width:850px!important;}
 }
 #tmk-footer {
   background-color:  #FEF2D8;
@@ -313,9 +333,9 @@ nav {
   width:100%;
 }
 
-@media screen and (max-width:767px) {
-  .tmk-footer-nav ul {width:100%;}
-}
+//@media screen and (max-width:767px) {
+//  .tmk-footer-nav ul {width:100%;}
+//}
 @media screen and (min-width:768px) {
   .tmk-footer-nav ul {max-width:720px;}
 }
@@ -340,7 +360,6 @@ nav {
       text-decoration-line: none !important;
     }
   }
-
 }
 
 .tmk-footer-copyright {
@@ -351,7 +370,7 @@ nav {
   }
   li {
     display: inline-block;
-    padding: 5px 0px;
+    padding: 5px;
   }
 }
 
@@ -459,8 +478,9 @@ ul{
   width: 100%;
   height: 570px;
   top:0;
+  margin-top:-70px;
   //overflow: visible;
-  margin-top:-80px;
+  padding-bottom:15px;
   //video {
   //  position: absolute;
   //  top: 0;
@@ -480,7 +500,8 @@ ul{
     font-family: AppleSDGothicNeo-Bold;
     font-weight:600;
     text-align: center;
-    padding-top: 180px;
+    padding: 160px 15px 0 15px;
+    //padding-left:15px;
     font-size: 40px;
     line-height:57px;
   }
@@ -488,7 +509,7 @@ ul{
     color: #FFFFFF;
     font-family:AppleSDGothicNeo-Regular;
     text-align: center;
-    padding-top: 15px;
+    padding: 15px;
     font-size: 20px;
     line-height: 21px;
     margin-bottom:50px;
@@ -1010,36 +1031,39 @@ ul{
   background-color: rgba(255,255,255,0.7);
 }
 
-.carousel {
-  margin-bottom: 20px;
-}
-.carousel-inner {
-  background: #fff;
-  border: 1px solid transparent;
-  display: inline-block;
-  vertical-align: top;
-  /*padding: 10px;*/
-  width: 100%;
-  height: 500px;
-  margin-right: .5em;
-  margin-bottom: .3em;
-}
-.item {
-  border-radius: 4px 4px 0 0;
-  /*border: 1px solid transparent;*/
-  height: 100%;
-  overflow: hidden;
-  position: relative;}
-.item img {
-  display: block;
-  min-width: 150%;
-  min-height: 120%;
-  margin: auto;
-  position: absolute;
-  top: -100%;
-  right: -100%;
-  bottom: -100%;
-  left: -100%;
+#class-post-carousel {
+  .carousel {
+    margin-bottom: 20px;
+  }
+  .carousel-inner {
+    background: #fff;
+    border: 1px solid transparent;
+    display: inline-block;
+    vertical-align: top;
+    /*padding: 10px;*/
+    width: 100%;
+    height: 500px;
+    margin-right: .5em;
+    margin-bottom: .3em;
+  }
+  .item {
+    border-radius: 4px 4px 0 0;
+    /*border: 1px solid transparent;*/
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+  }
+  .item img {
+    display: block;
+    min-width: 150%;
+    min-height: 120%;
+    margin: auto;
+    position: absolute;
+    top: -100%;
+    right: -100%;
+    bottom: -100%;
+    left: -100%;
+  }
 }
 //.carousel-control:hover, .carousel-control a:hover, .carousel-control span:hover{
 //  text-shadow:0 0 0 rgba(0,0,0,0)!important;
@@ -1221,7 +1245,7 @@ ul{
   display: inline-block;
   vertical-align: top;
   /*padding: 10px;*/
-  width: 100%;
+  width: 99%;
   height: 280px;
   margin-right: .5em;
   margin-bottom: .3em;
@@ -1266,8 +1290,7 @@ ul{
   }
 }
 
-.tmk-search {max-width:540px;margin:auto;}
-.tmk-search button {height:44px;margin-left:5px;}
+.tmk-search button {height:44px;margin-top:-1px;}
 
 .card-list li {
   height: 450px;
@@ -1281,8 +1304,8 @@ ul{
   border-radius: 4px;
   float: left;
   list-style-type: none;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.1);
-    transition: all 0.2s ease-in-out;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.1);
+  transition: all 0.2s ease-in-out;
   &:hover {
     box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
   }
@@ -1331,7 +1354,7 @@ ul{
 @media screen and (max-width:767px) {
   .card-list li {
     width: 100%;
-    margin: 0px;
+    margin: 0;
     left: 0;
     right: 0;
     margin-bottom: 15px;
@@ -1342,7 +1365,8 @@ ul{
     min-width: 870px !important;
   }
 }
-@media screen and (min-width:861px) and (max-width:1264px) {
+
+@media screen and (min-width:861px) and (max-width:1199px) {
   /*html {min-width:1240px;}*/
   #card-list {
     text-align: center !important;
@@ -1354,13 +1378,4 @@ ul{
     height:auto;
   }
 }
-@media screen and (min-width:1265px) {
-  #card-list {
-    text-align: center !important;
-    margin: 0px auto !important;
-    max-width: 1200px;
-  }
-}
 
-
-//img {max-width:1000px;}

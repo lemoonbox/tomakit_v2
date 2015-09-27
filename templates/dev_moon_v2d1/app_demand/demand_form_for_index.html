@@ -180,7 +180,8 @@
         .col-md-2 {display:block;}
         .col-md-6 {display:inline-block;min-width:340px;margin-left:-15px;}
     }
-
+label span {color:red;}
+    .tmk-panel label {color:#565a5c;}
 </style>
 
 
@@ -189,15 +190,15 @@
 
 <!--</div>-->
 <!--<div class="col-md-8 well" id="tmk-form" style="text-align:left;">-->
-<div class="tmk-page-pick" style="border:1px solid #ddd;"></div>
-<div class="tmk-h3" style="font-weight:bold;margin-top:30px;text-align:left;">클래스 제안하기</div>
+<div class="tmk-page-pick hidden-xs" style="border:1px solid #ddd;"></div>
+<div class="tmk-h3" style="font-weight:bold;margin-top:30px;text-align:left;"> 클래스 제안하기</div>
 
     <form method="POST" action="{% url 'demand_create_v2d1' %}" enctype="multipart/form-data">
         {%csrf_token%}
 
 
         <div class="tmk-panel">
-            <label class="col-md-2">제목</label>
+            <label class="col-md-2">제목 <span>*</span></label>
             <div class="tmk-qitem-selecter-wrapper col-md-3">
                 <div class="selecter cover" tabindex="0">
                     <select name="category" required class="selecter_3 selecter-element" data-selecter-options="{&quot;cover&quot;:&quot;true&quot;}" tabindex="-1">
@@ -298,7 +299,7 @@
 
 
         <div class="tmk-panel">
-            <label class="col-md-2">내용</label>
+            <label class="col-md-2">내용 <span>*</span></label>
             <div  class="col-md-10">
         <textarea name="descript" class="form-control" rows="4" cols="50"
                   placeholder="ex) 가죽공방을 창업하고 싶어서요. 기초부터 차근 차근가르쳐주는 공방 없을까요?">{{demand_data.descript}}</textarea>
@@ -309,7 +310,7 @@
 
 
         <div class="tmk-panel">
-            <label class="col-md-2">태그</label>
+            <label class="col-md-2">태그 <span>*</span></label>
             <div class="col-md-10">
                 <div class="btn-group" data-toggle="buttons">
                     <!--<label class="icheckbox_flat checked">-->
@@ -333,7 +334,7 @@
         </div>
 
         <div class="tmk-panel">
-            <label class="col-md-2">희망일정</label>
+            <label class="col-md-2">희망일정 <span>*</span></label>
             <div class="col-md-10">
                 <input type="text" name="weekday" class="form-control" value="{{demand_data.weekday}}" placeholder="ex) 주말 아무때나, 평일7시이후"><br>
                 {{demandform.weekday.errors|striptags}}<br>
@@ -342,7 +343,7 @@
 
         <div class="tmk-panel">
 
-            <label class="col-md-2">희망지역</label>
+            <label class="col-md-2">희망지역 <span>*</span></label>
             <div class="tmk-qitem-selecter-wrapper col-md-3">
                 <div class="selecter cover" tabindex="0">
                     <select name="state" required class="selecter_3 selecter-element" data-selecter-options="{&quot;cover&quot;:&quot;true&quot;}" tabindex="-1">
@@ -409,7 +410,7 @@
         </div>
 
         <div class="tmk-panel">
-            <label class="col-md-2">연락받으실<br>전화번호</label>
+            <label class="col-md-2">연락받으실<br>전화번호 <span>*</span></label>
             <!--<div class="col-md-10" style="display:inline;">-->
             <div class="form-group">
                 <div class="col-xs-4 col-sm-3 col-md-3" style="min-width:80px;">
@@ -428,6 +429,8 @@
             {{demandform.mobile.errors|striptags}}<br>
         </div>
 
+<a class="btn-link pull-left" data-toggle="#demand-form-options" id="dfo-btn" style="color:red;cursor:pointer;margin-bottom:15px;">+ 선택사항 추가입력</a>
+        <div id="demand-form-options" hidden>
         <div class="tmk-panel">
             <label class="col-md-2">참조할사진<br>(선택)</label>
             <div class="tmk-qitem-phupload col-md-10">
@@ -484,7 +487,7 @@
             {{imageform.image.errors|striptags}}
         </div>
         <div class="tmk-panel">
-            <label class="col-md-2">희망 수강료 범위<br>(선택)</label>
+            <label class="col-md-2">희망 수강료 범위</label>
             <div class="col-md-10">
                 <div id="html5">
                     <!--<span>최소</span><span class="pull-right">최대</span>-->
@@ -503,13 +506,22 @@
                 </div>
             </div>
         </div>
-        <input class="btn btn-primary pull-right" type="submit" value="제안등록">
+        </div>
+        <div class="tmk-page-pick hidden-xs" style="border:1px solid #ddd;"></div>
+        <input class="btn btn-primary" type="submit" style="padding:10px;" value="수업 제안 등록">
     </form>
 <!--</div>-->
 <!--</div>-->
 
 <script type="text/javascript" src="{% static 'media/js/nouislider.js' %}"></script>
 <script type="text/javascript" src="{%static 'media/js/wNumb.js'%}"></script>
+<script>
+    $(document).ready(function(){
+        $("#dfo-btn").click(function(){
+            $("#demand-form-options").toggle();
+        });
+    });
+</script>
 <script>
     var slider = document.getElementById('slide');
     var format = wNumb({

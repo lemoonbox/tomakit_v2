@@ -4,20 +4,28 @@
 <title>{%block title%}Tomakit-수업 개설{%endblock%}</title>
 {%block style%}
 <link rel="stylesheet" type="text/css" href="{%static 'media/css/tmk-form.css'%}">
+<style>
+    body {background-color:#fff!important;}
+    .tmk-page-header {background-color:#eee;}
+    label span {color:red;}
+    #tmk-form {margin-top:30px;}
+</style>
 {%endblock%}
 {%block content%}
 <div class="tmk-main-body col-md-12">
-    <div class="tmk-page-header col-md-10 col-md-offset-1">
+<div class="container">
+    <div class="tmk-page-header col-md-12">
         <div class="tmk-h2 tmk-title">클래스 개설 시작하기</div>
-        <div class="tmk-page-pick"></div>
+        <div class="tmk-h4">환영합니다! 토마킷을 통해 당신의 클래스를 세상에 공개하세요!</div>
+        <!--<div class="tmk-page-pick"></div>-->
     </div>
-    <div class="col-md-8 col-md-offset-1 well" id="tmk-form" style="text-align:left;float:left;">
-        <div class="tmk-h3">클래스 제안 등록</div>
+    <div class="col-md-8" id="tmk-form" style="text-align:left;float:left;">
+        <!--<div class="tmk-h3">클래스 제안 등록</div>-->
 
         <form method="POST" action="{% url 'class_create_begin_v2d1'%}">
             {%csrf_token%}
             <div class="tmk-panel">
-                <label class="col-md-2">제목</label>
+                <label class="col-md-2">제목 <span>*</span></label>
                 <div class="tmk-qitem-selecter-wrapper col-md-3">
                     <div class="selecter cover" tabindex="0">
                         <select name="category" required class="selecter_3 selecter-element" data-selecter-options="{&quot;cover&quot;:&quot;true&quot;}" tabindex="-1">
@@ -116,7 +124,7 @@
             </div>
 
             <div class="tmk-panel">
-                <label class="col-md-2">클래스 제목</label>
+                <label class="col-md-2">클래스 제목 <span>*</span></label>
                 <div class="col-md-7">
                     <input type="text" class="form-control" name="title" value="{{begin_data.title}}"placeholder="ex) 뜨개 테디베어만들기 4주 수업">
                     <div class="tmk-form-error">
@@ -126,7 +134,7 @@
             </div>
 
             <div class="tmk-panel">
-                <label class="col-md-2">한줄 소개</label>
+                <label class="col-md-2">한줄 소개 <span>*</span></label>
                 <div class="col-md-9">
                     <input type="text" class="form-control" name="intro_line" value="{{begin_data.intro_line}}" placeholder="ex) 누구나 배울 수 있게 기초부터 탄탄하게 가르쳐요.">
 
@@ -138,7 +146,7 @@
             </div>
 
             <div class="tmk-panel">
-                <label class="col-md-2">수업방식</label>
+                <label class="col-md-2">수업방식 <span>*</span></label>
 
                 <div class="col-md-10 tmk-radio classtype" style="margin-left:-15px;">
                     <div class="col-xs-5 col-md-5">
@@ -167,6 +175,7 @@
 
         </form>
     </div>
+    </div>
 </div>
 
 
@@ -174,4 +183,3 @@
 {%block script%}
 <script src='{%static "media/js/qitem_create.js" %}'></script>
 {%endblock%}
-</body>

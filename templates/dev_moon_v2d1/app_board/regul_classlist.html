@@ -4,8 +4,13 @@
 <title>{%block title%}Tomakit-클래스 살펴보기{%endblock%}</title>
 {%block style%}
 <style>
-    .tmk-search {max-width:540px;margin:auto;}
-    .tmk-search button {height:44px;}
+    @media screen and (max-width:767px) {
+        .tmk-search {
+            max-width: 405px;
+            margin: auto;
+        }
+    }
+
     /*.tmk-card-link {color:#565A5C;}*/
 
     .tmk-card-img-profile {
@@ -53,7 +58,8 @@
 {%block content%}
 
 <div class="tmk-main-body col-md-12">
-    <div class="tmk-body-wrapper">
+    <div class="container">
+    <!--<div class="tmk-body-wrapper">-->
         <div class="tmk-page-header">
             <div class="tmk-h2 tmk-title">클래스 살펴보기</div>
             <form method="GET" action="{% url 'class_filter_redirct_v2d1' %}">
@@ -209,12 +215,15 @@
                             </div>
                         </div>
                     </div>
-                    <div style="display:inline;vertical-align:text-bottom;">
+                    <div class="hidden-xs" style="display:inline;vertical-align:text-bottom;">
                         <button class="btn btn-primary" type="submit" style="outline:1px solid transparent!important;" value="검색">검색</button>
+                    </div>
+                    <div class="visible-xs">
+                        <button class="btn btn-primary btn-block" type="submit" value="검색">검색</button>
                     </div>
                 </div>
             </form>
-            <div class="tmk-page-pick col-md-10 col-sm-12 col-md-offset-1"></div>
+            <div class="tmk-page-pick col-md-12"></div>
         </div>
 
         <!--수업 list-->

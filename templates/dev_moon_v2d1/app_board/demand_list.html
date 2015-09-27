@@ -4,8 +4,13 @@
 <title>{%block title%}Tomakit-클래스 제안하기{%endblock%}</title>
 {%block style%}
 <style>
-    .tmk-search {max-width:540px;margin:30px auto;}
-    .tmk-search button {height:44px;}
+
+    @media screen and (max-width:767px) {
+        .tmk-search {
+            max-width: 405px;
+            margin: auto;
+        }
+    }
     /*.tmk-card-link {color:#565A5C;}*/
 
     .card-list li {
@@ -22,25 +27,25 @@
         list-style-type: none;
     }
 
-    @media screen and (max-width:767px) {
-        .card-list li {width:100%;margin:0px;left:0;right:0;margin-bottom:15px;}
-    }
-    @media screen and (min-width:768px) and (max-width:861px) {
-        html {min-width:870px!important;}
-    }
-    @media screen and (min-width:861px) and (max-width:1264px) {
-        /*html {min-width:1240px;}*/
-        #card-list {text-align:center!important;margin:0px auto!important;max-width:800px;}
-        #card-list-wrapper {margin:0px auto!important;}
-    }
-    @media screen and (min-width:1265px) {
-        #card-list {text-align:center!important;margin:0px auto!important;max-width:1200px;}
-    }
-    /*.li a > div {}*/
+    /*@media screen and (max-width:767px) {*/
+        /*.card-list li {width:100%;margin:0px;left:0;right:0;margin-bottom:15px;}*/
+    /*}*/
+    /*@media screen and (min-width:768px) and (max-width:861px) {*/
+        /*html {min-width:870px!important;}*/
+    /*}*/
+    /*@media screen and (min-width:861px) and (max-width:1264px) {*/
+        /*/!*html {min-width:1240px;}*!/*/
+        /*#card-list {text-align:center!important;margin:0px auto!important;max-width:800px;}*/
+        /*#card-list-wrapper {margin:0px auto!important;}*/
+    /*}*/
+    /*@media screen and (min-width:1265px) {*/
+        /*#card-list {text-align:center!important;margin:0px auto!important;max-width:1200px;}*/
+    /*}*/
+    /*/!*.li a > div {}*!/*/
     .tmk-card-info {height:220px;padding:10px;overflow:hidden;margin-bottom:15px;}
     .tmk-card-info div {margin:25px auto;}
 
-    .tmk-class-card .col-md-12 {text-align:left;}
+    /*.tmk-class-card .col-md-12 {text-align:left;}*/
     /*.tmk-class-card .col-md-12 div:first-child {}*/
     .tmk-card-img-profile {
         width: 50px;
@@ -54,7 +59,8 @@
 {%block content%}
 
 <div class="tmk-main-body col-md-12">
-    <div class="tmk-page-header col-md-10 col-md-offset-1">
+    <div class="container">
+    <div class="tmk-page-header">
         <div class="tmk-h2 tmk-title">클래스 제안하기</div>
         <div class="tmk-h4">찾으시는 클래스가 없다면, 지금 바로 제안해보세요!<br>
             여러분들의 줄서기 투표를 거쳐 인기있는 클래스가 개설됩니다</div>
@@ -218,8 +224,11 @@
                     </div>
                 </div>
 
-                <div style="display:inline;vertical-align:text-bottom;">
+                <div class="hidden-xs" style="display:inline;vertical-align:text-bottom;">
                     <button class="btn btn-info" type="submit" style="outline:1px solid transparent!important;" value="검색">검색</button>
+                </div>
+                <div class="visible-xs">
+                    <button class="btn btn-info btn-block" type="submit" value="검색">검색</button>
                 </div>
             </div>
         </form>
@@ -242,7 +251,7 @@
                         </div>
                     </a>
 
-                    <div class="col-md-12">
+                    <div class="" style="text-align:left;padding-left:20px;">
                         <div style="margin:10px auto;height:40px;overflow:hidden;color:#84CDC2;">{{class.demand_post.goal|goaltag2han}}</div>
 <div class="tmk-card-like">
                     {% if request.user.t2profile_set.first.mobli_able %}
@@ -308,6 +317,7 @@
         </div>
 
     </div>
+        </div>
 </div>
 {%endblock%}
 {%block script%}
