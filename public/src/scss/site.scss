@@ -50,7 +50,7 @@ body {
   font-family: 'NanumGothic', 'AppleSDGothicNeo-Bold', 'NotoSansCJKKR', sans-serif!important;
 }
 
-.tmk-h1, .tmk-h2, .tmk-h3, .tmk-h4 {margin-bottom:30px;}
+.tmk-h1, .tmk-h2, .tmk-h3, .tmk-h4 {margin:15px auto;}
 /* Title */
 .tmk-h1 {font-size:48px;}
 /* Screen Name */
@@ -66,6 +66,9 @@ body {
 
 .tmk-page-header .tmk-h4 {
   font-size:18px;
+}
+.tmk-page-header .tmk-label {
+  margin-top:50px!important;
 }
 //form {float:left;}
 .tmk-title {color:#565A5C;}
