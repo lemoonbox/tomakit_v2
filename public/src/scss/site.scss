@@ -1031,12 +1031,13 @@ ul{
   background-color: rgba(255,255,255,0.7);
 }
 
-#class-post-carousel {
-  .carousel {
-    margin-bottom: 20px;
-  }
+.col-lg-12 .carousel {
+  margin-bottom: 20px;
+  min-height:500px;
+}
+//#class-post-carousel {
   .carousel-inner {
-    background: #fff;
+    //background: #fff;
     border: 1px solid transparent;
     display: inline-block;
     vertical-align: top;
@@ -1052,6 +1053,7 @@ ul{
     height: 100%;
     overflow: hidden;
     position: relative;
+    //min-height:500px;
   }
   .item img {
     display: block;
@@ -1064,9 +1066,6 @@ ul{
     bottom: -100%;
     left: -100%;
   }
-}
-//.carousel-control:hover, .carousel-control a:hover, .carousel-control span:hover{
-//  text-shadow:0 0 0 rgba(0,0,0,0)!important;
 //}
 .tmk-slimfield {
   max-width: 150px !important;

@@ -37,7 +37,8 @@
     .tmk-infobox-price div {float:left;width:50%;}
     .tmk-infobox-price label {line-height:18px;}
     .tmk-infobox-profile{float:left;width:100%;text-align:left;padding:10px;}
-    .tmk-infobox-profile .img-grid {width:30%;float:left;overflow:hidden;vertical-align:middle;}
+    .tmk-infobox-profile .img-grid {width:30%;float:left;overflow:hidden;vertical-align:middle;z-index:1;}
+    .img-grid img {z-index:0;}
     .tmk-infobox-profile .infobox-img-wrapper {border-radius:50%;width:55px;height:55px;overflow:hidden;}
     .tmk-infobox-profile .infobox-img-wrapper img {width:150%;position:center;}
     /*.tmk-infobox-price*/
@@ -46,6 +47,18 @@
     .tmk-infobox-profile .h3 {margin:0px;padding:0;}
     .tmk-main-body {font-size:18px;line-height:28px;}
     .col-lg-8 .tmk-h2 {text-align:left;}
+    .tmk-post-detail .tmk-h3 {text-align:left;}
+
+
+    .tmk-review {margin: 50px auto!important;}
+    /*.tmk-review .col-md-8 {padding:0px;}*/
+    .tmk-review .btn-primary {width:170px;height:80px;}
+    .tmk-review textarea {height:80px;}
+    .img-wrap img {width:100%;}
+    .col-md-2 img {width:100px;}
+    .review-wrapper {margin:20px auto;}
+    .review-wrapper .btn-link {display:inline!important;float:left!important;}
+
 </style>
 {%endblock%}
 <body>
@@ -96,7 +109,7 @@
         </div>
 
 
-        <div class="col-lg-8">
+        <div class="col-lg-8 tmk-post-detail">
             <div class="tmk-h2" style="font-weight:bold;">클래스 소개</div>
             <!--동영상-->
             {% if post.video%}
@@ -108,7 +121,7 @@
             <div class="tmk-h3">커리큘럼</div>
             <div class="tmk-panel">{{post.curri}}</div>
             <div class="tmk-h3">안내사항</div>
-            {{post.notic}}
+            <div class="tmk-panel">{{post.notic}}</div>
 
             <div class="tmk-h3">공방위치</div>
             <div class="tmk-panel">{{post.addr}}</div>
@@ -154,17 +167,19 @@
                 </div>
                 <!--강사 프로필-->
                 <div class="tmk-infobox-profile">
-                    <a href="http://{{HTTP_HOST}}/v2.1/user/profile/{{post.user.id}}">
+
                         <div class="img-grid">
                             <div class="infobox-img-wrapper">
-                                <img src="{{MEDIA_URL}}{{post.user.t2profile_set.first.pro_pic}}">
+                                <!--<a href="http://{{HTTP_HOST}}/v2.1/user/profile/{{post.user.id}}">-->
+                                    <img src="{{MEDIA_URL}}{{post.user.t2profile_set.first.pro_pic}}">
+                                <!--</a>-->
                             </div>
                         </div>
                         <div>
                             <label>클래스 선생님</label><br>
                             <div class="h3">{{post.user.last_name}}{{post.user.first_name}}</div>
                         </div>
-                    </a>
+
                 </div>
 
                 <div style="padding:10px;">
@@ -183,59 +198,87 @@
 </div>
 
 <div class="tmk-main-body col-lg-12" style="box-shadow:0 1px 4px rgba(0,0,0,0.25)!important">
-    <div class="container">
-        <div class="col-lg-8">
-            <div class="tmk-h3" style="font-weight:bold;">후기 쓰기</div>
+        <div class="container">
+            <div class="tmk-review col-md-8">
+                <div class="tmk-h3 pull-left"><span style="color:#84CDC2;">"리뷰 숫자"</span>개의 후기가 있습니다</div>
+                <div class="review-wrapper col-md-12">
+                    <form method="POST" action="{% url 'create_review_v2d1' post.id %}">
+                        {%csrf_token%}
+                        <div class="col-md-2">
+                            <div class="tmk-card-img-profile" style="margin-top:15px;">
+                                <div class="card-link">
+                                    <img src="{{MEDIA_URL}}{{user.t2profile_set.first.pro_pic}}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-7" style="text-align:left;">
+                            <input type="hidden" name="class_num" value="{{post.id}}">
+                            <input type="hidden" name="classtype" value="tut_class">
+                            <textarea class="form-control" name="review"></textarea>
+                            <!--<img src="{%static 'media/image/slice/icon-star_empty.png'%}">-->
+                            <input class="form-control" type="number" name="grade" min="1" max="5"><br>
+                            {{review.review.errors|striptags}} {{review.grade.errors|striptags}}
+                        </div>
+                        <div class="col-md-3">
+                            <input class="btn btn-primary" type="submit" value="후기 작성">
+                        </div>
+                    </form>
+                </div>
+                <div class="review-wrapper col-md-12">
+                    {% for review in post.t2classreview_set.all%}
+                    {% if review.is_active %}
+                    <div class="col-md-2" style="margin-top:15px;">
+                        <div class="tmk-card-img-profile">
+                            <div class="card-link">
+                                <a href="http://{{HTTP_HOST}}/v2.1/user/profile/{{review.user.id}}">
+                                    <img src="{{MEDIA_URL}}{{review.user.t2profile_set.first.pro_pic}}">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-7" id="user-review">
+                        <a href="http://{{HTTP_HOST}}/v2.1/user/profile/{{review.user.id}}">
+                            {{review.user.last_name}}{{review.user.first_name}}
+                        </a> {{review.grade}}
+                        <!--댓글-->
+                        <div>{{review.review}}</div>
+                    </div>
 
-            <form method="POST" action="{% url 'create_review_v2d1' post.id %}">
-                {%csrf_token%}
-                <input type="hidden" name="class_num" value="{{post.id}}">
-                <input type="hidden" name="classtype" value="tut_class">
-                <textarea name="review"></textarea>
-                {{review.review.errors|striptags}}
-                <input type="number" name="grade" min="1" max="5">
-                {{review.grade.errors|striptags}}
-                <input type="submit" value="후기입력">
-            </form>
-            {% for review in post.t2classreview_set.all%}
-            {% if review.is_active %}
-            <a href="http://{{HTTP_HOST}}/v2.1/user/profile/{{review.user.id}}">
-                <img src="{{MEDIA_URL}}{{review.user.t2profile_set.first.pro_pic}}">
-                {{review.user.last_name}}{{review.user.first_name}}</a>
-            후기: {{review.review}}
-            <!--//등급::-->
-            <div>
-                {{review.grade}}
-                <p>
-
-            <span class="starRating">
-        <span>{{review.grade}}</span>
-                </span>
-                </p>
-
-
+                    <!--수정 form 나중에  hidden-->
+                    <div id="review-modify" hidden>
+                        <form method="POST" action="{% url 'modify_review_v2d1' post.id %}">
+                            {%csrf_token%}
+                            <div class="col-md-7">
+                                <input type="hidden" name="review_num" value="{{review.id}}">
+                                <input type="hidden" name="class_num" value="{{post.id}}">
+                                <input type="hidden" name="classtype" value="tut_class">
+                                <textarea class="form-control" name="review">{{review.review}}</textarea>
+                                <input class="form-control" type="number" name="grade" value="{{review.grade}}" min="1" max="5"><br>
+                                {{review.review.errors|striptags}}
+                                {{review.grade.errors|striptags}}
+                            </div>
+                            <div class="col-md-1">
+                                <input class="btn btn-link" id="modify-end" type="submit" value="수정 완료">
+                            </div>
+                        </form>
+                    </div>
+                    <!--사용자가 단 댓글인 경우에만 visible되는-->
+                    <div class="col-md-1" id="modify-wrap">
+                        <span class="btn btn-link" id="modify-btn">댓글 수정</span>
+                    </div>
+                    <form method="POST" action="{% url 'delete_review_v2d1' review.id%}">
+                        {%csrf_token%}
+                        <input type="hidden" name="classtype" value="tut_class">
+                        <div class="col-md-1">
+                            <input class="btn btn-link" type="submit" value="리뷰 삭제">
+                        </div>
+                    </form>
+                </div>
+                {% endif %}
+                {% endfor %}
             </div>
-
-            <!--수정 form 나중에  hidden-->
-            <form method="POST" action="{% url 'modify_review_v2d1' post.id %}">
-                {%csrf_token%}
-                <input type="hidden" name="review_num" value="{{review.id}}">
-                <input type="hidden" name="class_num" value="{{post.id}}">
-                <input type="hidden" name="classtype" value="tut_class">
-                <textarea name="review">{{review.review}}</textarea>
-                <input type="number" name="grade" value="{{review.grade}}">
-                <input type="submit" value="후기수정">
-            </form>
-            <form method="POST" action="{% url 'delete_review_v2d1' review.id%}">
-                {%csrf_token%}
-                <input type="hidden" name="classtype" value="tut_class">
-                <input type="submit" value="삭제하기">
-            </form>
-            {% endif %}
-            {% endfor %}
         </div>
     </div>
-</div>
 
 <div class="tmk-main-body col-lg-12" style="background:#eee;margin-top:3px;margin-bottom:-50px;padding:30px;">
     <div style="margin:50px auto;">

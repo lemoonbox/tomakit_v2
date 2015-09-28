@@ -104,8 +104,6 @@
                 </form>
             </div>
 
-
-
             <div class="review-wrapper col-md-12">
                 {% for comment in post.t2demandcmt_set.all%}
                 {% if comment.is_active %}
@@ -124,7 +122,6 @@
                     {% endif %}
                 </div>
                 <!--수정 form 나중에  hidden-->
-
                 <div id="review-modify" hidden>
                     <form method="POST" action="{% url 'modify_comment_v2d1' post.id %}">
                         {%csrf_token%}
