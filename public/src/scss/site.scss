@@ -62,6 +62,7 @@ body {
 /* Error message */
 .tmk-error {
   font-size: 12px;
+  color:red!important;
 }
 
 .tmk-h2, .tmk-h3 {font-weight:bold;color:#565A5C;}
@@ -1067,6 +1068,14 @@ ul{
     left: -100%;
   }
 //}
+
+@media screen and (max-width:767px) {
+  //.item img {min-width:150%!important;min-height:100%!important;}
+  //.carousel-inner {height:400px!important;}
+}
+
+.carousel-control.right {background-image:none!important;}
+.carousel-control.left {background-image:none!important;}
 .tmk-slimfield {
   max-width: 150px !important;
 }
