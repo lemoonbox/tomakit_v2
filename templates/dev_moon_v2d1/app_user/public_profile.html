@@ -1,47 +1,144 @@
 {%extends 'base.html'%}
-{% load static from staticfiles %}
+{%load static from staticfiles%}
+{% load v2d1_board_tags %}
+<title>{%block title%}{{profile_user.last_name}}{{profile_user.first_name}}님의 프로필{%endblock%}</title>
+{%block style%}
+<style>
+    body {background:#fff!important;}
+    .tmk-main-body {text-align:left;}
+    .profile-banner {height:320px;margin-bottom:50px;padding-top:50px;font-size:18px;background-color:#eee;}
+    .profile-banner .btn-primary img {vertical-align:text-bottom;height:20px;}
+    .nav-tabs {background:#fff;border:none;border-bottom:2px solid #eee;}
+    .nav-tabs a {font-size:24px;font-weight:bold;}
+    .nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover
+    {border:none;border-bottom:4px solid #FF565A;color:#FF565A;}
+    .nav-tabs li{border:none;}
+    .nav-tabs>li>a {border:none;color:#CACCCD;}
+    .nav-tabs a {border:none;}
+    /*#onoff-class {display:none;opacity:0;width:100%;line-height:400px;font-size:18px;font-weight:bold;}*/
+    /*#onoff-class:hover {display:block;z-index:500;opacity:1;float:left;}*/
+    .tmk-card-img:hover {z-index:-3;}
+    .card-list li {height:470px;}
+    #onoff-class span {color:red;font-weight:bold;}
+    /*.tab-content {background:#F9FBFB!important;}*/
 
-    <title>{%block title%}{{profile_user.last_name}}{{profile_user.first_name}}님의 프로필{%endblock%}</title>
+    .tmk-demand-info {height:220px;padding:10px;overflow:hidden;margin-bottom:15px;}
+    .tmk-demand-info div {margin:25px auto;}
 
+    .tmk-infobox-profile{float:left;width:100%;padding:10px;}
+    .tmk-infobox-profile .img-grid {margin:auto;width:100px;overflow:hidden;vertical-align:middle;}
+
+    .card-link {z-index:1!important;}
+    .card-link img {z-index:0!important;}
+
+    .tmk-infobox-profile .infobox-img-wrapper {border-radius:50%;width:100px;height:100px;overflow:hidden;}
+    .tmk-infobox-profile .infobox-img-wrapper img {width:120%;position:center;}
+
+    .btn-group a {font-size:24px;height:42px;padding:25px;margin:auto 15px;font-weight:bold;}
+    .profile-class-wrapper {height:120px;border:1px solid #eee; margin-bottom:15px;background-color:#fff;overflow:hidden;}
+    .profile-class-wrapper div {float:left;}
+    /*.profile-class-wrapper .col-xs-12 {}*/
+    /*.profile-class-wrapper {}*/
+    .class-img-wrapper {height:120px;width:120px;}
+    .img-grid {height:100%;width:100%;overflow:hidden;}
+    .img-grid img {width:250%;min-height:100%;position:center;}
+    .tmk-panel {border-bottom:none;}
+</style>
+{%endblock%}
 {%block content%}
-<h3>프로필 화면</h3>
-<style>.col-md-12 img {width:300px;}</style>
+<div class="col-lg-12 profile-banner">
+    <div class="container">
+        <!--<div class="col-md-12">-->
 
-<div class="col-md-12">
-<a href="http://{{HTTP_HOST}}/v2.1/user/profile/{{profile_user.id}}">
-프로필 사진<img src="{{MEDIA_URL}}{{profile_user.t2profile_set.first.pro_pic}}"><br>
-이름 : {{profile_user.last_name}} {{profile_user.first_name}}</a><br>
-한줄소개 : {{profile_user.t2profile_set.first.intro_line}}<br><br><br>
-<!-- - -->
-{% if request.user.is_authenticated%}
-    <a href="http://{{HTTP_HOST}}/v2.1/user/profile/{{profile_user.id}}/edit" class="btn btn-primary">프로필 편집</a>
-{% endif %}
-<!-- - -->
-<h3>소개</h3>
-{% if host_profile%}
-소개 동영상 or 사진<br>
-    {% if host_profile.intro_video%}
-        소개 상동영:<iframe width="560" height="315" src="https://www.youtube.com/embed/{{host_profile.intro_video}}" frameborder="0" allowfullscreen></iframe><br>
-    {% else %}
-        소개 사진:: <img src="{{MEDIA_URL}}{{host_profile.intro_pic}}"><br>
-    {% endif %}
-    자기 소개::{{host_profile.intro_self}}<br>
-    가게 주소{{host_profile.shop_addr}}<br>
-<h3>후기</h3>
-    {% for review in profile_user.host_review.all%}
-        <a href="http://{{HTTP_HOST}}/v2.1/user/profile/{{review.user.id}}">
-        리뷰어 사진:<img src="{{MEDIA_URL}}{{review.user.t2profile_set.first.pro_pic}}"><br>
-        리뷰어 이름:{{review.user.last_name}}{{review.user.first_name}}</a><br>
-        별점 : {{review.grade}}<br>
-        리뷰 : {{review.review}}
-    {% endfor %}
-    <h3>모집중인 수업</h3>
-    {% for class in open_classes%}
-        <a href="http://{{HTTP_HOST}}/v2.1/class/{{class.id}}">
-        수업 사진 ::<img src="{{MEDIA_URL}}{{class.t2classpic_set.first.image}}"><br>
-        수업 제목 ::{{class.title}}</a><br>
-        수업 소개 ::{{class.intro_line}}<br>
-    {% endfor %}
-{% endif%}
+        <div class="tmk-infobox-profile">
+            <div class="img-grid">
+                <div class="infobox-img-wrapper">
+                    <a href="http://{{HTTP_HOST}}/v2.1/user/profile/{{profile_user.id}}">
+                        <img src="{{MEDIA_URL}}{{profile_user.t2profile_set.first.pro_pic}}">
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="tmk-h2">{{profile_user.last_name}}{{profile_user.first_name}}</div>
+        <div>{{profile_user.t2profile_set.first.intro_line}}</div>
+        <div class="btn-group pull-left">
+            <a style="color:#FF565A;border-bottom:4px solid;" href="http://{{HTTP_HOST}}/v2.1/user/profile/{{profile_user.id}}/">소개</a>
+            <a style="color:#CACCCD;" href="http://{{HTTP_HOST}}/v2.1/user/profile/{{profile_user.id}}/class_check/">클래스</a>
+        </div>
+        <div class="pull-right">
+            {% if request.user.is_authenticated%}
+            <a href="http://{{HTTP_HOST}}/v2.1/user/profile/{{profile_user.id}}/edit" class="btn btn-primary"><img src="{%static 'media/image/slice/icon-setting.png'%}"> 프로필 수정</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+
+<div class="col-lg-12 tmk-main-body">
+    <div class="container">
+        <div class="col-lg-8">
+            <div class="tmk-h3">소개</div>
+            {% if host_profile%}
+            {% if host_profile.intro_video%}
+            <iframe width="100%" height="480px" src="https://www.youtube.com/embed/{{host_profile.intro_video}}" frameborder="0" allowfullscreen></iframe><br>
+            {% else %}
+            <img src="{{MEDIA_URL}}{{host_profile.intro_pic}}"><br>
+            {% endif %}
+            <div class="tmk-h3">자기 소개</div>
+            <div class="tmk-panel">{{host_profile.intro_self}}</div>
+            <div class="tmk-h3">가게 주소</div>
+            <div class="tmk-panel">{{host_profile.shop_addr}}</div>
+        </div>
+
+        <div class="col-lg-4">
+
+            <div class="tmk-h3">모집중인 수업</div>
+            {% for class in open_classes%}
+            <div class="profile-class-wrapper">
+                <a href="http://{{HTTP_HOST}}/v2.1/class/{{class.id}}">
+                    <div class="class-img-wrapper">
+                        <div class="img-grid">
+                            <img src="{{MEDIA_URL}}{{class.t2classpic_set.first.image}}">
+                        </div>
+                    </div>
+                    <div class="info-wrapper">
+                        <div style="color:#82888A;font-weight:bold;">{{class.title}}</div>
+                        <div class="col-xs-12">{{class.intro_line}}</div>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+            {% endif%}
+        </div>
+</div>
+    <div class="tmk-main-body col-lg-12">
+        <div class="container">
+        <div class="review-wrapper col-xs-12 col-md-12">
+            <div class="tmk-h3"><span style="color:#84CDC2;">리뷰 개수</span>개의 후기가 있습니다</div>
+            {% for review in profile_user.host_review.all%}
+            <div style="height:100px;">
+                <div class="col-xs-2 col-lg-2">
+                    <div class="tmk-card-img-profile">
+                        <div class="card-link">
+                            <img src="{{MEDIA_URL}}{{review.user.t2profile_set.first.pro_pic}}">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-7 col-xs-7" id="user-review">
+                    <a href="http://{{HTTP_HOST}}/v2.1/user/profile/{{review.user.id}}">
+                        {{review.user.last_name}}{{review.user.first_name}}
+                    </a> {{review.grade}}
+                    <!--댓글-->
+                    <div>{{review.review}}</div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+
+
+        </div>
+    </div>
 </div>
 {%endblock%}
