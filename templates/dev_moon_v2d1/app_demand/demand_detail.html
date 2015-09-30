@@ -6,7 +6,7 @@
 
 {%block style%}
 <style>
-    .tmk-review {margin: 50px auto!important;}
+    .tmk-review {margin-top: 50px;margin-bottom:50px;}
     /*.tmk-review .col-md-8 {padding:0px;}*/
     .tmk-review .btn-primary {width:170px;height:80px;}
     .tmk-review textarea {height:80px;}
@@ -14,52 +14,133 @@
     .col-md-2 img {width:100px;}
     .review-wrapper {margin:20px auto;}
     .review-wrapper .btn-link {display:inline!important;float:left!important;}
+
+    .tmk-infobox-profile{float:left;width:160px;text-align:left;padding:0;}
+    @media screen and (max-width:1199px) {
+        /*.tmk-infobox-profile {width:100%;float:left;z-index:5;}*/
+        .tmk-page-header .tmk-infobox-profile {text-align:center;margin:auto!important;float:none;}
+    }
+    .tmk-infobox-profile .img-grid {width:60px;float:left;overflow:hidden;vertical-align:middle;}
+
+    .card-link {z-index:1!important;}
+    .card-link img {z-index:0!important;}
+
+    .tmk-infobox-profile .infobox-img-wrapper {border-radius:50%;width:50px;height:50px;overflow:hidden;padding-left:0;}
+    .tmk-infobox-profile .infobox-img-wrapper img {width:150%;position:center;}
+
+    /*.tmk-infobox-profile div {width:60%;float:left;}*/
+    /*.tmk-infobox-profile label {width:60%;line-height:20px;}*/
+    /*.demand-post {margin-bottom:50px;}*/
+    .demand-post label {min-width:36px;line-height:36px;color:#82888A;font-size:14px;font-weight:normal;width:20%;vertical-align:middle;}
+.tmk-page-header {height:100px;}
+
+    .tmk-page-header div {text-align:center;margin:auto;}
+
+@media screen and (min-width:992px) {
+    #submit-comment {width:auto;}
+}
+    @media screen and (max-width:767px) {
+        #submit-comment {height:42px;margin-top:-20px;}
+    }
+    #demand-detail {font-size:18px;line-height:28px;margin-top:30px;}
 </style>
 {%endblock%}
 
 {%block content%}
-<div class="tmk-main-body col-md-12" style="text-align:left;">
-    <!--<div class="col-md-12">-->
-    <div class="container">
-        <div class="col-md-12">
-            <div class="col-md-2">여기에 사용자 이름 넣어야됨</div>
-            <div class="col-md-9" style="background:#fff;">
-                <div class="">{{post.category.category|cate2han}}</div>
-                <div class="tmk-h3"> {{post.title}}</div>
-                한줄소개 :: {{post.descript}}<br>
-                목표::{{post.goal}}<br><br>
-                희망시간 :: {{post.weekday}}<br>
-                희망지역 :: {{post.state.state|state2han}} {{post.local}}<br>
-                희망수강료 :: {{post.min_price}}~{{post.max_price}}<br>
-                <!--참조 -->
-                {% for image in post.t2demandpic_set.all%}
-                <div class="img-wrap">
-                    <img src="{{MEDIA_URL}}{{image.image}}">
+<div class="tmk-main-body col-lg-12" id="demand-detail" style="text-align:left;">
+    <div class=" container">
+    <div class="tmk-page-header hidden-lg" style="text-align:center;">
+        <div class="tmk-infobox-profile">
+            <div class="img-grid">
+                <div class="infobox-img-wrapper">
+                    <a href="http://{{HTTP_HOST}}/v2.1/user/profile/{{post.user.id}}">
+                        <img src="{{MEDIA_URL}}{{post.user.t2profile_set.first.pro_pic}}">
+                    </a>
                 </div>
-                {% endfor %}
+            </div>
+            <div>
+                <span class="small" style="line-height:16px;">클래스 제안</span><br>
+                <a href="http://{{HTTP_HOST}}/v2.1/user/profile/{{post.user.id}}">
+                    <div class="tmk-h3" style="line-height:16px;margin-top:5px;color:#565a5c;">{{post.user.first_name}}{{post.user.last_name}}</div>
+                </a>
             </div>
         </div>
     </div>
-</div>
 
-<div class="tmk-main-body col-md-12" style="margin:100px auto;">
+
+
+    <!--<div class="container">-->
+        <!--<div class="col-md-12">-->
+        <div class="col-lg-2 visible-lg">
+            <div class="tmk-infobox-profile">
+                <div class="img-grid">
+                    <div class="infobox-img-wrapper">
+                        <a href="http://{{HTTP_HOST}}/v2.1/user/profile/{{post.user.id}}">
+                            <img src="{{MEDIA_URL}}{{post.user.t2profile_set.first.pro_pic}}">
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <span class="small" style="line-height:16px;">클래스 제안</span><br>
+                    <a href="http://{{HTTP_HOST}}/v2.1/user/profile/{{post.user.id}}">
+                        <div class="tmk-h3" style="line-height:16px;margin-top:5px;color:#565a5c;">{{post.user.first_name}}{{post.user.last_name}}</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!--<div class="container">-->
+            <div class="col-lg-8 well demand-post" style="background:#fff;">
+            <div class="">{{post.category.category|cate2han}}</div>
+            <div class="tmk-h2">{{post.title}}</div>
+            <!--한줄소개 ::-->
+            <div style="margin-top:80px;">{{post.descript}}</div>
+            <div style="margin:30px auto;height:40px;font-size:14px;overflow:hidden;color:#84CDC2;">{{post.goal|goaltag2han}}</div>
+            <label><img src="{%static 'media/image/slice/icon-intro_clock.png'%}"> 희망 일정</label> {{post.weekday}}<br>
+            <label><img src="{%static 'media/image/slice/icon-intro_location.png'%}"> 희망지역</label> {{post.state.state|state2han}} {{post.local}}<br>
+            <label><img src="{%static 'media/image/slice/icon-intro_coin.png'%}"> 희망수강료</label> ￦{{post.min_price}} ~ ￦{{post.max_price}}<br>
+            <!--참조 -->
+            <div class="tmk-h3" style="margin-top:50px;width:100%;float:left;">참조사진<span style="color:red;font-size:14px;" class="btn btn-link pull-right" id="demand-pic-fold">+</span></div>
+            <div style="width:100%;display:block;" id="demand-pic">
+            {% for image in post.t2demandpic_set.all%}
+            <div class="img-wrap">
+                <img src="{{MEDIA_URL}}{{image.image}}">
+            </div>
+            {% endfor %}
+            </div>
+        </div>
+</div>
+    </div>
+<!--</div>-->
+
+
+<div class="tmk-main-body col-md-12" style="margin:50px auto;">
     <div class="container">
+
+        <div class="tmk-h3">
+            {% if post.inline_users.count %}
+            <span style="color:#84CDC2">{{post.inline_users.count}}</span>명이 함께하길 원합니다
+            {% else %}
+            수업에 참여하고 싶다면 줄서기를 눌러주세요!
+            {% endif %}
+        </div>
         <!--줄서기-->
         {% if request.user.t2profile_set.first.mobli_able %}
-        <div href="{% url 'lineup_demand_v2d1' post.id %}?lineup_next=/v2.1/demand/{{post.id}}/">
+        <a href="{% url 'lineup_demand_v2d1' post.id %}?lineup_next=/v2.1/demand/{{post.id}}/">
             {% else%}
             <a href="{% url 'mobli_require_v2d1' post.id %}?lineup_next=/v2.1/demand/{{post.id}}/">
                 {% endif %}
                 {% if request.user in post.inline_users.all %}
-                줄서기 취소
+                <button class="btn btn-default">
+                    <img style="width:18px;vertical-align:text-top;color:#82888A;" src="{%static 'media/image/slice/icon-line_gr.png'%}">&nbsp; <span class="h4">줄서기 취소
                 {% else %}
-                줄서기
+                <button class="btn btn-primary">
+                    <img style="width:18px;vertical-align:text-top;" src="{%static 'media/image/slice/icon-line_wh.png'%}">&nbsp; <span class="h4">줄서기
                 {% endif %}
                 <!--줄선 사람 숫자-->
                 {% if post.inline_users.count %}
-                ({{post.inline_users.count}})
+                ({{post.inline_users.count}})</span></button>
                 {% else %}
-                (0)
+                (0)</span></button>
                 {% endif %}
                 {% if post.inline_users.count %}
                 {% for user in post.inline_users.all %}
@@ -71,68 +152,75 @@
                 {% endfor %}
                 {% endif %}
             </a>
-        </div>
+            <!--</a>-->
     </div>
 </div>
 
 
 
-<div class="tmk-main-body col-md-12" style="background:#fff;margin-bottom:-50px;">
-    <div class="tmk-review">
-        <div class="container">
+<div class="tmk-main-body col-md-12" style="margin-top:50px;background:#fff;margin-bottom:-50px;padding-bottom:50px;">
+    <div class="container">
+
+        <div class="tmk-review col-lg-10 col-lg-offset-1">
             <!--댓글-->
+
             <div class="review-wrapper col-md-12">
+                <div class="tmk-h3" style="text-align:left;margin-bottom:50px;margin-left:15px;"><span style="color:#84CDC2">댓글 숫자</span>개의 댓글이 있습니다</div>
                 <form method="POST" action="{% url 'create_comment_v2d1' post.id %}">
                     {%csrf_token%}
-                    <div class="col-md-2">
+                    <div class="col-xs-2 col-lg-1">
                         <div class="tmk-card-img-profile" style="margin-top:15px;">
                             <div class="card-link">
                                 <img src="{{MEDIA_URL}}{{user.t2profile_set.first.pro_pic}}">
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-7" style="text-align:left;">
+                    <div class="col-xs-10 col-sm-7 col-md-7 col-lg-9" style="text-align:left;">
                         <input type="hidden" name="class_num" value="{{post.id}}">
                         <textarea class="form-control" name="comment"></textarea>
                         <!--<img src="{%static 'media/image/slice/icon-star_empty.png'%}">-->
                         <input type="checkbox" style="vertical-align:bottom;" class="icheckbox_flat" name="class_ad" value="host_ad"><span style="font-weight:bold;">&nbsp;해결 댓글&nbsp;</span>
-                        <span style="color:#82888A;">위 제안을 해결할 수 있는 댓글이라면 옆의 체크박스를 체크해주세요</span>
+                        <span class="hidden-xs" style="color:#82888A;">위 제안을 해결할 수 있는 댓글이라면 옆의 체크박스를 체크해주세요</span>
                     </div>
-                    <div class="col-md-3">
-                        <input class="btn btn-primary" type="submit" value="댓글달기">
+                    <div class="col-md-3 col-xs-3 col-lg-2 pull-right">
+                        <input class="btn btn-primary pull-right" id="submit-comment" type="submit" value="댓글달기">
                     </div>
                 </form>
             </div>
 
-            <div class="review-wrapper col-md-12">
+            <div class="review-wrapper col-xs-12 col-md-12">
                 {% for comment in post.t2demandcmt_set.all%}
                 {% if comment.is_active %}
-                <div class="col-md-2"  style="margin-top:15px;">
+                <div class="col-xs-2 col-lg-1"  style="margin-top:15px;">
                     <div class="tmk-card-img-profile">
                         <div class="card-link">
-                            <img src="{{MEDIA_URL}}{{comment.user.t2profile_set.first.pro_pic}}">
+                            <a href="http://{{HTTP_HOST}}/v2.1/user/profile/{{comment.user.id}}">
+                                <img src="{{MEDIA_URL}}{{comment.user.t2profile_set.first.pro_pic}}">
+                            </a>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-7" id="user-review">사용자 이름<br>
+                <div class="col-lg-9 col-md-7 col-xs-10" style="text-align:left;float:left;" id="user-review">
+
+                    <div class="tmk-h3"><a style="color:#82888A;" href="http://{{HTTP_HOST}}/v2.1/user/profile/{{comment.user.id}}">{{comment.user.last_name}}{{comment.user.first_name}}</a> <span style="color:gold;">★</span><span style="font-size:16px;color:#84CDC2;">해결댓글</span></div>
                     <!--댓글-->
                     <div>{{comment.comment}}</div>
                     {% if comment.class_ad%}
-                    <span style="color:red;">★</span> 관련 수업을 개설하였습니다.
+
                     {% endif %}
                 </div>
                 <!--수정 form 나중에  hidden-->
                 <div id="review-modify" hidden>
                     <form method="POST" action="{% url 'modify_comment_v2d1' post.id %}">
                         {%csrf_token%}
-                        <div class="col-md-7">
+                        <div class="col-lg-9 col-md-7 col-xs-10" style="text-align:left;">
                             <input type="hidden" name="comment_num" value="{{comment.id}}">
                             <input type="hidden"  name="demand_num" value="{{post.id}}">
                             <textarea class="form-control" name="comment">{{comment.comment}}</textarea>
-                            <input type="checkbox" name="class_ad" value="host_ad"
-                                   {% if comment.class_ad%}checked="checked"{% endif %}>수업 개설 댓글
+                            <input type="checkbox" name="class_ad" value="host_ad"  style="vertical-align:bottom;" class="icheckbox_flat"
+                                   {% if comment.class_ad%}checked="checked"{% endif %}> 수업 개설 댓글
                         </div>
-                        <div class="col-md-1">
+                        <div class="col-md-1 col-xs-2 pull-right">
                             <input class="btn btn-link" id="modify-end" type="submit" value="수정 완료">
                         </div>
                     </form>
@@ -140,16 +228,16 @@
                 <!--사용자가 단 댓글인 경우에만 visible되는-->
 
                 <!--<div class="col-md-3" style="text-align:center;">-->
-                <div class="col-md-1" id="modify-wrap">
+                <div class="col-md-1 col-xs-2 pull-right" id="modify-wrap" style="margin-right:15px;">
                     <span class="btn btn-link" id="modify-btn">댓글 수정</span>
                 </div>
-                <form method="POST" action="{% url 'delete_comment_v2d1' comment.id%}">
-                    {%csrf_token%}
-                    <input type="hidden" name="demand_num" value="{{post.id}}">
-                    <div class="col-md-1">
+                <div class="col-md-1 col-xs-2 pull-right" hidden id="review-del">
+                    <form method="POST" action="{% url 'delete_comment_v2d1' comment.id%}">
+                        {%csrf_token%}
+                        <input type="hidden" name="demand_num" value="{{post.id}}">
                         <input class="btn btn-link" type="submit" value="댓글 삭제">
-                    </div>
-                </form>
+                    </form>
+                </div>
                 <!--</div>-->
 
 
@@ -159,6 +247,7 @@
         </div>
     </div>
 </div>
+<!--</div>-->
 
 {%endblock%}
 {%block script%}
@@ -168,7 +257,16 @@
             $("#modify-wrap").hide();
             $("#user-review").hide();
             $("#review-modify").show();
+            $("#review-del").show();
         });
+        $("#demand-pic-fold").click(function(){
+            $("#demand-pic").slideToggle("slow");
+        });
+//        $("#demand-pic-spread").click(function(){
+//            $("#demand-pic").show();
+//            $("#fold-wrapper").show();
+//            $("demand-pic-spread").hide();
+//        });
     });
 </script>
 {%endblock%}

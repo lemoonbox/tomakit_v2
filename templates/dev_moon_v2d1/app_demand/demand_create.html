@@ -77,10 +77,6 @@
         background-color: rgba(255,255,255,0.7);
     }
 
-    /*.selecter .selecter-selected{*/
-    /*color: #000;*/
-    /*}*/
-
     .filedrag {
         border: 2px dashed #AAA;
         border-radius: 7px;
@@ -213,27 +209,32 @@
         .col-md-2 {display:block;}
         .col-md-7 {display:inline-block;min-width:340px;margin-left:-15px;}
     }
-
+.tmk-h3 {text-align:left;}
+    #tmk-form .btn-primary {margin-right:15px;}
+    .tmk-page-header{padding-bottom:15px;}
+    label span {color:red}
 </style>
 {%endblock%}
 
 <body>
 {%block content%}
 <div class="tmk-main-body col-md-12">
-    <div class="tmk-page-header col-md-10 col-md-offset-1">
+    <div class="container">
+    <div class="tmk-page-header">
     <div class="tmk-h2 tmk-title">원하는 클래스를 개설해드립니다</div>
     <div class="tmk-h4">제안서를 작성해주시면<br>가까운 장소, 편한 시간의 수업을 개설하여 드립니다</div>
         <div class="tmk-page-pick"></div>
     </div>
-    <div class="col-md-8 col-md-offset-1 well" id="tmk-form" style="text-align:left;float:left;">
         <div class="tmk-h3">클래스 제안하기</div>
+    <div class="col-md-8 well" id="tmk-form" style="text-align:left;float:left;">
+        <!--<div class="tmk-h3">클래스 제안하기</div>-->
 
         <form method="POST" action="{% url 'demand_create_v2d1' %}" enctype="multipart/form-data">
             {%csrf_token%}
 
 
             <div class="tmk-panel">
-            <label class="col-md-2">제목</label>
+            <label class="col-md-2">제목 <span>*</span></label>
             <div class="tmk-qitem-selecter-wrapper col-md-3">
                 <div class="selecter cover" tabindex="0">
                     <select name="category" required class="selecter_3 selecter-element" data-selecter-options="{&quot;cover&quot;:&quot;true&quot;}" tabindex="-1">
@@ -326,26 +327,26 @@
 
                 <!--<div class="alert alert-warning alert-dismissable">-->
                 <!--<button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>-->
-                {{demandform.category.errors|striptags}}
-                {{demandform.title.errors|striptags}}
+                <div class="col-md-10 pull-right tmk-error">{{demandform.category.errors|striptags}} {{demandform.title.errors|striptags}}</div>
                 <!--</div>-->
 
             </div>
 
 
             <div class="tmk-panel">
-            <label class="col-md-2">내용</label>
+            <label class="col-md-2">내용 <span>*</span></label>
             <div  class="col-md-10">
         <textarea name="descript" class="form-control" rows="4" cols="50"
                   placeholder="ex) 가죽공방을 창업하고 싶어서요. 기초부터 차근 차근가르쳐주는 공방 없을까요?">{{demand_data.descript}}</textarea>
-                {{demandform.descript.errors|striptags}}<br>
+                </div>
+                <div class="col-md-10 pull-right tmk-error">{{demandform.descript.errors|striptags}}<br>
             </div>
     </div>
 
 
 
             <div class="tmk-panel">
-            <label class="col-md-2">태그</label>
+            <label class="col-md-2">태그 <span>*</span></label>
             <div class="col-md-10">
                 <div class="btn-group" data-toggle="buttons">
                     <!--<label class="icheckbox_flat checked">-->
@@ -364,21 +365,24 @@
                     checked {% endif %}{% endfor %}>&nbsp;창업을 위한 전문 수업&nbsp;
                     <!--</label>-->
                 </div>
-                {{demandform.goal.errors|striptags}}<br>
+                <div class="col-md-10 pull-right tmk-error">{{demandform.goal.errors|striptags}}<br>
+                    </div>
             </div>
 </div>
 
             <div class="tmk-panel">
-            <label class="col-md-2">희망일정</label>
+            <label class="col-md-2">희망일정 <span>*</span></label>
             <div class="col-md-10">
                 <input type="text" name="weekday" class="form-control" value="{{demand_data.weekday}}" placeholder="ex) 주말 아무때나, 평일7시이후"><br>
-                {{demandform.weekday.errors|striptags}}<br>
+                </div>
+                <div class="col-md-10 pull-right tmk-error">
+                    {{demandform.weekday.errors|striptags}}<br>
             </div>
                 </div>
 
                 <div class="tmk-panel">
 
-            <label class="col-md-2">희망지역</label>
+            <label class="col-md-2">희망지역 <span>*</span></label>
             <div class="tmk-qitem-selecter-wrapper col-md-3">
                 <div class="selecter cover" tabindex="0">
                     <select name="state" required class="selecter_3 selecter-element" data-selecter-options="{&quot;cover&quot;:&quot;true&quot;}" tabindex="-1">
@@ -433,19 +437,16 @@
                              onclick="selecting(this, 'etc')">기타</div>
                     </div>
                 </div>
-
-                {{demandform.state.errors|striptags}}
-                {{demandform.local.errors|striptags}}<br>
-
             </div>
             <div class="col-md-7">
                 <input type="text" value="{{demand_data.local}}" name="local" class="form-control" style="display:inline;" placeholder="ex) 강남역 근처, 홍대 주변"><br>
             </div>
-
+                    <div class="col-md-10 pull-right tmk-error">{{demandform.state.errors|striptags}}
+                        {{demandform.local.errors|striptags}}</div>
 </div>
 
             <div class="tmk-panel">
-            <label class="col-md-2">연락받으실<br>전화번호</label>
+            <label class="col-md-2">연락받으실<br>전화번호 <span>*</span></label>
             <!--<div class="col-md-10" style="display:inline;">-->
             <div class="form-group">
                 <div class="col-xs-4 col-sm-3 col-md-3" style="min-width:80px;">
@@ -461,7 +462,7 @@
                     </div>
             </div>
             <!--</div>-->
-                {{demandform.mobile.errors|striptags}}<br>
+                <div class="col-md-10 pull-right tmk-error">{{demandform.mobile.errors|striptags}}<br></div>
 </div>
 
             <div class="tmk-panel">
@@ -517,10 +518,10 @@
                 </div>
                 <!--<aside class="tmk-aside-right">만들고 싶은 것의 사진을 업로드 해주세요. JPG, PNG 파일만 업로드가 가능합니다.</aside>-->
             </div>
-            {{imageform.image.errors|striptags}}
+                {{imageform.image.errors|striptags}}
 </div>
 
-            <div class="tmk-panel">
+            <div class="tmk-panel" style="border-bottom:none;">
 
             <label class="col-md-2">희망 수강료 범위<br>(선택)</label>
             <div class="col-md-10">
@@ -546,6 +547,7 @@
             <input class="btn btn-primary pull-right" type="submit" value="제안등록">
         </form>
     </div>
+        </div>
 </div>
 
 {%endblock%}

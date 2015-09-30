@@ -5,31 +5,40 @@
 
 <title>{%block title%}결제하기{%endblock%}</title>
 
-<body>
+{%block style%}
+<style>
+
+    .pay-form {width:400px;text-align:left;background:#fff;line-height:34px;font-size:16px;margin:100px auto;}
+    .pay-form label {color:#82888a; width:35%;}
+    .pay-info {margin:15px auto;}
+    /*.tmk-page-header{margin:0;}*/
+</style>
+{%endblock%}
 {%block content%}
 <div class="tmk-main-body col-md-12">
-    <div class="tmk-page-header col-md-10 col-md-offset-1">
-        <div class="tmk-h2 tmk-title">클래스명 {{post.title}}</div>
-        <div class="tmk-h4"></div>
-        <div class="tmk-page-pick"></div>
-    </div>
+    <!--<div class="tmk-page-header"></div>-->
+    <div class="container">
+
 <!--결제를 확인해주세요-->
-<div class="col-md-10">
-<h3>클래스 수강 신청</h3>
-아래의 신청 정보가 맞는지 확인해 주세요.<br>
+<div class="well pay-form">
+<div class="tmk-h2">신청정보 확인</div>
+<div style="font-size:18px;margin:30px auto;">아래의 신청 정보가 맞는지 확인해 주세요.</div>
 
-<!--클래스명 {{post.title}}<br>-->
-결제 금액 ￦{{ post.extra_price|add:post.price |intcomma}}<br>
+    <div class="pay-info">
+    <label>클래스명</label> {{post.title}}<br>
+<label>결제 금액</label> ￦{{ post.extra_price|add:post.price |intcomma}}<br><br>
 
-신청자 성함{{buyer_name}}<br>
-이메일{{buyer_email}}<br>
-전화번호 :010{{mobli}}<br>
+    <label>신청자 성함</label> {{buyer_name}}<br>
+    <label>이메일</label> {{buyer_email}}<br>
+    <label>전화번호</label> 010{{mobli}}<br>
 {% if classtype == "tutclass"%}
-희망 수업 시작일{{want_day}}<br>
+    <label>희망 수업 시작일</label> {{want_day}}<br>
 {% endif%}
-결제 방식 :{{pay_method}}<br>
-<button type="submit" class="btn btn-primary" value="결제" id="button_buy">결제하기</button>
+    <label>결제 방식</label> {{pay_method}}<br>
+    </div>
+<button type="submit" class="btn btn-primary btn-block" value="결제" id="button_buy">결제하기</button>
 </div>
+        </div>
     </div>
 {%endblock%}
 {%block script%}
