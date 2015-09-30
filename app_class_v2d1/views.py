@@ -118,7 +118,7 @@ def create_tut(request, class_num):
         sublocal_2=request.POST.get("sublocal_2", "").encode("utf-8")
         sublocal_3=request.POST.get("sublocal_4", "").encode("utf-8")
         _state, create=check_state(request)
-        addr=area_1+locality+sublocal_1+sublocal_2+sublocal_3
+        addr=area_1+" "+locality+" "+sublocal_1+" "+sublocal_2+" "+sublocal_3
         addr_detail=request.POST.get("addr_deatail", "").encode("utf-8")
         _user=User.objects.get(username=request.user)
         _pre_fillpost=T2TutClass.objects.get(pk=class_num)
@@ -213,7 +213,7 @@ def create_teach(request, class_num):
         sublocal_2=request.POST.get("sublocal_2", "").encode("utf-8")
         sublocal_3=request.POST.get("sublocal_4", "").encode("utf-8")
         _state, create=check_state(request)
-        addr=area_1+locality+sublocal_1+sublocal_2+sublocal_3
+        addr=area_1+" "+locality+" "+sublocal_1+" "+sublocal_2+" "+sublocal_3
         addr_detail=request.POST.get("addr_deatail", "").encode("utf-8")
         _user=User.objects.get(username=request.user)
         _pre_fillpost=T2TeachClass.objects.get(pk=class_num)
@@ -336,7 +336,7 @@ def modify_teach(request, class_num):
         sublocal_2=request.POST.get("sublocal_2", "").encode("utf-8")
         sublocal_3=request.POST.get("sublocal_4", "").encode("utf-8")
         _state, create=check_state(request)
-        addr=area_1+locality+sublocal_1+sublocal_2+sublocal_3
+        addr=area_1+" "+locality+" "+sublocal_1+" "+sublocal_2+" "+sublocal_3
         addr_detail=request.POST.get("addr_deatail", "").encode("utf-8")
         _user=User.objects.get(username=request.user)
         _pre_fillpost=T2TeachClass.objects.get(pk=class_num)
@@ -449,7 +449,7 @@ def modify_tut(request, class_num):
         sublocal_2=request.POST.get("sublocal_2", "").encode("utf-8")
         sublocal_3=request.POST.get("sublocal_4", "").encode("utf-8")
         _state, create=check_state(request)
-        addr=area_1+locality+sublocal_1+sublocal_2+sublocal_3
+        addr=area_1+" "+locality+" "+sublocal_1+" "+sublocal_2+" "+sublocal_3
         addr_detail=request.POST.get("addr_deatail", "").encode("utf-8")
         _user=User.objects.get(username=request.user)
         _pre_fillpost=T2TutClass.objects.get(pk=class_num)
