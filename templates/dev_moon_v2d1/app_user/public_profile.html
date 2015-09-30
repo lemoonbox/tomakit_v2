@@ -40,9 +40,12 @@
     /*.profile-class-wrapper .col-xs-12 {}*/
     /*.profile-class-wrapper {}*/
     .class-img-wrapper {height:120px;width:120px;}
+    .class-img-wrapper div {padding:0;float:left;}
+    .info-wrapper {max-width:65%;padding:15px;}
     .img-grid {height:100%;width:100%;overflow:hidden;}
     .img-grid img {width:250%;min-height:100%;position:center;}
-    .tmk-panel {border-bottom:none;}
+    .tmk-panel {border-bottom:none;font-size:16px;line-height:24px;}
+
 </style>
 {%endblock%}
 {%block content%}
@@ -96,48 +99,49 @@
             <div class="tmk-h3">모집중인 수업</div>
             {% for class in open_classes%}
             <div class="profile-class-wrapper">
-                <a href="http://{{HTTP_HOST}}/v2.1/class/{{class.id}}">
-                    <div class="class-img-wrapper">
+
+                <div class="class-img-wrapper">
+                    <a href="http://{{HTTP_HOST}}/v2.1/class/{{class.id}}">
                         <div class="img-grid">
                             <img src="{{MEDIA_URL}}{{class.t2classpic_set.first.image}}">
                         </div>
-                    </div>
-                    <div class="info-wrapper">
-                        <div style="color:#82888A;font-weight:bold;">{{class.title}}</div>
-                        <div class="col-xs-12">{{class.intro_line}}</div>
-                    </div>
-                </a>
+                    </a>
+                </div>
+
+                <div class="info-wrapper">
+                    <a href="http://{{HTTP_HOST}}/v2.1/class/{{class.id}}">
+                        <div style="font-size:1.2em;color:#82888A;font-weight:bold;">{{class.title}}<br>
+                            <div class="small" style="font-weight:normal;">{{class.intro_line}}</div></div>
+                    </a>
+                </div>
             </div>
             {% endfor %}
             {% endif%}
         </div>
-</div>
+    </div>
     <div class="tmk-main-body col-lg-12">
         <div class="container">
-        <div class="review-wrapper col-xs-12 col-md-12">
-            <div class="tmk-h3"><span style="color:#84CDC2;">리뷰 개수</span>개의 후기가 있습니다</div>
-            {% for review in profile_user.host_review.all%}
-            <div style="height:100px;">
-                <div class="col-xs-2 col-lg-2">
-                    <div class="tmk-card-img-profile">
-                        <div class="card-link">
-                            <img src="{{MEDIA_URL}}{{review.user.t2profile_set.first.pro_pic}}">
+            <div class="review-wrapper col-xs-12 col-md-12">
+                <div class="tmk-h3"><span style="color:#84CDC2;">"리뷰 개수"</span>개의 후기가 있습니다</div>
+                {% for review in profile_user.host_review.all%}
+                <div style="height:100px;">
+                    <div class="col-xs-2 col-lg-2">
+                        <div class="tmk-card-img-profile">
+                            <div class="card-link">
+                                <img src="{{MEDIA_URL}}{{review.user.t2profile_set.first.pro_pic}}">
+                            </div>
                         </div>
                     </div>
+                    <div class="col-lg-7 col-xs-7" id="user-review">
+                        <a href="http://{{HTTP_HOST}}/v2.1/user/profile/{{review.user.id}}">
+                            {{review.user.last_name}}{{review.user.first_name}}
+                        </a> {{review.grade}}
+                        <!--댓글-->
+                        <div>{{review.review}}</div>
+                    </div>
                 </div>
-                <div class="col-lg-7 col-xs-7" id="user-review">
-                    <a href="http://{{HTTP_HOST}}/v2.1/user/profile/{{review.user.id}}">
-                        {{review.user.last_name}}{{review.user.first_name}}
-                    </a> {{review.grade}}
-                    <!--댓글-->
-                    <div>{{review.review}}</div>
-                </div>
+                {% endfor %}
             </div>
-            {% endfor %}
-        </div>
-
-
-
         </div>
     </div>
 </div>

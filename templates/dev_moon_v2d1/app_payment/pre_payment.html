@@ -16,6 +16,11 @@
     .tmk-panel {border-bottom:none;padding-bottom:0;}
     .tmk-error {line-height:24px;}
     .tmk-page-header {text-align:center;margin-bottom:0;padding-bottom:15px;}
+    @media screen and (max-width:992px) {
+        .col-xs-4 {margin-left:-15px;}
+        .col-xs-12 {padding-left:0;}
+
+    }
 </style>
 {%endblock%}
 
@@ -50,14 +55,14 @@
         <input type="text" class="form-control" name="buyer_name" value="{{request.user.last_name}}{{request.user.first_name}}">
 
         </div>
-    <div class="col-md-10 pull-right tmk-error">{{prefillform.buyer_name.errors|striptags}}</div>
+    <div class="col-xs-12 col-md-10 pull-right tmk-error">{{prefillform.buyer_name.errors|striptags}}</div>
 </div>
         <div class="tmk-panel">
             <label class="col-md-2">이메일 <span>*</span></label>
         <div class="col-md-8">
             <input type="text" class="form-control" name="buyer_email" value="{{request.user.username}}">
             </div>
-            <div class="col-md-10 pull-right tmk-error">{{prefillform.buyer_email.errors|striptags}}</div>
+            <div class="col-xs-12 col-md-10 pull-right tmk-error">{{prefillform.buyer_email.errors|striptags}}</div>
 </div>
 
         <div class="tmk-panel">
@@ -75,13 +80,12 @@
                 <input type="text" class="form-control" value="{{request.user.t2profile_set.first.mobli2}}" name="mobli3">
             </div>
         </div>
-
-            <div class="col-md-10 pull-right tmk-error">{{prefillform.mobli2.errors|striptags}}{{prefillform.mobli3.errors|striptags}}</div>
+            <div class="col-xs-12 col-md-10 pull-right tmk-error">{{prefillform.mobli2.errors|striptags}}{{prefillform.mobli3.errors|striptags}}</div>
 </div>
             <div class="tmk-panel">
     {% if classtype == "tutclass"%}
         <label class="col-md-2">희망수업 시작일</label>
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <input class="form-control" type="date" name="want_day">
                 </div>
     {% endif %}

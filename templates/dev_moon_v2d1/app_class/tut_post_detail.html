@@ -58,7 +58,7 @@
     .tmk-review textarea {height:80px;}
     .img-wrap img {width:100%;}
     .col-md-2 img {width:100px;}
-    .review-wrapper {margin:20px auto;}
+    .review-wrapper {margin:20px auto;text-align:left;}
     .review-wrapper .btn-link {display:inline!important;float:left!important;}
 
     /*#tmk-post-container {min-height:1500px;}*/
@@ -76,6 +76,9 @@
         #submit-review {height:42px;}
     }
     .tmk-panel {border-bottom:none;}
+
+    /*.modify-btn {min-height:150px;}*/
+    /*.review-del {min-height:150px;}*/
 </style>
 {%endblock%}
 <body>
@@ -322,9 +325,10 @@
                     </div>
                 </form>
             </div>
-            <div class="review-wrapper col-xs-12 col-md-12">
+            <div class="col-xs-12 col-md-12">
                 {% for review in post.t2classreview_set.all%}
                 {% if review.is_active %}
+                <div class="review-wrapper" style="min-height:150px;margin-bottom:30px;padding:0;">
                 <div class="col-xs-2">
                     <div class="tmk-card-img-profile">
                         <div class="card-link">
@@ -334,7 +338,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-7 col-xs-10" id="user-review">
+                <div class="col-md-7 col-xs-10 user-review">
                     <a href="http://{{HTTP_HOST}}/v2.1/user/profile/{{review.user.id}}">
                         {{review.user.last_name}}{{review.user.first_name}}
                     </a> {{review.grade}}
@@ -343,7 +347,7 @@
                 </div>
 
                 <!--수정 form 나중에  hidden-->
-                <div id="review-modify" hidden>
+                <div class="review-modify" hidden>
                     <form method="POST" action="{% url 'modify_review_v2d1' post.id %}">
                         {%csrf_token%}
                         <div class="col-md-7">
@@ -355,29 +359,30 @@
                             {{review.review.errors|striptags}}
                             {{review.grade.errors|striptags}}
                         </div>
-                        <div class="col-md-1" style="margin-right:15px;">
-                            <input class="btn btn-link" id="modify-end" type="submit" value="수정 완료">
+                        <div class="col-md-2 col-xs-2 pull-right" style="margin-right:15px;">
+                            <input class="btn btn-link modify-end" type="submit" value="수정 완료">
                         </div>
                     </form>
                 </div>
                 <!--사용자가 단 댓글인 경우에만 visible되는-->
-                <div class="col-md-1" id="modify-wrap" style="margin-right:15px;" >
-                    <span class="btn btn-link" id="modify-btn">댓글 수정</span>
+                <div class="col-md-2 col-xs-2 pull-right modify-wrap" style="margin-right:15px;">
+                    <span class="btn btn-link modify-btn">댓글 수정</span>
                 </div>
-                <form method="POST" action="{% url 'delete_review_v2d1' review.id%}">
+
+                <div class="col-md-2 col-xs-2 pull-right review-del" style="padding-left:0;" hidden>
+                    <form method="POST" action="{% url 'delete_review_v2d1' review.id%}">
                     {%csrf_token%}
                     <input type="hidden" name="classtype" value="tut_class">
-                    <div class="col-md-1">
                         <input class="btn btn-link" type="submit" value="리뷰 삭제">
-                    </div>
                 </form>
             </div>
+                    </div>
             {% endif %}
             {% endfor %}
         </div>
     </div>
 </div>
-
+</div>
 <div class="tmk-main-body col-lg-12" style="background:#eee;margin-bottom:-50px;padding:30px;">
     <div style="margin:50px auto;">
         <div class="tmk-h3" style="font-weight:bold;">원하는 클래스를 찾지 못했나요?</div>
@@ -391,10 +396,11 @@
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script>
     $(document).ready(function(){
-        $("#modify-btn").click(function(){
-            $("#modify-wrap").hide();
-            $("#user-review").hide();
-            $("#review-modify").show();
+        $(".modify-btn").click(function(){
+            $(".modify-wrap").hide();
+            $(".user-review").hide();
+            $(".review-modify").show();
+            $(".review-del").show();
         });
     });
 </script>

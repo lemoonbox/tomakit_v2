@@ -40,7 +40,7 @@
     .tmk-review textarea {height:80px;}
     .img-wrap img {width:100%;}
     .col-md-2 img {width:100px;}
-    .review-wrapper {margin:20px auto;}
+    .review-wrapper {margin:20px auto;text-align:left;}
     .review-wrapper .btn-link {display:inline!important;float:left!important;}
     #user-review {text-align:left;}
 
@@ -60,11 +60,6 @@
     }
     .tmk-panel {border-bottom:none;}
 
-
-
-
-    .modify-btn {min-height:150px;}
-    .review-del {min-height:150px;}
 </style>
 
 {%endblock%}
@@ -315,57 +310,58 @@
                     </div>
                 </form>
             </div>
-            <div class="review-wrapper col-xs-12 col-md-12">
+            <div class="col-xs-12 col-md-12">
                 {% for review in post.t2classreview_set.all%}
                 {% if review.is_active %}
-                <div class="col-xs-2">
-
-                    <div class="tmk-card-img-profile">
-                        <div class="card-link">
-                            <a href="http://{{HTTP_HOST}}/v2.1/user/profile/{{review.user.id}}">
-                                <img src="{{MEDIA_URL}}{{review.user.t2profile_set.first.pro_pic}}">
-                            </a>
+                <div class="review-wrapper" style="min-height:150px;margin-bottom:30px;padding:0;">
+                    <div class="col-xs-2">
+                        <div class="tmk-card-img-profile">
+                            <div class="card-link">
+                                <a href="http://{{HTTP_HOST}}/v2.1/user/profile/{{review.user.id}}">
+                                    <img src="{{MEDIA_URL}}{{review.user.t2profile_set.first.pro_pic}}">
+                                </a>
+                            </div>
                         </div>
+
+                    </div>
+                    <div class="col-md-7 col-xs-10 user-review">
+                        <a href="http://{{HTTP_HOST}}/v2.1/user/profile/{{review.user.id}}">
+                            {{review.user.last_name}}{{review.user.first_name}}
+                        </a> {{review.grade}}
+                        <!--댓글-->
+                        <div>{{review.review}}</div>
                     </div>
 
-                </div>
-                <div class="col-md-7 col-xs-10 user-review">
-                    <a href="http://{{HTTP_HOST}}/v2.1/user/profile/{{review.user.id}}">
-                        {{review.user.last_name}}{{review.user.first_name}}
-                    </a> {{review.grade}}
-                    <!--댓글-->
-                    <div>{{review.review}}</div>
-                </div>
-
-                <!--수정 form 나중에  hidden-->
-                <div class="review-modify" hidden>
-                    <form method="POST" action="{% url 'modify_review_v2d1' post.id %}">
-                        {%csrf_token%}
-                        <div class="col-md-7">
-                            <input type="hidden" name="review_num" value="{{review.id}}">
-                            <input type="hidden" name="class_num" value="{{post.id}}">
+                    <!--수정 form 나중에  hidden-->
+                    <div class="review-modify" hidden>
+                        <form method="POST" action="{% url 'modify_review_v2d1' post.id %}">
+                            {%csrf_token%}
+                            <div class="col-md-7">
+                                <input type="hidden" name="review_num" value="{{review.id}}">
+                                <input type="hidden" name="class_num" value="{{post.id}}">
+                                <input type="hidden" name="classtype" value="teach_class">
+                                <textarea class="form-control" name="review">{{review.review}}</textarea>
+                                <input class="form-control" type="number" name="grade" value="{{review.grade}}" min="1" max="5"><br>
+                                {{review.review.errors|striptags}}
+                                {{review.grade.errors|striptags}}
+                            </div>
+                            <div class="col-md-2 col-xs-2 pull-right" style="margin-right:15px;">
+                                <input class="btn btn-link modify-end" type="submit" value="수정 완료">
+                            </div>
+                        </form>
+                    </div>
+                    <!--사용자가 단 댓글인 경우에만 visible되는-->
+                    <div class="col-md-2 col-xs-2 pull-right modify-wrap" style="margin-right:15px;">
+                        <span class="btn btn-link modify-btn">댓글 수정</span>
+                    </div>
+                    <div class="col-md-2 col-xs-2 pull-right review-del" style="padding-left:0;" hidden>
+                        <form method="POST" action="{% url 'delete_review_v2d1' review.id%}">
+                            {%csrf_token%}
                             <input type="hidden" name="classtype" value="teach_class">
-                            <textarea class="form-control" name="review">{{review.review}}</textarea>
-                            <input class="form-control" type="number" name="grade" value="{{review.grade}}" min="1" max="5"><br>
-                            {{review.review.errors|striptags}}
-                            {{review.grade.errors|striptags}}
-                        </div>
-                        <div class="col-md-2 col-xs-2 pull-right" style="margin-right:15px;">
-                            <input class="btn btn-link modify-end" type="submit" value="수정 완료">
-                        </div>
-                    </form>
-                </div>
-                <!--사용자가 단 댓글인 경우에만 visible되는-->
-                <div class="col-md-2 col-xs-2 pull-right modify-wrap" style="margin-right:15px;">
-                    <span class="btn btn-link modify-btn">댓글 수정</span>
-                </div>
-                <div class="col-md-2 col-xs-2 pull-right review-del" style="padding-left:0;" hidden>
-                <form method="POST" action="{% url 'delete_review_v2d1' review.id%}">
-                    {%csrf_token%}
-                    <input type="hidden" name="classtype" value="teach_class">
-                    <input class="btn btn-link" type="submit" value="리뷰 삭제">
-                </form>
+                            <input class="btn btn-link" type="submit" value="리뷰 삭제">
+                        </form>
                     </div>
+                </div>
             </div>
             {% endif %}
             {% endfor %}

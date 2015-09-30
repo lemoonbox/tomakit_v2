@@ -44,8 +44,6 @@
     }
     #demand-detail {font-size:18px;line-height:28px;margin-top:30px;}
 
-    .modify-btn {min-height:150px;}
-    .review-del {min-height:150px;}
 </style>
 {%endblock%}
 
@@ -191,7 +189,7 @@
                 </form>
             </div>
 
-            <div class=" col-xs-12 col-md-12">
+            <div class="col-xs-12 col-md-12">
                 {% for comment in post.t2demandcmt_set.all%}
                 {% if comment.is_active %}
                 <div class="review-wrapper" style="min-height:150px;margin-bottom:30px;padding:0;">
@@ -229,7 +227,7 @@
                         </form>
                     </div>
                     <!--사용자가 단 댓글인 경우에만 visible되는-->
-                    <div class="col-md-2 col-xs-2 pull-right modify-wrap" style="margin-right:15px;">
+                    <div class="col-md-2 col-xs-2 pull-right modify-wrap">
                         <span class="btn btn-link modify-btn">댓글 수정</span>
                     </div>
                     <div class="col-md-2 col-xs-2 pull-right review-del" hidden>
@@ -253,13 +251,14 @@
 {%endblock%}
 {%block script%}
 <script>
-    $(document).ready(function(){
-        $(".modify-btn").click(function(){
+    $(document).ready(function() {
+        $(".modify-btn").click(function () {
             $(".modify-wrap").hide();
             $(".user-review").hide();
             $(".review-modify").show();
             $(".review-del").show();
         });
+    });
         $("#demand-pic-fold").click(function(){
             $("#demand-pic").slideToggle("slow");
         });
