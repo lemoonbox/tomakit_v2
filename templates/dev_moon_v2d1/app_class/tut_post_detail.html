@@ -43,7 +43,7 @@
     .card-link img {z-index:0!important;}
 
     .tmk-infobox-profile .infobox-img-wrapper {border-radius:50%;width:55px;height:55px;overflow:hidden;}
-    .tmk-infobox-profile .infobox-img-wrapper img {width:150%;position:center;}
+    .tmk-infobox-profile .infobox-img-wrapper img {width:120%;position:center;}
 
     .tmk-infobox-profile div {width:60%;float:left;}
     .tmk-infobox-profile label {width:60%;line-height:20px;}
@@ -59,7 +59,7 @@
     .img-wrap img {width:100%;}
     .col-md-2 img {width:100px;}
     .review-wrapper {margin:20px auto;text-align:left;}
-    .review-wrapper .btn-link {display:inline!important;float:left!important;}
+    .review-wrapper .btn-link {display:inline!important;float:left!important;margin-left:-5px;}
 
     /*#tmk-post-container {min-height:1500px;}*/
     #user-review {text-align:left;}
@@ -77,8 +77,6 @@
     }
     .tmk-panel {border-bottom:none;}
 
-    /*.modify-btn {min-height:150px;}*/
-    /*.review-del {min-height:150px;}*/
 </style>
 {%endblock%}
 <body>
@@ -338,7 +336,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-7 col-xs-10 user-review">
+                <div class="col-md-7 col-xs-7 user-review">
                     <a href="http://{{HTTP_HOST}}/v2.1/user/profile/{{review.user.id}}">
                         {{review.user.last_name}}{{review.user.first_name}}
                     </a> {{review.grade}}
@@ -350,7 +348,7 @@
                 <div class="review-modify" hidden>
                     <form method="POST" action="{% url 'modify_review_v2d1' post.id %}">
                         {%csrf_token%}
-                        <div class="col-md-7">
+                        <div class="col-md-7 col-xs-7">
                             <input type="hidden" name="review_num" value="{{review.id}}">
                             <input type="hidden" name="class_num" value="{{post.id}}">
                             <input type="hidden" name="classtype" value="tut_class">

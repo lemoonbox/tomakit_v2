@@ -41,14 +41,12 @@
     .img-wrap img {width:100%;}
     .col-md-2 img {width:100px;}
     .review-wrapper {margin:20px auto;text-align:left;}
-    .review-wrapper .btn-link {display:inline!important;float:left!important;}
+    .review-wrapper .btn-link {display:inline!important;float:left!important;margin-left:-5px;}
     #user-review {text-align:left;}
 
-    .modify-btn {min-height:150px;}
-    .review-del {min-height:150px;}
     @media screen and (min-width:1200px) {
         #sidebar {
-            margin-bottom: -800px;
+            margin-bottom: -1000px;
         }
         /*#submit-review {position:absolute;top:-90px;left:0;}*/
     }
@@ -324,7 +322,7 @@
                         </div>
 
                     </div>
-                    <div class="col-md-7 col-xs-10 user-review">
+                    <div class="col-md-7 col-xs-7 user-review">
                         <a href="http://{{HTTP_HOST}}/v2.1/user/profile/{{review.user.id}}">
                             {{review.user.last_name}}{{review.user.first_name}}
                         </a> {{review.grade}}
@@ -336,7 +334,7 @@
                     <div class="review-modify" hidden>
                         <form method="POST" action="{% url 'modify_review_v2d1' post.id %}">
                             {%csrf_token%}
-                            <div class="col-md-7">
+                            <div class="col-xs-7 col-md-7">
                                 <input type="hidden" name="review_num" value="{{review.id}}">
                                 <input type="hidden" name="class_num" value="{{post.id}}">
                                 <input type="hidden" name="classtype" value="teach_class">
