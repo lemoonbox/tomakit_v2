@@ -118,7 +118,7 @@
 
 
                 <!--</div>-->
-                <div class="tmk-form-error">
+                <div class="tmk-error">
                 {{beginform.category.errors|striptags}}
                 </div>
             </div>
@@ -127,7 +127,7 @@
                 <label class="col-md-2">클래스 제목 <span>*</span></label>
                 <div class="col-md-7">
                     <input type="text" class="form-control" name="title" value="{{begin_data.title}}"placeholder="ex) 뜨개 테디베어만들기 4주 수업">
-                    <div class="tmk-form-error">
+                    <div class="tmk-error">
                     {{beginform.title.errors|striptags}}
                         </div>
                 </div>
@@ -138,14 +138,14 @@
                 <div class="col-md-9">
                     <input type="text" class="form-control" name="intro_line" value="{{begin_data.intro_line}}" placeholder="ex) 누구나 배울 수 있게 기초부터 탄탄하게 가르쳐요.">
 
-                    <div class="tmk-form-error">
+                    <div class="tmk-error">
                         {{beginform.intro_line.errors|striptags}}
                         </div>
                 </div>
 
             </div>
 
-            <div class="tmk-panel">
+            <div class="tmk-panel" style="border-bottom:none;">
                 <label class="col-md-2">수업방식 <span>*</span></label>
 
                 <div class="col-md-10 tmk-radio classtype" style="margin-left:-15px;">
@@ -168,7 +168,7 @@
                     <!--</div>-->
                     </div>
                 </div>
-                <div class="col-md-10 col-md-offset-2" style="margin-top:5px;">
+                <div class="tmk-error col-md-10 pull-right">
                     {{beginform.classtype.errors|striptags}}</div>
             </div>
             <input type="submit" class="btn btn-lg btn-primary pull-right" value="시작하기">

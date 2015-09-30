@@ -67,8 +67,15 @@
         #sidebar {
             margin-bottom: -800px;
         }
+        /*#submit-review {position:absolute;top:-90px;left:0;}*/
+    }
+    @media screen and (min-width:992px) {
         #submit-review {position:absolute;top:-90px;left:0;}
     }
+    @media screen and (max-width:991px) {
+        #submit-review {height:42px;}
+    }
+    .tmk-panel {border-bottom:none;}
 </style>
 {%endblock%}
 <body>
@@ -108,11 +115,13 @@
                 </div>
                 <!-- Left and right controls -->
                 <a class="left carousel-control" href="#class-post-Carousel" role="button" data-slide="prev">
-                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                    <span style="line-height:500px;font-size:38px;"><</span>
+                    <!--<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>-->
                     <span class="sr-only">Previous</span>
                 </a>
                 <a class="right carousel-control" href="#class-post-Carousel" role="button" data-slide="next">
-                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                    <span style="line-height:500px;font-size:38px;">></span>
+                    <!--<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>-->
                     <span class="sr-only">Next</span>
                 </a>
             </div>
@@ -146,9 +155,9 @@
                     </div>
                     <div class="tmk-infobox-price">
                         <div><label>재료비</label><br>
-                            {{post.extra_price|intcomma}}<br>
+                            <span class="small">￦</span> {{post.extra_price|intcomma}}<br>
                             <label>수강료</label><br>
-                            {{post.price|intcomma}}</div>
+                            <span class="small">￦</span> {{post.price|intcomma}}</div>
                         <div class="pull-right" style="text-align:right;padding-top: 72px;">합계<span class="tmk-h3" style="border-bottom:none;">￦{{ post.extra_price|add:post.price |intcomma}}</span></div>
                     </div>
                     <!--강사 프로필-->
@@ -198,9 +207,14 @@
 
             <div class="tmk-h3">선생님 소개</div>
             <div class="tmk-panel well" style="border:none;padding-top:50px;">
-                <div class="col-lg-2">
+                <div class="col-lg-2" style="float:left;">
                     <a href="http://{{HTTP_HOST}}/v2.1/user/profile/{{post.user.id}}">
-                        <img src="{{MEDIA_URL}}{{post.user.t2profile_set.first.pro_pic}}">
+                        <div class="tmk-infobox-profile">
+                            <div class="img-grid">
+                                <div class="infobox-img-wrapper">
+                                    <img src="{{MEDIA_URL}}{{post.user.t2profile_set.first.pro_pic}}">
+                                </div>
+                            </div></div>
                     </a>
                 </div>
                 <div class="col-lg-10">
@@ -241,9 +255,9 @@
                 </div>
                 <div class="tmk-infobox-price">
                     <div><label>재료비</label><br>
-                        {{post.extra_price|intcomma}}<br>
+                        <span class="small">￦</span> {{post.extra_price|intcomma}}<br>
                         <label>수강료</label><br>
-                        {{post.price|intcomma}}</div>
+                        <span class="small">￦</span> {{post.price|intcomma}}</div>
                     <div class="pull-right" style="text-align:right;padding-top: 72px;">합계<span class="tmk-h3" style="border-bottom:none;">￦{{ post.extra_price|add:post.price |intcomma}}</span></div>
                 </div>
                 <!--강사 프로필-->

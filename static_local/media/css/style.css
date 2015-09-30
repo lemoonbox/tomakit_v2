@@ -13,7 +13,7 @@ body {
 }
 */
 
-nav-tabs a {
+.nav-tabs a {
   color: #47C9AF;
 }
 
@@ -21,7 +21,7 @@ nav-tabs a {
 /* Sticky footer styles
 -------------------------------------------------- */
 
-html,
+/*html,*/
 
 /* Wrapper for page content to push down footer */
 
@@ -66,7 +66,7 @@ html,
   font-family: Titillium web, sans-serif;
   color: cornsilk;
   font-weight: 600;
-  word-break: none;
+  /*word-break: none;*/
   white-space: nowrap;
 }
 
@@ -140,7 +140,7 @@ code {
 .navbar-static-top {
   margin-right: -20px;
   margin-left: -20px;*/
-}
+
 /* MODAL
 ----------------------------------------------------*/
 

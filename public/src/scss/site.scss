@@ -61,6 +61,7 @@ body {
 .tmk-h4 {font-size: 18px;}
 /* Error message */
 .tmk-error {
+  margin-top:5px;
   font-size: 12px;
   color:red!important;
 }
@@ -104,9 +105,14 @@ button {
   color: #434a54!important;
   //font-size:16px!important;
 }
+.btn-default {
+  transition: all 0.3s ease 0s;
+}
 .btn-default:hover {
-  color:#fff !important;
-  background-color:#CCD1D9!important;
+  color:#82888a !important;
+  opacity:0.9;
+  background-color:#fff!important;
+  //background-color:#CCD1D9!important;
 }
 
 .btn-info, .btn-info.active, .btn-info.disabled, .btn-info:active, .btn-info[disabled]{
@@ -230,8 +236,13 @@ nav {
   text-align:left;
   background-color: #fff;
   /*border: 1px solid #ddd;*/
-  border-radius: 8px;
-  margin-bottom:30px;
+  //border-radius: 8px;
+  padding-top:15px;
+  padding-bottom:30px;
+  border-bottom:1px solid #ccc;
+
+  margin-bottom:15px;
+  //margin-bottom:30px;
   width:100%;
   input[type=number]::-webkit-inner-spin-button,
   input[type=number]::-webkit-outer-spin-button {
@@ -1334,7 +1345,7 @@ ul{
   margin-left: 7%;
   border-top: 1px solid #ddd;
   /*min-width: 340px;*/
-  max-width: 86%;
+  max-width: 90%;
 }
 .dp-label > div {
   line-height: 20px;

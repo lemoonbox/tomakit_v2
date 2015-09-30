@@ -48,97 +48,105 @@
         background-color: #eee;
         /*color:#82888A;*/
     }
-
+    .tmk-h3 {text-align:left;}
+    label span {color:red;}
 </style>
 {%endblock%}
 <body>
 {%block content%}
 
 <div class="tmk-main-body col-md-12">
-    <div class="tmk-page-header col-md-10 col-md-offset-1">
-        <div class="tmk-h2 tmk-title">선생님 등록</div>
-        <div class="tmk-h4">반갑습니다! 경험과 재능, 그리고 열정을 나누세요<br>아래 신청서를 작성해주세요. 관리자의 검토 후 24시간 이내에 연락드리겠습니다</div>
-    </div>
-    <div class="col-md-8 col-md-offset-1 well" id="tmk-form" style="text-align:left;float:left;">
+    <div class="container">
+        <div class="tmk-page-header">
+            <div class="tmk-h2 tmk-title">선생님 등록</div>
+            <div class="tmk-h4">반갑습니다! 경험과 재능, 그리고 열정을 나누세요<br>아래 신청서를 작성해주세요. 관리자의 검토 후 24시간 이내에 연락드리겠습니다</div>
+        </div>
         <div class="tmk-h3">등록 신청서</div>
-<form method="POST" action="{% url 'host_apply_v2d1' %}" enctype="multipart/form-data">
-    {% csrf_token %}
-    <div class="tmk-panel">
-        <label class="col-md-2">자기소개</label>
-        <div class="col-md-10">
-            <textarea name="introduce" style="min-"class="form-control">{{apply_data.introduce}}</textarea>
-            {{hostform.introduce.errors|striptags}}</div>
+        <div class="col-md-10 well" id="tmk-form" style="text-align:left;float:left;">
+            <form method="POST" action="{% url 'host_apply_v2d1' %}" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="tmk-panel">
+                    <label class="col-md-2">자기소개 <span>*</span></label>
+                    <div class="col-md-10" style="margin-bottom:5px;">자유롭게 소개글을 입력해주세요</div>
+                    <div class="col-md-10 pull-right">
+                        <textarea name="introduce" style="min-height:100px;" class="form-control">{{apply_data.introduce}}</textarea>
+                    </div>
+                    <div class="col-md-10 pull-right tmk-error">{{hostform.introduce.errors|striptags}}</div>
+                </div>
+                <div class="tmk-panel">
+                    <label class="col-md-2">전화번호 <span>*</span></label>
+                    <div class="form-group">
+                        <div class="col-xs-4 col-md-3">
+                            <input type="number" class="form-control" name="mobli1" value="{{apply_data.mobli1}}">
+                        </div>
+                        <div class="col-xs-4 col-md-3">
+                            <input type="number" class="form-control" name="mobli2" value="{{apply_data.mobli2}}">
+                        </div>
+                        <div class="col-xs-4 col-md-3">
+                            <input type="number" class="form-control" name="mobli3" value="{{apply_data.mobli3}}">
+                        </div>
+                    </div>
+                    <div class="col-md-10 pull-right tmk-error">{{hostform.mobli1.errors|striptags}}
+                    {{hostform.mobli2.errors|striptags}}
+                    {{hostform.mobli3.errors|striptags}}
+                    </div>
+                </div>
+
+
+                <div class="tmk-panel">
+                    <label class="col-md-2">공방유무 <span>*</span></label>
+                    <div class="col-md-10" style="margin-bottom:5px;">공방이 있으신가요?</div>
+                    <div class="col-md-10 pull-right tmk-radio" style="margin-left:-15px;">
+                        <div class="col-xs-5 col-md-5" style="width:253px;padding-left:0;">
+                            <input type="radio" class="iradio_flat" name="hosttype" value="shop"
+                                   {%if apply_data.hosttype == "shop" %} checked="checked" {% endif %}>
+                            <span style="font-size:16px;vertical-align:text-top">&nbsp;공방있음</span><br>
+                        </div>
+                        <div class="col-xs-5 col-md-5" style="width:253px;">
+                            <input type="radio" class="iradio_flat" name="hosttype" value="lectured"
+                                   {%if apply_data.hosttype == "lectured" %} checked="checked" {% endif %}>
+                            <span style="font-size:16px;vertical-align:text-top">&nbsp;공방없음(출강)</span><br>
+                        </div>
+                    </div>
+                    <div class="col-md-10 pull-right tmk-error">{{hostform.hosttype.errors|striptags}}</div>
+                </div>
+
+                <div class="tmk-panel">
+                    <label class="col-md-2">공방주소 or 활동지역 <span>*</span></label>
+                    <div class="col-md-10" style="margin-bottom:5px;">공방이 있으신 경우 공방 주소, 없으신 경우 활동 지역을 입력해주세요</div>
+                    <div class="col-md-10">
+
+                        <input type="text" class="form-control" name="local" value="{{apply_data.local}}" placeholder="ex) 서울 동서문로 24길 or 서울 전지역">
+
+                    </div>
+                    <div class="col-md-10 pull-right tmk-error">{{hostform.local.errors|striptags}}</div>
+                </div>
+
+                <div class="tmk-panel">
+                    <label class="col-md-2">홈페이지/블로그 주소</label>
+                    <div class="col-md-10">
+                        <input type="text" class="form-control" name="site" value="{{apply_data.site}}" placeholder="ex) http://blog.naver.com/tomakit">
+                    </div>
+                    <div class="col-md-10 pull-right tmk-error">{{hostform.site.errors|striptags}}</div>
+                </div>
+
+
+                <div class="tmk-panel" style="border-bottom:none;">
+                    <label class="col-md-2">개인포트폴리오</label>
+                    <div class="col-md-10">작품 사진들을 Zip 파일로 압축하여 올려주세요</div>
+                    <div class="col-md-10">
+                        <div class="custom-file-upload">
+                            <!--<label for="file">File: </label>-->
+                            <input type="file" id="file" name="potpolio" placeholder="Zip 파일만 업로드 가능합니다" multiple />
+                        </div>
+                    </div>
+                </div>
+
+                <input type="submit" class="btn btn-primary pull-right" value="등륵신청">
+            </form>
+        </div>
+    </div>
 </div>
-    <div class="tmk-panel">
-    <label class="col-md-2">전화번호</label>
-        <div class="form-group">
-            <div class="col-xs-4 col-md-3">
-                <input type="number" class="form-control" name="mobli1" value="{{apply_data.mobli1}}">
-            </div>
-            <div class="col-xs-4 col-md-3">
-                <input type="number" class="form-control" name="mobli2" value="{{apply_data.mobli2}}">
-            </div>
-            <div class="col-xs-4 col-md-3">
-                <input type="number" class="form-control" name="mobli3" value="{{apply_data.mobli3}}">
-            </div>
-        </div>
-    {{hostform.mobli1.errors|striptags}}
-    {{hostform.mobli2.errors|striptags}}
-    {{hostform.mobli3.errors|striptags}}<br><br>
-    </div>
-
-
-    <div class="tmk-panel">
-    <label class="col-md-2">공방유무</label>
-        <div class="col-md-10 tmk-radio" style="margin-left:-15px;">
-            <div class="col-xs-5 col-md-5" style="width:253px;">
-                <input type="radio" class="iradio_flat" name="hosttype" value="shop"
-                       {%if apply_data.hosttype == "shop" %} checked="checked" {% endif %}>
-                <span style="font-size:16px;vertical-align:text-top">&nbsp;공방있음</span><br>
-            </div>
-            <div class="col-xs-5 col-md-5" style="width:253px;">
-                <input type="radio" class="iradio_flat" name="hosttype" value="lectured"
-                       {%if apply_data.hosttype == "lectured" %} checked="checked" {% endif %}>
-                <span style="font-size:16px;vertical-align:text-top">&nbsp;공방없음(출강)</span><br>
-            </div>
-
-    {{hostform.hosttype.errors|striptags}}<br>
-        </div>
-        </div>
-
-    <div class="tmk-panel">
-    <label class="col-md-2">공방주소or 활동지역</label>
-    <div class="col-md-10">
-        <input type="text" class="form-control" name="local" value="{{apply_data.local}}" placeholder="ex) 서울 동서문로 24길 or 서울 전지역">
-    {{hostform.local.errors|striptags}}<br>
-        </div>
-        </div>
-
-    <div class="tmk-panel">
-        <label class="col-md-2">홈페이지/블로그 주소</label>
-        <div class="col-md-10">
-            <input type="text" class="form-control" name="site" value="{{apply_data.site}}" placeholder="ex) http://blog.naver.com/tomakit">
-            {{hostform.site.errors|striptags}}
-        </div>
-    </div>
-
-
-    <div class="tmk-panel">
-        <label class="col-md-2">개인포트폴리오</label>
-        <div class="col-md-10">
-            <div class="custom-file-upload">
-                <!--<label for="file">File: </label>-->
-                <input type="file" id="file" name="potpolio" placeholder="Zip 파일만 업로드 가능합니다" multiple />
-            </div>
-
-            <!--<input type="file" hidden class="form-control" name="potpolio"><div class="input-group-btn"><button type="button" class="btn btn-default" tabindex="-1">PC에서 파일찾기</button></div><br>-->
-        </div>
-    </div>
-
-    <input type="submit" class="btn btn-primary pull-right" value="등륵신청">
-</form>
-        </div>
-    </div>
 {%endblock%}
 </body>
 {%block script%}

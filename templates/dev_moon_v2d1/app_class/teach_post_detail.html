@@ -47,8 +47,15 @@
         #sidebar {
             margin-bottom: -800px;
         }
+        /*#submit-review {position:absolute;top:-90px;left:0;}*/
+    }
+    @media screen and (min-width:992px) {
         #submit-review {position:absolute;top:-90px;left:0;}
     }
+    @media screen and (max-width:991px) {
+        #submit-review {height:42px;}
+    }
+    .tmk-panel {border-bottom:none;}
 </style>
 
 {%endblock%}
@@ -92,11 +99,13 @@
                 </div>
                 <!-- Left and right controls -->
                 <a class="left carousel-control" href="#class-post-Carousel" role="button" data-slide="prev">
-                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                    <span style="line-height:500px;font-size:38px;"><</span>
+                    <!--<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>-->
                     <span class="sr-only">Previous</span>
                 </a>
                 <a class="right carousel-control" href="#class-post-Carousel" role="button" data-slide="next">
-                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                    <span style="line-height:500px;font-size:38px;">></span>
+                    <!--<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>-->
                     <span class="sr-only">Next</span>
                 </a>
             </div>
@@ -129,9 +138,9 @@
                     </div>
                     <div class="tmk-infobox-price">
                         <div><label>재료비</label><br>
-                            {{post.extra_price|intcomma}}<br>
+                            <span class="small">￦</span> {{post.extra_price|intcomma}}<br>
                             <label>수강료</label><br>
-                            {{post.price|intcomma}}</div>
+                            <span class="small">￦</span> {{post.price|intcomma}}</div>
                         <div class="pull-right" style="text-align:right;padding-top: 72px;">합계<span class="tmk-h3" style="border-bottom:none;">￦{{ post.extra_price|add:post.price |intcomma}}</span></div>
                     </div>
                     <!--강사 프로필-->
@@ -181,21 +190,21 @@
 
                 <div class="tmk-h3">선생님 소개</div>
                 <div class="tmk-panel well" style="border:none;padding-top:50px;">
-                    <div class="col-lg-2">
+                    <div class="col-lg-2" style="float:left;">
                         <a href="http://{{HTTP_HOST}}/v2.1/user/profile/{{post.user.id}}">
                             <div class="tmk-infobox-profile">
-                                    <div class="img-grid">
-                                        <div class="infobox-img-wrapper">
-                                            <img src="{{MEDIA_URL}}{{post.user.t2profile_set.first.pro_pic}}">
-                                        </div>
-                                        </div></div>
-                            </a>
-                        </div>
+                                <div class="img-grid">
+                                    <div class="infobox-img-wrapper">
+                                        <img src="{{MEDIA_URL}}{{post.user.t2profile_set.first.pro_pic}}">
+                                    </div>
+                                </div></div>
+                        </a>
+                    </div>
                     <div class="col-lg-10">
                         <span  style="line-height:16px;">클래스 선생님</span><br>
                         <a href="http://{{HTTP_HOST}}/v2.1/user/profile/{{post.user.id}}">
                             <div class="tmk-h3"  style="line-height:16px;">{{post.user.last_name}}{{post.user.first_name}}</div>
-                            </a>
+                        </a>
                     </div>
                     <div class="col-lg-12"><br>{{post.user.t2hostprofile_set.first.intro_self}}</div>
                     <div class="col-lg-12">
@@ -267,10 +276,10 @@
         </div>
     </div>
 </div>
-<div class="tmk-main-body col-lg-12" style="border-bottom:2px solid #ddd;">
+<div class="tmk-main-body col-lg-12" style="border-bottom:2px solid #ddd;background:#fff;">
     <div class="container">
-    <div class="tmk-review col-lg-8" style="background:#fff;">
-<div class="tmk-h3 col-xs-12" style="text-align:left;"><span style="color:#84CDC2;">"리뷰 숫자"</span>개의 후기가 있습니다</div>
+        <div class="tmk-review col-lg-8">
+            <div class="tmk-h3 col-xs-12" style="text-align:left;"><span style="color:#84CDC2;">"리뷰 숫자"</span>개의 후기가 있습니다</div>
             <div class="review-wrapper col-md-12">
                 <form method="POST" action="{% url 'create_review_v2d1' post.id %}">
                     {%csrf_token%}
@@ -281,12 +290,12 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-7"></div>
+                    <!--<div class="col-md-7"></div>-->
                     <div class="col-xs-10 col-md-7" style="text-align:left;">
                         <input type="hidden" name="class_num" value="{{post.id}}">
                         <input type="hidden" name="classtype" value="teach_class">
                         <textarea class="form-control" name="review"></textarea>
-                        </div>
+                    </div>
                     <div class="col-xs-5 col-md-7 col-xs-offset-2" style="text-align:left;">
                         <!--<img src="{%static 'media/image/slice/icon-star_empty.png'%}">-->
                         <input class="form-control" type="number" name="grade" min="1" max="5"><br>
@@ -306,7 +315,7 @@
                         <div class="card-link">
                             <a href="http://{{HTTP_HOST}}/v2.1/user/profile/{{review.user.id}}">
                                 <img src="{{MEDIA_URL}}{{review.user.t2profile_set.first.pro_pic}}">
-                        </a>
+                            </a>
                         </div>
                     </div>
 
@@ -337,23 +346,23 @@
                         </div>
                     </form>
                 </div>
-                    <!--사용자가 단 댓글인 경우에만 visible되는-->
-                    <div class="col-md-1" id="modify-wrap" style="margin-right:15px;">
-                        <span class="btn btn-link" id="modify-btn">댓글 수정</span>
-                    </div>
-                    <form method="POST" action="{% url 'delete_review_v2d1' review.id%}">
-                        {%csrf_token%}
-                        <input type="hidden" name="classtype" value="teach_class">
-                        <div class="col-md-1">
-                            <input class="btn btn-link" type="submit" value="리뷰 삭제">
-                        </div>
-                    </form>
+                <!--사용자가 단 댓글인 경우에만 visible되는-->
+                <div class="col-md-1" id="modify-wrap" style="margin-right:15px;">
+                    <span class="btn btn-link" id="modify-btn">댓글 수정</span>
                 </div>
-                {% endif %}
-                {% endfor %}
+                <form method="POST" action="{% url 'delete_review_v2d1' review.id%}">
+                    {%csrf_token%}
+                    <input type="hidden" name="classtype" value="teach_class">
+                    <div class="col-md-1">
+                        <input class="btn btn-link" type="submit" value="리뷰 삭제">
+                    </div>
+                </form>
             </div>
+            {% endif %}
+            {% endfor %}
         </div>
     </div>
+</div>
 
 <div class="tmk-main-body col-lg-12" style="background:#eee;margin-bottom:-50px;padding:30px;">
     <div style="margin:50px auto;">

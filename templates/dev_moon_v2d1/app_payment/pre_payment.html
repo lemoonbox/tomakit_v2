@@ -4,40 +4,116 @@
 {% load v2d1_board_tags %}
 
     <title>{%block title%}{%endblock%}</title>
-{%block style%}{%endblock%}
+{%block style%}
+<style>
+    body {background-color:#fff!important;}
+.tmk-main-body {text-align:left;}
+    .well {font-size:18px;line-height:42px;}
+    .well label {font-size:14px;}
+    #pay-pre {background:#eee!important;border:none;border-radius:0;height:180px;}
+    #pay-pre label {width:20%;}
+    .tmk-form label {padding-left:0;}label span {color:red}
+    .tmk-panel {border-bottom:none;padding-bottom:0;}
+    .tmk-error {line-height:24px;}
+    .tmk-page-header {text-align:center;margin-bottom:0;padding-bottom:15px;}
+</style>
+{%endblock%}
 
 {%block content%}
+<div class="tmk-main-body col-lg-12">
+    <div class="container">
+        <div class="tmk-page-header">
+            <div class="tmk-h4">{{post.category.category|cate2han}}</div>
+            <div class="tmk-h2 tmk-title">{{post.title}}</div>
+            <div class="tmk-h4">{{post.intro_line}}</div>
+        <div class="tmk-page-pick"></div>
+    </div>
+
+<div class="tmk-h3">클래스 수강신청</div>
 <form method="POST" action="{% url 'pay_conf_v2d1'%}">
         {%csrf_token%}
-    주문 번호 : {{merchant_id}}<br>
-
-    수업 일정 : {{post.weekday}}<br>
-
-    결제 금액 : {{ post.extra_price|add:post.price |intcomma}}<br>
+    <div class="col-md-9 well tmk-form" id="pay-pre">
+    <label>주문 번호</label> {{merchant_id}}<br>
+    <label>수업 일정</label> {{post.weekday}}<br>
+    <label>결제 금액</label> ￦{{ post.extra_price|add:post.price |intcomma}}<br>
     <input type="hidden" name="merchant_id" value="{{merchant_id}}"><br>
     <input type="hidden" name="post_id" value="{{post.id}}"><br>
     <input type="hidden" name="classtype" value="{{classtype}}"><br><br>
+    </div>
 
+    <div class="col-md-9 well tmk-form">
+        신청 정보를 입력해주세요
+<div class="tmk-panel">
 
-    신청자 이름:<input type="text" name="buyer_name" value="{{request.user.last_name}}{{request.user.first_name}}">
-     {{prefillform.buyer_name.errors|striptags}}<br>
-    이메일 :<input type="text" name="buyer_email" value="{{request.user.username}}">
-    {{prefillform.buyer_email.errors|striptags}}<br>
-    전화 번호 : <input type="text" name="mobli1" value="010">-
-        <input type="text" name="mobli2" value="{{request.user.t2profile_set.first.mobli1}}">-
-        <input type="text" name="mobli3" value="{{request.user.t2profile_set.first.mobli2}}">
-    {{prefillform.mobli2.errors|striptags}}{{prefillform.mobli3.errors|striptags}}<br><br>
+    <label class="col-md-2">신청자 이름 <span>*</span></label>
+        <div class="col-md-4">
+        <input type="text" class="form-control" name="buyer_name" value="{{request.user.last_name}}{{request.user.first_name}}">
 
+        </div>
+    <div class="col-md-10 pull-right tmk-error">{{prefillform.buyer_name.errors|striptags}}</div>
+</div>
+        <div class="tmk-panel">
+            <label class="col-md-2">이메일 <span>*</span></label>
+        <div class="col-md-8">
+            <input type="text" class="form-control" name="buyer_email" value="{{request.user.username}}">
+            </div>
+            <div class="col-md-10 pull-right tmk-error">{{prefillform.buyer_email.errors|striptags}}</div>
+</div>
+
+        <div class="tmk-panel">
+    <label class="col-md-2">전화 번호 <span>*</span></label>
+        <div class="form-group">
+            <div class="col-xs-4 col-sm-3 col-md-3" style="min-width:80px;">
+                <input class="form-control" value="010" name="mobli1">
+            </div>
+            <!--<div class="col-md-1" style="margin-left:-15px;margin-right:-15px;text-align:center;">-</div>-->
+            <div class="col-xs-4 col-sm-3 col-md-3" style="min-width:80px;margin-left:-15px;">
+                <input type="text" class="form-control" value="{{request.user.t2profile_set.first.mobli1}}" name="mobli2">
+            </div>
+            <!--<div class="col-md-1" style="margin-left:-15px;margin-right:-15px;text-align:center;">-</div>-->
+            <div class="col-xs-4 col-sm-3 col-md-3" style="min-width:80px;margin-left:-15px;">
+                <input type="text" class="form-control" value="{{request.user.t2profile_set.first.mobli2}}" name="mobli3">
+            </div>
+        </div>
+
+            <div class="col-md-10 pull-right tmk-error">{{prefillform.mobli2.errors|striptags}}{{prefillform.mobli3.errors|striptags}}</div>
+</div>
+            <div class="tmk-panel">
     {% if classtype == "tutclass"%}
-        희망수업 시작일 <input type="date" name="want_day">
+        <label class="col-md-2">희망수업 시작일</label>
+                <div class="col-md-3">
+                    <input class="form-control" type="date" name="want_day">
+                </div>
     {% endif %}
+</div>
+            </div>
 
-    결제 방식을 선택해 주세요<br>
+
+    <div class="col-md-9 well tmk-form">
+    결제 방식을 선택해 주세요 <span class="tmk-error" style="margin-left:30px;">{{prefillform.pay_method.errors|striptags}}</span>
+
+        <div class="tmk-panel">
+            <label class="col-md-2">결재방식 <span>*</span></label>
+
+            <div class="col-md-10">
     <input type="radio" name="pay_method" value="card">신용카드
     <input type="radio" name="pay_method" value="trans">실시간 계좌 이체
     <input type="radio" name="pay_method" value="vbank">가상계좌이체
-    {{prefillform.pay_method.errors|striptags}}
 
-    <input type="submit" class="btn btn-primary" value="결제하기" id="buy">
+</div>
+        <div class="col-md-10" style="color:#82888a;font-size:16px;line-height:20px;">
+            결제가 완료되면 24시간 내로 수강 확정 안내 이메일이 발송됩니다. (운영일 기준)<br>
+            수강시간 협의가 필요한 클래스의 경우, 별도로 협의를 위한 안내를 드립니다<br>
+            결제를 진행하는 동안 도움이 필요한 경우, 오른쪽 하단의 실시간 문의하기를 이용해주세요<br>
+            아래의 버튼을 누름으로써, <span style="color:red;">이용약관</span>과 <span style="color:red;">결제사 정보제공</span>에 동의합니다.
+        </div>
+            </div>
+
+   <div class="col-md-12" style="text-align:center;">
+       <input type="submit" class="btn btn-primary" value="결제하기" id="buy">
+   </div>
+</div>
 </form>
+</div>
+</div>
 {%endblock%}
