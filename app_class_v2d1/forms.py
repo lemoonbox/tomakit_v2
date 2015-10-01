@@ -223,6 +223,7 @@ class T2ReviewForm(forms.ModelForm):
         _post=self.data.get("post", "")
         classtype=self.data.get("classtype", "")
 
+
         if valid and _user:
             _review_exist=""
             if classtype =="tut_class":
@@ -231,7 +232,6 @@ class T2ReviewForm(forms.ModelForm):
             else:
                 _review_exist=T2ClassReview.objects.filter(
                     teach_post=_post,user=_user, is_active=True).exists()
-            print _review_exist
             if _review_exist:
                 self.add_error("review",u"리뷰는 1인당 1개만 입력 가능합니다.")
                 return False
