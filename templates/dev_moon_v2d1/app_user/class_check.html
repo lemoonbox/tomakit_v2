@@ -19,8 +19,11 @@
     .img-grid img {max-width:200px;}
     .tmk-card-img:hover {z-index:-3;}
     .card-list li {height:470px;}
-    #onoff-class span {color:red;font-weight:bold;}
+    /*#onoff-class span {color:red;font-weight:bold;}*/
     /*.tab-content {background:#F9FBFB!important;}*/
+    .onoff-class {line-height:320px;float:none;position:absolute;z-index:10;top:0;left:0;right:0;bottom:0;opacity:0;font-size:16px;}
+    .onoff-class a {color:#fff;}
+    .onoff-class:hover {z-index:3;background-color:#000;color:#fff;opacity:0.8;}
 
     .tmk-demand-info {height:220px;padding:10px;overflow:hidden;margin-bottom:15px;}
     .tmk-demand-info div {margin:25px auto;}
@@ -32,7 +35,7 @@
     .card-link img {z-index:0!important;}
 
     .tmk-infobox-profile .infobox-img-wrapper {border-radius:50%;width:100px;height:100px;overflow:hidden;}
-    .tmk-infobox-profile .infobox-img-wrapper img {width:150%;position:center;}
+    .tmk-infobox-profile .infobox-img-wrapper img {width:105%;height:105%;position:center;}
 
     .btn-group a {font-size:24px;height:42px;padding:25px;margin:auto 15px;font-weight:bold;}
 
@@ -84,7 +87,19 @@
                         <ul>
                             <!--<div class="tmk-h3">개설한 클래스</div>-->
                             {% for class in host_classes %}
+
                             <li class="tmk-class-card col-md-4">
+
+                                <span class="onoff-class">
+                                    <a href="{% url 'onoff_class_v2d1' class.user.id class.classtype class.id  %}">
+                                        {%if class.is_open%}
+                                    수업 내리기
+                                    {% else %}
+                                    수업 열기
+                                    {% endif %}
+                                        </a>  
+                                    <a href="http://{{HTTP_HOST}}/v2.1/class/modify/{{class.id}}">수업 수정</a>
+                                </span>
                                 <a class="tmk-card-img" href="http://{{HTTP_HOST}}/v2.1/class/{{class.id}}">
                                     <div class="tmk-class-type-label">
                                         <span class="label tmk-label">{{class.classtype}}</span>
@@ -110,14 +125,10 @@
                                     <div class="dp-label-right">￦{{class.price}}</div>
 
                                 </div>
-                                <a id="onoff-class" href="{% url 'onoff_class_v2d1' class.user.id class.classtype class.id  %}">
-                                    {%if class.is_open%}
-                                    <span>수업 내리기</span>
-                                    {% else %}
-                                    <span>수업 열기</span>
-                                    {% endif %}
-                                </a>
+
+
                             </li>
+
                             {% endfor %}
                         </ul>
                     </div>
@@ -154,25 +165,5 @@
 {%endblock%}
 {%block script%}
 <script>
-    //    $('document').ready(function() {
-    //    $('.tmk-class-card').hover(
-    //            function () {
-    //                $('.tmk-card-img').hide();
-    //            },
-    //            function () {
-    //              $('#onoff-class').show();
-    //            }
-    //    );
-    //
-    //    });
-    //    $('document').ready(function() {
-    //        $('.tmk-class-card').onmouseover.show('#onoff-class')
-    //    });
-    //function show(id) {
-    //    document.getElementById('onoff-class').style.visibility = "visible";
-    //}
-    //function hide(id) {
-    //    document.getElementById('onoff-class').style.visibility = "hidden";
-    //}
 </script>
 {%endblock%}
