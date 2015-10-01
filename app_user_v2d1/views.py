@@ -45,6 +45,8 @@ from app_user_v2d1.models import \
     T2HostProfile
 from app_demand_v2d1.models import \
     T2DemandCard
+from app_class_v2d1.models import \
+    T2ClassReview
 
 from utils import \
     utils, \
@@ -271,6 +273,7 @@ def pw_reset_process(request, key):
         'pwrset_process_form':pwreset_process_form,
         'HTTP_HOST':HTTP_HOST,
     })
+
 @login_required
 def host_apply(request):
     apply_data={}
@@ -314,17 +317,21 @@ def public_profile(request, user_num):
         # _hostprofile=T2HostProfile.objects.get(user=_profile_user)
         _hostprofile=""
         _open_class=""
+        _reviews=""
 
         if T2HostProfile.objects.filter(user=_profile_user).exists():
             _hostprofile=T2HostProfile.objects.filter(user=_profile_user)[0]
             _open_class=T2ClassCard.objects.filter(
                 user=_profile_user, is_open=True)
+            _reviews=T2ClassReview.objects.filter(host_user=_profile_user,
+                                                  is_active=True)
 
         return render(request, TEMP.PUBLIC_PROFILE_V2D1,{
             "profile_user":_profile_user,
             "profile":_profile,
             "host_profile":_hostprofile,
             "open_classes":_open_class,
+            "reviews":_reviews,
             "HTTP_HOST":HTTP_HOST,
             })
     else:
