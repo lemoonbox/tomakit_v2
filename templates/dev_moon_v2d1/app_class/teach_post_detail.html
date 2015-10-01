@@ -13,21 +13,21 @@
     .tmk-class-pay {border:1px solid #ddd;border-radius:4px;}
     .tmk-class-pay-top {padding:10px;}
     .tmk-class-pay .tmk-h3 {border-bottom:1px solid #ddd;padding:15px;margin-top:0px;}
-    .tmk-class-pay label {line-height:36px;color:#82888A;font-size:14px;font-weight:normal;width:35%;vertical-align:middle;}
+    .tmk-class-pay label {line-height:36px;color:#82888A;font-size:14px;font-weight:normal;min-width:130px;max-width:150px;vertical-align:middle;}
     .col-lg-12 img {max-width:100px;}
     .tmk-infobox-price {height:120px; line-height:24px;text-align:left;background-color:#eee;padding:10px;}
     .tmk-infobox-price div {float:left;min-width:46%;}
     .tmk-infobox-price label {line-height:18px;}
     .tmk-infobox-profile{float:left;width:100%;text-align:left;padding:10px;}
-    .tmk-infobox-profile .img-grid {width:80px;float:left;overflow:hidden;vertical-align:middle;}
+    .tmk-infobox-profile .img-grid {width:58px;float:left;overflow:hidden;vertical-align:middle;}
 
-    .card-link {z-index:1!important;}
-    .card-link img {z-index:0!important;}
+    .card-link {z-index:0!important;}
+    .card-link img {z-index:-1!important;}
 
     .tmk-infobox-profile .infobox-img-wrapper {border-radius:50%;width:55px;height:55px;overflow:hidden;}
-    .tmk-infobox-profile .infobox-img-wrapper img {width:150%;position:center;}
+    .tmk-infobox-profile .infobox-img-wrapper img {width:105%;height:105%;position:center;}
     /*.tmk-infobox-price*/
-    .tmk-infobox-profile div {width:60%;float:left;}
+    .tmk-infobox-profile div:first-child {min-width:58px;float:left;}
     .tmk-infobox-profile label {width:60%;line-height:20px;}
     .tmk-infobox-profile .h3 {margin:0px;padding:0;}
     .tmk-main-body {font-size:18px;line-height:28px;}
@@ -40,13 +40,13 @@
     .tmk-review textarea {height:80px;}
     .img-wrap img {width:100%;}
     .col-md-2 img {width:100px;}
-    .review-wrapper {margin:20px auto;text-align:left;}
+    .review-wrapper {margin:20px auto 30px auto;text-align:left;min-height:150px;padding:0;}
     .review-wrapper .btn-link {display:inline!important;float:left!important;margin-left:-5px;}
     #user-review {text-align:left;}
 
     @media screen and (min-width:1200px) {
         #sidebar {
-            margin-bottom: -1000px;
+            margin-bottom: -9999px;
         }
         /*#submit-review {position:absolute;top:-90px;left:0;}*/
     }
@@ -148,8 +148,8 @@
                     <!--강사 프로필-->
                     <div class="tmk-infobox-profile">
                         <a href="http://{{HTTP_HOST}}/v2.1/user/profile/{{post.user.id}}">
-                            <div class="img-grid">
-                                <div class="infobox-img-wrapper">
+                            <div class="tmk-card-img-profile">
+                                <div class="card-link">
                                     <img src="{{MEDIA_URL}}{{post.user.t2profile_set.first.pro_pic}}">
                                 </div>
                             </div>
@@ -251,8 +251,8 @@
                 <!--강사 프로필-->
                 <div class="tmk-infobox-profile">
                     <a href="http://{{HTTP_HOST}}/v2.1/user/profile/{{post.user.id}}">
-                        <div class="img-grid">
-                            <div class="infobox-img-wrapper">
+                        <div class="tmk-card-img-profile">
+                            <div class="card-link">
                                 <img src="{{MEDIA_URL}}{{post.user.t2profile_set.first.pro_pic}}">
                             </div>
                         </div>

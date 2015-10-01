@@ -334,6 +334,7 @@ nav {
   .container {min-width:850px!important;}
 }
 #tmk-footer {
+  z-index:3;
   background-color:  #FEF2D8;
   bottom: 0;
   min-height: 180px;
@@ -1296,7 +1297,7 @@ ul{
     border-radius: 50%;
     border:3px solid #fff;
   }
-  .card-link img {max-width:80px;max-height:80px;}
+  .card-link img {width:100%;height:100%;max-width:80px;max-height:80px;}
 }
 .tmk-class-card {
   .tmk-card-img-profile {
