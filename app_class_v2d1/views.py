@@ -559,6 +559,7 @@ def create_review(request, class_num):
 
     # return HttpResponseRedirect("/")
 
+
 @login_required
 def modify_review(request, class_num):
     HTTP_HOST=request.META["HTTP_HOST"]
@@ -568,29 +569,33 @@ def modify_review(request, class_num):
         grade=request.POST.get("grade", "")
         _user=User.objects.get(username=request.user)
         classtype=request.POST.get("classtype", "")
-        reviewform=T2ReviewForm(request.POST)
+        review_data={
+            'classtype':classtype,
+            "review":review,
+            "grade":grade,
+            "user":_user,
+        }
+        reviewform=T2ReviewForm(review_data)
 
         if classtype == "teach_class":
             _review=T2ClassReview.objects.get(pk=review_num)
-            if reviewform.is_valid():
-                _post=T2TeachClass.objects.get(pk=class_num)
-                _review.review=review
-                _review.grade=grade
-                _review.save()
+            _post=T2TeachClass.objects.get(pk=class_num)
+            review_data["post"]=_post
+            _review.review=review
+            _review.grade=grade
+            _review.save()
             return render(request, TEMP.TEACH_POST_DETAIL_V2D1,{
                 "post":_post,
                 "review":reviewform,
                 "HTTP_HOST":HTTP_HOST,
-
             })
-
         elif classtype == "tut_class":
             _review=T2ClassReview.objects.get(pk=review_num)
-            if reviewform.is_valid():
-                _post=T2TutClass.objects.get(pk=1)
-                _review.review=review
-                _review.grade=grade
-                _review.save()
+            _post=T2TutClass.objects.get(pk=class_num)
+            review_data["post"]=_post
+            _review.review=review
+            _review.grade=grade
+            _review.save()
             return render(request, TEMP.TUT_POST_DETAIL_V2D1,{
                 "post":_post,
                 "review":reviewform,
@@ -647,9 +652,6 @@ def class_post_detail(request, class_num):
 
         else:
             _post=_postcard.teach_post
-            print _post
-            print dir(_post)
-            print _post.t2classpic_set.all()
 
             return render(request, TEMP.TEACH_POST_DETAIL_V2D1,{
                 "post":_post,
