@@ -326,7 +326,7 @@
                         </div>
 
                     </div>
-                    <div class="col-md-7 col-xs-7 user-review">
+                    <div class="col-md-7 col-xs-7 user-review"  {% if review.user == request.user %}id="requestuser"{%endif%}>
                         <a href="http://{{HTTP_HOST}}/v2.1/user/profile/{{review.user.id}}">
                             {{review.user.last_name}}{{review.user.first_name}}
                         </a> {{review.grade}}
@@ -335,6 +335,7 @@
                     </div>
 
                     <!--수정 form 나중에  hidden-->
+                    {% if review.user == request.user %}
                     <div class="review-modify" hidden>
                         <form method="POST" action="{% url 'modify_review_v2d1' post.id %}">
                             {%csrf_token%}
@@ -352,11 +353,11 @@
                             </div>
                         </form>
                     </div>
-                    {% if review.user == request.user %}
+
                     <div class="col-md-2 col-xs-2 pull-right modify-wrap" style="margin-right:15px;">
                         <span class="btn btn-link modify-btn">댓글 수정</span>
                     </div>
-                    {% endif %}
+
                     <div class="col-md-2 col-xs-2 pull-right review-del" style="padding-left:0;" hidden>
                         <form method="POST" action="{% url 'delete_review_v2d1' review.id%}">
                             {%csrf_token%}
@@ -364,6 +365,7 @@
                             <input class="btn btn-link" type="submit" value="리뷰 삭제">
                         </form>
                     </div>
+                    {% endif %}
                 </div>
             {% endif %}
             {% endfor %}
@@ -386,7 +388,7 @@
     $(document).ready(function(){
         $(".modify-btn").click(function(){
             $(".modify-wrap").hide();
-            $(".user-review").hide();
+            $("#requestuser").hide();
             $(".review-modify").show();
             $(".review-del").show();
         });
