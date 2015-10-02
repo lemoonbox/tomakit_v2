@@ -274,7 +274,7 @@
                             {% endif %}
                             {% if class.inline_users.count %}
                             {% for user in class.inline_users.all %}
-                            <a href="http://{{HTTP_HOST}}/v2.1/user/profile/{{id}}" class="tmk-card-img-profile">
+                            <a href="http://{{HTTP_HOST}}/v2.1/user/profile/{{user.id}}" class="tmk-card-img-profile">
                                 <div class="card-link">
                                     <img src="{{MEDIA_URL}}{{user.t2profile_set.first.pro_pic}}">
                                 </div>
