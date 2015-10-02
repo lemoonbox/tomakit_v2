@@ -34,7 +34,12 @@
     .tmk-class-pay label {line-height:36px;color:#82888A;font-size:14px;font-weight:normal;min-width:130px;max-width:150px;vertical-align:middle;}
     .col-lg-12 img {max-width:100px;}
     .tmk-infobox-price {height:120px; line-height:24px;text-align:left;background-color:#eee;padding:10px;}
-    .tmk-infobox-price div {float:left;width:50%;}
+    .tmk-infobox-price div {
+        float: left;
+        /*width: 50%;*/
+    }
+    .tmk-infobox-price .tmk-h3 {padding-right:0;}
+
     .tmk-infobox-price label {line-height:18px;}
     .tmk-infobox-profile{float:left;width:100%;text-align:left;padding:10px;}
     .tmk-infobox-profile .img-grid {width:80px;float:left;overflow:hidden;vertical-align:middle;}
@@ -58,16 +63,16 @@
     .tmk-review textarea {height:80px;}
     .img-wrap img {width:100%;}
     .col-md-2 img {width:100px;}
-    .review-wrapper {margin:20px auto 30px auto;text-align:left;min-height:150px;padding:0;}
+    .review-wrapper {margin:20px auto;text-align:left;min-height:150px;margin-bottom:30px;padding:0;}
     .review-wrapper .btn-link {display:inline!important;float:left!important;margin-left:-5px;}
 
     /*#tmk-post-container {min-height:1500px;}*/
     #user-review {text-align:left;}
     /*@media screen and (min-width:1200px) {*/
-        /*#sidebar {*/
-            /*margin-bottom: -800px;*/
-        /*}*/
-        /*/!*#submit-review {position:absolute;top:-90px;left:0;}*!/*/
+    /*#sidebar {*/
+    /*margin-bottom: -800px;*/
+    /*}*/
+    /*/!*#submit-review {position:absolute;top:-90px;left:0;}*!/*/
     /*}*/
     @media screen and (min-width:992px) {
         #submit-review {position:absolute;top:-90px;left:0;}
@@ -79,7 +84,7 @@
 
 </style>
 {%endblock%}
-<body>
+
 {%block content%}
 <!--맞춤 수업 상세 페이지-->
 <div class="tmk-main-body col-lg-12">
@@ -90,7 +95,6 @@
             <div class="tmk-h4">{{post.intro_line}}</div>
             <span class="label tmk-label">즉시 등록 수업</span>
         </div>
-
         <!--사진-->
         <div class="col-lg-12">
             <div id="class-post-Carousel" class="carousel slide" data-ride="carousel">
@@ -127,7 +131,8 @@
                 </a>
             </div>
         </div>
-        </div>
+    </div>
+
     <div class="tmk-main-body col-lg-12" id="tmk-post-container">
         <div class="container">
             <div class="col-lg-4 hidden-lg" style="margin-bottom:50px;">
@@ -189,109 +194,109 @@
                     </div>
                 </div>
             </div>
-        <div class="col-lg-8 tmk-post-detail">
-            <div class="tmk-h2" style="font-weight:bold;">클래스 소개</div>
-            <!--동영상-->
-            {% if post.video%}
-            <iframe width="100%" height="480px" src="https://www.youtube.com/embed/{{post.video}}" frameborder="0" allowfullscreen></iframe>
-            {% endif %}
-            <div class="tmk-h3">소개</div>
-            <div class="tmk-panel">{{post.descript}}</div>
+            <div class="col-lg-8 tmk-post-detail">
+                <div class="tmk-h2" style="font-weight:bold;">클래스 소개</div>
+                <!--동영상-->
+                {% if post.video%}
+                <iframe width="100%" height="480px" src="https://www.youtube.com/embed/{{post.video}}" frameborder="0" allowfullscreen></iframe>
+                {% endif %}
+                <div class="tmk-h3">소개</div>
+                <div class="tmk-panel">{{post.descript}}</div>
 
-            <div class="tmk-h3">커리큘럼</div>
-            <div class="tmk-panel">{{post.curri}}</div>
-            <div class="tmk-h3">안내사항</div>
-            <div class="tmk-panel">{{post.notic}}</div>
+                <div class="tmk-h3">커리큘럼</div>
+                <div class="tmk-panel">{{post.curri}}</div>
+                <div class="tmk-h3">안내사항</div>
+                <div class="tmk-panel">{{post.notic}}</div>
 
-            <div class="tmk-h3">공방위치</div>
-            <div class="tmk-panel">{{post.addr}}</div>
+                <div class="tmk-h3">공방위치</div>
+                <div class="tmk-panel">{{post.addr}}</div>
 
-            <div class="tmk-h3">선생님 소개</div>
-            <div class="tmk-panel well" style="border:none;padding-top:50px;">
-                <div class="col-lg-2" style="float:left;">
-                    <a href="http://{{HTTP_HOST}}/v2.1/user/profile/{{post.user.id}}">
-                        <div class="tmk-infobox-profile">
-                            <div class="img-grid">
-                                <div class="infobox-img-wrapper">
-                                    <img src="{{MEDIA_URL}}{{post.user.t2profile_set.first.pro_pic}}">
-                                </div>
-                            </div></div>
-                    </a>
-                </div>
-                <div class="col-lg-10">
-                    <span  style="line-height:16px;">클래스 선생님</span><br>
-                    <a href="http://{{HTTP_HOST}}/v2.1/user/profile/{{post.user.id}}">
-                        <div class="tmk-h3"  style="line-height:16px;">{{post.user.last_name}}{{post.user.first_name}}</div>
-                    </a>
-                </div>
-                <div class="col-lg-12"><br>{{post.user.t2hostprofile_set.first.intro_self}}</div>
-                <div class="col-lg-12">
-                    <a class="btn-link pull-right" href="http://{{HTTP_HOST}}/v2.1/user/profile/{{post.user.id}}" style="font-size:14px;color:red;">프로필 보기 ></a>
+                <div class="tmk-h3">선생님 소개</div>
+                <div class="tmk-panel well" style="border:none;padding-top:50px;">
+                    <div class="col-lg-2" style="float:left;">
+                        <a href="http://{{HTTP_HOST}}/v2.1/user/profile/{{post.user.id}}">
+                            <div class="tmk-infobox-profile">
+                                <div class="img-grid">
+                                    <div class="infobox-img-wrapper">
+                                        <img src="{{MEDIA_URL}}{{post.user.t2profile_set.first.pro_pic}}">
+                                    </div>
+                                </div></div>
+                        </a>
+                    </div>
+                    <div class="col-lg-10">
+                        <span  style="line-height:16px;">클래스 선생님</span><br>
+                        <a href="http://{{HTTP_HOST}}/v2.1/user/profile/{{post.user.id}}">
+                            <div class="tmk-h3"  style="line-height:16px;">{{post.user.last_name}}{{post.user.first_name}}</div>
+                        </a>
+                    </div>
+                    <div class="col-lg-12"><br>{{post.user.t2hostprofile_set.first.intro_self}}</div>
+                    <div class="col-lg-12">
+                        <a class="btn-link pull-right" href="http://{{HTTP_HOST}}/v2.1/user/profile/{{post.user.id}}" style="font-size:14px;color:red;">프로필 보기 ></a>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-lg-4 visible-lg" id="sidebar">
-            <div class="tmk-class-pay">
-                <div class="tmk-class-pay-top">
-                    <!--<div class=h3>수업정보</>-->
-                    <div class="tmk-h3" style="font-weight:bold;">{{post.repeat}}회 과정 / 총 {% widthratio post.repeat 1 post.perhour%}시간</div>
-                    <div style="text-align:left;">
-                        <div>
-                            <label><img src="{%static 'media/image/slice/icon-intro_time.png'%}"> 모집 마감일</label> 즉시 등록 수업
-                        </div>
-                        <div>
-                            <label><img src="{%static 'media/image/slice/icon-intro_flag.png'%}"> 수업 시작일 </label> 날짜 협의
-                        </div>
-                        <div>
-                            <label><img src="{%static 'media/image/slice/icon-intro_clock.png'%}"> 수업 일정</label> {{post.weekday}}
-                        </div>
-                        <div>
-                            <label><img src="{%static 'media/image/slice/icon-intro_people.png'%}"> 인원</label> 소수 맞춤수업
-                            {%comment%}최소{{post.min_num}}명~최대{{post.max_num}}명{%endcomment%}
-                        </div>
-                        <div>
-                            <label><img src="{%static 'media/image/slice/icon-intro_location.png'%}"> 장소</label> {{post.addr}}
-                        </div>
-                    </div>
-                </div>
-                <div class="tmk-infobox-price">
-                    <div><label>재료비</label><br>
-                        <span class="small">￦</span> {{post.extra_price|intcomma}}<br>
-                        <label>수강료</label><br>
-                        <span class="small">￦</span> {{post.price|intcomma}}</div>
-                    <div class="pull-right" style="text-align:right;padding-top: 72px;">합계<span class="tmk-h3" style="border-bottom:none;">￦{{ post.extra_price|add:post.price |intcomma}}</span></div>
-                </div>
-                <!--강사 프로필-->
-                <div class="tmk-infobox-profile">
-
-                    <div class="tmk-card-img-profile">
-                        <div class="card-link">
-                            <a href="http://{{HTTP_HOST}}/v2.1/user/profile/{{post.user.id}}">
-                                <img src="{{MEDIA_URL}}{{post.user.t2profile_set.first.pro_pic}}">
-                            </a>
+            <div class="col-lg-4 visible-lg" id="sidebar">
+                <div class="tmk-class-pay">
+                    <div class="tmk-class-pay-top">
+                        <!--<div class=h3>수업정보</>-->
+                        <div class="tmk-h3" style="font-weight:bold;">{{post.repeat}}회 과정 / 총 {% widthratio post.repeat 1 post.perhour%}시간</div>
+                        <div style="text-align:left;">
+                            <div>
+                                <label><img src="{%static 'media/image/slice/icon-intro_time.png'%}"> 모집 마감일</label> 즉시 등록 수업
+                            </div>
+                            <div>
+                                <label><img src="{%static 'media/image/slice/icon-intro_flag.png'%}"> 수업 시작일 </label> 날짜 협의
+                            </div>
+                            <div>
+                                <label><img src="{%static 'media/image/slice/icon-intro_clock.png'%}"> 수업 일정</label> {{post.weekday}}
+                            </div>
+                            <div>
+                                <label><img src="{%static 'media/image/slice/icon-intro_people.png'%}"> 인원</label> 소수 맞춤수업
+                                {%comment%}최소{{post.min_num}}명~최대{{post.max_num}}명{%endcomment%}
+                            </div>
+                            <div>
+                                <label><img src="{%static 'media/image/slice/icon-intro_location.png'%}"> 장소</label> {{post.addr}}
+                            </div>
                         </div>
                     </div>
-                    <div>
-                        <label>클래스 선생님</label><br>
-                        <div class="h3">{{post.user.last_name}}{{post.user.first_name}}</div>
+                    <div class="tmk-infobox-price">
+                        <div><label>재료비</label><br>
+                            <span class="small">￦</span> {{post.extra_price|intcomma}}<br>
+                            <label>수강료</label><br>
+                            <span class="small">￦</span> {{post.price|intcomma}}</div>
+                        <div class="pull-right" style="text-align:right;padding-top: 72px;">합계<span class="tmk-h3" style="border-bottom:none;">￦{{ post.extra_price|add:post.price |intcomma}}</span></div>
+                    </div>
+                    <!--강사 프로필-->
+                    <div class="tmk-infobox-profile">
+
+                        <div class="tmk-card-img-profile">
+                            <div class="card-link">
+                                <a href="http://{{HTTP_HOST}}/v2.1/user/profile/{{post.user.id}}">
+                                    <img src="{{MEDIA_URL}}{{post.user.t2profile_set.first.pro_pic}}">
+                                </a>
+                            </div>
+                        </div>
+                        <div>
+                            <label>클래스 선생님</label><br>
+                            <div class="h3">{{post.user.last_name}}{{post.user.first_name}}</div>
+                        </div>
+
                     </div>
 
-                </div>
-
-                <div style="padding:10px;">
-                    <!-- 결제 하기 -->
-                    <form method="GET" action="{% url 'pay_prefill_v2d1' %}">
-                        <input type="hidden" value="{{post.id}}" name="post_id">
-                        <input type="hidden" value="tutclass" name="classtype">
-                        <button class="btn btn-primary btn-block">
-                            신청하기 <input type="submit" value="{{ post.extra_price|add:post.price |intcomma}}원" hidden>
-                        </button>
-                    </form>
+                    <div style="padding:10px;">
+                        <!-- 결제 하기 -->
+                        <form method="GET" action="{% url 'pay_prefill_v2d1' %}">
+                            <input type="hidden" value="{{post.id}}" name="post_id">
+                            <input type="hidden" value="tutclass" name="classtype">
+                            <button class="btn btn-primary btn-block">
+                                신청하기 <input type="submit" value="{{ post.extra_price|add:post.price |intcomma}}원" hidden>
+                            </button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-        </div>
 </div>
 
 <div class="tmk-main-body col-lg-12" style="border-bottom:2px solid #ddd;background:#fff;">
@@ -313,7 +318,7 @@
                         <input type="hidden" name="classtype" value="tut_class">
                         <textarea class="form-control" name="review"></textarea>
                         <!--<img src="{%static 'media/image/slice/icon-star_empty.png'%}">-->
-                        </div>
+                    </div>
                     <div class="col-xs-5 col-md-7 col-xs-offset-2" style="text-align:left;">
                         <input class="form-control" type="number" name="grade" min="1" max="5"><br>
                         <div class="tmk-error">{{review.review.errors|striptags}} {{review.grade.errors|striptags}}</div>
@@ -327,60 +332,61 @@
                 {% for review in post.t2classreview_set.all%}
                 {% if review.is_active %}
                 <div class="review-wrapper">
-                <div class="col-xs-2">
-                    <div class="tmk-card-img-profile">
-                        <div class="card-link">
-                            <!--<a href="http://{{HTTP_HOST}}/v2.1/user/profile/{{review.user.id}}">-->
-                            <img src="{{MEDIA_URL}}{{review.user.t2profile_set.first.pro_pic}}">
-                            <!--</a>-->
+                    <div class="col-xs-2">
+                        <div class="tmk-card-img-profile">
+                            <div class="card-link">
+                                <!--<a href="http://{{HTTP_HOST}}/v2.1/user/profile/{{review.user.id}}">-->
+                                <img src="{{MEDIA_URL}}{{review.user.t2profile_set.first.pro_pic}}">
+                                <!--</a>-->
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-7 col-xs-7 user-review">
-                    <a href="http://{{HTTP_HOST}}/v2.1/user/profile/{{review.user.id}}">
-                        {{review.user.last_name}}{{review.user.first_name}}
-                    </a> {{review.grade}}
-                    <!--댓글-->
-                    <div>{{review.review}}</div>
-                </div>
+                    <div class="col-md-7 col-xs-7 user-review">
+                        <a href="http://{{HTTP_HOST}}/v2.1/user/profile/{{review.user.id}}">
+                            {{review.user.last_name}}{{review.user.first_name}}
+                        </a> {{review.grade}}
+                        <!--댓글-->
+                        <div>{{review.review}}</div>
+                    </div>
 
-                <!--수정 form 나중에  hidden-->
-                <div class="review-modify" hidden>
-                    <form method="POST" action="{% url 'modify_review_v2d1' post.id %}">
-                        {%csrf_token%}
-                        <div class="col-md-7 col-xs-7">
-                            <input type="hidden" name="review_num" value="{{review.id}}">
-                            <input type="hidden" name="class_num" value="{{post.id}}">
+                    <!--수정 form 나중에  hidden-->
+                    <div class="review-modify" hidden>
+                        <form method="POST" action="{% url 'modify_review_v2d1' post.id %}">
+                            {%csrf_token%}
+                            <div class="col-md-7 col-xs-7">
+                                <input type="hidden" name="review_num" value="{{review.id}}">
+                                <input type="hidden" name="class_num" value="{{post.id}}">
+                                <input type="hidden" name="classtype" value="tut_class">
+                                <textarea class="form-control" name="review">{{review.review}}</textarea>
+                                <input class="form-control" type="number" name="grade" value="{{review.grade}}" min="1" max="5"><br>
+                                {{review.review.errors|striptags}}
+                                {{review.grade.errors|striptags}}
+                            </div>
+                            <div class="col-md-2 col-xs-2 pull-right" style="margin-right:15px;">
+                                <input class="btn btn-link modify-end" type="submit" value="수정 완료">
+                            </div>
+                        </form>
+                    </div>
+                    <!--사용자가 단 댓글인 경우에만 visible되는-->
+                    <div class="col-md-2 col-xs-2 pull-right modify-wrap" style="margin-right:15px;">
+                        <span class="btn btn-link modify-btn">댓글 수정</span>
+                    </div>
+
+                    <div class="col-md-2 col-xs-2 pull-right review-del" style="padding-left:0;" hidden>
+                        <form method="POST" action="{% url 'delete_review_v2d1' review.id%}">
+                            {%csrf_token%}
                             <input type="hidden" name="classtype" value="tut_class">
-                            <textarea class="form-control" name="review">{{review.review}}</textarea>
-                            <input class="form-control" type="number" name="grade" value="{{review.grade}}" min="1" max="5"><br>
-                            {{review.review.errors|striptags}}
-                            {{review.grade.errors|striptags}}
-                        </div>
-                        <div class="col-md-2 col-xs-2 pull-right" style="margin-right:15px;">
-                            <input class="btn btn-link modify-end" type="submit" value="수정 완료">
-                        </div>
-                    </form>
-                </div>
-                <!--사용자가 단 댓글인 경우에만 visible되는-->
-                <div class="col-md-2 col-xs-2 pull-right modify-wrap" style="margin-right:15px;">
-                    <span class="btn btn-link modify-btn">댓글 수정</span>
-                </div>
-
-                <div class="col-md-2 col-xs-2 pull-right review-del" style="padding-left:0;" hidden>
-                    <form method="POST" action="{% url 'delete_review_v2d1' review.id%}">
-                    {%csrf_token%}
-                    <input type="hidden" name="classtype" value="tut_class">
-                        <input class="btn btn-link" type="submit" value="리뷰 삭제">
-                </form>
-            </div>
+                            <input class="btn btn-link" type="submit" value="리뷰 삭제">
+                        </form>
                     </div>
-            {% endif %}
-            {% endfor %}
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
         </div>
     </div>
 </div>
-</div>
+
 <div class="tmk-main-body col-lg-12" style="background:#eee;margin-bottom:-50px;padding:30px;">
     <div style="margin:50px auto;">
         <div class="tmk-h3" style="font-weight:bold;">원하는 클래스를 찾지 못했나요?</div>
@@ -404,26 +410,26 @@
 </script>
 <!--<script>-->
 
-    <!--$(function() {-->
-        <!--var $sidebar   = $("#sidebar"),-->
-                <!--$window    = $(window),-->
-                <!--offset     = $sidebar.offset(),-->
-                <!--topPadding = 15;-->
-        <!--$window.scroll(function() {-->
-            <!--if ($window.scrollTop() > offset.top) {-->
-                <!--$sidebar.stop().animate({-->
-                    <!--marginTop: $window.scrollTop() - offset.top + topPadding-->
-                <!--});-->
+<!--$(function() {-->
+<!--var $sidebar   = $("#sidebar"),-->
+<!--$window    = $(window),-->
+<!--offset     = $sidebar.offset(),-->
+<!--topPadding = 15;-->
+<!--$window.scroll(function() {-->
+<!--if ($window.scrollTop() > offset.top) {-->
+<!--$sidebar.stop().animate({-->
+<!--marginTop: $window.scrollTop() - offset.top + topPadding-->
+<!--});-->
 <!--//            } else if ($window.width() < 768) {-->
 <!--//                $sidebar.stop().animate({-->
 <!--//                    marginBottom: -1000-->
 <!--//                });-->
-            <!--} else {-->
-            <!--$sidebar.stop().animate({-->
-                <!--marginTop: 0-->
-            <!--});-->
-        <!--}-->
-    <!--});-->
-    <!--});-->
+<!--} else {-->
+<!--$sidebar.stop().animate({-->
+<!--marginTop: 0-->
+<!--});-->
+<!--}-->
+<!--});-->
+<!--});-->
 <!--</script>-->
 {%endblock%}

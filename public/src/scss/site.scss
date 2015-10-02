@@ -1343,7 +1343,7 @@ ul{
 }
 .dp-label {
   margin-top: 30px;
-  margin-left: 7%;
+  margin-left: 5%;
   border-top: 1px solid #ddd;
   /*min-width: 340px;*/
   max-width: 90%;
@@ -1356,7 +1356,8 @@ ul{
 .dp-label-left {
   left: 0px;
   min-width: 20%;
-  margin-right: 35%;
+  margin-right: 30%;
+  text-align:left;
 }
 .dp-label-right {
   font-size: 18px;

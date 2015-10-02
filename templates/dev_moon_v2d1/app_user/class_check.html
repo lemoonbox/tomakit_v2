@@ -18,10 +18,10 @@
     /*#onoff-class:hover {display:block;z-index:500;opacity:1;float:left;}*/
     .img-grid img {max-width:200px;}
     .tmk-card-img:hover {z-index:-3;}
-    .card-list li {height:470px;}
+    /*.card-list li {height:470px;}*/
     /*#onoff-class span {color:red;font-weight:bold;}*/
     /*.tab-content {background:#F9FBFB!important;}*/
-    .onoff-class {line-height:320px;float:none;position:absolute;z-index:10;top:0;left:0;right:0;bottom:0;opacity:0;font-size:16px;}
+    .onoff-class {line-height:230px;float:none;border-radius:4px;position:absolute;z-index:10;top:0;left:0;right:0;bottom:0;opacity:0;font-size:16px;}
     .onoff-class a {color:#fff;}
     .onoff-class:hover {z-index:3;background-color:#000;color:#fff;opacity:0.8;}
 
@@ -38,7 +38,6 @@
     .tmk-infobox-profile .infobox-img-wrapper img {width:105%;height:105%;position:center;}
 
     .btn-group a {font-size:24px;height:42px;padding:25px;margin:auto 15px;font-weight:bold;}
-
 </style>
 {%endblock%}
 {%block content%}
@@ -97,7 +96,7 @@
                                     {% else %}
                                     수업 열기
                                     {% endif %}
-                                        </a>
+                                        </a><br>
                                     <a href="http://{{HTTP_HOST}}/v2.1/class/modify/{{class.id}}">수업 수정</a>
                                 </span>
                                 <a class="tmk-card-img" href="http://{{HTTP_HOST}}/v2.1/class/{{class.id}}">
