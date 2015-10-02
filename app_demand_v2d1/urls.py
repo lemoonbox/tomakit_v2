@@ -16,7 +16,7 @@ urlpatterns = patterns('app_demand_v2d1.views',
 
 
     url(r"lineup/(?P<demand_num>[0-9]+)/$", 'lineup_demand', name='lineup_demand_v2d1'),
-    url(r"lineup/(?P<demand_num>[0-9]+)/(?P<page>[0-9]+)/(?P<category>[a-z,_]+)/(?P<state>[a-z,_]+)/$",
+    url(r"lineup/(?P<demand_num>[0-9]+)/(?P<page>[0-9]+)/(?P<category>[a-z,_,0-9]+)/(?P<state>[a-z,_,0-9]+)/$",
         'lineup_demand', name="lineup_pageing_v2d1"),
 
     url(r'(?P<demand_num>[0-9]+)/$', 'demand_detail', name="demand_detial_v2d1"),

@@ -310,8 +310,6 @@ def mobli_required(request, post_num):
 
     })
 
-
-
 @login_required
 def lineup_demand(request, demand_num, page=1,category=all, state=all):
 

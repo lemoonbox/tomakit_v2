@@ -714,37 +714,107 @@ def class_onoff(request ,class_type, card_num, pro_user_num):
 def check_state(request):
 
     if request:
-        locality=request.POST.get("locality", "")
-        area_1=request.POST.get("area_1", "")
+        state=""
+        locality=request.POST.get("locality", "").encode("utf-8")
+        area_1=request.POST.get("area_1", "").encode("utf-8")
+        sublocal_1=request.POST.get("sublocal_1", "").encode("utf-8")
+        local_list=[]
+        local_list.append(area_1)
+        local_list.append(locality)
 
-        local_list=[locality.encode("utf-8"), area_1.encode("utf-8")]
+        #서울 동북
+        zone_1 = ['도봉구','노원구','강북구','중랑구','광진구','동대문구', '성북구','성동구']
+        #서울 서북
+        zone_2 = ['은평구','마포구', '서대문']
+        #서울 도심
+        zone_3 = ['종로구','중구','용산구']
+        #서울 남서
+        zone_4 = ['강서구','양천구','구로구','영등포구','동작구','관악구']
+        #서울 강남
+        zone_5 = ['송파구','강남구','서초구']
+
+        #경기 남부-수원,안산,안양
+        zone_6 = ['수원시', '화성시', '오산시', '평택시', '안양시', '군포시', '의왕시',
+                  '과천시', '안산시', '시흥시']
+        #경기 동부-성남/남양주/용인
+        zone_7 = ['성남시', '광주시', '용인시', '구리시', '하남시','남양주시',
+                  '양평군', '강평군']
+        #경기 북부-파주/의정부/고양(일산)
+        zone_8 = ['고양시', '김포시','파주시', '양주시', '포천시', '의정부시']
+        #인천/부천
+        zone_9 = ["인천광역시", '부천시']
+
 
         for local in local_list:
             if local in ["서울특별시"]:
-                _state=State.objects.get_or_create(state="seoul")
-                return _state
-            elif local in ["인천광역시", "경기도"]:
-                _state=State.objects.get_or_create(state="incheon_gyeonggi")
-                return _state
-            elif local in ['부산광역시','울산광역시','경상남도']:
-                _state=State.objects.get_or_create(state="busan_ulsan_gyeongnam")
-                return _state
-            elif local in ['대구광역시', '경상북도']:
-                _state=State.objects.get_or_create(state="daegu_gyeongbuk")
-                return _state
-            elif local in ['대전광역시','세종특별자치시', '충청북도', '충청남도']:
-                _state=State.objects.get_or_create(state="daejeon_chungcheong")
-                return _state
-            elif local in ['광주광역시', '전라북도', '전라남도']:
-                _state=State.objects.get_or_create(state="gwangju_jeonla")
-                return _state
-            elif local in ['강원도']:
-                _state=State.objects.get_or_create(state="gangwon")
-                return _state
-            elif local in ['제주특별자치도']:
-                _state=State.objects.get_or_create(state="jeju")
-                return _state
-        _state=State.objects.get_or_create(state="etc")
+                if sublocal_1 in zone_1:
+                    state="zone_1"
+                    break
+                elif sublocal_1 in zone_2:
+                    state="zone_2"
+                    break
+                elif sublocal_1 in zone_3:
+                    state="zone_3"
+                    break
+                elif sublocal_1 in zone_4:
+                    state="zone_4"
+                    break
+                elif sublocal_1 in zone_5:
+                    state="zone_5"
+                    break
+            elif local in ["경기도"]:
+                if locality in zone_5:
+                    state="zone_6"
+                    break
+                elif locality in zone_6:
+                    state="zone_7"
+                    break
+                elif locality in zone_7:
+                    state="zone_8"
+                    break
+                elif locality in zone_8:
+                    state="zone_9"
+                    break
+            elif local in ["인천광역시"]:
+                state="zone_9"
+                break
+            elif local in ['부산광역시','울산광역시','경상남도',
+                           '대구광역시', '경상북도',
+                           '대전광역시','세종특별자치시', '충청북도', '충청남도',
+                           '광주광역시', '전라북도', '전라남도',
+                           '강원도', '제주특별자치도']:
+                state="etc"
+                break
+
+        _state=State.objects.get_or_create(state=state)
         return _state
+
+        # for local in local_list:
+        #     if local in ["서울특별시"]:
+        #         _state=State.objects.get_or_create(state="seoul")
+        #         return _state
+        #     elif local in ["인천광역시", "경기도"]:
+        #         _state=State.objects.get_or_create(state="incheon_gyeonggi")
+        #         return _state
+        #     elif local in ['부산광역시','울산광역시','경상남도']:
+        #         _state=State.objects.get_or_create(state="busan_ulsan_gyeongnam")
+        #         return _state
+        #     elif local in ['대구광역시', '경상북도']:
+        #         _state=State.objects.get_or_create(state="daegu_gyeongbuk")
+        #         return _state
+        #     elif local in ['대전광역시','세종특별자치시', '충청북도', '충청남도']:
+        #         _state=State.objects.get_or_create(state="daejeon_chungcheong")
+        #         return _state
+        #     elif local in ['광주광역시', '전라북도', '전라남도']:
+        #         _state=State.objects.get_or_create(state="gwangju_jeonla")
+        #         return _state
+        #     elif local in ['강원도']:
+        #         _state=State.objects.get_or_create(state="gangwon")
+        #         return _state
+        #     elif local in ['제주특별자치도']:
+        #         _state=State.objects.get_or_create(state="jeju")
+        #         return _state
+        # _state=State.objects.get_or_create(state="etc")
+        # return _state
     else :
         return False
