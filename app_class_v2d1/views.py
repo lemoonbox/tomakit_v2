@@ -34,6 +34,8 @@ from app_class_v2d1.forms import \
     T2ClassPicForm, \
     T2ClassCardForm,\
     T2ReviewForm
+from app_user_v2d1.models import \
+    T2HostProfile
 
 
 # Create your views here.
@@ -172,12 +174,17 @@ def create_tut(request, class_num):
             imagelist=[]
             if imageform.is_valid():
                 _imagelist=imageform.savefiles()
-
+            _hostprofile=T2HostProfile.objects.get(user=_user)
+            _hostprofile.intro_self=request.POST.get("intro_self", "")
+            _hostprofile.save()
             _tutpost.wr_done=True
             _classcard.wr_done=True
+            _tutpost.is_opene=True
+            _classcard.is_open=True
             _tutpost.save()
             _classcard.save()
             return render(request, TEMP.CLASS_CREATE_FINISH_V2D1,{
+                        "HTTP_HOST":HTTP_HOST,
                     })
 
     return render(request, TEMP.CLASS_CREATE_TUT_V2D1,{
@@ -205,7 +212,6 @@ def create_teach(request, class_num):
         title=request.GET.get("title")
         prefill_intro=_user.t2hostprofile_set.first().intro_self
         imageform=T2ClassPicForm()
-        #prefill_addr=_user.t2hostprofile_set.first().shop_addr
     elif request.method == "POST":
         locality=request.POST.get("locality", "").encode("utf-8")
         area_1=request.POST.get("area_1", "").encode("utf-8")
@@ -271,12 +277,17 @@ def create_teach(request, class_num):
             imagelist=[]
             if imageform.is_valid():
                 _imagelist=imageform.savefiles()
-
+            _hostprofile=T2HostProfile.objects.get(user=_user)
+            _hostprofile.intro_self=request.POST.get("intro_self", "")
+            _hostprofile.save()
             _teachpost.wr_done=True
             _classcard.wr_done=True
+            _teachpost.is_opene=True
+            _classcard.is_open=True
             _teachpost.save()
             _classcard.save()
             return render(request, TEMP.CLASS_CREATE_FINISH_V2D1,{
+                "HTTP_HOST":HTTP_HOST,
             })
 
     return render(request, TEMP.CLASS_CREATE_TEACH_V2D1,{
@@ -549,12 +560,12 @@ def create_review(request, class_num):
                         tut_post=_post, grade=grade,
                         review=review)
                 _review.save()
-        print _post
-        return render(request, TEMP.TUT_POST_DETAIL_V2D1,{
-            "post":_post,
-            "review":reviewform,
-            "HTTP_HOST":HTTP_HOST,
-        })
+        # return render(request, TEMP.TUT_POST_DETAIL_V2D1,{
+        #     "post":_post,
+        #     "review":reviewform,
+        #     "HTTP_HOST":HTTP_HOST,
+        # })
+        return HttpResponseRedirect("/v2.1/class/"+str(_post.t2classcard_set.first().id))
     return Http404("잘못된 요청입니다.")
 
     # return HttpResponseRedirect("/")
@@ -584,11 +595,12 @@ def modify_review(request, class_num):
             _review.review=review
             _review.grade=grade
             _review.save()
-            return render(request, TEMP.TEACH_POST_DETAIL_V2D1,{
-                "post":_post,
-                "review":reviewform,
-                "HTTP_HOST":HTTP_HOST,
-            })
+            return HttpResponseRedirect("/v2.1/class/"+str(_post.t2classcard_set.first().id))
+            # return render(request, TEMP.TEACH_POST_DETAIL_V2D1,{
+            #     "post":_post,
+            #     "review":reviewform,
+            #     "HTTP_HOST":HTTP_HOST,
+            # })
         elif classtype == "tut_class":
             _review=T2ClassReview.objects.get(pk=review_num)
             _post=T2TutClass.objects.get(pk=class_num)
@@ -596,12 +608,12 @@ def modify_review(request, class_num):
             _review.review=review
             _review.grade=grade
             _review.save()
-            return render(request, TEMP.TUT_POST_DETAIL_V2D1,{
-                "post":_post,
-                "review":reviewform,
-                "HTTP_HOST":HTTP_HOST,
-            })
-
+            return HttpResponseRedirect("/v2.1/class/"+str(_post.t2classcard_set.first().id))
+            # return render(request, TEMP.TUT_POST_DETAIL_V2D1,{
+            #     "post":_post,
+            #     "review":reviewform,
+            #     "HTTP_HOST":HTTP_HOST,
+            # })
     return HttpResponseRedirect("/")
 
 @login_required
@@ -618,11 +630,12 @@ def delete_review(request, review_num):
             if _review.user == request.user:
                 _review.is_active=False
                 _review.save()
-            return render(request, TEMP.TEACH_POST_DETAIL_V2D1,{
-                "post":_post,
-                "HTTP_HOST":HTTP_HOST,
-
-            })
+            return HttpResponseRedirect("/v2.1/class/"+str(_post.t2classcard_set.first().id))
+            # return render(request, TEMP.TEACH_POST_DETAIL_V2D1,{
+            #     "post":_post,
+            #     "HTTP_HOST":HTTP_HOST,
+            #
+            # })
 
         elif classtype == "tut_class":
             _review=T2ClassReview.objects.get(pk=review_num)
@@ -630,10 +643,11 @@ def delete_review(request, review_num):
             if _review.user == request.user:
                 _review.is_active=False
                 _review.save()
-            return render(request, TEMP.TUT_POST_DETAIL_V2D1,{
-                "post":_post,
-                "HTTP_HOST":HTTP_HOST,
-            })
+            return HttpResponseRedirect("/v2.1/class/"+str(_post.t2classcard_set.first().id))
+            # return render(request, TEMP.TUT_POST_DETAIL_V2D1,{
+            #     "post":_post,
+            #     "HTTP_HOST":HTTP_HOST,
+            # })
 
     return HttpResponseRedirect("/")
 
@@ -645,16 +659,19 @@ def class_post_detail(request, class_num):
         _post=""
         if _postcard.classtype == "tutclass":
             _post=_postcard.tut_post
+            _reviews=_post.t2classreview_set.filter(is_active=True)
             return render(request, TEMP.TUT_POST_DETAIL_V2D1,{
                 "post":_post,
+                "reviews":_reviews,
                 "HTTP_HOST":HTTP_HOST,
             })
 
         else:
             _post=_postcard.teach_post
-
+            _reviews=_post.t2classreview_set.filter(is_active=True)
             return render(request, TEMP.TEACH_POST_DETAIL_V2D1,{
                 "post":_post,
+                "reviews":_reviews,
                 "HTTP_HOST": HTTP_HOST,
             })
     else :

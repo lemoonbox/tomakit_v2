@@ -73,9 +73,11 @@
 
 
             <ul class="nav navbar-nav navbar-right">
+                {% if not user.t2hostprofile_set.first %}
                 <li><a href="http://{{HTTP_HOST}}/v2.1/user/host/apply" class="user">
                     <img class="header-teacher" src="{%static 'media/image/slice/icon-header_teacher-gr.png'%}">&nbsp;선생님 등록</a>
                 </li>
+                {% endif %}
                 {% if user.is_authenticated %}
                 <li><a href="http://{{HTTP_HOST}}/v2.1/class/create/begin" class="user">
                     <img class="header-open" src="{%static 'media/image/slice/icon-header_open-gr.png'%}">&nbsp;클래스 개설 </a>

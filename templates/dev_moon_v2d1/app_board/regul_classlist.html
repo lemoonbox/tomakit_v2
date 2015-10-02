@@ -251,7 +251,7 @@
                             </div>
                         </a>
                         {%comment%}수업호스트::{{class.user}}{%endcomment%}
-                        <a class="tmk-card-img-profile">
+                        <a class="tmk-card-img-profile" href="http://{{HTTP_HOST}}/v2.1/user/profile/{{class.user.id}}">
                         <div class="card-link">
                             <img id="tmk-img-pro" src="{{MEDIA_URL}}{{class.user.t2profile_set.first.pro_pic}}">
                             </div>
