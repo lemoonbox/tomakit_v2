@@ -201,12 +201,12 @@
                 <iframe width="100%" height="480px" src="https://www.youtube.com/embed/{{post.video}}" frameborder="0" allowfullscreen></iframe>
                 {% endif %}
                 <div class="tmk-h3">소개</div>
-                <div class="tmk-panel">{{post.descript}}</div>
+                <div class="tmk-panel">{{post.descript|linebreaks}}</div>
 
                 <div class="tmk-h3">커리큘럼</div>
-                <div class="tmk-panel">{{post.curri}}</div>
+                <div class="tmk-panel">{{post.curri|linebreaks}}</div>
                 <div class="tmk-h3">안내사항</div>
-                <div class="tmk-panel">{{post.notic}}</div>
+                <div class="tmk-panel">{{post.notic|linebreaks}}</div>
 
                 <div class="tmk-h3">공방위치</div>
                 <div class="tmk-panel">{{post.addr}}</div>
@@ -302,7 +302,7 @@
 <div class="tmk-main-body col-lg-12" style="border-bottom:2px solid #ddd;background:#fff;">
     <div class="container">
         <div class="tmk-review col-lg-8">
-            <div class="tmk-h3 col-xs-12" style="text-align:left;"><span style="color:#84CDC2;">"리뷰 숫자"</span>개의 후기가 있습니다</div>
+            <div class="tmk-h3 col-xs-12" style="text-align:left;"><span style="color:#84CDC2;">{{reviews.count}}</span>개의 후기가 있습니다</div>
             <div class="review-wrapper col-md-12">
                 <form method="POST" action="{% url 'create_review_v2d1' post.id %}">
                     {%csrf_token%}
@@ -329,7 +329,7 @@
                 </form>
             </div>
             <div class="col-xs-12 col-md-12" style="padding-left:0;">
-                {% for review in post.t2classreview_set.all%}
+                {% for review in reviews %}
                 {% if review.is_active %}
                 <div class="review-wrapper">
                     <div class="col-xs-2">
@@ -341,7 +341,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-7 col-xs-7 user-review">
+                    <div class="col-md-7 col-xs-7 user-review"  {% if review.user == request.user %}id="requestuser"{%endif%}>
                         <a href="http://{{HTTP_HOST}}/v2.1/user/profile/{{review.user.id}}">
                             {{review.user.last_name}}{{review.user.first_name}}
                         </a> {{review.grade}}
@@ -350,6 +350,7 @@
                     </div>
 
                     <!--수정 form 나중에  hidden-->
+                    {% if review.user == request.user %}
                     <div class="review-modify" hidden>
                         <form method="POST" action="{% url 'modify_review_v2d1' post.id %}">
                             {%csrf_token%}
@@ -362,15 +363,18 @@
                                 {{review.review.errors|striptags}}
                                 {{review.grade.errors|striptags}}
                             </div>
+
                             <div class="col-md-2 col-xs-2 pull-right" style="margin-right:15px;">
                                 <input class="btn btn-link modify-end" type="submit" value="수정 완료">
                             </div>
                         </form>
                     </div>
                     <!--사용자가 단 댓글인 경우에만 visible되는-->
+
                     <div class="col-md-2 col-xs-2 pull-right modify-wrap" style="margin-right:15px;">
                         <span class="btn btn-link modify-btn">댓글 수정</span>
                     </div>
+
 
                     <div class="col-md-2 col-xs-2 pull-right review-del" style="padding-left:0;" hidden>
                         <form method="POST" action="{% url 'delete_review_v2d1' review.id%}">
@@ -379,9 +383,11 @@
                             <input class="btn btn-link" type="submit" value="리뷰 삭제">
                         </form>
                     </div>
+                    {% endif %}
                 </div>
                 {% endif %}
                 {% endfor %}
+
             </div>
         </div>
     </div>
@@ -402,7 +408,7 @@
     $(document).ready(function(){
         $(".modify-btn").click(function(){
             $(".modify-wrap").hide();
-            $(".user-review").hide();
+            $("#requestuser").hide();
             $(".review-modify").show();
             $(".review-del").show();
         });
