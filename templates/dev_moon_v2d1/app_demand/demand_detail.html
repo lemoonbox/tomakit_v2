@@ -94,7 +94,7 @@
             <div class="">{{post.category.category|cate2han}}</div>
             <div class="tmk-h2">{{post.title}}</div>
             <!--한줄소개 ::-->
-            <div style="margin-top:80px;">{{post.descript}}</div>
+            <div style="margin-top:80px;">{{post.descript|linebreaks}}</div>
             <div style="margin:30px auto;height:40px;font-size:14px;overflow:hidden;color:#84CDC2;">{{post.goal|goaltag2han}}</div>
             <label><img src="{%static 'media/image/slice/icon-intro_clock.png'%}"> 희망 일정</label> {{post.weekday}}<br>
             <label><img src="{%static 'media/image/slice/icon-intro_location.png'%}"> 희망지역</label> {{post.state.state|state2han}} {{post.local}}<br>

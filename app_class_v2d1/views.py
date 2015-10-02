@@ -34,6 +34,8 @@ from app_class_v2d1.forms import \
     T2ClassPicForm, \
     T2ClassCardForm,\
     T2ReviewForm
+from app_user_v2d1.models import \
+    T2HostProfile
 
 
 # Create your views here.
@@ -172,12 +174,17 @@ def create_tut(request, class_num):
             imagelist=[]
             if imageform.is_valid():
                 _imagelist=imageform.savefiles()
-
+            _hostprofile=T2HostProfile.objects.get(user=_user)
+            _hostprofile.intro_self=request.POST.get("intro_self", "")
+            _hostprofile.save()
             _tutpost.wr_done=True
             _classcard.wr_done=True
+            _tutpost.is_opene=True
+            _classcard.is_open=True
             _tutpost.save()
             _classcard.save()
             return render(request, TEMP.CLASS_CREATE_FINISH_V2D1,{
+                        "HTTP_HOST":HTTP_HOST,
                     })
 
     return render(request, TEMP.CLASS_CREATE_TUT_V2D1,{
@@ -205,7 +212,6 @@ def create_teach(request, class_num):
         title=request.GET.get("title")
         prefill_intro=_user.t2hostprofile_set.first().intro_self
         imageform=T2ClassPicForm()
-        #prefill_addr=_user.t2hostprofile_set.first().shop_addr
     elif request.method == "POST":
         locality=request.POST.get("locality", "").encode("utf-8")
         area_1=request.POST.get("area_1", "").encode("utf-8")
@@ -271,12 +277,17 @@ def create_teach(request, class_num):
             imagelist=[]
             if imageform.is_valid():
                 _imagelist=imageform.savefiles()
-
+            _hostprofile=T2HostProfile.objects.get(user=_user)
+            _hostprofile.intro_self=request.POST.get("intro_self", "")
+            _hostprofile.save()
             _teachpost.wr_done=True
             _classcard.wr_done=True
+            _teachpost.is_opene=True
+            _classcard.is_open=True
             _teachpost.save()
             _classcard.save()
             return render(request, TEMP.CLASS_CREATE_FINISH_V2D1,{
+                "HTTP_HOST":HTTP_HOST,
             })
 
     return render(request, TEMP.CLASS_CREATE_TEACH_V2D1,{

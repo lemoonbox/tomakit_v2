@@ -126,7 +126,7 @@ def login(request, *args, **kwargs):
                 auth_login(request, user)
                 return HttpResponseRedirect(next)
 
-    return render(request, TEMP.V2_LOGIN,
+    return render(request, TEMP.LOGIN_TEM_V2D1,
                   {'login_form':login_form,
                    'next':next,
                     'HTTP_HOST':HTTP_HOST,
@@ -355,6 +355,7 @@ def edit_profile(request, user_num):
         type=request.POST.get("edit_type", "")
         profileform=ProfileForm(request.POST)
         if type == "basic":
+            print "bassic"
             if profileform.is_valid():
                 image=request.FILES.get("pro_pic", "")
                 last_name=request.POST.get("last_name", "")
@@ -365,14 +366,16 @@ def edit_profile(request, user_num):
                 _profile_user.last_name=last_name
                 _profile_user.first_name=first_name
                 _profile.intro_line=intro_line
-                _profile.mobli1=request.POST.get("mobli2", "")
-                _profile.mobli2=request.POST.get("mobli3", "")
+                _profile.mobli1=request.POST.get("mobile2", "")
+                _profile.mobli2=request.POST.get("mobile3", "")
                 _profile.mobli=mobli
                 _profile.mobli_able=True
                 _profile.save()
                 _profile_user.save()
+
                 return HttpResponseRedirect("/v2.1/user/profile/%d" %(_profile_user.id))
         elif type == "host":
+            print "host"
             video=utils.shard_url_picker(request.POST.get("video", ""))
             image=request.FILES.get("intro_pic", "")
             intro_self=request.POST.get('intro_self', "")
