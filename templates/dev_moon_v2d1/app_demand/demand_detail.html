@@ -226,10 +226,11 @@
                             </div>
                         </form>
                     </div>
-                    <!--사용자가 단 댓글인 경우에만 visible되는-->
+                    {%if request.user == comment.user%}
                     <div class="col-md-2 col-xs-2 pull-right modify-wrap">
                         <span class="btn btn-link modify-btn">댓글 수정</span>
                     </div>
+                    {% endif %}
                     <div class="col-md-2 col-xs-2 pull-right review-del" hidden>
                         <form method="POST" action="{% url 'delete_comment_v2d1' comment.id%}">
                             {%csrf_token%}
