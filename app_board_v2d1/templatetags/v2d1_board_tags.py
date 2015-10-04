@@ -8,59 +8,51 @@ register = template.Library()
 
 @register.filter(name="cate2han")
 def cate2han(valu, argu=None):
-    if valu == "leather":
+    if valu == "cate_1":
         return  u"가죽공예"
-    elif valu =="calligraphy":
+    elif valu =="cate_2":
+        return u"플라워아트"
+    elif valu =="cate_3":
+        return u"전통공예/한복"
+    elif valu =="cate_4":
+        return u"목공예"
+    elif valu =="cate_5":
+        return u"금속공예/매듭"
+    elif valu =="cate_6":
+        return u"재봉틀/뜨개질"
+    elif valu =="cate_7":
         return u"캘리그라피"
-    elif valu =="flower":
-        return u"플라워/디퓨저"
-    elif valu =="dyeing":
-        return u"천연염색"
-    elif valu =="pottery":
-        return u"도자기공예"
-    elif valu =="home_living":
-        return u"Home&Living"
-    elif valu =="sewing":
-        return u"미싱/옷만들기"
-    elif valu =="etc":
+    elif valu =="cate_8":
+        return u"그리기"
+    elif valu =="cate_9":
+        return u'베이킹/요리'
+    elif valu =="cate_10":
+        return u"화장품/향기"
+    elif valu =="cate_11":
         return u"기타"
-    elif valu =="woodwork":
-        return u'목공예'
-    elif valu =="art":
-        return u"미술"
-    elif valu =="toreutics":
-        return u"금속공예/악세사리"
-    elif valu =="knot":
-        return u"매듭"
-    elif valu =="knit":
-        return u"뜨개질"
-    elif valu =="bake":
-        return u"베이킹/쿠킹"
-    elif valu =="cosmetics":
-        return u"천연화장품/비누"
     else :
         return u"ALL"
 
 @register.filter(name="state2han")
 def state2han(valu, argu=None):
-    if valu == "seoul":
-        return  u"서울"
-    elif valu =="incheon_gyeonggi":
-        return u"인천/경기"
-    elif valu =="busan_ulsan_gyeongnam":
-        return u"부산/울산/경남"
-    elif valu =="daegu_gyeongbuk":
-        return u"대구/경북"
-    elif valu =="daejeon_chungcheong":
-        return u"대전/충청"
-    elif valu =="gwangju_jeonla":
-        return u"광주/전라"
-    elif valu =="gangwon":
-        return u"강원"
-    elif valu =="jeju":
-        return u"제주"
-    elif valu =="etc":
-        return u'기타'
+    if valu == "zone_1":
+        return  u"도봉/성북/동대문..."
+    elif valu =="zone_2":
+        return u"은평/마포/서대문..."
+    elif valu =="zone_3":
+        return u"종로/중구/용산..."
+    elif valu =="zone_4":
+        return u"양천/영등포/동작.."
+    elif valu =="zone_5":
+        return u"송파/강남/서초..."
+    elif valu =="zone_6":
+        return u"수원/안산/안양..."
+    elif valu =="zone_7":
+        return u"성남/남양주/용인..."
+    elif valu =="zone_8":
+        return u"파주/의정부/고양..."
+    elif valu =="zone_9":
+        return u'인천/부천'
     else :
         return u"ALL"
 
@@ -87,6 +79,6 @@ def goaltag2han(valu, argu=None):
         elif goal == "quality":
             hantags+=u" #가격보다는 수업 퀄리티"
         elif goal == "professional":
-            hantags+=" #창업을 위한 전문 수업"
+            hantags+=u" #창업을 위한 전문 수업"
 
     return hantags
