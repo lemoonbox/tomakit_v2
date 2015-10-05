@@ -6,54 +6,46 @@
 {%block style%}
 <style>
     body {background-color:#fff!important;}
-    .html5-video-content {width:100%!important;}
-    .item >img {width:100%;}
-    .item {max-height:500px;overflow:hidden;}    /*.tmk-class-pay img {max-width:100px;}*/
+
     .tmk-class-pay {border:1px solid #ddd;border-radius:4px;}
     .tmk-class-pay-top {padding:10px;}
-    .tmk-class-pay .tmk-h3 {border-bottom:1px solid #ddd;padding:15px;margin-top:0px;}
+    .tmk-class-pay .tmk-h3 {border-bottom:1px solid #ddd;padding:15px;margin-top:0;}
     .tmk-class-pay label {line-height:36px;color:#82888A;font-size:14px;font-weight:normal;min-width:130px;max-width:150px;vertical-align:middle;}
     .col-lg-12 img {max-width:100px;}
     .tmk-infobox-price {height:120px; line-height:24px;text-align:left;background-color:#eee;padding:10px;}
     .tmk-infobox-price div {
         float: left;
-        /*min-width: 46%;*/
+        /*width: 50%;*/
     }
     .tmk-infobox-price .tmk-h3 {padding-right:0;}
 
     .tmk-infobox-price label {line-height:18px;}
     .tmk-infobox-profile{float:left;width:100%;text-align:left;padding:10px;}
-    .tmk-infobox-profile .img-grid {width:58px;float:left;overflow:hidden;vertical-align:middle;}
+    .tmk-infobox-profile .img-grid {width:80px;float:left;overflow:hidden;vertical-align:middle;}
 
     .card-link {z-index:0!important;}
     .card-link img {z-index:-1!important;}
 
     .tmk-infobox-profile .infobox-img-wrapper {border-radius:50%;width:55px;height:55px;overflow:hidden;}
     .tmk-infobox-profile .infobox-img-wrapper img {width:105%;height:105%;position:center;}
-    /*.tmk-infobox-price*/
+
     .tmk-infobox-profile div:first-child {min-width:58px;float:left;}
     .tmk-infobox-profile label {width:60%;line-height:20px;}
-    .tmk-infobox-profile .h3 {margin:0px;padding:0;}
+    .tmk-infobox-profile .h3 {margin:0;padding:0;}
     .tmk-main-body {font-size:18px;line-height:28px;}
     .col-lg-8 .tmk-h2 {text-align:left;}
     .tmk-post-detail .tmk-h3 {text-align:left;}
 
+
     .tmk-review {margin: 50px auto!important;}
-    /*.tmk-review .col-md-8 {padding:0px;}*/
     .tmk-review .btn-primary {width:170px;height:80px;}
     .tmk-review textarea {height:80px;}
     .img-wrap img {width:100%;}
     .col-md-2 img {width:100px;}
     .review-wrapper {margin:20px auto;text-align:left;min-height:150px;margin-bottom:30px;padding:0;}
     .review-wrapper .btn-link {display:inline!important;float:left!important;margin-left:-5px;}
-    #user-review {text-align:left;}
 
-    /*@media screen and (min-width:1200px) {*/
-        /*#sidebar {*/
-            /*margin-bottom: -1000px;*/
-        /*}*/
-        /*/!*#submit-review {position:absolute;top:-90px;left:0;}*!/*/
-    /*}*/
+    #user-review {text-align:left;}
     @media screen and (min-width:992px) {
         #submit-review {position:absolute;top:-90px;left:0;}
     }
@@ -61,7 +53,7 @@
         #submit-review {height:42px;}
     }
     .tmk-panel {border-bottom:none;}
-
+.card-link img{background:url('{%static "media/image/default_prof.png"%}') no-repeat; background-position:center; background-size:cover;}
 </style>
 
 {%endblock%}
@@ -82,7 +74,7 @@
         </div>
         <!--<div class="tmk-page-pick col-lg-12"></div>-->
         <div class="col-lg-12">
-            <div id="class-post-carousel" class="carousel slide" data-ride="carousel">
+            <div id="class-post-Carousel" class="carousel slide" data-ride="carousel">
                 <!--Indicators -->
                 <ol class="carousel-indicators">
                     {% for image in post.t2classpic_set.all%}{% if forloop.counter0 == 0 %}
@@ -116,11 +108,11 @@
                 </a>
             </div>
         </div>
-        </div>
+    </div>
 
-        <div class="tmk-main-body col-lg-12" id="tmk-post-container">
-            <div class="container">
-                <div class="col-lg-4 hidden-lg" style="margin-bottom:50px;">
+    <div class="tmk-main-body col-lg-12" id="tmk-post-container">
+        <div class="container">
+            <div class="col-lg-4 hidden-lg" style="margin-bottom:50px;">
                 <div class="tmk-class-pay">
                     <div class="tmk-class-pay-top">
                         <!--<div class=h3>수업정보</>-->
@@ -177,7 +169,7 @@
                     </div>
                 </div>
             </div>
-                <div class="col-lg-8 tmk-post-detail">
+            <div class="col-lg-8 tmk-post-detail">
                 <div class="tmk-h2" style="font-weight:bold;">클래스 소개</div>
                 <!--동영상-->
                 {% if post.video%}
@@ -218,68 +210,68 @@
                     </div>
                 </div>
             </div>
-                <div class="col-lg-4 visible-lg" id="sidebar">
-            <div class="tmk-class-pay">
-                <div class="tmk-class-pay-top">
-                    <!--<div class=h3>수업정보</>-->
-                    <div class="tmk-h3" style="font-weight:bold;">{{post.repeat}}회 과정 / 총 {% widthratio post.repeat 1 post.perhour%}시간</div>
-                    <div style="text-align:left;">
-                        <div>
-                            <label><img src="{%static 'media/image/slice/icon-intro_time.png'%}"> 모집 마감일</label> {{post.deadline|date:"Y년 n월 d일"}}
-                        </div>
-                        <div>
-                            <label><img src="{%static 'media/image/slice/icon-intro_flag.png'%}"> 수업 시작일 </label> {{post.deadline|date:"Y년 n월 d일"}}
-                        </div>
-                        <div>
-                            <label><img src="{%static 'media/image/slice/icon-intro_clock.png'%}"> 수업 일정</label> {{post.weekday}}
-                        </div>
-                        <div>
-                            <label><img src="{%static 'media/image/slice/icon-intro_people.png'%}"> 인원</label>
-                            최소 {{post.min_num}}명 ~ 최대 {{post.max_num}}명
-                        </div>
-                        <div>
-                            <label><img src="{%static 'media/image/slice/icon-intro_location.png'%}"> 장소</label> {{post.addr}}
-                        </div>
-                    </div>
-                </div>
-                <div class="tmk-infobox-price">
-                    <div><label>재료비</label><br>
-                        <span class="small">￦</span> {{post.extra_price|intcomma}}<br>
-                        <label>수강료</label><br>
-                        <span class="small">￦</span> {{post.price|intcomma}}</div>
-                    <div class="pull-right" style="text-align:right;padding-top: 72px;">합계<span class="tmk-h3" style="border-bottom:none;">￦{{ post.extra_price|add:post.price |intcomma}}</span></div>
-                </div>
-                <!--강사 프로필-->
-                <div class="tmk-infobox-profile">
-                    <a href="http://{{HTTP_HOST}}/v2.1/user/profile/{{post.user.id}}">
-                        <div class="tmk-card-img-profile">
-                            <div class="card-link">
-                                <img src="{{MEDIA_URL}}{{post.user.t2profile_set.first.pro_pic}}">
+            <div class="col-lg-4 visible-lg" id="sidebar">
+                <div class="tmk-class-pay">
+                    <div class="tmk-class-pay-top">
+                        <!--<div class=h3>수업정보</>-->
+                        <div class="tmk-h3" style="font-weight:bold;">{{post.repeat}}회 과정 / 총 {% widthratio post.repeat 1 post.perhour%}시간</div>
+                        <div style="text-align:left;">
+                            <div>
+                                <label><img src="{%static 'media/image/slice/icon-intro_time.png'%}"> 모집 마감일</label> {{post.deadline|date:"Y년 n월 d일"}}
+                            </div>
+                            <div>
+                                <label><img src="{%static 'media/image/slice/icon-intro_flag.png'%}"> 수업 시작일 </label> {{post.deadline|date:"Y년 n월 d일"}}
+                            </div>
+                            <div>
+                                <label><img src="{%static 'media/image/slice/icon-intro_clock.png'%}"> 수업 일정</label> {{post.weekday}}
+                            </div>
+                            <div>
+                                <label><img src="{%static 'media/image/slice/icon-intro_people.png'%}"> 인원</label>
+                                최소 {{post.min_num}}명 ~ 최대 {{post.max_num}}명
+                            </div>
+                            <div>
+                                <label><img src="{%static 'media/image/slice/icon-intro_location.png'%}"> 장소</label> {{post.addr}}
                             </div>
                         </div>
-                        <div>
-                            <label>클래스 선생님</label><br>
-                            <div class="h3" style="color:#565A5C;">{{post.user.last_name}}{{post.user.first_name}}</div>
-                        </div>
-                    </a>
-                </div>
+                    </div>
+                    <div class="tmk-infobox-price">
+                        <div><label>재료비</label><br>
+                            <span class="small">￦</span> {{post.extra_price|intcomma}}<br>
+                            <label>수강료</label><br>
+                            <span class="small">￦</span> {{post.price|intcomma}}</div>
+                        <div class="pull-right" style="text-align:right;padding-top: 72px;">합계<span class="tmk-h3" style="border-bottom:none;">￦{{ post.extra_price|add:post.price |intcomma}}</span></div>
+                    </div>
+                    <!--강사 프로필-->
+                    <div class="tmk-infobox-profile">
+                        <a href="http://{{HTTP_HOST}}/v2.1/user/profile/{{post.user.id}}">
+                            <div class="tmk-card-img-profile">
+                                <div class="card-link">
+                                    <img src="{{MEDIA_URL}}{{post.user.t2profile_set.first.pro_pic}}">
+                                </div>
+                            </div>
+                            <div>
+                                <label>클래스 선생님</label><br>
+                                <div class="h3" style="color:#565A5C;">{{post.user.last_name}}{{post.user.first_name}}</div>
+                            </div>
+                        </a>
+                    </div>
 
-                <div style="padding:10px;">
-                    <!-- 결제 하기 -->
-                    <form method="GET" action="{% url 'pay_prefill_v2d1' %}">
-                        <input type="hidden" value="{{post.id}}" name="post_id">
-                        <input type="hidden" value="teachclass" name="classtype">
-                        <button class="btn btn-primary btn-block">
-                            신청하기 <input type="submit" value="{{ post.extra_price|add:post.price |intcomma}}원" hidden>
-                        </button>
-                    </form>
-                </div>
+                    <div style="padding:10px;">
+                        <!-- 결제 하기 -->
+                        <form method="GET" action="{% url 'pay_prefill_v2d1' %}">
+                            <input type="hidden" value="{{post.id}}" name="post_id">
+                            <input type="hidden" value="teachclass" name="classtype">
+                            <button class="btn btn-primary btn-block">
+                                신청하기 <input type="submit" value="{{ post.extra_price|add:post.price |intcomma}}원" hidden>
+                            </button>
+                        </form>
+                    </div>
 
+                </div>
             </div>
         </div>
-            </div>
-        </div>
-   </div>
+    </div>
+</div>
 
 
 <div class="tmk-main-body col-lg-12" style="border-bottom:2px solid #ddd;background:#fff;">
@@ -367,8 +359,8 @@
                     </div>
                     {% endif %}
                 </div>
-            {% endif %}
-            {% endfor %}
+                {% endif %}
+                {% endfor %}
             </div>
         </div>
     </div>
@@ -384,6 +376,7 @@
 </div>
 {%endblock%}
 {%block script%}
+<script src="http://code.jquery.com/jquery-latest.js"></script>
 <script>
     $(document).ready(function(){
         $(".modify-btn").click(function(){
@@ -396,23 +389,23 @@
 </script>
 <!--<script>-->
 
-    <!--$(function() {-->
-        <!--var $sidebar   = $("#sidebar"),-->
-                <!--$window    = $(window),-->
-                <!--offset     = $sidebar.offset(),-->
-                <!--topPadding = 15;-->
-        <!--$window.scroll(function() {-->
-            <!--if ($window.scrollTop() > offset.top) {-->
-                <!--$sidebar.stop().animate({-->
-                    <!--marginTop: $window.scrollTop() - offset.top + topPadding-->
-                <!--});-->
-            <!--} else {-->
-                <!--$sidebar.stop().animate({-->
-                    <!--marginTop: 0-->
-                <!--});-->
-            <!--}-->
-        <!--});-->
-    <!--});-->
+<!--$(function() {-->
+<!--var $sidebar   = $("#sidebar"),-->
+<!--$window    = $(window),-->
+<!--offset     = $sidebar.offset(),-->
+<!--topPadding = 15;-->
+<!--$window.scroll(function() {-->
+<!--if ($window.scrollTop() > offset.top) {-->
+<!--$sidebar.stop().animate({-->
+<!--marginTop: $window.scrollTop() - offset.top + topPadding-->
+<!--});-->
+<!--} else {-->
+<!--$sidebar.stop().animate({-->
+<!--marginTop: 0-->
+<!--});-->
+<!--}-->
+<!--});-->
+<!--});-->
 
 <!--</script>-->
 {%endblock%}

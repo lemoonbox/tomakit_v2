@@ -7,6 +7,14 @@
 
 <link rel="stylesheet" type="text/css" href="{%static 'media/css/tmk-form.css'%}">
 <style>
+
+    .nav-tabs {background:none;border:none;border-bottom:2px solid #eee;}
+    .nav-tabs a {font-size:24px;font-weight:bold;font-family:NanumGothic;}
+    .nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover
+    {border:none;border-bottom:4px solid #FF565A;color:#FF565A;background:transparent!important;}
+    .nav-tabs li{border:none;}
+    .nav-tabs>li>a {border:none;color:#CACCCD;}
+    .nav-tabs a {border:none;}
     .file-upload-wrapper {
         position: relative;
         margin-bottom: 5px;
@@ -62,14 +70,34 @@
         <div class="tmk-h4"></div>
     </div>
     <div class="col-md-2 col-xs-2">
-        여기에 프로필 이미지 <img>
-        <h3>여기에 이름</h3>
-        <a class="btn btn-primary">프로필 화면 보기</a>
+        <div class="profile-wrapper" style="overflow:hidden;border-radius:50%;width:150px;height:150px;">
+        <img src="{{MEDIA_URL}}{{user.t2profile_set.first.pro_pic}}" style="height:100%;right:0;left:0;top:0;bottom:0;">
+        </div>
+        <h2>{{profile_user.last_name}} {{profile_user.first_name}}</h2>
+        <a class="btn btn-primary" href="http://{{HTTP_HOST}}/v2.1/user/profile/{{user.id}}">프로필 화면 보기</a>
     </div>
     <div class="col-md-10 col-xs-10">
-        <div class="col-md-9 col-md-offset-1 well" id="tmk-form">
+        <!-&#45;&#45;-->
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active">
+                    <a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">프로필 수정</a>
+                </li>
+                <li role="presentation">
+                    <a href="#artist" aria-controls="artist" role="tab" data-toggle="tab">작가 프로필 수정</a>
+                </li>
+                <li role="presentation">
+                    <a href="#pw-reset" aria-controls="pw-reset" role="tab" data-toggle="tab">계정 관리</a>
+                </li>
+            </ul>
+
+
+        <!-&#45;&#45;-->
+            <!-- Tab panes -->
+        <div class="tab-content">
+        <div class="col-md-9 well tmk-form tab-pane fade in active" id="profile">
             <form method="POST" action="{% url 'edit_profile_v2d1' user_num %}" enctype="multipart/form-data">
-                <h3 class="tmk-h3 profile-title pull-left">프로필 수정</h3>
+                <!--<h3 class="tmk-h3 profile-title pull-left">프로필 수정</h3>-->
                 {%csrf_token%}
                 <input class="form-control" type="hidden" name="edit_type" value="basic">
                 <div class="tmk-panel">
@@ -125,8 +153,8 @@
             </form>
         </div>
 
-        <div class="col-md-9 col-md-offset-1 well tmk-form">
-            <h3 class="tmk-h3 profile-title pull-left">작가 프로필 편집</h3>
+        <div class="col-md-9 well tmk-form tab-pane fade" id="artist">
+            <!--<h3 class="tmk-h3 profile-title pull-left">작가 프로필 편집</h3>-->
             <form method="POST" action="{% url 'edit_profile_v2d1' user_num %}" enctype="multipart/form-data">
                 {%csrf_token%}
                 <input class="form-control" type="hidden" name="edit_type" value="host">
@@ -178,12 +206,12 @@
             </form>
         </div>
 
-        <div class="col-md-9 col-md-offset-1 well tmk-form">
-            <h3 class="tmk-h3 profile-title pull-left">계정 관리</h3>
+        <div class="col-md-9 well tmk-form tab-pane fade" id="pw-reset">
+            <!--<h3 class="tmk-h3 profile-title pull-left">계정 관리</h3>-->
             <div class="tmk-panel">
                 <label class="col-md-2">계정 이메일</label>
                 <div class="col-md-9">
-                    <input class="form-control" type="text" value="{{request.user.username}}">
+                    <input disabled class="form-control" type="text" value="{{request.user.username}}">
                 </div>
             </div>
             <div class="tmk-panel">
@@ -193,6 +221,7 @@
                 </div>
             </div>
         </div>
+    </div>
     </div>
 </div>
 {%endblock%}
