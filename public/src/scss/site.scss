@@ -8,11 +8,12 @@
   font-family: 'NanumGothic', 'AppleSDGothicNeo-Bold', 'Dotum', 'NanumMyeongjo', 'Gulim', 'Helvetica', sans-serif !important;
 }
 //html {height:100vh!important;}
-html {width:100%;padding-right:0!important;}
+html {width:100%!important;overflow-x:hidden!important;padding-right:0!important;}
 a:hover {text-decoration: none !important;}
 
 body {
-  min-width:410px!important;
+  min-width:100%!important;
+  //min-width:410px;
   text-align: center;
   background-color: #F2F2F2 !important;
   /* global font-size */
