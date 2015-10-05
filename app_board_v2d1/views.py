@@ -9,12 +9,12 @@ from app_comminfo.models import \
 from app_board_v2d1.models import Bestclass
 from app_class_v2d1.models import T2ClassCard
 from app_demand_v2d1.models import T2DemandCard
-
+import logging
+logger = logging.getLogger(__name__)
 # Create your views here.
 
 
 def mainpage(request):
-    next="/"
     HTTP_HOST = request.META['HTTP_HOST']
     if request.method == "GET":
         adkeyword=request.GET.get("keyword", "all")

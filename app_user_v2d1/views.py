@@ -98,7 +98,7 @@ def signup(request):
                utils.send_key_email(request, title, sender,
                     _user.email, TEMP.CONFRI_TEM_V2D1, key)
             else:
-                tasks.send_key_email.delay(HTTP_HOST, title, sender,
+                tasks.send_key_email(HTTP_HOST, title, sender,
                 _user.email, TEMP.CONFRI_TEM_V2D1, key)
             return HttpResponseRedirect(next)
 
@@ -157,7 +157,7 @@ def send_confirm(request):
                     utils.send_key_email(request, title, sender,
                         _user[0].email, TEMP.CONFRI_TEM_V2D1, key)
                 else:
-                    tasks.send_key_email.delay(host, title, sender,
+                    tasks.send_key_email(host, title, sender,
                         _user[0].email, TEMP.CONFRI_TEM_V2D1, key)
         else:
             print "not eixst"
@@ -224,7 +224,7 @@ def pw_reset_request(request):
                     utils.send_key_email(request, title, sender,
                         _user[0].email, TEMP.PWRESET_MAIL_TEM_V2D1, key)
                 else:
-                    tasks.send_key_email.delay(HTTP_HOST, title, sender,
+                    tasks.send_key_email(HTTP_HOST, title, sender,
                         _user[0].email, TEMP.PWRESET_MAIL_TEM_V2D1, key)
 
     HTTP_HOST = request.META["HTTP_HOST"]
