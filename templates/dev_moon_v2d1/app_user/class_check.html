@@ -97,7 +97,11 @@
                                     수업 열기
                                     {% endif %}
                                         </a><br>
-                                    <a href="http://{{HTTP_HOST}}/v2.1/class/modify/{{class.id}}">수업 수정</a>
+                                    {% if class.type == "tutclass" %}
+                                        <a href="http://{{HTTP_HOST}}/v2.1/class/modify/tut/{{class.id}}">수업 수정</a>
+                                    {% else %}
+                                        <a href="http://{{HTTP_HOST}}/v2.1/class/modify/teach/{{class.id}}">수업 수정</a>
+                                    {% endif %}
                                 </span>
                                 <a class="tmk-card-img" href="http://{{HTTP_HOST}}/v2.1/class/{{class.id}}">
                                     <div class="tmk-class-type-label">
