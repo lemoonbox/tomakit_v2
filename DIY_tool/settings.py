@@ -174,7 +174,7 @@ else :
             'NAME': 'proddb',
             'USER': 'root',
             'PASSWORD':'20tencity15',
-            'HOST':'tomakit-v2-prod-db2.cfxqbzsbzi3i.ap-northeast-1.rds.amazonaws.com',
+            'HOST':'tomakitv2-1.cfxqbzsbzi3i.ap-northeast-1.rds.amazonaws.com',
             'PORT':'3306',
         }
     }
@@ -288,6 +288,18 @@ LOGGING = {
             'level': 'DEBUG',
         },
         'app_user': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+        },
+        'app_board_v2d1': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+        },
+        'app_user_v2d1': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+        },
+        'utils': {
             'handlers': ['file'],
             'level': 'DEBUG',
         },

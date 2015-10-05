@@ -12,6 +12,7 @@ def user_account(strategy, details, response, user=None, *args, **kwargs):
 
     if user:
         logger.debug(user)
+        print "oggin"
         attrs = {'user': user}
         if type(kwargs['backend']) is FacebookOAuth2:
             _profile, is_new = T2Profile.objects.get_or_create(**attrs)
