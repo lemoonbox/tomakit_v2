@@ -8,17 +8,17 @@
   font-family: 'NanumGothic', 'AppleSDGothicNeo-Bold', 'Dotum', 'NanumMyeongjo', 'Gulim', 'Helvetica', sans-serif !important;
 }
 //html {height:100vh!important;}
-html {min-width:410px!important;}
+html {width:100%;padding-right:0!important;}
 a:hover {text-decoration: none !important;}
 
 body {
+  min-width:410px!important;
   text-align: center;
   background-color: #F2F2F2 !important;
   /* global font-size */
   font-size: 14px;
   color: #82888A;
 }
-
 
 /* Let's get this party started */
 ::-webkit-scrollbar {
@@ -73,6 +73,7 @@ body {
 }
 .tmk-page-header .tmk-label {
   margin-top:50px!important;
+
 }
 //form {float:left;}
 .tmk-title {color:#565A5C;}
@@ -81,7 +82,7 @@ $g-btn-color:#F5515F;
 $g-btn-h-color:#F5515F;
 
 button {
-  height: 50px;
+  height: 42px;
 }
 
 .btn-primary {
@@ -267,7 +268,6 @@ nav {
 .tmk-page-header {
   padding-top: 50px;
   padding-bottom:50px;
-  //margin-bottom: 15px;
 }
 
 .tmk-page-pick {
@@ -346,9 +346,6 @@ nav {
   width:100%;
 }
 
-//@media screen and (max-width:767px) {
-//  .tmk-footer-nav ul {width:100%;}
-//}
 @media screen and (min-width:768px) {
   .tmk-footer-nav ul {max-width:720px;}
 }
@@ -386,7 +383,6 @@ nav {
     padding: 5px;
   }
 }
-
 
 
 .navbar-default .navbar-collapse, .navbar-default .navbar-form {
@@ -464,17 +460,6 @@ nav {
   margin-bottom:80px;
 }
 
-//.tmk-sub-body-case {
-//  width:1170px;
-//  text-align:center;
-//  display:inline-block;
-//  margin-bottom:80px;
-//  padding-left:20px;
-//}
-//.tmk-sub-body-wrapper {
-//  margin: 50px auto;
-//  min-height:600px;
-//}
 ul{
   list-style-type: none;
 }
@@ -492,7 +477,6 @@ ul{
   height: 570px;
   top:0;
   margin-top:-70px;
-  //overflow: visible;
   padding-bottom:15px;
   //video {
   //  position: absolute;
@@ -965,7 +949,7 @@ ul{
   padding:0 !important;
   text-align: center;
   .nav-tabs {
-    height:67px;
+    //height:67px;
     line-height:67px;
     background-color: transparent;
   }
@@ -1079,12 +1063,6 @@ ul{
     bottom: -100%;
     left: -100%;
   }
-//}
-
-@media screen and (max-width:767px) {
-  //.item img {min-width:150%!important;min-height:100%!important;}
-  //.carousel-inner {height:400px!important;}
-}
 
 .carousel-control.right {background-image:none!important;}
 .carousel-control.left {background-image:none!important;}
@@ -1305,7 +1283,7 @@ ul{
   }
 }
 
-.tmk-search button {height:44px;margin-top:-1px;}
+.tmk-search button {height:43px;margin-top:-3px;}
 
 .card-list li {
   height: 450px;

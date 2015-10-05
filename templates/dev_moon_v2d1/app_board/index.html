@@ -6,6 +6,7 @@
 <style>
     .tmk-main-banner {background-image:url({%static 'media/image/slice/bg-1.png'%});
         background-size: cover;
+        background-position:center;
         background-repeat:no-repeat;}
     @media screen and (min-width:768px) {
         #navbar {
@@ -49,6 +50,7 @@
     <!--<video autoplay loop muted poster="https://d3ce7jb7ih53ua.cloudfront.net/verloc_new_design/main_page/first-page-1.png" id="bgvid">-->
     <!--<source src="https://d3ce7jb7ih53ua.cloudfront.net/verloca_new_design/main_page/verlocal+header_3.mp4"></source>-->
     <!--</video>-->
+    {%comment%}
     <form method="GET" action="{% url 'class_filter_redirct_v2d1' %}">
         {%csrf_token%}
         <div class="tmk-search cover">
@@ -195,6 +197,7 @@
             </div>
         </div>
     </form>
+{%endcomment%}
 </div>
 
 <div class="tmk-main-body col-md-12">

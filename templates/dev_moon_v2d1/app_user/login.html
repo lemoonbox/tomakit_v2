@@ -8,7 +8,7 @@
 
 </style>
 <div class="tmk-sub-body">
-    <div class="tmk-sub-body-wrapper">
+    <div class="tmk-page-header">
         <div id="login" class="well">
           <form method="POST" action="{% url 'login_v2d1' %}" class="form-signin" autocomplete="off">
             <input type="hidden" name="next" value="{{next}}"/>
@@ -40,8 +40,9 @@
                       <table>
                           {% for field in login_form %}
                           {{ field.errors|striptags }}
-                          {% endfor %}</p>
-                </table>
+                          {% endfor %}
+                      </table>
+                      </p>
               </div>
             </div>
             {% endif %}
@@ -61,7 +62,7 @@
     <aside class="tmk-aside-help">
         <div class="aside-help-text">
             <div class="change_link">처음이신가요? <br>
-                <a href="/v2/user/signup/?next=/" class="to_register h4" style="color:#e86460;">회원가입 하러가기</a>
+                <a href="http://{{HTTP_HOST}}/v2.1/user/signup/?next=/" class="to_register h4" style="color:#e86460;">회원가입 하러가기</a>
             </div>
         </div>
     </aside>

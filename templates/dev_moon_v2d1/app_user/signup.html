@@ -8,7 +8,7 @@
 
 </style>
 <div class="tmk-sub-body">
-<div class="tmk-sub-body-wrapper">
+<div class="tmk-page-header">
         <div id="register" class="well">
           <form method="POST" action="{% url 'signup_v2d1' %}" enctype="multipart/form-data" class="form-signin">
               <input type="hidden" name="next" value="{{next}}"/>
@@ -71,7 +71,7 @@
     <aside class="tmk-aside-help">
         <div class="aside-help-text">
             <div class="change_link">이미 가입하셨나요? <br>
-                <a href="/v2/user/login/?next=/" class="to_register h4" style="color:#e86460;">로그인 하러가기</a>
+                <a href="http://{{HTTP_HOST}}/v2.1/user/login/?next=/" class="to_register h4" style="color:#e86460;">로그인 하러가기</a>
             </div>
         </div>
     </aside>

@@ -39,9 +39,26 @@ function selecting(option, id) {
 
     $selecterOptions.hide();
     $selecterOptions.parent().css("z-index", "0");
-
-
 }
+$( "#category" )
+    .change(function() {
+        var str = "";
+        $( "option:selected", this ).each(function() {
+            str += $( this ).text() + " ";
+        });
+        $( ".category-selected").text( str );
+    })
+    .trigger( "change" );
+$( "#state" )
+    .change(function() {
+        var str = "";
+        $( "option:selected", this ).each(function() {
+            str += $( this ).text() + " ";
+        });
+        $( ".state-selected").text( str );
+    })
+    .trigger( "change" );
+
 var indexOfImg = 0;
 function findLastInput(isOnclick){
     var $imgs = $('#tmk-imgs img');

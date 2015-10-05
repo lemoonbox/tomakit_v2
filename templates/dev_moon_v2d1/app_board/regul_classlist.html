@@ -67,7 +67,7 @@
                 <div class="tmk-search cover">
                     <div class="tmk-qitem-selecter-wrapper">
                         <div class="selecter cover" tabindex="0">
-                            <select name="category" required class="selecter_3 selecter-element" data-selecter-options="{&quot;cover&quot;:&quot;true&quot;}" tabindex="-1">
+                            <select id="category" name="category" required class="selecter_3 selecter-element" data-selecter-options="{&quot;cover&quot;:&quot;true&quot;}" tabindex="-1">
                                 <option value="all"
                                         {% if cate_current == 'all' %}selected{% endif %}>모든 카테고리</option>
                                 <option value="cate_1"
@@ -93,9 +93,9 @@
                                 <option value="cate_11"
                                         {% if cate_current == 'cate_11'%}selected{% endif %}>기타</option>
                             </select>
-                            <span class="selecter-selected" onclick="btnClick(this)">카테고리 선택</span>
+                            <span class="selecter-selected category-selected" onclick="btnClick(this)">카테고리 선택</span>
                             <div class="selecter-options" data-value="">
-                                <!--<span class="selecter-item selected" data-value="" onclick="selecting(this, '')">카테고리</span>-->
+                                <span class="selecter-item selected category-selected" data-value="" onclick="selecting(this, '')">카테고리</span>
                                 <div class="selecter-item"
                                      data-value="id"
                                      onclick="selecting(this, 'all')">모든 카테고리</div>
@@ -137,7 +137,7 @@
                     </div>
                     <div class="tmk-qitem-selecter-wrapper">
                         <div class="selecter cover" tabindex="0">
-                            <select name="state" required class="selecter_3 selecter-element" data-selecter-options="{&quot;cover&quot;:&quot;true&quot;}" tabindex="-1">
+                            <select id="state" name="state" required class="selecter_3 selecter-element" data-selecter-options="{&quot;cover&quot;:&quot;true&quot;}" tabindex="-1">
                                 <option value="all"
                                         {% if state_current == 'all' %}selected{% endif %}>모든 지역</option>
                                 <option value="zone_1"
@@ -161,9 +161,9 @@
                                 <option value="etc"
                                         {% if state_current == 'etc'%}selected{% endif %}>기타</option>
                             </select>
-                            <span class="selecter-selected" onclick="btnClick(this)">지역 선택</span>
+                            <span class="selecter-selected state-selected" onclick="btnClick(this)">지역 선택</span>
                             <div class="selecter-options" data-value="">
-                                <!--<span class="selecter-item selected" data-value="" onclick="selecting(this, '')">카테고리</span>-->
+                                <span class="selecter-item selected state-selected" data-value="" onclick="selecting(this, '')">카테고리</span>
                                 <div class="selecter-item"
                                      data-value="id"
                                      onclick="selecting(this, 'all')">모든 카테고리</div>
