@@ -405,14 +405,14 @@ def class_check(request, user_num):
     HTTP_HOST=request.META["HTTP_HOST"]
     _profile_user=get_object_or_404(User, id=user_num)
     if request.method == "GET" and request.user==_profile_user:
-        _host_classes=T2ClassCard.objects.filter(user=_profile_user)
+        _host_cl_cards=T2ClassCard.objects.filter(user=_profile_user)
         _demand_classes=T2DemandCard.objects.filter(user=_profile_user)
     else:
         return Http404("잘못된 요청입니다.")
 
     return render(request, TEMP.CLASS_CKECK_V2D1,{
         "profile_user":_profile_user,
-        "host_classes":_host_classes,
+        "host_cl_cards":_host_cl_cards,
         "demand_classes":_demand_classes,
         "HTTP_HOST":HTTP_HOST,
     })

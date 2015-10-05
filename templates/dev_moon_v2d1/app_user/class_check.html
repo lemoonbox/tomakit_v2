@@ -85,10 +85,9 @@
                     <div id="card-list-wrapper">
                         <ul>
                             <!--<div class="tmk-h3">개설한 클래스</div>-->
-                            {% for class in host_classes %}
+                            {% for class in host_cl_cards %}
 
                             <li class="tmk-class-card col-md-4">
-
                                 <span class="onoff-class">
                                     <a href="{% url 'onoff_class_v2d1' class.user.id class.classtype class.id  %}">
                                         {%if class.is_open%}
@@ -97,10 +96,10 @@
                                     수업 열기
                                     {% endif %}
                                         </a><br>
-                                    {% if class.type == "tutclass" %}
-                                        <a href="http://{{HTTP_HOST}}/v2.1/class/modify/tut/{{class.id}}">수업 수정</a>
+                                    {% if class.classtype == "tutclass" %}
+                                        <a href="http://{{HTTP_HOST}}/v2.1/class/modify/tut/{{class.tut_post.id}}">수업 수정</a>
                                     {% else %}
-                                        <a href="http://{{HTTP_HOST}}/v2.1/class/modify/teach/{{class.id}}">수업 수정</a>
+                                        <a href="http://{{HTTP_HOST}}/v2.1/class/modify/teach/{{class.teach_post.id}}">수업 수정</a>
                                     {% endif %}
                                 </span>
                                 <a class="tmk-card-img" href="http://{{HTTP_HOST}}/v2.1/class/{{class.id}}">
