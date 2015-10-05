@@ -69,29 +69,29 @@
                         <div class="selecter cover" tabindex="0">
                             <select name="category" required class="selecter_3 selecter-element" data-selecter-options="{&quot;cover&quot;:&quot;true&quot;}" tabindex="-1">
                                 <option value="all"
-                                        {% if begin_data.category == 'all' %}selected{% endif %}>모든 카테고리</option>
+                                        {% if cate_current == 'all' %}selected{% endif %}>모든 카테고리</option>
                                 <option value="cate_1"
-                                        {% if begin_data.category == 'cate_1' %}selected{% endif %}>가죽공예</option>
+                                        {% if cate_current == 'cate_1' %}selected{% endif %}>가죽공예</option>
                                 <option value="cate_2"
-                                        {% if begin_data.category == 'cate_2'%}selected{% endif %}>플라워아트</option>
+                                        {% if cate_current == 'cate_2'%}selected{% endif %}>플라워아트</option>
                                 <option value="cate_3"
-                                        {% if begin_data.category == 'cate_3'%}selected{% endif %}>전통공예/한복</option>
+                                        {% if cate_current == 'cate_3'%}selected{% endif %}>전통공예/한복</option>
                                 <option value="cate_4"
-                                        {% if begin_data.category == 'cate_4'%}selected{% endif %}>목공예</option>
+                                        {% if cate_current == 'cate_4'%}selected{% endif %}>목공예</option>
                                 <option value="cate_5"
-                                        {% if begin_data.category == 'cate_5'%}selected{% endif %}>금속공예/매듭</option>
+                                        {% if cate_current == 'cate_5'%}selected{% endif %}>금속공예/매듭</option>
                                 <option value="cate_6"
-                                        {% if begin_data.category == 'cate_6'%}selected{% endif %}>재봉틀/뜨개질</option>
+                                        {% if cate_current == 'cate_6'%}selected{% endif %}>재봉틀/뜨개질</option>
                                 <option value="cate_7"
-                                        {% if begin_data.category == 'cate_7'%}selected{% endif %}>캘리그라피</option>
+                                        {% if cate_current == 'cate_7'%}selected{% endif %}>캘리그라피</option>
                                 <option value="cate_8"
-                                        {% if begin_data.category == 'cate_8'%}selected{% endif %}>그리기</option>
+                                        {% if cate_current == 'cate_8'%}selected{% endif %}>그리기</option>
                                 <option value="cate_9"
-                                        {% if begin_data.category == 'cate_9'%}selected{% endif %}>베이킹/요리</option>
+                                        {% if cate_current == 'cate_9'%}selected{% endif %}>베이킹/요리</option>
                                 <option value="cate_10"
-                                        {% if begin_data.category == 'cate_10'%}selected{% endif %}>화장품/향기</option>
+                                        {% if cate_current == 'cate_10'%}selected{% endif %}>화장품/향기</option>
                                 <option value="cate_11"
-                                        {% if begin_data.category == 'cate_11'%}selected{% endif %}>기타</option>
+                                        {% if cate_current == 'cate_11'%}selected{% endif %}>기타</option>
                             </select>
                             <span class="selecter-selected" onclick="btnClick(this)">카테고리 선택</span>
                             <div class="selecter-options" data-value="">
@@ -139,27 +139,27 @@
                         <div class="selecter cover" tabindex="0">
                             <select name="state" required class="selecter_3 selecter-element" data-selecter-options="{&quot;cover&quot;:&quot;true&quot;}" tabindex="-1">
                                 <option value="all"
-                                        {% if begin_data.category == 'all' %}selected{% endif %}>모든 지역</option>
+                                        {% if state_current == 'all' %}selected{% endif %}>모든 지역</option>
                                 <option value="zone_1"
-                                        {% if demand_data.state == 'zone_1'%}selected{% endif %}>도봉/성북/동대문...</option>
+                                        {% if state_current == 'zone_1'%}selected{% endif %}>도봉/성북/동대문...</option>
                                 <option value="zone_2"
-                                        {% if demand_data.state == 'zone_2'%}selected{% endif %}>은평/마포/서대문...</option>
+                                        {% if state_current == 'zone_2'%}selected{% endif %}>은평/마포/서대문...</option>
                                 <option value="zone_3"
-                                        {% if demand_data.state == 'zone_3'%}selected{% endif %}>종로/중구/용산...</option>
+                                        {% if state_current == 'zone_3'%}selected{% endif %}>종로/중구/용산...</option>
                                 <option value="zone_4"
-                                        {% if demand_data.state == 'zone_4'%}selected{% endif %}>양천/영등포/동작...</option>
+                                        {% if state_current == 'zone_4'%}selected{% endif %}>양천/영등포/동작...</option>
                                 <option value="zone_5"
-                                        {% if demand_data.state == 'zone_5'%}selected{% endif %}>송파/강남/서초...</option>
+                                        {% if state_current == 'zone_5'%}selected{% endif %}>송파/강남/서초...</option>
                                 <option value="zone_6"
-                                        {% if demand_data.state == 'zone_6'%}selected{% endif %}>수원/안산/안양...</option>
+                                        {% if state_current == 'zone_6'%}selected{% endif %}>수원/안산/안양...</option>
                                 <option value="zone_7"
-                                        {% if demand_data.state == 'zone_7'%}selected{% endif %}>성남/남양주/용인...</option>
+                                        {% if state_current == 'zone_7'%}selected{% endif %}>성남/남양주/용인...</option>
                                 <option value="zone_8"
-                                        {% if demand_data.state == 'zone_8'%}selected{% endif %}>파주/의정부/고양...</option>
+                                        {% if state_current == 'zone_8'%}selected{% endif %}>파주/의정부/고양...</option>
                                 <option value="zone_9"
-                                        {% if demand_data.state == 'zone_9'%}selected{% endif %}>인천/부천</option>
+                                        {% if state_current == 'zone_9'%}selected{% endif %}>인천/부천</option>
                                 <option value="etc"
-                                        {% if demand_data.state == 'etc'%}selected{% endif %}>기타</option>
+                                        {% if state_current == 'etc'%}selected{% endif %}>기타</option>
                             </select>
                             <span class="selecter-selected" onclick="btnClick(this)">지역 선택</span>
                             <div class="selecter-options" data-value="">
@@ -169,7 +169,7 @@
                                      onclick="selecting(this, 'all')">모든 카테고리</div>
                                 <div class="selecter-item"
                                      data-value="id"
-                                     onclick="selecting(this, 'zone_1')">도봉/성북/동대문...</div>
+                                     onclick="selecting(this, 'zone_1')" >도봉/성북/동대문...</div>
                                 <div class="selecter-item"
                                      data-value="id"
                                      onclick="selecting(this, 'zone_2')">은평/마포/서대문...</div>
