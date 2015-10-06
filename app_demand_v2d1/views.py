@@ -291,13 +291,15 @@ def mobli_required(request, post_num):
         lineup_next=request.POST.get("lineup_next", "/")
         mobli1=request.POST.get('mobli1', "")
         mobli2=request.POST.get('mobli2', "")
-        mobli="010"+mobli1+mobli2
+        mobli=mobli1+mobli2
 
         _user=User.objects.get(username=request.user)
 
         _profile=_user.t2profile_set.first()
         _profile.mobli=mobli
         _profile.mobli_able=True
+        _profile.mobli1=mobli1
+        _profile.mobli2=mobli2
         _profile.save()
 
         return HttpResponseRedirect("/v2.1/demand/lineup/"+post_num+"?lineup_next="+lineup_next)

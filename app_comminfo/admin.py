@@ -5,7 +5,7 @@ from app_comminfo.models import State, Category
 
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ('category',)
-    fieldsets = [('Cate',{'fields':['category', 'is_active',]},)]
+    fieldsets = [('Cate',{'fields':['category', 'cate_pic','is_active',]},)]
 
 
 admin.site.register(Category, CategoryAdmin)
