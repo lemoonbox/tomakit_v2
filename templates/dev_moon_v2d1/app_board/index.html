@@ -47,9 +47,10 @@
 {%include 'component/navigation/_head_nav_custom.html'%}
 {%endblock%}
 {% block content %}
-<div class="tmk-main-banner">
+
+<div class="tmk-main-banner" id="wrapper">
     <div class="main-banner-title">취미에서 직업으로<br>
-        핸드메이드 클래스 찾을 땐, 공에쌤</div>
+        핸드메이드 클래스 찾을 땐, 공예쌤</div>
     <div class="main-banner-subtitle">공예쌤이 편한 시간, 가까운 공방의 클래스를 찾아드려요!</div>
     <!--<video autoplay loop muted poster="https://d3ce7jb7ih53ua.cloudfront.net/verloc_new_design/main_page/first-page-1.png" id="bgvid">-->
     <!--<source src="https://d3ce7jb7ih53ua.cloudfront.net/verloca_new_design/main_page/verlocal+header_3.mp4"></source>-->
@@ -307,10 +308,11 @@
     </div>
 </div>
 <div class="tmk-main-body col-md-12" style="width:100%;float:left;margin-top:50px;margin-bottom:-50px;background:url('{%static 'media/image/slice/bg-3.png'%}') no-repeat;background-size:cover;background-position:center;">
-    <div class="container">  <div class="tmk-main-host" style="padding:50px;">
+    <div class="container">
+        <div class="tmk-main-host" style="padding:50px;color:#fff!important;">
 
-          <div class="tmk-h3" style="font-weight:bold;color:#fff;">작가님! 공예쌤을 통해 수강생을 만나보세요</div>
-        <div class="tmk-h4" style="color:#fff;">작가님들께서 공방 운영과 작품 활동에 전념하실 수 있도록<br>
+          <div class="tmk-h3" style="font-weight:bold;color:#fff!important;">작가님! 공예쌤을 통해 수강생을 만나보세요</div>
+        <div class="tmk-h4">작가님들께서 공방 운영과 작품 활동에 전념하실 수 있도록<br>
         공예쌤이 클래스 홍보와 수강생 모집을 도와드립니다</div>
         <a href="http://{{HTTP_HOST}}/v2.1/user/host/apply/" class="btn btn-primary" style="padding:10px;">선생님 등록</a>
       </div>
@@ -319,4 +321,10 @@
 {%endblock %}
 {% block script %}
 <script src='{%static "media/js/qitem_create.js" %}'></script>
+
+<!--<script>-->
+    <!--$().ready(function() {-->
+        <!--$('#wrapper').tubular({videoId: 'KeWUl0Avr84'}); // where idOfYourVideo is the YouTube ID.-->
+    <!--});-->
+<!--</script>-->
 {% endblock %}
