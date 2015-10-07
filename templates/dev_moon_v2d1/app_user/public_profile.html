@@ -70,7 +70,7 @@
             <a style="color:#FF565A;border-bottom:4px solid;" href="http://{{HTTP_HOST}}/v2.1/user/profile/{{profile_user.id}}/">소개</a>
             <a style="color:#CACCCD;" href="http://{{HTTP_HOST}}/v2.1/user/profile/{{profile_user.id}}/class_check/">클래스</a>
         </div>
-        <div class="pull-right">
+        <div class="pull-right hidden-xs">
             {% if request.user.is_authenticated%}
             <a href="http://{{HTTP_HOST}}/v2.1/user/profile/{{profile_user.id}}/edit" class="btn btn-primary"><img src="{%static 'media/image/slice/icon-setting.png'%}"> 프로필 수정</a>
             {% endif %}
@@ -120,7 +120,7 @@
             {% endif%}
         </div>
     </div>
-    <div class="tmk-main-body col-lg-12">
+    <div class="tmk-main-body col-lg-12 col-xs-12">
         <div class="container">
             <div class="review-wrapper col-xs-12 col-md-12">
                 <div class="tmk-h3"><span style="color:#84CDC2;">"리뷰 개수"</span>개의 후기가 있습니다</div>

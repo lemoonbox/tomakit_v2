@@ -9,7 +9,7 @@
 <style>
 
     .nav-tabs {background:none;border:none;border-bottom:2px solid #eee;}
-    .nav-tabs a {font-size:24px;font-weight:bold;font-family:NanumGothic;}
+    .nav-tabs a {font-size:1.2em;font-weight:bold;font-family:NanumGothic;}
     .nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover
     {border:none;border-bottom:4px solid #FF565A;color:#FF565A;background:transparent!important;}
     .nav-tabs li{border:none;}
@@ -64,20 +64,20 @@
 {%block content%}
 
 <!--작가 프로필 편집-->
-<div class="tmk-main-body col-md-12">
-    <div class="tmk-page-header col-md-10 col-md-offset-1">
+<div class="tmk-main-body col-lg-12">
+    <div class="tmk-page-header col-lg-10 col-lg-offset-1">
         <div class="tmk-h2 tmk-title"></div>
         <div class="tmk-h4"></div>
     </div>
-    <div class="col-md-2 col-xs-2">
-        <div class="profile-wrapper" style="overflow:hidden;border-radius:50%;width:150px;height:150px;">
+    <div class="col-lg-2 col-xs-12">
+        <div class="profile-wrapper" style="overflow:hidden;border-radius:50%;width:150px;height:150px;margin:auto;">
         <img src="{{MEDIA_URL}}{{user.t2profile_set.first.pro_pic}}" style="height:100%;right:0;left:0;top:0;bottom:0;">
         </div>
         <h2>{{profile_user.last_name}} {{profile_user.first_name}}</h2>
         <a class="btn btn-primary" href="http://{{HTTP_HOST}}/v2.1/user/profile/{{user.id}}">프로필 화면 보기</a>
     </div>
-    <div class="col-md-10 col-xs-10">
-        <!-&#45;&#45;-->
+    <div class="hidden-lg" style="width:30px;margin:15px;float:left;"></div>
+    <div class="col-lg-10 col-xs-12">
             <!-- Nav tabs -->
             <ul class="nav nav-tabs" role="tablist">
                 <li role="presentation" class="active">
@@ -90,20 +90,17 @@
                     <a href="#pw-reset" aria-controls="pw-reset" role="tab" data-toggle="tab">계정 관리</a>
                 </li>
             </ul>
-
-
-        <!-&#45;&#45;-->
             <!-- Tab panes -->
         <div class="tab-content">
-        <div class="col-md-9 well tmk-form tab-pane fade in active" id="profile">
+        <div class="col-lg-9 well tmk-form tab-pane fade in active" id="profile">
             <form method="POST" action="{% url 'edit_profile_v2d1' user_num %}" enctype="multipart/form-data">
                 <!--<h3 class="tmk-h3 profile-title pull-left">프로필 수정</h3>-->
                 {%csrf_token%}
                 <input class="form-control" type="hidden" name="edit_type" value="basic">
                 <div class="tmk-panel">
-                    <label class="col-md-2">프로필 사진</label>
+                    <label class="col-lg-2">프로필 사진</label>
 
-                    <div class="col-md-9">
+                    <div class="col-lg-9">
                         <div class="custom-file-upload">
                             <!--<label for="file">File: </label>-->
                             <input type="file" name="pro_pic" placeholder="프로필 사진을 업로드해주세요"/>
@@ -115,12 +112,12 @@
                 </div>
 
                 <div class="tmk-panel">
-                    <label class="col-md-2">이름</label>
-                    <div class="col-md-3 col-xs-5">
+                    <label class="col-lg-2 col-xs-12">이름</label>
+                    <div class="col-lg-3 col-xs-5">
                         성
                         <input class="form-control" type="text" name="last_name"  value="{{profile_user.last_name}}">
                     </div>
-                    <div class="col-md-3 col-xs-5">
+                    <div class="col-lg-3 col-xs-5">
                         이름
                         <input class="form-control" type="text" name="first_name" value="{{profile_user.first_name}}">
                         {{ profileform.last_name.errors|striptags }}{{ profileform.first_name.errors|striptags }}
@@ -128,41 +125,43 @@
                 </div>
 
                 <div class="tmk-panel">
-                    <label class="col-md-2">한줄소개</label>
-                    <div class="col-md-9">
+                    <label class="col-lg-2">한줄소개</label>
+                    <div class="col-lg-9">
                         <input class="form-control" type="text" name="intro_line" value="{{profile_user.t2profile_set.first.intro_line}}">
                     </div>
                 </div>
-                <div class="tmk-panel">
-                    <label class="col-md-2">전화번호</label>
+                <div class="tmk-panel" style="border-bottom:none;">
+                    <label class="col-lg-2">전화번호</label>
                     <div class="form-group">
-                        <div class="col-xs-4 col-sm-3 col-md-3" style="min-width:80px;">
+                        <div class="col-xs-4 col-sm-3 col-lg-3" style="min-width:80px;">
                             <input class="form-control disabled" name="mobli" value="010">
                         </div>
-                        <!--<div class="col-md-1" style="margin-right:-15px;text-align:center;">-</div>-->
-                        <div class="col-xs-4 col-sm-3 col-md-3" style="min-width:80px;">
+                        <!--<div class="col-lg-1" style="margin-right:-15px;text-align:center;">-</div>-->
+                        <div class="col-xs-4 col-sm-3 col-lg-3" style="min-width:80px;">
                             <input type="text" class="form-control" value="{{profile_user.t2profile_set.first.mobli1}}" name="mobile2">
                         </div>
-                        <!--<div class="col-md-1" style="margin-right:-15px;text-align:center;">-</div>-->
-                        <div class="col-xs-4 col-sm-3 col-md-3" style="min-width:80px;">
+                        <!--<div class="col-lg-1" style="margin-right:-15px;text-align:center;">-</div>-->
+                        <div class="col-xs-4 col-sm-3 col-lg-3" style="min-width:80px;">
                             <input type="text" class="form-control" value="{{profile_user.t2profile_set.first.mobli2}}" name="mobile3">
                         </div>
                     </div>
                 </div>
-                <input class="btn btn-primary pull-right" type="submit" value="저장하기">
+                <div style="text-align:right;">
+                <input class="btn btn-primary" type="submit" value="저장하기">
+                    </div>
             </form>
         </div>
 
-        <div class="col-md-9 well tmk-form tab-pane fade" id="artist">
+        <div class="col-lg-9 well tmk-form tab-pane fade" id="artist">
             <!--<h3 class="tmk-h3 profile-title pull-left">작가 프로필 편집</h3>-->
             <form method="POST" action="{% url 'edit_profile_v2d1' user_num %}" enctype="multipart/form-data">
                 {%csrf_token%}
                 <input class="form-control" type="hidden" name="edit_type" value="host">
 
                 <div class="tmk-panel">
-                    <label class="col-md-2">소개사진</label>
+                    <label class="col-lg-2">소개사진</label>
 
-                    <div class="col-md-9">
+                    <div class="col-lg-9">
                         <div class="custom-file-upload">
                             <!--<label for="file">File: </label>-->
                             <input type="file" name="intro_pic" placeholder="작품 사진을 업로드해주세요" value="">
@@ -175,48 +174,50 @@
                 <div style="margin-bottom:30px;">OR</div>
 
                 <div class="tmk-panel">
-                    <label class="col-md-2">비디오</label>
-                    <div class="col-md-9">
+                    <label class="col-lg-2">비디오</label>
+                    <div class="col-lg-9">
                         <input class="form-control" type="text" name="video" placeholder="url 주소를 입력해주세요"
                                value="https://www.youtube.com/watch?v={{profile_user.t2hostprofile_set.first.intro_video}}">
 
                     </div>
                 </div>
                 <div class="tmk-panel">
-                    <label class="col-md-2">소개글</label>
-                    <div class="col-md-9">
+                    <label class="col-lg-2">소개글</label>
+                    <div class="col-lg-9">
                         <textarea class="form-control" name="intro_self">{{profile_user.t2hostprofile_set.first.intro_self}}</textarea>
                     </div>
                 </div>
 
-                <div class="tmk-panel">
-                    <label class="col-md-2">공방 위치</label>
-                    <div class="col-md-5">
+                <div class="tmk-panel" style="border-bottom:none;padding-bottom:0;">
+                    <label class="col-lg-2">공방 위치</label>
+                    <div class="col-lg-5">
                         도로명 또는 동 입력
                         <input class="form-control" type="text" name="shop_addr" placeholder="서울시 성북구 돈암1동"
                                value="{{profile_user.t2hostprofile_set.first.shop_addr}}">
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-lg-4">
                         상세 주소
                         <input class="form-control" type="text" name="shop_addr_detail" placeholder="삼성아파트 100동 100호"
                                value="{{profile_user.t2hostprofile_set.first.shop_addr_detail}}">
                     </div>
                 </div>
-                <input class="btn btn-primary pull-right" type="submit" value="저장하기">
+                <div style="text-align:right;">
+                <input class="btn btn-primary" type="submit" value="저장하기">
+                </div>
             </form>
         </div>
 
-        <div class="col-md-9 well tmk-form tab-pane fade" id="pw-reset">
+        <div class="col-lg-9 well tmk-form tab-pane fade" id="pw-reset">
             <!--<h3 class="tmk-h3 profile-title pull-left">계정 관리</h3>-->
             <div class="tmk-panel">
-                <label class="col-md-2">계정 이메일</label>
-                <div class="col-md-9">
+                <label class="col-lg-2">계정 이메일</label>
+                <div class="col-lg-9">
                     <input disabled class="form-control" type="text" value="{{request.user.username}}">
                 </div>
             </div>
             <div class="tmk-panel">
-                <label class="col-md-2">비밀 번호</label>
-                <div class="col-md-9">
+                <label class="col-lg-2">비밀 번호</label>
+                <div class="col-lg-9">
                     <a href="http://{{HTTP_HOST}}/v2.1/user/pw_reset" class="btn btn-default" style="width:150px;">비밀번호 변경</a>
                 </div>
             </div>
