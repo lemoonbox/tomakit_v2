@@ -112,6 +112,7 @@ def pay_conf(request):
         'mobli':mobli,
         'buyer_email':buyer_email,
         'classtype':classtype,
+        "HTTP_HOST":HTTP_HOST,
     })
 
 @login_required

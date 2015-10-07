@@ -29,7 +29,7 @@ def mainpage(request):
     return render(request, TEMP.INDEX_PAGE_V2D1,{
         'bestlist':_bestlist,
         "HTTP_HOST":HTTP_HOST,
-        "next":next,
+        "next":"/",
     })
 
 def class_filter_redirect(request):
@@ -81,7 +81,7 @@ def class_list_board(request, page=1, category = 'all', state='all'):
 
     else:
         pass
-    next ="/v2.1/index/demandlist"
+    next ="/v2.1/board/class_list"
     return render(request, TEMP.REGUL_CLASS_LIST_V2D1,{
         'classlist':_regul_class,
 
@@ -151,12 +151,9 @@ def demand_list_board(request, page=1, category = 'all', state='all'):
 def demand_filter_redirect(request):
     _category=""
     _state=""
-    print request.GET
     if request.method == "GET":
         _category=request.GET.get("category", "all")
-        print _category
         _state=request.GET.get("state", "all")
-        print _state
     else:
         pass
 

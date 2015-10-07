@@ -526,10 +526,13 @@ def modify_tut(request, class_num):
         "HTTP_HOST":HTTP_HOST,
     })
 
-@login_required
 def create_review(request, class_num):
+
     HTTP_HOST=request.META["HTTP_HOST"]
     if request.method == "POST":
+        if not request.user.is_authenticated():
+            next=request.POST.get("next", "/")
+            return HttpResponseRedirect("/v2.1/user/login?next="+next)
         _post=""
         _review=""
         review=request.POST.get("review", "")
@@ -664,6 +667,7 @@ def class_post_detail(request, class_num):
                 "post":_post,
                 "reviews":_reviews,
                 "HTTP_HOST":HTTP_HOST,
+                "next":"/v2.1/class/"+str(class_num)
             })
 
         else:
@@ -673,6 +677,7 @@ def class_post_detail(request, class_num):
                 "post":_post,
                 "reviews":_reviews,
                 "HTTP_HOST": HTTP_HOST,
+                "next":"/v2.1/class/"+str(class_num)
             })
     else :
         raise Http404("잘못된 요청 입니다.")

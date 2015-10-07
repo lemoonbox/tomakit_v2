@@ -211,6 +211,7 @@ def demand_detail(request, demand_num):
             return render(request, TEMP.DEMAND_DETAIL_V2D1,{
                 "post":_post,
                 "HTTP_HOST":HTTP_HOST,
+                "next":"/v2.1/demand/"+str(demand_num)
             })
 
         else:

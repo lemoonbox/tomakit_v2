@@ -29,7 +29,7 @@
               <input id="password" type="password" name="password" placeholder="비밀번호" class="form-control" required
                      autocomplete="off" value="{{valid_password}}">
 
-              <a href="{% url 'v2_reset_request' %}" class="fg-pwd">
+              <a href="{% url 'reset_pw_req' %}" class="fg-pwd">
                   <p style="margin:10px auto;padding-left:10px;">비밀번호가 기억나지 않아요</p></a>
 
               {% if login_form.errors %}

@@ -100,6 +100,7 @@ def signup(request):
             else:
                 tasks.send_key_email(HTTP_HOST, title, sender,
                 _user.email, TEMP.CONFRI_TEM_V2D1, key)
+
             return HttpResponseRedirect(next)
 
     return render(request, TEMP.SIGNUP_TEM_V2D1,{
@@ -118,14 +119,17 @@ def login(request, *args, **kwargs):
         next=request.GET.get("next","/")
 
     elif request.method=="POST":
+        print "login POST"
         login_form = LoginForm(request.POST)
         next=request.POST.get("next", "/")
         if login_form.is_valid():
             user = login_form.authenticate(request)
             if user:
                 auth_login(request, user)
+                print next
                 return HttpResponseRedirect(next)
-
+    print "login get"
+    print next
     return render(request, TEMP.LOGIN_TEM_V2D1,
                   {'login_form':login_form,
                    'next':next,
@@ -178,7 +182,7 @@ def signup_confirm(request, *args, **kwargs):
     HTTP_HOST = request.META["HTTP_HOST"]
     ctx = Context({
         'error':None,
-        'host':HTTP_HOST,
+        'HTTP_HOST':HTTP_HOST,
 
     })
 

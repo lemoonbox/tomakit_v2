@@ -281,6 +281,7 @@
             <div class="review-wrapper col-md-12">
                 <form method="POST" action="{% url 'create_review_v2d1' post.id %}">
                     {%csrf_token%}
+                    <input type="hidden" value="/v2.1/class/"+{{post.id}}>
                     <div class="col-xs-2">
                         <div class="tmk-card-img-profile" style="margin-top:15px;">
                             <div class="card-link">
@@ -290,6 +291,7 @@
                     </div>
                     <!--<div class="col-md-7"></div>-->
                     <div class="col-xs-10 col-md-7" style="text-align:left;">
+                        <input type="hidden" name="next" value="/v2.1/class/{{post.t2classcard_set.first.id}}">
                         <input type="hidden" name="class_num" value="{{post.id}}">
                         <input type="hidden" name="classtype" value="teach_class">
                         <textarea class="form-control" name="review"></textarea>
