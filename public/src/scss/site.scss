@@ -5,7 +5,7 @@
   -o-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
-  font-family: 'NanumGothic', 'AppleSDGothicNeo-Bold', 'Dotum', 'NanumMyeongjo', 'Gulim', 'Helvetica', sans-serif !important;
+  font-family: 'NanumGothic', 'NanumBarunGothic', 'AppleSDGothicNeo-Bold', 'Dotum', 'NanumMyeongjo', 'Gulim', 'Helvetica', sans-serif !important;
 }
 //html {height:100vh!important;}
 html {width:100%!important;overflow-x:hidden!important;padding-right:0!important;}
@@ -143,7 +143,7 @@ nav {
   z-index:997;
   margin-bottom: 0px !important;
   .navbar-brand {
-    padding: 15px;
+    padding: 15px;margin-right:15px;
   }
   button > img {
     width: 24px;
@@ -305,7 +305,7 @@ nav {
 }
 @media screen and (max-width:991px) {
   .container {padding-left:0!important;padding-right:0!important;}
-  .col-md-12, .col-md-8, .col-md-4 {padding-left:0!important;padding-right:0!important;}
+  //.col-md-12, .col-md-8, .col-md-4 {padding-left:0!important;padding-right:0!important;}
   .tmk-main-body {padding-left:0!important;padding-right:0!important;}
   .tmk-page-header {padding-bottom:0!important;}
   .filedrag .form-group {padding-left:15px;}
@@ -335,16 +335,20 @@ nav {
   .container {min-width:850px!important;}
 }
 #tmk-footer {
-  z-index:3;
-  background-color:  #FEF2D8;
+  z-index:100;
+  background-color:  #4E4C44;
   bottom: 0;
   min-height: 180px;
   text-align: left;
-  color: #82888A;
+  color: #CACCCD;
   left:0;
   float:left;
   margin-top:50px;
   width:100%;
+  //position:absolute;
+  right:0;
+  //bottom:0;
+  margin-bottom:0;
 }
 
 @media screen and (min-width:768px) {
@@ -475,7 +479,7 @@ ul{
 .tmk-main-banner {
   //min-width:1250px;
   width: 100%;
-  height: 570px;
+  height: 450px;
   top:0;
   margin-top:-70px;
   padding-bottom:15px;
@@ -874,7 +878,7 @@ ul{
 .go-top {
   position: fixed;
   bottom: 50px;
-  right: 0px;
+  right: 30px;
   z-index: 998;
   font-size: 20px;
   height:40px;
@@ -1348,7 +1352,7 @@ ul{
   white-space: nowrap;
 }
 .dp-label {
-  margin-top: 30px;
+  margin-top: 20px;
   margin-left: 5%;
   border-top: 1px solid #ddd;
   /*min-width: 340px;*/

@@ -36,6 +36,10 @@
         .tmk-demand-comment {text-align:left!important;padding:15px;}
     }
     .tmk-demand-comment {margin:50px auto;text-align:center;}
+    .tmk-panel {border-bottom:none;padding-bottom:0;}
+    @media screen and (min-width:613px) {
+        .tmk-form {padding:30px;}
+    }
 
 </style>
 {%endblock%}
@@ -44,9 +48,9 @@
 {%endblock%}
 {% block content %}
 <div class="tmk-main-banner">
-    <div class="main-banner-title">특별한 일상을 만들다<br>
-        핸드메이드 클래스 찾을 땐, 토마킷</div>
-    <div class="main-banner-subtitle">토마킷이 편한 시간, 가까운 공방의 클래스를 찾아드려요!</div>
+    <div class="main-banner-title">취미에서 직업으로<br>
+        핸드메이드 클래스 찾을 땐, 공에쌤</div>
+    <div class="main-banner-subtitle">공예쌤이 편한 시간, 가까운 공방의 클래스를 찾아드려요!</div>
     <!--<video autoplay loop muted poster="https://d3ce7jb7ih53ua.cloudfront.net/verloc_new_design/main_page/first-page-1.png" id="bgvid">-->
     <!--<source src="https://d3ce7jb7ih53ua.cloudfront.net/verloca_new_design/main_page/verlocal+header_3.mp4"></source>-->
     <!--</video>-->
@@ -203,7 +207,7 @@
 <div class="tmk-main-body col-md-12">
     <div class="container">
     <div class="tmk-page-header">
-        <div class="h3">반짝반짝, 새로운 클래스</div>
+        <div class="h3">주간 인기 클래스</div>
     </div>
 
     <div class="tmk-body-wrapper">
@@ -249,8 +253,8 @@
 </div>
 
 
-<div class="tmk-main-body col-md-12" style="overflow:hidden;background:url('{%static 'media/image/slice/bg-2.png'%}');color:#fff;">
-    <div class="container">
+<div class="col-md-12">
+    <div class="container" style="overflow:hidden;background:url('{%static 'media/image/slice/bg-2.png'%}');color:#fff;">
         <div class="tmk-demand-comment">
         <div class="h2">다른 사람들은 어떤 클래스를 배우고 싶어할까요?</div>
     <div class="tmk-h4">제안하기를 이용하면 원하시는 클래스를 개설해 드린답니다</div>
@@ -284,28 +288,32 @@
             <span class="sr-only">Next</span>
         </a>
     </div>
-<a href="http://{{HTTP_HOST}}/v2.1/board/demand" style="color:#fff;" class="btn-link pull-right">클래스 제안 보러가기 ></a>
+<a href="http://{{HTTP_HOST}}/v2.1/board/demand" style="color:#fff;padding-right:15px;" class="btn-link pull-right">클래스 제안 보러가기 ></a>
     </div>
     </div>
 </div>
 
-<div class="col-md-12" style="margin-top:50px;float:left;">
-<div style="max-width:1200px;border-radius:4px;overflow:hidden!important;margin:auto;background-color:#F9FBFB;padding:0;border:1px solid #ddd;">
+<div class="col-md-12" style="margin-top:50px;">
+    <div class="container" style="padding:0;">
+<div style="max-width:1200px;border-radius:4px;overflow:hidden!important;margin:auto;background-color:#F5FFFE;padding:0;border:1px solid #ddd;">
         <div class="col-md-3 hidden-xs" style="float:left;text-align:left;padding:50px;width:348px;">
             <div class="h2">원하는 클래스를<br>제안해보세요</div>
             <div class="tmk-h4">찾는 클래스가 없으시다면, 지금 바로 제안해보세요. 가까운 장소, 편한 시간의 수업을 개설하여 알려드립니다</div>
         </div>
-        <div class="col-md-7" id="tmk-form" style="float:left;padding:40px;">
+        <div class="col-md-7 tmk-form" style="float:left;">
             {%include 'dev_moon_v2d1/app_demand/demand_form_for_index.html'%}
     </div>
 </div>
+    </div>
 </div>
-<div class="tmk-main-body col-md-12" style="width:100%;height:360px;float:left;margin-top:50px;margin-bottom:-50px;background:url('{%static 'media/image/slice/bg-3.png'%}');">
-    <div class="tmk-main-host" style="margin-top:80px;">
-        <div class="tmk-h3" style="font-weight:bold;">작가님! 토마킷을 통해 수강생을 만나보세요</div>
-        <div class="tmk-h4">작가님들께서 공방 운영과 작품 활동에 전념하실 수 있도록<br>
-        토마킷이 클래스 홍보와 수강생 모집을 도와드립니다</div>
-        <a href="http://{{HTTP_HOST}}/v2.1/user/host/apply/" class="btn btn-primary" style="padding:15px;">선생님 등록</a>
+<div class="tmk-main-body col-md-12" style="width:100%;float:left;margin-top:50px;margin-bottom:-50px;background:url('{%static 'media/image/slice/bg-3.png'%}') no-repeat;background-size:cover;background-position:center;">
+    <div class="container">  <div class="tmk-main-host" style="padding:50px;">
+
+          <div class="tmk-h3" style="font-weight:bold;color:#fff;">작가님! 공예쌤을 통해 수강생을 만나보세요</div>
+        <div class="tmk-h4" style="color:#fff;">작가님들께서 공방 운영과 작품 활동에 전념하실 수 있도록<br>
+        공예쌤이 클래스 홍보와 수강생 모집을 도와드립니다</div>
+        <a href="http://{{HTTP_HOST}}/v2.1/user/host/apply/" class="btn btn-primary" style="padding:10px;">선생님 등록</a>
+      </div>
     </div>
 </div>
 {%endblock %}

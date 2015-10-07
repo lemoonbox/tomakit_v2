@@ -1,20 +1,7 @@
 /*
-* Hanna (Korean) http://www.google.com/fonts/earlyaccess
-*/
-@font-face {
-  font-family: 'Hanna';
-  font-style: normal;
-  font-weight: 400;
-  src: url(//fonts.gstatic.com/ea/hanna/v3/BM-HANNA.eot);
-  src: url(//fonts.gstatic.com/ea/hanna/v3/BM-HANNA.eot?#iefix) format('embedded-opentype'),
-    url(//fonts.gstatic.com/ea/hanna/v3/BM-HANNA.woff2) format('woff2'),
-    url(//fonts.gstatic.com/ea/hanna/v3/BM-HANNA.woff) format('woff'),
-    url(//fonts.gstatic.com/ea/hanna/v3/BM-HANNA.ttf) format('truetype');
-}
-/*
 * Nanum Gothic (Korean) http://www.google.com/fonts/earlyaccess
 */
-
+@import url(https://cdn.rawgit.com/openhiun/hangul/14c0f6faa2941116bb53001d6a7dcd5e82300c3f/nanumbarungothic.css);
 @font-face {
   font-family: 'Nanum Gothic';
   font-style: normal;
