@@ -207,10 +207,12 @@ def demand_detail(request, demand_num):
 
         if exist:
             _post=T2ClassDemand.objects.filter(pk=demand_num)[0]
+            _cmts=T2DemandCmt.objects.filter(is_active=True, demand_post=_post)
 
             return render(request, TEMP.DEMAND_DETAIL_V2D1,{
                 "post":_post,
                 "HTTP_HOST":HTTP_HOST,
+                "cmts":_cmts,
                 "next":"/v2.1/demand/"+str(demand_num)
             })
 

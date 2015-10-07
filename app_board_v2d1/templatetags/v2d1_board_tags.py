@@ -65,9 +65,14 @@ def d_day_count(valu, argu=None):
 @register.filter(name="classtype2han")
 def classtype2han(valu, argu=None):
     if valu == "tutclass":
-        return u"바로 신청 가능"
+        return u"상시 모집"
     else:
-        return d_day_count(valu)
+        day=d_day_count(valu)
+        if day<0:
+            return "마감"+str(-day)+"일전"
+        else:
+            return "수업 마감"
+
 
 @register.filter(name="goaltag2han")
 def goaltag2han(valu, argu=None):

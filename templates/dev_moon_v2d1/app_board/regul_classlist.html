@@ -228,7 +228,7 @@
                                 {% if class.classtype == "tutclass"%}
                                 <span class="label tmk-label">{{class.classtype|classtype2han}}</span>
                                 {% else %}
-                                <span class="label tmk-label">D-{{class.teach_post.deadline|classtype2han}}</span>
+                                <span class="label tmk-label">{{class.teach_post.deadline|classtype2han}}</span>
                                 {% endif %}
                             </div>
                             <div class="card-link">
