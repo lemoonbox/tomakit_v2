@@ -8,7 +8,7 @@
   font-family: 'NanumGothic', 'NanumBarunGothic', 'AppleSDGothicNeo-Bold', 'Dotum', 'NanumMyeongjo', 'Gulim', 'Helvetica', sans-serif !important;
 }
 //html {height:100vh!important;}
-html {width:100%!important;overflow-x:hidden!important;padding-right:0!important;}
+//html {overflow-x:hidden!important;padding-right:0!important;}
 a:hover {text-decoration: none !important;}
 
 body {
@@ -474,15 +474,26 @@ ul{
   margin: 30px;
   height: 470px;
 }
-
+@media screen and (min-width:768px) {
+  .tmk-main-banner {
+    height: 450px;
+    padding:100px 15px;
+  }
+}
+@media screen and (max-width:767px) {
+  .tmk-main-banner {
+    height:auto;
+    margin-top:30px;
+    padding:100px 15px 50px;
+    background-position:center;
+  }
+}
 
 .tmk-main-banner {
   //min-width:1250px;
-  //width: 100%;
+  width: 100%;
   //height: 450px;
-  //top:0;
-  //margin-top:-30px;
-  //padding-bottom:15px;
+  top:0;
   video {
     position: absolute;
     top: 50%;
@@ -503,10 +514,10 @@ ul{
     font-family: AppleSDGothicNeo-Bold;
     font-weight:600;
     text-align: center;
-    padding: 120px 15px 0 15px;
+    //padding: 120px 15px 0 15px;
     //padding-left:15px;
     font-size: 40px;
-    line-height:57px;
+    //line-height:57px;
   }
   .main-banner-subtitle {
     color: #FFFFFF;
@@ -514,9 +525,7 @@ ul{
     text-align: center;
     padding: 15px;
     font-size: 20px;
-    line-height: 21px;
-    margin-bottom:50px;
-    padding-bottom:50px;
+    line-height: 24px;
   }
 }
 
@@ -879,8 +888,8 @@ ul{
 /*go-top button*/
 .go-top {
   position: fixed;
-  bottom: 50px;
-  right: 30px;
+  bottom: 15px;
+  right: 10px;
   z-index: 998;
   font-size: 20px;
   height:40px;
