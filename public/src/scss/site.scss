@@ -478,31 +478,32 @@ ul{
 
 .tmk-main-banner {
   //min-width:1250px;
-  width: 100%;
-  height: 450px;
-  top:0;
-  margin-top:-70px;
-  padding-bottom:15px;
-  //video {
-  //  position: absolute;
-  //  top: 0;
-  //  left: 50%;
-  //  min-height:100%;
-  //  width:auto;
-  //  height:auto;
-  //  z-index: -100;
-  //  -webkit-transform: translateX(-50%) translateY(-50%);
-  //  transform: translateX(-50%) translateY(-50%);
-  //  background: url("main-background.png'") no-repeat;
-  //  background-size: cover;
-  //}
+  //width: 100%;
+  //height: 450px;
+  //top:0;
+  //margin-top:-30px;
+  //padding-bottom:15px;
+  video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width:100%;
+    min-height:100%;
+    width:auto;
+    height:auto;
+    z-index: -100;
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+    background: url("media/image/slice/main-banner-poster.png") no-repeat;
+    background-size: cover;
+  }
 
   .main-banner-title {
     color: #FFFFFf;
     font-family: AppleSDGothicNeo-Bold;
     font-weight:600;
     text-align: center;
-    padding: 160px 15px 0 15px;
+    padding: 120px 15px 0 15px;
     //padding-left:15px;
     font-size: 40px;
     line-height:57px;
@@ -515,6 +516,7 @@ ul{
     font-size: 20px;
     line-height: 21px;
     margin-bottom:50px;
+    padding-bottom:50px;
   }
 }
 

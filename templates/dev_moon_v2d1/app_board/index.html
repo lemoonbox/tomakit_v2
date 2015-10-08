@@ -4,10 +4,10 @@
 <title>{%block title%}토마킷 :: 기초부터 공방 창업까지. 현업 작가들의 공예 수업을 만나보세요.{%endblock%}</title>
 {%block style%}
 <style>
-    .tmk-main-banner {background-image:url({%static 'media/image/slice/bg-1.png'%});
-        background-size: cover;
-        background-position:center;
-        background-repeat:no-repeat;}
+    /*.tmk-main-banner {background-image:url({%static 'media/image/slice/bg-1.png'%});*/
+        /*background-size: cover;*/
+        /*background-position:center;*/
+        /*background-repeat:no-repeat;}*/
     @media screen and (min-width:768px) {
         #navbar {
             background: transparent;
@@ -40,6 +40,16 @@
     @media screen and (min-width:613px) {
         .tmk-form {padding:30px;}
     }
+    #video_container {
+        left:0;
+        position:absolute;
+        top:0;
+        width:100%;
+        /*background: url({%static 'media/image/main-banner-poster.png'%}) no-repeat;*/
+        height:480px;
+        overflow:hidden;
+    }
+    #bgvid {min-width:100%;}
 
 </style>
 {%endblock%}
@@ -48,13 +58,17 @@
 {%endblock%}
 {% block content %}
 
-<div class="tmk-main-banner" id="wrapper">
+<div class="tmk-main-banner">
     <div class="main-banner-title">취미에서 직업으로<br>
         핸드메이드 클래스 찾을 땐, 공예쌤</div>
     <div class="main-banner-subtitle">공예쌤이 편한 시간, 가까운 공방의 클래스를 찾아드려요!</div>
-    <!--<video autoplay loop muted poster="https://d3ce7jb7ih53ua.cloudfront.net/verloc_new_design/main_page/first-page-1.png" id="bgvid">-->
-    <!--<source src="https://d3ce7jb7ih53ua.cloudfront.net/verloca_new_design/main_page/verlocal+header_3.mp4"></source>-->
-    <!--</video>-->
+    <div  id="video_container">
+        <!--<video autoplay loop id="bgvid">-->
+            <video autoplay loop muted poster="{%static 'media/image/main-banner-poster.png'%}" id="bgvid">
+    <source src="{%static 'media/video/Tomakit_TV_website_p.webm' %}" type="video/webm">
+                <source src="{%static 'media/video/Tomakit_TV_website_promo.mp4'%}" type="video/mp4">
+    </video>
+    </div>
     {%comment%}
     <form method="GET" action="{% url 'class_filter_redirct_v2d1' %}">
         {%csrf_token%}
@@ -321,10 +335,4 @@
 {%endblock %}
 {% block script %}
 <script src='{%static "media/js/qitem_create.js" %}'></script>
-
-<!--<script>-->
-    <!--$().ready(function() {-->
-        <!--$('#wrapper').tubular({videoId: 'KeWUl0Avr84'}); // where idOfYourVideo is the YouTube ID.-->
-    <!--});-->
-<!--</script>-->
 {% endblock %}
