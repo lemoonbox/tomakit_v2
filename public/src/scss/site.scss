@@ -21,30 +21,28 @@ body {
   color: #82888A;
 }
 
-/* Let's get this party started */
-::-webkit-scrollbar {
-  width: 5px;
+@media screen and (min-width:480px) {
+  /* Let's get this party started */
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+  /* Track */
+  ::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.4);
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+  }
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    background: #eee;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+  }
+  ::-webkit-scrollbar-thumb:window-inactive {
+    background: #eee;
+  }
 }
-
-/* Track */
-::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset 0 0 3px rgba(0,0,0,0.4);
-  -webkit-border-radius: 5px;
-  border-radius: 5px;
-}
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-  -webkit-border-radius: 5px;
-  border-radius: 5px;
-  background: #eee;
-  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
-}
-::-webkit-scrollbar-thumb:window-inactive {
-  background: #eee;
-
-}
-
 
 
 .h1, .h2, .h3, .h4, .h5, .h6 {
@@ -1048,7 +1046,7 @@ ul{
   margin-bottom: 20px;
   //min-height:500px;
 }
-
+.carousel-control:focus, .carousel-control:hover, .carousel-control {opacity:1!important;}
 @media screen and (max-width:767px) {
   .col-lg-12 .carousel {
     height:300px!important;

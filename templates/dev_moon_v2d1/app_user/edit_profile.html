@@ -130,7 +130,7 @@
                         <input class="form-control" type="text" name="intro_line" value="{{profile_user.t2profile_set.first.intro_line}}">
                     </div>
                 </div>
-                <div class="tmk-panel" style="border-bottom:none;">
+                <div class="tmk-panel">
                     <label class="col-lg-2">전화번호</label>
                     <div class="form-group">
                         <div class="col-xs-4 col-sm-3 col-lg-3" style="min-width:80px;">
@@ -158,7 +158,7 @@
                 {%csrf_token%}
                 <input class="form-control" type="hidden" name="edit_type" value="host">
 
-                <div class="tmk-panel">
+                <div class="tmk-panel" style="border-bottom:none;">
                     <label class="col-lg-2">소개사진</label>
 
                     <div class="col-lg-9">
@@ -247,7 +247,7 @@
                         $wrap = $('<div class="file-upload-wrapper">'),
                         $input = $('<input type="text" class="file-upload-input" />'),
                 // Button that will be used in non-IE browsers
-                        $button = $('<button type="button" class="file-upload-button">PC에서 파일가져오기</button>'),
+                        $button = $('<button type="button" class="file-upload-button">파일 가져오기</button>'),
                 // Hack for IE
                         $label = $('<label class="file-upload-button" for="'+ $file[0].id +'">PC에서 파일가져오기</label>');
 
