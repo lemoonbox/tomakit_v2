@@ -57,7 +57,8 @@
                 buyer_email : '{{buyer_email}}',
                 buyer_name : '{{buyer_name}}',
                 buyer_tel : '010{{mobli}}',
-                vbank_due : '{{vbank_due|date:"Ymd"}}'
+                vbank_due : '{{vbank_due|date:"Ymd"}}',
+                m_redirect_url : 'http://{{HTTP_HOST}}/v2.1/payment/pay_finish?rsp=success',
             }, function(rsp) {
                 if ( rsp.success ) {
                     window.location.replace("http://{{HTTP_HOST}}/v2.1/payment/pay_finish?rsp=success");

@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load static from staticfiles%}
 {% load line_extras_tag%}
+{% load v2d1_board_tags %}
 <title>{%block title%}토마킷 :: 기초부터 공방 창업까지. 현업 작가들의 공예 수업을 만나보세요.{%endblock%}</title>
 {%block style%}
 <style>
@@ -234,7 +235,11 @@
                         <a class="tmk-card-img" href="http://{{HTTP_HOST}}/v2.1/class/{{bestclass.id}}">
                             <div class="tmk-class-type-label">
                                 <!--수업 타입-->
-                                <span class="label tmk-label">{{bestclass.best_classcard.classtype}}</span>
+                                {% if bestclass.best_classcard.classtype == "tutclass"%}
+                                <span class="label tmk-label">{{bestclass.best_classcard.classtype|classtype2han}}</span>
+                                {% else %}
+                                <span class="label tmk-label">{{bestclass.best_classcard.teach_post.deadline|classtype2han}}</span>
+                                {% endif %}
                             </div>
                             <div class="card-link">
                                 <img src="{{MEDIA_URL}}{{bestclass.best_classcard.t2classpic_set.first.image}}">

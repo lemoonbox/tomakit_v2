@@ -173,7 +173,7 @@
             <!--댓글-->
 
             <div class="review-wrapper col-md-12">
-                <div class="tmk-h3" style="text-align:left;margin-bottom:50px;margin-left:15px;"><span style="color:#84CDC2">댓글 숫자</span>개의 댓글이 있습니다</div>
+                <div class="tmk-h3" style="text-align:left;margin-bottom:50px;margin-left:15px;"><span style="color:#84CDC2">{{cmts.count}}</span>개의 댓글이 있습니다</div>
                 <form method="POST" action="{% url 'create_comment_v2d1' post.id %}">
                     {%csrf_token%}
                     <div class="col-xs-2 col-lg-1">
@@ -197,7 +197,7 @@
             </div>
 
             <div class="col-xs-12 col-md-12">
-                {% for comment in post.t2demandcmt_set.all%}
+                {% for comment in cmts %}
                 {% if comment.is_active %}
                 <div class="review-wrapper" style="min-height:150px;margin-bottom:30px;padding:0;">
                     <div class="col-xs-2 col-lg-1">
@@ -211,11 +211,12 @@
                     </div>
                     <div class="col-lg-9 col-md-7 col-xs-10 user-review" style="text-align:left;float:left;">
 
-                        <div class="tmk-h3"><a style="color:#82888A;" href="http://{{HTTP_HOST}}/v2.1/user/profile/{{comment.user.id}}">{{comment.user.last_name}}{{comment.user.first_name}}</a> <span style="color:gold;">★</span><span style="font-size:16px;color:#84CDC2;">해결댓글</span></div>
+                        <div class="tmk-h3"><a style="color:#82888A;" href="http://{{HTTP_HOST}}/v2.1/user/profile/{{comment.user.id}}">{{comment.user.last_name}}{{comment.user.first_name}}</a>
+                            {% if comment.class_ad%}
+                            <span style="color:gold;">★</span><span style="font-size:16px;color:#84CDC2;">해결댓글</span></div>
+                            {% endif %}
                         <!--댓글-->
                         <div>{{comment.comment}}</div>
-                        {% if comment.class_ad%}
-                        {% endif %}
                     </div>
                     <!--수정 form 나중에  hidden-->
                     <div class="review-modify" hidden>
