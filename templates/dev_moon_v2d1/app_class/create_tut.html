@@ -17,6 +17,23 @@
     .actions .disabled > a {color:#fff!important;}
     .actions li:first-child a {color:#FF575C;}
     label span {color:red;}
+
+    #map {
+        height: 500px;width:100%;
+    }
+    #floating-panel {
+        /*position: absolute;*/
+        top: 10px;
+        left: 25%;
+        z-index: 5;
+        background-color: #fff;
+        padding: 5px;
+        border: 1px solid #999;
+        text-align: center;
+        font-family: 'Roboto','sans-serif';
+        line-height: 30px;
+        padding-left: 10px;
+    }
 </style>
 
 {%endblock%}
@@ -27,7 +44,7 @@
 
 <div class="tmk-main-body col-md-12">
     <div class="container">
-    <div class="tmk-page-header">
+    <div class="tmk-page-header col-md-12">
         <div class="tmk-h2 tmk-title pull-left">{{title}}</div>
         <!--<div class="tmk-page-pick"></div>-->
     </div>
@@ -175,11 +192,11 @@
                 <label class="col-md-2">수강료 <span>*</span></label>
                 <div class="col-md-3 col-xs-4">
                     수강료(재료비 제외)
-                    <input class="form-control"type="text" name="price" value="{{tut_data.price}}">
+                    <input class="form-control" type="text" name="price" value="{{tut_data.price}}">
                 </div>
                 <div class="col-md-3 col-xs-4">
                     재료비
-                    <input class="form-control"type="text" name="extra_price" value="{{tut_data.extra_price}}">
+                    <input class="form-control" type="text" name="extra_price" value="{{tut_data.extra_price}}">
                 </div>
                 <div class="col-md-10 col-md-offset-2 col-xs-12 tmk-error">
                     {{tutform.price.errors|striptags}}
@@ -315,18 +332,29 @@
                 <div class="tmk-panel" style="border-bottom:none;">
                     <label class="col-md-2">수업장소 <span>*</span></label>
                     <div class="tmk-gmap-wrapper">
-                        <div class="col-md-5 col-xs-12">
+                        <div class="col-md-10 col-xs-12">
                             도로명 또는 동 입력
                             <div id="locationField">
-                                <input onkeypress="return event.keyCode != 13;" class="form-control" id="autocomplete" placeholder="동이나 도로명을 입력해주세요" onFocus="geolocate()" type="text" name="addr_input">
+                                <input id="pac-input" class="form-control controls" type="text"
+                                       placeholder="동이나 도로명을 입력해주세요" style="max-width:360px;margin-top:5px!important;" name="addr_input" onkeypress="return event.keyCode != 13;">
+                            <div id="type-selector" class="controls" hidden>
+                                <input type="radio" name="type" id="changetype-all" checked="checked">
+                                <label for="changetype-all">All</label>
+
+                                <input type="radio" name="type" id="changetype-establishment">
+                                <label for="changetype-establishment">Establishments</label>
+
+                                <input type="radio" name="type" id="changetype-address">
+                                <label for="changetype-address">Addresses</label>
+
+                                <input type="radio" name="type" id="changetype-geocode">
+                                <label for="changetype-geocode">Geocodes</label>
                             </div>
-                        </div>
-                        <table id="address">
-                            <!--<tr>-->
-                            <!--<td class="label">국가명</td>-->
-                            <!--<td class="wideField" colspan="3">-->
-                            <!--<input class="field" id="country" disabled="true"></input></td>-->
-                            <!--</tr>-->
+                            <div id="map"></div>
+                                <!--<input onkeypress="return event.keyCode != 13;" class="form-control" id="autocomplete" placeholder="동이나 도로명을 입력해주세요" onFocus="geolocate()" type="text" name="addr_input">-->
+                            <!--</div>-->
+
+                        <table hidden>
                             <tr class="form-group">
                                 <td class="label">시/도</td>
                                 <td class="widefield" colspan="2">
@@ -355,8 +383,9 @@
                                     <input class="field" id="premise"></input></td>
                             </tr>
                         </table>
+                            </div>
                     </div>
-                    <div class="col-md-4 col-xs-12">
+                    <div class="col-md-10 col-md-offset-2 col-xs-12 col-xs-offset-0">
                         상세 주소 입력
                         <input class="form-control" type="text" name="addr_deatail" value="{{tut_data.addr_details}}" placeholder="상세주소를 입력해주세요">
                     </div>
@@ -372,9 +401,8 @@
 
 {%block script%}
 <script src="{%static 'google_map.js'%}"></script>
-<script src="https://maps.googleapis.com/maps/api/js?language=ko&libraries=places&callback=initAutocomplete" async defer></script>
 <!--<script type="text/javascript" src="{% static 'media/js/nouislider.js' %}"></script>-->
-<script src="{%static 'media/js/jquery.steps.js'%}" charset="euc-kr"></script>
+<!--<script src="{%static 'media/js/jquery.steps.js'%}" charset="euc-kr"></script>-->
 <script>
     $("#class-create").steps({
         headerTag:"h3",

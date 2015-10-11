@@ -192,7 +192,7 @@
                     <label class="col-lg-2">공방 위치</label>
                     <div class="col-lg-5">
                         도로명 또는 동 입력
-                        <input class="form-control" type="text" name="shop_addr" placeholder="서울시 성북구 돈암1동"
+                        <input class="form-control" type="text" id="address" name="shop_addr" placeholder="서울시 성북구 돈암1동"
                                value="{{profile_user.t2hostprofile_set.first.shop_addr}}">
                     </div>
                     <div class="col-lg-4">
@@ -361,4 +361,8 @@
 
     $('input[type=file]').customFile();
 </script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDWLKiQU9kiiXSpS7A5RAeKenzpQlI84Ds&signed_in=true&libraries=places&callback=initMap"
+        async defer></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDWLKiQU9kiiXSpS7A5RAeKenzpQlI84Ds&signed_in=true&libraries=places&callback=initAutocomplete"
+        async defer></script>
 {%endblock%}

@@ -75,7 +75,7 @@ body {
 
 }
 //form {float:left;}
-.tmk-title {color:#565A5C;}
+.tmk-title {color:#565A5C;line-height:normal;}
 //global btn
 $g-btn-color:#F5515F;
 $g-btn-h-color:#F5515F;
@@ -114,6 +114,7 @@ button {
   background-color:#fff!important;
   //background-color:#CCD1D9!important;
 }
+.btn-block {max-width:330px!important;margin:auto;}
 
 .btn-info, .btn-info.active, .btn-info.disabled, .btn-info:active, .btn-info[disabled]{
   border: 3px solid #84CDC2!important;
@@ -265,8 +266,7 @@ nav {
 }
 
 .tmk-page-header {
-  padding-top: 50px;
-  padding-bottom:50px;
+  padding:50px 15px;
 }
 
 .tmk-page-pick {
@@ -911,7 +911,7 @@ ul{
   z-index: 1050 !important;
 }
 .modal-content {
-  max-width: 400px;
+  max-width: 330px;
   margin: auto;
 }
 
@@ -932,7 +932,7 @@ ul{
 #login, #register {
   border: none;
   text-align: left;
-  width:360px;
+  max-width:330px;
   margin:auto;
 }
 
@@ -1125,7 +1125,7 @@ ul{
 .tmk-qitem-selecter-wrapper{
   display: inline-block;
   vertical-align: middle;
-  min-width: 200px!important;
+  min-width: 162px!important;
   height:50px;
 }
 
@@ -1389,7 +1389,7 @@ ul{
 @media screen and (max-width:767px) {
   .card-list li {
     width: 100%;
-    margin: 0;
+    margin: 0!important;
     left: 0;
     right: 0;
     margin-bottom: 15px;

@@ -26,7 +26,7 @@
               </div>
 
 
-              <a href="/login/facebook?next={{next}}"><div class="facebook-login"><img src="{%static 'media/image/slice/buttonicon-4.png'%}"> 페이스북으로 회원가입</div></a>
+              <a href="http://{{HTTP_HOST}}/login/facebook?next={{next}}"><div class="facebook-login"><img src="{%static 'media/image/slice/buttonicon-4.png'%}"> 페이스북으로 회원가입</div></a>
               <div class="or h4" style="text-align:center;">또는</div>
 
               <label for="username" class="sr-only">이메일 주소</label>
@@ -51,7 +51,7 @@
                   <!--<a href="/v2/user/login/?next=/" class="to_register">로그인하기</a>-->
               <!--</p>-->
               {% if accountform.errors %}
-              <div id="form-error">
+              <div class="form-error">
                   <div class="alert alert-warning">
                       <a href="#" class="close" data-dismiss="alert">&times;</a>
                       <p>정보를 정확히 입력해주세요:</p>
@@ -77,7 +77,7 @@
   
   <div role="tabpanel" class="tab-pane" id="login">
     <div class="pop">
-    <div id="login" class="animate">
+    <div class="animate">
         <form method="POST" action="{% url 'login_v2d1' %}" class="form-signin" autocomplete="off">
             <input type="hidden" name="next" value="{{next}}"/>
             {% csrf_token %}
@@ -85,7 +85,7 @@
 
 
 
-            <a href="/login/facebook"><div class="facebook-login"><img src="{%static 'media/image/slice/buttonicon-4.png'%}"> 페이스북으로 로그인</div></a>
+            <a href="http://{{HTTP_HOST}}/login/facebook"><div class="facebook-login"><img src="{%static 'media/image/slice/buttonicon-4.png'%}"> 페이스북으로 로그인</div></a>
 
             <div class="or h4" style="text-align:center;">또는</div>
 
@@ -97,11 +97,11 @@
             <input id="password" type="password" name="password" placeholder="비밀번호" class="form-control" required
                    autocomplete="off" value="{{valid_password}}">
 
-            <a href="{% url 'v2_reset_request' %}" class="fg-pwd">
+            <a href="http://{{HTTP_HOST}}/v2.1/user/pw_reset" class="fg-pwd">
                 <p style="margin:10px auto;padding-left:10px;">비밀번호가 기억나지 않아요</p></a>
 
             {% if login_form.errors %}
-            <div id="form-error">
+            <div class="form-error">
                 <div class="alert alert-warning">
                     <a href="#" class="close" data-dismiss="alert">&times;</a>
                     <p>정보를 정확히 입력해주세요:
