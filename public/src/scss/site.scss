@@ -114,13 +114,16 @@ button {
   background-color:#fff!important;
   //background-color:#CCD1D9!important;
 }
-.btn-block {max-width:330px!important;margin:auto;}
+.btn-block {margin:auto;}
 
 .btn-info, .btn-info.active, .btn-info.disabled, .btn-info:active, .btn-info[disabled]{
   border: 3px solid #84CDC2!important;
   background: #84CDC2!important;
 }
 
+@media screen and (max-width:767px) {
+  .tmk-search .btn-block {max-width:330px;}
+}
 /* navigation */
 
 nav {
@@ -905,11 +908,12 @@ ul{
 
 
 /* Modal, pop-ups */
-
+//
 .modal-backdrop {z-index:999 !important;}
 .modal {
   z-index: 1050 !important;
 }
+
 .modal-content {
   max-width: 330px;
   margin: auto;
@@ -1277,7 +1281,7 @@ ul{
   /*padding: 10px;*/
   width: 100%;
   height: 280px;
-  margin-right: .5em;
+  //margin-right: .5em;
   margin-bottom: .3em;
 }
 .card-link {
@@ -1289,7 +1293,7 @@ ul{
 
 .card-link img {
   display: block;
-  width:700px;
+  width:50em;
   //min-width: 100%;
   //min-height: 100%;
   margin: auto;
@@ -1389,10 +1393,7 @@ ul{
 @media screen and (max-width:767px) {
   .card-list li {
     width: 100%;
-    margin: 0!important;
-    left: 0;
-    right: 0;
-    margin-bottom: 15px;
+    margin: 15px 0;
   }
 }
 @media screen and (min-width:768px) and (max-width:861px) {

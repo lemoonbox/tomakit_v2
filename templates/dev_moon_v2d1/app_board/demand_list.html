@@ -15,7 +15,7 @@
 
     .card-list li {
         height: 380px;
-        width: 370px;
+        /*width: 370px;*/
         margin: 15px;
         padding: 0px;
         background:#fff;
@@ -26,9 +26,15 @@
         float:left;
         list-style-type: none;
     }
+    @media screen and (min-width:768px) {
+        .card-list li {width:370px;}
+    }
 
     @media screen and (max-width:767px) {
-        .card-list li {float:none!important;
+        .card-list li {
+            float: none !important;
+            width: 100%;
+            margin:15px 0;
         }
     }
 
