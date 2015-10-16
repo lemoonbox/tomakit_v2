@@ -3,6 +3,8 @@ from django.conf import settings
 import uuid
 
 from app_comminfo.models import State, Category
+from datetime import datetime
+
 # Create your models here.
 
 

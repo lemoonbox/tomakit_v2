@@ -40,8 +40,10 @@ def pay_prefill(request):
 
         if classtype == "tutclass":
             _post=T2TutClass.objects.get(pk=post_id)
+            merchant_id+=_post.title
         else:
             _post=T2TeachClass.objects.get(pk=post_id)
+            merchant_id+=_post.title
     else :
         return Http404("잘못된 요청입니다.")
 
@@ -71,7 +73,6 @@ def pay_conf(request):
         if classtype == "teachclass":
             want_day=datetime.date.today()
 
-
         _profile=T2Profile.objects.get(user=request.user)
         _profile.mobli=mobli
         _profile.mobli_able=True
@@ -81,7 +82,7 @@ def pay_conf(request):
             _post=T2TutClass.objects.get(pk=post_id)
         else:
             _post=T2TeachClass.objects.get(pk=post_id)
-        if prefillform.is_valid():
+        if prefillform.is_valid() and want_day:
 
             _prepayment=PrePayment(user=request.user, classtype=classtype,
                                    merchant_uid=merchant_id, pay_method=pay_method,
@@ -104,6 +105,8 @@ def pay_conf(request):
                     "amount":str(_post.price+_post.extra_price),
                     "HTTP_HOST":HTTP_HOST,
                 })
+        else:
+            prefillform.add_error("want_day", u"희망 날짜를 선택해주세요")
     return render(request,TEMP.PRE_PAYMENT_V2D1,{
         "prefillform":prefillform,
         'post':_post,
