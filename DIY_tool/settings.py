@@ -25,8 +25,8 @@ SECRET_KEY = 'sj)7m^^1u$9=s40&8de&z#$alfgx(k6fztu3gj(w2^pdsnne6n'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-LOCAL = True
-
+LOCAL = False
+SERVER_TEST =True
 TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = ['*']
@@ -219,7 +219,11 @@ AWS_HEADERS = {
     'Cashe-Control' : 'max-age=94608000',
 }
 #S3 acess_key
-AWS_STORAGE_BUCKET_NAME = 'diytec.beta'
+
+#test
+AWS_STORAGE_BUCKET_NAME = 'tomakit.test'
+##product
+#AWS_STORAGE_BUCKET_NAME = 'diytec.beta'
 AWS_ACCESS_KEY_ID = 'AKIAJG4KYTAON2HRQB7Q'
 AWS_SECRET_ACCESS_KEY = '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'
 AWS_S3_SECURE_URLS = False
@@ -249,6 +253,9 @@ else :
     #It's for summernote
     STATIC_URL = "http://%s/" % AWS_S3_CUSTOM_DOMAIN
 
+
+    #test domain
+    AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % 'diytec.beta'
     MEDIAFILES_LOCATION = 'uploads'
     DEFAULT_FILE_STORAGE = 'DIY_tool.custom_storages.MediaStorage'
     MEDIA_URL = "http://%s/uploads/" % AWS_S3_CUSTOM_DOMAIN
