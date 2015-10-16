@@ -46,6 +46,9 @@
     .img-grid img {width:250%;min-height:100%;position:center;}
     .tmk-panel {border-bottom:none;font-size:16px;line-height:24px;}
     .card-link img{background:url('{%static "media/image/default_prof.png"%}') no-repeat; background-position:center; background-size:cover;}
+    #map {
+        height: 500px;width:100%;
+    }
 
 </style>
 {%endblock%}
@@ -93,6 +96,13 @@
             <div class="tmk-panel">{{host_profile.intro_self}}</div>
             <div class="tmk-h3">가게 주소</div>
             <div class="tmk-panel">{{host_profile.shop_addr}}</div>
+            <div>
+                <div id="floating-panel">
+                    <input hidden id="address" value="{{host_profile.shop_addr}}">
+                    <!--<input id="submit" type="button" value="Geocode">-->
+                </div>
+                <div id="map"></div>
+            </div>
         </div>
 
         <div class="col-lg-4">
@@ -146,4 +156,7 @@
         </div>
     </div>
 </div>
+{%endblock%}
+{%block script%}
+<script src="{% static 'google_map_load.js'%}"></script>
 {%endblock%}

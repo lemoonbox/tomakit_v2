@@ -1,12 +1,13 @@
 var gulp = require('gulp');
 
+//var rev = require('gulp-rev');
 //var server = require('gulp-webserver'); //this is not needed in this project
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var minifyhtml = require('gulp-minify-html');
 var minifycss = require('gulp-minify-css');
 var sass = require('gulp-sass');
-var livereload = require('gulp-livereload');
+//var livereload = require('gulp-livereload');
 var gutil = require('gulp-util');
 var del = require('del');
 //var sassFiles = 'public/src/scss/**/*.scss';
@@ -65,7 +66,7 @@ gulp.task('sass', function() {
       //        cascade:false
       //    }
       //))
-      .pipe(livereload());
+      //.pipe(livereload());
 });
 
 //minify html files
@@ -82,8 +83,14 @@ gulp.task('watch', function() {
     gulp.watch(paths.js, ['combine-js']);
     gulp.watch(paths.scss, ['sass']);
     //gulp.watch(paths.html, ['compress-html']);
-    gulp.watch(dist + '/**').on('change', livereload.changed);
+    //gulp.watch(dist + '/**').on('change', livereload.changed);
 });
+
+//gulp.task('rev', function() {
+//    return gulp.src(['dist/css/*.css'], {base: 'public'})
+//        .pipe(rev())
+//        .pipe(gulp.dest('public/dist'));
+//});
 
 //set default task
 gulp.task('default', [
@@ -92,4 +99,5 @@ gulp.task('default', [
     'sass',
     'compress-html',
     'watch'
+    //'rev'
 ]);

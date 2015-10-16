@@ -85,6 +85,10 @@
         .mobile-nomargin {padding-left:0!important;padding-right:0!important;
         }
     }
+    #map {
+        height: 500px;width:100%;
+    }
+
 </style>
 {%endblock%}
 
@@ -201,8 +205,8 @@
                 <div class="tmk-h2" style="font-weight:bold;">클래스 소개</div>
                 <!--동영상-->
                 {% if post.video%}
-                <div style="height:auto;margin-bottom:30px;">
-                <iframe width="100%" height="100%" src="https://www.youtube.com/embed/{{post.video}}" frameborder="0" allowfullscreen></iframe>
+                <div style="height:auto;min-height:30em;margin-bottom:30px;">
+                <iframe width="100%" style="min-height:30em;" height="100%" src="https://www.youtube.com/embed/{{post.video}}" frameborder="0" allowfullscreen></iframe>
                 </div>
                 {% endif %}
                 <div class="tmk-h3">소개</div>
@@ -214,8 +218,14 @@
                 <div class="tmk-panel">{{post.notic|linebreaks}}</div>
 
                 <div class="tmk-h3">공방위치</div>
-                <div class="tmk-panel">{{post.addr}}</div>
-
+                <div class="tmk-panel">{{post.addr}}                </div>
+<div>
+    <div id="floating-panel">
+        <input hidden id="address" value="{{post.addr}}">
+        <!--<input id="submit" type="button" value="Geocode">-->
+    </div>
+    <div id="map"></div>
+</div>
                 <div class="tmk-h3">선생님 소개</div>
                 <div class="tmk-panel well" style="border:none;padding-top:50px;">
                     <div class="col-lg-2" style="float:left;">
@@ -409,7 +419,9 @@
 </div>
 {%endblock%}
 {%block script%}
+<script src="{% static 'google_map_load.js'%}"></script>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
+
 <script>
     $(document).ready(function(){
         $(".modify-btn").click(function(){

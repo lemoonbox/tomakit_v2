@@ -42,7 +42,7 @@
 
               <label for="id_password" class="sr-only">Password</label>
               <input id="id_password" name="password" type="password"
-                     class="form-control" placeholder="비밀번호" required />
+                     class="form-control" placeholder="비밀번호" required /><br>
               <label for="id_password_confirm" class="sr-only">Confirm Password</label>
               <input id="id_password_confirm" name="password_confirm" type="password"
                      class="form-control" required placeholder="비밀번호 확인"/>
@@ -108,7 +108,7 @@
                     <table>
                         {% for field in login_form %}
                         {{ field.errors|striptags }}
-                        {% endfor %}</p>
+                        {% endfor %}
                     </table>
                 </div>
             </div>

@@ -21,6 +21,7 @@
         .col-xs-12 {padding-left:0;}
 
     }
+    #ui-datepicker-div {background-color:#fff;padding:15px;border:1px solid #eee;text-indent:0.25em;}
 </style>
 {%endblock%}
 
@@ -86,7 +87,8 @@
     {% if classtype == "tutclass"%}
         <label class="col-md-2">희망수업 시작일</label>
                 <div class="col-md-4">
-                    <input class="form-control" type="date" name="want_day">
+
+                    <p><input class="form-control" type="text" id="datepicker" name="want_day"></p>
                 </div>
     {% endif %}
 </div>
@@ -120,4 +122,14 @@
 </form>
 </div>
 </div>
+{%endblock%}
+{%block script%}
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
+<script>
+    $(function() {
+        $( "#datepicker" ).datepicker();
+    });
+</script>
 {%endblock%}
