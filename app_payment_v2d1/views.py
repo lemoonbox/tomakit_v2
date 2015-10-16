@@ -74,6 +74,8 @@ def pay_conf(request):
             want_day=datetime.date.today()
 
         _profile=T2Profile.objects.get(user=request.user)
+        _profile.mobli1=mobli2
+        _profile.mobli2=mobli3
         _profile.mobli=mobli
         _profile.mobli_able=True
         _profile.save()
@@ -82,6 +84,9 @@ def pay_conf(request):
             _post=T2TutClass.objects.get(pk=post_id)
         else:
             _post=T2TeachClass.objects.get(pk=post_id)
+
+        if want_day:
+            print "want_day"
         if prefillform.is_valid() and want_day:
 
             _prepayment=PrePayment(user=request.user, classtype=classtype,
@@ -91,6 +96,7 @@ def pay_conf(request):
                                    buyer_email=buyer_email, buyer_mobli=mobli,
                                    want_day=want_day)
             _prepayment.save()
+
             return render(request,TEMP.PAYMENT_CONF_V2D1,{
                     "prefillform":prefillform,
                     'post':_post,
