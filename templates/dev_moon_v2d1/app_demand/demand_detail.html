@@ -62,7 +62,7 @@
                 <div class="img-grid">
                     <div class="infobox-img-wrapper">
                         <a href="http://{{HTTP_HOST}}/v2.1/user/profile/{{post.user.id}}">
-                            <img src="{{MEDIA_URL}}{{post.user.t2profile_set.first.pro_pic}}">
+                            <img style="height:100%;width:100%;" src="{{MEDIA_URL}}{{post.user.t2profile_set.first.pro_pic}}">
                         </a>
                     </div>
                 </div>
@@ -235,17 +235,17 @@
                                 <input type="checkbox" name="class_ad" value="host_ad"  style="vertical-align:bottom;" class="icheckbox_flat"
                                        {% if comment.class_ad%}checked="checked"{% endif %}> 수업 개설 댓글
                             </div>
-                            <div class="col-md-2 col-xs-2 pull-right">
+                            <div class="col-md-2 col-xs-2 pull-right" style="margin-right:15px;margin-left:15px;">
                                 <input class="btn btn-link modify-end" type="submit" value="수정 완료">
                             </div>
                         </form>
                     </div>
                     {%if request.user == comment.user%}
-                    <div class="col-md-2 col-xs-2 pull-right modify-wrap">
+                    <div class="col-md-2 col-xs-2 pull-right modify-wrap"  style="margin-right:15px;">
                         <span class="btn btn-link modify-btn">댓글 수정</span>
                     </div>
                     {% endif %}
-                    <div class="col-md-2 col-xs-2 pull-right review-del" hidden>
+                    <div class="col-md-2 col-xs-2 pull-right review-del" style="padding-left:0;" hidden>
                         <form method="POST" action="{% url 'delete_comment_v2d1' comment.id%}">
                             {%csrf_token%}
                             <input type="hidden" name="demand_num" value="{{post.id}}">

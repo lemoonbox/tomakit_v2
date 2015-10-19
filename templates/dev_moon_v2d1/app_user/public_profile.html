@@ -6,6 +6,7 @@
 <style>
     body {background:#fff!important;}
     .tmk-main-body {text-align:left;}
+
     .profile-banner {height:320px;margin-bottom:50px;padding-top:50px;font-size:18px;background-color:#eee;}
     .profile-banner .btn-primary img {vertical-align:text-bottom;height:20px;}
     .nav-tabs {background:#fff;border:none;border-bottom:2px solid #eee;}
@@ -41,7 +42,7 @@
     /*.profile-class-wrapper {}*/
     .class-img-wrapper {height:120px;width:120px;}
     .class-img-wrapper div {padding:0;float:left;}
-    .info-wrapper {max-width:65%;padding:15px;}
+    .info-wrapper {max-width:55%;padding:15px;}
     .img-grid {height:100%;width:100%;overflow:hidden;}
     .img-grid img {width:250%;min-height:100%;position:center;}
     .tmk-panel {border-bottom:none;font-size:16px;line-height:24px;}
@@ -67,8 +68,8 @@
             </div>
         </div>
 
-        <div class="tmk-h2">{{profile_user.last_name}}{{profile_user.first_name}}</div>
-        <div>{{profile_user.t2profile_set.first.intro_line}}</div>
+        <div class="tmk-h2" style="margin:0 auto;">{{profile_user.last_name}} {{profile_user.first_name}}</div>
+        <div style="margin-bottom:15px;">{{profile_user.t2profile_set.first.intro_line}}</div>
         <div class="btn-group pull-left">
             <a style="color:#FF565A;border-bottom:4px solid;" href="http://{{HTTP_HOST}}/v2.1/user/profile/{{profile_user.id}}/">소개</a>
             <a style="color:#CACCCD;" href="http://{{HTTP_HOST}}/v2.1/user/profile/{{profile_user.id}}/class_check/">클래스</a>
@@ -133,10 +134,10 @@
     <div class="tmk-main-body col-lg-12 col-xs-12">
         <div class="container">
             <div class="review-wrapper col-xs-12 col-md-12">
-                <div class="tmk-h3"><span style="color:#84CDC2;">"리뷰 개수"</span>개의 후기가 있습니다</div>
+                <div class="tmk-h3"><span style="color:#84CDC2;">{{reviews.count}}</span>개의 후기가 있습니다</div>
                 {% for review in reviews%}
                 <div style="height:100px;">
-                    <div class="col-xs-2 col-lg-2">
+                    <div class="col-xs-2 col-lg-2" style="padding:0;">
                         <div class="tmk-card-img-profile">
                             <div class="card-link">
                                 <img src="{{MEDIA_URL}}{{review.user.t2profile_set.first.pro_pic}}">
@@ -158,5 +159,5 @@
 </div>
 {%endblock%}
 {%block script%}
-<script src="{% static 'google_map_load.js'%}"></script>
+<script src="{% static 'js/google_map_load.js'%}"></script>
 {%endblock%}

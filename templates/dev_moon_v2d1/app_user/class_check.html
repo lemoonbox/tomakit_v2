@@ -25,6 +25,11 @@
     .onoff-class a {color:#fff;}
     .onoff-class:hover {z-index:3;background-color:#000;color:#fff;opacity:0.8;}
 
+
+    .modify-demand {line-height:300px;float:none;border-radius:4px;position:absolute;z-index:10;top:0;left:0;right:0;bottom:0;opacity:0;font-size:16px;}
+    .modify-demand a {color:#fff;}
+    .modify-demand:hover {z-index:3;background-color:#000;color:#fff;opacity:0.8;}
+
     .tmk-demand-info {height:220px;padding:10px;overflow:hidden;margin-bottom:15px;}
     .tmk-demand-info div {margin:25px auto;}
 
@@ -51,8 +56,8 @@
         </div>
                 </div>
             </div>
-        <div class="tmk-h2">{{profile_user.last_name}}{{profile_user.first_name}}</div>
-        <div>{{profile_user.t2profile_set.first.intro_line}}</div>
+        <div class="tmk-h2" style="margin:0 auto;">{{profile_user.last_name}}{{profile_user.first_name}}</div>
+        <div style="margin-bottom:15px; ">{{profile_user.t2profile_set.first.intro_line}}</div>
         <div class="btn-group pull-left">
             <a style="color:#CACCCD;" href="http://{{HTTP_HOST}}/v2.1/user/profile/{{profile_user.id}}/">소개</a>
             <a style="color:#FF565A;border-bottom:4px solid" href="http://{{HTTP_HOST}}/v2.1/user/profile/{{profile_user.id}}/class_check/">클래스</a>
@@ -142,18 +147,24 @@
                     <div id="card-list-wrapper">
                         <ul>
                             {% for class in demand_classes %}
-                            <li class="tmk-class-card" style="height:380px;">
-                                <a href="http://{{HTTP_HOST}}/v2.1/demand/modify/{{class.id}}/" style="color: #565a5C;">
+                            <li class="tmk-class-card col-md-4" style="height:380px;">
+
+                                 <span class="modify-demand">
+                                    <a href="http://{{HTTP_HOST}}/v2.1/demand/modify/{{class.id}}"> 수정하기
+                                    </a>
+                                </span>
+
+                                <!--<a href="http://{{HTTP_HOST}}/v2.1/demand/modify/{{class.id}}/" style="color: #565a5C;">-->
                                     <div class="tmk-demand-info">
                                         <div style="color:#82888A">{{class.category}}</div>
                                         <div class="h4">{{class.title}}</div>
                                         <div class="info-describe" style="white-space: normal;word-break: break-all;">{{class.descript}}</div>
                                     </div>
-                                </a>
 
                                 <div class="" style="text-align:left;padding-left:20px;">
                                     <div style="margin:10px auto;height:40px;overflow:hidden;color:#84CDC2;">{{class.demand_post.goal|goaltag2han}}</div>
                                 </div>
+
                             </li>
                             {% endfor %}
                         </ul>

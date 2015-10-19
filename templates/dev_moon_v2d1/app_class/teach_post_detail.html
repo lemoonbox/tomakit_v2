@@ -11,7 +11,8 @@
     .tmk-class-pay {border:1px solid #ddd;border-radius:4px;}
     .tmk-class-pay-top {padding:10px;}
     .tmk-class-pay .tmk-h3 {border-bottom:1px solid #ddd;padding:15px;margin-top:0;}
-    .tmk-class-pay label {line-height:36px;color:#82888A;font-size:14px;font-weight:normal;min-width:130px;max-width:150px;vertical-align:middle;}
+    .tmk-class-pay label {line-height:36px;color:#82888A;font-size:14px;font-weight:normal;min-width:120px;max-width:150px;vertical-align:middle;}
+    .tmk-class-pay label span {max-width:45%;display:inline-flex!important;}
     .col-lg-12 img {max-width:100px;}
     .tmk-infobox-price {height:120px; line-height:24px;text-align:left;background-color:#eee;padding:10px;}
     .tmk-infobox-price div {
@@ -45,7 +46,7 @@
     .col-md-2 img {width:100px;}
     .review-wrapper {margin:20px auto;text-align:left;min-height:150px;margin-bottom:30px;padding:0;}
     .review-wrapper .btn-link {display:inline!important;float:left!important;margin-left:-5px;}
-
+    .review-wrapper .col-xs-2 {padding:0;}
     #user-review {text-align:left;}
     @media screen and (min-width:992px) {
         #submit-review {position:absolute;top:-90px;left:0;}
@@ -59,6 +60,7 @@
     @media (max-width: 480px) {
         .mobile-nomargin {padding-left:0!important;padding-right:0!important;
         }
+        .mobile-nomargin .tmk-h2 {padding-left:15px;}
     }
 
     #map {
@@ -66,7 +68,6 @@
     }
 
 </style>
-
 {%endblock%}
 
 <body>
@@ -130,20 +131,20 @@
                         <div class="tmk-h3" style="font-weight:bold;">{{post.repeat}}회 과정 / 총 {% widthratio post.repeat 1 post.perhour%}시간</div>
                         <div style="text-align:left;">
                             <div>
-                                <label><img src="{%static 'media/image/slice/icon-intro_time.png'%}"> 모집 마감일</label> {{post.deadline|date:"Y년 n월 d일"}}
+                                <label><img src="{%static 'media/image/slice/icon-intro_time.png'%}"> 모집 마감일</label> <span>{{post.deadline|date:"Y년 n월 d일"}}</span>
                             </div>
                             <div>
-                                <label><img src="{%static 'media/image/slice/icon-intro_flag.png'%}"> 수업 시작일 </label> {{post.deadline|date:"Y년 n월 d일"}}
+                                <label><img src="{%static 'media/image/slice/icon-intro_flag.png'%}"> 수업 시작일 </label> <span>{{post.deadline|date:"Y년 n월 d일"}}</span>
                             </div>
                             <div>
-                                <label><img src="{%static 'media/image/slice/icon-intro_clock.png'%}"> 수업 일정</label> <span style="max-width:45%;display:inline-flex;line-break: normal;">{{post.weekday}}</span>
+                                <label><img src="{%static 'media/image/slice/icon-intro_clock.png'%}"> 수업 일정</label> <span>{{post.weekday}}</span>
                             </div>
                             <div>
                                 <label><img src="{%static 'media/image/slice/icon-intro_people.png'%}"> 인원</label>
-                                최소 {{post.min_num}}명 ~ 최대 {{post.max_num}}명
+                                <span>최소 {{post.min_num}}명 ~ 최대 {{post.max_num}}명</span>
                             </div>
                             <div>
-                                <label><img src="{%static 'media/image/slice/icon-intro_location.png'%}"> 장소</label><span style="max-width:45%;display:inline-flex;">{{post.addr}}</span>
+                                <label><img src="{%static 'media/image/slice/icon-intro_location.png'%}"> 장소</label><span>{{post.addr}}</span>
                             </div>
                         </div>
                     </div>
@@ -180,7 +181,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-8 tmk-post-detail">
+            <div class="col-lg-8 tmk-post-detail mobile-nomargin">
                 <div class="tmk-h2" style="font-weight:bold;">클래스 소개</div>
                 <!--동영상-->
                 {% if post.video%}
@@ -188,6 +189,8 @@
                     <iframe width="100%" style="min-height:30em;" height="100%" src="https://www.youtube.com/embed/{{post.video}}" frameborder="0" allowfullscreen></iframe>
                     </div>
                 {% endif %}
+            </div>
+            <div class="col-lg-8 tmk-post-detail">
                 <div class="tmk-h3">소개</div>
                 <div class="tmk-panel">{{post.descript|linebreaks}}</div>
 
@@ -392,7 +395,7 @@
 </div>
 
 <div class="tmk-main-body col-lg-12" style="background:#eee;margin-bottom:-50px;padding:30px;">
-    <div style="margin:50px auto;">
+    <div class="container" style="margin:50px auto;padding:0 15px!important;">
         <div class="tmk-h3" style="font-weight:bold;">원하는 클래스를 찾지 못했나요?</div>
         <div class="tmk-h4">클래스를 제안해보세요 원하시는 클래스를 개설해드린답니다</div>
         <a href="http://{{HTTP_HOST}}/v2.1/demand/create" class="btn btn-primary">클래스 제안하기</a>

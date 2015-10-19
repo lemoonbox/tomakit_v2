@@ -1075,6 +1075,11 @@ ul{
     transform: translate(-50%, -50%); }
 
 }
+
+@media screen and (max-width:767px) {
+  #tawkchat-minified-wrapper {display:none!important;}
+  #tawkchat-minified-container {display:none!important;}
+}
 @media screen and (min-width:768px) {
   //.col-lg-12 .carousel {height:500px!important;}
   #class-post-Carousel {height:35em!important;overflow:hidden;}
@@ -1082,7 +1087,7 @@ ul{
     min-height:35em;}
   .carousel-control {line-height:35em!important;}
   .carousel-inner>.item>a>img,, .item>img, .carousel-inner>.item>img, .img-responsive, .thumbnail a>img, .thumbnail>img {
-    width: 100%!important;
+    width: 100%!important;position: absolute;
     //height:auto!important;
   }
   .item {
@@ -1311,7 +1316,7 @@ ul{
 
 .card-link img {
   display: block;
-  width:50em;
+  width:45em;
   //min-width: 100%;
   //min-height: 100%;
   margin: auto;
