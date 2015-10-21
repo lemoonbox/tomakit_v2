@@ -249,9 +249,9 @@
                         </div>
                     </a>
 
-                    <div class="" style="text-align:left;padding-left:20px;">
+                    <div class="" style="text-align:left;padding:0 20px;text-overflow:ellipsis;">
                         <div style="margin:10px auto;height:40px;overflow:hidden;color:#84CDC2;">{{class.demand_post.goal|goaltag2han}}</div>
-<div class="tmk-card-like">
+<div class="tmk-card-like" style=" text-overflow:ellipsis;">
                     {% if request.user.t2profile_set.first.mobli_able %}
                     <a href="{% url 'lineup_pageing_v2d1' class.id page_currunt cate_current state_current%}?lineup_next=/v2.1/board/demand_list/{{page_currunt}}/{{cate_current}}/{{state_current}}">
                         {% else%}

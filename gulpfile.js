@@ -79,7 +79,7 @@ gulp.task('compress-html', function() {
 //auto reload browser when files change
 gulp.task('watch', function() {
     //plugins.
-    livereaload.listen();
+    //livereaload.listen();
     gulp.watch(paths.js, ['combine-js']);
     gulp.watch(paths.scss, ['sass']);
     //gulp.watch(paths.html, ['compress-html']);

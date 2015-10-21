@@ -46,14 +46,50 @@
     #video_container {
         left:0;
         position:absolute;
+        z-index:-1;
         top:0;
         width:100%;
         height:480px;
         overflow:hidden;
     }
-    #bgvid {min-width:100%;}
+    #bgvid {
+        min-width: 100%;
+        position: absolute;
+        z-index: -99;
+        top: 50%;
+        left: 50%;
+        /*min-width:100%;*/
+        height: 300%;
+        -webkit-transform: translateX(-50%) translateY(-50%);
+        transform: translateX(-50%) translateY(-50%);
+        background: url({%static 'media/image/main-banner-poster.png' %}) no-repeat;
+        background-size:cover;
+    }
 
+    #youtubeNosound {
+
+    }
+    #myyoutubePlayer { min-width: 100%;
+        position: absolute;
+        z-index: -99;
+        top: 50%;
+        left: 50%;
+        /*min-width:100%;*/
+        height: 300%;
+        -webkit-transform: translateX(-50%) translateY(-50%);
+        transform: translateX(-50%) translateY(-50%);
+        background: url({%static 'media/image/main-banner-poster.png' %}) no-repeat;
+        background-size:cover;
+        }
+
+    /*.youtube-container { display: block; margin: 20px auto; width: 100%; max-width: 600px; }*/
+    /*/!*#myyoutubePlayer { display: block; width: 100%; /!* assuming that the video has a 16:9 ratio *!/ padding-bottom: 56.25%; overflow: hidden; position: relative; width: 100%; height: 100%; cursor: hand; cursor: pointer; display: block; }*!/*/
+    img.youtube-thumb { bottom: 0; display: block; left: 0; margin: auto; max-width: 100%; width: 100%; position: absolute; right: 0; top: 0; height: auto }
+    /*/!*div.play-button { height: 72px; width: 72px; left: 50%; top: 50%; margin-left: -36px; margin-top: -36px; position: absolute; background: url("http://i.imgur.com/TxzC70f.png") no-repeat; }*!/*/
+    /*#youtube-iframe { width: 100%; height: 100%; position: absolute; top: 0; left: 0; }*/
 </style>
+<script src="http://www.google.com/jsapi"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/swfobject/2.1/swfobject.js"></script>
 {%endblock%}
 {%block nav%}
 {%include 'component/navigation/_head_nav_custom.html'%}
@@ -65,13 +101,22 @@
         핸드메이드 클래스 찾을 땐, 토마킷</div>
     <div class="main-banner-subtitle">토마킷이 편한 시간, 가까운 공방의 클래스를 찾아드려요!</div>
     <div id="video_container" class="hidden-xs">
+        <div id="youtubeNosound"></div>
+        {% comment %}
+        <!--<div id="bgvid">-->
+                <!--<iframe class="hidden-xs" frameborder="0" height="100%" width="100%"-->
+                        <!--src="https://youtube.com/embed/KeWUl0Avr84?autoplay=1&controls=0&loop=1&showinfo=0&modestbranding=1&rel=0&enablejsapi=1&autohide=1&playlist=KeWUl0Avr84&">-->
+                <!--</iframe>-->
+        <!--</div>-->
         <!--<video autoplay loop id="bgvid">-->
-        <video class="hidden-xs" autoplay loop muted poster="{%static 'media/image/main-banner-poster.png'%}" id="bgvid">
-            <source src="{%static 'media/video/Tomakit_TV_website_promo.mp4'%}" type="video/mp4">
-            <source src="{%static 'media/video/Tomakit_TV_website_p.webm' %}" type="video/webm">
-    </video>
+        <!--<video class="hidden-xs" autoplay loop muted poster="{%static 'media/image/main-banner-poster.png'%}" id="bgvid">-->
+            <!--<source src="{%static 'media/video/Tomakit_TV_website_promo.mp4'%}" type="video/mp4">-->
+            <!--<source src="{%static 'media/video/Tomakit_TV_website_p.webm' %}" type="video/webm">-->
+        <!--</video>-->
+        {% endcomment %}
     </div>
-</div>
+    </div>
+
 
 <div class="tmk-main-body col-md-12">
     <div class="container">
@@ -190,4 +235,31 @@
 {%endblock %}
 {% block script %}
 <script src='{%static "media/js/qitem_create.js" %}'></script>
+
+<script type="text/javascript">
+    google.load("swfobject", "2.1");
+
+    function onYouTubePlayerReady(playerId) {
+        youtubePlayer = document.getElementById("myyoutubePlayer");
+        youtubePlayer.playVideo();
+        youtubePlayer.mute();
+    }
+    var params = { allowScriptAccess: "always" };
+    var atts = { id: "myyoutubePlayer" };
+    swfobject.embedSWF("http://www.youtube.com/v/KeWUl0Avr84&feature=plpp_play_all?start=1&enablejsapi=1&playerapiid=youtubePlayer&allowFullScreen=true&version=3&loop=1&autohide=1&autoplay=1&controls=0&showinfo=0&modestbranding=1&rel=0&autohide=1&playlist=KeWUl0Avr84&",
+            "youtubeNosound", "100%", "100%", "0", null, null, params, atts)
+
+//    (function() {
+//        var v = document.getElementById("myyoutubePlayer");
+//        for (var n = 0; n < v.length; n++) {
+//            var p = document.createElement("div");
+//            p.innerHTML = labnolThumb(v[n].dataset.id);
+//            v[n].appendChild(p);
+//        }
+//    })();
+//
+//    function labnolThumb(id) {
+//        return '<img class="youtube-thumb" src="//i.ytimg.com/vi/' + id + '/hqdefault.jpg"></div>';
+//    }
+</script>
 {% endblock %}

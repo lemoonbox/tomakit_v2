@@ -114,7 +114,7 @@
             <div class="tmk-panel">
                 <label class="col-md-2">클래스 제목 <span>*</span></label>
                 <div class="col-md-7">
-                    <input type="text" class="form-control" name="title" value="{{begin_data.title}}"placeholder="ex) 뜨개 테디베어만들기 4주 수업">
+                    <input type="text" class="form-control" name="title" value="{{begin_data.title}}"placeholder="ex) 뜨개 테디베어만들기 4주 수업" maxlength="40">
                     <div class="tmk-error">
                     {{beginform.title.errors|striptags}}
                         </div>
@@ -124,7 +124,7 @@
             <div class="tmk-panel">
                 <label class="col-md-2">한줄 소개 <span>*</span></label>
                 <div class="col-md-9">
-                    <input type="text" class="form-control" name="intro_line" value="{{begin_data.intro_line}}" placeholder="ex) 누구나 배울 수 있게 기초부터 탄탄하게 가르쳐요.">
+                    <input type="text" class="form-control" name="intro_line" value="{{begin_data.intro_line}}" placeholder="ex) 누구나 배울 수 있게 기초부터 탄탄하게 가르쳐요." maxlength="50">
 
                     <div class="tmk-error">
                         {{beginform.intro_line.errors|striptags}}
