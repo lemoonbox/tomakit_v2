@@ -22,6 +22,9 @@
 
     }
     #ui-datepicker-div {background-color:#fff;padding:15px;border:1px solid #eee;text-indent:0.25em;}
+    .ui-datepicker-prev, .ui-datepicker-next {cursor:pointer;}
+    .ui-datepicker-calendar a {color:#aaa;}
+    .ui-datepicker-calendar a:hover {color:#FF575C;}
 </style>
 {%endblock%}
 
@@ -88,7 +91,7 @@
         <label class="col-md-2">희망수업 시작일</label>
                 <div class="col-md-4">
 
-                    <p><input class="form-control" type="text" id="datepicker" name="want_day"></p>
+                    <p><input class="form-control"  placeholder="YYYY/MM/DD" type="text" id="datepicker" name="want_day" ></p>
                 </div>
                 {{prefillform.want_day.errors|striptags}}
     {% endif %}
@@ -129,7 +132,28 @@
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 
 <script>
-    $(function() {
+    jQuery(function($){
+        $.datepicker.regional['ko'] = { // Default regional settings
+            closeText: '닫기',
+            prevText: '이전달 ',
+            nextText: ' 다음달',
+            currentText: '오늘',
+            monthNames: ['1월(JAN)','2월(FEB)','3월(MAR)','4월(APR)','5월(MAY)','6월(JUN)',
+                '7월(JUL)','8월(AUG)','9월(SEP)','10월(OCT)','11월(NOV)','12월(DEC)'],
+            monthNamesShort: ['1월','2월','3월','4월','5월','6월',
+                '7월','8월','9월','10월','11월','12월'],
+            dayNames: ['일','월','화','수','목','금','토'],
+            dayNamesShort: ['일','월','화','수','목','금','토'],
+            dayNamesMin: ['일','월','화','수','목','금','토'],
+            weekHeader: 'Wk',
+            dateFormat: 'yy/mm/dd', // [mm/dd/yy], [yy-mm-dd], [d M, y], [DD, d MM]
+            firstDay: 0,
+            isRTL: false,
+            showMonthAfterYear: true,
+            yearSuffix: ''};
+
+        $.datepicker.setDefaults($.datepicker.regional['ko']);
+
         $( "#datepicker" ).datepicker();
     });
 </script>

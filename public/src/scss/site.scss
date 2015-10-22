@@ -499,6 +499,7 @@ ul{
 .tmk-main-banner {
   width: 100%;
   top:0;
+  position:relative;
   //video {
   //  position: absolute;
   //  top: 50%;
@@ -914,7 +915,7 @@ ul{
 
 /* Modal, pop-ups */
 //
-.modal-backdrop {z-index:999 !important;}
+.modal-backdrop {z-index:99 !important;}
 .modal {
   z-index: 1050 !important;
 }

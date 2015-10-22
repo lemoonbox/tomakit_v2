@@ -1,7 +1,7 @@
 {%load static from staticfiles%}
 <style>
     @media (min-width: 768px) {
-        #navbar {z-index:999;}
+        /*#navbar {z-index:999;}*/
         .navbar-main-menu {color:#fff!important;;}
         .navbar-brand > img {
             content: url({%static 'media/image/logo/tomakit-logo-whi-h32.png'%});
@@ -40,7 +40,7 @@
     }
 </style>
 <!-- Static navbar -->
-<nav class="navbar navbar-default navbar-static-top">
+<nav class="navbar navbar-default navbar-static-top" style="z-index:100;">
 
     <div class="navbar-inner">
         <!--<div class="container">-->
