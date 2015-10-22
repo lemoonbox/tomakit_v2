@@ -46,14 +46,34 @@
     #video_container {
         left:0;
         position:absolute;
+        z-index:-99;
         top:0;
         width:100%;
         height:480px;
         overflow:hidden;
     }
-    #bgvid {min-width:100%;}
 
+    #myyoutubePlayer { min-width: 100%;
+        position: absolute;
+        z-index: -99;
+        top: 50%;
+        left: 50%;
+        /*min-width:100%;*/
+        height: 300%;
+        -webkit-transform: translateX(-50%) translateY(-50%);
+        transform: translateX(-50%) translateY(-50%);
+        background: url({%static 'media/image/main-banner-poster.png' %}) no-repeat;
+        background-size:cover;
+        }
+
+    /*.youtube-container { display: block; margin: 20px auto; width: 100%; max-width: 600px; }*/
+    /*/!*#myyoutubePlayer { display: block; width: 100%; /!* assuming that the video has a 16:9 ratio *!/ padding-bottom: 56.25%; overflow: hidden; position: relative; width: 100%; height: 100%; cursor: hand; cursor: pointer; display: block; }*!/*/
+    img.youtube-thumb { bottom: 0; display: block; left: 0; margin: auto; max-width: 100%; width: 100%; position: absolute; right: 0; top: 0; height: auto }
+    /*/!*div.play-button { height: 72px; width: 72px; left: 50%; top: 50%; margin-left: -36px; margin-top: -36px; position: absolute; background: url("http://i.imgur.com/TxzC70f.png") no-repeat; }*!/*/
+    /*#youtube-iframe { width: 100%; height: 100%; position: absolute; top: 0; left: 0; }*/
 </style>
+<script src="http://www.google.com/jsapi"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/swfobject/2.1/swfobject.js"></script>
 {%endblock%}
 {%block nav%}
 {%include 'component/navigation/_head_nav_custom.html'%}
@@ -65,161 +85,22 @@
         핸드메이드 클래스 찾을 땐, 토마킷</div>
     <div class="main-banner-subtitle">토마킷이 편한 시간, 가까운 공방의 클래스를 찾아드려요!</div>
     <div id="video_container" class="hidden-xs">
+        <div id="youtubeNosound"></div>
+        {% comment %}
+        <!--<div id="bgvid">-->
+                <!--<iframe class="hidden-xs" frameborder="0" height="100%" width="100%"-->
+                        <!--src="https://youtube.com/embed/KeWUl0Avr84?autoplay=1&controls=0&loop=1&showinfo=0&modestbranding=1&rel=0&enablejsapi=1&autohide=1&playlist=KeWUl0Avr84&">-->
+                <!--</iframe>-->
+        <!--</div>-->
         <!--<video autoplay loop id="bgvid">-->
-        <video class="hidden-xs" autoplay loop muted poster="{%static 'media/image/main-banner-poster.png'%}" id="bgvid">
-            <source src="{%static 'media/video/Tomakit_TV_website_promo.mp4'%}" type="video/mp4">
-            <source src="{%static 'media/video/Tomakit_TV_website_p.webm' %}" type="video/webm">
-    </video>
+        <!--<video class="hidden-xs" autoplay loop muted poster="{%static 'media/image/main-banner-poster.png'%}" id="bgvid">-->
+            <!--<source src="{%static 'media/video/Tomakit_TV_website_promo.mp4'%}" type="video/mp4">-->
+            <!--<source src="{%static 'media/video/Tomakit_TV_website_p.webm' %}" type="video/webm">-->
+        <!--</video>-->
+        {% endcomment %}
     </div>
-    {%comment%}
-    <form method="GET" action="{% url 'class_filter_redirct_v2d1' %}">
-        {%csrf_token%}
-        <div class="tmk-search cover">
-            <div class="tmk-qitem-selecter-wrapper">
-                <div class="selecter cover" tabindex="0">
-                    <select name="category" required class="selecter_3 selecter-element" data-selecter-options="{&quot;cover&quot;:&quot;true&quot;}" tabindex="-1">
-                        <option value="all"
-                                {% if begin_data.category == 'all' %}selected{% endif %}>모든 카테고리</option>
-                        <option value="cate_1"
-                                {% if begin_data.category == 'cate_1' %}selected{% endif %}>가죽공예</option>
-                        <option value="cate_2"
-                                {% if begin_data.category == 'cate_2'%}selected{% endif %}>플라워아트</option>
-                        <option value="cate_3"
-                                {% if begin_data.category == 'cate_3'%}selected{% endif %}>전통공예/한복</option>
-                        <option value="cate_4"
-                                {% if begin_data.category == 'cate_4'%}selected{% endif %}>목공예</option>
-                        <option value="cate_5"
-                                {% if begin_data.category == 'cate_5'%}selected{% endif %}>금속공예/매듭</option>
-                        <option value="cate_6"
-                                {% if begin_data.category == 'cate_6'%}selected{% endif %}>재봉틀/뜨개질</option>
-                        <option value="cate_7"
-                                {% if begin_data.category == 'cate_7'%}selected{% endif %}>캘리그라피</option>
-                        <option value="cate_8"
-                                {% if begin_data.category == 'cate_8'%}selected{% endif %}>그리기</option>
-                        <option value="cate_9"
-                                {% if begin_data.category == 'cate_9'%}selected{% endif %}>베이킹/요리</option>
-                        <option value="cate_10"
-                                {% if begin_data.category == 'cate_10'%}selected{% endif %}>화장품/향기</option>
-                        <option value="cate_11"
-                                {% if begin_data.category == 'cate_11'%}selected{% endif %}>기타</option>
-                    </select>
-                    <span class="selecter-selected" onclick="btnClick(this)">카테고리 선택</span>
-                    <div class="selecter-options" data-value="">
-                        <!--<span class="selecter-item selected" data-value="" onclick="selecting(this, '')">카테고리</span>-->
-                        <div class="selecter-item"
-                             data-value="id"
-                             onclick="selecting(this, 'all')">모든 카테고리</div>
-                        <div class="selecter-item"
-                             data-value="id"
-                             onclick="selecting(this, 'cate_1')">가죽공예</div>
-                        <div class="selecter-item"
-                             data-value="id"
-                             onclick="selecting(this, 'cate_2')">플라워아트</div>
-                        <div class="selecter-item"
-                             data-value="id"
-                             onclick="selecting(this, 'cate_3')">전통공예/한복</div>
-                        <div class="selecter-item"
-                             data-value="id"
-                             onclick="selecting(this, 'cate_4')">목공예</div>
-                        <div class="selecter-item"
-                             data-value="id"
-                             onclick="selecting(this, 'cate_5')">금속공예/매듭</div>
-                        <div class="selecter-item"
-                             data-value="id"
-                             onclick="selecting(this, 'cate_6')">재봉틀/뜨개질</div>
-                        <div class="selecter-item"
-                             data-value="id"
-                             onclick="selecting(this, 'cate_7')">캘리그라피</div>
-                        <div class="selecter-item"
-                             data-value="id"
-                             onclick="selecting(this, 'cate_8')">그리기</div>
-                        <div class="selecter-item"
-                             data-value="id"
-                             onclick="selecting(this, 'cate_9')">베이킹/요리</div>
-                        <div class="selecter-item"
-                             data-value="id"
-                             onclick="selecting(this, 'cate_10')">화장품/향기</div>
-                        <div class="selecter-item"
-                             data-value="id"
-                             onclick="selecting(this, 'cate_11')">기타</div>
-                    </div>
-                </div>
-            </div>
-            <div class="tmk-qitem-selecter-wrapper">
-                <div class="selecter cover" tabindex="0">
-                    <select name="state" required class="selecter_3 selecter-element" data-selecter-options="{&quot;cover&quot;:&quot;true&quot;}" tabindex="-1">
-                        <option value="all"
-                                {% if begin_data.category == 'all' %}selected{% endif %}>모든 지역</option>
-                        <option value="zone_1"
-                                {% if demand_data.state == 'zone_1'%}selected{% endif %}>도봉/성북/동대문...</option>
-                        <option value="zone_2"
-                                {% if demand_data.state == 'zone_2'%}selected{% endif %}>은평/마포/서대문...</option>
-                        <option value="zone_3"
-                                {% if demand_data.state == 'zone_3'%}selected{% endif %}>종로/중구/용산...</option>
-                        <option value="zone_4"
-                                {% if demand_data.state == 'zone_4'%}selected{% endif %}>양천/영등포/동작...</option>
-                        <option value="zone_5"
-                                {% if demand_data.state == 'zone_5'%}selected{% endif %}>송파/강남/서초...</option>
-                        <option value="zone_6"
-                                {% if demand_data.state == 'zone_6'%}selected{% endif %}>수원/안산/안양...</option>
-                        <option value="zone_7"
-                                {% if demand_data.state == 'zone_7'%}selected{% endif %}>성남/남양주/용인...</option>
-                        <option value="zone_8"
-                                {% if demand_data.state == 'zone_8'%}selected{% endif %}>파주/의정부/고양...</option>
-                        <option value="zone_9"
-                                {% if demand_data.state == 'zone_9'%}selected{% endif %}>인천/부천</option>
-                        <option value="etc"
-                                {% if demand_data.state == 'etc'%}selected{% endif %}>기타</option>
-                    </select>
-                    <span class="selecter-selected" onclick="btnClick(this)">지역 선택</span>
-                    <div class="selecter-options" data-value="">
-                        <!--<span class="selecter-item selected" data-value="" onclick="selecting(this, '')">카테고리</span>-->
-                        <div class="selecter-item"
-                             data-value="id"
-                             onclick="selecting(this, 'all')">모든 카테고리</div>
-                        <div class="selecter-item"
-                             data-value="id"
-                             onclick="selecting(this, 'zone_1')">도봉/성북/동대문...</div>
-                        <div class="selecter-item"
-                             data-value="id"
-                             onclick="selecting(this, 'zone_2')">은평/마포/서대문...</div>
-                        <div class="selecter-item"
-                             data-value="id"
-                             onclick="selecting(this, 'zone_3')">종로/중구/용산...</div>
-                        <div class="selecter-item"
-                             data-value="id"
-                             onclick="selecting(this, 'zone_4')">양천/영등포/동작...</div>
-                        <div class="selecter-item"
-                             data-value="id"
-                             onclick="selecting(this, 'zone_5')">송파/강남/서초...</div>
-                        <div class="selecter-item"
-                             data-value="id"
-                             onclick="selecting(this, 'zone_6')">수원/안산/안양...</div>
-                        <div class="selecter-item"
-                             data-value="id"
-                             onclick="selecting(this, 'zone_7')">성남/남양주/용인...</div>
-                        <div class="selecter-item"
-                             data-value="id"
-                             onclick="selecting(this, 'zone_8')">파주/의정부/고양...</div>
-                        <div class="selecter-item"
-                             data-value="id"
-                             onclick="selecting(this, 'zone_9')">인천/부천</div>
-                        <div class="selecter-item"
-                             data-value="id"
-                             onclick="selecting(this, 'etc')">기타</div>
-                    </div>
-                </div>
-            </div>
-            <div class="hidden-xs" style="display:inline;vertical-align:text-bottom;">
-                <button class="btn btn-primary" type="submit" style="outline:1px solid transparent!important;" value="검색">검색</button>
-            </div>
-            <div class="visible-xs">
-                <button class="btn btn-primary btn-block" type="submit" value="검색">검색</button>
-            </div>
-        </div>
-    </form>
-{%endcomment%}
-</div>
+    </div>
+
 
 <div class="tmk-main-body col-md-12">
     <div class="container">
@@ -274,7 +155,7 @@
 </div>
 
 
-<div class="col-lg-12 tmk-demand-comment-wrapper">
+<div class="col-lg-12 tmk-demand-comment-wrapper" style="display:inline-block;">
     <div class="container" style="overflow:hidden;background:url('{%static 'media/image/slice/bg-2.png'%}');color:#fff;">
         <div class="tmk-demand-comment">
         <div class="h2">다른 사람들은 어떤 클래스를 배우고 싶어할까요?</div>
@@ -338,4 +219,31 @@
 {%endblock %}
 {% block script %}
 <script src='{%static "media/js/qitem_create.js" %}'></script>
+
+<script type="text/javascript">
+    google.load("swfobject", "2.1");
+
+    function onYouTubePlayerReady(playerId) {
+        youtubePlayer = document.getElementById("myyoutubePlayer");
+        youtubePlayer.playVideo();
+        youtubePlayer.mute();
+    }
+    var params = { allowScriptAccess: "always" };
+    var atts = { id: "myyoutubePlayer" };
+    swfobject.embedSWF("http://www.youtube.com/v/KeWUl0Avr84&feature=plpp_play_all?start=1&enablejsapi=1&playerapiid=youtubePlayer&allowFullScreen=true&version=3&loop=1&autohide=1&autoplay=1&controls=0&showinfo=0&modestbranding=1&rel=0&autohide=1&playlist=KeWUl0Avr84&",
+            "youtubeNosound", "100%", "100%", "0", null, null, params, atts);
+
+//    (function() {
+//        var v = document.getElementById("myyoutubePlayer");
+//        for (var n = 0; n < v.length; n++) {
+//            var p = document.createElement("div");
+//            p.innerHTML = labnolThumb(v[n].dataset.id);
+//            v[n].appendChild(p);
+//        }
+//    })();
+//
+//    function labnolThumb(id) {
+//        return '<img class="youtube-thumb" src="//i.ytimg.com/vi/' + id + '/hqdefault.jpg"></div>';
+//    }
+</script>
 {% endblock %}

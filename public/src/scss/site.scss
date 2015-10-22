@@ -49,7 +49,7 @@ body {
   font-family: 'NanumGothic', 'AppleSDGothicNeo-Bold', 'NotoSansCJKKR', sans-serif!important;
 }
 
-.tmk-h1, .tmk-h2, .tmk-h3, .tmk-h4 {margin:15px auto;}
+.tmk-h1, .tmk-h2, .tmk-h3, .tmk-h4 {margin:15px auto;line-height:normal;}
 /* Title */
 .tmk-h1 {font-size:48px;}
 /* Screen Name */
@@ -267,9 +267,15 @@ nav {
   height: 28px;
   margin-right: 5px;
 }
-
-.tmk-page-header {
-  padding:50px 15px;
+@media screen and (min-width:768px) {
+  .tmk-page-header {
+    padding-top: 50px!important;
+  }
+}
+@media screen and (max-width:767px) {
+  .tmk-page-header {
+    padding: 50px 15px;
+  }
 }
 
 .tmk-page-pick {
@@ -491,24 +497,22 @@ ul{
 }
 
 .tmk-main-banner {
-  //min-width:1250px;
   width: 100%;
-  //height: 450px;
   top:0;
-  video {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    min-width:100%;
-    min-height:100%;
-    width:auto;
-    height:auto;
-    z-index: -100;
-    -webkit-transform: translateX(-50%) translateY(-50%);
-    transform: translateX(-50%) translateY(-50%);
-    background: url("media/image/slice/main-banner-poster.png") no-repeat;
-    background-size: cover;
-  }
+  //video {
+  //  position: absolute;
+  //  top: 50%;
+  //  left: 50%;
+  //  min-width:100%;
+  //  min-height:100%;
+  //  width:auto;
+  //  height:auto;
+  //  z-index: -100;
+  //  -webkit-transform: translateX(-50%) translateY(-50%);
+  //  transform: translateX(-50%) translateY(-50%);
+  //  background: url("media/image/slice/main-banner-poster.png") no-repeat;
+  //  background-size: cover;
+  //}
 
   .main-banner-title {
     color: #FFFFFf;
@@ -903,6 +907,7 @@ ul{
   &:hover {
     opacity: 1;
     color: gold;
+
   }
 }
 
@@ -1054,7 +1059,7 @@ ul{
 @media screen and (max-width:767px) {
   //.carousel-inner {display:inline-block;}
   #class-post-Carousel {height:15em!important;overflow:hidden;}
-  .carousel-inner {max-height:15em!important;display:inline-block;}
+  .carousel-inner {max-height:15em!important;display:inline-block;min-height:15em;}
   .carousel-control {line-height:15em!important;}
   //.item {height:100%;overflow:hidden!important;}
   .carousel-inner>.item>a>img, .carousel-inner>.item>img, .img-responsive, .thumbnail a>img, .thumbnail>img {
@@ -1062,47 +1067,75 @@ ul{
   }
 
   .item {
-    position: relative }              /* 1 */
+    position: relative;
+    min-height: 15em;
+ }              /* 1 */
   .item img {
     min-width: 100% !important;
     position: absolute;
     top: 50%;
     left: 50%;
-    margin-right: -50%;
-    transform: translate(-50%, -50%) }
+    right: 50%;
+    bottom: 50%;
+    //margin-right: -50%;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+  }
+}
+@media screen and (min-width:768px) {
+  #map {
+    height:30em;
+  }
+}
+@media screen and (max-width:767px) {
+  #map {
+    height:18em;
+  }
+}
 
+@media screen and (max-width:767px) {
+  #tawkchat-minified-wrapper {display:none!important;}
+  #tawkchat-minified-container {display:none!important;}
 }
 @media screen and (min-width:768px) {
   //.col-lg-12 .carousel {height:500px!important;}
   #class-post-Carousel {height:35em!important;overflow:hidden;}
-  .carousel-inner {max-height:35em!important;display: initial;}
+  .carousel-inner {max-height:35em!important;display: initial;
+    min-height:35em;}
   .carousel-control {line-height:35em!important;}
   .carousel-inner>.item>a>img,, .item>img, .carousel-inner>.item>img, .img-responsive, .thumbnail a>img, .thumbnail>img {
-    width: 100%!important;
+    width: 100%!important;position: absolute;
     //height:auto!important;
   }
   .item {
-    position: relative }              /* 1 */
+    position: relative;
+    min-height: 35em;}              /* 1 */
   .item img {
     min-width: 100% !important;
     position: absolute;
     top: 50%;
     left: 50%;
+    right: 50%;
+    bottom: 50%;
     margin-right: -50%;
-    transform: translate(-50%, -50%) }
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+  }
 }
 
 
 //#class-post-carousel {
   .carousel-inner {
     border: 1px solid transparent;
-    min-height:15em;
+    //min-height:15em;
     margin-right: .5em;
     margin-bottom: .3em;
   }
   .item {
     border-radius: 4px 4px 0 0;
-    min-height: 18em;
+    //min-height: 18em;
     height:100%;
     overflow: hidden;
     position: relative;
@@ -1295,41 +1328,65 @@ ul{
   height: 280px;
   //margin-right: .5em;
   margin-bottom: .3em;
-}
-.card-link {
-  border-radius: 4px 4px 0 0;
-  /*border: 1px solid transparent;*/
-  height: 100%;
-  overflow: hidden;
-  position: relative;}
 
-.card-link img {
-  display: block;
-  width:50em;
-  //min-width: 100%;
-  //min-height: 100%;
-  margin: auto;
-  position: absolute;
-  top: -100%;
-  right: -100%;
-  bottom: -100%;
-  left: -100%;
-}
+  .card-link {
+    border-radius: 4px 4px 0 0;
+    /*border: 1px solid transparent;*/
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+  }
 
+  .card-link img {
+    display: block;
+    width: 45em;
+    //min-width: 100%;
+    //min-height: 100%;
+    margin: auto;
+    position: absolute;
+    top: -100%;
+    right: -100%;
+    bottom: -100%;
+    left: -100%;
+  }
+}
 
 
 .tmk-card-img-profile {
-  @extend .tmk-card-img;
-  //margin-top:-30px;
+  background: #fff;
+  border: 1px solid transparent;
+  display: inline-block;
+  vertical-align: top;
+  /*padding: 10px;*/
+  //margin-right: .5em;
+  //margin-bottom: .3em;
   width:60px;
   height:60px;
   border-radius: 50%;
   overflow: hidden;
+  position:relative;
   .card-link {
+    height: 100%;
+    overflow: hidden;
+    position: relative;
     border-radius: 50%;
-    border:3px solid #fff;
   }
-  .card-link img {width:100%;height:100%;max-width:80px;max-height:80px;}
+
+  .card-link img {
+    position:absolute;
+    top: 50%;
+    left: 50%;
+    right:50%;
+    bottom:50%;
+    margin-right:-50%;
+    transform:translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    //width: 100%;
+    //height: 100%;
+    //max-width: 80px;
+    max-height: 100%;
+  }
 }
 .tmk-class-card {
   .tmk-card-img-profile {
@@ -1379,6 +1436,7 @@ ul{
 .dp-label {
   margin-top: 20px;
   margin-left: 5%;
+  padding-top:5px;
   border-top: 1px solid #ddd;
   /*min-width: 340px;*/
   max-width: 90%;

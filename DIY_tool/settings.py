@@ -26,6 +26,10 @@ SECRET_KEY = 'sj)7m^^1u$9=s40&8de&z#$alfgx(k6fztu3gj(w2^pdsnne6n'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 LOCAL = True
+<<<<<<< HEAD
+=======
+SERVER_TEST =True
+>>>>>>> 8a5d59019f325f8bd35ad7da09b0b8a702dba00a
 TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = ['*']

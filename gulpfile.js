@@ -7,7 +7,7 @@ var uglify = require('gulp-uglify');
 var minifyhtml = require('gulp-minify-html');
 var minifycss = require('gulp-minify-css');
 var sass = require('gulp-sass');
-//var livereload = require('gulp-livereload');
+var livereload = require('gulp-livereload');
 var gutil = require('gulp-util');
 var del = require('del');
 //var sassFiles = 'public/src/scss/**/*.scss';
@@ -83,7 +83,7 @@ gulp.task('watch', function() {
     gulp.watch(paths.js, ['combine-js']);
     gulp.watch(paths.scss, ['sass']);
     //gulp.watch(paths.html, ['compress-html']);
-    //gulp.watch(dist + '/**').on('change', livereload.changed);
+    gulp.watch(dist + '/**').on('change', livereload.changed);
 });
 
 //gulp.task('rev', function() {

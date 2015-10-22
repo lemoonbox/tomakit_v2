@@ -229,7 +229,7 @@
             <div class="tmk-h4">제안서를 작성해주시면<br>가까운 장소, 편한 시간의 수업을 개설하여 드립니다</div>
             <div class="tmk-page-pick"></div>
         </div>
-        <div class="tmk-h3">클래스 제안하기</div>
+        <div style="padding-left:15px;" class="tmk-h3">클래스 제안하기</div>
         <div class="col-md-8 well" id="tmk-form" style="text-align:left;float:left;">
             <!--<div class="tmk-h3">클래스 제안하기</div>-->
             <form method="POST" action="{% url 'demand_modify_v2d1' demand_num %}" enctype="multipart/form-data">
@@ -325,7 +325,7 @@
                     </div>
 
                     <div class="col-md-7">
-                        <input type="text" class="form-control" name="title" value="{{demand_data.title}}"placeholder="ex) 캘라그라피로 엽서를 만들고 싶어요">
+                        <input type="text" class="form-control" name="title" value="{{demand_data.title}}" placeholder="ex) 캘라그라피로 엽서를 만들고 싶어요">
                     </div>
 
                     <!--<div class="alert alert-warning alert-dismissable">-->
@@ -349,7 +349,7 @@
 
 
                 <div class="tmk-panel">
-                    <label class="col-md-2">태그 <span>*</span></label>
+                    <label class="col-md-2">수강목표 <span>*</span></label>
                     <div class="col-md-10">
                         <div class="btn-group" data-toggle="buttons">
                             <!--<label class="icheckbox_flat checked">-->
@@ -376,6 +376,7 @@
                 <div class="tmk-panel">
                     <label class="col-md-2">희망일정 <span>*</span></label>
                     <div class="col-md-10">
+                        <span style="color:red;">여러개 입력해주시면 좋아요 :)</span><br>
                         <input type="text" name="weekday" class="form-control" value="{{demand_data.weekday}}" placeholder="ex) 주말 아무때나, 평일7시이후"><br>
                     </div>
                     <div class="col-md-10 pull-right tmk-error">
@@ -449,11 +450,11 @@
                 </div>
 
                 <div class="tmk-panel">
-                    <label class="col-md-2">연락받으실<br>전화번호 <span>*</span></label>
+                    <label class="col-md-2">연락받으실 전화번호 <span>*</span></label>
                     <!--<div class="col-md-10" style="display:inline;">-->
                     <div class="form-group">
                         <div class="col-xs-4 col-sm-3 col-md-3" style="min-width:80px;">
-                            <input class="form-control disabled" value="010" disabled>
+                            <input class="form-control" value="010">
                         </div>
                         <!--<div class="col-md-1" style="margin-left:-15px;margin-right:-15px;text-align:center;">-</div>-->
                         <div class="col-xs-4 col-sm-3 col-md-3" style="min-width:80px;margin-left:-15px;">

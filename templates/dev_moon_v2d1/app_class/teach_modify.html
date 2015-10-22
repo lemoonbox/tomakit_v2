@@ -2,12 +2,14 @@
 {% extends 'base.html' %}
 {% load static from staticfiles %}
 
-<title>{%block title%}수업 개설{%endblock%}</title>
+<title>{%block title%}{{teach_data.title}} 수정{%endblock%}</title>
 {%block style%}
 
-<link rel="stylesheet" type="text/css" href="{% static 'media/css/nouislider.min.css'%}">
+<!--<link rel="stylesheet" type="text/css" href="{% static 'media/css/nouislider.min.css'%}">-->
 <link rel="stylesheet" type="text/css" href="{%static 'media/css/tmk-form.css'%}">
 <style>
+    /*.reset-img-max-width img { max-width: none!important; }*/
+
     .steps {height:80px;}
     .tmk-tab-style {display:inline;}
     /*.tmk-tab-style a {color:#82888A;}*/
@@ -19,6 +21,11 @@
     .steps.done img, .steps .disabled img {content:url({%static 'media/image/slice/icon-phase_check-gr.png'%});vertical-align:text-bottom;margin-right:5px;}
     .actions .disabled > a {color:#fff!important;}
     .actions li:first-child a {color:#FF575C!important;}
+    #map {
+        height: 500px;width:100%;
+    }
+    label span {color:red;}
+    #ui-datepicker-div {background-color:#fff;padding:15px;border:1px solid #eee;text-indent:0.25em;}
 </style>
 {%endblock%}
 
@@ -28,7 +35,7 @@
 
 <div class="tmk-main-body col-md-12">
     <div class="tmk-page-header col-md-10 col-md-offset-1">
-        <div class="tmk-h2 tmk-title">{{title}}</div>
+        <div class="tmk-h2 tmk-title">{{teach_data.title}}</div>
         <div class="tmk-page-pick"></div>
     </div>
 
@@ -40,7 +47,7 @@
             <section>
 
                 <div class="tmk-panel">
-                    <label class="col-md-2">수업횟수 & 시간</label>
+                    <label class="col-md-2">수업횟수&시간 <span>*</span></label>
                     <div class="tmk-qitem-selecter-wrapper col-md-3 col-xs-4">
                         수업횟수
                         <div class="selecter cover" tabindex="0">
@@ -114,7 +121,7 @@
                     </div>
 
 
-                    <div class="tmk-qitem-selecter-wrapper col-md-3 col-xs-4">
+                    <div class="tmk-qitem-selecter-wrapper col-md-3 col-xs-4" style="margin-top:15px;">
                         회당 수업 시간
                         <div class="selecter cover" tabindex="0">
                             <select name="perhour" required class="selecter_3 selecter-element" data-selecter-options="{&quot;cover&quot;:&quot;true&quot;}" tabindex="-1">
@@ -162,7 +169,7 @@
                 </div>
 
                 <div class="tmk-panel">
-                    <label class="col-md-2">수업일정</label>
+                    <label class="col-md-2 col-xs-4">수업일정 <span>*</span></label>
                     <div class="col-md-8 col-xs-8">
                         <input class="form-control" type="text" name="weekday" value="{{teach_data.weekday}}" placeholder="ex) 매주 화요일 7:00, 매주 토요일 2시">
                     </div>
@@ -173,7 +180,7 @@
 
 
                 <div class="tmk-panel">
-                    <label class="col-md-2">수업인원</label>
+                    <label class="col-md-2 col-xs-4">수업인원 <span>*</span></label>
                     <div class="col-md-3 col-xs-4">
                         최소인원
                         <input class="form-control" type="number" name="min_num" value="{{teach_data.min_num}}">
@@ -189,11 +196,11 @@
                 </div>
 
                 <div class="tmk-panel">
-                    <label class="col-md-2">수업시작일 &<br>수강신청마감일</label>
+                    <label class="col-md-2">수업시작일 &<br>수강신청마감일 <span>*</span></label>
 
                     <div class="col-md-3 col-xs-4">
                         수업시작일
-                        <input class="form-control"type="date" name="startday" value="{{teach_data.startday}}">
+                        <input class="form-control" type="date" name="startday" value="{{teach_data.startday}}" placeholder="{{teach_data.startday}}">
                     </div>
                     <div class="col-md-3 col-xs-4">
                         등록마감일
@@ -205,8 +212,8 @@
                     </div>
                 </div>
 
-                <div class="tmk-panel">
-                    <label class="col-md-2">수강료</label>
+                <div class="tmk-panel" style="border-bottom:none;">
+                    <label class="col-md-2">수강료 <span>*</span></label>
                     <div class="col-md-3 col-xs-4">
                         수강료(재료비 제외)
                         <input class="form-control"type="text" name="price" value="{{teach_data.price}}">
@@ -228,7 +235,7 @@
             <h3 hidden>단계: 클래스 소개 입력</h3>
             <section>
                 <div class="tmk-panel">
-                    <label class="col-md-2">참조할사진<br>(선택)</label>
+                    <label class="col-md-2">사진 등록 <span>*</span></label>
                     <div class="tmk-qitem-phupload col-md-10">
                         <div class="tmk-phupload-contents">
                             <div class="tmk-panel-contents">
@@ -243,7 +250,7 @@
                                         </div>
                                         <div class="col-md-4 col-xs-5" style="top: 10px;">
                                         <span id="uploader" onclick="findLastInput(true);" class="custom-file-input-button btn btn-default" style="cursor:pointer;">
-                                            <span class="custom-file-input-button-text">PC에서 사진 가져오기</span>
+                                            <span class="custom-file-input-button-text">사진 가져오기</span>
                                         </span>
                                         </div>
                                     </div>
@@ -269,11 +276,11 @@
                                             <img src="">
                                             <span onclick="deleteImg(this);"></span>
                                         </div>
-                                        <input type="file" name="Qphoto"  id="filePhoto1" />
-                                        <input type="file" name="Qphoto"  id="filePhoto2" />
-                                        <input type="file" name="Qphoto"  id="filePhoto3" />
-                                        <input type="file" name="Qphoto"  id="filePhoto4" />
-                                        <input type="file" name="Qphoto"  id="filePhoto5" />
+                                        <input type="file" name="image"  id="filePhoto1" />
+                                        <input type="file" name="image"  id="filePhoto2" />
+                                        <input type="file" name="image"  id="filePhoto3" />
+                                        <input type="file" name="image"  id="filePhoto4" />
+                                        <input type="file" name="image"  id="filePhoto5" />
 
                                     </div>
                                 </div>
@@ -291,15 +298,15 @@
                 <div class="tmk-panel">
                     <label class="col-md-2">영상 등록(선택)</label>
                     <div class="col-md-10">
-                        <input class="form-control" type="text" name="video" value="{{teach_data.video}}" placeholder="유튜브 영상 url을 입력하세요">
-                        <div class="col-md-10 col-md-offset-2 col-xs-12 tmk-form-error">
+                        <input class="form-control" type="text" name="video" value="http://youtube.com/{{teach_data.video}}" placeholder="유튜브 영상 url을 입력하세요">
+                        <div class="col-md-10 col-xs-12 tmk-form-error">
                             {{teachform.video.errors|striptags}}
                         </div>
                     </div>
                 </div>
                 <div class="tmk-panel">
                     <label class="col-md-2">
-                        수업 소개</label>
+                        수업 소개 <span>*</span></label>
                     <div class="col-md-10">
                         이 클래스에서 무엇을 배울 수 있나요?
                         <textarea class="form-control" name="descript" >{{teach_data.descript}}</textarea>
@@ -311,7 +318,7 @@
 
                 <div class="tmk-panel">
                     <label class="col-md-2">
-                        커리큘럼</label>
+                        커리큘럼 <span>*</span></label>
                     <div class="col-md-10">
                         수업 회차 또는 시간별 커리큘럼이 어떻게 짜여져 있나요?
                         <textarea class="form-control" name="curri">{{teach_data.curri}}</textarea>
@@ -320,9 +327,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="tmk-panel">
+                <div class="tmk-panel" style="border-bottom:none;">
                     <label class="col-md-2">
-                        안내사항</label>
+                        안내사항 <span>*</span></label>
                     <div class="col-md-10">
                         수강생이 미리 알아야 할 수업 규정 및 안내사항을 입력해주세요
                         <textarea class="form-control" name="notic">{{teach_data.notic}}</textarea>
@@ -338,7 +345,7 @@
             <section>
 
                 <div class="tmk-panel">
-                    <label class="col-md-2">작가소개</label>
+                    <label class="col-md-2">작가소개 <span>*</span></label>
                     <div class="col-md-10">
                         <input class="form-control" type="text" name="intro_self" value="{{prefill_intro}}">
                         <div class="col-md-10 col-md-offset-2 col-xs-12 tmk-form-error">
@@ -348,59 +355,76 @@
                 </div>
 
 
-                <div class="tmk-panel">
-                    <label class="col-md-2">수업장소</label>
+                <div class="tmk-panel" style="border-bottom:none;">
+                    <label class="col-md-2">수업장소 <span>*</span></label>
                     <div class="tmk-gmap-wrapper">
-                        <div class="col-md-5 col-xs-12">
+                        <div class="col-md-10 col-xs-12">
                             도로명 또는 동 입력
                             <div id="locationField">
-                                <input class="form-control" onkeypress="return event.keyCode != 13;" id="autocomplete" placeholder="동이나 도로명을 입력해주세요" onFocus="geolocate()" type="text" name="addr_input">
+                                <input id="pac-input" class="form-control controls" type="text"
+                                       placeholder="동이나 도로명을 입력해주세요" value="{{teach_data.addr}}" style="max-width:360px;margin-top:5px!important;margin-bottom:15px;" name="addr_input" onkeypress="return event.keyCode != 13;">
+                                <div id="type-selector" class="controls" hidden>
+                                    <input type="radio" name="type" id="changetype-all" checked="checked">
+                                    <label for="changetype-all">All</label>
+
+                                    <input type="radio" name="type" id="changetype-establishment">
+                                    <label for="changetype-establishment">Establishments</label>
+
+                                    <input type="radio" name="type" id="changetype-address">
+                                    <label for="changetype-address">Addresses</label>
+
+                                    <input type="radio" name="type" id="changetype-geocode">
+                                    <label for="changetype-geocode">Geocodes</label>
+                                </div>
+
+                                <!--<div class="reset-img-max-width">-->
+                                    <!--<div id="floating-panel">-->
+                                        <!--<input hidden id="address" value="{{teach_data.addr}}">-->
+                                    <!--</div>-->
+                                    <div id="map"></div>
+                                <!--</div>-->
+
+                                <table hidden>
+                                    <tr class="form-group">
+                                        <td class="label">시/도</td>
+                                        <td class="widefield" colspan="2">
+                                            <input class="field" id="locality" name="locality" disabled="true">
+                                        </td>
+                                        <td class="wideField" colspan="2">
+                                            <input class="field" name="area_1"  id="administrative_area_level_1" disabled="true">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="label">구</td>
+                                        <td class="wideField">
+                                            <input class="field" name="sublocal_1" id="sublocality_level_1" disabled="true"></td>
+                                        <!--<td class="label">동</td>-->
+                                        <td class="wideField">
+                                            <input class="field" name="sublocal_2" id="sublocality_level_2" disabled="true"></td>
+                                        <td class="label">우편번호</td>
+                                        <td class="wideField">
+                                            <input class="field" name="postal_code" id="postal_code" disabled="true"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="label">상세주소</td>
+                                        <td class="slimField">
+                                            <input class="field" id="street_address" disabled="true"></input>
+                                            <input class="field" id="sublocality_level_4" name="sublocal_4" disabled="true"></input>
+                                            <input class="field" id="premise" disabled="true"></input></td>
+                                    </tr>
+                                </table>
                             </div>
                         </div>
-                        <table id="address" hidden>
-                            <!--<tr>-->
-                            <!--<td class="label">국가명</td>-->
-                            <!--<td class="wideField" colspan="3">-->
-                            <!--<input class="field" id="country" disabled="true"></input></td>-->
-                            <!--</tr>-->
-                            <tr class="form-group">
-                                <td class="label">시/도</td>
-                                <td class="widefield" colspan="2">
-                                    <input class="field" id="locality" name="locality" disabled="true">
-                                </td>
-                                <td class="wideField" colspan="2">
-                                    <input class="field" name="area_1"  id="administrative_area_level_1" disabled="true">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="label">구</td>
-                                <td class="wideField">
-                                    <input class="field" name="sublocal_1" id="sublocality_level_1" disabled="true"></td>
-                                <!--<td class="label">동</td>-->
-                                <td class="wideField">
-                                    <input class="field" name="sublocal_2" id="sublocality_level_2" disabled="true"></td>
-                                <td class="label">우편번호</td>
-                                <td class="wideField">
-                                    <input class="field" name="postal_code" id="postal_code" disabled="true"></td>
-                            </tr>
-                            <tr>
-                                <td class="label">상세주소</td>
-                                <td class="slimField">
-                                    <input class="field" id="street_address" disabled="true"></input>
-                                    <input class="field" id="sublocality_level_4" name="sublocal_4" disabled="true"></input>
-                                    <input class="field" id="premise" disabled="true"></input></td>
-                            </tr>
-                        </table>
+
+                        <div class="col-md-10 col-md-offset-2 col-xs-12 col-xs-offset-0" style="margin-top:15px;">
+                            상세 주소 입력
+                            <input class="form-control" type="text" name="addr_deatail" value="{{teach_data.addr_detail}}" placeholder="상세주소를 입력해주세요">
+                        </div>
                     </div>
-                    <div class="col-md-5 col-xs-12">
-                        상세 주소 입력
-                        <input class="form-control" type="text" name="addr_deatail" value="{{teach_data.addr_detail}}" placeholder="상세주소를 입력해주세요">
-                    </div>
-                </div>
 
 
-                <input class="btn btn-primary pull-right" type="submit" value="개설등록">
-                <!--</div>-->
+                    <input class="btn btn-primary pull-right" style="margin:15px;" type="submit" value="개설등록">
+                    </div>
             </section>
         </form>
 
@@ -408,13 +432,12 @@
 </div>
 {%endblock%}
 {%block script%}
-<script src="{%static 'google_map.js'%}"></script>
-<script src="https://maps.googleapis.com/maps/api/js?language=ko&libraries=places&callback=initAutocomplete" async defer></script>
+<script src="{%static 'js/google_map.js'%}"></script>
+<!--<script src="{%static 'js/google_map_load.js'%}"></script>-->
 <script src='{%static "media/js/qitem_create.js" %}'></script>
-<script type="text/javascript" src="{% static 'media/js/nouislider.js' %}"></script>
-<script src="http://thecodeplayer.com/uploads/js/jquery-1.9.1.min.js" type="text/javascript"></script>
-
-<script src="{%static 'media/js/jquery.steps.js'%}" charset="euc-kr"></script>
+<!--<script type="text/javascript" src="{% static 'media/js/nouislider.js' %}"></script>-->
+<!--<script src="http://thecodeplayer.com/uploads/js/jquery-1.9.1.min.js" type="text/javascript"></script>-->
+<!--<script src="{%static 'media/js/jquery.steps.js'%}" charset="euc-kr"></script>-->
 <script>
     $("#class-create").steps({
         headerTag:"h3",
