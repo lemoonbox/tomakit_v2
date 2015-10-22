@@ -25,8 +25,7 @@ SECRET_KEY = 'sj)7m^^1u$9=s40&8de&z#$alfgx(k6fztu3gj(w2^pdsnne6n'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-LOCAL = False
-SERVER_TEST =True
+LOCAL = True
 TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = ['*']
@@ -167,17 +166,32 @@ if LOCAL :
             'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         }
     }
+
+#conoHa
 else :
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
-            'NAME': 'proddb',
-            'USER': 'root',
-            'PASSWORD':'20tencity15',
-            'HOST':'tomakitv2-1.cfxqbzsbzi3i.ap-northeast-1.rds.amazonaws.com',
+            'NAME': 'qqsty_proddb',
+            'USER': 'qqsty_tomakit_server',
+            'PASSWORD':'20TENcity15',
+            'HOST':'private.qqsty.tyo1.database-hosting.conoha.io',
             'PORT':'3306',
         }
     }
+
+#amazon
+# else :
+#     DATABASES = {
+#         'default': {
+#             'ENGINE': 'django.db.backends.mysql',
+#             'NAME': 'proddb',
+#             'USER': 'root',
+#             'PASSWORD':'20tencity15',
+#             'HOST':'tomakitv2-1.cfxqbzsbzi3i.ap-northeast-1.rds.amazonaws.com',
+#             'PORT':'3306',
+#         }
+#     }
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/

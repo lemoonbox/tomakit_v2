@@ -70,25 +70,24 @@ def pay_conf(request):
         pay_method=request.POST.get('pay_method', "")
         prefillform=PayPrefillForm(request.POST)
         want_day=request.POST.get("want_day", "")
+
         if classtype == "teachclass":
             want_day=datetime.date.today()
 
-        _profile=T2Profile.objects.get(user=request.user)
-        _profile.mobli1=mobli2
-        _profile.mobli2=mobli3
-        _profile.mobli=mobli
-        _profile.mobli_able=True
-        _profile.save()
         vbank_due= datetime.date.today()+datetime.timedelta(days=1)
         if classtype == "tutclass":
             _post=T2TutClass.objects.get(pk=post_id)
         else:
             _post=T2TeachClass.objects.get(pk=post_id)
 
-        if want_day:
-            print "want_day"
-        if prefillform.is_valid() and want_day:
-
+        if prefillform.is_valid() and want_day and len(mobli)<40:
+            want_day=datetime.datetime.strptime(want_day, '%m/%d/%Y').strftime("%Y-%m-%d")
+            _profile=T2Profile.objects.get(user=request.user)
+            _profile.mobli1=mobli2
+            _profile.mobli2=mobli3
+            _profile.mobli=mobli
+            _profile.mobli_able=True
+            _profile.save()
             _prepayment=PrePayment(user=request.user, classtype=classtype,
                                    merchant_uid=merchant_id, pay_method=pay_method,
                                    amount=_post.price+_post.extra_price,
@@ -112,7 +111,10 @@ def pay_conf(request):
                     "HTTP_HOST":HTTP_HOST,
                 })
         else:
-            prefillform.add_error("want_day", u"희망 날짜를 선택해주세요")
+            if len(mobli)>40:
+                prefillform.add_error("mobli2", u"정상적인 전화번호를 입력해주세요")
+            else:
+                prefillform.add_error("want_day", u"희망 날짜를 선택해주세요")
     return render(request,TEMP.PRE_PAYMENT_V2D1,{
         "prefillform":prefillform,
         'post':_post,
