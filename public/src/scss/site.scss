@@ -1498,3 +1498,19 @@ ul{
   }
 }
 
+//datepicker
+#ui-datepicker-div {
+  background-color: #fff;
+  padding: 15px;
+  border: 1px solid #eee;
+  text-indent: 0.25em;
+}
+.ui-datepicker-prev, .ui-datepicker-next {
+  cursor: pointer;
+}
+.ui-datepicker-calendar a {
+  color: #aaa;
+}
+.ui-datepicker-calendar a:hover {
+  color: #FF575C;
+}

@@ -213,6 +213,14 @@
     #tmk-form .btn-primary {margin-right:15px;}
     .tmk-page-header{padding-bottom:15px;}
     label span {color:red}
+
+    @media screen and (max-width:480px) {
+        .btn-group {
+            word-break: break-all;
+            white-space: pre-line;
+            line-height: normal;
+        }
+    }
 </style>
 {%endblock%}
 
@@ -265,7 +273,7 @@
                     </select>
                     <span class="selecter-selected" onclick="btnClick(this)">카테고리 선택</span>
                     <div class="selecter-options" data-value="">
-                        <!--<span class="selecter-item selected" data-value="" onclick="selecting(this, '')">카테고리</span>-->
+                        <span class="selecter-item selected" data-value="" onclick="selecting(this, '')">카테고리</span>
                         <div class="selecter-item"
                              data-value="id"
                              onclick="selecting(this, 'all')">모든 카테고리</div>
@@ -541,7 +549,7 @@
                 </div>
 
 
-            <input class="btn btn-primary pull-right" type="submit" value="제안등록">
+            <input class="btn btn-primary pull-right" id="demand-submit" type="submit" value="제안등록">
         </form>
     </div>
         </div>
@@ -587,6 +595,14 @@
     valueInputmax.addEventListener('change', function(){
         slider.noUiSlider.set([null, this.value]);
     });
+</script>
+<script>
+//    function submitButton_OnClick(){
+//    $("#demand-submit").attr("disabled", "disabled");
+//    }
+//    $(document).ready(function() {
+//        $("#demand-submit").click(submitButton_OnClick);
+//    });
 </script>
 
 {%endblock%}
