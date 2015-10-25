@@ -392,7 +392,8 @@
                         <!--<img src="{%static 'media/image/slice/icon-star_empty.png'%}">-->
                     </div>
                     <div class="col-xs-5 col-md-7 col-xs-offset-2" style="text-align:left;">
-                        <input class="form-control" type="number" name="grade" min="1" max="5"><br>
+                        <div class="raty-grade"></div>
+                            <!--<input type="number" name="grade" min="1" max="5"><br>-->
                         <div class="tmk-error">{{review.review.errors|striptags}} {{review.grade.errors|striptags}}</div>
                     </div>
                     <div class="col-md-3 col-xs-5">
@@ -416,9 +417,10 @@
                     <div class="col-md-7 col-xs-7 user-review"  {% if review.user == request.user %}id="requestuser"{%endif%}>
                         <a href="http://{{HTTP_HOST}}/v2.1/user/profile/{{review.user.id}}">
                             {{review.user.last_name}}{{review.user.first_name}}
-                        </a> {{review.grade}}
+                        </a> <div class="raty-readonly" data-value="{{review.grade}}"></div>
                         <!--댓글-->
                         <div>{{review.review}}</div>
+
                     </div>
 
                     <!--수정 form 나중에  hidden-->
@@ -431,7 +433,7 @@
                                 <input type="hidden" name="class_num" value="{{post.id}}">
                                 <input type="hidden" name="classtype" value="tut_class">
                                 <textarea class="form-control" name="review">{{review.review}}</textarea>
-                                <input class="form-control" type="number" name="grade" value="{{review.grade}}" min="1" max="5"><br>
+                                <div class="raty-modify" data-value="{{review.grade}}"></div>
                                 {{review.review.errors|striptags}}
                                 {{review.grade.errors|striptags}}
                             </div>
@@ -476,8 +478,8 @@
 {%endblock%}
 {%block script%}
 <script src="{% static 'js/google_map_load.js'%}"></script>
+<script src="{% static 'js/jquery.raty.js'%}"></script>
 <!--<script src="http://code.jquery.com/jquery-latest.js"></script>-->
-
 <script>
     $(document).ready(function(){
         $(".modify-btn").click(function(){
@@ -486,6 +488,20 @@
             $(".review-modify").show();
             $(".review-del").show();
         });
+    });
+</script>
+<script>
+    $('.raty-grade').raty();
+    $('.raty-readonly').raty({
+        readOnly: true,
+        grade: function() {
+            return $(this).attr('data-value');
+        }
+    });
+    $('.raty-modify').raty({
+        grade: function() {
+            return $(this).attr('data-value');
+        }
     });
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDWLKiQU9kiiXSpS7A5RAeKenzpQlI84Ds&signed_in=true&language=ko&libraries=places&callback=initMap" async defer></script>

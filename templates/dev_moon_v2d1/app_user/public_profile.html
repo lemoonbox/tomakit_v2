@@ -110,7 +110,7 @@
             {% if host_profile.intro_video%}
             <iframe width="100%" height="480px" src="https://www.youtube.com/embed/{{host_profile.intro_video}}" frameborder="0" allowfullscreen></iframe><br>
             {% else %}
-            <img src="{{MEDIA_URL}}{{host_profile.intro_pic}}"><br>
+            <img style="width:100%;" src="{{MEDIA_URL}}{{host_profile.intro_pic}}"><br>
             {% endif %}
             <div class="tmk-h3">자기 소개</div>
             <div class="tmk-panel">{{host_profile.intro_self}}</div>

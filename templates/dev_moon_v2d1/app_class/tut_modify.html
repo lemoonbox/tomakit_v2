@@ -23,6 +23,9 @@
         height: 500px;width:100%;
     }
     label span {color:red;}
+    @media screen and (max-width:480px) {
+        .tmk-qitem-selecter-wrapper {margin-top:15px;}
+    }
 </style>
 {%endblock%}
 
@@ -45,10 +48,10 @@
 
                 <div class="tmk-panel">
                     <label class="col-md-2">수업횟수&시간 <span>*</span></label>
-                    <div class="tmk-qitem-selecter-wrapper col-md-3 col-xs-4">
+                    <div class="tmk-qitem-selecter-wrapper col-md-3 col-xs-4" style="margin-right:-15px;">
                         수업횟수
                         <div class="selecter cover" tabindex="0">
-                            <select name="repeat" required class="selecter_3 selecter-element" data-selecter-options="{&quot;cover&quot;:&quot;true&quot;}" tabindex="-1">
+                            <select id="repeat" name="repeat" required class="selecter_3 selecter-element" data-selecter-options="{&quot;cover&quot;:&quot;true&quot;}" tabindex="-1">
                                 <option value="1"
                                         {% if tut_data.repeat == '1' %}selected {% endif %}>1회</option>
                                 <option value="2"
@@ -74,9 +77,9 @@
                                 <option value="12"
                                         {% if tut_data.repeat == '12' %}selected {% endif %}>12회</option>
                             </select>
-                            <span class="selecter-selected" onclick="btnClick(this)">횟수 선택</span>
+                            <span class="selecter-selected repeat-selected" onclick="btnClick(this)">횟수 선택</span>
                             <div class="selecter-options" data-value="">
-                                <!--<span class="selecter-item selected" data-value="" onclick="selecting(this, '')">카테고리</span>-->
+                                <span class="selecter-item repeat-selected" data-value="" onclick="selecting(this, '')">횟수 선택</span>
                                 <div class="selecter-item"
                                      data-value="id"
                                      onclick="selecting(this, '1')">1회</div>
@@ -118,10 +121,10 @@
                     </div>
 
 
-                    <div class="tmk-qitem-selecter-wrapper col-md-3 col-xs-4" style="margin-top:15px;">
+                    <div class="tmk-qitem-selecter-wrapper col-md-3 col-xs-4">
                         회당 수업 시간
                         <div class="selecter cover" tabindex="0">
-                            <select name="perhour" required class="selecter_3 selecter-element" data-selecter-options="{&quot;cover&quot;:&quot;true&quot;}" tabindex="-1">
+                            <select id="perhour" name="perhour" required class="selecter_3 selecter-element" data-selecter-options="{&quot;cover&quot;:&quot;true&quot;}" tabindex="-1">
                                 <option value="1"
                                         {% if tut_data.perhour == '1'%}selected {% endif %} >1시간</option>
                                 <option value="2"
@@ -135,9 +138,9 @@
                                 <option value="6"
                                         {% if tut_data.perhour == '6' %}selected {% endif %}>6시간</option>
                             </select>
-                            <span class="selecter-selected" onclick="btnClick(this)">회당 시간 선택</span>
+                            <span class="selecter-selected perhour-selected" onclick="btnClick(this)">회당 시간 선택</span>
                             <div class="selecter-options" data-value="">
-                                <!--<span class="selecter-item selected" data-value="" onclick="selecting(this, '')">카테고리</span>-->
+                                <span class="selecter-item perhour-selected" data-value="" onclick="selecting(this, '')">회당 시간 선택</span>
                                 <div class="selecter-item"
                                      data-value="id"
                                      onclick="selecting(this, '1')">1시간</div>
@@ -165,7 +168,7 @@
                     </div>
                 </div>
                 <div class="tmk-panel">
-                    <label class="col-md-2 col-xs-4">수업일정 <span>*</span></label>
+                    <label class="col-md-2 col-xs-12">수업일정 <span>*</span></label>
                     <div class="col-md-8 col-xs-8">
                         <input class="form-control" type="text" name="weekday" value="{{tut_data.weekday}}" placeholder="ex) 매주 화요일 7:00, 매주 토요일 2시">
                     </div>
@@ -176,7 +179,7 @@
 
 
                 <div class="tmk-panel" style="border-bottom:none;">
-                    <label class="col-md-2 col-xs-4">수강료 <span>*</span></label>
+                    <label class="col-md-2 col-xs-12">수강료 <span>*</span></label>
                     <div class="col-md-3 col-xs-4">
                         수강료(재료비 제외)
                         <input class="form-control"type="text" name="price" value="{{tut_data.price}}">
@@ -237,7 +240,7 @@
                                             <img src="">
                                             <span onclick="deleteImg(this);"></span>
                                         </div>
-                                        <input type="file" name="image"  id="filePhoto1" />
+                                        <input type="file" name="image"  value="{{teachform.class_photo}}" id="filePhoto1" />
                                         <input type="file" name="image"  id="filePhoto2" />
                                         <input type="file" name="image"  id="filePhoto3" />
                                         <input type="file" name="image"  id="filePhoto4" />
@@ -259,7 +262,7 @@
                 <div class="tmk-panel">
                     <label class="col-md-2">영상 등록(선택)</label>
                     <div class="col-md-10">
-                        <input class="form-control" type="text" name="video" value="{{tut_data.video}}" placeholder="유튜브 영상 url을 입력하세요">
+                        <input class="form-control" type="text" name="video" value="http://www.youtube.com/{{tut_data.video}}" placeholder="유튜브 영상 url을 입력하세요">
                         <div class="col-md-10 col-md-offset-2 col-xs-12 tmk-form-error">
                             {{tutform.video.errors|striptags}}
                         </div>
@@ -309,7 +312,7 @@
                 <div class="tmk-panel">
                     <label class="col-md-2">작가소개 <span>*</span></label>
                     <div class="col-md-10">
-                        <input class="form-control" type="text" name="intro_self" value="{{prefill_intro}}">
+                        <input class="form-control" type="text" name="intro_self" value="{{intro_self}}">
                         <div class="col-md-10 col-md-offset-2 col-xs-12 tmk-form-error">
                             {{tutform.intro_self.errors|striptags}}
                         </div>
@@ -398,11 +401,30 @@
 
 <!--<script src="{%static 'media/js/jquery.steps.js'%}" charset="euc-kr"></script>-->
 <script>
-    $("#class-create").steps({
-        headerTag:"h3",
-        bodyTag:"section",
-        transitionEffect: "slideLeft",
-        autoFocus:true
-    });
+//    $("#class-create").steps({
+//        headerTag:"h3",
+//        bodyTag:"section",
+//        transitionEffect: "slideLeft",
+//        autoFocus:true
+//    });
+$( "#repeat" )
+        .change(function() {
+            var str = "";
+            $( "option:selected", this ).each(function() {
+                str += $( this ).text() + " ";
+            });
+            $( ".repeat-selected").text( str );
+        })
+        .trigger( "change" );
+$( "#perhour" )
+        .change(function() {
+            var str = "";
+            $( "option:selected", this ).each(function() {
+                str += $( this ).text() + " ";
+            });
+            $( ".perhour-selected").text( str );
+        })
+        .trigger( "change" );
 </script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDWLKiQU9kiiXSpS7A5RAeKenzpQlI84Ds&signed_in=true&language=ko&libraries=places&callback=initMap" async defer></script>
 {%endblock%}

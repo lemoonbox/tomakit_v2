@@ -4,7 +4,7 @@
 function initMap() {
     var map = new google.maps.Map(document.getElementById('map'), {
         zoom: 16,
-        center: {lat: -33.8688, lng: 151.2195}
+        center: {lat: 37.563311, lng: 126.978262}
     });
     var geocoder = new google.maps.Geocoder();
 
@@ -23,7 +23,7 @@ function geocodeAddress(geocoder, resultsMap) {
                 position: results[0].geometry.location
             });
         } else {
-            alert('Geocode was not successful for the following reason: ' + status);
+            //alert('Geocode was not successful for the following reason: ' + status);
         }
     });
 }
