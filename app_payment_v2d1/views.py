@@ -70,6 +70,7 @@ def pay_conf(request):
         pay_method=request.POST.get('pay_method', "")
         prefillform=PayPrefillForm(request.POST)
         want_day=request.POST.get("want_day", "")
+        want_time=request.POST.get("want_time", "")
         vbank_due= datetime.date.today()+datetime.timedelta(days=1)
 
 
@@ -94,7 +95,7 @@ def pay_conf(request):
                                    amount=_post.price+_post.extra_price,
                                    pay_name=_post.title, buyer_name=buyer_name,
                                    buyer_email=buyer_email, buyer_mobli=mobli,
-                                   want_day=want_day)
+                                   want_day=want_day, want_time=want_time)
             _prepayment.save()
 
             return render(request,TEMP.PAYMENT_CONF_V2D1,{

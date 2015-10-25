@@ -306,18 +306,34 @@ def create_teach(request, class_num):
 def modify_teach(request, class_num):
     HTTP_HOST=request.META["HTTP_HOST"]
     if request.method == "GET":
-      teachform=T2TeachClassForm()
-      imageform=T2ClassPicForm()
-      try :
-          _post=T2TeachClass.objects.get(pk=class_num)
-          if _post.user != request.user:
-              raise Http404("포스팅이 존재 하지 않습니다.")
-      except ObjectDoesNotExist:
-          raise Http404("포스팅이 존재 하지 않습니다.")
+        teachform=T2TeachClassForm()
+        imageform=T2ClassPicForm()
+        try :
+            _post=T2TeachClass.objects.get(pk=class_num)
+            if _post.user != request.user:
+                raise Http404("포스팅이 존재 하지 않습니다.")
+        except ObjectDoesNotExist:
+            raise Http404("포스팅이 존재 하지 않습니다.")
 
-      _user=User.objects.get(username=request.user)
+        _user=User.objects.get(username=request.user)
+        addr_partes=_post.addr.split(" ")
+        addr_data={}
+        if len(addr_partes)>3:
+            addr_data={
+                "area_1":addr_partes[0],
+                "locality":addr_partes[1],
+                "sub_1":addr_partes[2],
+                "sub_2":addr_partes[3],
+            }
+        else:
+            addr_data={
+                "area_1":"",
+                "locality":addr_partes[0],
+                "sub_1":addr_partes[1],
+                "sub_2":addr_partes[2],
+            }
 
-      teach_data={
+        teach_data={
             "user":_user,
             "category":_post.category,
             "title":_post.title,
@@ -407,6 +423,7 @@ def modify_teach(request, class_num):
                 _imagelist=imageform.savefiles()
 
             return render(request, TEMP.CLASS_MODIFY_FINISH_V2D1,{
+                 "HTTP_HOST":HTTP_HOST,
             })
 
     return render(request, TEMP.CLASS_MODIFY_TEACH_V2D1, {
@@ -414,6 +431,7 @@ def modify_teach(request, class_num):
         "imageform":imageform,
         "teach_data":teach_data,
         "class_num":class_num,
+        "addr_data":addr_data,
         "HTTP_HOST":HTTP_HOST,
         })
 
@@ -432,6 +450,23 @@ def modify_tut(request, class_num):
             raise Http404("포스팅이 존재 하지 않습니다.")
 
         _user=User.objects.get(username=request.user)
+        print _post.addr
+        addr_partes=_post.addr.split(" ")
+        addr_data={}
+        if len(addr_partes)>3:
+            addr_data={
+                "area_1":addr_partes[0],
+                "locality":addr_partes[1],
+                "sub_1":addr_partes[2],
+                "sub_2":addr_partes[3],
+            }
+        else:
+            addr_data={
+                "area_1":"",
+                "locality":addr_partes[0],
+                "sub_1":addr_partes[1],
+                "sub_2":addr_partes[2],
+            }
 
         tut_data={
             "user":_user,
@@ -516,13 +551,14 @@ def modify_tut(request, class_num):
                 _imagelist=imageform.savefiles()
 
             return render(request, TEMP.CLASS_MODIFY_FINISH_V2D1,{
+                 "HTTP_HOST":HTTP_HOST,
                     })
-
     return render(request, TEMP.CLASS_MODIFY_TUT_V2D1, {
         "tutform":tutform,
         'imageform':imageform,
         "tut_data":tut_data,
         "class_num":class_num,
+        "addr_data":addr_data,
         "HTTP_HOST":HTTP_HOST,
     })
 
@@ -599,11 +635,7 @@ def modify_review(request, class_num):
             _review.grade=grade
             _review.save()
             return HttpResponseRedirect("/v2.1/class/"+str(_post.t2classcard_set.first().id))
-            # return render(request, TEMP.TEACH_POST_DETAIL_V2D1,{
-            #     "post":_post,
-            #     "review":reviewform,
-            #     "HTTP_HOST":HTTP_HOST,
-            # })
+
         elif classtype == "tut_class":
             _review=T2ClassReview.objects.get(pk=review_num)
             _post=T2TutClass.objects.get(pk=class_num)
@@ -612,11 +644,7 @@ def modify_review(request, class_num):
             _review.grade=grade
             _review.save()
             return HttpResponseRedirect("/v2.1/class/"+str(_post.t2classcard_set.first().id))
-            # return render(request, TEMP.TUT_POST_DETAIL_V2D1,{
-            #     "post":_post,
-            #     "review":reviewform,
-            #     "HTTP_HOST":HTTP_HOST,
-            # })
+
     return HttpResponseRedirect("/")
 
 @login_required
