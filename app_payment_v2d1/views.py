@@ -81,6 +81,7 @@ def pay_conf(request):
             _post=T2TeachClass.objects.get(pk=post_id)
 
         if prefillform.is_valid() and want_day and len(mobli)<40:
+            print "is ok"
             want_day=datetime.datetime.strptime(want_day, '%m/%d/%Y').strftime("%Y-%m-%d")
             _profile=T2Profile.objects.get(user=request.user)
             _profile.mobli1=mobli2
