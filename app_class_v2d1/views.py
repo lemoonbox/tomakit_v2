@@ -179,7 +179,7 @@ def create_tut(request, class_num):
             _hostprofile.save()
             _tutpost.wr_done=True
             _classcard.wr_done=True
-            _tutpost.is_opene=True
+            _tutpost.is_open=True
             _classcard.is_open=True
             _tutpost.save()
             _classcard.save()
@@ -282,11 +282,11 @@ def create_teach(request, class_num):
             _hostprofile.save()
             _teachpost.wr_done=True
             _classcard.wr_done=True
-            _teachpost.is_opene=True
+            _teachpost.is_open=True
             _classcard.is_open=True
             _teachpost.save()
             _classcard.save()
-            return render(request, TEMP.CLASS_CREATE_FINISH_V2D1,{
+            return render(request, TEMP.CLASS_MODIFY_FINISH_V2D1,{
                 "HTTP_HOST":HTTP_HOST,
             })
 
@@ -515,7 +515,7 @@ def modify_tut(request, class_num):
             if imageform.is_valid():
                 _imagelist=imageform.savefiles()
 
-            return render(request, TEMP.CLASS_CREATE_FINISH_V2D1,{
+            return render(request, TEMP.CLASS_MODIFY_FINISH_V2D1,{
                     })
 
     return render(request, TEMP.CLASS_MODIFY_TUT_V2D1, {

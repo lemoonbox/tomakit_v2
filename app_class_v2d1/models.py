@@ -120,6 +120,19 @@ class T2ClassPic(models.Model):
     def __unicode__(self):
         return  u'%s %s' % (self.id, self.image)
 
+class T2CardPic(models.Model):
+    user=models.ForeignKey(settings.AUTH_USER_MODEL)
+    class_card=models.ForeignKey(T2ClassCard)
+    image = models.ImageField(null=True, upload_to=upload_to)
+
+    created_at = models.DateTimeField(auto_now_add=True, auto_now=False)
+    updated_at = models.DateTimeField(auto_now_add=True, auto_now=True)
+    is_active = models.BooleanField(default=True)
+
+    def __unicode__(self):
+        return  u'%s %s' % (self.id, self.image)
+
+
 class T2ClassReview(models.Model):
     user=models.ForeignKey(settings.AUTH_USER_MODEL, related_name="my_review")
     host_user=models.ForeignKey(settings.AUTH_USER_MODEL, related_name="host_review")

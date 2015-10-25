@@ -24,7 +24,6 @@ def handle_uploaded_image(i, x, y):
     IMAGE_TYPE=i.content_type
 
     #PIL_TYPE use to save disk, FILE_EXTENSTION use to make the path
-    print
     if IMAGE_TYPE =='image/jpeg':
          PIL_TYPE = 'image/jpg'
          PIL_SAVE = 'JPEG'
@@ -198,6 +197,7 @@ def handle_uploaded_image2(i, x, y):
     """
 
     return (filename, content)
+
 
 def send_key_email(request, title, sender, recipient,template, key, *args, **kargs):
 

@@ -19,5 +19,5 @@ class PayPrefillForm(forms.Form):
     mobli1=forms.IntegerField(error_messages=mobli_error)
     mobli2=forms.IntegerField(error_messages=mobli_error)
     mobli3=forms.IntegerField(error_messages=mobli_error)
-    want_day=forms.DateField(required=False)
+    want_day=forms.DateField(required=False, input_formats=['%Y/%m/%d',])
     pay_method=forms.CharField(error_messages=required_error)

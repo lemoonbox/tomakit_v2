@@ -20,5 +20,4 @@ urlpatterns = patterns('app_user_v2d1.views',
     #profile
     url(r'profile/(?P<user_num>[0-9]+)/$', 'public_profile', name='public_profile_v2d1'),
     url(r'profile/(?P<user_num>[0-9]+)/edit/$', 'edit_profile', name='edit_profile_v2d1'),
-    url(r'profile/(?P<user_num>[0-9]+)/class_check/$', 'class_check', name='class_check_v2d1'),
-    )
+    url(r'profile/(?P<user_num>[0-9]+)/class_check/$', 'class_check', name='class_check_v2d1'),)

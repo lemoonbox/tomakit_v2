@@ -70,19 +70,19 @@ def pay_conf(request):
         pay_method=request.POST.get('pay_method', "")
         prefillform=PayPrefillForm(request.POST)
         want_day=request.POST.get("want_day", "")
-
-        if classtype == "teachclass":
-            want_day=datetime.date.today()
-
         vbank_due= datetime.date.today()+datetime.timedelta(days=1)
+
+
         if classtype == "tutclass":
+            if want_day :
+                want_day=datetime.datetime.strptime(
+                    want_day, '%Y/%m/%d').strftime("%Y-%m-%d")
             _post=T2TutClass.objects.get(pk=post_id)
-        else:
+        elif classtype == "teachclass":
+            want_day=datetime.date.today()
             _post=T2TeachClass.objects.get(pk=post_id)
 
         if prefillform.is_valid() and want_day and len(mobli)<40:
-            print "is ok"
-            want_day=datetime.datetime.strptime(want_day, '%m/%d/%Y').strftime("%Y-%m-%d")
             _profile=T2Profile.objects.get(user=request.user)
             _profile.mobli1=mobli2
             _profile.mobli2=mobli3
