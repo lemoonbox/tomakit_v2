@@ -143,8 +143,8 @@
     }
 
     #sidebar {margin-top:42px;}
-
 </style>
+<link href="{% static 'css/jquery.raty.css'%}">
 {%endblock%}
 
 <body>
@@ -508,6 +508,9 @@
             return $(this).attr('data-value');
         }
     });
+    $().raty()({
+
+    })
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDWLKiQU9kiiXSpS7A5RAeKenzpQlI84Ds&signed_in=true&language=ko&libraries=places&callback=initMap" async defer></script>
 {%comment%}

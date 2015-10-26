@@ -1059,20 +1059,23 @@ ul{
 .carousel-control:focus, .carousel-control:hover, .carousel-control {opacity:1!important;}
 @media screen and (max-width:767px) {
   //.carousel-inner {display:inline-block;}
-  #class-post-Carousel {height:15em!important;overflow:hidden;}
-  .carousel-inner {max-height:15em!important;display:inline-block;min-height:15em;}
-  .carousel-control {line-height:15em!important;}
+  #class-post-Carousel {height:18em!important;overflow:hidden;}
+  .carousel-inner {height:18em!important;display:inline-block;}
+  .carousel-control {line-height:18em!important;}
   //.item {height:100%;overflow:hidden!important;}
   .carousel-inner>.item>a>img, .carousel-inner>.item>img, .img-responsive, .thumbnail a>img, .thumbnail>img {
-    //height:15em!important; width:20em!important;
+    height:100%!important;
+    max-width:767px!important;
   }
 
   .item {
     position: relative;
-    min-height: 15em;
+    height: 18em;
  }              /* 1 */
   .item img {
-    min-width: 100% !important;
+    height:100%!important;
+    max-width:767px!important;
+    //min-width: 100% !important;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -1106,7 +1109,9 @@ ul{
     min-height:35em;}
   .carousel-control {line-height:35em!important;}
   .carousel-inner>.item>a>img,, .item>img, .carousel-inner>.item>img, .img-responsive, .thumbnail a>img, .thumbnail>img {
-    width: 100%!important;position: absolute;
+    width: 100%!important;
+  height:100%!important;
+  position: absolute;
     //height:auto!important;
   }
   .item {
@@ -1340,9 +1345,9 @@ ul{
 
   .card-link img {
     display: block;
-    width: 45em;
+    //width: 45em;
     //min-width: 100%;
-    //min-height: 100%;
+    min-height: 100%;
     margin: auto;
     position: absolute;
     top: -100%;
