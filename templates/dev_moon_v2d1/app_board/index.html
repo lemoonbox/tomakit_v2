@@ -116,7 +116,7 @@
                 <ul>
                     {%for bestclass in bestlist%}
                     <li class="tmk-class-card col-md-4 counter{{forloop.counter}}">
-                        <a class="tmk-card-img" href="http://{{HTTP_HOST}}/v2.1/class/{{bestclass.id}}">
+                        <a class="tmk-card-img" href="http://{{HTTP_HOST}}/v2.1/class/{{bestclass.best_classcard.id}}">
                             <div class="tmk-class-type-label">
                                 <!--수업 타입-->
                                 {% if bestclass.best_classcard.classtype == "tutclass"%}

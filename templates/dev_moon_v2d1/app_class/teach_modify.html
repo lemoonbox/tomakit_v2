@@ -391,19 +391,23 @@
                                     <tr class="form-group">
                                         <td class="label">시/도</td>
                                         <td class="widefield" colspan="2">
-                                            <input class="field" id="locality" name="locality" disabled="true">
+                                            <input class="field" id="locality" name="locality" disabled="true"
+                                                   value="{{addr_data.locality}}">
                                         </td>
                                         <td class="wideField" colspan="2">
-                                            <input class="field" name="area_1"  id="administrative_area_level_1" disabled="true">
+                                            <input class="field" name="area_1"  id="administrative_area_level_1"
+                                                   disabled="true" value="{{addr_data.area_1}}">
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="label">구</td>
                                         <td class="wideField">
-                                            <input class="field" name="sublocal_1" id="sublocality_level_1" disabled="true"></td>
+                                            <input class="field" name="sublocal_1" id="sublocality_level_1" disabled="true"
+                                                    value="{{addr_data.sub_1}}"></td>
                                         <!--<td class="label">동</td>-->
                                         <td class="wideField">
-                                            <input class="field" name="sublocal_2" id="sublocality_level_2" disabled="true"></td>
+                                            <input class="field" name="sublocal_2" id="sublocality_level_2" disabled="true"
+                                                    value="{{addr_data.sub_2}}"></td>
                                         <td class="label">우편번호</td>
                                         <td class="wideField">
                                             <input class="field" name="postal_code" id="postal_code" disabled="true"></td>
