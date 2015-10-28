@@ -7,15 +7,13 @@
 <style>
     body {background-color:#fff!important;}
     .reset-img-max-width img { max-width: none!important; }
-    /*img {max-width:100%;}*/
 
-    /*.tmk-class-pay img {max-width:100px;}*/
     .tmk-class-pay {border:1px solid #ddd;border-radius:4px;}
     .tmk-class-pay-top {padding:10px;}
     .tmk-class-pay .tmk-h3 {border-bottom:1px solid #ddd;padding:15px;margin-top:0;}
     .tmk-class-pay label {line-height:36px;color:#82888A;font-size:14px;font-weight:normal;min-width:120px;max-width:150px;vertical-align:middle;}
     .tmk-class-pay label span {max-width:45%;display:inline-flex;}
-    /*.col-lg-12 img {max-width:100px;}*/
+
     .tmk-infobox-price {height:120px; line-height:24px;text-align:left;background-color:#eee;padding:10px;}
     .tmk-infobox-price div {
         float: left;
@@ -50,9 +48,6 @@
         -webkit-transform: translate(-50%, -50%);
         -ms-transform: translate(-50%, -50%);
         max-height:70px;
-        /*right: 50%!important;*/
-        /*bottom: 50%!important;*/
-        /*width:100%;*/
     }
 
     .card-link {z-index:0!important;}
@@ -73,13 +68,11 @@
         left: 50%;
         right:50%;
         bottom:50%;
-        /*margin-right: -50%;*/
         transform: translate(-50%, -50%);
         -webkit-transform: translate(-50%, -50%);
         -ms-transform: translate(-50%, -50%);
         max-height:100%;
     }
-    /*.tmk-infobox-profile div:first-child {min-width:58px;float:left;}*/
     .tmk-infobox-profile label {width:60%;line-height:20px;}
     .tmk-infobox-profile .h3 {margin:0;padding:0;}
     .tmk-main-body {font-size:18px;line-height:28px;}
@@ -93,14 +86,7 @@
     .review-wrapper {margin:20px auto;text-align:left;min-height:150px;margin-bottom:30px;padding:0;}
     .review-wrapper .btn-link {display:inline!important;float:left!important;margin-left:-5px;}
 
-    /*#tmk-post-container {min-height:1500px;}*/
     #user-review {text-align:left;}
-    /*@media screen and (min-width:1200px) {*/
-    /*#sidebar {*/
-    /*margin-bottom: -800px;*/
-    /*}*/
-    /*/!*#submit-review {position:absolute;top:-90px;left:0;}*!/*/
-    /*}*/
     .btn-block {width:100%!important;}
     @media screen and (min-width:992px) {
         #submit-review {position:absolute;top:-90px;left:0;}
@@ -108,8 +94,10 @@
     @media screen and (max-width:991px) {
         #submit-review {height:42px;width:auto;}
     }
-    .tmk-panel {border-bottom:none;}
-    /*.card-link img{background:url('{%static "media/image/default_prof.png"%}') no-repeat; background-position:center; background-size:cover;}*/
+    .tmk-panel {
+        border-bottom: none;
+        font-size:16px;
+    }
     .html5-video-content {min-height:30em!important;}
     @media (max-width: 480px) {
         .review-wrapper .col-xs-2 {
