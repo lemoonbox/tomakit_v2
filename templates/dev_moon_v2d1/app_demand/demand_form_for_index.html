@@ -281,7 +281,7 @@ label span {color:red;}
 
         <div class="tmk-panel">
             <label class="col-md-2">내용 <span>*</span></label>
-            <div  class="col-md-10">
+            <div  class="col-md-9">
         <textarea name="descript" class="form-control" rows="4" cols="50"
                   placeholder="ex) 가죽공방을 창업하고 싶어서요. 기초부터 차근 차근가르쳐주는 공방 없을까요?">{{demand_data.descript}}</textarea>
                 {{demandform.descript.errors|striptags}}<br>
@@ -316,7 +316,7 @@ label span {color:red;}
 
         <div class="tmk-panel">
             <label class="col-md-2">희망일정 <span>*</span></label>
-            <div class="col-md-10">
+            <div class="col-md-9">
                 <input type="text" name="weekday" class="form-control" value="{{demand_data.weekday}}" placeholder="ex) 주말 아무때나, 평일7시이후"><br>
                 {{demandform.weekday.errors|striptags}}<br>
             </div>
@@ -485,13 +485,13 @@ label span {color:red;}
                     <div id="slide"></div>
                     <!--<span id="value-span"></span>-->
                     <label for="max-price" class="pull-left" style="color:#84CDC2;margin-top:5px;">￦
-                        <input style="border:0px;width:52px;color:#84CDC2;font-weight:bold;" type="text" value="{{demand_data.max_price}}" id="max-price" name="max_price"></input>
+                        <input style="border:0px;width:52px;color:#84CDC2;font-weight:bold;" type="text" id="max-price" name="max_price"></input>
                     </label>
                     <!--<label for="max-price">원</label>-->
                     {{demandform.max_price.errors|striptags}}
 
                     <label for="max-price" class="pull-right" style="color:#84CDC2;margin-top:5px;">￦
-                        <input style="text-align:right;border:0px;width:52px;color:#84CDC2;font-weight:bold;" type="text" value="{{demand_data.min_price}}" id="min-price" name="min_price"></input>
+                        <input style="text-align:right;border:0px;width:52px;color:#84CDC2;font-weight:bold;" type="text" id="min-price" name="min_price"></input>
                     </label>
                     {{demandform.min_price.errors|striptags}}
                 </div>
