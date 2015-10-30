@@ -220,26 +220,12 @@
                                     </div>
 
                                     <div class="tmk-imgs" id="tmk-imgs">
+                                        {% for image in tut_data.post.t2classpic_set.all%}
                                         <div>
-                                            <img src="">
+                                            <img src="{{MEDIA_URL}}{{image.image}}">
                                             <span onclick="deleteImg(this);"></span>
                                         </div>
-                                        <div>
-                                            <img src="">
-                                            <span onclick="deleteImg(this);"></span>
-                                        </div>
-                                        <div>
-                                            <img src="">
-                                            <span onclick="deleteImg(this);"></span>
-                                        </div>
-                                        <div>
-                                            <img src="">
-                                            <span onclick="deleteImg(this);"></span>
-                                        </div>
-                                        <div>
-                                            <img src="">
-                                            <span onclick="deleteImg(this);"></span>
-                                        </div>
+                                        {% endfor %}
                                         <input type="file" name="image"  id="filePhoto1" />
                                         <input type="file" name="image"  id="filePhoto2" />
                                         <input type="file" name="image"  id="filePhoto3" />

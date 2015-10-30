@@ -470,6 +470,7 @@ def modify_tut(request, class_num):
 
         tut_data={
             "user":_user,
+            "post":_post,
             "category":_post.category,
             "title":_post.title,
             "intro_line":_post.intro_line,
