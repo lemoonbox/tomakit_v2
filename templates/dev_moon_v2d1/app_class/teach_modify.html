@@ -201,13 +201,24 @@
                 <div class="tmk-panel">
                     <label class="col-md-2">수업시작일 &<br>수강신청마감일 <span>*</span></label>
 
+                    <!-&#45;&#45;-->
+                    <!--<div class="col-md-3 col-xs-4">-->
+                        <!--수업시작일-->
+                        <!--<input class="form-control datepicker" type="date" name="startday" value="{{teach_data.startday|date:'Y-m-d'}}" placeholder="{{teach_data.startday}}">-->
+                    <!--</div>-->
+                    <!--<div class="col-md-3 col-xs-4">-->
+                        <!--등록마감일-->
+                        <!--<input class="form-control datepicker" type="date" name="deadline" value="{{teach_data.deadline|date:'Y-m-d'}}">-->
+                    <!--</div>-->
+                    <!-&#45;&#45;-->
+
                     <div class="col-md-3 col-xs-4">
                         수업시작일
-                        <input class="form-control datepicker" type="text" name="startday" value="{{teach_data.startday|date:'Y-m-d'}}" placeholder="{{teach_data.startday}}">
+                        <input class="form-control" type="date" name="startday" value="{{teach_data.startday|date:'Y-m-d'}}" placeholder="{{teach_data.startday}}">
                     </div>
                     <div class="col-md-3 col-xs-4">
                         등록마감일
-                        <input class="form-control datepicker" type="text" name="deadline" value="{{teach_data.deadline|date:'Y-m-d'}}">
+                        <input class="form-control" type="date" name="deadline" value="{{teach_data.deadline|date:'Y-m-d'}}">
                     </div>
                     <div class="col-md-10 col-md-offset-2 col-xs-12 tmk-form-error">
                         {{teachform.startday.errors|striptags}}
@@ -279,11 +290,12 @@
                                             <img src="">
                                             <span onclick="deleteImg(this);"></span>
                                         </div>
-                                        <input type="file" name="image"  value="{{teachform.class_photo}}" id="filePhoto1" />
-                                        <input type="file" name="image"  id="filePhoto2" />
-                                        <input type="file" name="image"  id="filePhoto3" />
-                                        <input type="file" name="image"  id="filePhoto4" />
-                                        <input type="file" name="image"  id="filePhoto5" />
+
+                                        <input type="file" name="image" id="filePhoto1" />
+                                        <input type="file" name="image" id="filePhoto2" />
+                                        <input type="file" name="image" id="filePhoto3" />
+                                        <input type="file" name="image" id="filePhoto4" />
+                                        <input type="file" name="image" id="filePhoto5" />
 
                                     </div>
                                 </div>
@@ -350,7 +362,7 @@
                 <div class="tmk-panel">
                     <label class="col-md-2">작가소개 <span>*</span></label>
                     <div class="col-md-10">
-                        <input class="form-control" type="text" name="intro_self" value="{{intro_self}}">
+                        <input class="form-control" type="text" name="intro_self" value="{{prefill_intro}}">
                         <div class="col-md-10 col-md-offset-2 col-xs-12 tmk-form-error">
                             {{teachform.intro_self.errors|striptags}}
                         </div>

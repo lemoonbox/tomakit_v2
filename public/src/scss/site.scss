@@ -1057,22 +1057,26 @@ ul{
   //min-height:500px;
 }
 .carousel-control:focus, .carousel-control:hover, .carousel-control {opacity:1!important;}
+
 @media screen and (max-width:767px) {
   //.carousel-inner {display:inline-block;}
-  #class-post-Carousel {height:15em!important;overflow:hidden;}
-  .carousel-inner {max-height:15em!important;display:inline-block;min-height:15em;}
-  .carousel-control {line-height:15em!important;}
+  #class-post-Carousel {height:18em!important;overflow:hidden;}
+  .carousel-inner {height:18em!important;display:inline-block;}
+  .carousel-control {line-height:18em!important;}
   //.item {height:100%;overflow:hidden!important;}
   .carousel-inner>.item>a>img, .carousel-inner>.item>img, .img-responsive, .thumbnail a>img, .thumbnail>img {
-    //height:15em!important; width:20em!important;
+    min-height:100%!important;
+    max-width:767px!important;
   }
 
   .item {
     position: relative;
-    min-height: 15em;
+    height: 18em;
  }              /* 1 */
   .item img {
-    min-width: 100% !important;
+    min-height:100%!important;
+    max-width:767px!important;
+    //min-width: 100% !important;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -1106,8 +1110,8 @@ ul{
     min-height:35em;}
   .carousel-control {line-height:35em!important;}
   .carousel-inner>.item>a>img,, .item>img, .carousel-inner>.item>img, .img-responsive, .thumbnail a>img, .thumbnail>img {
-    width: 100%!important;position: absolute;
-    //height:auto!important;
+    width: 100%!important;
+    position: absolute;
   }
   .item {
     position: relative;
@@ -1340,9 +1344,8 @@ ul{
 
   .card-link img {
     display: block;
-    width: 45em;
     //min-width: 100%;
-    //min-height: 100%;
+    min-height: 100%;
     margin: auto;
     position: absolute;
     top: -100%;
@@ -1398,7 +1401,7 @@ ul{
 .tmk-search button {height:43px;margin-top:-3px;}
 
 .card-list li {
-  height: 450px;
+  height: 470px;
   width: 370px;
   margin: 15px;
   padding: 0px;
@@ -1424,23 +1427,32 @@ ul{
   z-index: 2;
 }
 .tmk-card-info {
-  margin-top: 15px;
+  margin-top: 5px;
   padding: 0 15px;
   overflow:hidden;
-  .h4 {padding: 0 15px;overflow:hidden;}
+  .h4 {
+    height:48px;
+    line-height:1.3em;
+    font-weight:600!important;
+    //padding: 0 15px;
+    overflow: hidden;
+    //margin:15px auto;
+  }
+  .intro_line {color:#82888A;}
 }
 .tmk-card-info > div {
   padding: 0px 5px;
   overflow: hidden;
-  white-space: nowrap;
+  //white-space: nowrap;
 }
 .dp-label {
-  margin-top: 20px;
+  margin-top: 15px;
   margin-left: 5%;
   padding-top:5px;
   border-top: 1px solid #ddd;
   /*min-width: 340px;*/
   max-width: 90%;
+  color:#82888A;
 }
 .dp-label > div {
   line-height: 20px;

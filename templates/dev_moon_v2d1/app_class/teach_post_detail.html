@@ -43,12 +43,10 @@
         left: 50%;
         right:50%;
         bottom:50%;
-        /*margin-right: -50%;*/
         transform: translate(-50%, -50%);
+        -webkit-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
         max-height:70px;
-        /*right: 50%!important;*/
-        /*bottom: 50%!important;*/
-        /*width:100%;*/
     }
     .card-link {z-index:0!important;}
     .card-link img {z-index:-1!important;}
@@ -95,12 +93,8 @@
         -webkit-transform: translate(-50%, -50%);
         -ms-transform: translate(-50%, -50%);
         max-height:70px;
-        /*right: 50%!important;*/
-        /*bottom: 50%!important;*/
-        /*width:100%;*/
     }
 
-    /*.tmk-infobox-profile div:first-child {min-width:58px;float:left;}*/
     .tmk-infobox-profile label {width:60%;line-height:20px;}
     .tmk-infobox-profile .h3 {margin:0;padding:0;}
     .tmk-main-body {font-size:18px;line-height:28px;}
@@ -124,8 +118,10 @@
     @media screen and (max-width:991px) {
         #submit-review {height:42px;width:auto;}
     }
-    .tmk-panel {border-bottom:none;}
-/*.card-link img{background:url('{%static "media/image/default_prof.png"%}') no-repeat; background-position:center; background-size:cover;}*/
+    .tmk-panel {
+        border-bottom: none;
+        font-size: 16px;
+    }
 
     @media (max-width: 480px) {
         .review-wrapper .col-xs-2 {
@@ -143,8 +139,8 @@
     }
 
     #sidebar {margin-top:42px;}
-
 </style>
+<!--<link href="{% static 'css/jquery.raty.css'%}">-->
 {%endblock%}
 
 <body>
@@ -508,6 +504,9 @@
             return $(this).attr('data-value');
         }
     });
+    $().raty()({
+
+    })
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDWLKiQU9kiiXSpS7A5RAeKenzpQlI84Ds&signed_in=true&language=ko&libraries=places&callback=initMap" async defer></script>
 {%comment%}
