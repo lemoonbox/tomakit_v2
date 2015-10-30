@@ -138,11 +138,9 @@
         }
     }
 
-    #sidebar {margin-top:42px;}
+    #sidebar {margin-top:42px;position:inherit;}
 </style>
-<!--<link href="{% static 'css/jquery.raty.css'%}">-->
 {%endblock%}
-
 <body>
 {%block content%}
 
@@ -197,7 +195,7 @@
 
     <div class="tmk-main-body col-lg-12" id="tmk-post-container">
         <div class="container">
-            <div class="col-lg-4 hidden-lg" style="margin-bottom:50px;">
+            <div class="col-lg-4" style="margin-bottom:50px; float:right;">
                 <div class="tmk-class-pay">
                     <div class="tmk-class-pay-top">
                         <!--<div class=h3>수업정보</>-->
@@ -263,6 +261,9 @@
                     </div>
                 {% endif %}
             </div>
+
+
+            {%comment%}
             <div class="col-lg-4 visible-lg" id="sidebar">
                 <div class="tmk-class-pay">
                     <div class="tmk-class-pay-top">
@@ -322,6 +323,8 @@
 
                 </div>
             </div>
+            {%endcomment%}
+
             <div class="col-lg-8 tmk-post-detail">
                 <div class="tmk-h3">소개</div>
                 <div class="tmk-panel">{{post.descript|linebreaks}}</div>
