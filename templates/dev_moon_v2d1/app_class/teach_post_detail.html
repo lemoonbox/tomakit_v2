@@ -206,14 +206,14 @@
                                 <label><img src="{%static 'media/image/slice/icon-intro_flag.png'%}" alt="icon"> 수업 시작일 </label> <span>{{post.startday|date:"Y년 n월 d일"}}</span>
                             </div>
                             <div>
-                                <label><img src="{%static 'media/image/slice/icon-intro_clock.png'%}" alt="icon"> 수업 일정</label> <span>{{post.weekday}}</span>
+                                <label><img src="{%static 'media/image/slice/icon-intro_clock.png'%}" alt="icon"> 수업 일정</label> <span style="max-width:50%;display:inline-block;vertical-align:middle;">{{post.weekday}}</span>
                             </div>
                             <div>
                                 <label><img src="{%static 'media/image/slice/icon-intro_people.png'%}" alt="icon"> 인원</label>
                                 <span>최소 {{post.min_num}}명 ~ 최대 {{post.max_num}}명</span>
                             </div>
                             <div>
-                                <label><img src="{%static 'media/image/slice/icon-intro_location.png'%}" alt="icon"> 장소</label><span>{{post.addr}}</span>
+                                <label style="vertical-align:middle;"><img src="{%static 'media/image/slice/icon-intro_location.png'%}"> 장소</label> <span style="max-width:50%;display:inline-block;vertical-align:middle;">{{post.addr}}</span>
                             </div>
                         </div>
                     </div>
