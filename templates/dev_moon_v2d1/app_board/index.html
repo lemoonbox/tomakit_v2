@@ -126,13 +126,13 @@
                                 {% endif %}
                             </div>
                             <div class="card-link">
-                                <img src="{{MEDIA_URL}}{{bestclass.best_classcard.t2classpic_set.first.image}}">
+                                <img alt="{{bestclass.best_classcard.title}} 사진" src="{{MEDIA_URL}}{{bestclass.best_classcard.t2classpic_set.first.image}}">
                             </div>
                         </a>
                         {%comment%}수업호스트::{{bestclass.best_classcard.user}}{%endcomment%}
                         <a class="tmk-card-img-profile">
                             <div class="card-link">
-                                <img src="{{MEDIA_URL}}{{bestclass.best_classcard.user.t2profile_set.first.pro_pic}}">
+                                <img alt="{{bestclass.best_classcard.title}} 강사 프로필 사진" src="{{MEDIA_URL}}{{bestclass.best_classcard.user.t2profile_set.first.pro_pic}}">
                             </div>
                         </a>
                         <div class="tmk-card-info">
@@ -234,18 +234,5 @@
     var atts = { id: "myyoutubePlayer" };
     swfobject.embedSWF("http://www.youtube.com/v/KeWUl0Avr84&feature=plpp_play_all?start=1&enablejsapi=1&playerapiid=youtubePlayer&allowFullScreen=true&version=3&loop=1&autohide=1&autoplay=1&controls=0&showinfo=0&modestbranding=1&rel=0&autohide=1&playlist=KeWUl0Avr84&",
             "youtubeNosound", "100%", "100%", "0", null, null, params, atts);
-
-//    (function() {
-//        var v = document.getElementById("myyoutubePlayer");
-//        for (var n = 0; n < v.length; n++) {
-//            var p = document.createElement("div");
-//            p.innerHTML = labnolThumb(v[n].dataset.id);
-//            v[n].appendChild(p);
-//        }
-//    })();
-//
-//    function labnolThumb(id) {
-//        return '<img class="youtube-thumb" src="//i.ytimg.com/vi/' + id + '/hqdefault.jpg"></div>';
-//    }
 </script>
 {% endblock %}

@@ -169,20 +169,20 @@
                         <div class="tmk-h3" style="font-weight:bold;">{{post.repeat}}회 과정 / 총 {% widthratio post.repeat 1 post.perhour%}시간</div>
                         <div style="text-align:left;">
                             <div>
-                                <label><img src="{%static 'media/image/slice/icon-intro_time.png'%}"> 모집 마감일</label> 즉시 등록 수업
+                                <label><img src="{%static 'media/image/slice/icon-intro_time.png'%}" alt="icon"> 모집 마감일</label> 즉시 등록 수업
                             </div>
                             <div>
-                                <label><img src="{%static 'media/image/slice/icon-intro_flag.png'%}"> 수업 시작일 </label> 날짜 협의
+                                <label><img src="{%static 'media/image/slice/icon-intro_flag.png'%}" alt="icon"> 수업 시작일 </label> 날짜 협의
                             </div>
                             <div>
-                                <label><img src="{%static 'media/image/slice/icon-intro_clock.png'%}"> 수업 일정</label> <span style="max-width:60%;display:inline-flex;">{{post.weekday}}</span>
+                                <label><img src="{%static 'media/image/slice/icon-intro_clock.png'%}" alt="icon"> 수업 일정</label> <span style="max-width:60%;display:inline-flex;">{{post.weekday}}</span>
                             </div>
                             <div>
-                                <label><img src="{%static 'media/image/slice/icon-intro_people.png'%}"> 인원</label> 소수 맞춤수업
+                                <label><img src="{%static 'media/image/slice/icon-intro_people.png'%}" alt="icon"> 인원</label> 소수 맞춤수업
                                 {%comment%}최소{{post.min_num}}명~최대{{post.max_num}}명{%endcomment%}
                             </div>
                             <div>
-                                <label><img src="{%static 'media/image/slice/icon-intro_location.png'%}"> 장소</label> <span style="max-width:60%;display:inline-flex;">{{post.addr}}</span>
+                                <label><img src="{%static 'media/image/slice/icon-intro_location.png'%}" alt="icon"> 장소</label> <span style="max-width:60%;display:inline-flex;">{{post.addr}}</span>
                             </div>
                         </div>
                     </div>
@@ -198,7 +198,7 @@
                         <div class="tmk-card-img-profile">
                             <div class="card-link">
                                 <a href="http://{{HTTP_HOST}}/v2.1/user/profile/{{post.user.id}}">
-                                    <img src="{{MEDIA_URL}}{{post.user.t2profile_set.first.pro_pic}}">
+                                    <img src="{{MEDIA_URL}}{{post.user.t2profile_set.first.pro_pic}}" alt="강사 프로필 사진">
                                 </a>
                             </div>
                         </div>
@@ -351,7 +351,7 @@
                     <div class="col-xs-2">
                         <div class="tmk-card-img-profile">
                             <div class="card-link">
-                                <img src="{{MEDIA_URL}}{{user.t2profile_set.first.pro_pic}}">
+                                <img alt="프로필 사진" src="{{MEDIA_URL}}{{user.t2profile_set.first.pro_pic}}">
                             </div>
                         </div>
                     </div>
@@ -380,7 +380,7 @@
                         <div class="tmk-card-img-profile">
                             <div class="card-link">
                                 <!--<a href="http://{{HTTP_HOST}}/v2.1/user/profile/{{review.user.id}}">-->
-                                <img src="{{MEDIA_URL}}{{review.user.t2profile_set.first.pro_pic}}">
+                                <img alt="프로필 사진" src="{{MEDIA_URL}}{{review.user.t2profile_set.first.pro_pic}}">
                                 <!--</a>-->
                             </div>
                         </div>

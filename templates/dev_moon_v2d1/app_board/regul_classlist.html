@@ -234,13 +234,13 @@
                                 {% endif %}
                             </div>
                             <div class="card-link">
-                                <img id="tmk-card-img" src="{{MEDIA_URL}}{{class.t2cardpic_set.first.image}}">
+                                <img id="tmk-card-img" alt="{{class.title}} 사진" src="{{MEDIA_URL}}{{class.t2cardpic_set.first.image}}">
                             </div>
                         </a>
                         {%comment%}수업호스트::{{class.user}}{%endcomment%}
                         <a class="tmk-card-img-profile" href="http://{{HTTP_HOST}}/v2.1/user/profile/{{class.user.id}}">
                         <div class="card-link">
-                            <img id="tmk-img-pro" src="{{MEDIA_URL}}{{class.user.t2profile_set.first.pro_pic}}">
+                            <img id="tmk-img-pro" alt="{{class.title}} 강사 프로필 사진" src="{{MEDIA_URL}}{{class.user.t2profile_set.first.pro_pic}}">
                             </div>
                         </a>
                         <div class="tmk-card-info">
