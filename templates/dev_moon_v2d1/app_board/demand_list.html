@@ -258,11 +258,11 @@
                         <a href="{% url 'mobli_require_v2d1' class.id %}?lineup_next=/v2.1/board/demand_list/{{page_currunt}}/{{cate_current}}/{{state_current}}">
                             {% endif %}
                             {% if request.user in class.inline_users.all %}
-                            <button class="btn btn-default">
-                                <img style="width:18px;vertical-align:text-top;color:#82888A;" src="{%static 'media/image/slice/icon-line_gr.png'%}">&nbsp; <span class="h4">줄서기 취소
+                            <button class="btn btn-primary">
+                                <img style="width:18px;vertical-align:text-top;color:#82888A;" src="{%static 'media/image/slice/icon-line_wh.png'%}">&nbsp; <span class="h4">줄서기 취소
                                 {% else %}
-                                <button class="btn btn-primary">
-                                    <img style="width:18px;vertical-align:text-top;" src="{%static 'media/image/slice/icon-line_wh.png'%}">&nbsp; <span class="h4">줄서기
+                                <button class="btn btn-default">
+                                    <img style="width:18px;vertical-align:text-top;" src="{%static 'media/image/slice/icon-line_gr.png'%}">&nbsp; <span class="h4">줄서기
                                     {% endif %}
                                     <!--줄선 사람 숫자-->
                                     {% if class.inline_users.count %}
@@ -319,5 +319,5 @@
 </div>
 {%endblock%}
 {%block script%}
-<script src='{%static "media/js/qitem_create.js" %}'></script>
+<script src='{%static "media/js/tmk-selecter.js" %}'></script>
 {%endblock%}
