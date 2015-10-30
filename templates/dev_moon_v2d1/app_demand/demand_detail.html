@@ -101,18 +101,18 @@
 
 {%block content%}
 <div class="tmk-main-body col-lg-12" id="demand-detail" style="text-align:left;">
-    <div class=" container">
-        <div class="tmk-page-header hidden-lg" style="min-height:120px;text-align:center;">
+    <div class="container">
+        <div class="tmk-page-header hidden-lg" style="min-height:120px;padding-bottom:50px!important;text-align:center;">
             <div class="tmk-infobox-profile">
                 <div class="img-grid">
                     <div class="infobox-img-wrapper">
                         <a href="http://{{HTTP_HOST}}/v2.1/user/profile/{{post.user.id}}">
-                            <img style="height:100%;width:100%;" src="{{MEDIA_URL}}{{post.user.t2profile_set.first.pro_pic}}">
+                            <img alt="post user profile image" src="{{MEDIA_URL}}{{post.user.t2profile_set.first.pro_pic}}">
                         </a>
                     </div>
                 </div>
                 <div>
-                    <span class="small" style="line-height:16px;">클래스 제안</span><br>
+                    <span class="small" style="line-height:50px;">클래스 제안</span><br>
                     <a href="http://{{HTTP_HOST}}/v2.1/user/profile/{{post.user.id}}">
                         <div class="tmk-h3" style="line-height:16px;margin-top:5px;color:#565a5c;">{{post.user.first_name}}{{post.user.last_name}}</div>
                     </a>
@@ -134,7 +134,7 @@
                     </div>
                 </div>
                 <div>
-                    <span class="small" style="line-height:16px;">클래스 제안</span><br>
+                    <span class="small" style="line-height:50px;">클래스 제안</span><br>
                     <a href="http://{{HTTP_HOST}}/v2.1/user/profile/{{post.user.id}}">
                         <div class="tmk-h3" style="line-height:16px;margin-top:5px;color:#565a5c;">{{post.user.first_name}}{{post.user.last_name}}</div>
                     </a>
