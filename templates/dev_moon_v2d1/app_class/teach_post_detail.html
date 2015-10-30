@@ -364,7 +364,8 @@
                     <div class="col-md-7 col-xs-7 user-review"  {% if review.user == request.user %}id="requestuser"{%endif%}>
                         <a href="http://{{HTTP_HOST}}/v2.1/user/profile/{{review.user.id}}">
                             {{review.user.last_name}}{{review.user.first_name}}
-                        </a>  <div class="raty-readonly" data-value="{{review.grade}}"></div>
+                        </a>
+                        <div class="raty-readonly" data-value="{{review.grade}}"></div>
                         <!--댓글-->
                         <div>{{review.review}}</div>
                     </div>

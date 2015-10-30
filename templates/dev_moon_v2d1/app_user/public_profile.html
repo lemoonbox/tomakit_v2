@@ -168,7 +168,8 @@
                     <div class="col-lg-7 col-xs-7" id="user-review">
                         <a href="http://{{HTTP_HOST}}/v2.1/user/profile/{{review.user.id}}">
                             {{review.user.last_name}}{{review.user.first_name}}
-                        </a> {{review.grade}}
+                        </a>
+                        <div class="raty-readonly" data-value="{{review.grade}}"></div>
                         <!--댓글-->
                         <div>{{review.review}}</div>
                     </div>
@@ -181,5 +182,14 @@
 {%endblock%}
 {%block script%}
 <script src="{% static 'js/google_map_load.js'%}"></script>
+<script src="{% static 'js/jquery.raty.js'%}"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDWLKiQU9kiiXSpS7A5RAeKenzpQlI84Ds&signed_in=true&language=ko&libraries=places&callback=initMap" async defer></script>
+<script>
+    $('.raty-readonly').raty({
+        readOnly: true,
+        grade: function() {
+            return $(this).attr('data-value');
+        }
+    });
+</script>
 {%endblock%}

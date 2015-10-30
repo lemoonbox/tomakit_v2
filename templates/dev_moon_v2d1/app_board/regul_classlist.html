@@ -243,14 +243,17 @@
                             <img id="tmk-img-pro" alt="{{class.title}} 강사 프로필 사진" src="{{MEDIA_URL}}{{class.user.t2profile_set.first.pro_pic}}">
                             </div>
                         </a>
+                        <a href="http://{{HTTP_HOST}}/v2.1/class/{{class.id}}" style="color:#333333!important;">
                         <div class="tmk-card-info">
                             <div class="h4">{{class.title}}</div>
                             <div class="intro_line">{{class.intro_line}}</div>
                         </div>
+
                         <div class="dp-label">
                         <div class="dp-label-left">{{class.repeat}}회 / 수업당 {{class.perhour}}시간</div>
                         <div class="dp-label-right">￦{{class.price}}</div>
                         </div>
+                        </a>
                     </li>
 
                     {% endfor %}
