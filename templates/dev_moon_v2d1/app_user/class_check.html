@@ -61,7 +61,7 @@
         <div class="tmk-infobox-profile">
             <div class="img-grid">
                 <div class="infobox-img-wrapper">
-            <img src="{{MEDIA_URL}}{{profile_user.t2profile_set.first.pro_pic}}">
+            <img src="{{MEDIA_URL}}{{profile_user.t2profile_set.first.pro_pic}}" alt="프로필 사진">
         </div>
                 </div>
             </div>
@@ -73,7 +73,7 @@
         </div>
         <div class="pull-right hidden-xs">
             {% if request.user.is_authenticated%}
-            <a href="http://{{HTTP_HOST}}/v2.1/user/profile/{{profile_user.id}}/edit" class="btn btn-primary"><img src="{%static 'media/image/slice/icon-setting.png'%}"> 프로필 수정</a>
+            <a href="http://{{HTTP_HOST}}/v2.1/user/profile/{{profile_user.id}}/edit" class="btn btn-primary"><img src="{%static 'media/image/slice/icon-setting.png'%}" alt="프로필 수정 버튼"> 프로필 수정</a>
             {% endif %}
         </div>
     </div>
@@ -121,13 +121,13 @@
                                         <span class="label tmk-label">{{class.classtype}}</span>
                                     </div>
                                     <div class="card-link">
-                                        <img id="tmk-card-img" src="{{MEDIA_URL}}{{class.t2cardpic_set.first.image}}">
+                                        <img id="tmk-card-img" src="{{MEDIA_URL}}{{class.t2cardpic_set.first.image}}" alt="{{class.title}} 사진">
                                     </div>
                                 </a>
 
                                 <a class="tmk-card-img-profile">
                                     <div class="card-link">
-                                        <img id="tmk-img-pro" src="{{MEDIA_URL}}{{class.user.t2profile_set.first.pro_pic}}">
+                                        <img id="tmk-img-pro" src="{{MEDIA_URL}}{{class.user.t2profile_set.first.pro_pic}}" alt="프로필 사진">
                                         {%comment%}{{class.user}}{%endcomment%}
                                     </div>
                                 </a>
