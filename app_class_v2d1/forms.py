@@ -198,7 +198,7 @@ class T2ClassPicForm(forms.ModelForm):
                     _cardimage=T2CardPic(user=_user, class_card=_class_card,
                                          image=cardfile)
                     _cardimage.save()
-                file=handle_uploaded_image(file, 1280, 720)[1]
+                file=handle_uploaded_image(file, 1140, 820)[1]
                 if _teach_post:
                     _image=T2ClassPic(user=_user, teach_post=_teach_post,
                                        class_card=_class_card, image=file)
