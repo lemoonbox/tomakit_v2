@@ -184,11 +184,11 @@
                 <a href="{% url 'mobli_require_v2d1' post.id %}?lineup_next=/v2.1/demand/{{post.id}}/">
                     {% endif %}
                     {% if request.user in post.inline_users.all %}
-                    <button class="btn btn-default">
-                        <img style="width:18px;vertical-align:text-top;color:#82888A;" src="{%static 'media/image/slice/icon-line_gr.png'%}">&nbsp; <span class="h4">줄서기 취소
+                    <button class="btn btn-primary">
+                        <img style="width:18px;vertical-align:text-top;color:#82888A;" src="{%static 'media/image/slice/icon-line_wh.png'%}">&nbsp; <span class="h4">줄서기 취소
                 {% else %}
-                <button class="btn btn-primary">
-                    <img style="width:18px;vertical-align:text-top;" src="{%static 'media/image/slice/icon-line_wh.png'%}">&nbsp; <span class="h4">줄서기
+                <button class="btn btn-default">
+                    <img style="width:18px;vertical-align:text-top;" src="{%static 'media/image/slice/icon-line_gr.png'%}">&nbsp; <span class="h4">줄서기
                 {% endif %}
                 <!--줄선 사람 숫자-->
                 {% if post.inline_users.count %}

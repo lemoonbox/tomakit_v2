@@ -88,7 +88,7 @@
         </div>
 
         <div class="tmk-h2" style="margin:0 auto;">{{profile_user.last_name}}{{profile_user.first_name}}</div>
-        <div style="margin:12px auto;">{{profile_user.t2profile_set.first.intro_line}}</div>
+        <div style="margin:12px auto;min-height:25px;">{{profile_user.t2profile_set.first.intro_line}}</div>
         <div class="btn-group pull-left">
             <a style="color:#FF565A;border-bottom:4px solid;" href="http://{{HTTP_HOST}}/v2.1/user/profile/{{profile_user.id}}/">소개</a>
             <a style="color:#CACCCD;" href="http://{{HTTP_HOST}}/v2.1/user/profile/{{profile_user.id}}/class_check/">클래스</a>
@@ -115,14 +115,16 @@
             <div class="tmk-h3">자기 소개</div>
             <div class="tmk-panel">{{host_profile.intro_self}}</div>
             <div class="tmk-h3">가게 주소</div>
-            <div class="tmk-panel">{{host_profile.shop_addr}}</div>
-            <div>
-                <div id="floating-panel">
-                    <input hidden id="address" value="{{host_profile.shop_addr}}">
-                    <!--<input id="submit" type="button" value="Geocode">-->
+            <div class="tmk-panel">{{host_profile.shop_addr}}
+                <div>
+                    <div id="floating-panel">
+                        <input hidden id="address" value="{{host_profile.shop_addr}}">
+                        <!--<input id="submit" type="button" value="Geocode">-->
+                    </div>
+                    <div id="map"></div>
                 </div>
-                <div id="map"></div>
             </div>
+
         </div>
 
         <div class="col-lg-4">

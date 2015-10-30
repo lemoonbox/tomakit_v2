@@ -44,16 +44,11 @@
           <input id="id_email" class="form-control" placeholder="Email" name="username" type="email"><br>
           <div class="help-block"><br>입력하신 이메일로 비밀번호 변경 링크가 전송됩니다.
             Facebook이나 Kakao아이디로 생성하신 분은 비밀번호를 변경할 수 없습니다.</div><br>
-          <a href="javascript:history.back()"> <button class="btn btn-primary cancel">뒤로 가기</button></a>
+          <a href="javascript:history.back()" style="line-height:34px;" class="btn btn-primary cancel">취소</a>
           <input class="btn btn-primary reset-pwd" type = "submit" value="이메일 전송">
 
         </form>
     </div>
   <!--</div>-->
   </div>
-{%endblock%}
-{%block script%}
-<script>
-    document.referrer&&-1!=document.referrer.indexOf("tomakit.com")?history.back():location.href="http://tomakit.com";
-</script>
 {%endblock%}

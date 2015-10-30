@@ -137,8 +137,6 @@
             padding-left: 15px;
         }
     }
-
-    #sidebar {margin-top:42px;position:inherit;}
 </style>
 {%endblock%}
 <body>
@@ -195,7 +193,7 @@
 
     <div class="tmk-main-body col-lg-12" id="tmk-post-container">
         <div class="container">
-            <div class="col-lg-4" style="margin-bottom:50px; float:right;">
+            <div class="col-lg-4" style="margin:50px auto; float:right;">
                 <div class="tmk-class-pay">
                     <div class="tmk-class-pay-top">
                         <!--<div class=h3>수업정보</>-->
@@ -261,69 +259,6 @@
                     </div>
                 {% endif %}
             </div>
-
-
-            {%comment%}
-            <div class="col-lg-4 visible-lg" id="sidebar">
-                <div class="tmk-class-pay">
-                    <div class="tmk-class-pay-top">
-                        <!--<div class=h3>수업정보</>-->
-                        <div class="tmk-h3" style="font-weight:bold;">{{post.repeat}}회 과정 / 총 {% widthratio post.repeat 1 post.perhour%}시간</div>
-                        <div style="text-align:left;">
-                            <div>
-                                <label><img src="{%static 'media/image/slice/icon-intro_time.png'%}"> 모집 마감일</label> <span>{{post.deadline|date:"Y년 n월 d일"}}</span>
-                            </div>
-                            <div>
-                                <label><img src="{%static 'media/image/slice/icon-intro_flag.png'%}"> 수업 시작일 </label> <span>{{post.startday|date:"Y년 n월 d일"}}</span>
-                            </div>
-                            <div>
-                                <label><img src="{%static 'media/image/slice/icon-intro_clock.png'%}"> 수업 일정</label> <span>{{post.weekday}}</span>
-                            </div>
-                            <div>
-                                <label><img src="{%static 'media/image/slice/icon-intro_people.png'%}"> 인원</label>
-                                최소 {{post.min_num}}명 ~ 최대 {{post.max_num}}명
-                            </div>
-                            <div>
-                                <label style="vertical-align:middle;"><img src="{%static 'media/image/slice/icon-intro_location.png'%}"> 장소</label> <span style="max-width:60%;display:inline-block;vertical-align:middle;">{{post.addr}}</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tmk-infobox-price">
-                        <div><label>재료비</label><br>
-                            <span class="small">￦</span> {{post.extra_price|intcomma}}<br>
-                            <label>수강료</label><br>
-                            <span class="small">￦</span> {{post.price|intcomma}}</div>
-                        <div class="pull-right" style="text-align:right;padding-top: 72px;">합계<span class="tmk-h3" style="border-bottom:none;">￦{{ post.extra_price|add:post.price |intcomma}}</span></div>
-                    </div>
-                    <!--강사 프로필-->
-                    <div class="tmk-infobox-profile">
-                        <a href="http://{{HTTP_HOST}}/v2.1/user/profile/{{post.user.id}}">
-                            <div class="tmk-card-img-profile">
-                                <div class="card-link">
-                                    <img src="{{MEDIA_URL}}{{post.user.t2profile_set.first.pro_pic}}">
-                                </div>
-                            </div>
-                            <div>
-                                <label>클래스 선생님</label><br>
-                                <div class="h3" style="color:#565A5C;">{{post.user.last_name}}{{post.user.first_name}}</div>
-                            </div>
-                        </a>
-                    </div>
-
-                    <div style="padding:10px;">
-                        <!-- 결제 하기 -->
-                        <form method="GET" action="{% url 'pay_prefill_v2d1' %}">
-                            <input type="hidden" value="{{post.id}}" name="post_id">
-                            <input type="hidden" value="teachclass" name="classtype">
-                            <button class="btn btn-primary btn-block">
-                                신청하기 <input type="submit" value="{{ post.extra_price|add:post.price |intcomma}}원" hidden>
-                            </button>
-                        </form>
-                    </div>
-
-                </div>
-            </div>
-            {%endcomment%}
 
             <div class="col-lg-8 tmk-post-detail">
                 <div class="tmk-h3">소개</div>
