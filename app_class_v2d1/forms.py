@@ -9,7 +9,8 @@ from app_class_v2d1.models import \
     T2ClassCard, \
     T2ClassReview, \
     T2CardPic
-from utils.utils import shard_url_picker, handle_uploaded_image
+from utils.utils import shard_url_picker, handle_uploaded_image,\
+    hfix_uploaded_image
 
 
 class T2Class_BeginForm(forms.Form):
@@ -194,7 +195,7 @@ class T2ClassPicForm(forms.ModelForm):
             for file in images:
                 i+=1
                 if i == 1 :
-                    cardfile=handle_uploaded_image(file, 370, 280)[1]
+                    cardfile=hfix_uploaded_image(file, 370, 280)[1]
                     _cardimage=T2CardPic(user=_user, class_card=_class_card,
                                          image=cardfile)
                     _cardimage.save()
