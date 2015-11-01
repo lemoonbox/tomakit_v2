@@ -323,13 +323,23 @@
                 <form method="POST" action="{% url 'create_review_v2d1' post.id %}">
                     {%csrf_token%}
                     <input type="hidden" value="/v2.1/class/"+{{post.id}}>
+                    {% if request.user.is_authenticated %}
                     <div class="col-xs-2">
-                        <div class="tmk-card-img-profile" style="margin-top:15px;">
+                        <div class="tmk-card-img-profile">
                             <div class="card-link">
                                 <img alt="프로필" src="{{MEDIA_URL}}{{user.t2profile_set.first.pro_pic}}">
                             </div>
                         </div>
                     </div>
+                    {% else %}
+                    <div class="col-xs-2">
+                        <div class="tmk-card-img-profile">
+                            <div class="card-link">
+                                <img src="{%static 'media/image/slice/icon-star_empty.png'%}">
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
                     <!--<div class="col-md-7"></div>-->
                     <div class="col-xs-10 col-md-7" style="text-align:left;">
                         <input type="hidden" name="next" value="/v2.1/class/{{post.t2classcard_set.first.id}}">

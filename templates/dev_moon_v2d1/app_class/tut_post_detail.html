@@ -288,6 +288,7 @@
             <div class="review-wrapper col-md-12">
                 <form method="POST" action="{% url 'create_review_v2d1' post.id %}">
                     {%csrf_token%}
+                    {% if request.user.is_authenticated %}
                     <div class="col-xs-2">
                         <div class="tmk-card-img-profile">
                             <div class="card-link">
@@ -295,12 +296,21 @@
                             </div>
                         </div>
                     </div>
+                    {% else %}
+                    <div class="col-xs-2">
+                        <div class="tmk-card-img-profile">
+                            <div class="card-link">
+                                <img src="{%static 'media/image/slice/icon-star_empty.png'%}">
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
                     <div class="col-md-7 col-xs-10" style="text-align:left;">
                         <input type="hidden" name="next" value="/v2.1/class/{{post.t2classcard_set.first.id}}">
                         <input type="hidden" name="class_num" value="{{post.id}}">
                         <input type="hidden" name="classtype" value="tut_class">
                         <textarea class="form-control" name="review"></textarea>
-                        <!--<img src="{%static 'media/image/slice/icon-star_empty.png'%}">-->
+                        <!---->
                     </div>
                     <div class="col-xs-5 col-md-7 col-xs-offset-2" style="text-align:left;">
                         <div class="raty-grade"></div>
