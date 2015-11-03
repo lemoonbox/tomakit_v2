@@ -25,8 +25,7 @@ SECRET_KEY = 'sj)7m^^1u$9=s40&8de&z#$alfgx(k6fztu3gj(w2^pdsnne6n'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-LOCAL = True
-
+LOCAL = False
 TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = ['*']
@@ -169,30 +168,30 @@ if LOCAL :
     }
 
 #conoHa
-else :
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.mysql',
-            'NAME': 'qqsty_proddb',
-            'USER': 'qqsty_tomakit_server',
-            'PASSWORD':'20TENcity15',
-            'HOST':'private.qqsty.tyo1.database-hosting.conoha.io',
-            'PORT':'3306',
-        }
-    }
-
-#amazon
 # else :
 #     DATABASES = {
 #         'default': {
 #             'ENGINE': 'django.db.backends.mysql',
-#             'NAME': 'proddb',
-#             'USER': 'root',
-#             'PASSWORD':'20tencity15',
-#             'HOST':'tomakitv2-1.cfxqbzsbzi3i.ap-northeast-1.rds.amazonaws.com',
+#             'NAME': 'qqsty_proddb',
+#             'USER': 'qqsty_tomakit_server',
+#             'PASSWORD':'20TENcity15',
+#             'HOST':'private.qqsty.tyo1.database-hosting.conoha.io',
 #             'PORT':'3306',
 #         }
 #     }
+
+#amazon
+else :
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'proddb',
+            'USER': 'root',
+            'PASSWORD':'20tencity15',
+            'HOST':'tomakitv2-1.cfxqbzsbzi3i.ap-northeast-1.rds.amazonaws.com',
+            'PORT':'3306',
+        }
+    }
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
@@ -233,10 +232,9 @@ AWS_HEADERS = {
     'Expires' : 'Thu, 31 Dec 2099 20:00:00 GMT',
     'Cashe-Control' : 'max-age=94608000',
 }
-#S3 acess_key
-
 #test
 AWS_STORAGE_BUCKET_NAME = 'tomakit.test'
+
 ##product
 #AWS_STORAGE_BUCKET_NAME = 'diytec.beta'
 AWS_ACCESS_KEY_ID = 'AKIAJG4KYTAON2HRQB7Q'
@@ -262,18 +260,21 @@ else :
 
 
     STATICFILES_DIRS=(os.path.join(BASE_DIR, 'static_local'), 'public/dist/',)
-    AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+    #test
+    AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % "tomakit.test"
+    #prod
+    #AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
     STATICFILES_LOCATION = 'static'
     STATICFILES_STORAGE = 'DIY_tool.custom_storages.StaticStorage'
     #It's for summernote
     STATIC_URL = "http://%s/" % AWS_S3_CUSTOM_DOMAIN
 
-
-    #test domain
-    AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % 'diytec.beta'
     MEDIAFILES_LOCATION = 'uploads'
     DEFAULT_FILE_STORAGE = 'DIY_tool.custom_storages.MediaStorage'
-    MEDIA_URL = "http://%s/uploads/" % AWS_S3_CUSTOM_DOMAIN
+    #test
+    MEDIA_URL = "http://%s/uploads/" % "diytec.beta.s3.amazonaws.com"
+    #prod
+    #MEDIA_URL = "http://%s/uploads/" % AWS_S3_CUSTOM_DOMAIN
 
     SUMMERNOTE_CONFIG = {
         'lang': 'ko-KR',
