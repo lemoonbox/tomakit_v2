@@ -6,7 +6,7 @@ It exposes the WSGI callable as a module-level variable named ``application``.
 For more information on this file, see
 https://docs.djangoproject.com/en/1.7/howto/deployment/wsgi/
 """
-LOCAL = True
+LOCAL = False
 
 if LOCAL:
     import os
@@ -20,15 +20,15 @@ else :
 
     ##setting uer virtualenv##
     #amazon
-    #activate_this = '/home/ubuntu/.virtualenvs/diy_tec/bin/activate_this.py'
+    activate_this = '/home/ubuntu/.virtualenvs/diy_tec/bin/activate_this.py'
     #conoha
-    activate_this = '/opt/webroot/.virtualenvs/diy_tec/bin/activate_this.py'
+    #activate_this = '/opt/webroot/.virtualenvs/diy_tec/bin/activate_this.py'
     execfile(activate_this, dict(__file__=activate_this))
     #amazon
-    #sys.path.append("/opt/diyroot")
+    sys.path.append("/opt/diyroot")
 
     #conoha
-    sys.path.append("/opt/webroot")
+    #sys.path.append("/opt/webroot")
 
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "DIY_tool.settings")
     from django.core.wsgi import get_wsgi_application

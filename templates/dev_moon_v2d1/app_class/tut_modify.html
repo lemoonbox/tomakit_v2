@@ -218,35 +218,21 @@
                                         </span>
                                         </div>
                                     </div>
-
                                     <div class="tmk-imgs" id="tmk-imgs">
                                         {% for image in tut_data.post.t2classpic_set.all%}
                                         <div>
                                             <img src="{{MEDIA_URL}}{{image.image}}">
                                             <span onclick="deleteImg(this);"></span>
+
                                         </div>
                                         {% endfor %}
+
+                                        {% for i in tut_data.empty_box %}
                                         <div>
-                                            <img src="" hidden>
+                                            <img src="">
                                             <span onclick="deleteImg(this);"></span>
                                         </div>
-                                        <div>
-                                            <img src="" hidden>
-                                            <span onclick="deleteImg(this);"></span>
-                                        </div>
-                                        <div>
-                                            <img src="" hidden>
-                                            <span onclick="deleteImg(this);"></span>
-                                        </div>
-                                        <div>
-                                            <img src="" hidden>
-                                            <span onclick="deleteImg(this);"></span>
-                                        </div>
-                                        <div>
-                                            <img src="" hidden>
-                                            <span onclick="deleteImg(this);"></span>
-                                        </div>
-                                        <!--<div id="input-image"></div>-->
+                                        {% endfor %}
 
                                         <input type="file" name="image"  id="filePhoto1" />
                                         <input type="file" name="image"  id="filePhoto2" />
@@ -319,7 +305,7 @@
                 <div class="tmk-panel">
                     <label class="col-md-2">작가소개 <span>*</span></label>
                     <div class="col-md-10">
-                        <input class="form-control" type="text" name="intro_self" value="{{prefill_intro}}">
+                        <input class="form-control" type="text" name="intro_self" value="{{user.t2hostprofile_set.first.intro_self}}">
                         <div class="col-md-10 col-md-offset-2 col-xs-12 tmk-form-error">
                             {{tutform.intro_self.errors|striptags}}
                         </div>

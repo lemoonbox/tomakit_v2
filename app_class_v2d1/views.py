@@ -325,7 +325,7 @@ def modify_teach(request, class_num):
                 "sub_1":addr_partes[2],
                 "sub_2":addr_partes[3],
             }
-        else:
+        elif len(addr_partes) == 4:
             addr_data={
                 "area_1":"",
                 "locality":addr_partes[0],
@@ -335,6 +335,7 @@ def modify_teach(request, class_num):
 
         teach_data={
             "user":_user,
+            "post":_post,
             "category":_post.category,
             "title":_post.title,
             "intro_line":_post.intro_line,
@@ -355,6 +356,7 @@ def modify_teach(request, class_num):
             'state':_post.state,
             'addr':_post.addr,
             'addr_detail':_post.addr_detail,
+            'empty_box': range(5-(_post.t2classpic_set.all().count())),
         }
     elif request.method == "POST":
         locality=request.POST.get("locality", "").encode("utf-8")
@@ -450,7 +452,6 @@ def modify_tut(request, class_num):
             raise Http404("포스팅이 존재 하지 않습니다.")
 
         _user=User.objects.get(username=request.user)
-        print _post.addr
         addr_partes=_post.addr.split(" ")
         addr_data={}
         if len(addr_partes)>3:
@@ -460,14 +461,13 @@ def modify_tut(request, class_num):
                 "sub_1":addr_partes[2],
                 "sub_2":addr_partes[3],
             }
-        else:
+        elif len(addr_partes) == 4:
             addr_data={
                 "area_1":"",
                 "locality":addr_partes[0],
                 "sub_1":addr_partes[1],
                 "sub_2":addr_partes[2],
             }
-
         tut_data={
             "user":_user,
             "post":_post,
@@ -487,6 +487,7 @@ def modify_tut(request, class_num):
             'state':_post.state,
             'addr':_post.addr,
             'addr_detail':_post.addr_detail,
+            'empty_box': range(5-(_post.t2classpic_set.all().count())),
         }
 
     elif request.method == "POST":
