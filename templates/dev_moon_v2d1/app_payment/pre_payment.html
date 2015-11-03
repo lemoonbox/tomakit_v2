@@ -10,7 +10,7 @@
 .tmk-main-body {text-align:left;}
     .well {font-size:18px;line-height:42px;}
     .well label {font-size:14px;}
-    #pay-pre {background:#eee!important;border:none;border-radius:0;height:180px;}
+    #pay-pre {background:#eee!important;border:none;border-radius:0;}
     #pay-pre label {width:20%;}
     .tmk-form label {padding-left:0;}label span {color:red}
     .tmk-panel {border-bottom:none;padding-bottom:0;}
@@ -33,16 +33,16 @@
         <div class="tmk-page-pick"></div>
     </div>
 
-<div class="tmk-h3">클래스 수강신청</div>
+<div class="tmk-h3" style="padding-left:15px;">클래스 수강신청</div>
 <form method="POST" action="{% url 'pay_conf_v2d1'%}">
         {%csrf_token%}
     <div class="col-md-9 well tmk-form" id="pay-pre">
     <label>주문 번호</label> {{merchant_id}}<br>
     <label>수업 일정</label> {{post.weekday}}<br>
-    <label>결제 금액</label> ￦{{ post.extra_price|add:post.price |intcomma}}<br>
-    <input type="hidden" name="merchant_id" value="{{merchant_id}}"><br>
-    <input type="hidden" name="post_id" value="{{post.id}}"><br>
-    <input type="hidden" name="classtype" value="{{classtype}}"><br><br>
+    <label>결제 금액</label> ￦{{ post.extra_price|add:post.price |intcomma}}
+    <input type="hidden" name="merchant_id" value="{{merchant_id}}" hidden>
+    <input type="hidden" name="post_id" value="{{post.id}}" hidden>
+    <input type="hidden" name="classtype" value="{{classtype}}" hidden>
     </div>
 
     <div class="col-md-9 well tmk-form">
@@ -95,7 +95,7 @@
         <div class="tmk-panel">
             <label class="col-md-2">희망시간 <span>*</span></label>
             <div class="col-md-8">
-                <input type="text" class="col-md-4" name="want_time">
+                <input type="text" class="form-control" name="want_time">
             </div>
             <div class="col-xs-12 col-md-10 pull-right tmk-error">{{prefillform.want_time.errors|striptags}}</div>
         </div>

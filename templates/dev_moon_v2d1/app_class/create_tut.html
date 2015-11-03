@@ -18,9 +18,10 @@
     .actions li:first-child a {color:#FF575C;}
     label span {color:red;}
 
-    #map {
-        height: 500px;width:100%;
-    }
+    /*#map {*/
+        /*height: 500px;width:100%;*/
+    /*}*/
+    .reset-img-max-width img { max-width: none!important; }
 </style>
 
 {%endblock%}
@@ -31,374 +32,371 @@
 
 <div class="tmk-main-body col-md-12">
     <div class="container">
-    <div class="tmk-page-header col-md-12">
-        <div class="tmk-h2 tmk-title pull-left">{{title}}</div>
-        <!--<div class="tmk-page-pick"></div>-->
-    </div>
+        <div class="tmk-page-header col-md-12">
+            <div class="tmk-h2 tmk-title pull-left">{{title}}</div>
+            <!--<div class="tmk-page-pick"></div>-->
+        </div>
 
-    <div class="col-md-8 well" id="tmk-form" style="text-align:left;float:left;">
-        <form method="POST" action="{%url 'class_craete_tut_v2d1' class_num%}" id="class-create"enctype="multipart/form-data">
-            {% csrf_token%}
+        <div class="col-md-8 well" id="tmk-form" style="text-align:left;float:left;">
+            <form method="POST" action="{%url 'class_craete_tut_v2d1' class_num%}" id="class-create" enctype="multipart/form-data">
+                {% csrf_token%}
 
-            <h3 hidden>단계: 기본 정보 입력</h3>
-            <section>
+                <h3 hidden>단계: 기본 정보 입력</h3>
+                <section>
+                    <div class="tmk-panel">
+                        <label class="col-md-2">수업횟수&시간 <span>*</span></label>
+                        <div class="tmk-qitem-selecter-wrapper col-md-3 col-xs-4">
+                            수업횟수
+                            <div class="selecter cover" tabindex="0">
+                                <select name="repeat" required class="selecter_3 selecter-element" data-selecter-options="{&quot;cover&quot;:&quot;true&quot;}" tabindex="-1">
+                                    <option value="1"
+                                            {% if tut_data.repeat == '1' %}selected {% endif %}>1회</option>
+                                    <option value="2"
+                                            {% if tut_data.repeat == '2' %}selected {% endif %}>2회</option>
+                                    <option value="3"
+                                            {% if tut_data.repeat == '3' %}selected {% endif %}>3회</option>
+                                    <option value="4"
+                                            {% if tut_data.repeat == '4' %}selected {% endif %}>4회</option>
+                                    <option value="5"
+                                            {% if tut_data.repeat == '5' %}selected {% endif %}>5회</option>
+                                    <option value="6"
+                                            {% if tut_data.repeat == '6' %}selected {% endif %}>6회</option>
+                                    <option value="7"
+                                            {% if tut_data.repeat == '7' %}selected {% endif %}>7회</option>
+                                    <option value="8"
+                                            {% if tut_data.repeat == '8' %}selected {% endif %}>8회</option>
+                                    <option value="9"
+                                            {% if tut_data.repeat == '9' %}selected {% endif %}>9회</option>
+                                    <option value="10"
+                                            {% if tut_data.repeat == '10' %}selected {% endif %}>10회</option>
+                                    <option value="11"
+                                            {% if tut_data.repeat == '11' %}selected {% endif %}>11회</option>
+                                    <option value="12"
+                                            {% if tut_data.repeat == '12' %}selected {% endif %}>12회</option>
+                                </select>
+                                <span class="selecter-selected" onclick="btnClick(this)">횟수 선택</span>
+                                <div class="selecter-options" data-value="">
+                                    <!--<span class="selecter-item selected" data-value="" onclick="selecting(this, '')">카테고리</span>-->
+                                    <div class="selecter-item"
+                                         data-value="id"
+                                         onclick="selecting(this, '1')">1회</div>
+                                    <div class="selecter-item"
+                                         data-value="id"
+                                         onclick="selecting(this, '2')">2회</div>
+                                    <div class="selecter-item"
+                                         data-value="id"
+                                         onclick="selecting(this, '3')">3회</div>
+                                    <div class="selecter-item"
+                                         data-value="id"
+                                         onclick="selecting(this, '4')">4회</div>
+                                    <div class="selecter-item"
+                                         data-value="id"
+                                         onclick="selecting(this, '5')">5회</div>
+                                    <div class="selecter-item"
+                                         data-value="id"
+                                         onclick="selecting(this, '6')">6회</div>
+                                    <div class="selecter-item"
+                                         data-value="id"
+                                         onclick="selecting(this, '7')">7회</div>
+                                    <div class="selecter-item"
+                                         data-value="id"
+                                         onclick="selecting(this, '8')">8회</div>
+                                    <div class="selecter-item"
+                                         data-value="id"
+                                         onclick="selecting(this, '9')">9회</div>
+                                    <div class="selecter-item"
+                                         data-value="id"
+                                         onclick="selecting(this, '10')">10회</div>
+                                    <div class="selecter-item"
+                                         data-value="id"
+                                         onclick="selecting(this, '11')">11회</div>
+                                    <div class="selecter-item"
+                                         data-value="id"
+                                         onclick="selecting(this, '12')">12회</div>
+                                </div>
+                            </div>
+                        </div>
 
-            <div class="tmk-panel">
-                <label class="col-md-2">수업횟수&시간 <span>*</span></label>
-                <div class="tmk-qitem-selecter-wrapper col-md-3 col-xs-4">
-                    수업횟수
-                    <div class="selecter cover" tabindex="0">
-                        <select name="repeat" required class="selecter_3 selecter-element" data-selecter-options="{&quot;cover&quot;:&quot;true&quot;}" tabindex="-1">
-                            <option value="1"
-                                    {% if tut_data.repeat == '1' %}selected {% endif %}>1회</option>
-                            <option value="2"
-                                    {% if tut_data.repeat == '2' %}selected {% endif %}>2회</option>
-                            <option value="3"
-                                    {% if tut_data.repeat == '3' %}selected {% endif %}>3회</option>
-                            <option value="4"
-                                    {% if tut_data.repeat == '4' %}selected {% endif %}>4회</option>
-                            <option value="5"
-                                    {% if tut_data.repeat == '5' %}selected {% endif %}>5회</option>
-                            <option value="6"
-                                    {% if tut_data.repeat == '6' %}selected {% endif %}>6회</option>
-                            <option value="7"
-                                    {% if tut_data.repeat == '7' %}selected {% endif %}>7회</option>
-                            <option value="8"
-                                    {% if tut_data.repeat == '8' %}selected {% endif %}>8회</option>
-                            <option value="9"
-                                    {% if tut_data.repeat == '9' %}selected {% endif %}>9회</option>
-                            <option value="10"
-                                    {% if tut_data.repeat == '10' %}selected {% endif %}>10회</option>
-                            <option value="11"
-                                    {% if tut_data.repeat == '11' %}selected {% endif %}>11회</option>
-                            <option value="12"
-                                    {% if tut_data.repeat == '12' %}selected {% endif %}>12회</option>
-                        </select>
-                        <span class="selecter-selected" onclick="btnClick(this)">횟수 선택</span>
-                        <div class="selecter-options" data-value="">
-                            <!--<span class="selecter-item selected" data-value="" onclick="selecting(this, '')">카테고리</span>-->
-                            <div class="selecter-item"
-                                 data-value="id"
-                                 onclick="selecting(this, '1')">1회</div>
-                            <div class="selecter-item"
-                                 data-value="id"
-                                 onclick="selecting(this, '2')">2회</div>
-                            <div class="selecter-item"
-                                 data-value="id"
-                                 onclick="selecting(this, '3')">3회</div>
-                            <div class="selecter-item"
-                                 data-value="id"
-                                 onclick="selecting(this, '4')">4회</div>
-                            <div class="selecter-item"
-                                 data-value="id"
-                                 onclick="selecting(this, '5')">5회</div>
-                            <div class="selecter-item"
-                                 data-value="id"
-                                 onclick="selecting(this, '6')">6회</div>
-                            <div class="selecter-item"
-                                 data-value="id"
-                                 onclick="selecting(this, '7')">7회</div>
-                            <div class="selecter-item"
-                                 data-value="id"
-                                 onclick="selecting(this, '8')">8회</div>
-                            <div class="selecter-item"
-                                 data-value="id"
-                                 onclick="selecting(this, '9')">9회</div>
-                            <div class="selecter-item"
-                                 data-value="id"
-                                 onclick="selecting(this, '10')">10회</div>
-                            <div class="selecter-item"
-                                 data-value="id"
-                                 onclick="selecting(this, '11')">11회</div>
-                            <div class="selecter-item"
-                                 data-value="id"
-                                 onclick="selecting(this, '12')">12회</div>
+
+                        <div class="tmk-qitem-selecter-wrapper col-md-3 col-xs-4">
+                            회당 수업 시간
+                            <div class="selecter cover" tabindex="0">
+                                <select name="perhour" required class="selecter_3 selecter-element" data-selecter-options="{&quot;cover&quot;:&quot;true&quot;}" tabindex="-1">
+                                    <option value="1"
+                                            {% if tut_data.perhour == '1'%}selected {% endif %} >1시간</option>
+                                    <option value="2"
+                                            {% if tut_data.perhour == '2' %}selected {% endif %} >2시간</option>
+                                    <option value="3"
+                                            {% if tut_data.perhour == '3' %}selected {% endif %} >3시간</option>
+                                    <option value="4"
+                                            {% if tut_data.perhour == '4' %}selected {% endif %} >4시간</option>
+                                    <option value="5"
+                                            {% if tut_data.perhour == '5' %}selected {% endif %}>5시간</option>
+                                    <option value="6"
+                                            {% if tut_data.perhour == '6' %}selected {% endif %}>6시간</option>
+                                </select>
+                                <span class="selecter-selected" onclick="btnClick(this)">회당 시간 선택</span>
+                                <div class="selecter-options" data-value="">
+                                    <!--<span class="selecter-item selected" data-value="" onclick="selecting(this, '')">카테고리</span>-->
+                                    <div class="selecter-item"
+                                         data-value="id"
+                                         onclick="selecting(this, '1')">1시간</div>
+                                    <div class="selecter-item"
+                                         data-value="id"
+                                         onclick="selecting(this, '2')">2시간</div>
+                                    <div class="selecter-item"
+                                         data-value="id"
+                                         onclick="selecting(this, '3')">3시간</div>
+                                    <div class="selecter-item"
+                                         data-value="id"
+                                         onclick="selecting(this, '4')">4시간</div>
+                                    <div class="selecter-item"
+                                         data-value="id"
+                                         onclick="selecting(this, '5')">5시간</div>
+                                    <div class="selecter-item"
+                                         data-value="id"
+                                         onclick="selecting(this, '6')">6시간</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-10 col-md-offset-2 col-xs-12 tmk-error">
+                            {{tutform.repeat.errors|striptags}}
+                            {{tutform.perhour.errors|striptags}}
                         </div>
                     </div>
-                </div>
-
-
-                <div class="tmk-qitem-selecter-wrapper col-md-3 col-xs-4">
-                    회당 수업 시간
-                    <div class="selecter cover" tabindex="0">
-                        <select name="perhour" required class="selecter_3 selecter-element" data-selecter-options="{&quot;cover&quot;:&quot;true&quot;}" tabindex="-1">
-                            <option value="1"
-                                    {% if tut_data.perhour == '1'%}selected {% endif %} >1시간</option>
-                            <option value="2"
-                                    {% if tut_data.perhour == '2' %}selected {% endif %} >2시간</option>
-                            <option value="3"
-                                    {% if tut_data.perhour == '3' %}selected {% endif %} >3시간</option>
-                            <option value="4"
-                                    {% if tut_data.perhour == '4' %}selected {% endif %} >4시간</option>
-                            <option value="5"
-                                    {% if tut_data.perhour == '5' %}selected {% endif %}>5시간</option>
-                            <option value="6"
-                                    {% if tut_data.perhour == '6' %}selected {% endif %}>6시간</option>
-                        </select>
-                        <span class="selecter-selected" onclick="btnClick(this)">회당 시간 선택</span>
-                        <div class="selecter-options" data-value="">
-                            <!--<span class="selecter-item selected" data-value="" onclick="selecting(this, '')">카테고리</span>-->
-                            <div class="selecter-item"
-                                 data-value="id"
-                                 onclick="selecting(this, '1')">1시간</div>
-                            <div class="selecter-item"
-                                 data-value="id"
-                                 onclick="selecting(this, '2')">2시간</div>
-                            <div class="selecter-item"
-                                 data-value="id"
-                                 onclick="selecting(this, '3')">3시간</div>
-                            <div class="selecter-item"
-                                 data-value="id"
-                                 onclick="selecting(this, '4')">4시간</div>
-                            <div class="selecter-item"
-                                 data-value="id"
-                                 onclick="selecting(this, '5')">5시간</div>
-                            <div class="selecter-item"
-                                 data-value="id"
-                                 onclick="selecting(this, '6')">6시간</div>
+                    <div class="tmk-panel">
+                        <label class="col-md-2">수업일정 <span>*</span></label>
+                        <div class="col-md-10 col-xs-10">
+                            <input class="form-control" type="text" name="weekday" value="{{tut_data.weekday}}" placeholder="ex) 매주 화요일 7:00, 매주 토요일 2시">
+                        </div>
+                        <div class="col-md-10 col-md-offset-2 col-xs-12 tmk-error">
+                            {{tutform.weekday.errors|striptags}}
                         </div>
                     </div>
-                </div>
-                <div class="col-md-10 col-md-offset-2 col-xs-12 tmk-error">
-                    {{tutform.repeat.errors|striptags}}
-                    {{tutform.perhour.errors|striptags}}
-                </div>
-            </div>
-            <div class="tmk-panel">
-                <label class="col-md-2">수업일정 <span>*</span></label>
-                <div class="col-md-10 col-xs-10">
-                    <input class="form-control" type="text" name="weekday" value="{{tut_data.weekday}}" placeholder="ex) 매주 화요일 7:00, 매주 토요일 2시">
-                </div>
-                <div class="col-md-10 col-md-offset-2 col-xs-12 tmk-error">
-                    {{tutform.weekday.errors|striptags}}
-                </div>
-            </div>
+                    <div class="tmk-panel" style="border-bottom:none;">
+                        <label class="col-md-2">수강료 <span>*</span></label>
+                        <div class="col-md-3 col-xs-4">
+                            수강료(재료비 제외)
+                            <input class="form-control" type="text" name="price" value="{{tut_data.price}}">
+                        </div>
+                        <div class="col-md-3 col-xs-4">
+                            재료비
+                            <input class="form-control" type="text" name="extra_price" value="{{tut_data.extra_price}}">
+                        </div>
+                        <div class="col-md-10 col-md-offset-2 col-xs-12 tmk-error">
+                            {{tutform.price.errors|striptags}}
+                            {{tutform.extra_price.errors|striptags}}
+                        </div>
+                    </div>
+                </section>
 
+                <!--2단계-->
+                <h3 hidden>단계: 클래스 소개 입력</h3>
+                <section>
+                    <div class="tmk-panel">
+                        <label class="col-md-2">사진등록 <span>*</span></label>
+                        <div class="tmk-qitem-phupload col-md-10">
+                            <div class="tmk-phupload-contents">
+                                <div class="tmk-panel-contents">
+                                    <div class="well filedrag" id="filedrag">
+                                        <div class="form-group row">
+                                            <div class="col-md-8 col-xs-7">
+                                                <div>
+                                                    <label class="drag-label">참조할 작품 사진을 이곳에 끌어다 놓아주세요 <br>
+                                                        JPG, PNG 파일만 업로드가 가능합니다.</label>
+                                                </div>
 
-            <div class="tmk-panel" style="border-bottom:none;">
-                <label class="col-md-2">수강료 <span>*</span></label>
-                <div class="col-md-3 col-xs-4">
-                    수강료(재료비 제외)
-                    <input class="form-control" type="text" name="price" value="{{tut_data.price}}">
-                </div>
-                <div class="col-md-3 col-xs-4">
-                    재료비
-                    <input class="form-control" type="text" name="extra_price" value="{{tut_data.extra_price}}">
-                </div>
-                <div class="col-md-10 col-md-offset-2 col-xs-12 tmk-error">
-                    {{tutform.price.errors|striptags}}
-                    {{tutform.extra_price.errors|striptags}}
-                </div>
-            </div>
-            </section>
-
-            <!--2단계-->
-            <h3 hidden>단계: 클래스 소개 입력</h3>
-            <section>
-            <div class="tmk-panel">
-                <label class="col-md-2">사진등록 <span>*</span></label>
-                <div class="tmk-qitem-phupload col-md-10">
-                    <div class="tmk-phupload-contents">
-                        <div class="tmk-panel-contents">
-                            <div class="well filedrag" id="filedrag">
-                                <div class="form-group row">
-                                    <div class="col-md-8 col-xs-7">
-                                        <div>
-                                            <label class="drag-label">참조할 작품 사진을 이곳에 끌어다 놓아주세요 <br>
-                                                JPG, PNG 파일만 업로드가 가능합니다.</label>
+                                            </div>
+                                            <div class="col-md-4 col-xs-5" style="top: 10px;">
+                                        <span id="uploader" onclick="findLastInput(true);" class="custom-file-input-button btn btn-default" style="cursor:pointer;">
+                                            <span class="custom-file-input-button-text">사진 가져오기</span>
+                                        </span>
+                                            </div>
                                         </div>
 
-                                    </div>
-                                    <div class="col-md-4 col-xs-5" style="top: 10px;">
-                                        <span id="uploader" onclick="findLastInput(true);" class="custom-file-input-button btn btn-default" style="cursor:pointer;">
-                                            <span class="custom-file-input-button-text">PC에서 사진 가져오기</span>
-                                        </span>
-                                    </div>
-                                </div>
+                                        <div class="tmk-imgs" id="tmk-imgs">
+                                            <div>
+                                                <img src="">
+                                                <span onclick="deleteImg(this);"></span>
+                                            </div>
+                                            <div>
+                                                <img src="">
+                                                <span onclick="deleteImg(this);"></span>
+                                            </div>
+                                            <div>
+                                                <img src="">
+                                                <span onclick="deleteImg(this);"></span>
+                                            </div>
+                                            <div>
+                                                <img src="">
+                                                <span onclick="deleteImg(this);"></span>
+                                            </div>
+                                            <div>
+                                                <img src="">
+                                                <span onclick="deleteImg(this);"></span>
+                                            </div>
+                                            <input type="file" name="image"  id="filePhoto1" />
+                                            <input type="file" name="image"  id="filePhoto2" />
+                                            <input type="file" name="image"  id="filePhoto3" />
+                                            <input type="file" name="image"  id="filePhoto4" />
+                                            <input type="file" name="image"  id="filePhoto5" />
 
-                                <div class="tmk-imgs" id="tmk-imgs">
-                                    <div>
-                                        <img src="">
-                                        <span onclick="deleteImg(this);"></span>
+                                        </div>
                                     </div>
-                                    <div>
-                                        <img src="">
-                                        <span onclick="deleteImg(this);"></span>
-                                    </div>
-                                    <div>
-                                        <img src="">
-                                        <span onclick="deleteImg(this);"></span>
-                                    </div>
-                                    <div>
-                                        <img src="">
-                                        <span onclick="deleteImg(this);"></span>
-                                    </div>
-                                    <div>
-                                        <img src="">
-                                        <span onclick="deleteImg(this);"></span>
-                                    </div>
-                                    <input type="file" name="image"  id="filePhoto1" />
-                                    <input type="file" name="image"  id="filePhoto2" />
-                                    <input type="file" name="image"  id="filePhoto3" />
-                                    <input type="file" name="image"  id="filePhoto4" />
-                                    <input type="file" name="image"  id="filePhoto5" />
 
                                 </div>
+                                <div class="tmk-panel-footer"></div>
                             </div>
-
+                            <!--<aside class="tmk-aside-right">만들고 싶은 것의 사진을 업로드 해주세요. JPG, PNG 파일만 업로드가 가능합니다.</aside>-->
                         </div>
-                        <div class="tmk-panel-footer"></div>
-                    </div>
-                    <!--<aside class="tmk-aside-right">만들고 싶은 것의 사진을 업로드 해주세요. JPG, PNG 파일만 업로드가 가능합니다.</aside>-->
-                </div>
-                <div class="col-md-10 col-md-offset-2 col-xs-12 tmk-error">
-                    {{imageform.image.errors|striptags}}
-                </div>
-            </div>
-
-            <div class="tmk-panel">
-                <label class="col-md-2">영상 등록(선택)</label>
-                <div class="col-md-10">
-                    <input class="form-control" type="text" name="video" value="{{tut_data.video}}" placeholder="유튜브 영상 url을 입력하세요">
-                    <div class="col-md-10 col-md-offset-2 col-xs-12 tmk-error">
-                        {{tutform.video.errors|striptags}}
-                    </div>
-                </div>
-            </div>
-            <div class="tmk-panel">
-                <label class="col-md-2">
-                    수업 소개 <span>*</span></label>
-                <div class="col-md-10">
-                    이 클래스에서 무엇을 배울 수 있나요?
-                    <textarea class="form-control" name="descript" >{{tut_data.descript}}</textarea>
-                    <div class="tmk-error">
-                        {{tutform.descript.errors|striptags}}
-                    </div>
-                </div>
-            </div>
-
-            <div class="tmk-panel">
-                <label class="col-md-2">
-                    커리큘럼 <span>*</span></label>
-                <div class="col-md-10">
-                    수업 회차 또는 시간별 커리큘럼이 어떻게 짜여져 있나요?
-                    <textarea class="form-control" name="curri">{{tut_data.curri}}</textarea>
-                    <div class="tmk-error">
-                        {{tutform.curri.errors|striptags}}
-                    </div>
-                </div>
-            </div>
-            <div class="tmk-panel" style="border-bottom:none;">
-                <label class="col-md-2">
-                    안내사항 <span>*</span></label>
-                <div class="col-md-10">
-                    수강생이 미리 알아야 할 수업 규정 및 안내사항을 입력해주세요
-                    <textarea class="form-control" name="notic">{{tut_data.notic}}</textarea>
-                    <div class="tmk-error">
-                        {{tutform.notic.errors|striptags}}
-                    </div>
-                </div>
-</div>
-
-
-            </section>
-<!--3단계-->
-
-            <h3 hidden>단계: 작가&공방 소개 입력</h3>
-         <section>
-                <div class="tmk-panel">
-                    <label class="col-md-2">작가소개 <span>*</span></label>
-                    <div class="col-md-10">
-                        <input class="form-control" type="text" name="intro_self" value="{{user.t2hostprofile_set.first.intro_self}}">
                         <div class="col-md-10 col-md-offset-2 col-xs-12 tmk-error">
-                            {{tutform.intro_self.errors|striptags}}
+                            {{imageform.image.errors|striptags}}
                         </div>
                     </div>
-                </div>
 
-                <div class="tmk-panel" style="border-bottom:none;">
-                    <label class="col-md-2">수업장소 <span>*</span></label>
-                    <div class="tmk-gmap-wrapper">
-                        <div class="col-md-10 col-xs-12">
-                            도로명 또는 동 입력
-                            <div id="locationField">
-                                <input id="pac-input" class="form-control controls" type="text"
-                                       placeholder="동이나 도로명을 입력해주세요" style="max-width:360px;margin-top:5px!important;" name="addr_input" onkeypress="return event.keyCode != 13;">
-                            <div id="type-selector" class="controls" hidden>
-                                <input type="radio" name="type" id="changetype-all" checked="checked">
-                                <label for="changetype-all">All</label>
-
-                                <input type="radio" name="type" id="changetype-establishment">
-                                <label for="changetype-establishment">Establishments</label>
-
-                                <input type="radio" name="type" id="changetype-address">
-                                <label for="changetype-address">Addresses</label>
-
-                                <input type="radio" name="type" id="changetype-geocode">
-                                <label for="changetype-geocode">Geocodes</label>
+                    <div class="tmk-panel">
+                        <label class="col-md-2">영상 등록(선택)</label>
+                        <div class="col-md-10">
+                            <input class="form-control" type="text" name="video" value="{{tut_data.video}}" placeholder="유튜브 영상 url을 입력하세요">
+                            <div class="col-md-10 col-md-offset-2 col-xs-12 tmk-error">
+                                {{tutform.video.errors|striptags}}
                             </div>
-                            <div id="map"></div>
-                                <!--<input onkeypress="return event.keyCode != 13;" class="form-control" id="autocomplete" placeholder="동이나 도로명을 입력해주세요" onFocus="geolocate()" type="text" name="addr_input">-->
-                            <!--</div>-->
-
-                        <table hidden>
-                            <tr class="form-group">
-                                <td class="label">시/도</td>
-                                <td class="widefield" colspan="2">
-                                    <input class="field" id="locality" name="locality">
-                                </td>
-                                <td class="wideField" colspan="2">
-                                    <input class="field" name="area_1"  id="administrative_area_level_1">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="label">구</td>
-                                <td class="wideField">
-                                    <input class="field" name="sublocal_1" id="sublocality_level_1"></td>
-                                <!--<td class="label">동</td>-->
-                                <td class="wideField">
-                                    <input class="field" name="sublocal_2" id="sublocality_level_2"></td>
-                                <td class="label">우편번호</td>
-                                <td class="wideField">
-                                    <input class="field" name="postal_code" id="postal_code"></td>
-                            </tr>
-                            <tr>
-                                <td class="label">상세주소</td>
-                                <td class="slimField">
-                                    <input class="field" id="street_address"></input>
-                                    <input class="field" id="sublocality_level_4" name="sublocal_4"></input>
-                                    <input class="field" id="premise"></input></td>
-                            </tr>
-                        </table>
+                        </div>
+                    </div>
+                    <div class="tmk-panel">
+                        <label class="col-md-2">
+                            수업 소개 <span>*</span></label>
+                        <div class="col-md-10">
+                            이 클래스에서 무엇을 배울 수 있나요?
+                            <textarea class="form-control" name="descript" >{{tut_data.descript}}</textarea>
+                            <div class="tmk-error">
+                                {{tutform.descript.errors|striptags}}
                             </div>
+                        </div>
                     </div>
-                    <div class="col-md-10 col-md-offset-2 col-xs-12 col-xs-offset-0">
-                        상세 주소 입력
-                        <input class="form-control" type="text" name="addr_deatail" value="{{tut_data.addr_details}}" placeholder="상세주소를 입력해주세요">
+
+                    <div class="tmk-panel">
+                        <label class="col-md-2">
+                            커리큘럼 <span>*</span></label>
+                        <div class="col-md-10">
+                            수업 회차 또는 시간별 커리큘럼이 어떻게 짜여져 있나요?
+                            <textarea class="form-control" name="curri">{{tut_data.curri}}</textarea>
+                            <div class="tmk-error">
+                                {{tutform.curri.errors|striptags}}
+                            </div>
+                        </div>
                     </div>
-                </div>
-<div class="col-md-12 pull-right" style="margin-top:15px;">
-            <input class="btn btn-primary" type="submit" value="개설등록">
-</div>
-         </section>
-        </form>
+                    <div class="tmk-panel" style="border-bottom:none;">
+                        <label class="col-md-2">
+                            안내사항 <span>*</span></label>
+                        <div class="col-md-10">
+                            수강생이 미리 알아야 할 수업 규정 및 안내사항을 입력해주세요
+                            <textarea class="form-control" name="notic">{{tut_data.notic}}</textarea>
+                            <div class="tmk-error">
+                                {{tutform.notic.errors|striptags}}
+                            </div>
+                        </div>
+                    </div>
+
+                </section>
+                <!--3단계-->
+
+                <h3 hidden>단계: 작가&공방 소개 입력</h3>
+                <section>
+                    <div class="tmk-panel">
+                        <label class="col-md-2">작가소개 <span>*</span></label>
+                        <div class="col-md-10">
+                            <input class="form-control" type="text" name="intro_self" value="{{user.t2hostprofile_set.first.intro_self}}">
+                            <div class="col-md-10 col-md-offset-2 col-xs-12 tmk-error">
+                                {{tutform.intro_self.errors|striptags}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tmk-panel" style="border-bottom:none;">
+                        <label class="col-md-2">수업장소 <span>*</span></label>
+                        <div class="tmk-gmap-wrapper">
+                            <div class="col-md-10 col-xs-12">
+                                도로명 또는 동 입력
+                                <div id="locationField">
+                                    <input id="pac-input" class="form-control controls" type="text"
+                                           placeholder="동이나 도로명을 입력해주세요" style="max-width:360px;margin-top:5px!important;" name="addr_input" onkeypress="return event.keyCode != 13;">
+                                    <div id="type-selector" class="controls" hidden>
+                                        <input type="radio" name="type" id="changetype-all" checked="checked">
+                                        <label for="changetype-all">All</label>
+
+                                        <input type="radio" name="type" id="changetype-establishment">
+                                        <label for="changetype-establishment">Establishments</label>
+
+                                        <input type="radio" name="type" id="changetype-address">
+                                        <label for="changetype-address">Addresses</label>
+
+                                        <input type="radio" name="type" id="changetype-geocode">
+                                        <label for="changetype-geocode">Geocodes</label>
+                                    </div>
+                                    <div class="reset-img-max-width">
+                                    <div id="map"></div>
+                                        </div>
+                                    <!--<input onkeypress="return event.keyCode != 13;" class="form-control" id="autocomplete" placeholder="동이나 도로명을 입력해주세요" onFocus="geolocate()" type="text" name="addr_input">-->
+                                    <!--</div>-->
+
+                                    <table hidden>
+                                        <tr class="form-group">
+                                            <td class="label">시/도</td>
+                                            <td class="widefield" colspan="2">
+                                                <input class="field" id="locality" name="locality">
+                                            </td>
+                                            <td class="wideField" colspan="2">
+                                                <input class="field" name="area_1"  id="administrative_area_level_1">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="label">구</td>
+                                            <td class="wideField">
+                                                <input class="field" name="sublocal_1" id="sublocality_level_1"></td>
+                                            <!--<td class="label">동</td>-->
+                                            <td class="wideField">
+                                                <input class="field" name="sublocal_2" id="sublocality_level_2"></td>
+                                            <td class="label">우편번호</td>
+                                            <td class="wideField">
+                                                <input class="field" name="postal_code" id="postal_code"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="label">상세주소</td>
+                                            <td class="slimField">
+                                                <input class="field" id="street_address"></input>
+                                                <input class="field" id="sublocality_level_4" name="sublocal_4"></input>
+                                                <input class="field" id="premise"></input></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="col-md-10 col-md-offset-2 col-xs-12 col-xs-offset-0">
+                                상세 주소 입력
+                                <input class="form-control" type="text" name="addr_deatail" value="{{tut_data.addr_details}}" placeholder="상세주소를 입력해주세요">
+                            </div>
+                        </div>
+                    </div>
+                        <div class="col-md-12" style="margin-top:15px;">
+                            <input class="btn btn-primary  pull-right" type="submit" value="개설등록">
+                        </div>
+                </section>
+            </form>
+        </div>
     </div>
 </div>
-    </div>
 {%endblock%}
-
 {%block script%}
-<script src="{%static 'js/google_map.js'%}"></script>
 <!--<script type="text/javascript" src="{% static 'media/js/nouislider.js' %}"></script>-->
 <!--<script src="{%static 'media/js/jquery.steps.js'%}" charset="euc-kr"></script>-->
-<script>
-    $("#class-create").steps({
-        headerTag:"h3",
-        bodyTag:"section",
-        transitionEffect: "slideLeft",
-        autoFocus:true
-    });
-</script>
+<!--<script>-->
+    <!--$("#class-create").steps({-->
+        <!--headerTag:"h3",-->
+        <!--bodyTag:"section",-->
+        <!--transitionEffect: "slideLeft",-->
+        <!--autoFocus:true-->
+    <!--});-->
+<!--</script>-->
+<script src="{%static 'js/google_map.js'%}"></script>
 <script src='{%static "media/js/qitem_create.js" %}'></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDWLKiQU9kiiXSpS7A5RAeKenzpQlI84Ds&signed_in=true&language=ko&libraries=places&callback=initMap" async defer></script>
 {%endblock%}

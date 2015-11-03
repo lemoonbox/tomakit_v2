@@ -18,9 +18,21 @@
     .img-grid img {max-height:100%;}
     .tmk-card-img:hover {z-index:-3;}
 
-    .onoff-class {line-height:230px;float:none;border-radius:4px;position:absolute;z-index:10;top:0;left:0;right:0;bottom:0;opacity:0;font-size:16px;}
+    .onoff-class {
+        line-height: 230px;
+        float: none;
+        border-radius: 4px;
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        opacity: 0;
+        font-size: 16px;
+    }
     .onoff-class a {color:#fff;}
-    .onoff-class:hover {z-index:3;background-color:#000;color:#fff;opacity:0.8;}
+    .onoff-class:hover {z-index:3;background-color:#000;color:#fff;opacity:0.9;}
 
 
     .modify-demand {line-height:300px;float:none;border-radius:4px;position:absolute;z-index:10;top:0;left:0;right:0;bottom:0;opacity:0;font-size:16px;}
@@ -51,6 +63,8 @@
         transform: translate(-50%, -50%);
     }
 
+    .toggle {cursor:pointer;padding:0; margin:0 5px; vertical-align:middle;line-height:normal;}
+
     .btn-group a {font-size:24px;height:42px;padding:25px;margin:auto 15px;font-weight:bold;}
 </style>
 {%endblock%}
@@ -79,7 +93,6 @@
     </div>
 </div>
 <div class="tmk-main-body col-lg-12">
-
     <div class="container" style="padding:0;">
         <!-- Nav tabs -->
         <ul class="nav nav-tabs" role="tablist">
@@ -103,11 +116,20 @@
 
                             <li class="tmk-class-card col-md-4">
                                 <span class="onoff-class">
-                                    <a href="{% url 'onoff_class_v2d1' class.user.id class.classtype class.id  %}">
+
+                                    <a onclick="location.href='{% url 'onoff_class_v2d1' class.user.id class.classtype class.id  %}'">
                                         {%if class.is_open%}
-                                    수업 내리기
+                                        <span style="font-weight:normal;line-height:normal;">수업 내리기 </span>
+                                        <label class="toggle">
+                                                <input type="checkbox" checked>
+                                                <span class="handle"></span>
+                                        </label>
                                     {% else %}
-                                    수업 열기
+                                            <label class="toggle">
+                                                <input type="checkbox">
+                                               <span class="handle"></span>
+                                            </label>
+                                        <span style="font-weight:normal;line-height:normal;"> 수업 열기</span>
                                     {% endif %}
                                         </a><br>
                                     {% if class.classtype == "tutclass" %}

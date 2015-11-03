@@ -4,6 +4,8 @@
 .tmk-form textarea {
     min-height: 150px;
 }
+
+textarea {    margin-top:5px;}
 .tmk-qitem-wrapper{
     width: 720px;
     margin:30px auto;
@@ -115,7 +117,7 @@
 
 
 .tmk-imgs img{
-    height:70px;
+    max-height:70px;
 }
 .tmk-imgs input{
     display: none;
@@ -125,7 +127,6 @@
     position: relative;
     display: inline-block;
     overflow:hidden;
-    height:70px;
     width:70px;
     /*background:url("http://www.jpnn.com/blog/assets/img/news/thumb/no_image.jpg");*/
     background-size:cover;

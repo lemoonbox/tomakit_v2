@@ -13,7 +13,6 @@ function btnClick(selecterSelected) {
         $(this).hide();
     });
 
-
     $('div').not('.selecter-item').on('mouseup', function(){
         $(options).hide();
     });
