@@ -535,14 +535,14 @@
                     <!--<span>최소</span><span class="pull-right">최대</span>-->
                     <div id="slide"></div>
                     <!--<span id="value-span"></span>-->
-                    <label for="min-price" class="pull-left" style="color:#84CDC2;margin-top:5px;">￦
-                        <input style="border:0px;width:52px;color:#84CDC2;font-weight:bold;" type="text" value="{{demand_data.min_price}}" id="min-price" name="min_price"></input>
+                    <label for="max-price" class="pull-left" style="color:#84CDC2;margin-top:5px;">￦
+                        <input style="border:0px;width:52px;color:#84CDC2;font-weight:bold;" type="text" value="{{demand_data.min_price}}" id="max-price" name="max_price"></input>
                     </label>
                     <!--<label for="max-price">원</label>-->
                     {{demandform.min_price.errors|striptags}}
 
                     <label for="max-price" class="pull-right" style="color:#84CDC2;margin-top:5px;">￦
-                        <input style="text-align:right;border:0px;width:52px;color:#84CDC2;font-weight:bold;" type="text" value="{{demand_data.max_price}}" id="max-price" name="max_price"></input>
+                        <input style="text-align:right;border:0px;width:52px;color:#84CDC2;font-weight:bold;" type="text" value="{{demand_data.max_price}}" id="min-price" name="min_price"></input>
                     </label>
                     {{demandform.max_price.errors|striptags}}
                 </div>
