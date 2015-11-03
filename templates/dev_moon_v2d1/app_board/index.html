@@ -232,4 +232,14 @@
     swfobject.embedSWF("http://www.youtube.com/v/KeWUl0Avr84&feature=plpp_play_all?start=1&enablejsapi=1&playerapiid=youtubePlayer&allowFullScreen=true&version=3&loop=1&autohide=1&autoplay=1&controls=0&showinfo=0&modestbranding=1&rel=0&autohide=1&playlist=KeWUl0Avr84&",
             "youtubeNosound", "100%", "100%", "0", null, null, params, atts);
 </script>
+<script>
+    $(document).ready(function() {
+        $("#main-comment-slide").swiperight(function() {
+            $(this).carousel('prev');
+        });
+        $("#main-comment-slide").swipeleft(function() {
+            $(this).carousel('next');
+        });
+    });
+</script>
 {% endblock %}

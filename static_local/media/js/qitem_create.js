@@ -69,6 +69,9 @@ function findLastInput(isOnclick){
     indexOfImg = i;
     if(isOnclick) $('#filePhoto'+ (indexOfImg + 1)).click();
 }
+//document.getElementById("input-image").innerHTML("<input type=\"file\"" + "name=\"image\"" + "id=\"" + 'filePhoto' + (indexOfImg + 1) + "\"/>");
+//var imageLoader = document.getElementById('filePhoto' + (indexOfImg + 1));
+//imageLoader.addEventListener('change', handleImage, false);
 
 var imageLoader1 = document.getElementById('filePhoto1');
 imageLoader1.addEventListener('change', handleImage, false);
@@ -84,7 +87,8 @@ imageLoader5.addEventListener('change', handleImage, false);
 function handleImage(e) {
     var reader = new FileReader();
     reader.onload = function (event) {
-        $('#tmk-imgs img').eq(indexOfImg).attr('src',event.target.result);
+        $('#tmk-imgs img').eq(indexOfImg).attr('src',event.target.result).show();
+        //document.images[i].visibility="visible";
     };
     reader.readAsDataURL(e.target.files[0]);
 }
@@ -125,20 +129,20 @@ function deleteImg(span){
     $imgsWrap.append($deleteImgWrap.detach());
 
 }
-
-function stepper(stepper) {
-    var $stepper = $(stepper);
-    var $input = $stepper.siblings('input');
-    var value = parseInt($input.val());
-    if ($stepper.text() == 'up') {
-        if (value < parseInt($input.attr('max'))) {
-            value = value + 1;
-            $input.val(value);
-        }
-    } else {
-        if (value > parseInt($input.attr('min'))) {
-            value = value - 1;
-            $input.val(value);
-        }
-    }
-}
+//
+//function stepper(stepper) {
+//    var $stepper = $(stepper);
+//    var $input = $stepper.siblings('input');
+//    var value = parseInt($input.val());
+//    if ($stepper.text() == 'up') {
+//        if (value < parseInt($input.attr('max'))) {
+//            value = value + 1;
+//            $input.val(value);
+//        }
+//    } else {
+//        if (value > parseInt($input.attr('min'))) {
+//            value = value - 1;
+//            $input.val(value);
+//        }
+//    }
+//}
