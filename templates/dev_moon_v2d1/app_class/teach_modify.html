@@ -270,24 +270,30 @@
                                     </div>
 
                                     <div class="tmk-imgs" id="tmk-imgs">
+                                        {% for image in teach_data.post.t2classpic_set.all%}
                                         <div>
-                                            <img src="">
+                                            <img src="{{MEDIA_URL}}{{image.image}}">
+                                            <span onclick="deleteImg(this);"></span>
+                                        </div>
+                                        {% endfor %}
+                                        <div>
+                                            <img src="" hidden>
                                             <span onclick="deleteImg(this);"></span>
                                         </div>
                                         <div>
-                                            <img src="">
+                                            <img src="" hidden>
                                             <span onclick="deleteImg(this);"></span>
                                         </div>
                                         <div>
-                                            <img src="">
+                                            <img src="" hidden>
                                             <span onclick="deleteImg(this);"></span>
                                         </div>
                                         <div>
-                                            <img src="">
+                                            <img src="" hidden>
                                             <span onclick="deleteImg(this);"></span>
                                         </div>
                                         <div>
-                                            <img src="">
+                                            <img src="" hidden>
                                             <span onclick="deleteImg(this);"></span>
                                         </div>
 
@@ -452,7 +458,6 @@
 {%endblock%}
 {%block script%}
 <script src="{%static 'js/google_map.js'%}"></script>
-<!--<script src="{%static 'js/google_map_load.js'%}"></script>-->
 <script src='{%static "media/js/qitem_create.js" %}'></script>
 <!--<script type="text/javascript" src="{% static 'media/js/nouislider.js' %}"></script>-->
 <!--<script src="http://thecodeplayer.com/uploads/js/jquery-1.9.1.min.js" type="text/javascript"></script>-->

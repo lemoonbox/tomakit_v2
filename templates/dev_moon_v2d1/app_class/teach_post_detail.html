@@ -193,7 +193,7 @@
 
     <div class="tmk-main-body col-lg-12" id="tmk-post-container">
         <div class="container">
-            <div class="col-lg-4" style="margin:50px auto; float:right;">
+            <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12" style="margin:50px auto; float:right;z-index:1;">
                 <div class="tmk-class-pay">
                     <div class="tmk-class-pay-top">
                         <!--<div class=h3>수업정보</>-->
@@ -450,26 +450,15 @@
 
     })
 </script>
+<script>
+    $(document).ready(function() {
+        $("#main-comment-slide").swiperight(function() {
+            $(this).carousel('prev');
+        });
+        $("#main-comment-slide").swipeleft(function() {
+            $(this).carousel('next');
+        });
+    });
+</script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDWLKiQU9kiiXSpS7A5RAeKenzpQlI84Ds&signed_in=true&language=ko&libraries=places&callback=initMap" async defer></script>
-{%comment%}
-<!--<script>-->
-<!--$(function() {-->
-<!--var $sidebar   = $("#sidebar"),-->
-<!--$window    = $(window),-->
-<!--offset     = $sidebar.offset(),-->
-<!--topPadding = 15;-->
-<!--$window.scroll(function() {-->
-<!--if ($window.scrollTop() > offset.top) {-->
-<!--$sidebar.stop().animate({-->
-<!--marginTop: $window.scrollTop() - offset.top + topPadding-->
-<!--});-->
-<!--} else {-->
-<!--$sidebar.stop().animate({-->
-<!--marginTop: 0-->
-<!--});-->
-<!--}-->
-<!--});-->
-<!--});-->
-<!--</script>-->
-{%endcomment%}
 {%endblock%}

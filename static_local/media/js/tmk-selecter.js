@@ -12,6 +12,11 @@ function btnClick(selecterSelected) {
     $('.selecter-options').mouseleave(function() {
         $(this).hide();
     });
+    //
+    var a = ".selecter-options";
+    $('body').on('touchstart', function(e){
+        $(a).hide();
+    });
 }
 
 
@@ -58,21 +63,3 @@ $( "#state" )
         $( ".state-selected").text( str );
     })
     .trigger( "change" );
-
-
-function stepper(stepper) {
-    var $stepper = $(stepper);
-    var $input = $stepper.siblings('input');
-    var value = parseInt($input.val());
-    if ($stepper.text() == 'up') {
-        if (value < parseInt($input.attr('max'))) {
-            value = value + 1;
-            $input.val(value);
-        }
-    } else {
-        if (value > parseInt($input.attr('min'))) {
-            value = value - 1;
-            $input.val(value);
-        }
-    }
-}
