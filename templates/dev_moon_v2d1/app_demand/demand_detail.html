@@ -152,7 +152,7 @@
             <label><img src="{%static 'media/image/slice/icon-intro_location.png'%}"> 희망지역</label> {{post.state.state|state2han}} {{post.local}}<br>
             <label><img src="{%static 'media/image/slice/icon-intro_coin.png'%}"> 희망수강료</label> ￦{{post.min_price}} ~ ￦{{post.max_price}}<br>
             <!--참조 -->
-            <div class="tmk-h3" style="margin-top:50px;width:100%;float:left;">참조사진<span style="color:red;font-size:14px;" class="btn btn-link pull-right" id="demand-pic-fold">+</span></div>
+            <div class="tmk-h3" style="margin-top:50px;width:100%;">참조사진<span style="color:red;font-size:14px;" class="btn btn-link pull-right" id="demand-pic-fold">+</span></div>
             <div style="width:100%;display:block;" id="demand-pic">
                 {% for image in post.t2demandpic_set.all%}
                 <div class="img-wrap">
@@ -261,7 +261,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-9 col-md-9 col-xs-10 user-review {%if request.user == comment.user%}requestuser{%endif%}" style="text-align:left;float:left;">
+
+                    <div class="col-lg-9 col-md-9 col-xs-10 user-review"
+                         {%if request.user == comment.user%}id="cmt{{forloop.counter0}}"{%endif%} style="text-align:left;float:left;">
+
                         <div class="tmk-h3">
                             <a style="color:#82888A;" href="http://{{HTTP_HOST}}/v2.1/user/profile/{{comment.user.id}}">
                                 {{comment.user.last_name}}{{comment.user.first_name}}</a>
@@ -275,7 +278,7 @@
                     </div>
                     <!--수정 form 나중에  hidden-->
                     {%if request.user == comment.user%}
-                    <div class="review-modify" hidden>
+                    <div id="review-modify{{forloop.counter0}}" hidden>
                         <form method="POST" action="{% url 'modify_comment_v2d1' post.id %}">
                             {%csrf_token%}
                             <div class="col-lg-9 col-md-7 col-xs-10" style="text-align:left;">
@@ -291,12 +294,11 @@
                         </form>
                     </div>
 
-                    <div class="col-md-2 col-xs-2 pull-right modify-wrap"  style="margin-right:15px;">
-                        <span class="btn btn-link modify-btn">댓글 수정</span>
+                    <div class="col-md-2 col-xs-2 pull-right" id="modify-wrap{{forloop.counter0}}"  style="margin-right:15px;">
+                        <span class="btn btn-link modify-btn" id="modify-btn{{forloop.counter0}}">댓글 수정</span>
                     </div>
 
-
-                    <div class="col-md-2 col-xs-2 pull-right review-del" style="padding-left:0;margin-right:15px;" hidden>
+                    <div class="col-md-2 col-xs-2 pull-right" id="review-del{{forloop.counter0}}" style="padding-left:0;margin-right:15px;" hidden>
                         <form method="POST" action="{% url 'delete_comment_v2d1' comment.id%}">
                             {%csrf_token%}
                             <input type="hidden" name="demand_num" value="{{post.id}}">
@@ -304,27 +306,26 @@
                         </form>
                     </div>
                     {% endif %}
-                <!--</div>-->
-                {% endif %}
-                    </div>
+                    <!--</div>-->
+                    {% endif %}
+                </div>
                 {% endfor %}
             </div>
         </div>
     </div>
 </div>
 </div>
-
 {%endblock%}
 {%block script%}
 <script>
-    $(document).ready(function() {
-        $(".modify-btn").click(function () {
-            $(".modify-wrap").hide();
-            $(".requestuser").hide();
-            $(".review-modify").show();
-            $(".review-del").show();
-        });
-    });
+//    $(document).ready(function() {
+//        $(".modify-btn").click(function () {
+//            $(".modify-wrap").hide();
+//            $(".requestuser").hide();
+//            $(".review-modify").show();
+//            $(".review-del").show();
+//        });
+//    });
     $("#demand-pic-fold").click(function(){
         $("#demand-pic").slideToggle("slow");
     });

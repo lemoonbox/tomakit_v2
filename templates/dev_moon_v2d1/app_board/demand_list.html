@@ -11,13 +11,11 @@
             margin: auto;
         }
     }
-    /*.tmk-card-link {color:#565A5C;}*/
 
     .card-list li {
         height: 380px;
-        /*width: 370px;*/
         margin: 15px;
-        padding: 0px;
+        padding: 0;
         background:#fff;
         display:inline-block;
         vertical-align: top;
@@ -38,33 +36,17 @@
         }
     }
 
-    /*@media screen and (max-width:767px) {*/
-        /*.card-list li {width:100%;margin:0px;left:0;right:0;margin-bottom:15px;}*/
-    /*}*/
-    /*@media screen and (min-width:768px) and (max-width:861px) {*/
-        /*html {min-width:870px!important;}*/
-    /*}*/
-    /*@media screen and (min-width:861px) and (max-width:1264px) {*/
-        /*/!*html {min-width:1240px;}*!/*/
-        /*#card-list {text-align:center!important;margin:0px auto!important;max-width:800px;}*/
-        /*#card-list-wrapper {margin:0px auto!important;}*/
-    /*}*/
-    /*@media screen and (min-width:1265px) {*/
-        /*#card-list {text-align:center!important;margin:0px auto!important;max-width:1200px;}*/
-    /*}*/
-    /*/!*.li a > div {}*!/*/
-    .tmk-card-info {height:220px;padding:10px;overflow:hidden;margin-bottom:15px;}
+    .tmk-card-info {height:230px;padding:10px;overflow:hidden;margin-bottom:15px;}
     .tmk-card-info div {margin:25px auto;}
 
-    /*.tmk-class-card .col-md-12 {text-align:left;}*/
-    /*.tmk-class-card .col-md-12 div:first-child {}*/
     .tmk-card-img-profile {
         width: 50px;
         height: 50px;
         margin: auto !important;
-        margin-top: 0px;
+        margin-top: 0;
     }
     .tmk-card-like {white-space: nowrap;overflow:hidden;}
+
 </style>
 {%endblock%}
 {%block content%}
@@ -245,7 +227,7 @@
                         <div class="tmk-card-info">
                         <div style="color:#82888A">{{class.category|cate2han}}</div>
                         <div class="h4" style="text-overflow:ellipsis;">{{class.title}}</div>
-                        <div class="info-describe" style="white-space: normal;word-break: break-all;">{{class.descript}}</div>
+                        <div class="info-describe" style="white-space: normal;word-break: break-all; text-overflow:ellipsis;">{{class.descript}}</div>
                         </div>
                     </a>
 

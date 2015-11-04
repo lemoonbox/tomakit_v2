@@ -61,7 +61,7 @@
             <div class="tmk-h2 tmk-title">선생님 등록</div>
             <div class="tmk-h4">반갑습니다! 경험과 재능, 그리고 열정을 나누세요<br>아래 신청서를 작성해주세요. 관리자의 검토 후 24시간 이내에 연락드리겠습니다</div>
         </div>
-        <div class="tmk-h3">등록 신청서</div>
+        <div class="tmk-h3" style="padding-left:15px;">등록 신청서</div>
         <div class="col-md-10 well" id="tmk-form" style="text-align:left;float:left;">
             <form method="POST" action="{% url 'host_apply_v2d1' %}" enctype="multipart/form-data">
                 {% csrf_token %}
@@ -94,15 +94,15 @@
 
 
                 <div class="tmk-panel">
-                    <label class="col-md-2">공방유무 <span>*</span></label>
-                    <div class="col-md-10" style="margin-bottom:5px;">공방이 있으신가요?</div>
+                    <label class="col-md-2 col-xs-12">공방유무 <span>*</span></label>
+                    <div class="col-xs-12 col-md-10" style="margin-bottom:5px;">공방이 있으신가요?</div>
                     <div class="col-md-10 pull-right tmk-radio" style="margin-left:-15px;">
-                        <div class="col-xs-5 col-md-5" style="width:253px;padding-left:0;">
+                        <div class="col-xs-4 col-md-4" style="width:253px;">
                             <input type="radio" class="iradio_flat" name="hosttype" value="shop"
                                    {%if apply_data.hosttype == "shop" %} checked="checked" {% endif %}>
                             <span style="font-size:16px;vertical-align:text-top">&nbsp;공방있음</span><br>
                         </div>
-                        <div class="col-xs-5 col-md-5" style="width:253px;">
+                        <div class="col-xs-4 col-md-4" style="width:253px;">
                             <input type="radio" class="iradio_flat" name="hosttype" value="lectured"
                                    {%if apply_data.hosttype == "lectured" %} checked="checked" {% endif %}>
                             <span style="font-size:16px;vertical-align:text-top">&nbsp;공방없음(출강)</span><br>
@@ -123,7 +123,7 @@
                 </div>
 
                 <div class="tmk-panel">
-                    <label class="col-md-2">홈페이지/블로그 주소</label>
+                    <label class="col-md-2">홈페이지/블로그 주소 <span>*</span></label>
                     <div class="col-md-10">
                         <input type="text" class="form-control" name="site" value="{{apply_data.site}}" placeholder="ex) http://blog.naver.com/tomakit">
                     </div>
@@ -165,7 +165,7 @@
                         $wrap = $('<div class="file-upload-wrapper">'),
                         $input = $('<input type="text" class="file-upload-input" />'),
                 // Button that will be used in non-IE browsers
-                        $button = $('<button type="button" class="file-upload-button">PC에서 파일가져오기</button>'),
+                        $button = $('<button type="button" class="file-upload-button">파일 가져오기</button>'),
                 // Hack for IE
                         $label = $('<label class="file-upload-button" for="'+ $file[0].id +'">PC에서 파일가져오기</label>');
 

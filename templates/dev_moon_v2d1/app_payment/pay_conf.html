@@ -8,8 +8,8 @@
 {%block style%}
 <style>
 
-    .pay-form {width:400px;text-align:left;background:#fff;line-height:34px;font-size:16px;margin:100px auto;}
-    .pay-form label {color:#82888a; width:35%;}
+    .pay-form {max-width:370px;text-align:left;background:#fff;line-height:28px;font-size:16px;margin:70px auto;}
+    .pay-form label {color:#82888a; width:30%; display:inline-flex;}
     .pay-info {margin:15px auto;}
     /*.tmk-page-header{margin:0;}*/
 </style>
@@ -21,18 +21,18 @@
 
 <!--결제를 확인해주세요-->
 <div class="well pay-form">
-<div class="tmk-h2">신청정보 확인</div>
-<div style="font-size:18px;margin:30px auto;">아래의 신청 정보가 맞는지 확인해 주세요.</div>
+<div class="tmk-h2">신청 정보 확인</div>
+<div style="color:red;margin:15px auto;">아래의 신청 정보가 맞는지 확인해 주세요.</div>
 
     <div class="pay-info">
-    <label>클래스명</label> {{post.title}}<br>
+    <label>클래스명</label> <span style="width:65%;display:inline-flex;">{{post.title}}</span><br>
 <label>결제 금액</label> ￦{{ post.extra_price|add:post.price |intcomma}}<br><br>
 
     <label>신청자 성함</label> {{buyer_name}}<br>
     <label>이메일</label> {{buyer_email}}<br>
     <label>전화번호</label> 010{{mobli}}<br>
 {% if classtype == "tutclass"%}
-    <label>희망 수업 시작일</label> {{want_day}}<br>
+    <label style="line-height:normal;">희망<br>수업시작일</label> <span style="line-height:36px;vertical-align:bottom;">{{want_day}}</span><br><br>
 {% endif%}
     <label>결제 방식</label> {{pay_method}}<br>
     </div>

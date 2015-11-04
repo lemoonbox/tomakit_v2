@@ -106,21 +106,22 @@
         opacity: 0;
     }
     .tmk-imgs img{
-        width: 70px;
-        height: 70px;
+        max-height: 70px;
     }
     .tmk-imgs input{
         display: none;
         border:none;
     }
     .tmk-imgs div{
+        overflow:hidden;
+        width:70px;
         position: relative;
         display: inline-block;
         /*background:url("http://www.jpnn.com/blog/assets/img/news/thumb/no_image.jpg");*/
         background-size:cover;
     }
     .tmk-imgs div span{
-        background-image: url("/static/media/image/icon/icon-close.png");
+        background-image: url("{% static 'media/image/icon/icon-close.png'%}");
         position: absolute;
         top: 26px;
         width: 23px;
@@ -225,7 +226,7 @@ label span {color:red;}
                     </select>
                     <span class="selecter-selected" onclick="btnClick(this)">카테고리 선택</span>
                     <div class="selecter-options" data-value="">
-                        <!--<span class="selecter-item selected" data-value="" onclick="selecting(this, '')">카테고리</span>-->
+                        <span class="selecter-item selected" data-value="" onclick="selecting(this, '')">카테고리 선택</span>
                         <div class="selecter-item"
                              data-value="id"
                              onclick="selecting(this, 'all')">모든 카테고리</div>
@@ -500,8 +501,8 @@ label span {color:red;}
         </div>
         <div class="tmk-page-pick hidden-xs" style="float:left;margin:0;border:1px solid #ddd;"></div>
 
-        <div class="pull-right">
-            <input class="btn btn-primary" type="submit" style="margin:15px auto;padding:10px;" value="요청 등록">
+        <div class="col-md-12">
+            <input class="btn btn-primary pull-right" type="submit" style="margin:15px auto;padding:10px;" value="요청 등록">
         </div>
     </form>
 <!--</div>-->

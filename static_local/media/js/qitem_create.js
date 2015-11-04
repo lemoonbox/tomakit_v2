@@ -12,6 +12,10 @@ function btnClick(selecterSelected) {
     $('.selecter-options').mouseleave(function() {
         $(this).hide();
     });
+
+    $('div').not('.selecter-item').on('mouseup', function(){
+        $(options).hide();
+    });
 }
 
 

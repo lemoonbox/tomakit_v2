@@ -52,11 +52,12 @@ function initMap() {
     var map = new google.maps.Map(document.getElementById('map'), {
         center: {lat: 37.563311, lng: 126.978262},
         zoom: 13
-    });
-    google.maps.event.addListenerOnce(map, 'idle', function(){
-        // do something only the first time the map is loaded
 
     });
+    //google.maps.event.addListenerOnce(map, 'idle', function(){
+    //    // do something only the first time the map is loaded
+    //
+    //});
     //google.maps.event.addDomListener(window, 'load', initMap);
     var input = /** @type {!HTMLInputElement} */(
         document.getElementById('pac-input'));
