@@ -241,7 +241,7 @@ def hfix_uploaded_image(i, x, y):
     max_height = y
 
     #height fix
-    target_ratio = 280/float(max_height)
+    target_ratio = max_height/float(height)
 
     target_width = 0
     target_height = 0

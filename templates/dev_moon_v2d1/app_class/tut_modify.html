@@ -219,9 +219,9 @@
                                         </div>
                                     </div>
                                     <div class="tmk-imgs" id="tmk-imgs">
-                                        {% for image in tut_data.post.t2classpic_set.all%}
+                                        {% for image in tut_data.db_images%}
                                         <div>
-                                            <img src="{{MEDIA_URL}}{{image.image}}">
+                                            <img src="data:image/png;base64,{{image}}">
                                             <span onclick="deleteImg(this);"></span>
 
                                         </div>

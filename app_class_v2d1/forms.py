@@ -195,7 +195,7 @@ class T2ClassPicForm(forms.ModelForm):
             for file in images:
                 i+=1
                 if i == 1 :
-                    cardfile=hfix_uploaded_image(file, 370, 280)[1]
+                    cardfile=handle_uploaded_image(file, 504, 336)[1]
                     _cardimage=T2CardPic(user=_user, class_card=_class_card,
                                          image=cardfile)
                     _cardimage.save()

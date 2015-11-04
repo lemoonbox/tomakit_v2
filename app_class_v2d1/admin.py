@@ -4,7 +4,8 @@ from app_class_v2d1.models import \
     T2TeachClass, \
     T2TutClass, \
     T2ClassReview, \
-    T2ClassPic
+    T2ClassPic, \
+    T2CardPic
 # Register your models here.
 
 class T2TutClassPicLine(admin.TabularInline):
@@ -30,7 +31,7 @@ class T2TeachClassPicLine(admin.TabularInline):
     model = T2ClassPic
 
     def get_max_num(self, request, obj=None, **kwargs):
-        max_num =5
+        max_num =10
 
         return max_num
     extra = 0
@@ -41,10 +42,10 @@ class T2CardPicLine(admin.TabularInline):
                  {'fields':('user', 'tut_post', 'teach_post', 'class_card',
                             'image', 'is_active',)}
                 ),)
-    model = T2ClassPic
+    model = T2CardPic
 
     def get_max_num(self, request, obj=None, **kwargs):
-        max_num =5
+        max_num =1
 
         return max_num
     extra = 0

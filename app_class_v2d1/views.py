@@ -1,4 +1,10 @@
 #coding: utf-8
+from PIL import Image
+from StringIO import StringIO
+import requests, base64
+
+
+
 from django.shortcuts import \
     render, \
     HttpResponseRedirect
@@ -26,7 +32,8 @@ from app_class_v2d1.models import \
     T2TeachClass, \
     T2TutClass, \
     T2ClassPic, \
-    T2ClassReview
+    T2ClassReview, \
+    T2CardPic
 from app_class_v2d1.forms import \
     T2Class_BeginForm, \
     T2TeachClassForm, \
@@ -36,7 +43,7 @@ from app_class_v2d1.forms import \
     T2ReviewForm
 from app_user_v2d1.models import \
     T2HostProfile
-
+from DIY_tool.settings import LOCAL
 
 # Create your views here.
 def host_check(user):
@@ -310,8 +317,8 @@ def modify_teach(request, class_num):
         imageform=T2ClassPicForm()
         try :
             _post=T2TeachClass.objects.get(pk=class_num)
-            if _post.user != request.user:
-                raise Http404("포스팅이 존재 하지 않습니다.")
+            if _post.user != request.user and not request.user.is_staff:
+                raise Http404("수정 가능한 사용자가 아닙니다.")
         except ObjectDoesNotExist:
             raise Http404("포스팅이 존재 하지 않습니다.")
 
@@ -358,6 +365,23 @@ def modify_teach(request, class_num):
             'addr_detail':_post.addr_detail,
             'empty_box': range(5-(_post.t2classpic_set.all().count())),
         }
+        if LOCAL:
+            url_set = "http://localhost:8000/userphoto/media/"
+        else:
+            url_set= "http://diytec.beta.s3.amazonaws.com/uploads/"
+
+        img_arr=[]
+        for db_images in _post.t2classpic_set.all():
+            url =url_set+str(db_images.image)
+            img_res = requests.get(url)
+            img = Image.open(StringIO(img_res.content))
+            output = StringIO()
+            img.save(output, format="PNG")
+            contents = output.getvalue().encode("base64")
+            output.close()
+            img_arr.append(contents)
+        teach_data['db_images']=img_arr
+
     elif request.method == "POST":
         locality=request.POST.get("locality", "").encode("utf-8")
         area_1=request.POST.get("area_1", "").encode("utf-8")
@@ -397,7 +421,10 @@ def modify_teach(request, class_num):
         teachform=T2TeachClassForm(teach_data, instance=_pre_fillpost)
         prefill_intro=request.POST.get("intro_self").encode("utf-8")
 
-        if teachform.is_valid() and _pre_fillpost.user == request.user:
+        auth=False
+        if _pre_fillpost.user == request.user or request.user.is_staff:
+            auth = True
+        if teachform.is_valid() and auth:
             _teachpost=teachform.save()
             teach_data['teach_post']=_teachpost
             teach_data['classtype']="teachclass"
@@ -419,6 +446,8 @@ def modify_teach(request, class_num):
             if image_exist:
                 _old_images=T2ClassPic.objects.filter(teach_post=_teachpost)
                 _old_images.delete()
+                _old_card_images = T2CardPic.objects.filter(class_card=_classcard)
+                _old_card_images.delete()
             imageform=T2ClassPicForm(teach_data, request.FILES)
             imagelist=[]
             if imageform.is_valid():
@@ -446,8 +475,8 @@ def modify_tut(request, class_num):
         imageform=T2ClassPicForm()
         try :
             _post=T2TutClass.objects.get(pk=class_num)
-            if _post.user != request.user:
-                raise Http404("포스팅이 존재 하지 않습니다.")
+            if _post.user != request.user and not request.user.is_staff:
+                raise Http404("수정 가능한 사용자가 아닙니다.")
         except ObjectDoesNotExist:
             raise Http404("포스팅이 존재 하지 않습니다.")
 
@@ -490,6 +519,24 @@ def modify_tut(request, class_num):
             'empty_box': range(5-(_post.t2classpic_set.all().count())),
         }
 
+        if LOCAL:
+            url_set = "http://localhost:8000/userphoto/media/"
+        else:
+            url_set= "http://diytec.beta.s3.amazonaws.com/uploads/"
+
+        img_arr=[]
+        for db_images in _post.t2classpic_set.all():
+            url =url_set+str(db_images.image)
+            img_res = requests.get(url)
+            img = Image.open(StringIO(img_res.content))
+            output = StringIO()
+            type=img.format
+            img.save(output, format=type)
+            contents = output.getvalue().encode("base64")
+            output.close()
+            img_arr.append(contents)
+        tut_data['db_images']=img_arr
+
     elif request.method == "POST":
         locality=request.POST.get("locality", "").encode("utf-8")
         area_1=request.POST.get("area_1", "").encode("utf-8")
@@ -525,7 +572,10 @@ def modify_tut(request, class_num):
         tutform=T2TutClassForm(tut_data, instance=_pre_fillpost)
         prefill_intro=request.POST.get("intro_self").encode("utf-8")
 
-        if tutform.is_valid() and _pre_fillpost.user == request.user:
+        auth=False
+        if _pre_fillpost.user == request.user or request.user.is_staff:
+            auth = True
+        if tutform.is_valid() and auth:
             _tutpost=tutform.save()
             tut_data['tut_post']=_tutpost
             tut_data['classtype']="tutclass"
@@ -542,11 +592,12 @@ def modify_tut(request, class_num):
                 classcardform=T2ClassCardForm(tut_data)
             _classcard=classcardform.save()
             tut_data['class_card']=_classcard
-
             image_exist=T2ClassPic.objects.filter(tut_post=_tutpost).exists()
             if image_exist:
                 _old_images=T2ClassPic.objects.filter(tut_post=_tutpost)
+                _old_card_images = T2CardPic.objects.filter(class_card=_classcard)
                 _old_images.delete()
+                _old_card_images.delete()
             imageform=T2ClassPicForm(tut_data, request.FILES)
             imagelist=[]
             if imageform.is_valid():
@@ -718,7 +769,7 @@ def class_post_detail(request, class_num):
 def class_onoff(request ,class_type, card_num, pro_user_num):
 
     _classcard=get_object_or_404(T2ClassCard, pk=card_num)
-    if _classcard.user != request.user:
+    if _classcard.user != request.user and not request.user.is_staff:
         return Http404("잘못된 요청입니다.")
 
     if class_type == "tutclass":
