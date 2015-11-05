@@ -270,9 +270,10 @@
                                     </div>
 
                                     <div class="tmk-imgs" id="tmk-imgs">
-                                        {% for image in teach_data.db_images%}
+                                        {% for img_info in teach_data.db_images%}
                                         <div>
-                                            <img src="data:image/png;base64,{{image}}"/>
+                                            <input type="hidden" name="img_id" value="{{img_info.0}}">
+                                            <img src="{{MEDIA_URL}}{{img_info.1}}"/>
                                             <span onclick="deleteImg(this);"></span>
                                         </div>
                                         {% endfor %}

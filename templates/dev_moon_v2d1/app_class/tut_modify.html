@@ -219,11 +219,11 @@
                                         </div>
                                     </div>
                                     <div class="tmk-imgs" id="tmk-imgs">
-                                        {% for image in tut_data.db_images%}
+                                       {% for img_info in teach_data.db_images%}
                                         <div>
-                                            <img src="data:image/png;base64,{{image}}">
+                                            <input type="hidden" name="img_id" value="{{img_info.0}}">
+                                            <img src="{{MEDIA_URL}}{{img_info.1}}"/>
                                             <span onclick="deleteImg(this);"></span>
-
                                         </div>
                                         {% endfor %}
 
@@ -234,11 +234,15 @@
                                         </div>
                                         {% endfor %}
 
-                                        <input type="file" name="image"  id="filePhoto1" />
-                                        <input type="file" name="image"  id="filePhoto2" />
-                                        <input type="file" name="image"  id="filePhoto3" />
-                                        <input type="file" name="image"  id="filePhoto4" />
-                                        <input type="file" name="image"  id="filePhoto5" />
+                                        {% for image in tut_data.post.t2classpic_set.all%}
+                                            <input type="file" name="image"  value="{{MEDIA_URL}}{{image.image}}" id="filePhoto{{forloop.counter}}" />
+                                        {% endfor %}
+
+                                        <!--<input type="file" name="image"  id="filePhoto1" />-->
+                                        <!--<input type="file" name="image"  id="filePhoto2" />-->
+                                        <!--<input type="file" name="image"  id="filePhoto3" />-->
+                                        <!--<input type="file" name="image"  id="filePhoto4" />-->
+                                        <!--<input type="file" name="image"  id="filePhoto5" />-->
                                     </div>
                                 </div>
 
