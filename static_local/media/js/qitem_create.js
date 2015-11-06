@@ -9,11 +9,11 @@ function btnClick(selecterSelected) {
      *     Mina added 4 lines below on 15.9.22
      */
     $select.css("z-index", "150");
-    $('.selecter-options').mouseleave(function() {
+    $('.selecter-options').mouseleave(function () {
         $(this).hide();
     });
 
-    $('div').not('.selecter-item').on('mouseup', function(){
+    $('div').not('.selecter-item').on('mouseup', function () {
         $(options).hide();
     });
 }
@@ -30,7 +30,7 @@ function selecting(option, id) {
     $(option).addClass("selected");
     var formGroup = $selecterOptions.closest(".wgt-form-group");
     var $selecterHiddenInput = $(formGroup).nextAll().find('input[type=hidden]').eq(0);
-    if(id == ''){
+    if (id == '') {
         id = $(option).attr('data-value');
         motionType = "00";
         $(formGroup).nextAll('.wgt-selecter').remove();
@@ -44,57 +44,66 @@ function selecting(option, id) {
     $selecterOptions.hide();
     $selecterOptions.parent().css("z-index", "0");
 }
-$( "#category" )
-    .change(function() {
+$("#category")
+    .change(function () {
         var str = "";
-        $( "option:selected", this ).each(function() {
-            str += $( this ).text() + " ";
+        $("option:selected", this).each(function () {
+            str += $(this).text() + " ";
         });
-        $( ".category-selected").text( str );
+        $(".category-selected").text(str);
     })
-    .trigger( "change" );
-$( "#state" )
-    .change(function() {
+    .trigger("change");
+$("#state")
+    .change(function () {
         var str = "";
-        $( "option:selected", this ).each(function() {
-            str += $( this ).text() + " ";
+        $("option:selected", this).each(function () {
+            str += $(this).text() + " ";
         });
-        $( ".state-selected").text( str );
+        $(".state-selected").text(str);
     })
-    .trigger( "change" );
+    .trigger("change");
 
 var indexOfImg = 0;
-function findLastInput(isOnclick){
-    var $imgs = $('#tmk-imgs img');
-    for(var i = 0; i < $imgs.length; i++){
-        var $img = $imgs.eq(i);
-        if($img.attr('src') == '') break;
+function setImgsToFile(){
+
+    var $templateImg = $('#templateImg div').clone();
+    var $childrenOfTmkImgs = $('#tmk-imgs').find('.tmk-img');
+
+
+    var $lastOfTmkImgs = $childrenOfTmkImgs.last();
+    if($childrenOfTmkImgs.length > 0 && $lastOfTmkImgs.find("img").attr('src') == "") $lastOfTmkImgs.remove();
+
+    var $filePhoto = $templateImg.find('.filePhoto');
+
+    if($childrenOfTmkImgs.length > 0) {
+        $filePhoto.attr('id', 'filePhoto' + (parseInt($('#tmk-imgs').find('.filePhoto').last().attr('id').replace(/[^0-9\.]/g, ''),10) + 1));
     }
-    indexOfImg = i;
-    if(isOnclick) $('#filePhoto'+ (indexOfImg + 1)).click();
+
+    $filePhoto.bind('change', handleImage);
+
+    $('#tmk-imgs').append($templateImg);
+
+    return $filePhoto;
+}
+function putImgsToFile() {
+    var $filePhoto = setImgsToFile();
+    $filePhoto.click();
 }
 //document.getElementById("input-image").innerHTML("<input type=\"file\"" + "name=\"image\"" + "id=\"" + 'filePhoto' + (indexOfImg + 1) + "\"/>");
 //var imageLoader = document.getElementById('filePhoto' + (indexOfImg + 1));
 //imageLoader.addEventListener('change', handleImage, false);
 
-var imageLoader1 = document.getElementById('filePhoto1');
-imageLoader1.addEventListener('change', handleImage, false);
-var imageLoader2 = document.getElementById('filePhoto2');
-imageLoader2.addEventListener('change', handleImage, false);
-var imageLoader3 = document.getElementById('filePhoto3');
-imageLoader3.addEventListener('change', handleImage, false);
-var imageLoader4 = document.getElementById('filePhoto4');
-imageLoader4.addEventListener('change', handleImage, false);
-var imageLoader5 = document.getElementById('filePhoto5');
-imageLoader5.addEventListener('change', handleImage, false);
+//var imageLoader = document.getElementById('filePhoto1');
+//imageLoader.addEventListener('change', handleImage, false);
+
 
 function handleImage(e) {
     var reader = new FileReader();
     reader.onload = function (event) {
-        $('#tmk-imgs img').eq(indexOfImg).attr('src',event.target.result).show();
-        //document.images[i].visibility="visible";
+        $(e.target).parent().find('img').attr('src', event.target.result);
     };
     reader.readAsDataURL(e.target.files[0]);
+
 }
 
 var dropbox;
@@ -120,17 +129,16 @@ function drop(e) {
     //console.log(e);
     var dt = e.dataTransfer;
     var files = dt.files;
-    findLastInput();
     //this code line fires your 'handleImage' function (imageLoader change event)
-    var imageLoaderTarget = document.getElementById('filePhoto'+(indexOfImg + 1));
-    imageLoaderTarget.files = files;
+    //var imageLoaderTarget = document.getElementById('filePhoto');
+    //imageLoaderTarget.files = files;
+    var $imageLoaderTarget = setImgsToFile();
+    $imageLoaderTarget[0].files = files;
 }
 
-function deleteImg(span){
+function deleteImg(span) {
     var $deleteImgWrap = $(span).parent();
-    $deleteImgWrap.find('img').attr('src','');
-    var $imgsWrap = $deleteImgWrap.parent();
-    $imgsWrap.append($deleteImgWrap.detach());
+    $deleteImgWrap.remove();
 
 }
 //
