@@ -587,7 +587,6 @@ def modify_tut(request, class_num):
             tut_data['tut_post']=_tutpost
             tut_data['classtype']="tutclass"
             tut_data['class_id']=_tutpost.id
-
             _user.intro_self=prefill_intro
             _user.save()
 
@@ -601,11 +600,14 @@ def modify_tut(request, class_num):
             tut_data['class_card']=_classcard
             image_exist=T2ClassPic.objects.filter(tut_post=_tutpost).exists()
             if image_exist:
-                _old_images=T2ClassPic.objects.filter(tut_post=_tutpost)
-                _old_card_images = T2CardPic.objects.filter(class_card=_classcard)
-                _old_images.delete()
-                _old_card_images.delete()
-            imageform=T2ClassPicForm(tut_data, request.FILES)
+                old_fimg=T2TutClass.T2classPic_set.first()
+                
+            # if image_exist:
+            #     _old_images=T2ClassPic.objects.filter(tut_post=_tutpost)
+            #     _old_card_images = T2CardPic.objects.filter(class_card=_classcard)
+            #     _old_images.delete()
+            #     _old_card_images.delete()
+            # imageform=T2ClassPicForm(tut_data, request.FILES)
             imagelist=[]
             if imageform.is_valid():
                 _imagelist=imageform.savefiles()

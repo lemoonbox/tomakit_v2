@@ -160,20 +160,12 @@ class T2ClassPicForm(forms.ModelForm):
     def is_valid(self):
         valid=super(T2ClassPicForm, self).is_valid()
 
-        if not valid:
-            return False
-
         images=[]
-        if self.files:
+        if valid and self.files:
             images=self.files.getlist('image', "")
-        else :
-            return False
-        if images:
             for file in images:
-                if file.content_type == "image/png" or \
-                                file.content_type == "image/jpeg":
-                    valid=True
-                else :
+                if not file.content_type == "image/png" or \
+                                not file.content_type == "image/jpeg":
                     self.add_error("image", "png/jpeg형태의 파일만 업로드 가능합니다.")
                     return False
         return valid
