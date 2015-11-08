@@ -64,19 +64,23 @@ $("#state")
     .trigger("change");
 
 var indexOfImg = 0;
-function setImgsToFile(){
+function setImgsToFile() {
 
     var $templateImg = $('#templateImg div').clone();
     var $childrenOfTmkImgs = $('#tmk-imgs').find('.tmk-img');
 
-
     var $lastOfTmkImgs = $childrenOfTmkImgs.last();
-    if($childrenOfTmkImgs.length > 0 && $lastOfTmkImgs.find("img").attr('src') == "") $lastOfTmkImgs.remove();
+    if ($childrenOfTmkImgs.length > 0 && $lastOfTmkImgs.find("img").attr('src') == "") $lastOfTmkImgs.remove();
+
+    if ($('#tmk-imgs').find('.tmk-img').length >= 10 ) {
+        alert("사진은 최대 10장까지 가능합니다!!");
+        return false;
+    }
 
     var $filePhoto = $templateImg.find('.filePhoto');
 
-    if($childrenOfTmkImgs.length > 0) {
-        $filePhoto.attr('id', 'filePhoto' + (parseInt($('#tmk-imgs').find('.filePhoto').last().attr('id').replace(/[^0-9\.]/g, ''),10) + 1));
+    if ($childrenOfTmkImgs.length > 0) {
+        $filePhoto.attr('id', 'filePhoto' + (parseInt($('#tmk-imgs').find('.filePhoto').last().attr('id').replace(/[^0-9\.]/g, ''), 10) + 1));
     }
 
     $filePhoto.bind('change', handleImage);
@@ -133,7 +137,7 @@ function drop(e) {
     //var imageLoaderTarget = document.getElementById('filePhoto');
     //imageLoaderTarget.files = files;
     var $imageLoaderTarget = setImgsToFile();
-    $imageLoaderTarget[0].files = files;
+    if($imageLoaderTarget) $imageLoaderTarget[0].files = files;
 }
 
 function deleteImg(span) {
