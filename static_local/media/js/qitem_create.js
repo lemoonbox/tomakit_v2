@@ -73,9 +73,6 @@ function findLastInput(isOnclick){
     indexOfImg = i;
     if(isOnclick) $('#filePhoto'+ (indexOfImg + 1)).click();
 }
-//document.getElementById("input-image").innerHTML("<input type=\"file\"" + "name=\"image\"" + "id=\"" + 'filePhoto' + (indexOfImg + 1) + "\"/>");
-//var imageLoader = document.getElementById('filePhoto' + (indexOfImg + 1));
-//imageLoader.addEventListener('change', handleImage, false);
 
 var imageLoader1 = document.getElementById('filePhoto1');
 imageLoader1.addEventListener('change', handleImage, false);
@@ -96,6 +93,18 @@ function handleImage(e) {
     };
     reader.readAsDataURL(e.target.files[0]);
 }
+//
+//function modifyImg(){
+//    var $imgs = $('#tmk-imgs img');
+//    var $imgsInput = $('#tmk-imgs input');
+//    for (var i = 0; i < $imgs.length; i++){
+//        var $img = $imgs.eq(i);
+//        if (0 < ($img.attr('src')).length){
+//            ($imgsInput).get($img.attr('src'))
+//        }
+//    }
+//}
+
 
 var dropbox;
 dropbox = document.getElementById("filedrag");
