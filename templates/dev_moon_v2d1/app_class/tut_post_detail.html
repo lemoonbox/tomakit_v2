@@ -423,7 +423,7 @@
         },
         webButton: {
             text: '이 수업 같이 들어요!',
-            url: 'http://tomakit.com/v2.1/class/{{post.id}}' // 앱 설정의 웹 플랫폼에 등록한 도메인의 URL이어야 합니다.
+            url: 'http://{{HTTP_HOST}}/v2.1/class/{{post.id}}' // 앱 설정의 웹 플랫폼에 등록한 도메인의 URL이어야 합니다.
         }
     });
 </script>
