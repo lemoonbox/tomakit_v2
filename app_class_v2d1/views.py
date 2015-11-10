@@ -47,7 +47,7 @@ from DIY_tool.settings import LOCAL
 
 # Create your views here.
 def host_check(user):
-    if user.t2hostprofile_set.first():
+    if user.t2hostprofile_set.first() or user.is_staff:
         return True
     else :
         return False
@@ -372,6 +372,7 @@ def modify_teach(request, class_num):
 
         img_arr=[]
         for db_images in _post.t2classpic_set.all():
+            img_info=[]
             url =url_set+str(db_images.image)
             img_res = requests.get(url)
             img = Image.open(StringIO(img_res.content))
@@ -379,7 +380,10 @@ def modify_teach(request, class_num):
             img.save(output, format="PNG")
             contents = output.getvalue().encode("base64")
             output.close()
-            img_arr.append(contents)
+            img_info.append(db_images.id)
+            img_info.append(db_images.image)
+            img_info.append(contents)
+            img_arr.append(img_info)
         teach_data['db_images']=img_arr
 
     elif request.method == "POST":
@@ -526,6 +530,7 @@ def modify_tut(request, class_num):
 
         img_arr=[]
         for db_images in _post.t2classpic_set.all():
+            img_info=[]
             url =url_set+str(db_images.image)
             img_res = requests.get(url)
             img = Image.open(StringIO(img_res.content))
@@ -534,7 +539,10 @@ def modify_tut(request, class_num):
             img.save(output, format=type)
             contents = output.getvalue().encode("base64")
             output.close()
-            img_arr.append(contents)
+            img_info.append(db_images.id)
+            img_info.append(db_images.image)
+            img_info.append(contents)
+            img_arr.append(img_info)
         tut_data['db_images']=img_arr
 
     elif request.method == "POST":
@@ -571,7 +579,6 @@ def modify_tut(request, class_num):
         }
         tutform=T2TutClassForm(tut_data, instance=_pre_fillpost)
         prefill_intro=request.POST.get("intro_self").encode("utf-8")
-
         auth=False
         if _pre_fillpost.user == request.user or request.user.is_staff:
             auth = True
@@ -580,7 +587,6 @@ def modify_tut(request, class_num):
             tut_data['tut_post']=_tutpost
             tut_data['classtype']="tutclass"
             tut_data['class_id']=_tutpost.id
-
             _user.intro_self=prefill_intro
             _user.save()
 
@@ -594,11 +600,14 @@ def modify_tut(request, class_num):
             tut_data['class_card']=_classcard
             image_exist=T2ClassPic.objects.filter(tut_post=_tutpost).exists()
             if image_exist:
-                _old_images=T2ClassPic.objects.filter(tut_post=_tutpost)
-                _old_card_images = T2CardPic.objects.filter(class_card=_classcard)
-                _old_images.delete()
-                _old_card_images.delete()
-            imageform=T2ClassPicForm(tut_data, request.FILES)
+                old_fimg=T2TutClass.T2classPic_set.first()
+                
+            # if image_exist:
+            #     _old_images=T2ClassPic.objects.filter(tut_post=_tutpost)
+            #     _old_card_images = T2CardPic.objects.filter(class_card=_classcard)
+            #     _old_images.delete()
+            #     _old_card_images.delete()
+            # imageform=T2ClassPicForm(tut_data, request.FILES)
             imagelist=[]
             if imageform.is_valid():
                 _imagelist=imageform.savefiles()

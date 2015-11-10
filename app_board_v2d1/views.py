@@ -68,7 +68,7 @@ def class_list_board(request, page=1, category = 'all', state='all'):
             state_condt.append(state)
 
 
-        paging_date = pagination(navline_num=5, onepage_post_num=6,
+        paging_date = pagination(navline_num=5, onepage_post_num=12,
                                  target_model=T2ClassCard, cate_condt=cate_condt,
                                  state_condt =state_condt, page=page)
 
@@ -118,7 +118,7 @@ def demand_list_board(request, page=1, category = 'all', state='all'):
             state_condt.append(state)
 
 
-        paging_date = pagination(navline_num=2, onepage_post_num=1,
+        paging_date = pagination(navline_num=5, onepage_post_num=12,
                                  target_model=T2DemandCard, cate_condt=cate_condt,
                                  state_condt =state_condt, page=page)
 
@@ -159,7 +159,7 @@ def demand_filter_redirect(request):
 
     return HttpResponseRedirect("/v2.1/board/demand_list/1/"+_category+"/"+_state)
 
-def pagination(navline_num=5, onepage_post_num=20,target_model=None,
+def pagination(navline_num=5, onepage_post_num=12,target_model=None,
                cate_condt=[], state_condt=[], page = 1):
 
     from app_board_v2d1.models import T2ClassCard
@@ -188,10 +188,10 @@ def pagination(navline_num=5, onepage_post_num=20,target_model=None,
     if target_model is T2ClassCard :
         _line_post = target_model.objects.filter(
             category__category__in  = cate_condt,state__state__in = state_condt,
-            is_active=True, is_open=True).order_by('pop_point')[start_pos:end_pos]
+            is_active=True, is_open=True).order_by('-id')[start_pos:end_pos]
         _nav_post=target_model.objects.filter(
             category__category__in  = cate_condt, state__state__in = state_condt,
-            is_active=True, is_open=True).order_by('pop_point')[start_nav_pos:end_nav_pos+1]
+            is_active=True, is_open=True).order_by('-id')[start_nav_pos:end_nav_pos+1]
         _nav_post_count=_nav_post.count()
 
     else:

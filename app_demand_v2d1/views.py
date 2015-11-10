@@ -1,4 +1,8 @@
 #coding: utf-8
+from PIL import Image
+from StringIO import StringIO
+import requests, base64
+
 from django.shortcuts import render, \
     get_object_or_404
 from django.contrib.auth.decorators import \
@@ -18,6 +22,7 @@ from rest_framework.decorators import\
 
 from DIY_tool import \
     template_match as TEMP
+from DIY_tool.settings import LOCAL
 from app_user_v2d1.models import \
     T2Profile
 from app_comminfo.models import \
@@ -139,8 +144,30 @@ def demand_modify(request, demand_num=0):
             'mobile1':_user.t2profile_set.first().mobli1,
             'mobile2':_user.t2profile_set.first().mobli2,
             'min_price':str(_post.min_price),
-            'max_price':str(_post.max_price)
+            'max_price':str(_post.max_price),
+            'empty_box': range(5-(_post.t2demandpic_set.all().count())),
         }
+        if LOCAL:
+            url_set = "http://localhost:8000/userphoto/media/"
+        else:
+            url_set= "http://diytec.beta.s3.amazonaws.com/uploads/"
+        img_arr=[]
+        for db_images in _post.t2demandpic_set.all():
+            img_info=[]
+            url =url_set+str(db_images.image)
+            img_res = requests.get(url)
+            img = Image.open(StringIO(img_res.content))
+            output = StringIO()
+            type=img.format
+            img.save(output, format=type)
+            contents = output.getvalue().encode("base64")
+            output.close()
+            img_info.append(db_images.id)
+            img_info.append(db_images.image)
+            img_info.append(contents)
+            img_arr.append(img_info)
+        demand_data['db_images']=img_arr
+
     elif request.method == "POST":
         imageform=""
         demand_data={
