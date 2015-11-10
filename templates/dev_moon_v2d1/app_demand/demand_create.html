@@ -5,6 +5,9 @@
 {%block style%}
 
 <link rel="stylesheet" type="text/css" href="{% static 'media/css/nouislider.min.css'%}">
+<script src="{% static 'media/js/spin.min.js'%}"></script>
+<script src="{% static 'media/js/ladda.min.js'%}"></script>
+
 <style>
    .tmk-qitem-wrapper{
         width: 720px;
@@ -249,7 +252,7 @@
             <label class="col-md-2">제목 <span>*</span></label>
             <div class="tmk-qitem-selecter-wrapper col-md-3">
                 <div class="selecter cover" tabindex="0">
-                    <select name="category" required class="selecter_3 selecter-element" data-selecter-options="{&quot;cover&quot;:&quot;true&quot;}" tabindex="-1">
+                    <select id="category" name="category" required class="selecter_3 selecter-element" data-selecter-options="{&quot;cover&quot;:&quot;true&quot;}" tabindex="-1">
                         <option value="all"
                                 {% if begin_data.category == 'all' %}selected{% endif %}>모든 카테고리</option>
                         <option value="cate_1"
@@ -275,9 +278,9 @@
                         <option value="cate_11"
                                 {% if begin_data.category == 'cate_11'%}selected{% endif %}>기타</option>
                     </select>
-                    <span class="selecter-selected" onclick="btnClick(this)">카테고리 선택</span>
+                    <span class="selecter-selected category-selected" onclick="btnClick(this)">카테고리 선택</span>
                     <div class="selecter-options" data-value="">
-                        <span class="selecter-item selected" data-value="" onclick="selecting(this, '')">카테고리</span>
+                        <span class="selecter-item selected category-selected" data-value="" onclick="selecting(this, '')">카테고리</span>
                         <div class="selecter-item"
                              data-value="id"
                              onclick="selecting(this, 'all')">모든 카테고리</div>
@@ -384,7 +387,7 @@
             <label class="col-md-2">희망지역 <span>*</span></label>
             <div class="tmk-qitem-selecter-wrapper col-md-3">
                 <div class="selecter cover" tabindex="0">
-                    <select name="state" required class="selecter_3 selecter-element" data-selecter-options="{&quot;cover&quot;:&quot;true&quot;}" tabindex="-1">
+                    <select id="state" name="state" required class="selecter_3 selecter-element" data-selecter-options="{&quot;cover&quot;:&quot;true&quot;}" tabindex="-1">
                         <option value="all"
                                 {% if begin_data.category == 'all' %}selected{% endif %}>모든 지역</option>
                         <option value="zone_1"
@@ -408,9 +411,9 @@
                         <option value="etc"
                                 {% if demand_data.state == 'etc'%}selected{% endif %}>기타</option>
                     </select>
-                    <span class="selecter-selected" onclick="btnClick(this)">지역 선택</span>
+                    <span class="selecter-selected category-selected" onclick="btnClick(this)">카테고리 선택</span>
                     <div class="selecter-options" data-value="">
-                        <!--<span class="selecter-item selected" data-value="" onclick="selecting(this, '')">카테고리</span>-->
+                        <span class="selecter-item selected category-selected" data-value="" onclick="selecting(this, '')">카테고리</span>
                         <div class="selecter-item"
                              data-value="id"
                              onclick="selecting(this, 'all')">모든 카테고리</div>
@@ -539,7 +542,7 @@
                 </div>
 
 
-            <input class="btn btn-primary pull-right" id="demand-submit" type="submit" value="제안등록">
+            <input class="btn btn-primary ladda-button pull-right" id="demand-submit" type="submit" data-style="expand-right" value="제안등록">
         </form>
     </div>
         </div>
@@ -587,12 +590,19 @@
     });
 </script>
 <script>
-//    function submitButton_OnClick(){
-//    $("#demand-submit").attr("disabled", "disabled");
-//    }
-//    $(document).ready(function() {
-//        $("#demand-submit").click(submitButton_OnClick);
-//    });
-</script>
+    Ladda.bind( '#demand-submit', {
+        callback: function( instance ) {
+            var progress = 0;
+            var interval = setInterval( function() {
+                progress = Math.min( progress + Math.random() * 0.1, 1 );
+                instance.setProgress( progress );
 
+                if( progress === 1 ) {
+                    instance.stop();
+                    clearInterval( interval );
+                }
+            }, 200 );
+        }
+    } );
+</script>
 {%endblock%}
