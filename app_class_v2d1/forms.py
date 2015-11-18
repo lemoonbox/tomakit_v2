@@ -161,7 +161,8 @@ class T2ClassPicForm(forms.ModelForm):
         if valid and self.files:
             images=self.files.getlist('image', "")
             for file in images:
-                if not file.content_type == "image/png" or \
+                print file.content_type
+                if not file.content_type == "image/png" and \
                                 not file.content_type == "image/jpeg":
                     self.add_error("image", "png/jpeg형태의 파일만 업로드 가능합니다.")
                     return False
