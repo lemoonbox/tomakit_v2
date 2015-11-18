@@ -153,9 +153,11 @@ def create_tut(request, class_num):
             'addr_detail':addr_detail,
         }
         tutform=T2TutClassForm(tut_data, instance=_pre_fillpost)
+        imageform=T2ClassPicForm(tut_data, request.FILES)
         prefill_intro=request.POST.get("intro_self").encode("utf-8")
 
-        if tutform.is_valid() and _pre_fillpost.user == request.user:
+        if tutform.is_valid() and imageform.is_valid() and \
+                        _pre_fillpost.user == request.user:
             _tutpost=tutform.save()
             tut_data['tut_post']=_tutpost
             tut_data['classtype']="tutclass"
@@ -177,8 +179,8 @@ def create_tut(request, class_num):
             if image_exist:
                 _old_images=T2ClassPic.objects.filter(tut_post=_tutpost)
                 _old_images.delete()
-            imageform=T2ClassPicForm(tut_data, request.FILES)
             imagelist=[]
+            print imageform.is_valid()
             if imageform.is_valid():
                 _imagelist=imageform.savefiles()
             _hostprofile=T2HostProfile.objects.get(user=_user)
@@ -598,10 +600,17 @@ def modify_tut(request, class_num):
                 classcardform=T2ClassCardForm(tut_data)
             _classcard=classcardform.save()
             tut_data['class_card']=_classcard
-            image_exist=T2ClassPic.objects.filter(tut_post=_tutpost).exists()
-            if image_exist:
-                old_fimg=T2TutClass.T2classPic_set.first()
-                
+
+            old_class_img = T2ClassPic.objects.filter(tut_post=_tutpost)
+            old_card_img = T2CardPic.objects.filter(class_card=_classcard)
+            print request.FILES
+
+            if len(request.POST.getlist("img_id")[0])>0 :
+                fst_img_id=request.POST.getlist("img_id")[0]
+                request.FILES['cd_image']=T2ClassPic.objects.filter(id=fst_img_id)[0]
+            elif request.FILES.getlist("image"):
+                print request.FILES.getlist("image")[0]
+
             # if image_exist:
             #     _old_images=T2ClassPic.objects.filter(tut_post=_tutpost)
             #     _old_card_images = T2CardPic.objects.filter(class_card=_classcard)

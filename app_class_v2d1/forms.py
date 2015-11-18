@@ -149,17 +149,14 @@ class T2ClassCardForm(forms.ModelForm):
 class T2ClassPicForm(forms.ModelForm):
 
     image_error={'invalid':"png/jpeg형태의 파일만 업로드 가능합니다."}
-
     image=forms.ImageField(error_messages=image_error, required=False)
 
     class Meta:
         model=T2ClassPic
         fields=("image", )
 
-
     def is_valid(self):
         valid=super(T2ClassPicForm, self).is_valid()
-
         images=[]
         if valid and self.files:
             images=self.files.getlist('image', "")
@@ -168,15 +165,16 @@ class T2ClassPicForm(forms.ModelForm):
                                 not file.content_type == "image/jpeg":
                     self.add_error("image", "png/jpeg형태의 파일만 업로드 가능합니다.")
                     return False
+        else:
+            self.add_error("image", "한장 이상 사진을 입력해주세요")
+            return False
         return valid
-
 
     def savefiles(self, commit=True):
         _user=self.data.get('user', "")
         _teach_post=self.data.get('teach_post', "")
         _tut_post=self.data.get('tut_post', "")
         _class_card=self.data.get('class_card', "")
-
 
         if self.files:
             images=self.files.getlist('image', "")
@@ -202,8 +200,28 @@ class T2ClassPicForm(forms.ModelForm):
                    class_card=_class_card, image=file)
                     _image.save()
                     imagelist.append(_image)
-
         return imagelist
+
+class T2CardPicForm(forms.ModelForm):
+
+    image_error={'invalid':"png/jpeg형태의 파일만 업로드 가능합니다."}
+    image=forms.ImageField(error_messages=image_error, required=False)
+
+    class Meta:
+        model=T2CardPic
+        fields=("image", )
+
+    def is_valid(self):
+        valid=super(T2CardPicForm, self).is_valid()
+        images=[]
+        if valid and self.files:
+            images=self.files.getlist('image', "")
+            for file in images:
+                if not file.content_type == "image/png" or \
+                                not file.content_type == "image/jpeg":
+                    self.add_error("image", "png/jpeg형태의 파일만 업로드 가능합니다.")
+                    return False
+        return valid
 
 
 class T2ReviewForm(forms.ModelForm):
