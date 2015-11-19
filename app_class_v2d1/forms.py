@@ -157,11 +157,11 @@ class T2ClassPicForm(forms.ModelForm):
 
     def is_valid(self):
         valid=super(T2ClassPicForm, self).is_valid()
+
         images=[]
         if valid and self.files:
             images=self.files.getlist('image', "")
             for file in images:
-                print file.content_type
                 if not file.content_type == "image/png" and \
                                 not file.content_type == "image/jpeg":
                     self.add_error("image", "png/jpeg형태의 파일만 업로드 가능합니다.")
@@ -182,21 +182,14 @@ class T2ClassPicForm(forms.ModelForm):
 
         imagelist=[]
         if images:
-            i=0
             for file in images:
-                i+=1
-                if i == 1 :
-                    cardfile=handle_uploaded_image(file, 504, 336)[1]
-                    _cardimage=T2CardPic(user=_user, class_card=_class_card,
-                                         image=cardfile)
-                    _cardimage.save()
                 file=handle_uploaded_image(file, 1140, 820)[1]
                 if _teach_post:
                     _image=T2ClassPic(user=_user, teach_post=_teach_post,
                                        class_card=_class_card, image=file)
                     _image.save()
                     imagelist.append(_image)
-                else :
+                elif _tut_post:
                     _image=T2ClassPic(user=_user, tut_post=_tut_post,
                    class_card=_class_card, image=file)
                     _image.save()
@@ -212,17 +205,21 @@ class T2CardPicForm(forms.ModelForm):
         model=T2CardPic
         fields=("image", )
 
-    def is_valid(self):
-        valid=super(T2CardPicForm, self).is_valid()
-        images=[]
-        if valid and self.files:
-            images=self.files.getlist('image', "")
+    def save_img(self, commit=True):
+        _user=self.data.get('user', "")
+        _class_card=self.data.get('class_card', "")
+
+        if self.files:
+            images=self.files.getlist('card_img', "")
+
+        imagelist=[]
+        if images:
             for file in images:
-                if not file.content_type == "image/png" or \
-                                not file.content_type == "image/jpeg":
-                    self.add_error("image", "png/jpeg형태의 파일만 업로드 가능합니다.")
-                    return False
-        return valid
+                card_img=handle_uploaded_image(file, 504, 336)[1]
+                _cardimage=T2CardPic(user=_user, class_card=_class_card,
+                                     image=card_img)
+                _cardimage.save()
+        return card_img
 
 
 class T2ReviewForm(forms.ModelForm):

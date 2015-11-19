@@ -3,8 +3,6 @@ from PIL import Image
 from StringIO import StringIO
 import requests, base64
 
-
-
 from django.shortcuts import \
     render, \
     HttpResponseRedirect
@@ -21,6 +19,8 @@ from django.http import \
 from django.shortcuts import render, \
     get_object_or_404
 import  datetime
+from django.core.files.uploadedfile import\
+    InMemoryUploadedFile
 
 
 from DIY_tool import template_match as TEMP
@@ -40,7 +40,8 @@ from app_class_v2d1.forms import \
     T2TutClassForm, \
     T2ClassPicForm, \
     T2ClassCardForm,\
-    T2ReviewForm
+    T2ReviewForm, \
+    T2CardPicForm
 from app_user_v2d1.models import \
     T2HostProfile
 from DIY_tool.settings import LOCAL
@@ -166,23 +167,27 @@ def create_tut(request, class_num):
             _user.intro_self=prefill_intro
             _user.save()
 
-            cardexist=T2ClassCard.objects.filter(tut_post=_tutpost).exists()
-            if cardexist:
-                _pre_fillcard=T2ClassCard.objects.get(tut_post=_tutpost)
-                classcardform=T2ClassCardForm(tut_data, instance=_pre_fillcard)
+            _classcard_set=T2ClassCard.objects.filter(tut_post=_tutpost)
+            if _classcard_set.exists():
+                classcardform=T2ClassCardForm(tut_data, instance=_classcard_set[0])
             else:
                 classcardform=T2ClassCardForm(tut_data)
             _classcard=classcardform.save()
             tut_data['class_card']=_classcard
 
-            image_exist=T2ClassPic.objects.filter(tut_post=_tutpost).exists()
-            if image_exist:
-                _old_images=T2ClassPic.objects.filter(tut_post=_tutpost)
-                _old_images.delete()
+            _class_image=T2ClassPic.objects.filter(tut_post=_tutpost)
+            _card_image=T2CardPic.objects.filter(class_card=_classcard)
+            if _class_image.exists():
+                _class_image.delete()
+                _card_image.delete()
+
             imagelist=[]
-            print imageform.is_valid()
+            request.FILES["card_img"]=request.FILES.getlist("image", "")[0]
+            card_imageform=T2CardPicForm(tut_data, request.FILES)
             if imageform.is_valid():
                 _imagelist=imageform.savefiles()
+                _card_image=card_imageform.save_img()
+
             _hostprofile=T2HostProfile.objects.get(user=_user)
             _hostprofile.intro_self=request.POST.get("intro_self", "")
             _hostprofile.save()
@@ -258,9 +263,11 @@ def create_teach(request, class_num):
             'addr_detail':addr_detail,
         }
         teachform=T2TeachClassForm(teach_data, instance=_pre_fillpost)
+        imageform=T2ClassPicForm(teach_data, request.FILES)
         prefill_intro=request.POST.get("intro_self").encode("utf-8")
 
-        if teachform.is_valid() and _pre_fillpost.user == request.user:
+        if teachform.is_valid() and imageform.is_valid()\
+                and _pre_fillpost.user == request.user:
             _teachpost=teachform.save()
             teach_data['teach_post']=_teachpost
             teach_data['classtype']="teachclass"
@@ -269,23 +276,27 @@ def create_teach(request, class_num):
             _user.intro_self=prefill_intro
             _user.save()
 
-            cardexist=T2ClassCard.objects.filter(teach_post=_teachpost).exists()
-            if cardexist:
-                _pre_fillcard=T2ClassCard.objects.get(teach_post=_teachpost)
-                classcardform=T2ClassCardForm(teach_data, instance=_pre_fillcard)
+            _calsscard_set=T2ClassCard.objects.filter(teach_post=_teachpost)
+            if _calsscard_set.exists():
+                classcardform=T2ClassCardForm(teach_data, instance=_calsscard_set[0])
             else:
                 classcardform=T2ClassCardForm(teach_data)
             _classcard=classcardform.save()
             teach_data['class_card']=_classcard
 
-            image_exist=T2ClassPic.objects.filter(teach_post=_teachpost).exists()
-            if image_exist:
-                _old_images=T2ClassPic.objects.filter(teach_post=_teachpost)
-                _old_images.delete()
-            imageform=T2ClassPicForm(teach_data, request.FILES)
+            _class_image=T2ClassPic.objects.filter(teach_post=_teachpost)
+            _card_image=T2CardPic.objects.filter(class_card=_classcard)
+            if _class_image.exists():
+                _class_image.delete()
+                _card_image.delete()
+
             imagelist=[]
+            request.FILES["card_img"]=request.FILES.getlist("image", "")[0]
+            card_imageform=T2CardPicForm(teach_data, request.FILES)
             if imageform.is_valid():
                 _imagelist=imageform.savefiles()
+                _card_image=card_imageform.save_img()
+
             _hostprofile=T2HostProfile.objects.get(user=_user)
             _hostprofile.intro_self=request.POST.get("intro_self", "")
             _hostprofile.save()
@@ -399,9 +410,26 @@ def modify_teach(request, class_num):
         addr_detail=request.POST.get("addr_deatail", "").encode("utf-8")
         _user=User.objects.get(username=request.user)
         _pre_fillpost=T2TeachClass.objects.get(pk=class_num)
-
         images=request.FILES.getlist("image", "")
         imageform=""
+
+
+        addr_data={}
+        addr_partes=addr.split(" ")
+        if len(addr_partes)>3:
+            addr_data={
+                "area_1":addr_partes[0],
+                "locality":addr_partes[1],
+                "sub_1":addr_partes[2],
+                "sub_2":addr_partes[3],
+            }
+        elif len(addr_partes) == 4:
+            addr_data={
+                "area_1":"",
+                "locality":addr_partes[0],
+                "sub_1":addr_partes[1],
+                "sub_2":addr_partes[2],
+            }
         teach_data={
             "user":_user,
             "category":_pre_fillpost.category,
@@ -430,6 +458,11 @@ def modify_teach(request, class_num):
         auth=False
         if _pre_fillpost.user == request.user or request.user.is_staff:
             auth = True
+        img_valid=False
+        imageform=T2ClassPicForm(teach_data, request.FILES)
+        if imageform.is_valid() or len(request.POST.getlist("img_id")[0])>0:
+            img_valid=True
+
         if teachform.is_valid() and auth:
             _teachpost=teachform.save()
             teach_data['teach_post']=_teachpost
@@ -448,16 +481,31 @@ def modify_teach(request, class_num):
             _classcard=classcardform.save()
             teach_data['class_card']=_classcard
 
-            image_exist=T2ClassPic.objects.filter(teach_post=_teachpost).exists()
-            if image_exist:
-                _old_images=T2ClassPic.objects.filter(teach_post=_teachpost)
-                _old_images.delete()
-                _old_card_images = T2CardPic.objects.filter(class_card=_classcard)
-                _old_card_images.delete()
-            imageform=T2ClassPicForm(teach_data, request.FILES)
+
+            _old_class_img_set = T2ClassPic.objects.filter(teach_post=_teachpost)
+            _old_card_img_set = T2CardPic.objects.filter(class_card=_classcard)
+            if len(request.POST.getlist("img_id")[0])>0 :
+                fst_img_id=request.POST.getlist("img_id")[0]
+                _fst_img=T2ClassPic.objects.filter(id=fst_img_id)[0].image
+                content=imgdb_to_uploadifle(LOCAL, _fst_img)
+                request.FILES['card_img']=content
+            elif request.FILES.getlist("image"):
+                request.FILES['card_img']=request.FILES.getlist("image")[0]
+
+            if _old_card_img_set.exists():
+                _old_card_img_set.delete()
+            i=0
+            img_list=[]
+            for old_class_img in _old_class_img_set:
+                if unicode(old_class_img.id) not in request.POST.getlist("img_id"):
+                    old_class_img.delete()
+
             imagelist=[]
+            imageform=T2ClassPicForm(teach_data,  request.FILES)
+            card_imageform=T2CardPicForm(teach_data, request.FILES)
             if imageform.is_valid():
                 _imagelist=imageform.savefiles()
+                _card_img=card_imageform.save_img()
 
             return render(request, TEMP.CLASS_MODIFY_FINISH_V2D1,{
                  "HTTP_HOST":HTTP_HOST,
@@ -558,9 +606,25 @@ def modify_tut(request, class_num):
         addr_detail=request.POST.get("addr_deatail", "").encode("utf-8")
         _user=User.objects.get(username=request.user)
         _pre_fillpost=T2TutClass.objects.get(pk=class_num)
-
         images=request.FILES.getlist("image", "")
         imageform=""
+
+        addr_data={}
+        addr_partes=addr.split(" ")
+        if len(addr_partes)>3:
+            addr_data={
+                "area_1":addr_partes[0],
+                "locality":addr_partes[1],
+                "sub_1":addr_partes[2],
+                "sub_2":addr_partes[3],
+            }
+        elif len(addr_partes) == 4:
+            addr_data={
+                "area_1":"",
+                "locality":addr_partes[0],
+                "sub_1":addr_partes[1],
+                "sub_2":addr_partes[2],
+            }
         tut_data={
             "user":_user,
             "category":_pre_fillpost.category,
@@ -581,10 +645,16 @@ def modify_tut(request, class_num):
         }
         tutform=T2TutClassForm(tut_data, instance=_pre_fillpost)
         prefill_intro=request.POST.get("intro_self").encode("utf-8")
+
         auth=False
         if _pre_fillpost.user == request.user or request.user.is_staff:
             auth = True
-        if tutform.is_valid() and auth:
+        img_valid=False
+        imageform=T2ClassPicForm(tut_data, request.FILES)
+        if imageform.is_valid() or len(request.POST.getlist("img_id")[0])>0:
+            img_valid=True
+
+        if tutform.is_valid() and img_valid and auth:
             _tutpost=tutform.save()
             tut_data['tut_post']=_tutpost
             tut_data['classtype']="tutclass"
@@ -601,25 +671,30 @@ def modify_tut(request, class_num):
             _classcard=classcardform.save()
             tut_data['class_card']=_classcard
 
-            old_class_img = T2ClassPic.objects.filter(tut_post=_tutpost)
-            old_card_img = T2CardPic.objects.filter(class_card=_classcard)
-            print request.FILES
-
+            _old_class_img_set = T2ClassPic.objects.filter(tut_post=_tutpost)
+            _old_card_img_set = T2CardPic.objects.filter(class_card=_classcard)
             if len(request.POST.getlist("img_id")[0])>0 :
                 fst_img_id=request.POST.getlist("img_id")[0]
-                request.FILES['cd_image']=T2ClassPic.objects.filter(id=fst_img_id)[0]
+                _fst_img=T2ClassPic.objects.filter(id=fst_img_id)[0].image
+                content=imgdb_to_uploadifle(LOCAL, _fst_img)
+                request.FILES['card_img']=content
             elif request.FILES.getlist("image"):
-                print request.FILES.getlist("image")[0]
+                request.FILES['card_img']=request.FILES.getlist("image")[0]
 
-            # if image_exist:
-            #     _old_images=T2ClassPic.objects.filter(tut_post=_tutpost)
-            #     _old_card_images = T2CardPic.objects.filter(class_card=_classcard)
-            #     _old_images.delete()
-            #     _old_card_images.delete()
-            # imageform=T2ClassPicForm(tut_data, request.FILES)
+            if _old_card_img_set.exists():
+                _old_card_img_set.delete()
+            i=0
+            img_list=[]
+            for old_class_img in _old_class_img_set:
+                if unicode(old_class_img.id) not in request.POST.getlist("img_id"):
+                    old_class_img.delete()
+
             imagelist=[]
+            imageform=T2ClassPicForm(tut_data,  request.FILES)
+            card_imageform=T2CardPicForm(tut_data, request.FILES)
             if imageform.is_valid():
                 _imagelist=imageform.savefiles()
+                _card_img=card_imageform.save_img()
 
             return render(request, TEMP.CLASS_MODIFY_FINISH_V2D1,{
                  "HTTP_HOST":HTTP_HOST,
@@ -892,33 +967,22 @@ def check_state(request):
 
         _state=State.objects.get_or_create(state=state)
         return _state
-
-        # for local in local_list:
-        #     if local in ["서울특별시"]:
-        #         _state=State.objects.get_or_create(state="seoul")
-        #         return _state
-        #     elif local in ["인천광역시", "경기도"]:
-        #         _state=State.objects.get_or_create(state="incheon_gyeonggi")
-        #         return _state
-        #     elif local in ['부산광역시','울산광역시','경상남도']:
-        #         _state=State.objects.get_or_create(state="busan_ulsan_gyeongnam")
-        #         return _state
-        #     elif local in ['대구광역시', '경상북도']:
-        #         _state=State.objects.get_or_create(state="daegu_gyeongbuk")
-        #         return _state
-        #     elif local in ['대전광역시','세종특별자치시', '충청북도', '충청남도']:
-        #         _state=State.objects.get_or_create(state="daejeon_chungcheong")
-        #         return _state
-        #     elif local in ['광주광역시', '전라북도', '전라남도']:
-        #         _state=State.objects.get_or_create(state="gwangju_jeonla")
-        #         return _state
-        #     elif local in ['강원도']:
-        #         _state=State.objects.get_or_create(state="gangwon")
-        #         return _state
-        #     elif local in ['제주특별자치도']:
-        #         _state=State.objects.get_or_create(state="jeju")
-        #         return _state
-        # _state=State.objects.get_or_create(state="etc")
-        # return _state
     else :
         return False
+
+def imgdb_to_uploadifle(local, dburl):
+
+    if local:
+        url_set = "http://localhost:8000/userphoto/media/"
+    else:
+        url_set= "http://diytec.beta.s3.amazonaws.com/uploads/"
+
+    img_info=[]
+    url =url_set+str(dburl)
+    img_res = requests.get(url)
+    img = Image.open(StringIO(img_res.content))
+    imgstring = StringIO()
+    img.save(imgstring, "PNG")
+    newfile=InMemoryUploadedFile(imgstring, None, 'temp.png', 'image/png', imgstring.len, None)
+
+    return newfile

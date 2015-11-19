@@ -29,6 +29,13 @@
     @media screen and (max-width:480px) {
         .tmk-qitem-selecter-wrapper {margin-top:15px;}
     }
+
+    .filePhoto{
+        display: none;
+    }
+    input.filePhoto{
+        display: none;
+    }
 </style>
 {%endblock%}
 
@@ -255,44 +262,38 @@
                             <div class="tmk-panel-contents">
                                 <div class="well filedrag" id="filedrag">
                                     <div class="form-group row">
-                                        <div class="col-md-8 col-xs-7">
+                                        <div class="col-md-8">
                                             <div>
-                                                <label class="drag-label">참조할 작품 사진을 이곳에 끌어다 놓아주세요 <br>
+                                                <label class="drag-label">사진을 이곳에 끌어다 놓아주세요 <br>
                                                     JPG, PNG 파일만 업로드가 가능합니다.</label>
                                             </div>
 
                                         </div>
-                                        <div class="col-md-4 col-xs-5" style="top: 10px;">
-                                        <span id="uploader" onclick="findLastInput(true);" class="custom-file-input-button btn btn-default" style="cursor:pointer;">
-                                            <span class="custom-file-input-button-text">사진 가져오기</span>
-                                        </span>
+                                        <div class="col-md-4" style="top: 10px;">
+                                                <span id="uploader" onclick="putImgsToFile();" class="custom-file-input-button btn btn-default" style="cursor:pointer;">
+                                                    <span class="custom-file-input-button-text">사진 가져오기</span>
+                                                </span>
                                         </div>
                                     </div>
-
                                     <div class="tmk-imgs" id="tmk-imgs">
                                         {% for img_info in teach_data.db_images%}
-                                        <div>
+                                        <div class="tmk-img">
+                                            <input type="file" name="image" id="filePhoto{{forloop.counter}}" class="filePhoto"/>
                                             <input type="hidden" name="img_id" value="{{img_info.0}}">
                                             <img src="{{MEDIA_URL}}{{img_info.1}}"/>
                                             <span onclick="deleteImg(this);"></span>
                                         </div>
                                         {% endfor %}
-
-
-                                        {% for i in teach_data.empty_box %}
-                                        <div>
-                                            <img src="" hidden>
+                                    </div>
+                                    <div id="templateImg">
+                                        <div class="tmk-img">
+                                            <input type="file" name="image" id="filePhoto1" class="filePhoto"/>
+                                            <input type="hidden" name="img_id" value="">
+                                            <img src=""/>
                                             <span onclick="deleteImg(this);"></span>
                                         </div>
-                                        {% endfor %}
-
-                                        <input type="file" name="image" id="filePhoto1" />
-                                        <input type="file" name="image" id="filePhoto2" />
-                                        <input type="file" name="image" id="filePhoto3" />
-                                        <input type="file" name="image" id="filePhoto4" />
-                                        <input type="file" name="image" id="filePhoto5" />
-
                                     </div>
+
                                 </div>
 
                             </div>
