@@ -120,7 +120,7 @@
                                 {% if bestclass.best_classcard.classtype == "tutclass"%}
                                 <span class="label tmk-label">{{bestclass.best_classcard.classtype|classtype2han}}</span>
                                 {% else %}
-                                <span class="label tmk-label">{{bestclass.best_classcard.teach_post.deadline|classtype2han}}</span>
+                                <span class="label tmk-label" style="background:#FF565A!important;">{{bestclass.best_classcard.teach_post.deadline|classtype2han}}</span>
                                 {% endif %}
                             </div>
                             <div class="card-link">
