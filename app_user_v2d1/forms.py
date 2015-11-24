@@ -6,7 +6,8 @@ from django.contrib.auth import authenticate
 
 from app_user_v2d1.models import \
     T2HostApply,\
-    T2Profile
+    T2Profile, \
+    T2HostProfile
 
 
 class UserForm(forms.ModelForm):
@@ -112,3 +113,16 @@ class ProfileForm(forms.Form):
     pro_pic=forms.ImageField(required=False)
     intro_line=forms.CharField(required=False)
     mobli=forms.CharField(required=False)
+
+
+class HostProfileForm(forms.ModelForm):
+
+    hosttype=forms.CharField(max_length=100)
+
+    class Meta:
+        model=T2HostProfile
+        fields=('hosttype',"intro_self",)
+
+    # def save(self, commit=True):
+    #     _user=self.data.get('user', "")
+    #

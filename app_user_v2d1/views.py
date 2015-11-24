@@ -37,7 +37,8 @@ from app_user_v2d1.forms import\
     EmailCheck,\
     PW_CrossCheckForm, \
     HostApplyForm, \
-    ProfileForm
+    ProfileForm, \
+    HostProfileForm
 from app_user_v2d1.models import \
     T2Profile, \
     T2SignupConfirmKey,\
@@ -287,8 +288,11 @@ def host_apply(request):
     elif request.method == "POST":
         mobli=request.POST.get("mobli1","")+request.POST.get("mobli2","")+\
             request.POST.get("mobli3","")
+
+        _user=User.objects.get(username=request.user)
         apply_data={
             "introduce":request.POST.get("introduce", ""),
+            "intro_self":request.POST.get("introduce", ""),
             "mobli1":request.POST.get("mobli1",""),
             "mobli2":request.POST.get("mobli2",""),
             "mobli3":request.POST.get("mobli3",""),
@@ -299,11 +303,19 @@ def host_apply(request):
             "potpolio":request.POST.get("potpolio",""),
         }
         hostform=HostApplyForm(apply_data, request.FILES)
+        hostproform=HostProfileForm(apply_data)
+        print hostproform.is_valid()
         if hostform.is_valid():
             _hostapply=hostform.save(commit=False)
-            _hostapply.user=User.objects.get(username=request.user)
+            _hostapply.user=_user
             _hostapply.save()
-            return render(request, TEMP.HOST_APPLY_FINISH,{})
+            _hostprofile=hostproform.save(commit=False)
+            _hostprofile.user=_user
+            _hostprofile.save()
+            _profile=T2Profile.objects.get(user=_user)
+            _profile.mobli_on(_user, apply_data["mobli2"], apply_data["mobli3"])
+
+            return render(request, TEMP.HOST_APPLY_FINISH,{ 'HTTP_HOST':HTTP_HOST,})
 
     return render(request, TEMP.HOST_APLLY_V2D1,{
         "hostform":hostform,
@@ -359,7 +371,6 @@ def edit_profile(request, user_num):
         type=request.POST.get("edit_type", "")
         profileform=ProfileForm(request.POST)
         if type == "basic":
-            print "bassic"
             if profileform.is_valid():
                 image=request.FILES.get("pro_pic", "")
                 last_name=request.POST.get("last_name", "")
@@ -379,7 +390,6 @@ def edit_profile(request, user_num):
 
                 return HttpResponseRedirect("/v2.1/user/profile/%d" %(_profile_user.id))
         elif type == "host":
-            print "host"
             video=utils.shard_url_picker(request.POST.get("video", ""))
             image=request.FILES.get("intro_pic", "")
             intro_self=request.POST.get('intro_self', "")
