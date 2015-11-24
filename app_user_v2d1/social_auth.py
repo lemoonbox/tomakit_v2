@@ -32,7 +32,7 @@ def save_propic(strategy,  response, details, user=None ,*args, **kwargs):
             except HTTPError:
                 pass
             else:
-                _profile.pro_pic.save('{0}_facebook.jpg'.format(user.username),
+                _profile.pro_pic.save('{0}_facebook.jpg'.format("profile"),
                                          ContentFile(responsepic.content))
 
         FB_unitime= response.get(u'updated_time')
@@ -50,5 +50,5 @@ def save_propic(strategy,  response, details, user=None ,*args, **kwargs):
             except HTTPError:
                 pass
             else:
-                _profile.pro_pic.save('{0}_facebook.jpg'.format(user.username),
+                _profile.pro_pic.save('{0}_facebook.jpg'.format("profile"),
                                          ContentFile(responsepic.content))

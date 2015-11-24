@@ -105,11 +105,13 @@
         <div class="col-lg-8">
             <div class="tmk-h3">소개</div>
             {% if host_profile%}
-            {% if host_profile.intro_video%}
-            <iframe width="100%" height="480px" src="https://www.youtube.com/embed/{{host_profile.intro_video}}" frameborder="0" allowfullscreen></iframe><br>
-            {% else %}
-            <img style="width:100%;" src="{{MEDIA_URL}}{{host_profile.intro_pic}}" alt="작가 소개 이미지"><br>
-            {% endif %}
+                {% if host_profile.intro_video%}
+                <iframe width="100%" height="480px" src="https://www.youtube.com/embed/{{host_profile.intro_video}}" frameborder="0" allowfullscreen></iframe><br>
+                {% elif  host_profile.intro_pic %}
+                <img style="width:100%;" src="{{MEDIA_URL}}{{host_profile.intro_pic}}" alt="작가 소개 이미지"><br>
+                {% else %}
+                    <div class="tmk-panel">작가 소개-동영상,사진이 아직 없습니다.</div>
+                {% endif %}
             <div class="tmk-h3">자기 소개</div>
             <div class="tmk-panel">{{host_profile.intro_self}}</div>
             <div class="tmk-h3">가게 주소</div>
