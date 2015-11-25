@@ -151,22 +151,9 @@ def demand_modify(request, demand_num=0):
             url_set = "http://localhost:8000/userphoto/media/"
         else:
             url_set= "http://diytec.beta.s3.amazonaws.com/uploads/"
-        img_arr=[]
-        for db_images in _post.t2demandpic_set.all():
-            img_info=[]
-            url =url_set+str(db_images.image)
-            img_res = requests.get(url)
-            img = Image.open(StringIO(img_res.content))
-            output = StringIO()
-            type=img.format
-            img.save(output, format=type)
-            contents = output.getvalue().encode("base64")
-            output.close()
-            img_info.append(db_images.id)
-            img_info.append(db_images.image)
-            img_info.append(contents)
-            img_arr.append(img_info)
-        demand_data['db_images']=img_arr
+
+        _img_arr=T2DemandPic.base64_imglist(url_set=url_set, _demand_post=_post)
+        demand_data['db_images']=_img_arr
 
     elif request.method == "POST":
         imageform=""
@@ -207,13 +194,18 @@ def demand_modify(request, demand_num=0):
             _newcard=cardform.save()
             demand_data["demand_card"]=_newcard
 
-            _oldpics=T2DemandPic.objects.filter(demand_post=_oldpost)
-            _oldpics.delete()
+            _oldimgs=T2DemandPic.objects.filter(demand_post=_oldpost)
+
+            for _oldimg in _oldimgs:
+                if unicode(_oldimg.id) not in request.POST.getlist("img_id"):
+                    _oldimg.delete()
+
             imageform=T2DemandPicForm(demand_data, request.FILES)
             imagelist=[]
             if imageform.is_valid():
                 for file in images:
                     _imagelist=imageform.savefiles()
+
             return render(request,TEMP.MODIFY_FINISH_V2D1,{
                 "HTTP_HOST":HTTP_HOST,
                 'demand_data':demand_data,

@@ -117,10 +117,8 @@
                         <a class="tmk-card-img" href="http://{{HTTP_HOST}}/v2.1/class/{{bestclass.best_classcard.id}}">
                             <div class="tmk-class-type-label">
                                 <!--수업 타입-->
-                                {% if bestclass.best_classcard.classtype == "tutclass"%}
-                                <span class="label tmk-label">{{bestclass.best_classcard.classtype|classtype2han}}</span>
-                                {% else %}
-                                <span class="label tmk-label">{{bestclass.best_classcard.teach_post.deadline|classtype2han}}</span>
+                                {% if bestclass.best_classcard.deadline_over %}
+                                <span class="label tmk-label" style="background:#FF565A!important;">모집 마감</span>
                                 <!--style="background:#FF565A!important;"-->
                                 {% endif %}
                             </div>

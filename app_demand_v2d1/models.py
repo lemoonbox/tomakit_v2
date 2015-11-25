@@ -1,8 +1,12 @@
 from django.db import models
 from django.conf import settings
 import uuid
+import requests
+from PIL import Image
+from StringIO import StringIO
 
 from app_comminfo.models import State, Category
+
 from datetime import datetime
 
 # Create your models here.
@@ -69,6 +73,26 @@ class T2DemandPic(models.Model):
 
     def __unicode__(self):
         return  u'%s %s' % (self.id, self.image)
+
+    @staticmethod
+    def base64_imglist(url_set, _demand_post):
+        img_arr=[]
+        _img_qset=T2DemandPic.objects.filter(demand_post=_demand_post)
+        for db_images in _img_qset:
+            img_info=[]
+            url =url_set+str(db_images.image)
+            img_res = requests.get(url)
+            img = Image.open(StringIO(img_res.content))
+            output = StringIO()
+            img.save(output, format="PNG")
+            contents = output.getvalue().encode("base64")
+            output.close()
+            img_info.append(db_images.id)
+            img_info.append(db_images.image)
+            img_info.append(contents)
+            img_arr.append(img_info)
+        return img_arr
+
 
 class T2DemandCmt(models.Model):
     user=models.ForeignKey(settings.AUTH_USER_MODEL)

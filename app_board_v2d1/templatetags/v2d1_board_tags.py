@@ -87,3 +87,11 @@ def goaltag2han(valu, argu=None):
             hantags+=u" #창업을 위한 전문 수업"
 
     return hantags
+
+
+@register.filter(name="classtype2han")
+def class_status(valu, argu=None):
+    if valu == "True":
+        return "SOLD OUT"
+    else:
+        pass

@@ -216,6 +216,13 @@
     #tmk-form .btn-primary {margin-right:15px;}
     .tmk-page-header{padding-bottom:15px;}
     label span {color:red}
+
+    .filePhoto{
+        display: none;
+    }
+    input.filePhoto{
+        display: none;
+    }
 </style>
 {%endblock%}
 
@@ -376,7 +383,6 @@
                 <div class="tmk-panel">
                     <label class="col-md-2">희망일정 <span>*</span></label>
                     <div class="col-md-10">
-                        <span style="color:red;">여러개 입력해주시면 좋아요 :)</span><br>
                         <input type="text" name="weekday" class="form-control" value="{{demand_data.weekday}}" placeholder="ex) 주말 아무때나, 평일7시이후"><br>
                     </div>
                     <div class="col-md-10 pull-right tmk-error">
@@ -450,7 +456,7 @@
                 </div>
 
                 <div class="tmk-panel">
-                    <label class="col-md-2">연락받으실 전화번호 <span>*</span></label>
+                    <label class="col-md-2">연락처<span>*</span></label>
                     <!--<div class="col-md-10" style="display:inline;">-->
                     <div class="form-group">
                         <div class="col-xs-4 col-sm-3 col-md-3" style="min-width:80px;">
@@ -484,40 +490,39 @@
 
                                         </div>
                                         <div class="col-md-4" style="top: 10px;">
-                                        <span id="uploader" onclick="findLastInput(true);" class="custom-file-input-button btn btn-default" style="cursor:pointer;">
-                                            <span class="custom-file-input-button-text">PC에서 사진 가져오기</span>
+                                        <span id="uploader" onclick="putImgsToFile();" class="custom-file-input-button btn btn-default" style="cursor:pointer;">
+                                            <span class="custom-file-input-button-text">사진 가져오기</span>
                                         </span>
                                         </div>
                                     </div>
                                     <div class="tmk-imgs" id="tmk-imgs">
                                         {% for img_info in demand_data.db_images%}
-                                        <div>
+                                        <div class="tmk-img">
+                                            <input type="file" name="image" id="filePhoto{{forloop.counter}}" class="filePhoto"/>
                                             <input type="hidden" name="img_id" value="{{img_info.0}}">
                                             <img src="{{MEDIA_URL}}{{img_info.1}}"/>
                                             <span onclick="deleteImg(this);"></span>
                                         </div>
                                         {% endfor %}
-
-
-                                        {% for i in teach_data.empty_box %}
-                                        <div>
-                                            <img src="" hidden>
+                                    </div>
+                                    <div id="templateImg">
+                                        <div class="tmk-img">
+                                            <input type="file" name="image" id="filePhoto1" class="filePhoto"/>
+                                            <input type="hidden" name="img_id" value="">
+                                            <img src=""/>
                                             <span onclick="deleteImg(this);"></span>
                                         </div>
-                                        {% endfor %}
-                                        <input type="file" name="image"  id="filePhoto1" />
-                                        <input type="file" name="image"  id="filePhoto2" />
-                                        <input type="file" name="image"  id="filePhoto3" />
-                                        <input type="file" name="image"  id="filePhoto4" />
-                                        <input type="file" name="image"  id="filePhoto5" />
+                                    </div>
 
-                                    </div>   </div>
+                                </div>
                             </div>
                             <div class="tmk-panel-footer"></div>
                         </div>
                         <!--<aside class="tmk-aside-right">만들고 싶은 것의 사진을 업로드 해주세요. JPG, PNG 파일만 업로드가 가능합니다.</aside>-->
                     </div>
+                    <div class="col-md-10 col-md-offset-2 col-xs-12 tmk-form-error">
                     {{imageform.image.errors|striptags}}
+                    </div>
                 </div>
 
                 <div class="tmk-panel" style="border-bottom:none;">

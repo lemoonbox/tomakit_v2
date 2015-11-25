@@ -377,7 +377,8 @@ def edit_profile(request, user_num):
                 first_name=request.POST.get('first_name', "")
                 intro_line=request.POST.get('intro_line', "")
                 mobli=request.POST.get("mobli2", "")+request.POST.get("mobli3", "")
-                _profile.pro_pic=image
+                if image:
+                    _profile.pro_pic=image
                 _profile_user.last_name=last_name
                 _profile_user.first_name=first_name
                 _profile.intro_line=intro_line
@@ -425,7 +426,7 @@ def class_check(request, user_num):
             _host_cl_cards=T2ClassCard.objects.filter(user=_profile_user)
         _demand_classes=T2DemandCard.objects.filter(user=_profile_user)
     else:
-        return Http404("잘못된 요청입니다.")
+        raise Http404("본인의 아이디에서만 사용할 수 있습니다..")
 
     return render(request, TEMP.CLASS_CKECK_V2D1,{
         "profile_user":_profile_user,

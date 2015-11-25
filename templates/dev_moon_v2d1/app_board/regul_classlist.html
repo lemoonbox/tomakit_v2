@@ -187,12 +187,10 @@
 
 
                         <a class="tmk-card-img" href="http://{{HTTP_HOST}}/v2.1/class/{{class.id}}">
-                            <div class="tmk-class-type-label">
+                            <div class="tmk-class-type-label" >
                                 <!--수업 타입-->
-                                {% if class.classtype == "tutclass"%}
-                                <span class="label tmk-label">{{class.classtype|classtype2han}}</span>
-                                {% else %}
-                                <span class="label tmk-label">{{class.teach_post.deadline|classtype2han}}</span>
+                                {% if class.deadline_over%}
+                                <span class="label tmk-label"style="background:#FF565A!important;">SOLD OUT</span>
                                 {% endif %}
                             </div>
                             <div class="card-link">

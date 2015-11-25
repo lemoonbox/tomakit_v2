@@ -52,8 +52,8 @@ class T2CardPicLine(admin.TabularInline):
 
 
 class T2TeachClassAdmin(admin.ModelAdmin):
-
-    list_display=('title', 'id', 'repeat','perhour', 'price', 'extra_price')
+    search_fields = ['user__username', 'user__first_name', 'user__email','title',]
+    list_display=('title', 'id', 'repeat','perhour', 'price', 'extra_price', "created_at","updated_at")
     fieldsets=[('Redcord',{'fields':['user', 'category','classtype', 'title', 'intro_line',
                                      'repeat', 'perhour', 'weekday', 'max_num',
                                      'min_num', 'startday', 'deadline', 'price',
@@ -64,8 +64,8 @@ class T2TeachClassAdmin(admin.ModelAdmin):
 
 
 class T2TutClassAdmin(admin.ModelAdmin):
-
-    list_display=('title', 'id', 'repeat','perhour', 'price', 'extra_price')
+    search_fields = ['user__username', 'user__first_name', 'user__email','title',]
+    list_display=('title', 'id', 'repeat','perhour', 'price', 'extra_price', "created_at","updated_at")
     fieldsets=[('Redcord',{'fields':['user', 'category','classtype', 'title', 'intro_line',
                                      'repeat', 'perhour', 'weekday',  'price',
                                      'extra_price', 'video', 'descript', 'curri',
@@ -76,8 +76,8 @@ class T2TutClassAdmin(admin.ModelAdmin):
 
 
 class T2ClassCardAdmin(admin.ModelAdmin):
-
-    list_display=('title', 'id', 'repeat','perhour', 'price', 'extra_price')
+    search_fields = ['user__username', 'user__first_name', 'user__email','title',]
+    list_display=('title', 'id', 'repeat','perhour', 'price', 'extra_price', "created_at","updated_at")
     fieldsets=[('Redcord',{'fields':['user', 'category','state', 'teach_post', 'tut_post',
                                      'classtype', 'class_id', 'title', 'intro_line',
                                      'repeat', 'perhour', 'price', 'extra_price',
@@ -86,7 +86,8 @@ class T2ClassCardAdmin(admin.ModelAdmin):
     inlines = (T2CardPicLine,)
 
 class T2ReviewAmdin(admin.ModelAdmin):
-    list_display=('review', 'id', 'user','grade','host_user','teach_post', 'tut_post')
+    search_fields = ['user__username', 'user__first_name', 'user__email','review',]
+    list_display=('review', 'id', 'user','grade','host_user','teach_post', 'tut_post', "created_at","updated_at")
     fieldsets=[('Redcord',{'fields':['user', 'host_user','teach_post', 'tut_post', 'grade',
                                      'review', 'image', 'is_active'],})]
 
