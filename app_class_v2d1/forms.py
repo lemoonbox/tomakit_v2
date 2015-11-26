@@ -36,6 +36,8 @@ class T2TeachClassForm(forms.ModelForm):
     url_error={"invalid":u"url주소를 적어주세요."}
     num_error={'required':u"필수 항목 입니다.",
         'invalid':u"숫자만 입력해주세요",}
+    addr_error={"required": u"주소를 입력해주세요."}
+    addr_detail_error={"required": u"상세 주소를 입력해주세요."}
 
     category=forms.CharField(error_messages=category_error,required=False)
     title=forms.CharField(error_messages=title_error, required=False)
@@ -55,8 +57,8 @@ class T2TeachClassForm(forms.ModelForm):
     descript=forms.CharField(error_messages=required_error)
     curri=forms.CharField(error_messages=required_error)
     notic=forms.CharField(error_messages=required_error)
-    addr=forms.CharField(error_messages=required_error)
-    addr_detail=forms.CharField(error_messages=required_error)
+    addr=forms.CharField(error_messages=addr_error)
+    addr_detail=forms.CharField(error_messages=addr_detail_error)
 
     class Meta:
         model=T2TeachClass
@@ -85,7 +87,8 @@ class T2TutClassForm(forms.ModelForm):
     num_error={'required':u"필수 항목 입니다.",
         'invalid':u"숫자만 입력해주세요",}
     url_error={"invalid":u"url주소를 적어주세요."}
-
+    addr_error={"required": u"주소를 입력해주세요."}
+    addr_detail_error={"required": u"상세 주소를 입력해주세요."}
 
     repeat=forms.IntegerField(error_messages=num_error)
     perhour=forms.IntegerField(error_messages=num_error)
@@ -96,13 +99,27 @@ class T2TutClassForm(forms.ModelForm):
     descript=forms.CharField(error_messages=required_error)
     curri=forms.CharField(error_messages=required_error)
     notic=forms.CharField(error_messages=required_error)
-    addr=forms.CharField(error_messages=required_error)
-    addr_detail=forms.CharField(error_messages=required_error)
+    addr=forms.CharField(error_messages=addr_error)
+    addr_detail=forms.CharField(error_messages=addr_detail_error)
 
     class Meta:
         model=T2TutClass
         fields=('repeat','perhour','weekday','price','extra_price',
                 'video','descript','curri','notic', 'addr', 'addr_detail',)
+
+    # def is_valid(self):
+    #     valid=super(T2TutClassForm, self).is_valid()
+    #     print valid
+    #     if valid:
+    #         addr=self.data.get("addr", "")
+    #         if addr:
+    #             print addr
+    #             print "is_addr ok"
+    #             return True
+    #     else:
+    #         self.add_error("addr", "주소를 입력해주세요.")
+    #
+    #     return valid
 
     def save(self, commit=True):
         _sate=self.data.get('state', "")
@@ -148,7 +165,9 @@ class T2ClassCardForm(forms.ModelForm):
 
 class T2ClassPicForm(forms.ModelForm):
 
-    image_error={'invalid':"png/jpeg형태의 파일만 업로드 가능합니다."}
+    image_error={'invalid':"png/jpeg형태의 파일만 업로드 가능합니다.",
+                 'requeir':"한장 이상 사진을 입력해주세요."}
+
     image=forms.ImageField(error_messages=image_error, required=False)
 
     class Meta:

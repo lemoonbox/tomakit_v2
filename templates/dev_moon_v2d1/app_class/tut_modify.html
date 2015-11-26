@@ -60,29 +60,29 @@
                         <div class="selecter cover" tabindex="0">
                             <select id="repeat" name="repeat" required class="selecter_3 selecter-element" data-selecter-options="{&quot;cover&quot;:&quot;true&quot;}" tabindex="-1">
                                 <option value="1"
-                                        {% if tut_data.repeat == '1' %}selected {% endif %}>1회</option>
+                                        {% if tut_data.repeat == 1 %}selected {% endif %}>1회</option>
                                 <option value="2"
-                                        {% if tut_data.repeat == '2' %}selected {% endif %}>2회</option>
+                                        {% if tut_data.repeat == 2 %}selected {% endif %}>2회</option>
                                 <option value="3"
-                                        {% if tut_data.repeat == '3' %}selected {% endif %}>3회</option>
+                                        {% if tut_data.repeat == 3 %}selected {% endif %}>3회</option>
                                 <option value="4"
-                                        {% if tut_data.repeat == '4' %}selected {% endif %}>4회</option>
+                                        {% if tut_data.repeat == 4 %}selected {% endif %}>4회</option>
                                 <option value="5"
-                                        {% if tut_data.repeat == '5' %}selected {% endif %}>5회</option>
+                                        {% if tut_data.repeat == 5 %}selected {% endif %}>5회</option>
                                 <option value="6"
-                                        {% if tut_data.repeat == '6' %}selected {% endif %}>6회</option>
+                                        {% if tut_data.repeat == 6 %}selected {% endif %}>6회</option>
                                 <option value="7"
-                                        {% if tut_data.repeat == '7' %}selected {% endif %}>7회</option>
+                                        {% if tut_data.repeat == 7 %}selected {% endif %}>7회</option>
                                 <option value="8"
-                                        {% if tut_data.repeat == '8' %}selected {% endif %}>8회</option>
+                                        {% if tut_data.repeat == 8 %}selected {% endif %}>8회</option>
                                 <option value="9"
-                                        {% if tut_data.repeat == '9' %}selected {% endif %}>9회</option>
+                                        {% if tut_data.repeat == 9 %}selected {% endif %}>9회</option>
                                 <option value="10"
-                                        {% if tut_data.repeat == '10' %}selected {% endif %}>10회</option>
+                                        {% if tut_data.repeat == 10 %}selected {% endif %}>10회</option>
                                 <option value="11"
-                                        {% if tut_data.repeat == '11' %}selected {% endif %}>11회</option>
+                                        {% if tut_data.repeat == 11 %}selected {% endif %}>11회</option>
                                 <option value="12"
-                                        {% if tut_data.repeat == '12' %}selected {% endif %}>12회</option>
+                                        {% if tut_data.repeat == 12 %}selected {% endif %}>12회</option>
                             </select>
                             <span class="selecter-selected repeat-selected" onclick="btnClick(this)">횟수 선택</span>
                             <div class="selecter-options" data-value="">
@@ -133,17 +133,17 @@
                         <div class="selecter cover" tabindex="0">
                             <select id="perhour" name="perhour" required class="selecter_3 selecter-element" data-selecter-options="{&quot;cover&quot;:&quot;true&quot;}" tabindex="-1">
                                 <option value="1"
-                                        {% if tut_data.perhour == '1'%}selected {% endif %} >1시간</option>
+                                        {% if tut_data.perhour == 1%}selected {% endif %} >1시간</option>
                                 <option value="2"
-                                        {% if tut_data.perhour == '2' %}selected {% endif %} >2시간</option>
+                                        {% if tut_data.perhour == 2 %}selected {% endif %} >2시간</option>
                                 <option value="3"
-                                        {% if tut_data.perhour == '3' %}selected {% endif %} >3시간</option>
+                                        {% if tut_data.perhour == 3 %}selected {% endif %} >3시간</option>
                                 <option value="4"
-                                        {% if tut_data.perhour == '4' %}selected {% endif %} >4시간</option>
+                                        {% if tut_data.perhour == 4 %}selected {% endif %} >4시간</option>
                                 <option value="5"
-                                        {% if tut_data.perhour == '5' %}selected {% endif %}>5시간</option>
+                                        {% if tut_data.perhour == 5 %}selected {% endif %}>5시간</option>
                                 <option value="6"
-                                        {% if tut_data.perhour == '6' %}selected {% endif %}>6시간</option>
+                                        {% if tut_data.perhour == 6 %}selected {% endif %}>6시간</option>
                             </select>
                             <span class="selecter-selected perhour-selected" onclick="btnClick(this)">회당 시간 선택</span>
                             <div class="selecter-options" data-value="">
@@ -177,7 +177,8 @@
                 <div class="tmk-panel">
                     <label class="col-md-2 col-xs-12">수업일정 <span>*</span></label>
                     <div class="col-md-8 col-xs-8">
-                        <input class="form-control" type="text" name="weekday" value="{{tut_data.weekday}}" placeholder="ex) 매주 화요일 7:00, 매주 토요일 2시">
+                        <input class="form-control" type="text" name="weekday" value="{{tut_data.weekday}}"
+                               placeholder="ex) 매주 화요일 7:00, 매주 토요일 2시" {% if tutform.weekday.errors%}autofocus{%endif%}>
                     </div>
                     <div class="col-md-10 col-md-offset-2 col-xs-12 tmk-form-error">
                         {{tutform.weekday.errors|striptags}}
@@ -189,11 +190,13 @@
                     <label class="col-md-2 col-xs-12">수강료 <span>*</span></label>
                     <div class="col-md-3 col-xs-4">
                         수강료(재료비 제외)
-                        <input class="form-control"type="text" name="price" value="{{tut_data.price}}">
+                        <input class="form-control"type="text" name="price" value="{{tut_data.price}}"
+                                {% if tutform.price.errors%}autofocus{%endif%}>
                     </div>
                     <div class="col-md-3 col-xs-4">
                         재료비
-                        <input class="form-control"type="text" name="extra_price" value="{{tut_data.extra_price}}">
+                        <input class="form-control"type="text" name="extra_price" value="{{tut_data.extra_price}}"
+                                {% if tutform.extra_price.errors%}autofocus{%endif%}>
                     </div>
                     <div class="col-md-10 col-md-offset-2 col-xs-12 tmk-form-error">
                         {{tutform.price.errors|striptags}}
@@ -259,7 +262,8 @@
                 <div class="tmk-panel">
                     <label class="col-md-2">영상 등록(선택)</label>
                     <div class="col-md-10">
-                        <input class="form-control" type="text" name="video" value="http://www.youtube.com/{{tut_data.video}}" placeholder="유튜브 영상 url을 입력하세요">
+                        <input class="form-control" type="text" name="video" value="http://www.youtube.com/{{tut_data.video}}"
+                               placeholder="유튜브 영상 url을 입력하세요" {% if tutform.video.errors%}autofocus{%endif%}>
                         <div class="col-md-10 col-md-offset-2 col-xs-12 tmk-form-error">
                             {{tutform.video.errors|striptags}}
                         </div>
@@ -270,7 +274,8 @@
                         수업 소개 <span>*</span></label>
                     <div class="col-md-10">
                         이 클래스에서 무엇을 배울 수 있나요?
-                        <textarea class="form-control" name="descript" >{{tut_data.descript}}</textarea>
+                        <textarea class="form-control" name="descript"
+                                  {% if tutform.descript.errors%}autofocus{%endif%}>{{tut_data.descript}}</textarea>
                         <div class="tmk-form-error">
                             {{tutform.descript.errors|striptags}}
                         </div>
@@ -282,7 +287,8 @@
                         커리큘럼 <span>*</span></label>
                     <div class="col-md-10">
                         수업 회차 또는 시간별 커리큘럼이 어떻게 짜여져 있나요?
-                        <textarea class="form-control" name="curri">{{tut_data.curri}}</textarea>
+                        <textarea class="form-control" name="curri"
+                                {% if tutform.curri.errors%}autofocus{%endif%}>{{tut_data.curri}}</textarea>
                         <div class="tmk-form-error">
                             {{tutform.curri.errors|striptags}}
                         </div>
@@ -293,7 +299,8 @@
                         안내사항 <span>*</span></label>
                     <div class="col-md-10">
                         수강생이 미리 알아야 할 수업 규정 및 안내사항을 입력해주세요
-                        <textarea class="form-control" name="notic">{{tut_data.notic}}</textarea>
+                        <textarea class="form-control" name="notic"
+                                  {% if tutform.notic.errors%}autofocus{%endif%}>{{tut_data.notic}}</textarea>
                         <div class="tmk-form-error">
                             {{tutform.notic.errors|striptags}}
                         </div>
@@ -309,7 +316,8 @@
                 <div class="tmk-panel">
                     <label class="col-md-2">작가소개 <span>*</span></label>
                     <div class="col-md-10">
-                        <input class="form-control" type="text" name="intro_self" value="{{user.t2hostprofile_set.first.intro_self}}">
+                        <input class="form-control" type="text" name="intro_self"
+                               value="{{user.t2hostprofile_set.first.intro_self}}" {% if tutform.intro_self.errors%}autofocus{%endif%}>
                         <div class="col-md-10 col-md-offset-2 col-xs-12 tmk-form-error">
                             {{tutform.intro_self.errors|striptags}}
                         </div>
@@ -323,7 +331,9 @@
                             도로명 또는 동 입력
                             <div id="locationField">
                                 <input id="pac-input" class="form-control controls" type="text"
-                                       placeholder="동이나 도로명을 입력해주세요" value="{{tut_data.addr}}" style="max-width:360px;margin-top:5px!important;margin-bottom:15px;" name="addr_input" onkeypress="return event.keyCode != 13;">
+                                       placeholder="동이나 도로명을 입력해주세요" value="{{tut_data.addr}}"
+                                       style="max-width:360px;margin-top:5px!important;margin-bottom:15px;" name="addr_input" onkeypress="return event.keyCode != 13;"
+                                        {% if tutform.addr.errors%}autofocus{%endif%}>
                                 <div id="type-selector" class="controls" hidden>
                                     <input type="radio" name="type" id="changetype-all" checked="checked">
                                     <label for="changetype-all">All</label>
@@ -337,57 +347,60 @@
                                     <input type="radio" name="type" id="changetype-geocode">
                                     <label for="changetype-geocode">Geocodes</label>
                                 </div>
-                            <!--<div class="reset-img-max-width">-->
-                                <!--<div id="floating-panel">-->
-                                    <!--<input hidden id="address" value="{{tut_data.addr}}">-->
-                                    <!--&lt;!&ndash;<input id="submit" type="button" value="Geocode">&ndash;&gt;-->
-                                <!--</div>-->
+                                <!--<div class="reset-img-max-width">-->
+                                    <!--<div id="floating-panel">-->
+                                        <!--<input hidden id="address" value="{{tut_data.addr}}">-->
+                                        <!--&lt;!&ndash;<input id="submit" type="button" value="Geocode">&ndash;&gt;-->
+                                    <!--</div>-->
                                 <div id="map"></div>
                             <!--</div>-->
-                        <table hidden>
-                            <tr class="form-group">
-                                <td class="label">시/도</td>
-                                <td class="widefield" colspan="2">
-                                    <input class="field" id="locality" name="locality"
-                                           value="{{addr_data.locality}}">
-                                </td>
-                                <td class="wideField" colspan="2">
-                                    <input class="field" name="area_1"  id="administrative_area_level_1"
-                                           value="{{addr_data.area_1}}">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="label">구</td>
-                                <td class="wideField">
-                                    <input class="field" name="sublocal_1" id="sublocality_level_1"
-                                           value="{{addr_data.sub_1}}"></td>
-                                <!--<td class="label">동</td>-->
-                                <td class="wideField">
-                                    <input class="field" name="sublocal_2" id="sublocality_level_2"
-                                           value="{{addr_data.sub_2}}"></td>
-                                <td class="label">우편번호</td>
-                                <td class="wideField">
-                                    <input class="field" name="postal_code" id="postal_code"></td>
-                            </tr>
-                            <tr>
-                                <td class="label">상세주소</td>
-                                <td class="slimField">
-                                    <input class="field" id="street_address"></input>
-                                    <input class="field" id="sublocality_level_4" name="sublocal_4"></input>
-                                    <input class="field" id="premise"></input></td>
-                            </tr>
-                        </table>
-                    </div>
+                                <table hidden>
+                                    <tr class="form-group">
+                                        <td class="label">시/도</td>
+                                        <td class="widefield" colspan="2">
+                                            <input class="field" id="locality" name="locality"
+                                                   value="{{addr_data.locality}}">
+                                        </td>
+                                        <td class="wideField" colspan="2">
+                                            <input class="field" name="area_1"  id="administrative_area_level_1"
+                                                   value="{{addr_data.area_1}}">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="label">구</td>
+                                        <td class="wideField">
+                                            <input class="field" name="sublocal_1" id="sublocality_level_1"
+                                                   value="{{addr_data.sub_1}}"></td>
+                                        <!--<td class="label">동</td>-->
+                                        <td class="wideField">
+                                            <input class="field" name="sublocal_2" id="sublocality_level_2"
+                                                   value="{{addr_data.sub_2}}"></td>
+                                        <td class="label">우편번호</td>
+                                        <td class="wideField">
+                                            <input class="field" name="postal_code" id="postal_code"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="label">상세주소</td>
+                                        <td class="slimField">
+                                            <input class="field" id="street_address"></input>
+                                            <input class="field" id="sublocality_level_4" name="sublocal_4"></input>
+                                            <input class="field" id="premise"></input></td>
+                                    </tr>
+                                </table>
+                            </div>
                         </div>
                         <div class="col-md-10 col-md-offset-2 col-xs-12" style="margin-top:15px;">
                         상세 주소 입력
-                        <input class="form-control" type="text" name="addr_deatail" value="{{tut_data.addr_detail}}" placeholder="상세주소를 입력해주세요">
-                    </div>
+                        <input class="form-control" type="text" name="addr_deatail" value="{{tut_data.addr_detail}}"
+                               placeholder="상세주소를 입력해주세요" {% if tutform.addr_detail.errors%}autofocus{%endif%}>
                         </div>
-
-
-                <input class="btn btn-primary pull-right" style="margin:15px;" type="submit" value="개설등록">
+                        <div class="col-md-10 col-md-offset-2 col-xs-12 tmk-error">
+                            {{tutform.addr.errors|striptags}}
+                            {{tutform.addr_detail.errors|striptags}}
+                        </div>
                     </div>
+                    <input class="btn btn-primary pull-right" style="margin:15px;" type="submit" value="개설등록">
+                </div>
             </section>
         </form>
     </div>

@@ -80,6 +80,7 @@ def class_begin(request):
             'intro_line':request.POST.get('intro_line', ""),
             'classtype':request.POST.get('classtype', "")
         }
+        print request.POST.get("category","")
 
         if beginform.is_valid() and classtype == "tutclass":
             _tutpost=T2TutClass(user=_user, classtype=classtype,
@@ -150,6 +151,11 @@ def create_tut(request, class_num):
             'curri':request.POST.get("curri"),
             'notic':request.POST.get("notic"),
             'state':_state,
+            'locality':locality,
+            'area_1':area_1,
+            'sublocal_1': sublocal_1,
+            'sublocal_2': sublocal_2,
+            'sublocal_3': sublocal_3,
             'addr':addr,
             'addr_detail':addr_detail,
         }
@@ -199,6 +205,8 @@ def create_tut(request, class_num):
             _classcard.save()
             return render(request, TEMP.CLASS_CREATE_FINISH_V2D1,{
                         "HTTP_HOST":HTTP_HOST,
+                        "cl_card_id":_classcard.id,
+                        'user':_user,
                     })
 
     return render(request, TEMP.CLASS_CREATE_TUT_V2D1,{
@@ -259,6 +267,11 @@ def create_teach(request, class_num):
             'curri':request.POST.get("curri"),
             'notic':request.POST.get("notic"),
             'state':_state,
+            'locality':locality,
+            'area_1':area_1,
+            'sublocal_1': sublocal_1,
+            'sublocal_2': sublocal_2,
+            'sublocal_3': sublocal_3,
             'addr':addr,
             'addr_detail':addr_detail,
         }
@@ -308,6 +321,8 @@ def create_teach(request, class_num):
             _classcard.save()
             return render(request, TEMP.CLASS_MODIFY_FINISH_V2D1,{
                 "HTTP_HOST":HTTP_HOST,
+                "cl_card_id":_classcard.id,
+                'user':_user
             })
 
     return render(request, TEMP.CLASS_CREATE_TEACH_V2D1,{
@@ -352,7 +367,6 @@ def modify_teach(request, class_num):
                 "sub_1":addr_partes[1],
                 "sub_2":addr_partes[2],
             }
-
         teach_data={
             "user":_user,
             "post":_post,
@@ -360,8 +374,8 @@ def modify_teach(request, class_num):
             "title":_post.title,
             "intro_line":_post.intro_line,
             "classtype":_post.classtype,
-            'repeat':_post.repeat,
-            'perhour':_post.perhour,
+            'repeat':int(_post.repeat),
+            'perhour':int(_post.perhour),
             'weekday':_post.weekday,
             'max_num':str(_post.max_num),
             "min_num":str(_post.min_num),
@@ -435,8 +449,8 @@ def modify_teach(request, class_num):
             "category":_pre_fillpost.category,
             "title":_pre_fillpost.title,
             "intro_line":_pre_fillpost.intro_line,
-            'repeat':request.POST.get("repeat"),
-            'perhour':request.POST.get("perhour"),
+            'repeat': int(request.POST.get("repeat")),
+            'perhour':int(request.POST.get("perhour")),
             'weekday':request.POST.get("weekday"),
             'max_num':request.POST.get("max_num"),
             "min_num":request.POST.get('min_num'),
@@ -509,8 +523,10 @@ def modify_teach(request, class_num):
 
             return render(request, TEMP.CLASS_MODIFY_FINISH_V2D1,{
                  "HTTP_HOST":HTTP_HOST,
+                 "cl_card_id":_classcard.id,
             })
-
+    print teach_data['repeat']
+    print teach_data['perhour']
     return render(request, TEMP.CLASS_MODIFY_TEACH_V2D1, {
         "teachform":teachform,
         "imageform":imageform,
@@ -630,8 +646,8 @@ def modify_tut(request, class_num):
             "category":_pre_fillpost.category,
             "title":_pre_fillpost.title,
             "intro_line":_pre_fillpost.intro_line,
-            'repeat':request.POST.get("repeat"),
-            'perhour':request.POST.get("perhour"),
+            'repeat':int(request.POST.get("repeat")),
+            'perhour':int(request.POST.get("perhour")),
             'weekday':request.POST.get("weekday"),
             'price':request.POST.get('price'),
             'extra_price':request.POST.get('extra_price'),
@@ -697,7 +713,8 @@ def modify_tut(request, class_num):
                 _card_img=card_imageform.save_img()
 
             return render(request, TEMP.CLASS_MODIFY_FINISH_V2D1,{
-                 "HTTP_HOST":HTTP_HOST,
+                "HTTP_HOST":HTTP_HOST,
+                "cl_card_id":_classcard.id,
                     })
     return render(request, TEMP.CLASS_MODIFY_TUT_V2D1, {
         "tutform":tutform,
@@ -926,38 +943,41 @@ def check_state(request):
 
         for local in local_list:
             if local in ["서울특별시"]:
-                if sublocal_1 in zone_1:
-                    state="zone_1"
-                    break
-                elif sublocal_1 in zone_2:
-                    state="zone_2"
-                    break
-                elif sublocal_1 in zone_3:
-                    state="zone_3"
-                    break
-                elif sublocal_1 in zone_4:
-                    state="zone_4"
-                    break
-                elif sublocal_1 in zone_5:
-                    state="zone_5"
-                    break
-            elif local in ["경기도"]:
-                if locality in zone_5:
-                    state="zone_6"
-                    break
-                elif locality in zone_6:
-                    state="zone_7"
-                    break
-                elif locality in zone_7:
-                    state="zone_8"
-                    break
-                elif locality in zone_8:
-                    state="zone_9"
-                    break
-            elif local in ["인천광역시"]:
-                state="zone_9"
+                state="zone_1"
                 break
-            elif local in ['부산광역시','울산광역시','경상남도',
+                # if sublocal_1 in zone_1:
+                #     state="zone_1"
+                #     break
+                # elif sublocal_1 in zone_2:
+                #     state="zone_2"
+                #     break
+                # elif sublocal_1 in zone_3:
+                #     state="zone_3"
+                #     break
+                # elif sublocal_1 in zone_4:
+                #     state="zone_4"
+                #     break
+                # elif sublocal_1 in zone_5:
+                #     state="zone_5"
+                #     break
+            elif local in ["경기도", "인천광역시"]:
+                state="zone_2"
+                # if locality in zone_5:
+                #     state="zone_6"
+                #     break
+                # elif locality in zone_6:
+                #     state="zone_7"
+                #     break
+                # elif locality in zone_7:
+                #     state="zone_8"
+                #     break
+                # elif locality in zone_8:
+                #     state="zone_9"
+                #     break
+            elif local in ["부산광역시"]:
+                state="zone_3"
+                break
+            elif local in ['울산광역시','경상남도',
                            '대구광역시', '경상북도',
                            '대전광역시','세종특별자치시', '충청북도', '충청남도',
                            '광주광역시', '전라북도', '전라남도',

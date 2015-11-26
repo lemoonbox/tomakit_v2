@@ -72,12 +72,11 @@ def demand_create(request):
             'min_price':request.POST.get('min_price', ''),
             'max_price':request.POST.get('max_price', ''),
         }
+
         _user=User.objects.get(username=request.user)
         T2Profile.mobli_on(_user, demand_data['mobile1'],demand_data['mobile2'])
 
         images=request.FILES.getlist("image", "")
-        print "images"
-        print images
         _category, create=Category.objects.get_or_create(category=demand_data['category'])
         _state, create=State.objects.get_or_create(state=demand_data['state'])
         demand_data['user']=_user

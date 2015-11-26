@@ -70,27 +70,13 @@
                             <option value="all"
                                     {% if cate_current == 'all' %}selected{% endif %}>모든 카테고리</option>
                             <option value="cate_1"
-                                    {% if cate_current == 'cate_1' %}selected{% endif %}>가죽공예</option>
+                                    {% if cate_current == 'cate_1' %}selected{% endif %}>공예</option>
                             <option value="cate_2"
-                                    {% if cate_current == 'cate_2'%}selected{% endif %}>플라워아트</option>
+                                    {% if cate_current == 'cate_2'%}selected{% endif %}>아트</option>
                             <option value="cate_3"
-                                    {% if cate_current == 'cate_3'%}selected{% endif %}>전통공예/한복</option>
+                                    {% if cate_current == 'cate_3'%}selected{% endif %}>푸드</option>
                             <option value="cate_4"
-                                    {% if cate_current == 'cate_4'%}selected{% endif %}>목공예</option>
-                            <option value="cate_5"
-                                    {% if cate_current == 'cate_5'%}selected{% endif %}>금속공예/매듭</option>
-                            <option value="cate_6"
-                                    {% if cate_current == 'cate_6'%}selected{% endif %}>재봉틀/뜨개질</option>
-                            <option value="cate_7"
-                                    {% if cate_current == 'cate_7'%}selected{% endif %}>캘리그라피</option>
-                            <option value="cate_8"
-                                    {% if cate_current == 'cate_8'%}selected{% endif %}>그리기</option>
-                            <option value="cate_9"
-                                    {% if cate_current == 'cate_9'%}selected{% endif %}>베이킹/요리</option>
-                            <option value="cate_10"
-                                    {% if cate_current == 'cate_10'%}selected{% endif %}>화장품/향기</option>
-                            <option value="cate_11"
-                                    {% if cate_current == 'cate_11'%}selected{% endif %}>기타</option>
+                                    {% if cate_current == 'cate_4'%}selected{% endif %}>기타</option>
                         </select>
                         <span class="selecter-selected category-selected" onclick="btnClick(this)">카테고리 선택</span>
                         <!--onchange="this.form.submit()"-->
@@ -101,37 +87,16 @@
                                  onclick="selecting(this, 'all')">모든 카테고리</div>
                             <div class="selecter-item"
                                  data-value="id"
-                                 onclick="selecting(this, 'cate_1')">가죽공예</div>
+                                 onclick="selecting(this, 'cate_1')">공예</div>
                             <div class="selecter-item"
                                  data-value="id"
-                                 onclick="selecting(this, 'cate_2')">플라워아트</div>
+                                 onclick="selecting(this, 'cate_2')">아트</div>
                             <div class="selecter-item"
                                  data-value="id"
-                                 onclick="selecting(this, 'cate_3')">전통공예/한복</div>
+                                 onclick="selecting(this, 'cate_3')">푸드</div>
                             <div class="selecter-item"
                                  data-value="id"
-                                 onclick="selecting(this, 'cate_4')">목공예</div>
-                            <div class="selecter-item"
-                                 data-value="id"
-                                 onclick="selecting(this, 'cate_5')">금속공예/매듭</div>
-                            <div class="selecter-item"
-                                 data-value="id"
-                                 onclick="selecting(this, 'cate_6')">재봉틀/뜨개질</div>
-                            <div class="selecter-item"
-                                 data-value="id"
-                                 onclick="selecting(this, 'cate_7')">캘리그라피</div>
-                            <div class="selecter-item"
-                                 data-value="id"
-                                 onclick="selecting(this, 'cate_8')">그리기</div>
-                            <div class="selecter-item"
-                                 data-value="id"
-                                 onclick="selecting(this, 'cate_9')">베이킹/요리</div>
-                            <div class="selecter-item"
-                                 data-value="id"
-                                 onclick="selecting(this, 'cate_10')">화장품/향기</div>
-                            <div class="selecter-item"
-                                 data-value="id"
-                                 onclick="selecting(this, 'cate_11')">기타</div>
+                                 onclick="selecting(this, 'cate_4')">기타</div>
                         </div>
                     </div>
                 </div>
@@ -143,25 +108,11 @@
                             <option value="all"
                                     {% if state_current == 'all' %}selected{% endif %}>모든 지역</option>
                             <option value="zone_1"
-                                    {% if state_current == 'zone_1'%}selected{% endif %}>도봉/성북/동대문...</option>
+                                    {% if state_current == 'zone_1'%}selected{% endif %}>서울</option>
                             <option value="zone_2"
-                                    {% if state_current == 'zone_2'%}selected{% endif %}>은평/마포/서대문...</option>
+                                    {% if state_current == 'zone_2'%}selected{% endif %}>경기/인천</option>
                             <option value="zone_3"
-                                    {% if state_current == 'zone_3'%}selected{% endif %}>종로/중구/용산...</option>
-                            <option value="zone_4"
-                                    {% if state_current == 'zone_4'%}selected{% endif %}>양천/영등포/동작...</option>
-                            <option value="zone_5"
-                                    {% if state_current == 'zone_5'%}selected{% endif %}>송파/강남/서초...</option>
-                            <option value="zone_6"
-                                    {% if state_current == 'zone_6'%}selected{% endif %}>수원/안산/안양...</option>
-                            <option value="zone_7"
-                                    {% if state_current == 'zone_7'%}selected{% endif %}>성남/남양주/용인...</option>
-                            <option value="zone_8"
-                                    {% if state_current == 'zone_8'%}selected{% endif %}>파주/의정부/고양...</option>
-                            <option value="zone_9"
-                                    {% if state_current == 'zone_9'%}selected{% endif %}>인천/부천</option>
-                            <option value="etc"
-                                    {% if state_current == 'etc'%}selected{% endif %}>기타</option>
+                                    {% if state_current == 'zone_3'%}selected{% endif %}>부산</option>
                         </select>
 
                         <span class="selecter-selected state-selected" onclick="btnClick(this)">지역 선택</span>
@@ -172,34 +123,13 @@
                                  onclick="selecting(this, 'all')">모든 지역</div>
                             <div class="selecter-item"
                                  data-value="id"
-                                 onclick="selecting(this, 'zone_1')">도봉/성북/동대문...</div>
+                                 onclick="selecting(this, 'zone_1')">서울</div>
                             <div class="selecter-item"
                                  data-value="id"
-                                 onclick="selecting(this, 'zone_2')">은평/마포/서대문...</div>
+                                 onclick="selecting(this, 'zone_2')">경기/인천</div>
                             <div class="selecter-item"
                                  data-value="id"
-                                 onclick="selecting(this, 'zone_3')">종로/중구/용산...</div>
-                            <div class="selecter-item"
-                                 data-value="id"
-                                 onclick="selecting(this, 'zone_4')">양천/영등포/동작...</div>
-                            <div class="selecter-item"
-                                 data-value="id"
-                                 onclick="selecting(this, 'zone_5')">송파/강남/서초...</div>
-                            <div class="selecter-item"
-                                 data-value="id"
-                                 onclick="selecting(this, 'zone_6')">수원/안산/안양...</div>
-                            <div class="selecter-item"
-                                 data-value="id"
-                                 onclick="selecting(this, 'zone_7')">성남/남양주/용인...</div>
-                            <div class="selecter-item"
-                                 data-value="id"
-                                 onclick="selecting(this, 'zone_8')">파주/의정부/고양...</div>
-                            <div class="selecter-item"
-                                 data-value="id"
-                                 onclick="selecting(this, 'zone_9')">인천/부천</div>
-                            <div class="selecter-item"
-                                 data-value="id"
-                                 onclick="selecting(this, 'etc')">기타</div>
+                                 onclick="selecting(this, 'zone_3')">부산</div>
                         </div>
                     </div>
                 </div>

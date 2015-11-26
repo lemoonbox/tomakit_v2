@@ -89,10 +89,12 @@
         <div style="margin:12px auto;min-height:25px;">{{profile_user.t2profile_set.first.intro_line}}</div>
         <div class="btn-group pull-left">
             <a style="color:#FF565A;border-bottom:4px solid;" href="http://{{HTTP_HOST}}/v2.1/user/profile/{{profile_user.id}}/">소개</a>
-            <a style="color:#CACCCD;" href="http://{{HTTP_HOST}}/v2.1/user/profile/{{profile_user.id}}/class_check/">클래스</a>
+            {% if profile_user == request.user%}
+            <a style="color:#CACCCD;" href="http://{{HTTP_HOST}}/v2.1/user/profile/{{profile_user.id}}/class_check/">내 수업 보기</a>
+            {% endif %}
         </div>
         <div class="pull-right hidden-xs">
-            {% if request.user.is_authenticated%}
+            {% if profile_user == request.user%}
             <a href="http://{{HTTP_HOST}}/v2.1/user/profile/{{profile_user.id}}/edit" class="btn btn-primary"><img src="{%static 'media/image/slice/icon-setting.png'%}" alt="프로필 수정 버튼"> 프로필 수정</a>
             {% endif %}
         </div>
@@ -113,7 +115,11 @@
                     <div class="tmk-panel">작가 소개-동영상,사진이 아직 없습니다.</div>
                 {% endif %}
             <div class="tmk-h3">자기 소개</div>
-            <div class="tmk-panel">{{host_profile.intro_self}}</div>
+            {% if host_profile.intro_self %}
+                <div class="tmk-panel">{{host_profile.intro_self}}</div>
+            {% else%}
+                <div class="tmk-panel">아직 등록된 작가 소개가 없습니다.</div>
+            {% endif %}
             <div class="tmk-h3">가게 주소</div>
             <div class="tmk-panel">{{host_profile.shop_addr}}
                 <div>

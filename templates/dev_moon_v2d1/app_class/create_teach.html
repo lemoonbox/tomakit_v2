@@ -173,7 +173,8 @@
                     <div class="tmk-panel">
                         <label class="col-md-2">수업일정 <span>*</span></label>
                         <div class="col-md-10 col-xs-10">
-                            <input class="form-control" type="text" name="weekday" value="{{teach_data.weekday}}" placeholder="ex) 매주 화요일 7:00, 매주 토요일 2시">
+                            <input class="form-control" type="text" name="weekday" value="{{teach_data.weekday}}"
+                                   placeholder="ex) 매주 화요일 7:00, 매주 토요일 2시"{% if teachform.weekday.errors%}autofocus{%endif%}>
                         </div>
                         <div class="col-md-10 col-md-offset-2 col-xs-12 tmk-error">
                             {{teachform.weekday.errors|striptags}}
@@ -185,11 +186,13 @@
                         <label class="col-md-2">수업인원 <span>*</span></label>
                         <div class="col-md-3 col-xs-4">
                             최소인원
-                            <input class="form-control" type="number" name="min_num" value="{{teach_data.min_num}}">
+                            <input class="form-control" type="number" name="min_num" value="{{teach_data.min_num}}"
+                                    {% if tutform.min_num.errors%}autofocus{%endif%}>
                         </div>
                         <div class="col-md-3 col-xs-4">
                             최대인원
-                            <input class="form-control" type="number" name="max_num" value="{{teach_data.max_num}}">
+                            <input class="form-control" type="number" name="max_num" value="{{teach_data.max_num}}"
+                                    {% if tutform.max_num.errors%}autofocus{%endif%}>
                         </div>
                         <div class="col-md-10 col-md-offset-2 col-xs-12 tmk-error">
                             {{teachform.min_num.errors|striptags}}
@@ -202,11 +205,13 @@
 
                         <div class="col-md-3 col-xs-4">
                             수업시작일
-                            <input class="form-control"type="date" name="startday" value="{{teach_data.startday}}">
+                            <input class="form-control"type="date" name="startday" value="{{teach_data.startday}}"
+                                    {% if tutform.startday.errors%}autofocus{%endif%}>
                         </div>
                         <div class="col-md-3 col-xs-4">
                             등록마감일
-                            <input class="form-control" type="date" name="deadline" value="{{teach_data.deadline}}">
+                            <input class="form-control" type="date" name="deadline" value="{{teach_data.deadline}}"
+                                   {% if tutform.deadline.errors%}autofocus{%endif%}>
                         </div>
                         <div class="col-md-10 col-md-offset-2 col-xs-12 tmk-error">
                             {{teachform.startday.errors|striptags}}
@@ -218,11 +223,13 @@
                         <label class="col-md-2">수강료 <span>*</span></label>
                         <div class="col-md-3 col-xs-4">
                             수강료(재료비 제외)
-                            <input class="form-control"type="text" name="price" value="{{teach_data.price}}">
+                            <input class="form-control"type="text" name="price" value="{{teach_data.price}}"
+                                    {% if tutform.price.errors%}autofocus{%endif%}>
                         </div>
                         <div class="col-md-3 col-xs-4">
                             재료비
-                            <input class="form-control"type="text" name="extra_price" value="{{teach_data.extra_price}}">
+                            <input class="form-control"type="text" name="extra_price" value="{{teach_data.extra_price}}"
+                                     {% if tutform.extra_price.errors%}autofocus{%endif%}>
                         </div>
                         <div class="col-md-10 col-md-offset-2 col-xs-12 tmk-error">
                             {{teachform.price.errors|striptags}}
@@ -241,50 +248,6 @@
                         <div class="tmk-qitem-phupload col-md-10">
                             <div class="tmk-phupload-contents">
                                 <div class="tmk-panel-contents">
-                                    <!--<div class="well filedrag" id="filedrag">-->
-                                        <!--<div class="form-group row">-->
-                                            <!--<div class="col-md-8 col-xs-7">-->
-                                                <!--<div>-->
-                                                    <!--<label class="drag-label">참조할 작품 사진을 이곳에 끌어다 놓아주세요 <br>-->
-                                                        <!--JPG, PNG 파일만 업로드가 가능합니다.</label>-->
-                                                <!--</div>-->
-
-                                            <!--</div>-->
-                                            <!--<div class="col-md-4 col-xs-5" style="top: 10px;">-->
-                                        <!--<span id="uploader" onclick="findLastInput(true);" class="custom-file-input-button btn btn-default" style="cursor:pointer;">-->
-                                            <!--<span class="custom-file-input-button-text">사진 가져오기</span>-->
-                                        <!--</span>-->
-                                            <!--</div>-->
-                                        <!--</div>-->
-
-                                        <!--<div class="tmk-imgs" id="tmk-imgs">-->
-                                            <!--<div>-->
-                                                <!--<img src="">-->
-                                                <!--<span onclick="deleteImg(this);"></span>-->
-                                            <!--</div>-->
-                                            <!--<div>-->
-                                                <!--<img src="">-->
-                                                <!--<span onclick="deleteImg(this);"></span>-->
-                                            <!--</div>-->
-                                            <!--<div>-->
-                                                <!--<img src="">-->
-                                                <!--<span onclick="deleteImg(this);"></span>-->
-                                            <!--</div>-->
-                                            <!--<div>-->
-                                                <!--<img src="">-->
-                                                <!--<span onclick="deleteImg(this);"></span>-->
-                                            <!--</div>-->
-                                            <!--<div>-->
-                                                <!--<img src="">-->
-                                                <!--<span onclick="deleteImg(this);"></span>-->
-                                            <!--</div>-->
-                                            <!--<input type="file" name="image"  id="filePhoto1" />-->
-                                            <!--<input type="file" name="image"  id="filePhoto2" />-->
-                                            <!--<input type="file" name="image"  id="filePhoto3" />-->
-                                            <!--<input type="file" name="image"  id="filePhoto4" />-->
-                                            <!--<input type="file" name="image"  id="filePhoto5" />-->
-                                        <!--</div>-->
-                                    <!--</div>-->
                                     <div class="well filedrag" id="filedrag">
                                         <div class="form-group row">
                                             <div class="col-md-8">
@@ -331,7 +294,8 @@
                     <div class="tmk-panel">
                         <label class="col-md-2">영상 등록(선택)</label>
                         <div class="col-md-10">
-                            <input class="form-control" type="text" name="video" value="{{teach_data.video}}" placeholder="유튜브 영상 url을 입력하세요">
+                            <input class="form-control" type="text" name="video" value="{{teach_data.video}}"
+                                   placeholder="유튜브 영상 url을 입력하세요" {% if tutform.video.errors%}autofocus{%endif%}>
                             <div class="col-md-10 col-md-offset-2 col-xs-12 tmk-error">
                                 {{teachform.video.errors|striptags}}
                             </div>
@@ -342,7 +306,8 @@
                             수업 소개 <span>*</span></label>
                         <div class="col-md-10">
                             이 클래스에서 무엇을 배울 수 있나요?
-                            <textarea class="form-control" name="descript" >{{teach_data.descript}}</textarea>
+                            <textarea class="form-control" name="descript"
+                                      {% if tutform.descript.errors%}autofocus{%endif%}>{{teach_data.descript}}</textarea>
                             <div class="tmk-error">
                                 {{teachform.descript.errors|striptags}}
                             </div>
@@ -354,7 +319,8 @@
                             커리큘럼 <span>*</span></label>
                         <div class="col-md-10">
                             수업 회차 또는 시간별 커리큘럼이 어떻게 짜여져 있나요?
-                            <textarea class="form-control" name="curri">{{teach_data.curri}}</textarea>
+                            <textarea class="form-control" name="curri"
+                                     {% if tutform.curri.errors%}autofocus{%endif%}>{{teach_data.curri}}</textarea>
                             <div class="tmk-error">
                                 {{teachform.curri.errors|striptags}}
                             </div>
@@ -365,7 +331,8 @@
                             안내사항 <span>*</span></label>
                         <div class="col-md-10">
                             수강생이 미리 알아야 할 수업 규정 및 안내사항을 입력해주세요
-                            <textarea class="form-control" name="notic">{{teach_data.notic}}</textarea>
+                            <textarea class="form-control" name="notic"
+                                     {% if tutform.notic.errors%}autofocus{%endif%}>{{teach_data.notic}}</textarea>
                             <div class="tmk-error">
                                 {{teachform.notic.errors|striptags}}
                             </div>
@@ -380,7 +347,8 @@
                     <div class="tmk-panel">
                         <label class="col-md-2">작가소개 <span>*</span></label>
                         <div class="col-md-10">
-                            <input class="form-control" type="text" name="intro_self" value="{{user.t2hostprofile_set.first.intro_self}}">
+                            <input class="form-control" type="text" name="intro_self"
+                                   value="{{user.t2hostprofile_set.first.intro_self}}" {% if tutform.intro_self.errors%}autofocus{%endif%}>
                             <div class="col-md-10 col-md-offset-2 col-xs-12 tmk-error">
                                 {{teachform.intro_self.errors|striptags}}
                             </div>
@@ -395,7 +363,8 @@
                                 도로명 또는 동 입력
                                 <div id="locationField">
                                     <input id="pac-input" class="form-control controls" type="text"
-                                           placeholder="동이나 도로명을 입력해주세요" style="max-width:360px;margin-top:5px!important;" name="addr_input" onkeypress="return event.keyCode != 13;">
+                                           placeholder="동이나 도로명을 입력해주세요" style="max-width:360px;margin-top:5px!important;" name="addr_input"
+                                           onkeypress="return event.keyCode != 13;" value="{{teach_data.addr}}" {% if tutform.addr.errors%}autofocus{%endif%}>
                                     <div id="type-selector" class="controls" hidden>
                                         <input type="radio" name="type" id="changetype-all" checked="checked">
                                         <label for="changetype-all">All</label>
@@ -414,28 +383,28 @@
                                         <tr class="form-group">
                                             <td class="label">시/도</td>
                                             <td class="widefield" colspan="2">
-                                                <input class="field" id="locality" name="locality" disabled="true">
+                                                <input class="field" id="locality" name="locality" value="{{teach_data.locality}}">
                                             </td>
                                             <td class="wideField" colspan="2">
-                                                <input class="field" name="area_1"  id="administrative_area_level_1" disabled="true">
+                                                <input class="field" name="area_1"  id="administrative_area_level_1" value="{{teach_data.area_1}}">
                                             </td>
                                         </tr>
                                         <tr>
                                             <td class="label">구</td>
                                             <td class="wideField">
-                                                <input class="field" name="sublocal_1" id="sublocality_level_1" disabled="true"></td>
+                                                <input class="field" name="sublocal_1" id="sublocality_level_1" value="{{teach_data.sublocal_1}}"></td>
                                             <!--<td class="label">동</td>-->
                                             <td class="wideField">
-                                                <input class="field" name="sublocal_2" id="sublocality_level_2" disabled="true"></td>
+                                                <input class="field" name="sublocal_2" id="sublocality_level_2" value="{{teach_data.sublocal_2}}"></td>
                                             <td class="label">우편번호</td>
                                             <td class="wideField">
-                                                <input class="field" name="postal_code" id="postal_code" disabled="true"></td>
+                                                <input class="field" name="postal_code" id="postal_code"></td>
                                         </tr>
                                         <tr>
                                             <td class="label">상세주소</td>
                                             <td class="slimField">
                                                 <input class="field" id="street_address" disabled="true"></input>
-                                                <input class="field" id="sublocality_level_4" name="sublocal_4" disabled="true"></input>
+                                                <input class="field" id="sublocality_level_4" name="sublocal_4" value="{{teach_data.sublocal_3}}"></input>
                                                 <input class="field" id="premise" disabled="true"></input></td>
                                         </tr>
                                     </table>
@@ -443,7 +412,12 @@
                             </div>
                             <div class="col-md-10 col-md-offset-2 col-xs-12 col-xs-offset-0">
                                 상세 주소 입력
-                                <input class="form-control" type="text" name="addr_deatail" value="{{teach_data.addr_detail}}" placeholder="상세주소를 입력해주세요">
+                                <input class="form-control" type="text" name="addr_deatail" value="{{teach_data.addr_detail}}"
+                                       placeholder="상세주소를 입력해주세요" {% if tutform.addr_detail.errors%}autofocus{%endif%}>
+                            </div>
+                            <div class="col-md-10 col-md-offset-2 col-xs-12 tmk-error">
+                                {{teachform.addr.errors|striptags}}
+                                {{teachform.addr_detail.errors|striptags}}
                             </div>
                         </div>
                     </div>

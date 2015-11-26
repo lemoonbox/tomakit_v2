@@ -127,10 +127,7 @@ def login(request, *args, **kwargs):
             user = login_form.authenticate(request)
             if user:
                 auth_login(request, user)
-                print next
                 return HttpResponseRedirect(next)
-    print "login get"
-    print next
     return render(request, TEMP.LOGIN_TEM_V2D1,
                   {'login_form':login_form,
                    'next':next,

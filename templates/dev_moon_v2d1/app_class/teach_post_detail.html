@@ -240,13 +240,26 @@
                     </div>
                     <div style="padding:10px;">
                         <!-- 결제 하기 -->
-                        <form method="GET" action="{% url 'pay_prefill_v2d1' %}">
-                            <input type="hidden" value="{{post.id}}" name="post_id">
-                            <input type="hidden" value="teachclass" name="classtype">
+                        {% if post.deadline_over %}
                             <button class="btn btn-primary btn-block">
-                                신청하기 <input type="submit" value="{{ post.extra_price|add:post.price |intcomma}}원" hidden>
+                                모집 마감 <input type="submit" value="{{ post.extra_price|add:post.price |intcomma}}원" hidden>
                             </button>
-                        </form>
+                        {% elif not user.is_authenticated %}
+                            <form method="GET" action="{% url 'signup_v2d1' %}">
+                                <input type="hidden" value="/v2.1/class/{{post.t2classcard_set.first.id}}" name="next">
+                                <button class="btn btn-primary btn-block">
+                                    신청하기 <input type="submit" value="{{ post.extra_price|add:post.price |intcomma}}원" hidden>
+                                </button>
+                            </form>
+                        {% else %}
+                            <form method="GET" action="{% url 'pay_prefill_v2d1'%}">
+                                <input type="hidden" value="{{post.id}}" name="post_id">
+                                <input type="hidden" value="tutclass" name="classtype">
+                                <button class="btn btn-primary btn-block">
+                                    신청하기 <input type="submit" value="{{ post.extra_price|add:post.price |intcomma}}원" hidden>
+                                </button>
+                            </form>
+                        {% endif %}
                     </div>
                 </div>
 
