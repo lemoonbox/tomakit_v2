@@ -127,9 +127,9 @@ def create_tut(request, class_num):
         area_1=request.POST.get("area_1", "").encode("utf-8")
         sublocal_1=request.POST.get("sublocal_1", "").encode("utf-8")
         sublocal_2=request.POST.get("sublocal_2", "").encode("utf-8")
-        sublocal_3=request.POST.get("sublocal_4", "").encode("utf-8")
+        sublocal_4=request.POST.get("sublocal_4", "").encode("utf-8")
         _state, create=check_state(request)
-        addr=area_1+" "+locality+" "+sublocal_1+" "+sublocal_2+" "+sublocal_3
+        addr=area_1+" "+locality+" "+sublocal_1+" "+sublocal_2+" "+sublocal_4
         addr_detail=request.POST.get("addr_deatail", "").encode("utf-8")
         _user=User.objects.get(username=request.user)
         _pre_fillpost=T2TutClass.objects.get(pk=class_num)
@@ -155,7 +155,7 @@ def create_tut(request, class_num):
             'area_1':area_1,
             'sublocal_1': sublocal_1,
             'sublocal_2': sublocal_2,
-            'sublocal_3': sublocal_3,
+            'sublocal_4': sublocal_4,
             'addr':addr,
             'addr_detail':addr_detail,
         }

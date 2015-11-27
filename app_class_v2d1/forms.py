@@ -105,12 +105,18 @@ class T2TutClassForm(forms.ModelForm):
     descript=forms.CharField(error_messages=required_error)
     curri=forms.CharField(error_messages=required_error)
     notic=forms.CharField(error_messages=required_error)
+    locality=forms.CharField(required=False)
+    area_1=forms.CharField(required=False)
+    sublocal_1=forms.CharField(required=False)
+    sublocal_2=forms.CharField(required=False)
+    sublocal_4=forms.CharField(required=False)
     addr=forms.CharField(error_messages=addr_error)
     addr_detail=forms.CharField(error_messages=addr_detail_error)
 
     class Meta:
         model=T2TutClass
         fields=('repeat','perhour','weekday','price','extra_price',
+                'locality', 'area_1', 'sublocal_1','sublocal_2','sublocal_4',
                 'video','descript','curri','notic', 'addr', 'addr_detail',)
 
     # def is_valid(self):
