@@ -359,22 +359,22 @@
                                         <td class="label">시/도</td>
                                         <td class="widefield" colspan="2">
                                             <input class="field" id="locality" name="locality"
-                                                   value="{{addr_data.locality}}">
+                                                   value="{{tut_data.locality}}">
                                         </td>
                                         <td class="wideField" colspan="2">
                                             <input class="field" name="area_1"  id="administrative_area_level_1"
-                                                   value="{{addr_data.area_1}}">
+                                                   value="{{tut_data.area_1}}">
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="label">구</td>
                                         <td class="wideField">
                                             <input class="field" name="sublocal_1" id="sublocality_level_1"
-                                                   value="{{addr_data.sub_1}}"></td>
+                                                   value="{{tut_data.sublocal_1}}"></td>
                                         <!--<td class="label">동</td>-->
                                         <td class="wideField">
                                             <input class="field" name="sublocal_2" id="sublocality_level_2"
-                                                   value="{{addr_data.sub_2}}"></td>
+                                                   value="{{tut_data.sublocal_2}}"></td>
                                         <td class="label">우편번호</td>
                                         <td class="wideField">
                                             <input class="field" name="postal_code" id="postal_code"></td>
@@ -383,7 +383,8 @@
                                         <td class="label">상세주소</td>
                                         <td class="slimField">
                                             <input class="field" id="street_address"></input>
-                                            <input class="field" id="sublocality_level_4" name="sublocal_4"></input>
+                                            <input class="field" id="sublocality_level_4" name="sublocal_4"
+                                                    value="{{tut_data.sublocal_4}}"></input>
                                             <input class="field" id="premise"></input></td>
                                     </tr>
                                 </table>

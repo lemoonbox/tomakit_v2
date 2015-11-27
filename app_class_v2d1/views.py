@@ -351,22 +351,6 @@ def modify_teach(request, class_num):
             raise Http404("포스팅이 존재 하지 않습니다.")
 
         _user=User.objects.get(username=request.user)
-        addr_partes=_post.addr.split(" ")
-        addr_data={}
-        if len(addr_partes)>3:
-            addr_data={
-                "area_1":addr_partes[0],
-                "locality":addr_partes[1],
-                "sub_1":addr_partes[2],
-                "sub_2":addr_partes[3],
-            }
-        elif len(addr_partes) == 4:
-            addr_data={
-                "area_1":"",
-                "locality":addr_partes[0],
-                "sub_1":addr_partes[1],
-                "sub_2":addr_partes[2],
-            }
         teach_data={
             "user":_user,
             "post":_post,
@@ -388,6 +372,11 @@ def modify_teach(request, class_num):
             'curri':_post.curri,
             'notic':_post.notic,
             'state':_post.state,
+            'locality':_post.locality,
+            'area_1':_post.area_1,
+            'sublocal_1': _post.sublocal_1,
+            'sublocal_2': _post.sublocal_2,
+            'sublocal_4': _post.sublocal_4,
             'addr':_post.addr,
             'addr_detail':_post.addr_detail,
             'empty_box': range(5-(_post.t2classpic_set.all().count())),
@@ -418,32 +407,15 @@ def modify_teach(request, class_num):
         area_1=request.POST.get("area_1", "").encode("utf-8")
         sublocal_1=request.POST.get("sublocal_1", "").encode("utf-8")
         sublocal_2=request.POST.get("sublocal_2", "").encode("utf-8")
-        sublocal_3=request.POST.get("sublocal_4", "").encode("utf-8")
+        sublocal_4=request.POST.get("sublocal_4", "").encode("utf-8")
         _state, create=check_state(request)
-        addr=area_1+" "+locality+" "+sublocal_1+" "+sublocal_2+" "+sublocal_3
+        addr=area_1+" "+locality+" "+sublocal_1+" "+sublocal_2+" "+sublocal_4
         addr_detail=request.POST.get("addr_deatail", "").encode("utf-8")
         _user=User.objects.get(username=request.user)
         _pre_fillpost=T2TeachClass.objects.get(pk=class_num)
         images=request.FILES.getlist("image", "")
         imageform=""
 
-
-        addr_data={}
-        addr_partes=addr.split(" ")
-        if len(addr_partes)>3:
-            addr_data={
-                "area_1":addr_partes[0],
-                "locality":addr_partes[1],
-                "sub_1":addr_partes[2],
-                "sub_2":addr_partes[3],
-            }
-        elif len(addr_partes) == 4:
-            addr_data={
-                "area_1":"",
-                "locality":addr_partes[0],
-                "sub_1":addr_partes[1],
-                "sub_2":addr_partes[2],
-            }
         teach_data={
             "user":_user,
             "category":_pre_fillpost.category,
@@ -463,6 +435,11 @@ def modify_teach(request, class_num):
             'curri':request.POST.get("curri"),
             'notic':request.POST.get("notic"),
             'state':_state,
+            'locality':locality,
+            'area_1': area_1,
+            'sublocal_1': sublocal_1,
+            'sublocal_2': sublocal_2,
+            'sublocal_4': sublocal_4,
             'addr':addr,
             'addr_detail':addr_detail,
         }
@@ -525,14 +502,12 @@ def modify_teach(request, class_num):
                  "HTTP_HOST":HTTP_HOST,
                  "cl_card_id":_classcard.id,
             })
-    print teach_data['repeat']
-    print teach_data['perhour']
+
     return render(request, TEMP.CLASS_MODIFY_TEACH_V2D1, {
         "teachform":teachform,
         "imageform":imageform,
         "teach_data":teach_data,
         "class_num":class_num,
-        "addr_data":addr_data,
         "HTTP_HOST":HTTP_HOST,
         })
 
@@ -549,24 +524,7 @@ def modify_tut(request, class_num):
                 raise Http404("수정 가능한 사용자가 아닙니다.")
         except ObjectDoesNotExist:
             raise Http404("포스팅이 존재 하지 않습니다.")
-
         _user=User.objects.get(username=request.user)
-        addr_partes=_post.addr.split(" ")
-        addr_data={}
-        if len(addr_partes)>3:
-            addr_data={
-                "area_1":addr_partes[0],
-                "locality":addr_partes[1],
-                "sub_1":addr_partes[2],
-                "sub_2":addr_partes[3],
-            }
-        elif len(addr_partes) == 4:
-            addr_data={
-                "area_1":"",
-                "locality":addr_partes[0],
-                "sub_1":addr_partes[1],
-                "sub_2":addr_partes[2],
-            }
         tut_data={
             "user":_user,
             "post":_post,
@@ -584,6 +542,11 @@ def modify_tut(request, class_num):
             'curri':_post.curri,
             'notic':_post.notic,
             'state':_post.state,
+            'locality':_post.locality,
+            'area_1':_post.area_1,
+            'sublocal_1': _post.sublocal_1,
+            'sublocal_2': _post.sublocal_2,
+            'sublocal_4': _post.sublocal_4,
             'addr':_post.addr,
             'addr_detail':_post.addr_detail,
             'empty_box': range(5-(_post.t2classpic_set.all().count())),
@@ -616,31 +579,15 @@ def modify_tut(request, class_num):
         area_1=request.POST.get("area_1", "").encode("utf-8")
         sublocal_1=request.POST.get("sublocal_1", "").encode("utf-8")
         sublocal_2=request.POST.get("sublocal_2", "").encode("utf-8")
-        sublocal_3=request.POST.get("sublocal_4", "").encode("utf-8")
+        sublocal_4=request.POST.get("sublocal_4", "").encode("utf-8")
         _state, create=check_state(request)
-        addr=area_1+" "+locality+" "+sublocal_1+" "+sublocal_2+" "+sublocal_3
+        addr=area_1+" "+locality+" "+sublocal_1+" "+sublocal_2+" "+sublocal_4
         addr_detail=request.POST.get("addr_deatail", "").encode("utf-8")
         _user=User.objects.get(username=request.user)
         _pre_fillpost=T2TutClass.objects.get(pk=class_num)
         images=request.FILES.getlist("image", "")
         imageform=""
 
-        addr_data={}
-        addr_partes=addr.split(" ")
-        if len(addr_partes)>3:
-            addr_data={
-                "area_1":addr_partes[0],
-                "locality":addr_partes[1],
-                "sub_1":addr_partes[2],
-                "sub_2":addr_partes[3],
-            }
-        elif len(addr_partes) == 4:
-            addr_data={
-                "area_1":"",
-                "locality":addr_partes[0],
-                "sub_1":addr_partes[1],
-                "sub_2":addr_partes[2],
-            }
         tut_data={
             "user":_user,
             "category":_pre_fillpost.category,
@@ -656,6 +603,11 @@ def modify_tut(request, class_num):
             'curri':request.POST.get("curri"),
             'notic':request.POST.get("notic"),
             'state':_state,
+            'locality':locality,
+            'area_1':area_1,
+            'sublocal_1':sublocal_1,
+            'sublocal_2':sublocal_2,
+            'sublocal_4':sublocal_4,
             'addr':addr,
             'addr_detail':addr_detail,
         }
@@ -721,7 +673,6 @@ def modify_tut(request, class_num):
         'imageform':imageform,
         "tut_data":tut_data,
         "class_num":class_num,
-        "addr_data":addr_data,
         "HTTP_HOST":HTTP_HOST,
     })
 
