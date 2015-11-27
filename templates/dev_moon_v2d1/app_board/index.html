@@ -68,6 +68,7 @@
         background: url({%static 'media/image/main-banner-poster.png' %}) no-repeat;
         background-size:cover;
         }
+    .tmk-label {background:#000!important;border-radius:14px!important;}
 
     img.youtube-thumb { bottom: 0; display: block; left: 0; margin: auto; max-width: 100%; width: 100%; position: absolute; right: 0; top: 0; height: auto }
 
@@ -118,7 +119,7 @@
                             <div class="tmk-class-type-label">
                                 <!--수업 타입-->
                                 {% if bestclass.best_classcard.deadline_over %}
-                                <span class="label tmk-label" style="background:#FF565A!important;">모집 마감</span>
+                                <span class="label tmk-label">Sold Out</span>
                                 <!--style="background:#FF565A!important;"-->
                                 {% endif %}
                             </div>

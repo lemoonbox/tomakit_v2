@@ -17,6 +17,8 @@
 
     .intro_line {white-space: nowrap;text-overflow:ellipsis;}
 
+    .tmk-label {background:#000!important;border-radius:14px!important;}
+
 </style>
 {%endblock%}
 {%block content%}
@@ -120,7 +122,7 @@
                             <div class="tmk-class-type-label" >
                                 <!--수업 타입-->
                                 {% if class.deadline_over%}
-                                <span class="label tmk-label"style="background:#FF565A!important;">SOLD OUT</span>
+                                <span class="label tmk-label">Sold Out</span>
                                 {% endif %}
                             </div>
                             <div class="card-link">
