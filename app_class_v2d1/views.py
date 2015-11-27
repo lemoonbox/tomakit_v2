@@ -381,26 +381,17 @@ def modify_teach(request, class_num):
             'addr_detail':_post.addr_detail,
             'empty_box': range(5-(_post.t2classpic_set.all().count())),
         }
-        if LOCAL:
-            url_set = "http://localhost:8000/userphoto/media/"
-        else:
-            url_set= "http://diytec.beta.s3.amazonaws.com/uploads/"
 
         img_arr=[]
         for db_images in _post.t2classpic_set.all():
             img_info=[]
-            url =url_set+str(db_images.image)
-            img_res = requests.get(url)
-            img = Image.open(StringIO(img_res.content))
-            output = StringIO()
-            img.save(output, format="PNG")
-            contents = output.getvalue().encode("base64")
-            output.close()
+            contents = imgdb_to_uploadifle(LOCAL, db_images.url)
             img_info.append(db_images.id)
             img_info.append(db_images.image)
             img_info.append(contents)
             img_arr.append(img_info)
         teach_data['db_images']=img_arr
+
 
     elif request.method == "POST":
         locality=request.POST.get("locality", "").encode("utf-8")
@@ -443,6 +434,17 @@ def modify_teach(request, class_num):
             'addr':addr,
             'addr_detail':addr_detail,
         }
+
+        # img_arr=[]
+        # for db_images in _post.t2classpic_set.all():
+        #     img_info=[]
+        #     contents = imgdb_to_uploadifle(LOCAL, db_images.url)
+        #     img_info.append(db_images.id)
+        #     img_info.append(db_images.image)
+        #     img_info.append(contents)
+        #     img_arr.append(img_info)
+        # teach_data['db_images']=img_arr
+
         teachform=T2TeachClassForm(teach_data, instance=_pre_fillpost)
         prefill_intro=request.POST.get("intro_self").encode("utf-8")
 

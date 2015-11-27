@@ -48,6 +48,7 @@ PW_RESET_PROCESS_V2D1='dev_moon_v2d1/app_user/pw_reset_process.html'
 PW_RESET_FAIL_V2D1='dev_moon_v2d1/app_user/pw_reset_fail.html'
 
 #app_user//host
+HOST_GUIDE_V2D1='dev_moon_v2d1/app_user/host_guide.html'
 HOST_APLLY_V2D1='dev_moon_v2d1/app_user/host_apply.html'
 HOST_APPLY_FINISH='dev_moon_v2d1/app_user/host_apply_finish.html'
 
