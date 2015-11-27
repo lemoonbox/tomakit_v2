@@ -5,7 +5,7 @@
   -o-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
-  font-family: 'NanumGothic', 'NanumBarunGothic', 'AppleSDGothicNeo-Bold', 'Dotum', 'NanumMyeongjo', 'Gulim', 'Helvetica', sans-serif !important;
+  font-family: 'Noto Sans', "Noto Sans CJK KR", sans-serif!important;
 }
 //html {height:100vh!important;}
 //html {overflow-x:hidden!important;padding-right:0!important;}
@@ -46,7 +46,7 @@ body {
 
 
 .h1, .h2, .h3, .h4, .h5, .h6 {
-  font-family: 'NanumGothic', 'AppleSDGothicNeo-Bold', 'NotoSansCJKKR', sans-serif!important;
+  font-family: 'Noto Sans', 'Noto Sans CJK KR', sans-serif!important;
 }
 
 .tmk-h1, .tmk-h2, .tmk-h3, .tmk-h4 {margin:15px auto;line-height:normal;}
@@ -503,7 +503,7 @@ ul{
 
   .main-banner-title {
     color: #FFFFFf;
-    font-family: AppleSDGothicNeo-Bold;
+    //font-family: AppleSDGothicNeo-Bold;
     font-weight:600;
     text-align: center;
     //padding: 120px 15px 0 15px;
@@ -513,7 +513,7 @@ ul{
   }
   .main-banner-subtitle {
     color: #FFFFFF;
-    font-family:AppleSDGothicNeo-Regular;
+    //font-family:AppleSDGothicNeo-Regular;
     text-align: center;
     padding: 15px;
     font-size: 20px;
@@ -639,13 +639,13 @@ ul{
 
   .footer-banner-title {
     padding-top:50px;
-    font-family: NanumMyeongjo!important;
+    //font-family: NanumMyeongjo!important;
     line-height:50px;
     font-size: 24px;
     color: #FFFFFF;
   }
   .footer-banner-subtitle {
-    font-family: AppleSDGothicNeo-Regular;
+    //font-family: AppleSDGothicNeo-Regular;
     font-size: 14px;
     color: #FFFFFF;
     line-height: 17px;
@@ -788,7 +788,7 @@ ul{
 
   .h3 {
     margin: 0px 0px 5px 0px !important;
-    font-family: NanumMyeongjo;
+    //font-family: NanumMyeongjo;
     font-weight:normal;
     font-size: 24px;
     color: #CCCCCC;
@@ -797,7 +797,7 @@ ul{
     display:inline-block;
   }
   .category {
-    font-family: AppleSDGothicNeo-Regular;
+    //font-family: AppleSDGothicNeo-Regular;
     font-size: 14px;
     color: #F5515F;
     line-height: 17px;
@@ -807,7 +807,7 @@ ul{
   }
 
   .h4 {
-    font-family: AppleSDGothicNeo-Regular;
+    //font-family: AppleSDGothicNeo-Regular;
     //font-size: 14px;
     //color: #8B572A;
     line-height: 17px;
@@ -854,7 +854,7 @@ ul{
     border-top: 1px solid #ddd;
     border-radius: 0px 0px 4px 4px;
 
-    font-family: AppleSDGothicNeo-Regular;
+    //font-family: AppleSDGothicNeo-Regular;
     font-size: 12px;
     color: #666666;
     line-height: 15px;
@@ -1260,7 +1260,7 @@ ul{
     padding-top:20px;
     height: 360px;
     background:#ffffff;
-    font-family: 'NanumGothic' !important;
+    //font-family: 'NanumGothic' !important;
     .tmk-guide-img {
       height: 300px;
       width: 570px;
@@ -1463,10 +1463,9 @@ ul{
   }
 }
 .dp-label-right {
-  font-size: 18px;
+  //font-size: 18px;
   min-width: 20%;
   text-align: right;
-  font-weight: bold;
   color: #82888A
 }
 
