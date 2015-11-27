@@ -46,6 +46,9 @@ from app_user_v2d1.models import \
     T2HostProfile
 from DIY_tool.settings import LOCAL
 
+from utils.utils import shard_url_picker
+
+
 # Create your views here.
 def host_check(user):
     if user.t2hostprofile_set.first() or user.is_staff:
@@ -381,17 +384,15 @@ def modify_teach(request, class_num):
             'addr_detail':_post.addr_detail,
             'empty_box': range(5-(_post.t2classpic_set.all().count())),
         }
-
         img_arr=[]
         for db_images in _post.t2classpic_set.all():
             img_info=[]
-            contents = imgdb_to_uploadifle(LOCAL, db_images.url)
+            contents = imgdb_to_uploadifle(LOCAL, db_images.image)
             img_info.append(db_images.id)
             img_info.append(db_images.image)
             img_info.append(contents)
             img_arr.append(img_info)
         teach_data['db_images']=img_arr
-
 
     elif request.method == "POST":
         locality=request.POST.get("locality", "").encode("utf-8")
@@ -434,16 +435,15 @@ def modify_teach(request, class_num):
             'addr':addr,
             'addr_detail':addr_detail,
         }
-
-        # img_arr=[]
-        # for db_images in _post.t2classpic_set.all():
-        #     img_info=[]
-        #     contents = imgdb_to_uploadifle(LOCAL, db_images.url)
-        #     img_info.append(db_images.id)
-        #     img_info.append(db_images.image)
-        #     img_info.append(contents)
-        #     img_arr.append(img_info)
-        # teach_data['db_images']=img_arr
+        img_arr=[]
+        for db_images in _pre_fillpost.t2classpic_set.all():
+            img_info=[]
+            contents = imgdb_to_uploadifle(LOCAL, db_images.image)
+            img_info.append(db_images.id)
+            img_info.append(db_images.image)
+            img_info.append(contents)
+            img_arr.append(img_info)
+        teach_data['db_images']=img_arr
 
         teachform=T2TeachClassForm(teach_data, instance=_pre_fillpost)
         prefill_intro=request.POST.get("intro_self").encode("utf-8")
@@ -539,7 +539,7 @@ def modify_tut(request, class_num):
             'weekday':_post.weekday,
             'price':str(_post.price),
             'extra_price':str(_post.extra_price),
-            'video':_post.video,
+            'video':shard_url_picker(_post.video),
             'descript':_post.descript,
             'curri':_post.curri,
             'notic':_post.notic,
@@ -553,23 +553,10 @@ def modify_tut(request, class_num):
             'addr_detail':_post.addr_detail,
             'empty_box': range(5-(_post.t2classpic_set.all().count())),
         }
-
-        if LOCAL:
-            url_set = "http://localhost:8000/userphoto/media/"
-        else:
-            url_set= "http://diytec.beta.s3.amazonaws.com/uploads/"
-
         img_arr=[]
         for db_images in _post.t2classpic_set.all():
             img_info=[]
-            url =url_set+str(db_images.image)
-            img_res = requests.get(url)
-            img = Image.open(StringIO(img_res.content))
-            output = StringIO()
-            type=img.format
-            img.save(output, format=type)
-            contents = output.getvalue().encode("base64")
-            output.close()
+            contents = imgdb_to_uploadifle(LOCAL, db_images.image)
             img_info.append(db_images.id)
             img_info.append(db_images.image)
             img_info.append(contents)
@@ -600,7 +587,7 @@ def modify_tut(request, class_num):
             'weekday':request.POST.get("weekday"),
             'price':request.POST.get('price'),
             'extra_price':request.POST.get('extra_price'),
-            'video':request.POST.get("video"),
+            'video':shard_url_picker(request.POST.get("video")),
             'descript':request.POST.get("descript"),
             'curri':request.POST.get("curri"),
             'notic':request.POST.get("notic"),
@@ -613,6 +600,16 @@ def modify_tut(request, class_num):
             'addr':addr,
             'addr_detail':addr_detail,
         }
+        img_arr=[]
+        for db_images in _pre_fillpost.t2classpic_set.all():
+            img_info=[]
+            contents = imgdb_to_uploadifle(LOCAL, db_images.image)
+            img_info.append(db_images.id)
+            img_info.append(db_images.image)
+            img_info.append(contents)
+            img_arr.append(img_info)
+        tut_data['db_images']=img_arr
+
         tutform=T2TutClassForm(tut_data, instance=_pre_fillpost)
         prefill_intro=request.POST.get("intro_self").encode("utf-8")
 
@@ -621,8 +618,11 @@ def modify_tut(request, class_num):
             auth = True
         img_valid=False
         imageform=T2ClassPicForm(tut_data, request.FILES)
+
         if imageform.is_valid() or len(request.POST.getlist("img_id")[0])>0:
             img_valid=True
+            imageform.errors['image']=imageform.error_class()
+
 
         if tutform.is_valid() and img_valid and auth:
             _tutpost=tutform.save()
