@@ -57,6 +57,11 @@ class T2TeachClassForm(forms.ModelForm):
     descript=forms.CharField(error_messages=required_error)
     curri=forms.CharField(error_messages=required_error)
     notic=forms.CharField(error_messages=required_error)
+    locality=forms.CharField(required=False)
+    area_1=forms.CharField(required=False)
+    sublocal_1=forms.CharField(required=False)
+    sublocal_2=forms.CharField(required=False)
+    sublocal_4=forms.CharField(required=False)
     addr=forms.CharField(error_messages=addr_error)
     addr_detail=forms.CharField(error_messages=addr_detail_error)
 
@@ -64,7 +69,8 @@ class T2TeachClassForm(forms.ModelForm):
         model=T2TeachClass
         fields=('repeat','perhour','weekday','min_num','max_num', 'startday',
                 'deadline','price','extra_price','video','descript','curri',
-                'notic','addr', 'addr_detail',)
+                'notic','locality', 'area_1', 'sublocal_1','sublocal_2','sublocal_4',
+                'addr', 'addr_detail',)
 
     def save(self, commit=True):
         _sate=self.data.get('state', "")
@@ -139,6 +145,7 @@ class T2ClassCardForm(forms.ModelForm):
     class Meta:
         model=T2ClassCard
         fields=('classtype', 'class_id','title', 'intro_line','repeat',
+                'locality', 'area_1', 'sublocal_1','sublocal_2','sublocal_4',
                 'perhour', 'price', 'extra_price')
 
     def save(self, commit=True):
