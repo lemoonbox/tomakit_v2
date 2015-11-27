@@ -276,6 +276,13 @@ def pw_reset_process(request, key):
         'HTTP_HOST':HTTP_HOST,
     })
 
+def host_guide(request):
+    HTTP_HOST=request.META["HTTP_HOST"]
+    if request.method == "GET":
+        return render(request, TEMP.HOST_GUIDE_V2D1,{ 'HTTP_HOST':HTTP_HOST,})
+    else:
+        raise Http404("잘못된 접근입니다.")
+
 @login_required
 def host_apply(request):
     apply_data={}
@@ -301,7 +308,6 @@ def host_apply(request):
         }
         hostform=HostApplyForm(apply_data, request.FILES)
         hostproform=HostProfileForm(apply_data)
-        print hostproform.is_valid()
         if hostform.is_valid():
             _hostapply=hostform.save(commit=False)
             _hostapply.user=_user

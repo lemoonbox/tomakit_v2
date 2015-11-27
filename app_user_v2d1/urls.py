@@ -15,6 +15,7 @@ urlpatterns = patterns('app_user_v2d1.views',
     url(r'logout/$', 'logout', name='logout_v2d1'),
 
     #host
+    url(r'host/guide/$', 'host_guide', name='host_guide_v2d1'),
     url(r'host/apply/$', 'host_apply', name='host_apply_v2d1'),
 
     #profile
