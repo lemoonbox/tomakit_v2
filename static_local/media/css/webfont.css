@@ -1,7 +1,9 @@
 /*
 * Nanum Gothic (Korean) http://www.google.com/fonts/earlyaccess
 */
-@import url(https://cdn.rawgit.com/openhiun/hangul/14c0f6faa2941116bb53001d6a7dcd5e82300c3f/nanumbarungothic.css);
+@font-face {
+  font-family:
+}
 @font-face {
   font-family: 'Nanum Gothic';
   font-style: normal;
@@ -23,5 +25,5 @@
     url(//fonts.gstatic.com/ea/nanumgothic/v5/NanumGothic-ExtraBold.woff) format('woff'),
     url(//fonts.gstatic.com/ea/nanumgothic/v5/NanumGothic-ExtraBold.ttf) format('truetype');
 }
-
+@import url(https://cdn.rawgit.com/openhiun/hangul/14c0f6faa2941116bb53001d6a7dcd5e82300c3f/nanumbarungothic.css);
 @import url(http://fonts.googleapis.com/earlyaccess/nanummyeongjo.css);

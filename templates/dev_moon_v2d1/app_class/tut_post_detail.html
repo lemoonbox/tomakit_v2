@@ -211,7 +211,7 @@
                     <div style="padding:10px;">
                         <!-- 결제 하기 -->
                         {% if post.deadline_over %}
-                            <button class="btn btn-primary btn-block">
+                            <button class="btn btn-default btn-block">
                                 모집 마감 <input type="submit" value="{{ post.extra_price|add:post.price |intcomma}}원" hidden>
                             </button>
                         {% elif not user.is_authenticated %}
