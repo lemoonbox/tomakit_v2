@@ -54,35 +54,35 @@
                         <div class="tmk-qitem-selecter-wrapper col-md-3 col-xs-4">
                             수업횟수
                             <div class="selecter cover" tabindex="0">
-                                <select name="repeat" required class="selecter_3 selecter-element" data-selecter-options="{&quot;cover&quot;:&quot;true&quot;}" tabindex="-1">
+                                <select id="repeat" name="repeat" required class="selecter_3 selecter-element" data-selecter-options="{&quot;cover&quot;:&quot;true&quot;}" tabindex="-1">
                                     <option value="1"
-                                            {% if tut_data.repeat == '1' %}selected {% endif %}>1회</option>
+                                            {% if tut_data.repeat == '1' %}selected{% endif %}>1회</option>
                                     <option value="2"
-                                            {% if tut_data.repeat == '2' %}selected {% endif %}>2회</option>
+                                            {% if tut_data.repeat == '2' %}selected{% endif %}>2회</option>
                                     <option value="3"
-                                            {% if tut_data.repeat == '3' %}selected {% endif %}>3회</option>
+                                            {% if tut_data.repeat == '3' %}selected{% endif %}>3회</option>
                                     <option value="4"
-                                            {% if tut_data.repeat == '4' %}selected {% endif %}>4회</option>
+                                            {% if tut_data.repeat == '4' %}selected{% endif %}>4회</option>
                                     <option value="5"
-                                            {% if tut_data.repeat == '5' %}selected {% endif %}>5회</option>
+                                            {% if tut_data.repeat == '5' %}selected{% endif %}>5회</option>
                                     <option value="6"
-                                            {% if tut_data.repeat == '6' %}selected {% endif %}>6회</option>
+                                            {% if tut_data.repeat == '6' %}selected{% endif %}>6회</option>
                                     <option value="7"
-                                            {% if tut_data.repeat == '7' %}selected {% endif %}>7회</option>
+                                            {% if tut_data.repeat == '7' %}selected{% endif %}>7회</option>
                                     <option value="8"
-                                            {% if tut_data.repeat == '8' %}selected {% endif %}>8회</option>
+                                            {% if tut_data.repeat == '8' %}selected{% endif %}>8회</option>
                                     <option value="9"
-                                            {% if tut_data.repeat == '9' %}selected {% endif %}>9회</option>
+                                            {% if tut_data.repeat == '9' %}selected{% endif %}>9회</option>
                                     <option value="10"
-                                            {% if tut_data.repeat == '10' %}selected {% endif %}>10회</option>
+                                            {% if tut_data.repeat == '10' %}selected{% endif %}>10회</option>
                                     <option value="11"
-                                            {% if tut_data.repeat == '11' %}selected {% endif %}>11회</option>
+                                            {% if tut_data.repeat == '11' %}selected{% endif %}>11회</option>
                                     <option value="12"
-                                            {% if tut_data.repeat == '12' %}selected {% endif %}>12회</option>
+                                            {% if tut_data.repeat == '12' %}selected{% endif %}>12회</option>
                                 </select>
-                                <span class="selecter-selected" onclick="btnClick(this)">횟수 선택</span>
+                                <span class="selecter-selected repeat-selected" onclick="btnClick(this)">횟수 선택</span>
                                 <div class="selecter-options" data-value="">
-                                    <!--<span class="selecter-item selected" data-value="" onclick="selecting(this, '')">카테고리</span>-->
+                                    <span class="selecter-item selected repeat-selected" data-value="" onclick="selecting(this, '')">횟수 선택</span>
                                     <div class="selecter-item"
                                          data-value="id"
                                          onclick="selecting(this, '1')">1회</div>
@@ -127,7 +127,7 @@
                         <div class="tmk-qitem-selecter-wrapper col-md-3 col-xs-4">
                             회당 수업 시간
                             <div class="selecter cover" tabindex="0">
-                                <select name="perhour" required class="selecter_3 selecter-element" data-selecter-options="{&quot;cover&quot;:&quot;true&quot;}" tabindex="-1">
+                                <select id="perhour" name="perhour" required class="selecter_3 selecter-element" data-selecter-options="{&quot;cover&quot;:&quot;true&quot;}" tabindex="-1">
                                     <option value="1"
                                             {% if tut_data.perhour == '1'%}selected {% endif %} >1시간</option>
                                     <option value="2"
@@ -141,9 +141,9 @@
                                     <option value="6"
                                             {% if tut_data.perhour == '6' %}selected {% endif %}>6시간</option>
                                 </select>
-                                <span class="selecter-selected" onclick="btnClick(this)">회당 시간 선택</span>
+                                <span class="selecter-selected perhour-selected" onclick="btnClick(this)">회당 시간 선택</span>
                                 <div class="selecter-options" data-value="">
-                                    <!--<span class="selecter-item selected" data-value="" onclick="selecting(this, '')">카테고리</span>-->
+                                    <span class="selecter-item selected perhour-selected" data-value="" onclick="selecting(this, '')">회당 시간 선택</span>
                                     <div class="selecter-item"
                                          data-value="id"
                                          onclick="selecting(this, '1')">1시간</div>
@@ -403,6 +403,27 @@
         <!--autoFocus:true-->
     <!--});-->
 <!--</script>-->
+<script>
+    $("#repeat")
+            .change(function () {
+                var str = "";
+                $("option:selected", this).each(function () {
+                    str += $(this).text() + " ";
+                });
+                $(".repeat-selected").text(str);
+            })
+            .trigger("change");
+    $( "#perhour" )
+            .change(function() {
+                var str = "";
+                $( "option:selected", this ).each(function() {
+                    str += $( this ).text() + " ";
+                });
+                $( ".perhour-selected").text( str );
+            })
+            .trigger( "change" );
+</script>
+
 <script src="{%static 'js/google_map.js'%}"></script>
 <script src='{%static "media/js/qitem_create.js" %}'></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDWLKiQU9kiiXSpS7A5RAeKenzpQlI84Ds&signed_in=true&language=ko&libraries=places&callback=initMap" async defer></script>

@@ -53,7 +53,7 @@
                         <div class="tmk-qitem-selecter-wrapper col-md-3 col-xs-4">
                             수업횟수
                             <div class="selecter cover" tabindex="0">
-                                <select name="repeat" required class="selecter_3 selecter-element" data-selecter-options="{&quot;cover&quot;:&quot;true&quot;}" tabindex="-1">
+                                <select id="repeat" name="repeat" required class="selecter_3 selecter-element" data-selecter-options="{&quot;cover&quot;:&quot;true&quot;}" tabindex="-1">
                                     <option value="1"
                                             {% if teach_data.repeat == '1' %}selected {% endif %}>1회</option>
                                     <option value="2"
@@ -81,7 +81,7 @@
                                 </select>
                                 <span class="selecter-selected" onclick="btnClick(this)">횟수 선택</span>
                                 <div class="selecter-options" data-value="">
-                                    <!--<span class="selecter-item selected" data-value="" onclick="selecting(this, '')">카테고리</span>-->
+                                    <span class="selecter-item selected repeat-selected" data-value="" onclick="selecting(this, '')">횟수 선택</span>
                                     <div class="selecter-item"
                                          data-value="id"
                                          onclick="selecting(this, '1')">1회</div>
@@ -126,7 +126,7 @@
                         <div class="tmk-qitem-selecter-wrapper col-md-3 col-xs-4">
                             회당 수업 시간
                             <div class="selecter cover" tabindex="0">
-                                <select name="perhour" required class="selecter_3 selecter-element" data-selecter-options="{&quot;cover&quot;:&quot;true&quot;}" tabindex="-1">
+                                <select id="perhour" name="perhour" required class="selecter_3 selecter-element" data-selecter-options="{&quot;cover&quot;:&quot;true&quot;}" tabindex="-1">
                                     <option value="1"
                                             {% if teach_data.perhour == '1'%}selected {% endif %} >1시간</option>
                                     <option value="2"
@@ -140,9 +140,9 @@
                                     <option value="6"
                                             {% if teach_data.perhour == '6' %}selected {% endif %}>6시간</option>
                                 </select>
-                                <span class="selecter-selected" onclick="btnClick(this)">회당 시간 선택</span>
+                                <span class="selecter-selected perhour-selected" onclick="btnClick(this)">회당 시간 선택</span>
                                 <div class="selecter-options" data-value="">
-                                    <!--<span class="selecter-item selected" data-value="" onclick="selecting(this, '')">카테고리</span>-->
+                                    <span class="selecter-item selected perhour-selected" data-value="" onclick="selecting(this, '')">회당 시간 선택/span>
                                     <div class="selecter-item"
                                          data-value="id"
                                          onclick="selecting(this, '1')">1시간</div>
@@ -447,6 +447,26 @@
         <!--autoFocus:true-->
     <!--});-->
 <!--</script>-->
+<script>
+    $("#repeat")
+            .change(function () {
+                var str = "";
+                $("option:selected", this).each(function () {
+                    str += $(this).text() + " ";
+                });
+                $(".repeat-selected").text(str);
+            })
+            .trigger("change");
+    $( "#perhour" )
+            .change(function() {
+                var str = "";
+                $( "option:selected", this ).each(function() {
+                    str += $( this ).text() + " ";
+                });
+                $( ".perhour-selected").text( str );
+            })
+            .trigger( "change" );
+</script>
 <script src='{%static "media/js/qitem_create.js" %}'></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDWLKiQU9kiiXSpS7A5RAeKenzpQlI84Ds&signed_in=true&language=ko&libraries=places&callback=initMap" async defer></script>
 {%endblock%}
