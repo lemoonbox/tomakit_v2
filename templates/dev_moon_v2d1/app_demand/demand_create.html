@@ -355,9 +355,9 @@
                                 {% if demand_data.state.state == 'zone_3'%}selected{% endif %}>다른 지역</option>
 
                     </select>
-                    <span class="selecter-selected category-selected" onclick="btnClick(this)">지역 선택</span>
+                    <span class="selecter-selected state-selected" onclick="btnClick(this)">지역 선택</span>
                     <div class="selecter-options" data-value="">
-                        <span class="selecter-item selected category-selected" data-value="" onclick="selecting(this, '')">지역 선</span>
+                        <span class="selecter-item selected state-selected" data-value="" onclick="selecting(this, '')">지역 선</span>
                         <div class="selecter-item"
                              data-value="id"
                              onclick="selecting(this, 'zone_1')">서울</div>
@@ -369,7 +369,7 @@
                              onclick="selecting(this, 'zone_3')">부산</div>
                         <div class="selecter-item"
                              data-value="id"
-                             onclick="selecting(this, 'zone_4')">다른 지</div>
+                             onclick="selecting(this, 'zone_4')">다른 지역</div>
                     </div>
                 </div>
             </div>
