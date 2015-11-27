@@ -9,52 +9,24 @@ register = template.Library()
 @register.filter(name="cate2han")
 def cate2han(valu, argu=None):
     if valu == "cate_1":
-        return  u"가죽공예"
+        return  u"공예"
     elif valu =="cate_2":
-        return u"플라워아트"
+        return u"아트"
     elif valu =="cate_3":
-        return u"전통공예/한복"
-    elif valu =="cate_4":
-        return u"목공예"
-    elif valu =="cate_5":
-        return u"금속공예/매듭"
-    elif valu =="cate_6":
-        return u"재봉틀/뜨개질"
-    elif valu =="cate_7":
-        return u"캘리그라피"
-    elif valu =="cate_8":
-        return u"그리기"
-    elif valu =="cate_9":
-        return u'베이킹/요리'
-    elif valu =="cate_10":
-        return u"화장품/향기"
-    elif valu =="cate_11":
-        return u"기타"
+        return u"푸드"
     else :
-        return u"ALL"
+        return u"기타"
 
 @register.filter(name="state2han")
 def state2han(valu, argu=None):
     if valu == "zone_1":
-        return  u"도봉/성북/동대문..."
+        return  u"서울"
     elif valu =="zone_2":
-        return u"은평/마포/서대문..."
+        return u"경기.인천"
     elif valu =="zone_3":
-        return u"종로/중구/용산..."
-    elif valu =="zone_4":
-        return u"양천/영등포/동작.."
-    elif valu =="zone_5":
-        return u"송파/강남/서초..."
-    elif valu =="zone_6":
-        return u"수원/안산/안양..."
-    elif valu =="zone_7":
-        return u"성남/남양주/용인..."
-    elif valu =="zone_8":
-        return u"파주/의정부/고양..."
-    elif valu =="zone_9":
-        return u'인천/부천'
+        return u"부산"
     else :
-        return u"ALL"
+        return u"다른 지역"
 
 @register.filter(name="d_day_count")
 def d_day_count(valu, argu=None):
