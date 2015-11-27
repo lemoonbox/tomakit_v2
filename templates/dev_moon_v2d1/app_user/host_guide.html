@@ -1,10 +1,106 @@
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
-    호스트 가이드
-</body>
-</html>
+{%extends "base.html"%}
+{% load static from staticfiles %}
+<title> {%block title%}작가 신청 안내{%endblock%}</title>
+{%block style%}
+<style>
+    .tmk-main-banner {
+        background: url({%static 'media/image/slice/bg-4.png' %});
+        height:400px;
+    }
+    .tmk-main-banner .tmk-main-body {
+        text-align:left;
+    }
+    .guide-section-2 {color:#84CDC2;text-align:center;max-width:800px;margin:auto;}
+    .guide-section-3 {
+        background: url({%static 'media/image/slice/bg-5.png' %});
+        background-size:cover;
+        height:400px;
+    }
+</style>
+{%endblock%}
+{%block content%}
+
+<div class="tmk-main-banner">
+    <div class="tmk-main-body col-md-12">
+        <div class="container">
+            <div class="tmk-h2">
+                선생님 등록
+            </div>
+            <div class="tmk-h4">
+                토마킷은 공방을 운영하는 선생님과 수강생들이<br>
+                쉽고 간편하게 만날 수 있도록 연결합니다
+            </div>
+            <button class="btn btn-primary">토마킷 선생님으로 등록하기</button>
+        </div>
+    </div>
+</div>
+
+<div class="tmk-main-body col-md-12">
+    <div class="container">
+        <div class="tmk-h3">왜 토마킷 선생님으로 등록해야 할까요?</div>
+
+        <div class="guide-section-2">
+            <div class="col-md-4">
+                <div class="tmk-h4">수강생 증가</div>
+                <img src="{%static 'media/image/slice/icon-etc_graph.png'%}">
+                <div>클래스 등록만 해주세요 토마<br>킷이 수강생을 모집해드립니다</div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="tmk-h4">사진&영상 촬영</div>
+                <img src="{%static 'media/image/slice/icon-etc_graph.png'%}">
+                <div>효과적인 홍보를 위해 전문가의<br>손길이 담긴 사진과 영상을 촬영,<br>
+                    제작해드려요</div>
+            </div>
+            <div class="col-md-4">
+                <div class="tmk-h4">인기 클래스</div>
+                <img src="{%static 'media/image/slice/icon-etc_graph.png'%}">
+                <div>대중에게 인기 있는 클래스를<br>발굴하고 기획하여 선생님께 기<br>
+                    획 클래스로 제안해드립니다</div>
+            </div>
+
+            </div>
+
+        <div class="guide-section-2">
+            <div class="col-md-4">
+                <div class="tmk-h4">기업체 제휴</div>
+                <img src="{%static 'media/image/slice/icon-etc_graph.png'%}">
+                <div>클래스 제휴가 이루어진 기업이<br>나 단체의 요청에 선생님들을<br>
+                    연결해드립니다</div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="tmk-h4">안전한 거래</div>
+                <img src="{%static 'media/image/slice/icon-etc_exchange.png'%}">
+                <div>안전한 거래가 이루어질 수 있<br>도록 에스크로 서비스와 보증보<br>
+                    보험에 가입되어 있습니다</div>
+            </div>
+            <div class="col-md-4">
+                <div class="tmk-h4">문화를 전파</div>
+                <img src="{%static 'media/image/slice/icon-etc_exchange.png'%}">
+                <div>핸드메이드 클래스 소식이 담긴<br>정기 소식지를 발행하여 문화를<br>
+                    전파합니다</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="tmk-main-body">
+    <div class="guide-section-3 col-md-8"></div>
+    <div class="col-md-4" style="text-align:left;">
+            <div class="tmk-h2">
+                "토마킷 서비스를 통해 안정적인 수익을 낼 수 있었습니다"
+            </div>
+            <div class="tmk-h4">
+                "매달 불규칙한 수강신청으로 걱정이 많았는데, 이제 토마킷을 통해 안정적으로 수강생 모집이 이루어져서 안심이에요"
+                <br>
+                <br>
+                - 김소라 선생님
+            </div>
+
+</div>
+
+</div>
+
+{% endblock %}
