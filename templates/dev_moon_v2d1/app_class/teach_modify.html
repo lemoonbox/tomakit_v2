@@ -63,29 +63,29 @@
                         <div class="selecter cover" tabindex="0">
                             <select id="repeat" name="repeat" required class="selecter_3 selecter-element" data-selecter-options="{&quot;cover&quot;:&quot;true&quot;}" tabindex="-1">
                                 <option value="1"
-                                        {% if teach_data.repeat == '1' %}selected {% endif %}>1회</option>
+                                        {% if teach_data.repeat == 1 %}selected {% endif %}>1회</option>
                                 <option value="2"
-                                        {% if teach_data.repeat == '2' %}selected {% endif %}>2회</option>
+                                        {% if teach_data.repeat == 2 %}selected {% endif %}>2회</option>
                                 <option value="3"
-                                        {% if teach_data.repeat == '3' %}selected {% endif %}>3회</option>
+                                        {% if teach_data.repeat == 3 %}selected {% endif %}>3회</option>
                                 <option value="4"
-                                        {% if teach_data.repeat == '4' %}selected {% endif %}>4회</option>
+                                        {% if teach_data.repeat == 4 %}selected {% endif %}>4회</option>
                                 <option value="5"
-                                        {% if teach_data.repeat == '5' %}selected {% endif %}>5회</option>
+                                        {% if teach_data.repeat == 5 %}selected {% endif %}>5회</option>
                                 <option value="6"
-                                        {% if teach_data.repeat == '6' %}selected {% endif %}>6회</option>
+                                        {% if teach_data.repeat == 6 %}selected {% endif %}>6회</option>
                                 <option value="7"
-                                        {% if teach_data.repeat == '7' %}selected {% endif %}>7회</option>
+                                        {% if teach_data.repeat == 7 %}selected {% endif %}>7회</option>
                                 <option value="8"
-                                        {% if teach_data.repeat == '8' %}selected {% endif %}>8회</option>
+                                        {% if teach_data.repeat == 8 %}selected {% endif %}>8회</option>
                                 <option value="9"
-                                        {% if teach_data.repeat == '9' %}selected {% endif %}>9회</option>
+                                        {% if teach_data.repeat == 9 %}selected {% endif %}>9회</option>
                                 <option value="10"
-                                        {% if teach_data.repeat == '10' %}selected {% endif %}>10회</option>
+                                        {% if teach_data.repeat == 10 %}selected {% endif %}>10회</option>
                                 <option value="11"
-                                        {% if teach_data.repeat == '11' %}selected {% endif %}>11회</option>
+                                        {% if teach_data.repeat == 11 %}selected {% endif %}>11회</option>
                                 <option value="12"
-                                        {% if teach_data.repeat == '12' %}selected {% endif %}>12회</option>
+                                        {% if teach_data.repeat == 12 %}selected {% endif %}>12회</option>
                             </select>
                             <span class="selecter-selected repeat-selected" onclick="btnClick(this)">횟수 선택</span>
                             <div class="selecter-options" data-value="">
@@ -136,17 +136,17 @@
                         <div class="selecter cover" tabindex="0">
                             <select id="perhour" name="perhour" required class="selecter_3 selecter-element" data-selecter-options="{&quot;cover&quot;:&quot;true&quot;}" tabindex="-1">
                                 <option value="1"
-                                        {% if teach_data.perhour == '1' %}selected {% endif %} >1시간</option>
+                                        {% if teach_data.perhour == 1 %}selected {% endif %} >1시간</option>
                                 <option value="2"
-                                        {% if teach_data.perhour == '2' %}selected {% endif %} >2시간</option>
+                                        {% if teach_data.perhour == 2 %}selected {% endif %} >2시간</option>
                                 <option value="3"
-                                        {% if teach_data.perhour == '3' %}selected {% endif %} >3시간</option>
+                                        {% if teach_data.perhour == 3 %}selected {% endif %} >3시간</option>
                                 <option value="4"
-                                        {% if teach_data.perhour == '4' %}selected {% endif %} >4시간</option>
+                                        {% if teach_data.perhour == 4 %}selected {% endif %} >4시간</option>
                                 <option value="5"
-                                        {% if teach_data.perhour == '5' %}selected {% endif %}>5시간</option>
+                                        {% if teach_data.perhour == 5 %}selected {% endif %}>5시간</option>
                                 <option value="6"
-                                        {% if teach_data.perhour == '6' %}selected {% endif %}>6시간</option>
+                                        {% if teach_data.perhour == 6 %}selected {% endif %}>6시간</option>
                             </select>
                             <span class="selecter-selected perhour-selected" onclick="btnClick(this)">회당 시간 선택</span>
                             <div class="selecter-options" data-value="">
@@ -189,7 +189,6 @@
                     </div>
                 </div>
 
-
                 <div class="tmk-panel">
                     <label class="col-md-2 col-xs-12">수업인원 <span>*</span></label>
                     <div class="col-md-3 col-xs-4">
@@ -224,13 +223,13 @@
 
                     <div class="col-md-3 col-xs-4">
                         수업시작일
-                        <input class="form-control" type="date" name="startday" value="{{teach_data.startday|date:'Y-m-d'}}"
-                               placeholder="{{teach_data.startday}}"  {% if teachform.startday.errors%}autofocus{%endif%}>
+                        <input class="form-control" type="date" name="startday" value="{{teach_data.startday}}"
+                               {% if teachform.startday.errors%}autofocus{%endif%}>
                     </div>
                     <div class="col-md-3 col-xs-4">
                         등록마감일
                         <input class="form-control" type="date" name="deadline"
-                               value="{{teach_data.deadline|date:'Y-m-d'}}" {% if teachform.deadline.errors%}autofocus{%endif%}>
+                               value="{{teach_data.deadline}}" {% if teachform.deadline.errors%}autofocus{%endif%}>
                     </div>
                     <div class="col-md-10 col-md-offset-2 col-xs-12 tmk-form-error">
                         {{teachform.startday.errors|striptags}}

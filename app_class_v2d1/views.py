@@ -366,8 +366,8 @@ def modify_teach(request, class_num):
             'weekday':_post.weekday,
             'max_num':str(_post.max_num),
             "min_num":str(_post.min_num),
-            'startday':_post.startday,
-            'deadline':_post.deadline,
+            'startday':str(_post.startday),
+            'deadline':str(_post.deadline),
             'price':str(_post.price),
             'extra_price':str(_post.extra_price),
             'video':_post.video,
@@ -384,6 +384,8 @@ def modify_teach(request, class_num):
             'addr_detail':_post.addr_detail,
             'empty_box': range(5-(_post.t2classpic_set.all().count())),
         }
+        print teach_data["startday"]
+        print teach_data['deadline']
         img_arr=[]
         for db_images in _post.t2classpic_set.all():
             img_info=[]
@@ -422,7 +424,7 @@ def modify_teach(request, class_num):
             'deadline':request.POST.get('deadline'),
             'price':request.POST.get('price'),
             'extra_price':request.POST.get('extra_price'),
-            'video':request.POST.get("video"),
+            'video':shard_url_picker(request.POST.get("video")),
             'descript':request.POST.get("descript"),
             'curri':request.POST.get("curri"),
             'notic':request.POST.get("notic"),
@@ -455,6 +457,8 @@ def modify_teach(request, class_num):
         imageform=T2ClassPicForm(teach_data, request.FILES)
         if imageform.is_valid() or len(request.POST.getlist("img_id")[0])>0:
             img_valid=True
+            imageform.errors['image']=imageform.error_class()
+
 
         if teachform.is_valid() and auth:
             _teachpost=teachform.save()
@@ -539,7 +543,7 @@ def modify_tut(request, class_num):
             'weekday':_post.weekday,
             'price':str(_post.price),
             'extra_price':str(_post.extra_price),
-            'video':shard_url_picker(_post.video),
+            'video':_post.video,
             'descript':_post.descript,
             'curri':_post.curri,
             'notic':_post.notic,
@@ -622,7 +626,6 @@ def modify_tut(request, class_num):
         if imageform.is_valid() or len(request.POST.getlist("img_id")[0])>0:
             img_valid=True
             imageform.errors['image']=imageform.error_class()
-
 
         if tutform.is_valid() and img_valid and auth:
             _tutpost=tutform.save()

@@ -33,7 +33,6 @@ class T2TeachClassForm(forms.ModelForm):
     intro_line_error={'required':u"필수 항목 입니다.",}
     classtype_error={'required':u"필수 항목 입니다.",}
     required_error={'required':u"필수 항목 입니다.",}
-    url_error={"invalid":u"url주소를 적어주세요."}
     num_error={'required':u"필수 항목 입니다.",
         'invalid':u"숫자만 입력해주세요",}
     addr_error={"required": u"주소를 입력해주세요."}
@@ -53,7 +52,7 @@ class T2TeachClassForm(forms.ModelForm):
     deadline=forms.DateField(error_messages=required_error)
     price=forms.IntegerField(error_messages=num_error)
     extra_price=forms.IntegerField(error_messages=num_error)
-    video=forms.URLField(required=False, error_messages=url_error)
+    video=forms.CharField(max_length=250,required=False)
     descript=forms.CharField(error_messages=required_error)
     curri=forms.CharField(error_messages=required_error)
     notic=forms.CharField(error_messages=required_error)
@@ -92,7 +91,6 @@ class T2TutClassForm(forms.ModelForm):
     required_error={'required':u"필수 항목 입니다.",}
     num_error={'required':u"필수 항목 입니다.",
         'invalid':u"숫자만 입력해주세요",}
-    url_error={"invalid":u"url주소를 적어주세요."}
     addr_error={"required": u"주소를 입력해주세요."}
     addr_detail_error={"required": u"상세 주소를 입력해주세요."}
 
@@ -101,7 +99,7 @@ class T2TutClassForm(forms.ModelForm):
     weekday=forms.CharField(error_messages=required_error)
     price=forms.IntegerField(error_messages=num_error)
     extra_price=forms.IntegerField(error_messages=num_error)
-    video=forms.URLField(required=False, error_messages=url_error)
+    video=forms.CharField(max_length=250, required=False)
     descript=forms.CharField(error_messages=required_error)
     curri=forms.CharField(error_messages=required_error)
     notic=forms.CharField(error_messages=required_error)
