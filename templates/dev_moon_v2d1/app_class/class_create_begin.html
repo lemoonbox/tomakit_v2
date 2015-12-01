@@ -18,8 +18,8 @@
 <div class="tmk-main-body col-md-12">
 <div class="container">
     <div class="tmk-page-header col-xs-12 col-lg-12">
-        <div class="tmk-h2 tmk-title">클래스 개설 시작하기</div>
-        <div class="tmk-h4">환영합니다! 토마킷을 통해 당신의 클래스를 세상에 공개하세요!</div>
+        <div class="tmk-h2 tmk-title">수업 개설 하기</div>
+        <div class="tmk-h4">환영합니다!<br> 토마킷을 통해 당신의 수업 세상에 공개하세요!</div>
         <!--<div class="tmk-page-pick"></div>-->
     </div>
     <div class="col-md-8" id="tmk-form" style="text-align:left;float:left;">
@@ -28,7 +28,7 @@
         <form method="POST" action="{% url 'class_create_begin_v2d1'%}">
             {%csrf_token%}
             <div class="tmk-panel">
-                <label class="col-md-2">제목 <span>*</span></label>
+                <label class="col-md-2">카테고리 <span>*</span></label>
                 <div class="tmk-qitem-selecter-wrapper col-md-3">
                     <div class="selecter cover" tabindex="0">
                         <select name="category" required class="selecter_3 selecter-element" data-selecter-options="{&quot;cover&quot;:&quot;true&quot;}" tabindex="-1">
@@ -72,7 +72,7 @@
             </div>
 
             <div class="tmk-panel">
-                <label class="col-md-2">클래스 제목 <span>*</span></label>
+                <label class="col-md-2">수업 제목 <span>*</span></label>
                 <div class="col-md-7">
                     <input type="text" class="form-control" name="title" value="{{begin_data.title}}"
                            placeholder="ex) 뜨개 테디베어만들기 4주 수업" maxlength="40" {%if beginform.title.errors%}autofocus{% endif %}>
@@ -105,7 +105,7 @@
                         <span style="font-size:16px;vertical-align:text-top">&nbsp;요일별모집(시간협의수업)</span><br>
                         <!--<div class="col-md-12">-->
                             <img src="{%static 'media/image/slice/icon-etc_calendar.png'%}"><br>
-                        <p style="margin:auto;font-size:14px;text-align:left;color:#84CDC2;">수업이 가능한 요일과 시간대를 알려주고 학생과 수업 시간 협의 </p>
+                        <p style="margin:auto;font-size:14px;text-align:left;color:#84CDC2;">수업이 가능한 요일과 시간대를 공지하고 학생과 수업 시간 협의 </p>
                         <!--</div>-->
                     </div>
                 <div class="col-xs-5 col-md-5">

@@ -37,7 +37,7 @@
 <form method="POST" action="{% url 'pay_conf_v2d1'%}">
         {%csrf_token%}
     <div class="col-md-9 well tmk-form" id="pay-pre">
-    <label>주문 번호</label> {{merchant_id}}<br>
+    <!--<label>주문 번호</label> {{merchant_id}}<br>-->
     <label>수업 일정</label> {{post.weekday}}<br>
     <label>결제 금액</label> ￦{{ post.extra_price|add:post.price |intcomma}}
     <input type="hidden" name="merchant_id" value="{{merchant_id}}" hidden>
@@ -104,7 +104,7 @@
 
 
     <div class="col-md-9 well tmk-form">
-    결제 방식을 선택해 주세요 <span class="tmk-error" style="margin-left:30px;">{{prefillform.pay_method.errors|striptags}}</span>
+        <span class="tmk-error" style="margin-left:30px;">{{prefillform.pay_method.errors|striptags}}</span>
 
         <div class="tmk-panel">
             <label class="col-md-2">결재방식 <span>*</span></label>
@@ -116,9 +116,7 @@
 
 </div>
         <div class="col-md-10" style="color:#82888a;font-size:16px;line-height:20px;">
-            결제가 완료되면 24시간 내로 수강 확정 안내 이메일이 발송됩니다. (운영일 기준)<br>
-            수강시간 협의가 필요한 클래스의 경우, 별도로 협의를 위한 안내를 드립니다<br>
-            결제를 진행하는 동안 도움이 필요한 경우, 오른쪽 하단의 실시간 문의하기를 이용해주세요<br>
+            시간 협의가 필요한 경우, 선생님께 확인 후 별도 연락드립니다.<br>
             아래의 버튼을 누름으로써, <span style="color:red;">이용약관</span>과 <span style="color:red;">결제사 정보제공</span>에 동의합니다.
         </div>
             </div>

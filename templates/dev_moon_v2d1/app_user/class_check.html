@@ -83,7 +83,7 @@
         <div style="margin: 12px auto; min-height:25px;">{{profile_user.t2profile_set.first.intro_line}}</div>
         <div class="btn-group pull-left">
             <a style="color:#CACCCD;" href="http://{{HTTP_HOST}}/v2.1/user/profile/{{profile_user.id}}/">소개</a>
-            <a style="color:#FF565A;border-bottom:4px solid" href="http://{{HTTP_HOST}}/v2.1/user/profile/{{profile_user.id}}/class_check/">클래스</a>
+            <a style="color:#FF565A;border-bottom:4px solid" href="http://{{HTTP_HOST}}/v2.1/user/profile/{{profile_user.id}}/class_check/">내 수업 보기</a>
         </div>
         <div class="pull-right hidden-xs">
             {% if request.user.is_authenticated%}
@@ -97,10 +97,10 @@
         <!-- Nav tabs -->
         <ul class="nav nav-tabs" role="tablist">
             <li role="presentation" class="active">
-                <a href="#class" aria-controls="class" role="tab" data-toggle="tab">개설한 클래스</a>
+                <a href="#class" aria-controls="class" role="tab" data-toggle="tab">개설한 수업</a>
             </li>
             <li role="presentation">
-                <a href="#demand" aria-controls="demand" role="tab" data-toggle="tab">제안한 클래스</a>
+                <a href="#demand" aria-controls="demand" role="tab" data-toggle="tab">요청한 수업</a>
             </li>
         </ul>
         </div>
