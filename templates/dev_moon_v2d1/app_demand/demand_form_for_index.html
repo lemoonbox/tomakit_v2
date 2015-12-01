@@ -185,84 +185,49 @@ label span {color:red;}
 .tmk-panel {margin-bottom:0;}
     .tmk-panel label {color:#565a5c;}
     #tmk-form .btn-primary {margin-right:15px;}
+    .filePhoto{
+        display: none;
+    }
+    input.filePhoto{
+        display: none;
+    }
 </style>
 
 <div class="tmk-page-pick hidden-xs" style="border:1px solid #ddd;"></div>
-<div class="tmk-h3" style="font-weight:bold;margin-top:30px;text-align:left;"> 클래스 제안하기</div>
+<div class="tmk-h3" style="font-weight:bold;margin-top:30px;text-align:left;">우리동네에 수업요청</div>
 
     <form method="POST" action="{% url 'demand_create_v2d1' %}" enctype="multipart/form-data">
         {%csrf_token%}
 
-
         <div class="tmk-panel">
-            <label class="col-md-2">제목 <span>*</span></label>
+            <label class="col-md-2">해보고 싶은 것<span>*</span></label>
             <div class="tmk-qitem-selecter-wrapper col-md-3">
                 <div class="selecter cover" tabindex="0">
                     <select name="category" required class="selecter_3 selecter-element" data-selecter-options="{&quot;cover&quot;:&quot;true&quot;}" tabindex="-1">
-                        <option value="all"
-                                {% if begin_data.category == 'all' %}selected{% endif %}>모든 카테고리</option>
                         <option value="cate_1"
-                                {% if begin_data.category == 'cate_1' %}selected{% endif %}>가죽공예</option>
+                                {% if begin_data.category == 'cate_1' %}selected{% endif %}>공예</option>
                         <option value="cate_2"
-                                {% if begin_data.category == 'cate_2'%}selected{% endif %}>플라워아트</option>
+                                {% if begin_data.category == 'cate_2'%}selected{% endif %}>아트</option>
                         <option value="cate_3"
-                                {% if begin_data.category == 'cate_3'%}selected{% endif %}>전통공예/한복</option>
+                                {% if begin_data.category == 'cate_3'%}selected{% endif %}>푸드</option>
                         <option value="cate_4"
-                                {% if begin_data.category == 'cate_4'%}selected{% endif %}>목공예</option>
-                        <option value="cate_5"
-                                {% if begin_data.category == 'cate_5'%}selected{% endif %}>금속공예/매듭</option>
-                        <option value="cate_6"
-                                {% if begin_data.category == 'cate_6'%}selected{% endif %}>재봉틀/뜨개질</option>
-                        <option value="cate_7"
-                                {% if begin_data.category == 'cate_7'%}selected{% endif %}>캘리그라피</option>
-                        <option value="cate_8"
-                                {% if begin_data.category == 'cate_8'%}selected{% endif %}>그리기</option>
-                        <option value="cate_9"
-                                {% if begin_data.category == 'cate_9'%}selected{% endif %}>베이킹/요리</option>
-                        <option value="cate_10"
-                                {% if begin_data.category == 'cate_10'%}selected{% endif %}>화장품/향기</option>
-                        <option value="cate_11"
-                                {% if begin_data.category == 'cate_11'%}selected{% endif %}>기타</option>
+                                {% if begin_data.category == 'cate_4'%}selected{% endif %}>기타</option>
                     </select>
                     <span class="selecter-selected" onclick="btnClick(this)">카테고리 선택</span>
                     <div class="selecter-options" data-value="">
                         <span class="selecter-item selected" data-value="" onclick="selecting(this, '')">카테고리 선택</span>
                         <div class="selecter-item"
                              data-value="id"
-                             onclick="selecting(this, 'all')">모든 카테고리</div>
+                             onclick="selecting(this, 'cate_1')">공예</div>
                         <div class="selecter-item"
                              data-value="id"
-                             onclick="selecting(this, 'cate_1')">가죽공예</div>
+                             onclick="selecting(this, 'cate_2')">아트</div>
                         <div class="selecter-item"
                              data-value="id"
-                             onclick="selecting(this, 'cate_2')">플라워아트</div>
+                             onclick="selecting(this, 'cate_3')">푸드</div>
                         <div class="selecter-item"
                              data-value="id"
-                             onclick="selecting(this, 'cate_3')">전통공예/한복</div>
-                        <div class="selecter-item"
-                             data-value="id"
-                             onclick="selecting(this, 'cate_4')">목공예</div>
-                        <div class="selecter-item"
-                             data-value="id"
-                             onclick="selecting(this, 'cate_5')">금속공예/매듭</div>
-                        <div class="selecter-item"
-                             data-value="id"
-                             onclick="selecting(this, 'cate_6')">재봉틀/뜨개질</div>
-                        <div class="selecter-item"
-                             data-value="id"
-                             onclick="selecting(this, 'cate_7')">캘리그라피</div>
-                        <div class="selecter-item"
-                             data-value="id"
-                             onclick="selecting(this, 'cate_8')">그리기</div>
-                        <div class="selecter-item"
-                             data-value="id"
-                             onclick="selecting(this, 'cate_9')">베이킹/요리</div>
-                        <div class="selecter-item"
-                             data-value="id"
-                             onclick="selecting(this, 'cate_10')">화장품/향기</div>
-                        <div class="selecter-item"
-                             data-value="id"
-                             onclick="selecting(this, 'cate_11')">기타</div>
+                             onclick="selecting(this, 'cate_4')">기타</div>
                     </div>
                 </div>
             </div>
@@ -281,10 +246,10 @@ label span {color:red;}
 
 
         <div class="tmk-panel">
-            <label class="col-md-2">내용 <span>*</span></label>
+            <label class="col-md-2">수업 내용 <span>*</span></label>
             <div  class="col-md-9">
         <textarea name="descript" class="form-control" rows="4" cols="50"
-                  placeholder="ex) 가죽공방을 창업하고 싶어서요. 기초부터 차근 차근가르쳐주는 공방 없을까요?">{{demand_data.descript}}</textarea>
+                  placeholder="ex) 캘라그라피를 잘하고 싶어요. 기초부터 차근 차근가르쳐주는 공방 없을까요?">{{demand_data.descript}}</textarea>
                 {{demandform.descript.errors|striptags}}<br>
             </div>
         </div>
@@ -314,6 +279,43 @@ label span {color:red;}
                 {{demandform.goal.errors|striptags}}<br>
             </div>
         </div>
+        <div class="tmk-panel">
+            <label class="col-md-2">희망지역 <span>*</span></label>
+            <div class="tmk-qitem-selecter-wrapper col-md-3">
+                <div class="selecter cover" tabindex="0">
+                    <select id="state" name="state" required class="selecter_3 selecter-element" data-selecter-options="{&quot;cover&quot;:&quot;true&quot;}" tabindex="-1">
+                        <option value="zone_1"
+                                {% if demand_data.state.state == 'zone_1'%}selected{% endif %}>서울</option>
+                        <option value="zone_2"
+                                {% if demand_data.state.state == 'zone_2'%}selected{% endif %}>경기.인천</option>
+                        <option value="zone_3"
+                                {% if demand_data.state.state == 'zone_3'%}selected{% endif %}>부산</option>
+                        <option value="zone_4"
+                                {% if demand_data.state.state == 'zone_4'%}selected{% endif %}>다른 지역</option>
+
+                    </select>
+                    <span class="selecter-selected state-selected" onclick="btnClick(this)">지역 선택</span>
+                    <div class="selecter-options" data-value="">
+                        <span class="selecter-item selected state-selected" data-value="" onclick="selecting(this, '')">지역 선택</span>
+                        <div class="selecter-item"
+                             data-value="id"
+                             onclick="selecting(this, 'zone_1')">서울</div>
+                        <div class="selecter-item"
+                             data-value="id"
+                             onclick="selecting(this, 'zone_2')">경기.인천</div>
+                        <div class="selecter-item"
+                             data-value="id"
+                             onclick="selecting(this, 'zone_3')">부산</div>
+                        <div class="selecter-item"
+                             data-value="id"
+                             onclick="selecting(this, 'zone_4')">다른 지역</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <input type="text" value="{{demand_data.local}}" name="local" class="form-control" style="display:inline;" placeholder="ex) 강남역 근처, 홍대 주변"><br>
+            </div>
+        </div>
 
         <div class="tmk-panel">
             <label class="col-md-2">희망일정 <span>*</span></label>
@@ -323,86 +325,9 @@ label span {color:red;}
             </div>
         </div>
 
-        <div class="tmk-panel">
-
-            <label class="col-md-2">희망지역 <span>*</span></label>
-            <div class="tmk-qitem-selecter-wrapper col-md-3">
-                <div class="selecter cover" tabindex="0">
-                    <select name="state" required class="selecter_3 selecter-element" data-selecter-options="{&quot;cover&quot;:&quot;true&quot;}" tabindex="-1">
-                        <option value="all"
-                                {% if begin_data.category == 'all' %}selected{% endif %}>모든 지역</option>
-                        <option value="zone_1"
-                                {% if demand_data.state == 'zone_1'%}selected{% endif %}>도봉/성북/동대문...</option>
-                        <option value="zone_2"
-                                {% if demand_data.state == 'zone_2'%}selected{% endif %}>은평/마포/서대문...</option>
-                        <option value="zone_3"
-                                {% if demand_data.state == 'zone_3'%}selected{% endif %}>종로/중구/용산...</option>
-                        <option value="zone_4"
-                                {% if demand_data.state == 'zone_4'%}selected{% endif %}>양천/영등포/동작...</option>
-                        <option value="zone_5"
-                                {% if demand_data.state == 'zone_5'%}selected{% endif %}>송파/강남/서초...</option>
-                        <option value="zone_6"
-                                {% if demand_data.state == 'zone_6'%}selected{% endif %}>수원/안산/안양...</option>
-                        <option value="zone_7"
-                                {% if demand_data.state == 'zone_7'%}selected{% endif %}>성남/남양주/용인...</option>
-                        <option value="zone_8"
-                                {% if demand_data.state == 'zone_8'%}selected{% endif %}>파주/의정부/고양...</option>
-                        <option value="zone_9"
-                                {% if demand_data.state == 'zone_9'%}selected{% endif %}>인천/부천</option>
-                        <option value="etc"
-                                {% if demand_data.state == 'etc'%}selected{% endif %}>기타</option>
-                    </select>
-                    <span class="selecter-selected" onclick="btnClick(this)">지역 선택</span>
-                    <div class="selecter-options" data-value="">
-                        <!--<span class="selecter-item selected" data-value="" onclick="selecting(this, '')">카테고리</span>-->
-                        <div class="selecter-item"
-                             data-value="id"
-                             onclick="selecting(this, 'all')">모든 카테고리</div>
-                        <div class="selecter-item"
-                             data-value="id"
-                             onclick="selecting(this, 'zone_1')">도봉/성북/동대문...</div>
-                        <div class="selecter-item"
-                             data-value="id"
-                             onclick="selecting(this, 'zone_2')">은평/마포/서대문...</div>
-                        <div class="selecter-item"
-                             data-value="id"
-                             onclick="selecting(this, 'zone_3')">종로/중구/용산...</div>
-                        <div class="selecter-item"
-                             data-value="id"
-                             onclick="selecting(this, 'zone_4')">양천/영등포/동작...</div>
-                        <div class="selecter-item"
-                             data-value="id"
-                             onclick="selecting(this, 'zone_5')">송파/강남/서초...</div>
-                        <div class="selecter-item"
-                             data-value="id"
-                             onclick="selecting(this, 'zone_6')">수원/안산/안양...</div>
-                        <div class="selecter-item"
-                             data-value="id"
-                             onclick="selecting(this, 'zone_7')">성남/남양주/용인...</div>
-                        <div class="selecter-item"
-                             data-value="id"
-                             onclick="selecting(this, 'zone_8')">파주/의정부/고양...</div>
-                        <div class="selecter-item"
-                             data-value="id"
-                             onclick="selecting(this, 'zone_9')">인천/부천</div>
-                        <div class="selecter-item"
-                             data-value="id"
-                             onclick="selecting(this, 'etc')">기타</div>
-                    </div>
-                </div>
-
-                {{demandform.state.errors|striptags}}
-                {{demandform.local.errors|striptags}}<br>
-
-            </div>
-            <div class="col-md-6">
-                <input type="text" value="{{demand_data.local}}" name="local" class="form-control" style="display:inline;" placeholder="ex) 강남역 근처, 홍대 주변"><br>
-            </div>
-
-        </div>
 
         <div class="tmk-panel">
-            <label class="col-md-2">연락받으실 전화번호 <span>*</span></label>
+            <label class="col-md-2">연락처<span>*</span></label>
             <!--<div class="col-md-10" style="display:inline;">-->
             <div class="form-group">
                 <div class="col-xs-4 col-sm-3 col-md-3" style="min-width:80px;">
@@ -422,63 +347,48 @@ label span {color:red;}
             {{demandform.mobile.errors|striptags}}<br>
         </div>
 
-<a class="btn-link pull-left" data-toggle="#demand-form-options" id="dfo-btn" style="color:red;cursor:pointer;margin:15px auto;">+ 선택사항 추가입력</a>
+<a class="btn-link pull-left" data-toggle="#demand-form-options" id="dfo-btn" style="color:red;cursor:pointer;margin:15px auto;">+ 사진&희망 가격 입력</a>
         <div id="demand-form-options" hidden>
-        <div class="tmk-panel">
-            <label class="col-md-2">참조할사진<br>(선택)</label>
-            <div class="tmk-qitem-phupload col-md-10">
-                <div class="tmk-phupload-contents">
-                    <div class="tmk-panel-contents">
-                        <div class="well filedrag" id="filedrag">
-                            <div class="form-group row">
-                                <div class="col-md-8">
-                                    <div>
-                                        <label class="drag-label">참조할 작품 사진을 이곳에 끌어다 놓아주세요 <br>
-                                            JPG, PNG 파일만 업로드가 가능합니다.</label>
+            <div class="tmk-panel">
+                <label class="col-md-2">참조할사진<br>(선택)</label>
+                <div class="tmk-qitem-phupload col-md-10">
+                    <div class="tmk-phupload-contents">
+                        <div class="tmk-panel-contents">
+                            <div class="well filedrag" id="filedrag">
+                                <div class="form-group row">
+                                    <div class="col-md-8">
+                                        <div>
+                                            <label class="drag-label">JPG, PNG 파일만 업로드가 가능합니다.</label>
+                                        </div>
+
                                     </div>
+                                    <div class="col-md-4" style="top: 10px;">
+                                            <span id="uploader" onclick="putImgsToFile();" class="custom-file-input-button btn btn-default" style="cursor:pointer;">
+                                                <span class="custom-file-input-button-text">사진 가져오기</span>
+                                            </span>
+                                    </div>
+                                </div>
+                                <div class="tmk-imgs" id="tmk-imgs">
+
 
                                 </div>
-                                <div class="col-md-4" style="top: 10px;">
-                                        <span id="uploader" onclick="findLastInput(true);" class="custom-file-input-button btn btn-default" style="cursor:pointer;">
-                                            <span class="custom-file-input-button-text">사진 가져오기</span>
-                                        </span>
+                                <div id="templateImg">
+                                    <div class="tmk-img">
+                                        <input type="file" name="image" id="filePhoto1" class="filePhoto"/>
+                                        <input type="hidden" name="img_id" value="">
+                                        <img src=""/>
+                                        <span onclick="deleteImg(this);"></span>
+                                    </div>
                                 </div>
+
                             </div>
-                            <div class="tmk-imgs" id="tmk-imgs">
-                                <div>
-                                    <img src="">
-                                    <span onclick="deleteImg(this);"></span>
-                                </div>
-                                <div>
-                                    <img src="">
-                                    <span onclick="deleteImg(this);"></span>
-                                </div>
-                                <div>
-                                    <img src="">
-                                    <span onclick="deleteImg(this);"></span>
-                                </div>
-                                <div>
-                                    <img src="">
-                                    <span onclick="deleteImg(this);"></span>
-                                </div>
-                                <div>
-                                    <img src="">
-                                    <span onclick="deleteImg(this);"></span>
-                                </div>
-                                <input type="file" name="image"  id="filePhoto1" />
-                                <input type="file" name="image"  id="filePhoto2" />
-                                <input type="file" name="image"  id="filePhoto3" />
-                                <input type="file" name="image"  id="filePhoto4" />
-                                <input type="file" name="image"  id="filePhoto5" />
-
-                            </div>   </div>
+                        </div>
+                        <div class="tmk-panel-footer"></div>
                     </div>
-                    <div class="tmk-panel-footer"></div>
+                    <!--<aside class="tmk-aside-right">만들고 싶은 것의 사진을 업로드 해주세요. JPG, PNG 파일만 업로드가 가능합니다.</aside>-->
                 </div>
-                <!--<aside class="tmk-aside-right">만들고 싶은 것의 사진을 업로드 해주세요. JPG, PNG 파일만 업로드가 가능합니다.</aside>-->
+                    {{imageform.image.errors|striptags}}
             </div>
-            {{imageform.image.errors|striptags}}
-        </div>
         <div class="tmk-panel" style="border-bottom:none;">
             <label class="col-md-2">희망 수강료 범위</label>
             <div class="col-md-10">

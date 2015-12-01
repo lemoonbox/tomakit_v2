@@ -25,7 +25,7 @@ class DemandForm(forms.ModelForm):
     local_error={'required':u"어느 지역의 수업을 찾는지 알려주세요.",}
     weekday_error={'required':u"편한 요일/시간을 알려주세요.",}
     goal_error={'required':u"최소 한개 이상의 수업 목표를 정해주세요.",    }
-    mobile_error={'required':u"수업 견적을 문자로 보내드립니다. 전화번호를 꼭 입력해주세요.",
+    mobile_error={'required':u"수업 소식을 문자로 보내드려요. 전화번호를 꼭 입력해주세요.",
                   'invalid':u"숫자로 입력해주세요"}
     min_error={'invalid':u"숫자로 입력해주세요.",}
     max_error={'invalid':u"숫자로 입력해주세요",}

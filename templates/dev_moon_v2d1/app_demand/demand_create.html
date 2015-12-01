@@ -236,18 +236,18 @@
 <div class="tmk-main-body col-md-12">
     <div class="container">
     <div class="tmk-page-header">
-    <div class="tmk-h2 tmk-title">원하는 클래스를 개설해드립니다</div>
-    <div class="tmk-h4">제안서를 작성해주시면<br>가까운 장소, 편한 시간의 수업을 개설하여 드립니다</div>
+    <div class="tmk-h2 tmk-title">수업 신청서 작성</div>
+    <div class="tmk-h4">가까운 지역, 편한 시간을 알려주세요.</div>
         <div class="tmk-page-pick"></div>
     </div>
-        <div style="padding-left:15px;" class="tmk-h3">클래스 제안하기</div>
+        <!--<div style="padding-left:15px;" class="tmk-h3">신청서 작성하기</div>-->
     <div class="col-md-8 well" id="tmk-form" style="text-align:left;float:left;">
         <!--<div class="tmk-h3">클래스 제안하기</div>-->
 
         <form method="POST" action="{% url 'demand_create_v2d1' %}" enctype="multipart/form-data">
             {%csrf_token%}
             <div class="tmk-panel">
-            <label class="col-md-2">제목 <span>*</span></label>
+            <label class="col-md-2">하고 싶은 것<span>*</span></label>
             <div class="tmk-qitem-selecter-wrapper col-md-3">
                 <div class="selecter cover" tabindex="0">
                     <select id="category" name="category" required class="selecter_3 selecter-element" data-selecter-options="{&quot;cover&quot;:&quot;true&quot;}" tabindex="-1">
@@ -292,7 +292,7 @@
 
 
             <div class="tmk-panel">
-            <label class="col-md-2">내용 <span>*</span></label>
+            <label class="col-md-2">수업내용 <span>*</span></label>
             <div  class="col-md-10">
         <textarea name="descript" class="form-control" rows="4" cols="50"
                   placeholder="ex) 가죽공방을 창업하고 싶어서요. 기초부터 차근 차근가르쳐주는 공방 없을까요?">{{demand_data.descript}}</textarea>
@@ -352,7 +352,7 @@
                         <option value="zone_3"
                                 {% if demand_data.state.state == 'zone_3'%}selected{% endif %}>부산</option>
                         <option value="zone_4"
-                                {% if demand_data.state.state == 'zone_3'%}selected{% endif %}>다른 지역</option>
+                                {% if demand_data.state.state == 'zone_4'%}selected{% endif %}>다른 지역</option>
 
                     </select>
                     <span class="selecter-selected state-selected" onclick="btnClick(this)">지역 선택</span>
@@ -400,7 +400,7 @@
                     </div>
                 </div>
                 <!--</div>-->
-                <div class="col-md-10 pull-right">전화번호는 공개되지 않습니다.<br></div>
+                <div class="col-md-10 pull-right">번호는 공개되지 않고, 수업 개설 알림에만 쓰입니다.<br></div>
                 <div class="col-md-10 pull-right tmk-error">{{demandform.mobile.errors|striptags}}<br></div>
             </div>
 
@@ -413,8 +413,7 @@
                                 <div class="form-group row">
                                     <div class="col-md-8">
                                         <div>
-                                            <label class="drag-label">참조할 작품 사진을 이곳에 끌어다 놓아주세요 <br>
-                                                JPG, PNG 파일만 업로드가 가능합니다.</label>
+                                            <label class="drag-label">JPG, PNG 파일만 업로드가 가능합니다.</label>
                                         </div>
 
                                     </div>
@@ -471,7 +470,7 @@
                 </div>
 
 
-            <input class="btn btn-primary ladda-button pull-right" id="demand-submit" type="submit" data-style="expand-right" value="제안등록">
+            <input class="btn btn-primary ladda-button pull-right" id="demand-submit" type="submit" data-style="expand-right" value="요청 등록">
         </form>
     </div>
         </div>

@@ -27,7 +27,7 @@
     <div class="container">
     <!--<div class="tmk-body-wrapper">-->
         <div class="tmk-page-header">
-            <div class="tmk-h2 tmk-title">클래스 살펴보기</div>
+            <div class="tmk-h2 tmk-title">수업 둘러보기</div>
             <form method="GET" action="{% url 'class_filter_redirct_v2d1' %}">
                 {%csrf_token%}
                 <div class="tmk-search cover">
@@ -142,7 +142,7 @@
                         </div>
 
                         <div class="dp-label">
-                        <div class="dp-label-left">{{class.repeat}}회 / 수업당 {{class.perhour}}시간</div>
+                        <div class="dp-label-left">{{class.repeat}}회/수업당{{class.perhour}}시간</div>
                         <div class="dp-label-right">{{class.locality}}/{{class.sublocal_1}}</div>
                         </div>
                         </a>

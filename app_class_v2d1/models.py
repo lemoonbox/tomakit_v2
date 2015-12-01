@@ -164,3 +164,11 @@ class T2ClassReview(models.Model):
     def __unicode__(self):
         return  u'%s %s' % (self.id, self.review)
 
+
+class T2Tag(models.Model):
+    class_card=models.ForeignKey(T2ClassCard, null=True, blank=True)
+    teach_post=models.ForeignKey(T2TeachClass, null=True, blank=True)
+    tut_post=models.ForeignKey(T2TutClass, null=True, blank=True)
+
+    tag=models.CharField(max_length=50)
+    search_cnt=models.IntegerField(default=0)
