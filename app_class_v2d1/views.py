@@ -384,8 +384,6 @@ def modify_teach(request, class_num):
             'addr_detail':_post.addr_detail,
             'empty_box': range(5-(_post.t2classpic_set.all().count())),
         }
-        print teach_data["startday"]
-        print teach_data['deadline']
         img_arr=[]
         for db_images in _post.t2classpic_set.all():
             img_info=[]
