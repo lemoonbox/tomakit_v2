@@ -34,6 +34,10 @@
     .onoff-class a {color:#fff;}
     .onoff-class:hover {z-index:3;background-color:#000;color:#fff;opacity:0.9;}
 
+    .dp-label {overflow:hidden;}
+    .dp-label-right {text-overflow:ellipsis;max-width:40%;line-height:30px!important;}
+    .dp-label-left {line-height:30px!important;}
+
 
     .modify-demand {line-height:300px;float:none;border-radius:4px;position:absolute;z-index:10;top:0;left:0;right:0;bottom:0;opacity:0;font-size:16px;}
     .modify-demand a {color:#fff;}
@@ -159,8 +163,8 @@
                                     <div>{{class.intro_line}}</div>
                                 </div>
                                 <div class="dp-label">
-                                    <div class="dp-label-left">{{class.repeat}}회 / 수업당 {% widthratio class.repeat 1 class.perhour%}{%comment%}{{class.perhour}}{%endcomment%}시간</div>
-                                    <div class="dp-label-right">￦{{class.price}}</div>
+                                    <div class="dp-label-left pull-left">{{class.repeat}}회 / 수업당 {% widthratio class.repeat 1 class.perhour%}{%comment%}{{class.perhour}}{%endcomment%}시간</div>
+                                    <div class="dp-label-right pull-right">￦{{class.price}}</div>
 
                                 </div>
 

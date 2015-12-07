@@ -390,8 +390,20 @@
         </div>
     </div>
 </div>
+<img src="{%static 'media/image/loading2.gif'%}" style="display: none;" id="loading_image">
 {%endblock%}
 {%block script%}
+<script>
+    $('#loading_image').show();
+    $.ajax({
+        url: '{%url 'class_craete_tut_v2d1' class_num%}',
+        type: 'POST',
+        complete: function() {
+            // request is complete, regardless of error or success, so hide image
+            $('#loading_image').hide();
+        }
+    });
+</script>
 <!--<script type="text/javascript" src="{% static 'media/js/nouislider.js' %}"></script>-->
 <!--<script src="{%static 'media/js/jquery.steps.js'%}" charset="euc-kr"></script>-->
 <!--<script>-->

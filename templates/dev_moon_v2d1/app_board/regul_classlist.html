@@ -16,7 +16,9 @@
     }
 
     .intro_line {white-space: nowrap;text-overflow:ellipsis;}
-
+    .dp-label {overflow:hidden;}
+    .dp-label-right {text-overflow:ellipsis;max-width:40%;line-height:30px!important;}
+    .dp-label-left {line-height:30px!important;}
     .tmk-label {background:#000!important;border-radius:14px!important;}
 
 </style>
@@ -142,8 +144,8 @@
                         </div>
 
                         <div class="dp-label">
-                        <div class="dp-label-left">{{class.repeat}}회/수업당{{class.perhour}}시간</div>
-                        <div class="dp-label-right">{{class.locality}}/{{class.sublocal_1}}</div>
+                        <div class="dp-label-left pull-left">{{class.repeat}}회/수업당{{class.perhour}}시간</div>
+                        <div class="dp-label-right pull-right">{{class.locality}}/{{class.sublocal_1}}</div>
                         </div>
                         </a>
                     </li>
