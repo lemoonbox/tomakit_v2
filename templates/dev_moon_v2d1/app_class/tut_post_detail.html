@@ -305,7 +305,7 @@
 <div class="tmk-main-body col-lg-12" style="border-bottom:2px solid #ddd;background:#fff;">
     <div class="container">
         <div class="tmk-review col-lg-8">
-            <div class="tmk-h3 col-xs-12" style="text-align:left;"><span style="color:#84CDC2;">{{reviews.count}}</span>개의 후기가 있습니다</div>
+            <div class="tmk-h3 col-xs-12" style="text-align:left;"><span style="color:#84CDC2;">{{reviews.count}}</span>개의 댓글이 있습니다</div>
             <div class="review-wrapper col-md-12">
                 <form method="POST" action="{% url 'create_review_v2d1' post.id %}">
                     {%csrf_token%}
@@ -339,7 +339,7 @@
                         <div class="tmk-error">{{review.review.errors|striptags}} {{review.grade.errors|striptags}}</div>
                     </div>
                     <div class="col-md-3 col-xs-5">
-                        <input class="btn btn-primary pull-right" id="submit-review" type="submit" value="후기 작성">
+                        <input class="btn btn-primary pull-right" id="submit-review" type="submit" value="댓글 작성">
                     </div>
                 </form>
             </div>

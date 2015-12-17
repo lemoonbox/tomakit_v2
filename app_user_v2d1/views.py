@@ -93,7 +93,7 @@ def signup(request):
             #send mail
             key = utils.generate_key(32, T2SignupConfirmKey, _user)
             title = u"안녕하세요! 토마킷입니다. 정식 사용을 승인해주세요."
-            sender = "tomakit.info@gmail.com"
+            sender = "info@tomakit.com"
 
             if SET_LOCAL:
                utils.send_key_email(request, title, sender,
@@ -153,7 +153,7 @@ def send_confirm(request):
                 key = utils.generate_key(32,T2SignupConfirmKey,_user[0])
                 host =request.META['HTTP_HOST']
                 title = u"아래의 링크를 클릭하시면 비밀번호를 변경하실 수 있습니다."
-                sender = "tomakit.info@gmail.com"
+                sender = "info@tomakit.com"
 
                 if SET_LOCAL:
                     utils.send_key_email(request, title, sender,
@@ -220,7 +220,7 @@ def pw_reset_request(request):
                 key = utils.generate_key(32,T2PWResetKeys,_user[0])
 
                 title = u"안녕하세요. 토마킷 패스워드 변경 이메일을 입니다.."
-                sender = "tomakit.info@gmail.com"
+                sender = "info@tomakit.com"
 
                 if SET_LOCAL:
                     utils.send_key_email(request, title, sender,

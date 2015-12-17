@@ -213,7 +213,7 @@ EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_POST = 587
 EMAIL_HOST_USER = 'tomakit.info@gmail.com' # gmail login account.. user@example.com
-EMAIL_HOST_PASSWORD = 'tomakit2015'
+EMAIL_HOST_PASSWORD = 'everyok2015'
 
 
 # Static files (CSS, JavaScript, Images)
