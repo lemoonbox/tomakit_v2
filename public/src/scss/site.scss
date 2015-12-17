@@ -5,13 +5,14 @@
   -o-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
-  font-family: 'Noto Sans', "Noto Sans CJK KR", sans-serif!important;
+  font-family: 'Noto Sans', 'Noto Sans CJK KR', sans-serif!important;
 }
 //html {height:100vh!important;}
 //html {overflow-x:hidden!important;padding-right:0!important;}
 a:hover {text-decoration: none !important;}
 
 body {
+  font-family: 'Noto Sans', 'Noto Sans CJK KR', sans-serif!important;
   min-width:100%!important;
   //min-width:410px;
   text-align: center;
@@ -639,13 +640,11 @@ ul{
 
   .footer-banner-title {
     padding-top:50px;
-    //font-family: NanumMyeongjo!important;
     line-height:50px;
     font-size: 24px;
     color: #FFFFFF;
   }
   .footer-banner-subtitle {
-    //font-family: AppleSDGothicNeo-Regular;
     font-size: 14px;
     color: #FFFFFF;
     line-height: 17px;
@@ -788,7 +787,6 @@ ul{
 
   .h3 {
     margin: 0px 0px 5px 0px !important;
-    //font-family: NanumMyeongjo;
     font-weight:normal;
     font-size: 24px;
     color: #CCCCCC;
@@ -797,7 +795,6 @@ ul{
     display:inline-block;
   }
   .category {
-    //font-family: AppleSDGothicNeo-Regular;
     font-size: 14px;
     color: #F5515F;
     line-height: 17px;
@@ -1260,7 +1257,6 @@ ul{
     padding-top:20px;
     height: 360px;
     background:#ffffff;
-    //font-family: 'NanumGothic' !important;
     .tmk-guide-img {
       height: 300px;
       width: 570px;

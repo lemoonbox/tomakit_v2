@@ -476,8 +476,21 @@
         </div>
 </div>
 
+<img src="{%static 'media/image/loading2.gif'%}" style="display: none;" id="loading_image">
 {%endblock%}
 {%block script%}
+<script>
+    $('#loading_image').show(); // show loading image, as request is about to start
+    $.ajax({
+        url: '{% url 'demand_create_v2d1' %}',
+        type: 'POST',
+        complete: function() {
+            // request is complete, regardless of error or success, so hide image
+            $('#loading_image').hide();
+        }
+    });
+</script>
+
 <script src='{%static "media/js/qitem_create.js" %}'></script>
 <script type="text/javascript" src="{% static 'media/js/nouislider.js' %}"></script>
 <script type="text/javascript" src="{%static 'media/js/wNumb.js'%}"></script>

@@ -4,18 +4,35 @@
 {%block style%}
 <style>
     .tmk-main-banner {
-        background: url({%static 'media/image/slice/bg-4.png' %});
+        background: url({%static 'media/image/slice/bg-4.png' %}) no-repeat;
         height:400px;
+        background-size:cover;
+        border:none;
     }
     .tmk-main-banner .tmk-main-body {
         text-align:left;
     }
+
+    .tmk-h2 {line-height:1.2em;font-weight:400;}
+    .tmk-h3 {font-size:20px; margin:0 auto 20px;}
+
     .guide-section-2 {color:#84CDC2;text-align:center;max-width:800px;margin:auto;}
+    .guide-section-2 span {display:block;text-align:left;max-width:180px;margin:10px auto;}
+    @media screen and (min-width:768px) {
+        .guide-section-2 .col-md-4 {padding:0 46px;}
+    }
+
+    .guide-section-2 .col-md-4 {height:240px;}
     .guide-section-3 {
         background: url({%static 'media/image/slice/bg-5.png' %});
         background-size:cover;
-        height:400px;
+        height:401px;
     }
+
+    .how-to {text-align:left; padding:50px;}
+    .how-to span {color:#777;}
+    .img-header {font-size:1.1em;font-weight:bold;margin-bottom:10px;}
+    body {background-color:#fff!important;}
 </style>
 {%endblock%}
 {%block content%}
@@ -23,12 +40,12 @@
 <div class="tmk-main-banner">
     <div class="tmk-main-body col-md-12">
         <div class="container">
-            <div class="tmk-h2">
+            <div class="tmk-h3">
                 선생님 등록
             </div>
-            <div class="tmk-h4">
+            <div class="">
                 토마킷은 공방을 운영하는 선생님과 수강생들이<br>
-                쉽고 간편하게 만날 수 있도록 연결합니다
+                쉽고 간편하게 만날 수 있도록 연결합니다<br><br>
             </div>
             <button class="btn btn-primary">토마킷 선생님으로 등록하기</button>
         </div>
@@ -36,50 +53,50 @@
 </div>
 
 <div class="tmk-main-body col-md-12">
-    <div class="container">
-        <div class="tmk-h3">왜 토마킷 선생님으로 등록해야 할까요?</div>
+    <div class="container" style="margin-top:50px;padding-bottom:50px;">
+        <div class="tmk-h3" style="margin-bottom:50px;">왜 선생님으로 등록해야 할까요?</div>
 
         <div class="guide-section-2">
-            <div class="col-md-4">
-                <div class="tmk-h4">수강생 증가</div>
+            <div class="col-md-4 col-sm-4 col-xs-6">
+                <div class="img-header">수강생 증가</div>
                 <img src="{%static 'media/image/slice/icon-etc_graph.png'%}">
-                <div>클래스 등록만 해주세요 토마<br>킷이 수강생을 모집해드립니다</div>
+                <span>클래스 등록만 해주세요 토마킷이 수강생을 모집해드립니다</span>
             </div>
 
-            <div class="col-md-4">
-                <div class="tmk-h4">사진&영상 촬영</div>
-                <img src="{%static 'media/image/slice/icon-etc_graph.png'%}">
-                <div>효과적인 홍보를 위해 전문가의<br>손길이 담긴 사진과 영상을 촬영,<br>
-                    제작해드려요</div>
+            <div class="col-md-4 col-sm-4 col-xs-6">
+                <div class="img-header">사진&영상 촬영</div>
+                <img src="{%static 'media/image/slice/icon-etc_camera.png'%}">
+                <span>효과적인 홍보를 위해 전문가의손길이 담긴 사진과 영상을 촬영,
+                    제작해드려요</span>
             </div>
-            <div class="col-md-4">
-                <div class="tmk-h4">인기 클래스</div>
-                <img src="{%static 'media/image/slice/icon-etc_graph.png'%}">
-                <div>대중에게 인기 있는 클래스를<br>발굴하고 기획하여 선생님께 기<br>
-                    획 클래스로 제안해드립니다</div>
+            <div class="col-md-4 col-sm-4 col-xs-6">
+                <div class="img-header">인기 클래스</div>
+                <img src="{%static 'media/image/slice/icon-etc_favorite.png'%}">
+                <span>대중에게 인기 있는 클래스를발굴하고 기획하여 선생님께 기
+                    획 클래스로 제안해드립니다</span>
             </div>
 
             </div>
 
         <div class="guide-section-2">
-            <div class="col-md-4">
-                <div class="tmk-h4">기업체 제휴</div>
-                <img src="{%static 'media/image/slice/icon-etc_graph.png'%}">
-                <div>클래스 제휴가 이루어진 기업이<br>나 단체의 요청에 선생님들을<br>
-                    연결해드립니다</div>
+            <div class="col-md-4 col-sm-4 col-xs-6">
+                <div class="img-header">기업체 제휴</div>
+                <img src="{%static 'media/image/slice/icon-etc_festival.png'%}">
+                <span>클래스 제휴가 이루어진 기업이나 단체의 요청에 선생님들을
+                    연결해드립니다</span>
             </div>
 
-            <div class="col-md-4">
-                <div class="tmk-h4">안전한 거래</div>
+            <div class="col-md-4 col-sm-4 col-xs-6">
+                <div class="img-header">안전한 거래</div>
                 <img src="{%static 'media/image/slice/icon-etc_exchange.png'%}">
-                <div>안전한 거래가 이루어질 수 있<br>도록 에스크로 서비스와 보증보<br>
-                    보험에 가입되어 있습니다</div>
+                <span>안전한 거래가 이루어질 수 있도록 에스크로 서비스와 보증보
+                    보험에 가입되어 있습니다</span>
             </div>
-            <div class="col-md-4">
-                <div class="tmk-h4">문화를 전파</div>
-                <img src="{%static 'media/image/slice/icon-etc_exchange.png'%}">
-                <div>핸드메이드 클래스 소식이 담긴<br>정기 소식지를 발행하여 문화를<br>
-                    전파합니다</div>
+            <div class="col-md-4 col-sm-4 col-xs-6">
+                <div class="img-header">문화를 전파</div>
+                <img src="{%static 'media/image/slice/icon-etc_share.png'%}">
+                <span>핸드메이드 클래스 소식이 담긴정기 소식지를 발행하여 문화를
+                    전파합니다</span>
             </div>
         </div>
     </div>
@@ -87,13 +104,14 @@
 
 
 <div class="tmk-main-body">
-    <div class="guide-section-3 col-md-8"></div>
-    <div class="col-md-4" style="text-align:left;">
-            <div class="tmk-h2">
+    <div class="guide-section-3 col-sm-7 col-md-7"></div>
+    <div class="col-sm-5 col-md-5" style="text-align:left;padding:43px;height:100%!important;background-color:#FF7A7A;color:#fff;">
+            <div class="tmk-h2" style="color:#fff;">
                 "토마킷 서비스를 통해 안정적인 수익을 낼 수 있었습니다"
             </div>
             <div class="tmk-h4">
                 "매달 불규칙한 수강신청으로 걱정이 많았는데, 이제 토마킷을 통해 안정적으로 수강생 모집이 이루어져서 안심이에요"
+                <br>
                 <br>
                 <br>
                 - 김소라 선생님
@@ -101,6 +119,48 @@
 
 </div>
 
+</div>
+<div class="tmk-main-body col-md-12" style="background-color:#F2F2F2!important">
+    <div class="container" style="padding:50px 0;">
+        <div class="tmk-h3" style="margin-bottom:50px;">토마킷 선생님으로 이용하는 법</div>
+<div>
+    <div class="col-md-12">
+    <div class="col-md-6">
+    <img src="">
+        </div>
+        <div class="col-md-6 how-to">
+    <div class="tmk-h4">1단계: 선생님 등록
+    </div>
+        <span>선생님 등록을 클릭하시고 간단한 신청서를 작성해주세요</span>
+    </div>
+        <div class="col-md-6">
+        <img src="">
+            </div>
+        <div class="col-md-6 how-to">
+        <div class="tmk-h4">2단계: 클래스 개설
+        </div>
+        <span>당신의 경험과 재능을 세상에 공개하세요!<br>
+        토마킷의 담당자가 24시간 내 확인하여 공개해드립니다</span>
+    </div>
+        <div class="col-md-6">
+        <img src="">
+            </div>
+        <div class="col-md-6 how-to">
+        <div class="tmk-h4">3단계: 수강생 연결
+        </div>
+        <span>토마킷에 방문한 예비 수강생들이 선생님의 클래스에 수강신청 하였습니다. 축하합니다!</span>
+    </div>
+    </div>
+</div>
+</div>
+</div>
+
+<div class="tmk-main-body col-md-12">
+    <div class="container" style="margin-top:50px;">
+        <div class="tmk-h2" style="margin-bottom:50px;">그럼, 이제 시작해볼까요?</div>
+        <button class="btn btn-primary">토마킷 선생님으로 등록하기</button>
+        <div style="font-size:18px;color:#777;margin:50px auto;">문의가 필요할 땐 왼쪽 아래 실시간 문의를 이용해주세요!</div>
+    </div>
 </div>
 
 {% endblock %}

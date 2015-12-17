@@ -26,6 +26,9 @@
             color: white!important;
         }
     }
+    .dp-label {overflow:hidden;}
+    .dp-label-right {text-overflow:ellipsis;max-width:40%;line-height:30px!important;}
+    .dp-label-left {line-height:30px!important;}
     .tmk-demand-comment-img {margin-top:30px;}
     @media screen and (max-width:767px) {
         .tmk-search {
@@ -142,8 +145,8 @@
                             <div style="white-space:nowrap;text-overflow:ellipsis;">{{bestclass.best_classcard.intro_line}}</div>
                         </div>
                         <div class="dp-label">
-                            <div class="dp-label-left">{{bestclass.best_classcard.repeat}}회 / 수업당 {{bestclass.best_classcard.perhour}}시간</div>
-                            <div class="dp-label-right">{{bestclass.best_classcard.locality}}/{{bestclass.best_classcard.sublocal_1}}</div>
+                            <div class="dp-label-left pull-left">{{bestclass.best_classcard.repeat}}회 / 수업당 {{bestclass.best_classcard.perhour}}시간</div>
+                            <div class="dp-label-right pull-right">{{bestclass.best_classcard.locality}}/{{bestclass.best_classcard.sublocal_1}}</div>
                         </div>
                         </a>
                     </li>

@@ -68,4 +68,19 @@
     </aside>
     </div>
 </div>
+
+<img src="{%static 'media/image/loading2.gif'%}" style="display: none;" id="loading_image">
+{%endblock%}
+{%block script%}
+<script>
+    $('#loading_image').show();
+    $.ajax({
+        url: '{% url 'login_v2d1' %}',
+        type: 'POST',
+        complete: function() {
+            // request is complete, regardless of error or success, so hide image
+            $('#loading_image').hide();
+        }
+    });
+</script>
 {%endblock%}
